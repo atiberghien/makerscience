@@ -1,0 +1,158 @@
+#sidebar {
+	font-size: 0.9em;
+
+	section {
+		margin-bottom: 2em;
+		h3 {
+			padding: 2em;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+	}
+	
+	section.community {
+
+		padding-bottom: 2em;
+		color: $color-sidebar-community;
+		background: $color-sidebar-community-bg url('../img/bg/sidebar-blue-bg.png') 175px -110px no-repeat;
+
+		ul.submenu {
+			clear: both;
+			padding: 2em 0;
+			li {
+				display: inline-block;
+				border-right: 1px solid $color-sidebar-submenu-border;
+				&:last-child {
+					border: none;
+				}
+			}
+			a {
+				display: inline-block;
+				padding: 1em 0.5em;
+				font-size: 0.8em;
+				color: $color-sidebar-submenu;
+				text-transform: uppercase;
+				line-height: 1.2em;
+				span {
+					display: block;
+				}
+				&.selected {
+					background-color: $color-sidebar-submenu-bg;
+				}
+			
+			}
+		}
+		div.member {
+			position: relative;
+			margin: 0 5em;
+			padding: 0.5em 0;
+			border-bottom: 1px solid $color-sidebar-community-member-border;
+			&:last-child {
+				border: none;
+			}
+			img {
+				display: inline-block;
+			}
+			p {
+				display: inline-block;
+				margin-top: 0.75em;
+				margin-left: 1em;
+				line-height: 1.25em;
+				vertical-align: top;
+				font-weight: bold;
+			}
+			em {
+				display: block;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 0.8em;
+			}
+		}
+		
+	}
+	
+	section.comments {
+	
+		color: $color-sidebar-comments;
+		background-color: $color-sidebar-comments-bg;
+		
+		div.comment {
+			position: relative;
+			margin-bottom: 1.5em;
+			padding: 1em 2em;
+			border-bottom: 1px solid $color-sidebar-comments-border;
+			&:last-child {
+				border: none;
+			}
+			span.date {
+				position: absolute;
+				top: 0;
+				right: 2em;
+			}
+			div.author {
+				font-weight: bold;
+				img {
+					display: inline-block;
+				}
+				p {
+					display: inline-block;
+					margin-top: 0.75em;
+					margin-left: 1em;
+					line-height: 1.25em;
+					vertical-align: top;
+				}
+				em {
+					display: block;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 0.8em;
+				}
+			}
+			> p {
+				text-align: justify;
+			}
+		}
+		> p {
+			padding: 1em 0 2em;
+			text-align: center;
+			a {
+				font-weight: bold;
+				color: $color-sidebar-comments;
+				text-decoration: underline;
+			}
+		}
+	}
+	
+	section.popularity {
+
+		padding-bottom: 2em;
+		color: $color-sidebar-popularity;
+		background: $color-sidebar-popularity-bg url('../img/bg/sidebar-blue-bg.png') 175px -110px no-repeat;
+
+		table {
+			margin: 2em 2em;
+			width: 85%;
+			td {
+				line-height: 2em;
+				text-transform: uppercase;
+				small {
+					font-size: 0.65em;
+				}
+			}
+			td.percent {
+				width: 50%;
+			}
+			td.percent span {
+				display: block;
+				height: 1.25em;
+				margin-right: 1em;
+				background-color: $color-sidebar-popularity-percent;
+				@include border-radius(2px);
+				span {
+					background-color: $color-sidebar-popularity-percent-bg;
+				}
+			}
+		}
+	}
+	
+}

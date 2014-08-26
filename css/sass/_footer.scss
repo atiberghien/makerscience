@@ -1,0 +1,13 @@
+footer {
+	padding: 3em 2em 10em;
+	color: $color-footer;
+	background-color: $color-footer-bg;
+	text-align: center;
+	li {
+		display: inline;
+	}
+	a {
+		padding: 2em;
+		color: $color-footer;
+	}
+}

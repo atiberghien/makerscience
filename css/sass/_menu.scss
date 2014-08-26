@@ -1,0 +1,35 @@
+#menu {
+	margin: 3em 1em 4em;
+	font-size: 0.95em;
+	ul.navbar-nav:first-child a {
+		margin: 1em;
+		padding: 0.25em 0;
+		color: $color-menu-a;
+		text-transform: uppercase;
+		&.selected {
+			border-bottom: 4px solid $color-menu-a-border;
+		}
+		&:hover {
+			background-color: transparent;
+			border-bottom: 4px solid $color-menu-a-border;
+		}
+	}
+	.navbar-brand img {
+		margin-top: -2.25em;
+		margin-right: 1em;
+	}
+	
+	form {
+		input[type=text], button {
+			color: $color-menu-form;
+			background-color: $color-menu-form-bg;
+		}
+	}
+	
+	button.user {
+		margin-left: 2em;
+		border: none;
+		background-color: transparent;
+	}
+}
+
