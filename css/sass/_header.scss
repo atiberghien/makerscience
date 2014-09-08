@@ -1,0 +1,176 @@
+header {
+	background-color: $color-header-bg;
+	form {
+		display: inline;
+	}	
+}
+
+#intro {
+	padding: 2em 0;
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	h1, h2 {
+		text-align: center;
+	}
+	h1 {
+		margin: 1.5em 0 0.5em;
+		color: $color-intro-h1;
+		font-weight: bold;
+		font-size: 2em;
+		text-transform: uppercase;
+	}
+	h2 {
+		margin: 0 0 2em 0;
+		font-size: 1.3em;
+		font-weight: bold;
+		color: $color-intro-h2;
+	}
+	h3 {
+		z-index: 200;
+		position: absolute;
+		top: 8em;
+		left: -21px;
+		padding: 13px 0 0 0;
+		font-size: 1.1em;
+		color: $color-intro-h3;
+		background-position: top left;
+		background-repeat: no-repeat;
+		span {
+			display: block;
+			padding: 0.75em 1.25em;
+			text-transform: uppercase;
+			border: 3px solid $color-intro-h3-border;
+			@include border-radius(3px);
+		}
+	}
+	&.intro-project {
+		background-color: $color-intro-project-bg;
+		background-image: url('../img/bg/header-project-bg.jpg');
+		h3 {
+			background-image: url('../img/fiche-project.png');
+			span {
+				background-color: $color-intro-h3-project-bg;
+			}
+		}
+	}
+	&.intro-resource {
+		background-color: $color-intro-resource-bg;
+		background-image: url('../img/bg/header-resource-bg.png');
+		h3 {
+			background-image: url('../img/fiche-resource.png');
+			span {
+				background-color: $color-intro-h3-resource-bg;
+			}
+		}
+	}
+}
+
+.intro {
+	position: relative;
+	margin: 2em 15px;
+	font-size: 0.8em;
+	border: 2px solid $color-intro-border;
+
+	& > .row {
+		overflow: hidden;
+/*		background-color: $color-intro-project-bg;*/
+/*		margin: 0;*/
+	}	
+	.row > div:first-child {
+		position: relative;
+/*		margin-left: -15px;*/
+	}
+	.row > div:last-child {
+/*		margin-right: -15px;*/
+/*		padding: 0;*/
+	}
+	.row > div:first-child img {
+		position: absolute;
+		top: 0;
+		left: $grid-gutter-width / 2;
+		display: block;
+		width: 100%;
+	}
+
+	div.sideproject {
+		margin-right: -1px; /* fix 1px bug from boostrap grid */
+		padding: 2em;
+		color: $color-intro;
+		background-color: $color-intro-project-bg;
+		p.location {
+			margin: 2em 0;
+			padding-left: 60px;
+			line-height: 48px;
+			background: transparent url('../img/location.png') left center no-repeat;
+		}
+	}
+	
+	ul.tags {
+		margin: 0 0 1em;
+		li {
+			display: inline-block;
+		}
+		a {
+			display: inline-block;
+			margin: 0 0.25em 0.5em 0;
+			padding: 0.25em 1em;
+			color: $color-intro-tags;
+			@include border-radius(1px);
+		}
+		&.tags-project a {
+			background-color: $color-intro-tags-project-bg;
+		}
+		&.tags-resource a {
+			background-color: $color-intro-tags-resource-bg;
+		}
+	}
+	
+	ul.phases {
+		margin: 1em 0;
+		li {
+			display: inline-block;
+			width: 44px;
+			height: 44px;
+			margin-right: 0.5em;
+			line-height: 44px;
+			vertical-align: middle;
+			background: url('../img/phase.png') center center no-repeat;
+			text-transform: uppercase;
+			&.selected {
+				color: $color-phase-selected;
+				background-image: url('../img/phase-selected.png');
+			}
+			span {
+				display: none;
+			}
+			&:last-child {
+				width: auto;
+				margin: 0;
+				background-image: none;
+			}
+		}
+	}
+	
+	ul.details {
+		li {
+			margin-bottom: 1em;
+			padding-left: 63px;
+			line-height: 48px;
+			text-transform: uppercase;
+			background-position: center left;
+			background-repeat: no-repeat;
+			&.level-average {
+				font-weight: bold;
+				background-image: url('../img/details/details-level-average.png');
+			}
+			&.duration {
+				background-image: url('../img/details/details-duration.png');
+			}
+			&.cost {
+				background-image: url('../img/details/details-cost.png');
+			}
+		}
+	}
+	
+}
