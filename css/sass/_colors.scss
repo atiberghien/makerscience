@@ -1,15 +1,21 @@
 /* MakerScience colors */
-$color-red: #c30;
+$color-orange: #c30;
 $color-blue: #2497d0;
-
+$color-green: #30c9ad;
+$color-project: #2497d0;
+$color-resource: #30c9ad;
+$color-purple: #639;
+$color-purple-light: #5a4b84;
 
 /* Body */
 $color-bg: #f2f2f2;
 
-/* Left Nav */
+/* Side Nav */
 $color-nav-a: #fdfdfd;
 $color-nav-a-bg: #2f2f2f;
-$color-nav-a-bg-selected: $color-red;
+$color-nav-a-bg-selected: $color-orange;
+$color-nav-project-a-bg-selected: $color-orange;
+$color-nav-resource-a-bg-selected: $color-purple;
 $color-nav-a-bg-hover: $color-nav-a-bg-selected;
 
 /* Header */
@@ -17,29 +23,35 @@ $color-header-bg: #fff;
 
 /* Menu */
 $color-menu-a: #3a3a3a;
-$color-menu-a-border: #3297cd;
+$color-menu-projects: #3297cd;
+$color-menu-resources: #3c9;
 $color-menu-form: #fff;
 $color-menu-form-bg: #e4e4e4;
 
 /* Intro */
 $color-intro: #000;
-$color-intro-bg: #042d41;
+$color-intro-project-bg: #042d41;
+$color-intro-resource-bg: #21083b;
 $color-intro-border: #fff;
 $color-intro-h1: #fefefe;
 $color-intro-h2: #fcfcfc;
 $color-intro-h3: #fff;
-$color-intro-h3-bg: #2497d0;
 $color-intro-h3-border: #fff;
+$color-intro-h3-project-bg: $color-project;
+$color-intro-h3-resource-bg: $color-resource;
 $color-intro-project-bg: #f2f2f2;
 $color-intro-tags: #fff;
-$color-intro-tags-bg: #2497d0;
+$color-intro-tags-project-bg: $color-project;
+$color-intro-tags-resource-bg: $color-resource;
 $color-phase-selected: #fe9903;
 
 /* Content */
 $color-content-tab: #000;
 $color-content-tab-bg: transparent;
 $color-content-tab-active: #fff;
-$color-content-tab-active-bg: #2497ce;
+$color-content-tab-project-active-bg: $color-project;
+$color-content-tab-resource-active-bg: $color-purple;
+$color-content-tab-seance-active-bg: $color-purple;
 $color-content-section: #333;
 $color-content-section-bg: #fff;
 $color-content-section-bg-even: #eee;
@@ -48,14 +60,14 @@ $color-needs-bg: #2695cd;
 $color-needs-border: #fff;
 $color-needs-h3: #fff;
 $color-interested: $color-needs-h3;
-$color-interested-bg: $color-red;
+$color-interested-bg: $color-orange;
 $color-interested-border: #fff;
 $color-linked: #fff;
 $color-linked-h3-bg: #039d85;
 $color-linked-h4-bg: #333;
 $color-linked-h5-bg: $color-linked-h4-bg;
 $color-siblings: #fff;
-$color-siblings-bg: $color-red;
+$color-siblings-bg: $color-orange;
 $color-siblings-title-bg: #333;
 $color-siblings-title-border: #444;
 $color-carousel-photos-tabs-bg: #333;
@@ -67,7 +79,6 @@ $color-sidebar-submenu: #fff;
 $color-sidebar-submenu-bg: #304651;
 $color-sidebar-submenu-border: #cbdfde;
 $color-sidebar-community: #fff;
-$color-sidebar-community-bg: $color-blue;
 $color-sidebar-community-member-border: #7fb3c9;
 $color-sidebar-comments: #333;
 $color-sidebar-comments-bg: #e8e8e8;

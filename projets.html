@@ -11,7 +11,7 @@
 <body>
 <div class="container-fluid">
 
-	<ul id="sidenav">
+	<ul id="sidenav" class="project">
 		<li><a href=""><span class="glyphicon glyphicon-th-large"></span>Projet</a></li>
 		<li><a href="" class="selected"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
 		<li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
@@ -36,11 +36,11 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li><a href="">Home</a></li>
-							<li><a href="">Membres</a></li>
-							<li><a href="" class="selected">Projets</a></li>
-							<li><a href="">Resources</a></li>
-							<li><a href="">Forum</a></li>
+							<li><a href="" class="nav-home">Home</a></li>
+							<li><a href="" class="nav-members">Membres</a></li>
+							<li><a href="projets.html" class="nav-projects selected">Projets</a></li>
+							<li><a href="ressources.html" class="nav-resources">Ressources</a></li>
+							<li><a href="" class="nav-forum">Forum</a></li>
 						</ul>
 						<button class="user pull-right"><img src="./img/users/user-default.png" alt="User" /></button>
 						<form class="navbar-form navbar-right" role="search">
@@ -59,7 +59,7 @@
 	
 	</header>
 	
-	<div id="intro">
+	<div id="intro" class="intro-project">
 
 		<div class="container">
 
@@ -79,7 +79,7 @@
 		
 						<div class="sideproject">
 
-							<ul class="tags">
+							<ul class="tags tags-project">
 								<li><a href="">Créativité</a></li>
 								<li><a href="">Workshop</a></li>
 								<li><a href="">Géologie</a></li>
@@ -118,7 +118,7 @@
 			<div id="content">
 
 				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist">
+				<ul class="nav nav-tabs nav-tabs-project" role="tablist">
 					<li class="active"><a href="#project" role="tab" data-toggle="tab">Projet</a></li>
 					<li><a href="#actus" role="tab" data-toggle="tab">Actus</a></li>
 					<li><a href="#discussions" role="tab" data-toggle="tab">Discussions</a></li>
@@ -268,7 +268,7 @@
 		<div class="col-md-4">
 
 			<div id="sidebar">
-				<section class="community">
+				<section class="community community-project">
 					<ul class="actions">
 						<li><a href=""><span class="glyphicon glyphicon-user"></span>Rejoindre</a></li>
 						<li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span>S'abonner</a></li>
@@ -328,7 +328,7 @@
 
 				</section><!-- .comments -->
 				
-				<section class="popularity">
+				<section class="popularity popularity-blue">
 					<ul class="actions">
 						<li><a href=""><span class="glyphicon glyphicon-user"></span>Vote</a></li>
 					</ul>
@@ -367,7 +367,7 @@
 			<div class="row">
 		
 				<div class="col-md-4">
-					<div class="bloc solo">
+					<div class="bloc bloc-solo bloc-orange">
 						<a href="">Projet similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>
 				</div>
@@ -409,7 +409,7 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="bloc solo">
+					<div class="bloc bloc-solo bloc-orange">
 						<a href="">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>
 				</div>

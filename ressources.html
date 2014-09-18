@@ -11,7 +11,7 @@
 <body>
 <div class="container-fluid">
 
-	<ul id="sidenav">
+	<ul id="sidenav" class="resource">
 		<li><a href=""><span class="glyphicon glyphicon-th-large"></span>Projet</a></li>
 		<li><a href="" class="selected"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
 		<li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
@@ -59,7 +59,7 @@
 	
 	</header>
 	
-	<div id="intro">
+	<div id="intro" class="intro-resource">
 
 		<div class="container">
 
@@ -67,7 +67,7 @@
 	
 				<h1>Former des jeunes au livetweet</h1>
 				<h2>Rendre "acteurs" des jeunes lors d'une conférence scientifique grâce au livetweet</h2>
-				<h3 class="resource"><span>Fiche Resource</span></h3>
+				<h3><span>Fiche Resource</span></h3>
 
 				<div class="row">
 
@@ -88,17 +88,13 @@
 								<li><a href="">Réalité augmentée</a></li>
 							</ul><!-- .tag -->
 	
-							<p class="location">Cité de l'Espace Toulouse</p>
+							<ul class="details">
+								<li class="level-average">Niveau moyen</li>
+								<li class="duration">8H</li>
+								<li class="cost">0 euros</li>
+							</ul><!-- .details -->
 	
-							<ul class="phases">
-								<li><span>Phase 1</span></li>
-								<li><span>Phase 2</span></li>
-								<li class="selected"><span>Phase 3</span></li>
-								<li><span>Phase 4</span></li>
-								<li>Phase 2</li>
-							</ul><!-- .phase -->
-	
-							<p>Fin de projet: 12/2015<br />Mise à jour il y a 2 jours</p>
+							<p>Mise à jour il y a 2 jours</p>
 					
 						</div><!-- .sideproject -->
 	
@@ -118,8 +114,8 @@
 			<div id="content">
 
 				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="#project" role="tab" data-toggle="tab">Projet</a></li>
+				<ul class="nav nav-tabs nav-tabs-resource" role="tablist">
+					<li class="active"><a href="#project" role="tab" data-toggle="tab">Ressource</a></li>
 					<li><a href="#actus" role="tab" data-toggle="tab">Actus</a></li>
 					<li><a href="#discussions" role="tab" data-toggle="tab">Discussions</a></li>
 				</ul>
@@ -128,7 +124,7 @@
 				<div class="tab-content">
 					<div class="tab-pane active" id="project">
 						<section>
-							<h3>A propos du projet</h3>
+							<h3>A propos de la ressource</h3>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 						</section>
 						<section>
@@ -165,61 +161,7 @@
 						</section>
 					</div><!-- #discussions -->
 				</div>
-
-				<div class="row">
-					<div class="col-md-8">
-						<div class="needs">
-							<ul class="actions">
-								<li><a href=""><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
-							</ul>
-							<h3>Besoins</h3>
-							<div id="carousel-needs" class="carousel slide" data-ride="carousel-needs">
 				
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
-									<div class="item active needs-idea">
-										<h4>Idée</h4>
-										<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-									<div class="item needs-competence">
-										<h4>Compétence</h4>
-										<p>Ccaecat cupidatat nxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-									<div class="item needs-equipment">
-										<h4>Matériel</h4>
-										<p>Rur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-									<div class="item needs-funding">
-										<h4>Financement</h4>
-										<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-								</div>
-
-								<!-- Controls -->
-								<a class="left carousel-control" href="#carousel-needs" role="button" data-slide="prev">Précédent</a>
-								<a class="right carousel-control" href="#carousel-needs" role="button" data-slide="next">Suivant</a>
-							</div><!-- .carousel -->
-						</div><!-- .needs -->
-					</div>
-					<div class="col-md-4">
-						<div class="interested">
-							<h3><a href="">Intéressé?</a></h3>
-						</div><!-- .interested -->
-					</div>
-				</div><!-- .row -->
-				
-				<section class="linked" >
-					<h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
-					<h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
-					<h5><a href="">Tournée nationale 2014</a></h5>
-					<img src="./img/bacasable.jpg" alt="Image background" />
-					<ul class="nav">
-						<li><a href="">Précédent</a></li>
-						<li><a href="">Suivant</a></li>
-					</ul><!-- .links -->
-				</section>
-
-				<!-- Nav tabs -->
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active"><a href="#photos" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span></a></li>
 					<li><a href="#videos" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-facetime-video"></span></a></li>
@@ -261,6 +203,87 @@
 					</div>
 				</div><!-- .tab-content -->
 
+				<div class="row">
+					<div class="col-md-6">
+						<div class="methodology">
+							
+							<h3><img src="./img/icons/methodology.png" alt="Methodologie" />Methodologie</h3>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="">
+							<h3>Attention avant de se lancer</h3>
+							<ul>
+								<li>Bla bla bla</li>
+								<li>Bla bla bli</li>
+								<li>Bla bla blou</li>
+							</ul>
+						</div>
+					</div>
+				</div><!-- .row -->
+
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs nav-tabs-resource" role="tablist">
+					<li class="active"><a href="#seances1and2" role="tab" data-toggle="tab">Séances 1 and 2</a></li>
+					<li><a href="#seances3and4" role="tab" data-toggle="tab">Séances 3 and 4</a></li>
+					<li><a href="#seances5and6" role="tab" data-toggle="tab">Séances 5 and 6</a></li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="seances1and2">
+						<section>
+							<h3>Séances 1 and 2</h3>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						</section>
+						<section>
+							<h3>Questionnement</h3>
+							<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						</section>
+					</div><!-- #project -->
+					<div class="tab-pane" id="seances3and4">
+						<section>
+							<h3>Séances 3 et 4</h3>
+							<p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						</section>
+					</div><!-- #actus -->
+					<div class="tab-pane" id="seances5and6">
+						<section>
+							<h3>Séances 5 et 6</h3>
+							<p>Ced do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						</section>
+					</div><!-- #discussions -->
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="box box-links">
+							<h3>Liens et ressources</h3>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="box box-about">
+							<h3>A propos des créateurs de la fiche</h3>
+							<ul>
+								<li>Bla bla bla</li>
+								<li>Bla bla bli</li>
+								<li>Bla bla blou</li>
+							</ul>
+						</div>
+					</div>
+				</div><!-- .row -->
+
+				<section class="linked" >
+					<h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
+					<h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
+					<h5><a href="">Tournée nationale 2014</a></h5>
+					<img src="./img/bacasable.jpg" alt="Image background" />
+					<ul class="nav">
+						<li><a href="">Précédent</a></li>
+						<li><a href="">Suivant</a></li>
+					</ul><!-- .links -->
+				</section>
+
 			</div><!-- #content -->
 			
 		</div><!-- .col-md-8 -->
@@ -268,7 +291,7 @@
 		<div class="col-md-4">
 
 			<div id="sidebar">
-				<section class="community">
+				<section class="community community-resource">
 					<ul class="actions">
 						<li><a href=""><span class="glyphicon glyphicon-user"></span>Rejoindre</a></li>
 						<li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span>S'abonner</a></li>
@@ -292,6 +315,10 @@
 						<p>Mathieu Corain <em>Chef de projet</em></p>
 					</div><!-- .member -->
 				</section><!-- .community -->
+				
+				<section class="solo">
+					<h3>J'aimerais bien tester!</h3>
+				</section>
 	
 				<section class="comments">
 
@@ -328,9 +355,9 @@
 
 				</section><!-- .comments -->
 				
-				<section class="popularity">
+				<section class="popularity popularity-green">
 					<ul class="actions">
-						<li><a href=""><span class="glyphicon glyphicon-user"></span>Vote</a></li>
+						<li><a href=""><span class="glyphicon glyphicon-star-empty"></span>Vote</a></li>
 					</ul>
 					<h3>Popularité</h3>
 					<table>
@@ -367,8 +394,8 @@
 			<div class="row">
 		
 				<div class="col-md-4">
-					<div class="bloc solo">
-						<a href="">Projet similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
+					<div class="bloc bloc-solo bloc-purple">
+						<a href="">Ressources similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -409,8 +436,8 @@
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="bloc solo">
-						<a href="">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
+					<div class="bloc bloc-solo bloc-purple">
+						<a href="">Plus de ressources <span class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>
 				</div>
 

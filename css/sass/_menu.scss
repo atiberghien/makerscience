@@ -6,12 +6,15 @@
 		padding: 0.25em 0;
 		color: $color-menu-a;
 		text-transform: uppercase;
-		&.selected {
-			border-bottom: 4px solid $color-menu-a-border;
-		}
-		&:hover {
+		&.selected, &:hover {
 			background-color: transparent;
-			border-bottom: 4px solid $color-menu-a-border;
+			border-bottom: 4px solid #666;
+			&.nav-projects {
+				border-color: $color-menu-projects;
+			}
+			&.nav-resources {
+				border-color: $color-menu-resources;
+			}
 		}
 	}
 	.navbar-brand img {

@@ -14,7 +14,13 @@
 
 		padding-bottom: 2em;
 		color: $color-sidebar-community;
-		background: $color-sidebar-community-bg url('../img/bg/sidebar-blue-bg.png') 175px -110px no-repeat;
+		
+		&.community-project {
+			background: $color-project url('../img/bg/shape-right-bg.png') 175px -110px no-repeat;
+		}
+		&.community-resource {
+			background: $color-resource url('../img/bg/shape-right-bg..png') 175px -110px no-repeat;
+		}
 
 		ul.submenu {
 			clear: both;
@@ -69,6 +75,18 @@
 			}
 		}
 		
+	}
+	
+	section.solo {
+		color: white;
+		background-color: $color-purple;
+		h3 {
+			padding: 5em 0;
+			font-size: 1.6em;
+			font-weight: normal;
+			text-align: center;
+			text-transform: uppercase;
+		}
 	}
 	
 	section.comments {
@@ -127,7 +145,13 @@
 
 		padding-bottom: 2em;
 		color: $color-sidebar-popularity;
-		background: $color-sidebar-popularity-bg url('../img/bg/sidebar-blue-bg.png') 175px -110px no-repeat;
+		
+		&.popularity-blue {
+			background: $color-blue url('../img/bg/sidebar-blue-bg.png') 175px -110px no-repeat;
+		}
+		&.popularity-green {
+			background: $color-green url('../img/bg/sidebar-green-bg.png') top left no-repeat;
+		}
 
 		table {
 			margin: 2em 2em;
