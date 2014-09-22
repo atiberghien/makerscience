@@ -4,15 +4,18 @@ $color-blue: #2497d0;
 $color-green: #30c9ad;
 $color-project: #2497d0;
 $color-resource: #30c9ad;
-$color-purple: #639;
+$color-purple: #5a4b84;
 $color-purple-light: #5a4b84;
+$color-dark-grey: #2f2f2f;
+$color-light-grey: #e8e8e8;
 
 /* Body */
+$color-text: #333;
 $color-bg: #f2f2f2;
 
 /* Side Nav */
 $color-nav-a: #fdfdfd;
-$color-nav-a-bg: #2f2f2f;
+$color-nav-a-bg: $color-dark-grey;
 $color-nav-a-bg-selected: $color-orange;
 $color-nav-project-a-bg-selected: $color-orange;
 $color-nav-resource-a-bg-selected: $color-purple;
@@ -50,38 +53,49 @@ $color-content-tab: #000;
 $color-content-tab-bg: transparent;
 $color-content-tab-active: #fff;
 $color-content-tab-project-active-bg: $color-project;
-$color-content-tab-resource-active-bg: $color-purple;
+$color-content-tab-resource-active-bg: $color-resource;
 $color-content-tab-seance-active-bg: $color-purple;
+$color-content-tab-slide: #fff;
+$color-content-tab-slide-bg: $color-dark-grey;
+$color-content-tab-slide-active-bg: $color-blue;
 $color-content-section: #333;
 $color-content-section-bg: #fff;
-$color-content-section-bg-even: #eee;
-$color-needs: #333;
+$color-content-section-bg-even: $color-light-grey;
+$color-needs: $color-text;
 $color-needs-bg: #2695cd;
-$color-needs-border: #fff;
 $color-needs-h3: #fff;
 $color-interested: $color-needs-h3;
 $color-interested-bg: $color-orange;
 $color-interested-border: #fff;
 $color-linked: #fff;
-$color-linked-h3-bg: #039d85;
-$color-linked-h4-bg: #333;
+$color-linked-project-h3-bg: $color-green;
+$color-linked-resource-h3-bg: $color-blue;
+$color-linked-h4-bg: $color-text;
 $color-linked-h5-bg: $color-linked-h4-bg;
 $color-siblings: #fff;
 $color-siblings-bg: $color-orange;
 $color-siblings-title-bg: #333;
 $color-siblings-title-border: #444;
 $color-carousel-photos-tabs-bg: #333;
+$color-bloc-methodology: #fff;
+$color-bloc-methodology-bg: $color-green;
+$color-bloc-warning: #fff;
+$color-bloc-warning-bg: $color-purple;
+$color-bloc-links: $color-text;
+$color-bloc-links-bg: $color-light-grey;
+$color-bloc-about: #fff;
+$color-bloc-about-bg: $color-green;
 
 /* Sidebar */
 $color-sidebar-action: #fff;
-$color-sidebar-action-bg: #333;
+$color-sidebar-action-bg: $color-text;
 $color-sidebar-submenu: #fff;
 $color-sidebar-submenu-bg: #304651;
 $color-sidebar-submenu-border: #cbdfde;
 $color-sidebar-community: #fff;
 $color-sidebar-community-member-border: #7fb3c9;
-$color-sidebar-comments: #333;
-$color-sidebar-comments-bg: #e8e8e8;
+$color-sidebar-comments: $color-text;
+$color-sidebar-comments-bg: $color-light-grey;
 $color-sidebar-comments-border: #d3d3d3;
 $color-sidebar-popularity: #fff;
 $color-sidebar-popularity-bg: $color-blue;
@@ -89,5 +103,5 @@ $color-sidebar-popularity-percent: #50587c;
 $color-sidebar-popularity-percent-bg: #fff;
 
 /* Footer */
-$color-footer: #333;
+$color-footer: $color-text;
 $color-footer-bg: #fff;

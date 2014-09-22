@@ -8,14 +8,14 @@
 	}
 	ul.nav-tabs {
 		&.nav-tabs-seance,
-		&.nav-tabs-resource {
+		&.nav-tabs-slide {
 			margin: 0;
 		}
 		&> li {
 			 a {
+			 	font-size: 1.4em;
 				color: $color-content-tab;
 				background-color: $color-content-tab-bg;
-			 	font-weight: bold;
 			}
 			&.active a {
 				color: $color-content-tab-active;
@@ -23,12 +23,30 @@
 		}
 		&.nav-tabs-project > li.active a {
 			background-color: $color-content-tab-project-active-bg;
+			border: 2px solid $color-content-tab-active;
 		}
 		&.nav-tabs-resource > li.active a {
 			background-color: $color-content-tab-resource-active-bg;
+			border: 2px solid $color-content-tab-active;
 		}
-		&.nav-tabs-seance > li.active a {
-			background-color: $color-content-tab-seance-active-bg;
+		&.nav-tabs-seance {
+			font-size: 0.8em;
+			text-transform: uppercase;
+			&> li.active a {
+				background-color: $color-content-tab-seance-active-bg;
+			}
+		}
+		&.nav-tabs-slide {
+			font-size: 1.3em;
+			&>li a {
+				color: $color-content-tab-slide;
+				background-color: $color-content-tab-slide-bg;
+				@include border-radius(0);
+			}
+			&>li.active a {
+				background-color: $color-content-tab-slide-active-bg;
+				border: 2px solid $color-content-tab-active;
+			}
 		}
 	}
 	section {
@@ -70,7 +88,12 @@
 		}
 		h3 a {
 			padding: 1em;
-			background-color: $color-linked-h3-bg;
+		}
+		&.linked-project h3 a {
+			background-color: $color-linked-project-h3-bg;
+		}
+		&.linked-resource h3 a {
+			background-color: $color-linked-resource-h3-bg;
 		}
 		h4 a, h5 a {
 			padding: 0.5em 1em;
@@ -110,6 +133,7 @@
 
 	.needs, .interested {
 		height: $needs-height;
+		margin-bottom: 2em;
 		padding: 2em;
 		h3 {
 			color: $color-needs-h3;
@@ -127,7 +151,6 @@
 		font-size: 0.9em;
 		color: $color-needs;
 		background: $color-needs-bg url('../img/bg/content-blue-bg.png') center left no-repeat;
-		border: 2px solid $color-needs-border;
 		#carousel-needs {
 			div.carousel-inner {
 				padding-bottom: 3em;
@@ -177,24 +200,84 @@
 			color: $color-interested;
 		}
 	}
-	.methodology {
-		display: table;
-		width: 100%;
-		height: 5em;
-		text-align: center;
-		color: white;
-		background-color: $color-green;
+	.bloc {
+		overflow: hidden;
+		height: $bloc-height;
+		margin: 3em 0;
+		h3, p, ul {
+			padding-right: 1em;
+			padding-left: 1em;
+		}
 		h3 {
-			display: table-cell;
-			height: 100%;
+			padding-top: 1em;
+			font-weight: bold;
+			text-transform: uppercase;
+		}
+	}
+	.bloc-methodology {
+		padding: 170px 0 0 0;
+		text-align: center;
+		color: $color-bloc-methodology;
+		background: $color-bloc-methodology-bg url('../img/icons/methodology.png') 50% 35% no-repeat;
+		h3 {
 			font-size: 2em;
 			vertical-align: middle;
 			text-align: center;
+			font-weight: bold;
 			img {
-				display: block;
+				display: inline-block;
 			}
 		}
 	}
+	.bloc-warning {
+		color: $color-bloc-warning;
+		background: $color-bloc-warning-bg url('../img/icons/warning.png') 50% 15% no-repeat;
+		h3 {
+			padding-top: 120px;
+			padding-bottom: 1em;
+			font-weight: bold;
+		}
+		p, ul {
+			font-size: 0.9em;
+			line-height: 1.5em;
+		}
+		li:before {
+			content: "> ";
+		}
+	}
+	.bloc-links, .bloc-about {
+		h3, p, ul {
+			padding-right: 2em;
+			padding-left: 2em;
+		}
+		h3 {
+			padding: 2em 2em 1em 2em;
+		}
+	}
+	.bloc-links {
+		background-color: $color-bloc-links-bg;
+		a, a:visited {
+			color: $color-bloc-links;
+			text-decoration: underline;
+		}
+	}
+	.bloc-about {
+		color: $color-bloc-about;
+		background-color: $color-bloc-about-bg;
+		img {
+			display: block;
+			margin: 1em auto 2em;
+		}
+		p {
+			font-weight: bold;
+		}
+		em {
+			display: block;
+			font-size: 0.9em;
+			font-weight: normal;
+		}
+	}
+		
 }
 
 #siblings {
