@@ -1,14 +1,68 @@
+div.toolbar {
+	background-color: $color-toolbar-bg;
+	.col-md-2 {
+		h3, form {
+			height: 150px;
+			background-color: $color-blue;
+			vertical-align: middle;
+		}
+	}
+	h3 {
+		color: #fff;
+		text-transform: uppercase;
+	}
+	ul {
+		margin: 1.5em 0 0;
+		font-size: 0.9em;
+		li {
+			margin-right: 0.5em;
+			margin-bottom: 0.5em;
+		}
+	}
+	form {
+		button {
+			color: #fff;
+			background-color: $color-blue;
+			border: none;
+		}
+	}
+}
+
+
 #content, #sidebar {
 	margin-top: 3em;
 }
 #content {
+	&.listing {
+		overflow: hidden; /* Allows to have bottom padding */
+		padding-bottom: 4em;
+	}
+	&.edit {
+		margin-top: 2em;
+		margin-bottom: 10em;
+		padding: 1.5em;
+		background: $color-content-edit-bg url('../img/bg/edit-bg.jpg') 50% 170% no-repeat;
+		h2, h3 {
+			color: $color-content-edit;
+			font-size: 1.5em;
+			text-transform: uppercase;
+		}
+		h2 {
+			margin: 1em 0 3em;
+			font-weight: bold;
+		}
+		h3 {
+			margin: 1em 0;
+		}
+	}
 	ul.nav-tabs {
 		margin-bottom: 1em;
 		border: none;
 	}
 	ul.nav-tabs {
 		&.nav-tabs-seance,
-		&.nav-tabs-slide {
+		&.nav-tabs-slide,
+		&.nav-tabs-listing {
 			margin: 0;
 		}
 		&> li {
@@ -48,6 +102,13 @@
 				border: 2px solid $color-content-tab-active;
 			}
 		}
+		&.nav-tabs-listing > li.active a {
+			background-color: $color-content-tab-listing-active-bg;
+			border: 2px solid $color-content-tab-active;
+		}
+	}
+	.tab-content-listing {
+		background-color: $color-content-listing-bg;
 	}
 	section {
 		margin-bottom: 1em;
@@ -280,9 +341,9 @@
 		
 }
 
-#siblings {
+.siblings {
 	margin: 2em 15px 4em;
-	.bloc {
+	.box {
 		position: relative;
 		height: $sibling-height;
 		margin-bottom: 2em;
@@ -324,13 +385,13 @@
 			width: 100%;
 			height: 100%;
 		}
-		&.bloc-orange {
+		&.box-orange {
 			background-color: $color-orange;
 		}
-		&.bloc-purple {
+		&.box-purple {
 			background-color: $color-purple;
 		}
-		&.bloc-solo {
+		&.box-solo {
 			display: table;
 			a {
 				display: table-cell;
@@ -350,6 +411,18 @@
 					text-decoration: none;
 				}
 			}
+		}
+	}
+	&.siblings-listing {
+		margin: 2em 15px 2em;
+		padding: 3em 1em 2em;
+		.box {
+			height: 200px;
+			font-size: 0.85em;
+			@include box-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+		}
+		h3 img {
+			width: 28px;
 		}
 	}
 }
