@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Nouveau Projet | MakeScience</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="css/print.css" media="print" rel="stylesheet" type="text/css" />
+<body>
+<div class="container-fluid">
+
+	<header>
+		<div class="container">
+			<nav id="menu" class="navbar" role="navigation">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="#"><img src="./img/logo.jpg" alt="Logo MakerScience" /></a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li><a href="" class="nav-home">Home</a></li>
+							<li><a href="fiche_profil.html" class="nav-members">Membres</a></li>
+							<li><a href="fiche_projet.html" class="nav-projects selected">Projets</a></li>
+							<li><a href="fiche_ressource.html" class="nav-resources">Ressources</a></li>
+							<li><a href="" class="nav-forum">Forum</a></li>
+						</ul>
+						<button class="user pull-right"><img src="./img/users/user-default.png" alt="User" /></button>
+						<form class="navbar-form navbar-right" role="search">
+							<div class="input-group">
+								<input type="text" name="search-term" class="form-control" placeholder="Search" />
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+								</span>
+							</div><!-- /input-group -->
+						</form>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</nav><!-- #menu -->
+		</div><!-- .container -->
+	</header>
+	
+	<div id="intro" class="intro-project-create">
+
+		<h1>Le numérique et l'innovation</h1>
+		<h2>Au coeur de tous <em>les projets</em></h2>
+		<button>A vous de jouer!</button>
+
+	</div><!-- #intro -->
+
+	<div class="toolbar">
+		<div class="row container">
+			<div class="col-md-2">
+				<h3>Les tags populaires <span class="glyphicon glyphicon-chevron-right"></span></h3>
+			</div>
+			<div class="col-md-8">
+				<ul class="tags tags-listing">
+					<li><a href="">Réseaux sociaux</a></li>
+					<li><a href="">Journalisme</a></li>
+					<li><a href="">Ecriture</a></li>
+					<li><a href="">Community management</a></li>
+					<li><a href="">Transmedia</a></li>
+					<li><a href="">3D</a></li>
+					<li><a href="">Gamification</a></li>
+					<li><a href="">Numerique</a></li>
+					<li><a href="">Robotique</a></li>
+					<li><a href="">Créativité</a></li>
+				</ul>
+			</div>
+			<div class="col-md-2">
+				<form method="post" action="">
+<!--					<input type="search" name="search" placeholder="Rechercher..." />-->
+					<button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+				</form>
+			</div>
+		</div><!-- .row -->
+	</div><!-- .toolbar -->
+
+	<div class="row container">
+	
+		<div class="col-md-12">
+
+			<div id="content" class="edit">
+
+				<h2>Créer un projet</h2>
+				<h3>Nouveau projet</h3>
+				
+				<form method="post" action="">
+				
+					<div class="row">
+				
+						<div class="col-md-8">
+					
+							<input type="text" name="project-name" placeholder="Nom du projet" />
+							<textarea name="project-tagline" placeholder="Tagline" rows="4"></textarea>
+							<input type="text" name="projet-tags" placeholder="Quels sont les domaines (tags)?" />
+							
+							<div class="row">
+								<div class="col-md-8">
+									<ul class="tags tags-edit">
+										<li><button>Community management <span class="glyphicon glyphicon-remove"></span></button></li>
+										<li><button>Gamification <span class="glyphicon glyphicon-remove"></span></button></li>
+										<li><button>Journalisme <span class="glyphicon glyphicon-remove"></span></button></li>
+									</ul>
+								</div>
+								<div class="col-md-4">
+									<button class="button fullwidth" type="submit">Ajouter</button>
+								</div>
+							</div><!-- .row -->
+							
+					
+						</div>
+					
+						<div class="col-md-4">
+						
+							<button class="button button-geolocalisation"></span>Géolocalisation</button>
+							<fieldset>
+								<p>Work in progress</p>
+								<ul class="phases">
+									<li><button><img src="./img/phase.png" alt="Début" />Début</button></li>
+									<li><button><img src="./img/phase.png" alt="Phase 2" />Phase 2</button></li>
+									<li><button><img src="./img/phase-selected.png" alt="Phase 3" />Phase 3</button></li>
+									<li><button><img src="./img/phase.png" alt="Phase 4" />Phase 4</button></li>
+								</ul>
+							</fieldset>
+							<button class="button button-photo-upload">Photo de couverture</button>
+						
+						</div>
+				
+					</div><!-- .row -->
+					
+					<textarea name="project-about" placeholder="A propos du projet?"rows="4"></textarea>
+					<textarea name="project-public" placeholder="Public ciblé?"rows="4"></textarea>
+					<textarea name="project-content" placeholder="Quel est le contenu scientifique?"rows="4"></textarea>
+					<textarea name="project-look" placeholder="A quoi va ressembler le projet?"rows="4"></textarea>
+					<textarea name="project-questions" placeholder="Questionnement?"rows="4"></textarea>
+					<textarea name="project-links" placeholder="Liens et ressources?"rows="4"></textarea>
+					
+					<div class="row">
+
+						<div class="col-md-6">
+							<fieldset class="needs-idea">
+								<h4>Vos besoins?</h4>
+								<h5>Idée</h5>
+								<textarea name="project-idea" placeholder="Champ de texte..." rows="4"></textarea>
+								<button class="right">Suivant</button>
+							</fieldset>
+							<button class="button button-gallery-photo">Gallerie photo et vidéo</button>
+						</div>
+					
+						<div class="col-md-6">
+							<fieldset class="fixme">
+								<h4><span class="fixme">#FIXME</span><br />Lien vers une fiche ressource<br />(voir design)</h4>
+							</fieldset>
+						</div>
+						
+					</div><!-- .row -->
+					
+					<p class="right">
+						<button class="button cancel" type="submit">Annuler</button>
+						<button class="button" type="submit">Enregistrer et publier</button>
+					</p>
+					
+				</form>
+				
+			</div><!-- #content -->
+
+		</div><!-- .row -->
+		
+	</div><!-- .row .container -->
+
+	<footer>
+		<ul>
+			<li><a href=""><img src="./img/footer/social-twitter.gif" alt="Twitter" /></a></li>
+			<li><a href=""><img src="./img/footer/social-facebook.gif" alt="Facebook" /></a></li>
+			<li><a href=""><img src="./img/footer/social-google.gif" alt="Google+" /></a></li>
+		</ul>
+	</footer>
+
+</div><!-- .container-fluid -->
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>

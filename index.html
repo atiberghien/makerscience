@@ -1,27 +1,84 @@
 <!DOCTYPE html>
 <html ng-app="makerscience">
 <head>
-<title>MakerScience</title>
+	<title>MakerScience</title>
+	<link href="css/dev.css" media="screen" rel="stylesheet" type="text/css" />
+</head>
 <body>
-	<h1>MakerScience</h1>
-	<ul>
-		<li><a ui-sref="project-list">Fiche Projet</a></li>
-		<li><a href="fiche_ressource.html">Fiche Ressource</a></li>
-		<li><a href="fiche_profil.html">Fiche Profil</a></li>
-	</ul>
-	<ui-view></ui-view>
-	<script src="js/vendor/jquery/dist/jquery.min.js"></script>
-	<script src="js/vendor/angular/angular.js"></script>
-	<script src="js/vendor/underscore/underscore.js"></script>
-	<script src="js/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	<script src="js/vendor/restangular/dist/restangular.min.js"></script>
-	<script src="js/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-	
 
-	<script src="js/config.js"></script>
-	<script src="js/projectsheet/controllers.js"></script>
-	<script src="js/projectsheet/services.js"></script>
-	<script src="js/projectsheet/directives.js"></script>
-	<script src="js/app.js"></script>
+<div class="row">
+
+	<div class="col-md-3">
+	
+		<ul class="colors">
+			<li class="dark-grey"></li>
+			<li class="light-grey"></li>
+			<li class="green"></li>
+			<li class="blue"></li>
+			<li class="purple"></li>
+			<li class="orange"></li>
+		</ul>
+
+	</div>
+
+	<!-- spacer -->	
+	<div class="col-md-1"></div>
+	
+	<div class="col-md-8">
+
+		<h1>MakerScience</h1>
+
+		<h2>HTML Templates</h2>
+		<ul>
+			<li>
+				Profil
+				<ul>
+					<li><a href="fiche_profil.html">Fiche Profil</a> <span class="glyphicon glyphicon-ok"></span></li>
+				</ul>
+			</li>
+			<li>
+				Projets
+				<ul>
+					<li><a href="fiche_projet.html">Fiche Projet</a> <span class="glyphicon glyphicon-ok"></span></li>
+					<li><a href="nouveau_projet.html">Nouveau Projet</a> <em>En cours</em></li>
+					<li><a ui-sref="project-list">Listing Projets</a> <em>On hold</em></li>
+				</ul>
+			</li>
+			<li>
+				Ressources
+				<ul>
+					<li><a href="fiche_ressource.html">Fiche Ressource</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ui-view></ui-view>
+		
+		<h2>Links</h2>
+		<ul>
+			<li><a href="http://projects.nonetype.net/">Redmine: http://projects.nonetype.net/</a></li>
+			<li><a href="http://lite4.framapad.org/p/makerscience">Writeboard: http://lite4.framapad.org/p/makerscience</a></li>
+		</ul>
+		
+		<footer>
+			<span class="glyphicon glyphicon-ok"></span> = Approved
+		</footer>
+
+	</div>
+	
+</div><!-- .row -->
+
+<script src="js/vendor/jquery/dist/jquery.min.js"></script>
+<script src="js/vendor/angular/angular.js"></script>
+<script src="js/vendor/underscore/underscore.js"></script>
+<script src="js/vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="js/vendor/restangular/dist/restangular.min.js"></script>
+<script src="js/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+
+<script src="js/config.js"></script>
+<script src="js/projectsheet/controllers.js"></script>
+<script src="js/projectsheet/services.js"></script>
+<script src="js/projectsheet/directives.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

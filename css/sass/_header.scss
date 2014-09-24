@@ -54,6 +54,33 @@ header {
 			}
 		}
 	}
+	&.intro-project-create {
+		padding: 8em 0;
+		text-align: center;
+		background-color: $color-intro-project-bg;
+		background-image: url('../img/bg/header-project-create.gif');
+		h1, h2 {
+			font-size: 3em;
+			line-height: 1em;
+			text-transform: uppercase;
+		}
+		h2 {
+			margin-bottom: 1.25em;
+			font-weight: normal;
+			em {
+				border-bottom: 4px solid $color-intro-listing;
+			}
+		}
+		button {
+			padding: 0.75em 1em;
+			font-size: 2em;
+			color: $color-intro-listing;
+			border: 2px solid $color-intro-listing;
+			background-color: transparent;
+			text-transform: uppercase;
+			@include border-radius(3px);
+		}
+	}
 	&.intro-resource {
 		background-color: $color-intro-resource-bg;
 		background-image: url('../img/bg/header-resource-bg.png');
@@ -62,6 +89,33 @@ header {
 			span {
 				background-color: $color-intro-h3-resource-bg;
 			}
+		}
+	}
+	&.intro-listing {
+		padding: 8em 0;
+		text-align: center;
+		background-color: $color-intro-project-bg;
+		background-image: url('../img/bg/header-project-bg.jpg');
+		h1, h2 {
+			font-size: 3em;
+			line-height: 1em;
+			text-transform: uppercase;
+		}
+		h2 {
+			margin-bottom: 1.25em;
+			font-weight: normal;
+			em {
+				border-bottom: 4px solid $color-intro-listing;
+			}
+		}
+		button {
+			padding: 0.75em 1em;
+			font-size: 2em;
+			color: $color-intro-listing;
+			border: 2px solid $color-intro-listing;
+			background-color: transparent;
+			text-transform: uppercase;
+			@include border-radius(3px);
 		}
 	}
 }
@@ -103,26 +157,6 @@ header {
 			padding-left: 60px;
 			line-height: 48px;
 			background: transparent url('../img/location.png') left center no-repeat;
-		}
-	}
-	
-	ul.tags {
-		margin: 0 0 1em;
-		li {
-			display: inline-block;
-		}
-		a {
-			display: inline-block;
-			margin: 0 0.25em 0.5em 0;
-			padding: 0.25em 1em;
-			color: $color-intro-tags;
-			@include border-radius(1px);
-		}
-		&.tags-project a {
-			background-color: $color-intro-tags-project-bg;
-		}
-		&.tags-resource a {
-			background-color: $color-intro-tags-resource-bg;
 		}
 	}
 	

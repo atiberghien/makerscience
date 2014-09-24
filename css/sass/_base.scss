@@ -16,12 +16,19 @@ a {
 	text-decoration: none;
 }
 
+.right {
+	text-align: right;
+}
 .container {
 	width: $page-width;
 	margin: 0 auto;
 }
 .container-fluid {
 	padding: 0;
+}
+span.fixme {
+	font-weight: bold;
+	background-color: yellow;
 }
 
 /*
@@ -54,5 +61,67 @@ ul.actions {
 	}
 }
 
+/*
+	Tags - Found in header & content
+*/
+ul.tags {
+	margin: 0 0 1em;
+	li {
+		display: inline-block;
+	}
+	a, button {
+		display: inline-block;
+		margin: 0 0.25em 0.5em 0;
+		padding: 0.25em 1em;
+		color: $color-tags;
+		background-color: $color-blue;
+		@include border-radius(1px);
+	}
+	&.tags-project a {
+		background-color: $color-tags-project-bg;
+	}
+	&.tags-resource a {
+		background-color: $color-tags-resource-bg;
+		&:hover {
+			background-color: $color-purple;
+		}
+	}
+	&.tags-listing a {
+		background-color: $color-blue;
+	}
+	&.tags-edit {
+		margin: 0.75em;
+		margin-bottom: 4em;
+		button {
+			font-size: 0.8em;
+			background-color: $color-purple;
+			border: none;
+			span {
+				font-size: 0.85em;
+			}
+			&:hover {
+				background-color: $color-orange;
+			}
+		}
+	}
+	a:hover {
+		text-decoration: none;
+		background-color: $color-orange;
+	}
+}
 
 
+button {
+	&.large {
+		width: 100%;
+		padding: 1.5em;
+		font-size: 1.5em;
+		text-align: center;
+		text-transform: uppercase;
+		&.large-orange {
+			color: #fff;
+			background-color: $color-orange;
+			border: none;
+		}
+	}
+}

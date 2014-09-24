@@ -2,8 +2,8 @@
 $color-orange: #c30;
 $color-blue: #2497d0;
 $color-green: #30c9ad;
-$color-project: #2497d0;
-$color-resource: #30c9ad;
+$color-project: $color-blue;
+$color-resource: $color-green;
 $color-purple: #5a4b84;
 $color-purple-light: #5a4b84;
 $color-dark-grey: #2f2f2f;
@@ -33,6 +33,7 @@ $color-menu-form-bg: #e4e4e4;
 
 /* Intro */
 $color-intro: #000;
+$color-intro-listing: #fff;
 $color-intro-project-bg: #042d41;
 $color-intro-resource-bg: #21083b;
 $color-intro-border: #fff;
@@ -43,10 +44,15 @@ $color-intro-h3-border: #fff;
 $color-intro-h3-project-bg: $color-project;
 $color-intro-h3-resource-bg: $color-resource;
 $color-intro-project-bg: #f2f2f2;
-$color-intro-tags: #fff;
-$color-intro-tags-project-bg: $color-project;
-$color-intro-tags-resource-bg: $color-resource;
 $color-phase-selected: #fe9903;
+
+/* Base */
+$color-tags: #fff;
+$color-tags-project-bg: $color-project;
+$color-tags-resource-bg: $color-resource;
+
+/* Toolbar */
+$color-toolbar-bg: #ddd9da;
 
 /* Content */
 $color-content-tab: #000;
@@ -58,9 +64,13 @@ $color-content-tab-seance-active-bg: $color-purple;
 $color-content-tab-slide: #fff;
 $color-content-tab-slide-bg: $color-dark-grey;
 $color-content-tab-slide-active-bg: $color-blue;
+$color-content-tab-listing-active-bg: $color-blue;
 $color-content-section: #333;
 $color-content-section-bg: #fff;
 $color-content-section-bg-even: $color-light-grey;
+$color-content-listing-bg: $color-light-grey;
+$color-content-edit: #fff;
+$color-content-edit-bg: #999;
 $color-needs: $color-text;
 $color-needs-bg: #2695cd;
 $color-needs-h3: #fff;
@@ -85,6 +95,10 @@ $color-bloc-links: $color-text;
 $color-bloc-links-bg: $color-light-grey;
 $color-bloc-about: #fff;
 $color-bloc-about-bg: $color-green;
+
+/* Forms */
+$color-form-text: #535353;
+$color-form-input-bg: #ebebeb;
 
 /* Sidebar */
 $color-sidebar-action: #fff;
