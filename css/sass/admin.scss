@@ -56,10 +56,6 @@ body.admin {
 		}
 		
 		form {
-			p.right {
-				margin-top: -0.5em;
-				margin-bottom: 1.5em;
-			}
 			button.dark {
 				margin-left: 0.25em;
 				padding: 0.25em 1em;
@@ -77,6 +73,11 @@ body.admin {
 				}
 			}
 		}
+		.tab-content p.right {
+			margin-top: -0.5em;
+			margin-bottom: 1.5em;
+		}
+
 		section {
 			padding: 0;
 			h3 {
@@ -92,6 +93,21 @@ body.admin {
 				padding: 0.75em;
 				background-color: transparent;
 				border: 2px solid $color-dark-grey;
+			}
+		}
+		.bloc-links {
+			height: auto;
+			margin-bottom: 0.25em;
+			input {
+				margin: 0;
+				padding: 0 1em;
+				background-color: transparent;
+			}
+			fieldset {
+				margin-bottom: 1px;
+				input:first-child {
+					font-weight: bold;
+				}
 			}
 		}
 		

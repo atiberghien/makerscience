@@ -203,15 +203,30 @@
 				
 				<div class="row">
 					<div class="col-md-6">
-						<div class="bloc bloc-links bloc-links-project">
-							<div class="edit-buttons">
-								<button><span class="glyphicon glyphicon-pencil"></span></button>
+						<form method="post" action="">
+							<div class="bloc bloc-links bloc-links-project">
+								<div class="edit-buttons">
+									<button><span class="glyphicon glyphicon-pencil"></span></button>
+								</div>
+								<h3>Liens et ressources</h3>
+								<fieldset>
+									<input type="text" name="link1-title" value="Science-animation" />
+									<input type="text" name="link1-url" value="http://www.google.com" />
+								</fieldset>
+								<fieldset>
+									<input type="text" name="link2-title" value="Un autre lien" />
+									<input type="text" name="link2-url" value="http://www.pixmin.org" />
+								</fieldset>
+								<fieldset>
+									<input type="text" name="link2-title" value="Un autre lien" />
+									<input type="text" name="link2-url" value="http://www.pixmin.org" />
+								</fieldset>
 							</div>
-							<h3>Liens et ressources</h3>
-							<ul>
-								<li><a href="">Science-animation: Voir le lien</a></li>
-							</ul>
-						</div>
+							<p class="right">
+								<button class="dark cancel">Annuler</button>
+								<button class="dark">Valider</button>
+							</p>
+						</form>
 					</div>
 					<div class="col-md-6">
 						<div class="bloc bloc-about bloc-about-project">
