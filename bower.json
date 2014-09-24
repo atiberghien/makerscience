@@ -1,0 +1,32 @@
+{
+  "name": "makerscience",
+  "version": "0.0.1",
+  "homepage": "https://github.com/UnissonCo/makerscience",
+  "authors": [
+    "Unisson Team <contact@unisson.co>"
+  ],
+  "description": "MakerScience",
+  "main": "index.html",
+  "keywords": [
+    "unisson",
+    "scienceanimation",
+    "makerscience"
+  ],
+  "license": "AGPL v3",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  	"jquery": "~2.1.1",
+  	"angular": "~1.2.25",
+  	"angular-bootstrap" : "~0.11.0",
+  	"underscore": "~1.7.0",
+  	"restangular": "~1.4.0",
+  	"angular-ui-router": "~0.2.11"    
+  }
+}
