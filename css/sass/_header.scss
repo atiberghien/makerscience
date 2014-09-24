@@ -148,6 +148,7 @@ header {
 	}
 
 	div.sideproject {
+		position: relative;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */
 		padding: 2em;
 		color: $color-intro;

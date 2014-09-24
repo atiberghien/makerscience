@@ -89,27 +89,11 @@ ul.tags {
 	&.tags-listing a {
 		background-color: $color-blue;
 	}
-	&.tags-edit {
-		margin: 0.75em;
-		margin-bottom: 4em;
-		button {
-			font-size: 0.8em;
-			background-color: $color-purple;
-			border: none;
-			span {
-				font-size: 0.85em;
-			}
-			&:hover {
-				background-color: $color-orange;
-			}
-		}
-	}
 	a:hover {
 		text-decoration: none;
 		background-color: $color-orange;
 	}
 }
-
 
 button {
 	&.large {
@@ -125,3 +109,4 @@ button {
 		}
 	}
 }
+
