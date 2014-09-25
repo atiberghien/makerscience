@@ -92,18 +92,34 @@ header {
 		}
 	}
 	&.intro-listing {
-		padding: 8em 0;
+		padding: 0;
 		text-align: center;
 		background-color: $color-intro-project-bg;
-		background-image: url('../img/bg/header-project-bg.jpg');
+		background-image: none;
+		#carousel-photos {
+			.item {
+				padding: 17em 2em;
+				background-color: #000;
+				background-strech: cover;
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-size: cover;
+			}
+			.carousel-indicators {
+				bottom: 4em;
+			}
+		}
 		h1, h2 {
+			margin: 0;
 			font-size: 3em;
-			line-height: 1em;
+			line-height: 1.5em;
 			text-transform: uppercase;
+		}
+		h1 {
+			font-weight: normal;
 		}
 		h2 {
 			margin-bottom: 1.25em;
-			font-weight: normal;
 			em {
 				border-bottom: 4px solid $color-intro-listing;
 			}
