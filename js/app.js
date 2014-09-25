@@ -27,13 +27,13 @@
       $locationProvider.html5Mode(config.useHtml5Mode);
       $urlRouterProvider.otherwise("/");
       return $stateProvider.state('project-list', {
-        url: '/project',
+        url: '/p',
         controller: 'ProjectListCtrl',
-        templateUrl: 'views/projectsheet/project_list.html'
-      }).state('project-detail', {
-        url: '/projectsheet/:id',
-        controller: 'ProjectDetailCtrl',
-        templateUrl: 'views/projectsheet/project_detail.html'
+        templateUrl: 'views/catalog/project_list.html'
+      }).state('projectsheet', {
+        url: '/p/:slug',
+        controller: 'ProjectSheetCtrl',
+        templateUrl: 'views/catalog/project_detail.html'
       });
     }
   ]);

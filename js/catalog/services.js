@@ -4,8 +4,12 @@
 
   module = angular.module("projectsheet.services", ['restangular']);
 
+  module.factory('Project', function(Restangular) {
+    return Restangular.service('project');
+  });
+
   module.factory('ProjectSheet', function(Restangular) {
-    return Restangular.service('project/');
+    return Restangular.service('projectsheet');
   });
 
 }).call(this);
