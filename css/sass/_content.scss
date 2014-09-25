@@ -37,24 +37,6 @@ div.toolbar {
 		overflow: hidden; /* Allows to have bottom padding */
 		padding-bottom: 4em;
 	}
-	&.edit {
-		margin-top: 2em;
-		margin-bottom: 10em;
-		padding: 1.5em;
-		background: $color-content-edit-bg url('../img/bg/edit-bg.jpg') 50% 170% no-repeat;
-		h2, h3 {
-			color: $color-content-edit;
-			font-size: 1.5em;
-			text-transform: uppercase;
-		}
-		h2 {
-			margin: 1em 0 3em;
-			font-weight: bold;
-		}
-		h3 {
-			margin: 1em 0;
-		}
-	}
 	ul.nav-tabs {
 		margin-bottom: 1em;
 		border: none;
@@ -111,6 +93,7 @@ div.toolbar {
 		background-color: $color-content-listing-bg;
 	}
 	section {
+		position: relative;
 		margin-bottom: 1em;
 		padding: 1em 1em 2em;
 		color: $color-content-section;
@@ -209,6 +192,7 @@ div.toolbar {
 		}
 	}
 	.needs {
+		position: relative;
 		font-size: 0.9em;
 		color: $color-needs;
 		background: $color-needs-bg url('../img/bg/content-blue-bg.png') center left no-repeat;
@@ -307,6 +291,7 @@ div.toolbar {
 		}
 	}
 	.bloc-links, .bloc-about {
+		position: relative;
 		h3, p, ul {
 			padding-right: 2em;
 			padding-left: 2em;
@@ -317,6 +302,9 @@ div.toolbar {
 	}
 	.bloc-links {
 		background-color: $color-bloc-links-bg;
+		&.bloc-links-project {
+			background-color: #fff;
+		}
 		a, a:visited {
 			color: $color-bloc-links;
 			text-decoration: underline;
@@ -325,6 +313,9 @@ div.toolbar {
 	.bloc-about {
 		color: $color-bloc-about;
 		background-color: $color-bloc-about-bg;
+		&.bloc-about-project {
+			background-color: $color-blue;
+		}
 		img {
 			display: block;
 			margin: 1em auto 2em;
