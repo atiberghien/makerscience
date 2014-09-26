@@ -1,1 +1,201 @@
-body.admin div.edit-buttons{position:absolute;top:0;right:0}body.admin div.edit-buttons button{float:right;margin-left:0.5em;padding:0.5em 0.7em;font-size:1.5em;color:#fff;background-color:#2f2f2f;border:none}body.admin div.edit-buttons button.add-tag{background-color:#2497d0}body.admin div.edit-buttons button:hover{background-color:#c30}body.admin #intro.intro-project h3 span{background-color:#2f2f2f}body.admin #content.new-project{margin-top:2em;margin-bottom:10em;padding:1.5em;background:#999 url("../img/bg/edit-bg.jpg") 50% 170% no-repeat}body.admin #content.new-project h2,body.admin #content.new-project h3{color:#fff;font-size:1.5em;text-transform:uppercase}body.admin #content.new-project h2{margin:1em 0 3em;font-weight:bold}body.admin #content.new-project h3{margin:1em 0}body.admin #content form button.dark{margin-left:0.25em;padding:0.25em 1em;color:#fff;background-color:#2f2f2f;border:2px solid #2f2f2f}body.admin #content form button.dark.cancel{color:#2f2f2f;background-color:#fff}body.admin #content form button.dark:hover{color:#fff;background-color:#c30;border-color:#c30}body.admin #content .tab-content p.right{margin-top:-0.5em;margin-bottom:1.5em}body.admin #content section{padding:0}body.admin #content section h3{margin:0;padding:1em 1em 0.5em 1em}body.admin #content section p{padding:0 1em 1em 1em}body.admin #content section textarea{display:block;width:100%;padding:0.75em;background-color:transparent;border:2px solid #2f2f2f}body.admin #content .bloc-links{height:auto;margin-bottom:0.25em}body.admin #content .bloc-links input{margin:0;padding:0 1em;background-color:transparent}body.admin #content .bloc-links fieldset{margin-bottom:1px}body.admin #content .bloc-links fieldset input:first-child{font-weight:bold}body.admin ul.tags{margin-top:2.5em}body.admin ul.tags.tags-edit{margin:0.75em;margin-bottom:4em}body.admin ul.tags.tags-edit button{font-size:0.8em;background-color:#5a4b84;border:none}body.admin ul.tags.tags-edit button span{font-size:0.85em}body.admin ul.tags.tags-edit button:hover{background-color:#c30 !important}body.admin #sidebar div.member button.remove{position:absolute;top:0;left:-10px;width:25px;height:25px;font-size:0.85em;color:#fff;background-color:#2f2f2f;border:0;-moz-border-radius:12px;-webkit-border-radius:12px;border-radius:12px}body.admin #sidebar div.member button.remove:hover{background-color:#c30}body.admin #sidebar div.comment{position:relative}body.admin #sidebar div.comment ul.nav{position:absolute;top:0.5em;right:0}body.admin #sidebar div.comment ul.nav ul.dropdown-menu{left:auto;right:0}body.admin #sidebar div.comment ul.nav a[role="button"]{color:#2f2f2f;background-color:#d1cdce;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0}body.admin #sidebar div.comment div.author p{margin-top:0.25em}
+/*
+	Stylesheet used for the administration of MakerScience
+*/
+/* MakerScience colors */
+/* Body */
+/* Side Nav */
+/* Header */
+/* Menu */
+/* Intro */
+/* Base */
+/* Toolbar */
+/* Content */
+/* Forms */
+/* Sidebar */
+/* Admin */
+/* Footer */
+/* line 10, sass/admin.scss */
+body.admin div.edit-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* line 14, sass/admin.scss */
+body.admin div.edit-buttons button {
+  float: right;
+  margin-left: 0.5em;
+  padding: 0.5em 0.7em;
+  font-size: 1.5em;
+  color: #fff;
+  background-color: #2f2f2f;
+  border: none;
+}
+/* line 22, sass/admin.scss */
+body.admin div.edit-buttons button.add-tag {
+  background-color: #2497d0;
+}
+/* line 25, sass/admin.scss */
+body.admin div.edit-buttons button:hover {
+  background-color: #c30;
+}
+/* line 31, sass/admin.scss */
+body.admin #intro.intro-project h3 span {
+  background-color: #2f2f2f;
+}
+/* line 37, sass/admin.scss */
+body.admin #content.new-project {
+  margin-top: 2em;
+  margin-bottom: 10em;
+  padding: 1.5em;
+  background: #999 url("../img/bg/edit-bg.jpg") 50% 170% no-repeat;
+}
+/* line 43, sass/admin.scss */
+body.admin #content.new-project h2, body.admin #content.new-project h3 {
+  color: #fff;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+/* line 48, sass/admin.scss */
+body.admin #content.new-project h2 {
+  margin: 1em 0 3em;
+  font-weight: bold;
+}
+/* line 52, sass/admin.scss */
+body.admin #content.new-project h3 {
+  margin: 1em 0;
+}
+/* line 59, sass/admin.scss */
+body.admin #content form button.dark {
+  margin-left: 0.25em;
+  padding: 0.25em 1em;
+  color: #fff;
+  background-color: #2f2f2f;
+  border: 2px solid #2f2f2f;
+}
+/* line 65, sass/admin.scss */
+body.admin #content form button.dark.cancel {
+  color: #2f2f2f;
+  background-color: #fff;
+}
+/* line 69, sass/admin.scss */
+body.admin #content form button.dark:hover {
+  color: #fff;
+  background-color: #c30;
+  border-color: #c30;
+}
+/* line 76, sass/admin.scss */
+body.admin #content .tab-content p.right {
+  margin-top: -0.5em;
+  margin-bottom: 1.5em;
+}
+/* line 81, sass/admin.scss */
+body.admin #content section {
+  padding: 0;
+}
+/* line 83, sass/admin.scss */
+body.admin #content section h3 {
+  margin: 0;
+  padding: 1em 1em 0.5em 1em;
+}
+/* line 87, sass/admin.scss */
+body.admin #content section p {
+  padding: 0 1em 1em 1em;
+}
+/* line 90, sass/admin.scss */
+body.admin #content section textarea {
+  display: block;
+  width: 100%;
+  padding: 0.75em;
+  background-color: transparent;
+  border: 2px solid #2f2f2f;
+}
+/* line 98, sass/admin.scss */
+body.admin #content .bloc-links {
+  height: auto;
+  margin-bottom: 0.25em;
+}
+/* line 101, sass/admin.scss */
+body.admin #content .bloc-links input {
+  margin: 0;
+  padding: 0 1em;
+  background-color: transparent;
+}
+/* line 106, sass/admin.scss */
+body.admin #content .bloc-links fieldset {
+  margin-bottom: 1px;
+}
+/* line 108, sass/admin.scss */
+body.admin #content .bloc-links fieldset input:first-child {
+  font-weight: bold;
+}
+/* line 117, sass/admin.scss */
+body.admin .intro ul.tags {
+  margin-top: 2.5em;
+  /* make space for the edit buttons at the top */
+}
+/* line 119, sass/admin.scss */
+body.admin .intro ul.tags.tags-edit {
+  margin: 0.75em;
+  margin-bottom: 4em;
+}
+/* line 122, sass/admin.scss */
+body.admin .intro ul.tags.tags-edit button {
+  font-size: 0.8em;
+  background-color: #5a4b84;
+  border: none;
+}
+/* line 126, sass/admin.scss */
+body.admin .intro ul.tags.tags-edit button span {
+  font-size: 0.85em;
+}
+/* line 129, sass/admin.scss */
+body.admin .intro ul.tags.tags-edit button:hover {
+  background-color: #c30 !important;
+}
+/* line 140, sass/admin.scss */
+body.admin #sidebar div.member button.remove {
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 25px;
+  height: 25px;
+  font-size: 0.85em;
+  color: #fff;
+  background-color: #2f2f2f;
+  border: 0;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+  border-radius: 12px;
+}
+/* line 151, sass/admin.scss */
+body.admin #sidebar div.member button.remove:hover {
+  background-color: #c30;
+}
+/* line 157, sass/admin.scss */
+body.admin #sidebar div.comment {
+  position: relative;
+}
+/* line 159, sass/admin.scss */
+body.admin #sidebar div.comment ul.nav {
+  position: absolute;
+  top: 0.5em;
+  right: 0;
+  /* Open dropdown menu on the left, instead of right */
+}
+/* line 164, sass/admin.scss */
+body.admin #sidebar div.comment ul.nav ul.dropdown-menu {
+  left: auto;
+  right: 0;
+}
+/* line 168, sass/admin.scss */
+body.admin #sidebar div.comment ul.nav a[role="button"] {
+  color: #2f2f2f;
+  background-color: #d1cdce;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+/* line 174, sass/admin.scss */
+body.admin #sidebar div.comment div.author p {
+  margin-top: 0.25em;
+}

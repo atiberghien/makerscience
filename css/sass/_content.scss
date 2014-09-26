@@ -1,29 +1,35 @@
+@import "same-height";
+
 div.toolbar {
 	background-color: $color-toolbar-bg;
-	.col-md-2 {
-		h3, form {
-			height: 150px;
-			background-color: $color-blue;
-			vertical-align: middle;
-		}
+	.row.container {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	.col-xs-height.blue {
+		background-color: $color-blue;
 	}
 	h3 {
 		color: #fff;
 		text-transform: uppercase;
 	}
 	ul {
-		margin: 1.5em 0 0;
+		margin: 1.5em 0 0.25em;
 		font-size: 0.9em;
 		li {
 			margin-right: 0.5em;
 			margin-bottom: 0.5em;
 		}
 	}
-	form {
-		button {
-			color: #fff;
-			background-color: $color-blue;
-			border: none;
+	.col-md-2 {
+		form {
+			text-align: center;
+			button[type="submit"] {
+				color: #fff;
+				background-color: $color-blue;
+				font-size: 2.25em;
+				border: none;
+			}
 		}
 	}
 }
