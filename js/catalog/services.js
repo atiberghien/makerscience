@@ -12,4 +12,16 @@
     return Restangular.service('projectsheet');
   });
 
+  module.factory('PostalAddress', function(Restangular) {
+    return Restangular.service('scout/postaladdress');
+  });
+
+  module.factory('ProjectSheetTemplate', function(Restangular) {
+    return Restangular.service('projectsheettemplate');
+  });
+
+  module.factory('ProjectSheetItem', function(Restangular) {
+    return Restangular.service('projectsheetsuggesteditem');
+  });
+
 }).call(this);

@@ -1,2 +1,4 @@
 .project
 js/vendor/
+js/*.js
+js/catalog/*.js
