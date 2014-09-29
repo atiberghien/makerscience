@@ -23,7 +23,7 @@ body.admin {
 				background-color: $color-blue;
 			}
 			&:hover {
-				background-color: $color-orange;
+				background-color: $color-red;
 			}
 		}
 	}
@@ -68,8 +68,8 @@ body.admin {
 				}
 				&:hover {
 					color: #fff;
-					background-color: $color-orange;
-					border-color: $color-orange;
+					background-color: $color-red;
+					border-color: $color-red;
 				}
 			}
 		}
@@ -127,7 +127,7 @@ body.admin {
 						font-size: 0.85em;
 					}
 					&:hover {
-						background-color: $color-orange !important;
+						background-color: $color-red !important;
 					}
 				}
 			}
@@ -149,7 +149,7 @@ body.admin {
 				border: 0;
 				@include border-radius(12px);
 				&:hover {
-					background-color: $color-orange;
+					background-color: $color-red;
 				}
 			}
 		}

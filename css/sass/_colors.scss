@@ -1,13 +1,17 @@
 /* MakerScience colors */
-$color-orange: #c30;
 $color-blue: #2497d0;
+$color-chocolate: #453936;
+$color-dark-grey: #2f2f2f;
 $color-green: #30c9ad;
+$color-light-grey: #e8e8e8;
+$color-orange: #fa920b;
+$color-purple: #5a4b84;
+$color-red: #c30;
+
+/* Sections colors */
+$color-profil: $color-chocolate;
 $color-project: $color-blue;
 $color-resource: $color-green;
-$color-purple: #5a4b84;
-$color-purple-light: #5a4b84;
-$color-dark-grey: #2f2f2f;
-$color-light-grey: #e8e8e8;
 
 /* Body */
 $color-text: #333;
@@ -16,8 +20,8 @@ $color-bg: #f2f2f2;
 /* Side Nav */
 $color-nav-a: #fdfdfd;
 $color-nav-a-bg: $color-dark-grey;
-$color-nav-a-bg-selected: $color-orange;
-$color-nav-project-a-bg-selected: $color-orange;
+$color-nav-a-bg-selected: $color-red;
+$color-nav-project-a-bg-selected: $color-red;
 $color-nav-resource-a-bg-selected: $color-purple;
 $color-nav-a-bg-hover: $color-nav-a-bg-selected;
 
@@ -30,6 +34,7 @@ $color-menu-projects: #3297cd;
 $color-menu-resources: #3c9;
 $color-menu-form: #fff;
 $color-menu-form-bg: #e4e4e4;
+$color-menu-members: $color-profil;
 
 /* Intro */
 $color-intro: #000;
@@ -75,17 +80,17 @@ $color-needs: $color-text;
 $color-needs-bg: #2695cd;
 $color-needs-h3: #fff;
 $color-interested: $color-needs-h3;
-$color-interested-bg: $color-orange;
+$color-interested-bg: $color-red;
 $color-interested-border: #fff;
 $color-linked: #fff;
 $color-linked-project-h3-bg: $color-green;
 $color-linked-resource-h3-bg: $color-blue;
 $color-linked-h4-bg: $color-text;
 $color-linked-h5-bg: $color-linked-h4-bg;
-$color-siblings: #fff;
-$color-siblings-bg: $color-orange;
-$color-siblings-title-bg: #333;
-$color-siblings-title-border: #444;
+$color-boxes: #fff;
+$color-boxes-bg: $color-red;
+$color-boxes-title-bg: #333;
+$color-boxes-title-border: #444;
 $color-carousel-photos-tabs-bg: #333;
 $color-bloc-methodology: #fff;
 $color-bloc-methodology-bg: $color-green;
@@ -95,6 +100,8 @@ $color-bloc-links: $color-text;
 $color-bloc-links-bg: $color-light-grey;
 $color-bloc-about: #fff;
 $color-bloc-about-bg: $color-green;
+$color-member-bg: #d9d8d8;
+$color-member-added-bg: $color-orange;
 
 /* Forms */
 $color-form-text: #535353;

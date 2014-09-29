@@ -9,6 +9,9 @@
 		&.selected, &:hover {
 			background-color: transparent;
 			border-bottom: 4px solid #666;
+			&.nav-members {
+				border-color: $color-menu-members;
+			}
 			&.nav-projects {
 				border-color: $color-menu-projects;
 			}

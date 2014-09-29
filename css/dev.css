@@ -8025,6 +8025,7 @@ button.close {
   }
 }
 /* MakerScience colors */
+/* Sections colors */
 /* Body */
 /* Side Nav */
 /* Header */
@@ -8090,70 +8091,87 @@ ul.colors {
 }
 /* line 37, sass/dev.scss */
 ul.colors li {
-  display: block;
-  margin: 0 0 1em;
-  padding: 2em;
+  width: 45%;
+  display: inline-block;
+  margin: 0 1em 1em 0;
+  padding: 4em 1em;
   color: #fff;
   white-space: pre-line;
   text-align: center;
 }
-/* line 44, sass/dev.scss */
-ul.colors li.orange {
-  background-color: #c30;
-}
-/* line 46, sass/dev.scss */
-ul.colors li.orange:after {
-  content: "$color-orange\a#c30";
-}
-/* line 50, sass/dev.scss */
+/* line 45, sass/dev.scss */
 ul.colors li.blue {
   background-color: #2497d0;
 }
-/* line 52, sass/dev.scss */
+/* line 47, sass/dev.scss */
 ul.colors li.blue:after {
   content: "$color-blue\a#2497d0";
 }
-/* line 56, sass/dev.scss */
+/* line 51, sass/dev.scss */
+ul.colors li.chocolate {
+  background-color: #453936;
+}
+/* line 53, sass/dev.scss */
+ul.colors li.chocolate:after {
+  content: "$color-chocolate\a#453936";
+}
+/* line 57, sass/dev.scss */
 ul.colors li.dark-grey {
   background-color: #2f2f2f;
 }
-/* line 58, sass/dev.scss */
+/* line 59, sass/dev.scss */
 ul.colors li.dark-grey:after {
   content: "$color-dark-grey\a#2f2f2f";
 }
-/* line 62, sass/dev.scss */
+/* line 63, sass/dev.scss */
+ul.colors li.green {
+  background-color: #30c9ad;
+}
+/* line 65, sass/dev.scss */
+ul.colors li.green:after {
+  content: "$color-green\a#30c9ad";
+}
+/* line 69, sass/dev.scss */
 ul.colors li.light-grey {
   color: #2f2f2f;
   background-color: #e8e8e8;
 }
-/* line 65, sass/dev.scss */
+/* line 72, sass/dev.scss */
 ul.colors li.light-grey:after {
   content: "$color-light-grey\a#e8e8e8";
 }
-/* line 69, sass/dev.scss */
+/* line 76, sass/dev.scss */
+ul.colors li.orange {
+  background-color: #fa920b;
+}
+/* line 78, sass/dev.scss */
+ul.colors li.orange:after {
+  content: "$color-orange\a#fa920b";
+}
+/* line 82, sass/dev.scss */
 ul.colors li.purple {
   background-color: #5a4b84;
 }
-/* line 71, sass/dev.scss */
+/* line 84, sass/dev.scss */
 ul.colors li.purple:after {
   content: "$color-purple\a#5a4b84";
 }
-/* line 75, sass/dev.scss */
-ul.colors li.green {
-  background-color: #30c9ad;
+/* line 88, sass/dev.scss */
+ul.colors li.red {
+  background-color: #c30;
 }
-/* line 77, sass/dev.scss */
-ul.colors li.green:after {
-  content: "$color-green\a#30c9ad";
+/* line 90, sass/dev.scss */
+ul.colors li.red:after {
+  content: "$color-red\a#c30";
 }
 
-/* line 83, sass/dev.scss */
+/* line 96, sass/dev.scss */
 em {
   color: #666;
   background-color: yellow;
 }
 
-/* line 88, sass/dev.scss */
+/* line 101, sass/dev.scss */
 footer {
   margin: 2em 0;
   padding: 1em 0;
