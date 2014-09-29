@@ -56,8 +56,8 @@
 
 			<div class="intro">
 				
-				<h1>{{projectsheet.project}}</h1>
-				<h2>Journée créative autour d'un Bac à sable numérique pour coconstruire des scénarios d'animation</h2>
+				<h1>{{projectsheet.project.title}}</h1>
+				<h2>{{projectsheet.project.baseline}}</h2>
 				<h3><span>Fiche Projet</span></h3>
 
 				<div class="row">
@@ -79,7 +79,7 @@
 								<li><a href="">Réalité augmentée</a></li>
 							</ul><!-- .tag -->
 	
-							<p class="location">Cité de l'Espace Toulouse</p>
+							<p class="location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</p>
 	
 							<ul class="phases">
 								<li><span>Phase 1</span></li>
@@ -89,7 +89,7 @@
 								<li>Phase 2</li>
 							</ul><!-- .phase -->
 	
-							<p>Fin de projet: 12/2015<br />Mise à jour il y a 2 jours</p>
+							<p>Fin de projet: {{projectsheet.project.end_date || "N/C" }}<br />Mise à jour il y a 2 jours</p>
 					
 						</div><!-- .sideproject -->
 	
@@ -120,27 +120,11 @@
 					<div class="tab-pane active" id="project">
 						<section>
 							<h3>A propos du projet</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</section>
-						<section>
-							<h3>Public Cible</h3>
-							<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</section>
-						<section>
-							<h3>Quel est le contenu scientifique</h3>
-							<p>En voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</section>
-						<section>
-							<h3>A quoi va ressembler le projet</h3>
-							<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</section>
-						<section>
-							<h3>Ou en sommes nous?</h3>
-							<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</section>
-						<section>
-							<h3>Questionnement</h3>
-							<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+							<p>{{projectsheet.project.description}}</p>
+						</section> 
+						<section ng-repeat="q_a in projectsheet.q_a">
+							<h3>{{q_a.question}}</h3>
+							<p>{{q_a.answer}}</p>
 						</section>
 					</div><!-- #project -->
 					<div class="tab-pane" id="actus">
