@@ -1,7 +1,3 @@
-getObjectIdFromURI = (uri) ->
-    splitted_uri = uri.split("/")
-    return splitted_uri[splitted_uri.length-1]
-        
 module = angular.module("projectsheet.controllers", ['projectsheet.services'])
 
 module.controller("ProjectListCtrl", ($scope, Project) ->
