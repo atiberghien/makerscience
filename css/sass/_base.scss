@@ -1,6 +1,7 @@
 $page-width: 1100px;
 $needs-height: 220px;
-$sibling-height: 20em;
+$boxes-height: 20em;
+$boxes-small-height: 19em;
 $bloc-height: 300px;
 $linked-height: 20em;
 $intro-height: 25em;
@@ -57,7 +58,7 @@ ul.actions {
 	}
 	a:hover {
 		text-decoration: none;
-		background-color: $color-orange;
+		background-color: $color-red;
 	}
 }
 
@@ -91,22 +92,81 @@ ul.tags {
 	}
 	a:hover {
 		text-decoration: none;
-		background-color: $color-orange;
+		background-color: $color-red;
 	}
 }
 
 button {
 	&.large {
 		width: 100%;
+		margin: 2em 0;
 		padding: 1.5em;
 		font-size: 1.5em;
 		text-align: center;
 		text-transform: uppercase;
-		&.large-orange {
+		&.large-orange, &.large-red {
 			color: #fff;
-			background-color: $color-orange;
 			border: none;
 		}
+		&.large-orange {
+			background-color: $color-orange;
+		}
+		&.large-red {
+			background-color: $color-red;
+		}
+	}
+}
+
+form.share {
+	margin-bottom: 1em;
+	text-align: right;
+	button {
+		width: 36px;
+		height: 36px;
+		margin: 0 0 0 0.5em;
+		padding: 0;
+		background-color: transparent;
+		background-position: center center;
+		background-repeat: no-repeat;
+		border: none;
+	}
+	button.share-email {
+		margin-left: 1.5em;
+		background-image: url('../img/icons/share/share-email.png');
+	}
+	button.share-facebook {
+		background-image: url('../img/icons/share/share-facebook.png');
+	}
+	button.share-google {
+		background-image: url('../img/icons/share/share-google.png');
+	}
+	button.share-twitter {
+		background-image: url('../img/icons/share/share-twitter.png');
+	}
+}
+
+ul.pagination {
+	margin: 0;
+	li:first-child a, li:last-child a {
+		@include border-radius(0);
+	}
+	a {
+		margin: 0 0.1em;
+		font-size: 1.5em;
+		color: $color-orange;
+		background-color: transparent;
+		font-weight: bold;
+		border: 2px solid $color-orange;
+	}
+	li.active a {
+		color: #fff;
+		background-color: $color-orange;
+		border-color: $color-orange;
+	}
+	a:hover {
+		color: #fff;
+		background-color: $color-orange;
+		border-color: $color-orange;
 	}
 }
 

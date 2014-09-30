@@ -92,18 +92,33 @@ header {
 		}
 	}
 	&.intro-listing {
-		padding: 8em 0;
+		padding: 0;
 		text-align: center;
 		background-color: $color-intro-project-bg;
-		background-image: url('../img/bg/header-project-bg.jpg');
+		background-image: none;
+		#carousel-photos {
+			.item {
+				padding: 17em 2em;
+				background-color: #000;
+				background-repeat: no-repeat;
+				background-position: center center;
+				background-size: cover;
+			}
+			.carousel-indicators {
+				bottom: 4em;
+			}
+		}
 		h1, h2 {
+			margin: 0;
 			font-size: 3em;
-			line-height: 1em;
+			line-height: 1.5em;
 			text-transform: uppercase;
+		}
+		h1 {
+			font-weight: normal;
 		}
 		h2 {
 			margin-bottom: 1.25em;
-			font-weight: normal;
 			em {
 				border-bottom: 4px solid $color-intro-listing;
 			}
@@ -118,6 +133,48 @@ header {
 			@include border-radius(3px);
 		}
 	}
+	&.intro-profil {
+		background: $color-chocolate url('../img/bg/header-profil.png') center center no-repeat;
+		background-size: cover;
+		.col-md-4 {
+			padding-right: 0; /* remove gutter */
+		}
+		.col-md-8 {
+			padding-left: 0; /* remove gutter */
+		}
+		img.profil {
+			display: block;
+			width: 250px;
+			height: 250px;
+			margin: 2em auto;
+		}
+		h2 {
+			padding: 0 1em;
+			font-size: 1.2em;
+			line-height: 1.25em;
+		}
+		h5 {
+			margin-bottom: 0.5em;
+			font-size: 1.2em;
+			font-weight: bold;
+			&.bio {
+				margin-top: 2em;
+			}
+			&.skills {
+				margin-top: 2em;
+			}
+		}
+		p {
+			margin-bottom: 0.25em;
+			line-height: 1.5em;
+		}
+		p.location {
+			text-transform: uppercase;
+		}
+		ul.skills {
+			margin-bottom: 3em;
+		}
+	}
 }
 
 .intro {
@@ -126,38 +183,15 @@ header {
 	font-size: 0.8em;
 	border: 2px solid $color-intro-border;
 
-	& > .row {
-		overflow: hidden;
-/*		background-color: $color-intro-project-bg;*/
-/*		margin: 0;*/
-	}	
-	.row > div:first-child {
-		position: relative;
-/*		margin-left: -15px;*/
-	}
-	.row > div:last-child {
-/*		margin-right: -15px;*/
-/*		padding: 0;*/
-	}
-	.row > div:first-child img {
-		position: absolute;
-		top: 0;
-		left: $grid-gutter-width / 2;
-		display: block;
-		width: 100%;
-	}
-
 	div.sideproject {
 		position: relative;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */
 		padding: 2em;
 		color: $color-intro;
 		background-color: $color-intro-project-bg;
-		p.location {
-			margin: 2em 0;
-			padding-left: 60px;
-			line-height: 48px;
-			background: transparent url('../img/location.png') left center no-repeat;
+		p.location img {
+			margin-right: 1em;
+			vertical-align: middle;
 		}
 	}
 	
@@ -208,4 +242,25 @@ header {
 		}
 	}
 	
+}
+.intro-project .intro p.location {
+	margin: 2em 0;
+}
+
+.intro-project, .intro-resource {
+	.intro {
+		& > .row {
+			overflow: hidden;
+		}	
+		.row > div:first-child {
+			position: relative;
+		}
+		.row > div:first-child img {
+			position: absolute;
+			top: 0;
+			left: $grid-gutter-width / 2;
+			display: block;
+			width: 100%;
+		}	
+	}
 }

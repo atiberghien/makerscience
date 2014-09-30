@@ -23,7 +23,7 @@ body.admin {
 				background-color: $color-blue;
 			}
 			&:hover {
-				background-color: $color-orange;
+				background-color: $color-red;
 			}
 		}
 	}
@@ -68,8 +68,8 @@ body.admin {
 				}
 				&:hover {
 					color: #fff;
-					background-color: $color-orange;
-					border-color: $color-orange;
+					background-color: $color-red;
+					border-color: $color-red;
 				}
 			}
 		}
@@ -113,20 +113,22 @@ body.admin {
 		
 	}
 
-	ul.tags {
-		margin-top: 2.5em; /* make space for the edit buttons at the top */
-		&.tags-edit {
-			margin: 0.75em;
-			margin-bottom: 4em;
-			button {
-				font-size: 0.8em;
-				background-color: $color-purple;
-				border: none;
-				span {
-					font-size: 0.85em;
-				}
-				&:hover {
-					background-color: $color-orange !important;
+	.intro {
+		ul.tags {
+			margin-top: 2.5em; /* make space for the edit buttons at the top */
+			&.tags-edit {
+				margin: 0.75em;
+				margin-bottom: 4em;
+				button {
+					font-size: 0.8em;
+					background-color: $color-purple;
+					border: none;
+					span {
+						font-size: 0.85em;
+					}
+					&:hover {
+						background-color: $color-red !important;
+					}
 				}
 			}
 		}
@@ -147,7 +149,7 @@ body.admin {
 				border: 0;
 				@include border-radius(12px);
 				&:hover {
-					background-color: $color-orange;
+					background-color: $color-red;
 				}
 			}
 		}

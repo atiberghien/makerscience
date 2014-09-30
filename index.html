@@ -10,16 +10,17 @@
 <ui-view>
 <link href="css/dev.css" media="screen, projection" rel="stylesheet" type="text/css" />
 <div class="row">
-	
-	<div class="col-md-3">
+	<div class="col-md-4">
 	
 		<ul class="colors">
 			<li class="dark-grey"></li>
+			<li class="chocolate"></li>
 			<li class="light-grey"></li>
 			<li class="green"></li>
 			<li class="blue"></li>
 			<li class="purple"></li>
 			<li class="orange"></li>
+			<li class="red"></li>
 		</ul>
 
 	</div>
@@ -27,16 +28,17 @@
 	<!-- spacer -->	
 	<div class="col-md-1"></div>
 	
-	<div class="col-md-8">
+	<div class="col-md-7">
 
 		<h1>MakerScience</h1>
 
 		<h2>HTML Templates</h2>
 		<ul>
 			<li>
-				Profil
+				Profils
 				<ul>
 					<li><a href="fiche_profil.html">Fiche Profil</a> <span class="glyphicon glyphicon-ok"></span></li>
+					<li><a href="listing_profils.html">Listing Profils</a> <em>En cours</em></li>
 				</ul>
 			</li>
 			<li>
@@ -45,13 +47,8 @@
 					<li><a href="#">Fiche Projet</a> <span class="glyphicon glyphicon-ok"></span></li>
 					<li><a href="#">Fiche Projet (édition)</a> <span class="glyphicon glyphicon-ok"></span></li>
 					<li><a href="#">Nouveau Projet</a> <em>En cours</em></li>
-					<li><a ui-sref="project-list">Listing Projets</a> <em>On hold</em></li>
-				</ul>
-			</li>
-			<li>
-				Ressources
-				<ul>
 					<li><a href="fiche_ressource.html">Fiche Ressource</a></li>
+					<li><a ui-sref="project-list">Listing Projets/Ressources</a> <em>On hold</em></li>
 				</ul>
 			</li>
 		</ul>
