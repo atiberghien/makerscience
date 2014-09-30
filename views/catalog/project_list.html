@@ -42,43 +42,70 @@
 	
 	<div id="intro" class="intro-listing">
 
-		<h1>Le numérique et l'innovation</h1>
-		<h2>Au coeur de tous <em>les projets</em></h2>
-		<button>A vous de jouer!</button>
+		<div id="carousel-photos" class="carousel slide" data-ride="carousel-photos">
+				
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#carousel-photos" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-photos" data-slide-to="1"></li>
+				<li data-target="#carousel-photos" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active" style="background-image: url('./img/slides/slide-project-one.jpg')">
+					<h1>Coup de projecteur sur</h1>
+					<h2><em>La fête des sciences à Toulouse</em></h2>
+				</div>
+				<div class="item" style="background-image: url('./img/slides/slide-project-two.jpg')">
+					<h1>Coup de  sur</h1>
+					<h2>La fête des sciences à <em>Toulouse</em></h2>
+				</div>
+				<div class="item" style="background-image: url('./img/slides/slide-project-three.jpg')">
+					<h1>Coup de projecteur sur</h1>
+					<h2><em>La fête des  à Toulouse</em></h2>
+				</div>
+			</div>
+
+		</div><!-- .carousel -->
 
 	</div><!-- #intro -->
 
 	<div class="toolbar">
 		<div class="row container">
-			<div class="col-md-2">
-				<h3>Les tags populaires <span class="glyphicon glyphicon-chevron-right"></span></h3>
-			</div>
-			<div class="col-md-8">
-				<ul class="tags tags-listing">
-					<li><a href="">Réseaux sociaux</a></li>
-					<li><a href="">Journalisme</a></li>
-					<li><a href="">Ecriture</a></li>
-					<li><a href="">Community management</a></li>
-					<li><a href="">Transmedia</a></li>
-					<li><a href="">3D</a></li>
-					<li><a href="">Gamification</a></li>
-					<li><a href="">Numerique</a></li>
-					<li><a href="">Robotique</a></li>
-					<li><a href="">Créativité</a></li>
-				</ul>
-			</div>
-			<div class="col-md-2">
-				<form method="post" action="">
-					<input type="search" name="search" placeholder="Rechercher..." /><button type="submit"><span class="glyphicon glyphicon-search"></span></button>
-				</form>
-			</div>
-		</div><!-- .row -->
+			<div class="container-xs-height">
+				<div class="row-xs-height">
+					<div class="col-md-2 col-xs-height col-middle blue">
+						<h3>Les tags populaires <span class="glyphicon glyphicon-chevron-right"></span></h3>
+					</div>
+					<div class="col-md-8 col-xs-height col-middle">
+						<ul class="tags tags-listing">
+							<li><a href="">Réseaux sociaux</a></li>
+							<li><a href="">Journalisme</a></li>
+							<li><a href="">Ecriture</a></li>
+							<li><a href="">Community management</a></li>
+							<li><a href="">Transmedia</a></li>
+							<li><a href="">3D</a></li>
+							<li><a href="">Gamification</a></li>
+							<li><a href="">Numerique</a></li>
+							<li><a href="">Robotique</a></li>
+							<li><a href="">Créativité</a></li>
+						</ul>
+					</div>
+					<div class="col-md-2 col-xs-height col-middle blue">
+						<form method="post" action="">
+							<button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+						</form>
+					</div>
+				</div><!-- .row-xs-height -->
+			</div><!-- .container-xs-height -->
+		</div><!-- .container.row -->
 	</div><!-- .toolbar -->
-
+	
 	<div class="row container">
 	
 		<div id="content" class="listing">
-		
+
 			<div class="col-md-12">
 		
 				<!-- Nav tabs -->
@@ -94,18 +121,18 @@
 					<div class="tab-pane active" id="new">
 						<div class="siblings siblings-listing" ng-controller="ProjectListCtrl">
 							
-							<div class="row" ng-repeat="project in projects">
-								<div class="col-md-3">
+							<div class="row">
+								<div class="col-md-3" ng-repeat="project in projects">
 									<div class="box">
 										<h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-										<h4><a ui-sref="projectsheet({ slug: project.slug })">{{project.title}}</a></h4>
-										<h5><a ui-sref="projectsheet({ slug: project.slug })">{{project.baseline}}</a></h5>
 										<img src="./img/bacasable.jpg" alt="Image background" />
 									</div>
+									<h4>><a ui-sref="projectsheet({ slug: project.slug })">{{project.title}}</a></h4>
+									<h5><a href="">Contributeur: Alain Duvert</a></h5>
 								</div>
 							</div><!-- .row -->
 							
-						</div><!-- .siblings -->
+						</div><!-- .boxes -->
 					</div><!-- #new -->
 				
 					<div class="tab-pane" id="bestrated">
@@ -116,8 +143,8 @@
 
 				</div><!-- .tab-content -->
 			
-				<form action="nouveau_projet.html">
-					<button class="large large-orange">Créer un projet</button>
+				<form action="nouveau_projet.html" class="project-create">
+					<button class="large large-red">Créer un projet</button>
 				</form>
 			
 			</div><!-- .col-md-12 -->
