@@ -33,3 +33,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Proje
         )
     )
 )
+
+module.controller("ProjectSheetCreateCtrl", ($scope, $stateParams, ProjectSheet, Project, PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
+    $scope.templates = ProjectSheetTemplate.getList().$object
+)

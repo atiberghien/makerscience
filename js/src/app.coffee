@@ -36,11 +36,10 @@
                     controller: 'ProjectListCtrl'
                     templateUrl: 'views/catalog/project_list.html'
             )
-
-            .state('projectsheet',
-                    url: '/p/:slug',
-                    controller: 'ProjectSheetCtrl'
-                    templateUrl: 'views/catalog/project_detail.html'
+            .state('new-projectsheet',
+                    url: '/p/new',
+                    controller: 'ProjectSheetCreateCtrl'
+                    templateUrl: 'views/catalog/new_project.html'
             )
 
 
