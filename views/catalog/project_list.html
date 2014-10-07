@@ -290,19 +290,9 @@
 
 				</div><!-- .carousel -->
 				
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs nav-tabs-listing" role="tablist">
-					<li class="active"><a href="#new" role="tab" data-toggle="tab">Nouveautés</a></li>
-					<li><a href="#bestrated" role="tab" data-toggle="tab">Les mieux notés</a></li>
-					<li><a href="#mostseen" role="tab" data-toggle="tab">Les plus vus</a></li>
-				</ul>
-
-				<!-- Tab panes -->
-				<div class="tab-content tab-content-listing">
-			
-					<div class="tab-pane active" id="new">
+				<tabset>
+					<tab heading="Nouveautés">
 						<div class="boxes boxes-listing" ng-controller="ProjectListCtrl">
-							
 							<div class="row">
 								<div class="col-md-3" ng-repeat="project in projects">
 									<div class="box">
@@ -313,18 +303,16 @@
 									<h5><a href="">Contributeur: Alain Duvert</a></h5>
 								</div>
 							</div><!-- .row -->
-							
 						</div><!-- .boxes -->
-					</div><!-- #new -->
-				
-					<div class="tab-pane" id="bestrated">
-					</div><!-- #bestrated -->
-				
-					<div class="tab-pane" id="mostseen">
-					</div><!-- #mostseen -->
-
-				</div><!-- .tab-content -->
-			
+					</tab>
+					<tab heading="Les mieux notés">
+						Les mieux notés
+					</tab>
+					<tab heading="Les plus vus">
+						Les plus vus
+					</tab>
+				</tabset>
+							
 				<form action="nouveau_projet.html" class="project-create">
 					<button class="large large-red">Créer un projet</button>
 				</form>
