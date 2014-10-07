@@ -94,8 +94,8 @@
 				
 						<div class="col-md-8">
 					
-							<input type="text" name="project-name" placeholder="Nom du projet" ng-model="project.name"/>
-							<textarea name="project-tagline" placeholder="En une phrase" rows="4" ng-model="project.baseline"></textarea>
+							<input type="text" name="project-name" placeholder="Nom du projet" ng-model="projectsheet.project.title"/>
+							<textarea name="project-tagline" placeholder="En une phrase" rows="4" ng-model="projectsheet.project.baseline"></textarea>
 							<input type="text" name="projet-tags" placeholder="Quels sont les domaines (tags)?" />
 							
 							<div class="row">
@@ -132,14 +132,10 @@
 				
 					</div><!-- .row -->
 					
-					<textarea name="project-about" placeholder="A propos du projet?"rows="4" ng-model="project.description"></textarea>
+					<textarea name="project-about" placeholder="A propos du projet?"rows="4" ng-model="projectsheet.project.description"></textarea>
+
+					<textarea ng-model="projectsheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
 					
-					{{templates}}
-					<textarea name="project-public" placeholder="Public ciblé?"rows="4"></textarea>
-					<textarea name="project-content" placeholder="Quel est le contenu scientifique?"rows="4"></textarea>
-					<textarea name="project-look" placeholder="A quoi va ressembler le projet?"rows="4"></textarea>
-					<textarea name="project-questions" placeholder="Questionnement?"rows="4"></textarea>
-					<textarea name="project-links" placeholder="Liens et ressources?"rows="4"></textarea>
 					
 					<div class="row">
 
@@ -163,7 +159,7 @@
 					
 					<p class="right">
 						<button class="button cancel" type="submit">Annuler</button>
-						<button class="button" type="submit">Enregistrer et publier</button>
+						<button class="button" type="submit" ng-click="save(projectsheet)" >Enregistrer et publier</button>
 					</p>
 					
 				</form>
