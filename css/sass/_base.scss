@@ -96,8 +96,9 @@ ul.tags {
 	}
 }
 
-button {
+button, a {
 	&.large {
+		display: block;
 		width: 100%;
 		margin: 2em 0;
 		padding: 1.5em;
@@ -113,6 +114,9 @@ button {
 		}
 		&.large-red {
 			background-color: $color-red;
+		}
+		&:hover {
+			text-decoration: none;
 		}
 	}
 }

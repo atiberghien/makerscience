@@ -8224,7 +8224,8 @@ ul.tags a:hover {
 }
 
 /* line 100, sass/_base.scss */
-button.large {
+button.large, a.large {
+  display: block;
   width: 100%;
   margin: 2em 0;
   padding: 1.5em;
@@ -8232,26 +8233,30 @@ button.large {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 107, sass/_base.scss */
-button.large.large-orange, button.large.large-red {
+/* line 108, sass/_base.scss */
+button.large.large-orange, button.large.large-red, a.large.large-orange, a.large.large-red {
   color: #fff;
   border: none;
 }
-/* line 111, sass/_base.scss */
-button.large.large-orange {
+/* line 112, sass/_base.scss */
+button.large.large-orange, a.large.large-orange {
   background-color: #fa920b;
 }
-/* line 114, sass/_base.scss */
-button.large.large-red {
+/* line 115, sass/_base.scss */
+button.large.large-red, a.large.large-red {
   background-color: #c30;
 }
+/* line 118, sass/_base.scss */
+button.large:hover, a.large:hover {
+  text-decoration: none;
+}
 
-/* line 120, sass/_base.scss */
+/* line 124, sass/_base.scss */
 form.share {
   margin-bottom: 1em;
   text-align: right;
 }
-/* line 123, sass/_base.scss */
+/* line 127, sass/_base.scss */
 form.share button {
   width: 36px;
   height: 36px;
@@ -8262,35 +8267,35 @@ form.share button {
   background-repeat: no-repeat;
   border: none;
 }
-/* line 133, sass/_base.scss */
+/* line 137, sass/_base.scss */
 form.share button.share-email {
   margin-left: 1.5em;
   background-image: url("../img/icons/share/share-email.png");
 }
-/* line 137, sass/_base.scss */
+/* line 141, sass/_base.scss */
 form.share button.share-facebook {
   background-image: url("../img/icons/share/share-facebook.png");
 }
-/* line 140, sass/_base.scss */
+/* line 144, sass/_base.scss */
 form.share button.share-google {
   background-image: url("../img/icons/share/share-google.png");
 }
-/* line 143, sass/_base.scss */
+/* line 147, sass/_base.scss */
 form.share button.share-twitter {
   background-image: url("../img/icons/share/share-twitter.png");
 }
 
-/* line 148, sass/_base.scss */
+/* line 152, sass/_base.scss */
 ul.pagination {
   margin: 0;
 }
-/* line 150, sass/_base.scss */
+/* line 154, sass/_base.scss */
 ul.pagination li:first-child a, ul.pagination li:last-child a {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 153, sass/_base.scss */
+/* line 157, sass/_base.scss */
 ul.pagination a {
   margin: 0 0.1em;
   font-size: 1.5em;
@@ -8299,13 +8304,13 @@ ul.pagination a {
   font-weight: bold;
   border: 2px solid #fa920b;
 }
-/* line 161, sass/_base.scss */
+/* line 165, sass/_base.scss */
 ul.pagination li.active a {
   color: #fff;
   background-color: #fa920b;
   border-color: #fa920b;
 }
-/* line 166, sass/_base.scss */
+/* line 170, sass/_base.scss */
 ul.pagination a:hover {
   color: #fff;
   background-color: #fa920b;
