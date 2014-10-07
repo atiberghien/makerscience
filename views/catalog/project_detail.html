@@ -79,7 +79,11 @@
 								<li><a href="">Réalité augmentée</a></li>
 							</ul><!-- .tag -->
 	
-							<p class="location"><img src="./img/location.png" alt="Location" />{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</p>
+							<p class="location"><img src="./img/location.png" alt="Location" />
+							<span ng-if="projectsheet.project.location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</span>
+							<span ng-if="! projectsheet.project.location">N/C</span>
+                            
+							</p>
 	
 							<ul class="phases">
 								<li><span>Phase 1</span></li>
