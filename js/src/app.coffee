@@ -32,7 +32,7 @@
             $urlRouterProvider.otherwise("/")
             
             $stateProvider.state('project-list',
-                    url: '/p',
+                    url: '/p/list',
                     controller: 'ProjectListCtrl'
                     templateUrl: 'views/catalog/project_list.html'
             )
@@ -40,6 +40,11 @@
                     url: '/p/new',
                     controller: 'ProjectSheetCreateCtrl'
                     templateUrl: 'views/catalog/new_project.html'
+            )
+            .state('projectsheet',
+                    url: '/p/:slug',
+                    controller: 'ProjectSheetCtrl'
+                    templateUrl: 'views/catalog/project_detail.html'
             )
 
 
