@@ -168,6 +168,15 @@ div.toolbar {
 			}
 		}
 	}
+	/* Added to work with bootstrapui's extra div around the ul  */
+	/* FIXME Might need to remove redundant code above once all elements have been moved to angular */
+	.nav-tabs-listing ul.nav-tabs {
+			margin: 0 0 3em 0;
+			&> li.active a {
+				background-color: $color-content-tab-listing-active-bg;
+				border: 2px solid $color-content-tab-active;
+			}
+	}
 	.tab-content-listing {
 		padding: 0;
 		.boxes-listing {
