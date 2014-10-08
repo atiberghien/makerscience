@@ -82,7 +82,8 @@
 						<section ng-repeat="q_a in projectsheet.q_a">
 							<h3>{{q_a.question}}</h3>
 							<p>{{q_a.answer}}</p>
-						</section>					</tab>
+						</section>
+					</tab>
 					<tab heading="Actus">
 						<section>
 							<h3>Actus</h3>
@@ -104,32 +105,32 @@
 								<li><a href=""><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
 							</ul>
 							<h3>Besoins</h3>
-							<div id="carousel-needs" class="carousel slide" data-ride="carousel-needs">
-				
-								<!-- Wrapper for slides -->
-								<div class="carousel-inner">
-									<div class="item active needs-idea">
-										<h4>Idée</h4>
-										<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-									<div class="item needs-competence">
-										<h4>Compétence</h4>
-										<p>Ccaecat cupidatat nxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-									<div class="item needs-equipment">
-										<h4>Matériel</h4>
-										<p>Rur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-									<div class="item needs-funding">
-										<h4>Financement</h4>
-										<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-									</div>
-								</div>
 
-								<!-- Controls -->
-								<a class="left carousel-control" href="#carousel-needs" role="button" data-slide="prev">Précédent</a>
-								<a class="right carousel-control" href="#carousel-needs" role="button" data-slide="next">Suivant</a>
-							</div><!-- .carousel -->
+							<carousel id="carousel-needs">
+								<slide class="needs-idea">
+									<h4>Idée</h4>
+									<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								</slide>
+								<slide class="needs-skills">
+									<h4>Compétence</h4>
+									<p>Ccaecat cupidatat nxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								</slide>
+								<slide class="needs-hardware">
+									<h4>Matériel</h4>
+									<p>Rur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								</slide>
+								<slide class="needs-financing">
+									<h4>Financement</h4>
+									<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								</slide>
+							</carousel>
+
+							<!-- Controls -->
+							<!--
+							<a class="left carousel-control" href="#carousel-needs" role="button" data-slide="prev" >Précédent</a>
+							<a class="right carousel-control" href="#carousel-needs" role="button" data-slide="next">Suivant</a>
+							-->
+							
 						</div><!-- .needs -->
 					</div>
 					<div class="col-md-4">
@@ -147,15 +148,12 @@
 						<carousel>
 							<slide>
 								<img src="img/slides/slide_one.png" alt="Slide One">
-								<div class="carousel-caption">Slide One</div>
 							</slide>
 							<slide>
 								<img src="img/slides/slide_two.png" alt="Slide Two">
-								<div class="carousel-caption">Slide Two</div>
 							</slide>
 							<slide>
 								<img src="img/slides/slide_three.png" alt="Slide Three">
-								<div class="carousel-caption">Slide Three</div>
 							</slide>
 						</carousel>
 					</tab>
@@ -163,7 +161,14 @@
 						<tab-heading>
 							<span class="glyphicon glyphicon-facetime-video"></span>
 						</tab-heading>
-						Videos
+						<carousel>
+							<slide>
+								<img src="img/slides/slide_two.png" alt="Slide Two">
+							</slide>
+							<slide>
+								<img src="img/slides/slide_three.png" alt="Slide Three">
+							</slide>
+						</carousel>
 					</tab>
 				</tabset>
 				

@@ -187,16 +187,21 @@ div.toolbar {
 			border: 2px solid $color-content-tab-active;
 		}
 	}
-	.nav-tabs-slide ul.nav-tabs {
-		font-size: 1.3em;
-		&>li a {
-			color: $color-content-tab-slide;
-			background-color: $color-content-tab-slide-bg;
-			@include border-radius(0);
+	.nav-tabs-slide {
+		ol.carousel-indicators {
+			display: none;
 		}
-		&>li.active a {
-			background-color: $color-content-tab-slide-active-bg;
-			border: 2px solid $color-content-tab-active;
+		ul.nav-tabs {
+			font-size: 1.3em;
+			&>li a {
+				color: $color-content-tab-slide;
+				background-color: $color-content-tab-slide-bg;
+				@include border-radius(0);
+			}
+			&>li.active a {
+				background-color: $color-content-tab-slide-active-bg;
+				border: 2px solid $color-content-tab-active;
+			}
 		}
 	}
 	/* end of new bootstrap UI amends */
@@ -338,18 +343,54 @@ div.toolbar {
 					text-align: right;
 				}
 			}
-		}
-		.item {
-			min-height: 90px;
-			margin: 1em 0;
-			padding-left: 110px;
-			h4 {
-				padding-top: 1em;
+			.carousel-control {
+				background-image: none;
+				a {
+					color: #fff;
+				}
+			}
+			ol.carousel-indicators {
+				display: none;
+			}
+			span.glyphicon-chevron-left,
+			span.glyphicon-chevron-right {
+				font-family: inherit;
+				font-size: inherit;
+			}
+			span.glyphicon-chevron-left {
+				left: 1em;
+			}
+			span.glyphicon-chevron-left:before {
+				content: "Précédent";
+			}
+			span.glyphicon-chevron-right:before {
+				content: "Suivant";
+			}
+			.text-center {
+				text-align: left;
 			}
 		}
-		.needs-idea {
-			background: transparent url('../img/bg/needs-idea-bg.png') top left no-repeat;
+		.item {
+			min-height: 100px;
+			margin: 1em 0;
+			padding-left: 100px;
+			line-height: 1.25em;
+			h4 {
+				padding: 1em 0 0.25em;
+			}
 		}
+		.needs-idea,
+		.needs-financing,
+		.needs-hardware,
+		.needs-skills {
+			background-image: url('../img/needs/needs-idea.png');
+			background-position: 0 1.25em;
+			background-repeat: no-repeat;
+		}
+		.needs-idea { background-image: url('../img/needs/needs-idea.png'); }
+		.needs-financing { background-image: url('../img/needs/needs-financing.png'); }
+		.needs-hardware { background-image: url('../img/needs/needs-hardware.png'); }
+		.needs-skills { background-image: url('../img/needs/needs-skills.png'); }
 	}
 	.interested {
 		display: table;
