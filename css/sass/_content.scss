@@ -170,8 +170,12 @@ div.toolbar {
 	}
 	/* Added to work with bootstrapui's extra div around the ul  */
 	/* FIXME Might need to remove redundant code above once all elements have been moved to angular */
+	.nav-tabs-listing ul.nav-tabs,
+	.nav-tabs-slide ul.nav-tabs {
+		margin: 0;
+	}
 	.nav-tabs-listing ul.nav-tabs {
-			margin: 0 0 3em 0;
+			margin-bottom: 3em;
 			&> li.active a {
 				background-color: $color-content-tab-listing-active-bg;
 				border: 2px solid $color-content-tab-active;
@@ -183,6 +187,19 @@ div.toolbar {
 			border: 2px solid $color-content-tab-active;
 		}
 	}
+	.nav-tabs-slide ul.nav-tabs {
+		font-size: 1.3em;
+		&>li a {
+			color: $color-content-tab-slide;
+			background-color: $color-content-tab-slide-bg;
+			@include border-radius(0);
+		}
+		&>li.active a {
+			background-color: $color-content-tab-slide-active-bg;
+			border: 2px solid $color-content-tab-active;
+		}
+	}
+	/* end of new bootstrap UI amends */
 	
 	.tab-content-listing {
 		padding: 0;
