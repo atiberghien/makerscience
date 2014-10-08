@@ -188,9 +188,6 @@ div.toolbar {
 		}
 	}
 	.nav-tabs-slide {
-		ol.carousel-indicators {
-			display: none;
-		}
 		ul.nav-tabs {
 			font-size: 1.3em;
 			&>li a {
@@ -243,6 +240,22 @@ div.toolbar {
 		padding: 0;
 		background-repeat: no-repeat;
 		background-size: cover;
+		.carousel-inner {
+			height: $linked-height;
+		}
+		a.carousel-control {
+			bottom: 1.25em;
+			span {
+				font-weight: bold;
+				text-decoration: underline;
+			}
+			&.left {
+				left: 2em;
+			}
+			&.right {
+				right: 1em;
+			}
+		}
 		h3 {
 			margin: 0;
 		}
@@ -276,7 +289,7 @@ div.toolbar {
 			position: absolute;
 			top: 0;
 			left: 0;
-			height: 100%;
+			height: $linked-height;
 			width: 100%;
 		}
 		ul.nav {
@@ -329,42 +342,7 @@ div.toolbar {
 				padding-bottom: 3em;
 			}
 			a.carousel-control {
-				top: auto;
-				bottom: 0;
-				font-size: 0.9em;
 				color: $color-needs;
-				background-image: none;
-				opacity: 1;
-				text-shadow: none;
-				&.left {
-					text-align: left;
-				}
-				&.right {
-					text-align: right;
-				}
-			}
-			.carousel-control {
-				background-image: none;
-				a {
-					color: #fff;
-				}
-			}
-			ol.carousel-indicators {
-				display: none;
-			}
-			span.glyphicon-chevron-left,
-			span.glyphicon-chevron-right {
-				font-family: inherit;
-				font-size: inherit;
-			}
-			span.glyphicon-chevron-left {
-				left: 1em;
-			}
-			span.glyphicon-chevron-left:before {
-				content: "Précédent";
-			}
-			span.glyphicon-chevron-right:before {
-				content: "Suivant";
 			}
 			.text-center {
 				text-align: left;
