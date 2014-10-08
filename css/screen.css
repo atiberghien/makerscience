@@ -8029,7 +8029,7 @@ button.close {
   cursor: pointer;
 }
 
-/* line 5, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -8051,45 +8051,45 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../../../usr/lib/ruby/gems/2.1.0/gems/compass-1.0.1/vendor/bundle/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../../../../../../../../home/manjaro/.gem/ruby/2.1.0/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
@@ -9689,7 +9689,7 @@ div.badges h3 {
   padding: 0.7em 1em;
 }
 /* line 82, sass/_forms.scss */
-.admin #content form button.button.button-geolocalisation, .admin #content form button.button.button-photo-upload, .admin #content form button.button.button-gallery-photo {
+.admin #content form button.button.button-geolocalisation, .admin #content form button.button.button-photo-upload, .admin #content form button.button.button-add {
   width: 100%;
   margin-bottom: 0.75em;
   color: #535353;
@@ -9710,7 +9710,7 @@ div.badges h3 {
   background-image: url("../img/icons/buttons/icon-photo.png");
 }
 /* line 100, sass/_forms.scss */
-.admin #content form button.button.button-gallery-photo {
+.admin #content form button.button.button-add {
   background-image: url("../img/icons/buttons/icon-add.png");
   background-position: 100% 50%;
 }

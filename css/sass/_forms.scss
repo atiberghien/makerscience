@@ -79,7 +79,7 @@
 			&[type="submit"] {
 				padding: 0.7em 1em;
 			}
-			&.button-geolocalisation, &.button-photo-upload, &.button-gallery-photo {
+			&.button-geolocalisation, &.button-photo-upload, &.button-add {
 				width: 100%;
 				margin-bottom: 0.75em;
 				color: $color-form-text;
@@ -97,7 +97,7 @@
 				padding-left: 65px;
 				background-image: url('../img/icons/buttons/icon-photo.png');
 			}
-			&.button-gallery-photo {
+			&.button-add {
 				background-image: url('../img/icons/buttons/icon-add.png');
 				background-position: 100% 50%;
 			}
