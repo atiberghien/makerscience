@@ -177,6 +177,13 @@ div.toolbar {
 				border: 2px solid $color-content-tab-active;
 			}
 	}
+	.nav-tabs-project ul.nav-tabs {
+		> li.active a {
+			background-color: $color-content-tab-project-active-bg;
+			border: 2px solid $color-content-tab-active;
+		}
+	}
+	
 	.tab-content-listing {
 		padding: 0;
 		.boxes-listing {
