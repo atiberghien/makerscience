@@ -46,7 +46,18 @@
                     controller: 'ProjectSheetCtrl'
                     templateUrl: 'views/catalog/project_detail.html'
             )
-
+            .state('resourcesheet',
+                    url: '/r/',
+                    templateUrl: 'views/catalog/resource_detail.html'
+            )
+            .state('profile',
+                    url: '/u',
+                    templateUrl: 'views/profile/profile.html'
+            )
+            .state('profile-list',
+                    url: '/u/list',
+                    templateUrl: 'views/profile/profile_list.html'
+            )
 
     ])
 
