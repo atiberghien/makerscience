@@ -183,6 +183,24 @@
 				}
 			}
 		}
+		
+		/* Rating widget */
+		label {
+			display: inline-block;
+			width: 40%;
+			margin: 0 0 1em 2em;
+			text-transform: uppercase;
+		}
+		span i {
+			font-size: 2em;
+			vertical-align: middle;
+		}
+		button.solo {
+			padding: 0.25em 1.25em;
+			font-size: 1em;
+			font-weight: bold;
+		}
+			
 	}
 	
 }

@@ -275,6 +275,19 @@
 					</table>
 				</section>
 	
+				<section class="popularity popularity-blue">
+					<ul class="actions">
+						<li><button class="solo">OK</button></li>
+					</ul>
+					<h3>Voter le projet</h3>
+					<label for="rating-original">Original</label>
+					<rating id="rating-original" ng-model="ratingOriginal" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+					<label for="rating-fun">Fun</label>
+					<rating id="rating-fun" ng-model="ratingFun" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+					<label for="rating-prometteur">Prometteur</label>
+					<rating id="rating-prometteur" ng-model="ratingPrometteur" max="5" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+				</section>
+
 			</div><!-- #sidebar -->
 			
 		</div><!-- .col-md-4 -->

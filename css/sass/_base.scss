@@ -45,7 +45,7 @@ ul.actions {
 	li {
 		float: right;
 	}
-	a {
+	a, button {
 		display: inline-block;
 		padding: 1.25em 1em 0.25em 1em;
 		font-size: 0.7em;
@@ -54,14 +54,18 @@ ul.actions {
 		background-color: $color-sidebar-action-bg;
 		text-align: center;
 		text-transform: uppercase;
+		border: none;
 		span {
 			display: block;
 			font-size: 2em;
 		}
-	}
-	a:hover {
-		text-decoration: none;
-		background-color: $color-red;
+		.solo {
+			font-size: 2em !important;
+		}
+		&:hover {
+			text-decoration: none;
+			background-color: $color-red;
+		}
 	}
 }
 
