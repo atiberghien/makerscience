@@ -31,7 +31,12 @@
             $locationProvider.html5Mode(config.useHtml5Mode)
             $urlRouterProvider.otherwise("/")
             
-            $stateProvider.state('project-list',
+            $stateProvider.state('home',
+                    url: '/',
+                    controller: 'ProjectListCtrl'
+                    templateUrl: 'views/catalog/project_list.html'
+            )
+            .state('project-list',
                     url: '/p/list',
                     controller: 'ProjectListCtrl'
                     templateUrl: 'views/catalog/project_list.html'
@@ -40,6 +45,10 @@
                     url: '/p/new',
                     controller: 'ProjectSheetCreateCtrl'
                     templateUrl: 'views/catalog/new_project.html'
+            )
+            .state('edit-projectsheet',
+                    url: '/p/edit',
+                    templateUrl: 'views/catalog/edit_project.html'
             )
             .state('projectsheet',
                     url: '/p/:slug',
