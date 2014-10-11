@@ -9754,7 +9754,36 @@ div.badges h3 {
 .admin #content form fieldset.needs-idea {
   background-image: url("../img/needs/needs-idea.png");
 }
-/* line 44, sass/_forms.scss */
+/* line 43, sass/_forms.scss */
+.admin #content form fieldset.geolocalisation {
+  padding: 0;
+}
+/* line 45, sass/_forms.scss */
+.admin #content form fieldset.geolocalisation input {
+  margin: 0;
+}
+/* line 49, sass/_forms.scss */
+.admin #content form fieldset.phases {
+  margin-bottom: 1em;
+}
+/* line 51, sass/_forms.scss */
+.admin #content form fieldset.phases label {
+  display: inline-block;
+  margin-top: 1em;
+  padding-right: 1em;
+  text-align: center;
+  font-size: 0.9em;
+}
+/* line 57, sass/_forms.scss */
+.admin #content form fieldset.phases label img {
+  display: block;
+  margin: 0 auto 1em auto;
+}
+/* line 62, sass/_forms.scss */
+.admin #content form fieldset.phases label > input {
+  display: none;
+}
+/* line 67, sass/_forms.scss */
 .admin #content form input, .admin #content form textarea {
   width: 100%;
   margin-bottom: 0.75em;
@@ -9776,31 +9805,31 @@ div.badges h3 {
 .admin #content form input::-webkit-input-placeholder, .admin #content form textarea::-webkit-input-placeholder {
   color: #535353;
 }
-/* line 53, sass/_forms.scss */
+/* line 76, sass/_forms.scss */
 .admin #content form textarea {
   display: block;
 }
-/* line 56, sass/_forms.scss */
+/* line 79, sass/_forms.scss */
 .admin #content form ul.phases {
   margin: 1em 0 0;
 }
-/* line 58, sass/_forms.scss */
+/* line 81, sass/_forms.scss */
 .admin #content form ul.phases li {
   display: inline-block;
 }
-/* line 61, sass/_forms.scss */
+/* line 84, sass/_forms.scss */
 .admin #content form ul.phases button {
   font-size: 0.9em;
   text-align: center;
   border: none;
   background-color: transparent;
 }
-/* line 66, sass/_forms.scss */
+/* line 89, sass/_forms.scss */
 .admin #content form ul.phases button img {
   display: block;
   margin: 0 auto 1em;
 }
-/* line 72, sass/_forms.scss */
+/* line 95, sass/_forms.scss */
 .admin #content form button.button {
   padding: 1em;
   color: #fff;
@@ -9809,11 +9838,11 @@ div.badges h3 {
   border-right: 2px solid #126d9a;
   border-bottom: 2px solid #126d9a;
 }
-/* line 79, sass/_forms.scss */
+/* line 102, sass/_forms.scss */
 .admin #content form button.button[type="submit"] {
   padding: 0.7em 1em;
 }
-/* line 82, sass/_forms.scss */
+/* line 105, sass/_forms.scss */
 .admin #content form button.button.button-geolocalisation, .admin #content form button.button.button-photo-upload, .admin #content form button.button.button-add {
   width: 100%;
   margin-bottom: 0.75em;
@@ -9824,31 +9853,31 @@ div.badges h3 {
   text-align: left;
   border: none;
 }
-/* line 92, sass/_forms.scss */
+/* line 115, sass/_forms.scss */
 .admin #content form button.button.button-geolocalisation {
   padding-left: 65px;
   background-image: url("../img/icons/buttons/icon-geolocalisation.png");
 }
-/* line 96, sass/_forms.scss */
+/* line 119, sass/_forms.scss */
 .admin #content form button.button.button-photo-upload {
   padding-left: 65px;
   background-image: url("../img/icons/buttons/icon-photo.png");
 }
-/* line 100, sass/_forms.scss */
+/* line 123, sass/_forms.scss */
 .admin #content form button.button.button-add {
   background-image: url("../img/icons/buttons/icon-add.png");
   background-position: 100% 50%;
 }
-/* line 105, sass/_forms.scss */
+/* line 128, sass/_forms.scss */
 .admin #content form button.cancel {
   background-color: transparent;
   border-color: #2497d0;
 }
-/* line 109, sass/_forms.scss */
+/* line 132, sass/_forms.scss */
 .admin #content form button.fullwidth {
   width: 100%;
 }
-/* line 112, sass/_forms.scss */
+/* line 135, sass/_forms.scss */
 .admin #content form p.right button {
   margin-left: 0.75em;
 }

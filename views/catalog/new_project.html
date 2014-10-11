@@ -72,18 +72,36 @@
 						</div>
 					
 						<div class="col-md-4">
-						
-							<button class="button button-geolocalisation"></span>Géolocalisation</button>
-							<fieldset>
-								<p>Work in progress</p>
-								<ul class="phases">
-									<li><button><img src="./img/phase.png" alt="Début" />Début</button></li>
-									<li><button><img src="./img/phase.png" alt="Phase 2" />Phase 2</button></li>
-									<li><button><img src="./img/phase-selected.png" alt="Phase 3" />Phase 3</button></li>
-									<li><button><img src="./img/phase.png" alt="Phase 4" />Phase 4</button></li>
-								</ul>
-							</fieldset>
+
 							<button class="button button-photo-upload">Photo de couverture</button>
+							<fieldset class="geolocalisation">
+								<input type="text" name="address" placeholder="Adresse" />
+								<input type="text" name="city" placeholder="Ville" />
+								<input type="text" name="postalcode" placeholder="Code Postal" />
+							</fieldset>
+							<fieldset class="phases">
+								<p>Etat d'avencement</p>
+								<label for="phase1" class="selected">
+									<input id="phase1" type="radio" name="phase" value="1" />
+									<img src="./img/phase.png" alt="Phase 1" />
+									Début
+								</label>
+								<label for="phase2">
+									<input id="phase2" type="radio" name="phase" value="2" />
+									<img src="./img/phase.png" alt="Phase 2" />
+									Phase 2
+								</label>
+								<label for="phase3">
+									<input id="phase3" type="radio" name="phase" value="3" />
+									<img src="./img/phase-selected.png" alt="Phase 3" />
+									Phase 3
+								</label>
+								<label for="phase4">
+									<input id="phase4" type="radio" name="phase" value="4" />
+									<img src="./img/phase.png" alt="Phase 4" />
+									Phase 4
+								</label>
+							</fieldset>
 						
 						</div>
 				

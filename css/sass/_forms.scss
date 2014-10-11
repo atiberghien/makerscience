@@ -40,6 +40,29 @@
 			&.needs-idea {
 				background-image: url('../img/needs/needs-idea.png');
 			}
+			&.geolocalisation {
+				padding: 0;
+				input {
+					margin: 0;
+				}
+			}
+			&.phases {
+				margin-bottom: 1em;
+				label {
+					display: inline-block;
+					margin-top: 1em;
+					padding-right: 1em;
+					text-align: center;
+					font-size: 0.9em;
+					img {
+						display: block;
+						margin: 0 auto 1em auto;
+					}
+				}
+				label > input {
+					display: none;
+				}
+			}
 		}
 		input, textarea {
 			width: 100%;
