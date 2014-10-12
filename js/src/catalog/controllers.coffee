@@ -1,4 +1,4 @@
-module = angular.module("projectsheet.controllers", ['projectsheet.services', ])
+module = angular.module("projectsheet.controllers", ['projectsheet.services'])
 
 module.controller("ProjectListCtrl", ($scope, Project) ->
 	$scope.projects = Project.getList().$object;
@@ -25,6 +25,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Proje
                 item = 
                     'question' : question
                     'answer' : itemResult.answer
+                    'id' : itemResult.id
                 $scope.projectsheet.q_a.push(item)
             )
         
@@ -33,11 +34,18 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Proje
 
         )
     )
+    
+    $scope.update = (resourceName, resourceId, fieldName, data) ->
+        putData = {}
+        putData[fieldName] = data
+        switch resourceName
+            when 'Project' then Project.one(resourceId).patch(putData)
+            when 'ProjectSheetItem' then ProjectSheetItem.one(resourceId).patch(putData)
+    
 )
 
 module.controller("ProjectSheetCreateCtrl", ($scope, $state, ProjectSheet, Project, PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
     $scope.projectsheet = {}
-    
     ProjectSheetTemplate.one().get({'slug' : 'makerscience'}).then((templateResult) ->
         $scope.template = templateResult.objects[0]
     )
@@ -60,5 +68,4 @@ module.controller("ProjectSheetCreateCtrl", ($scope, $state, ProjectSheet, Proje
             )
             $state.go('projectsheet', {'slug' : projectResult.slug})            
         )
-        
 )

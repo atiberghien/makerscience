@@ -1,8 +1,14 @@
 <link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 <link href="css/print.css" media="print" rel="stylesheet" type="text/css" />
+<link href="js/vendor/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 <div class="container-fluid">
 
-	<ng-include src="'views/base/sidebar.html'"></ng-include>
+	<ul id="sidenav" class="project">
+	    <li><a href=""><span class="glyphicon glyphicon-th-large"></span>Projet</a></li>
+	    <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
+	    <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
+	    <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
+    </ul><!-- #nav -->
 
 	<ng-include src="'views/base/header.html'"></ng-include>
 	
@@ -12,8 +18,12 @@
 
 			<div class="intro edit">
 				
-				<h1>{{projectsheet.project.title}}#REMOVE_ME</h1>
-				<h2>{{projectsheet.project.baseline}}#REMOVE_ME</h2>
+				<h1>{{projectsheet.project.title}}</h1>
+				
+				<div class="edit-buttons" ng-show="editable">
+                    <button><span class="glyphicon glyphicon-pencil"></span></button>
+                </div>
+				<h2>{{projectsheet.project.baseline}}</h2>
 				<h3><span>Fiche Projet</span></h3>
 
 				<div class="row">
@@ -26,34 +36,30 @@
 		
 						<div class="sideproject">
 
-							<div class="edit-buttons">
-								<button><span class="glyphicon glyphicon-pencil"></span></button>
-								<button class="add-tag">+</button>
+							<div class="edit-buttons" ng-show="editable">
+								<button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
 							</div>
+							<input type="text" ng-show="addTag"/>
 							<ul class="tags tags-project">
-								<li><a href="">Créativité <span class="glyphicon glyphicon-remove"></span></a></li>
-								<li><a href="">Workshop <span class="glyphicon glyphicon-remove"></span></a></li>
-								<li><a href="">Géologie <span class="glyphicon glyphicon-remove"></span></a></li>
-								<li><a href="">Hydrologie <span class="glyphicon glyphicon-remove"></span></a></li>
-								<li><a href="">Numérique <span class="glyphicon glyphicon-remove"></span></a></li>
-								<li><a href="">Réalité augmentée <span class="glyphicon glyphicon-remove"></span></a></li>
-							</ul><!-- .tag -->
-
-							<ul class="tags tags-project">
-								<li><a href="">Créativité</a></li>
-								<li><a href="">Workshop</a></li>
-								<li><a href="">Géologie</a></li>
-								<li><a href="">Hydrologie</a></li>
-								<li><a href="">Numérique</a></li>
-								<li><a href="">Réalité augmentée</a></li>
+								<li><a href="">Créativité <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+								<li><a href="">Workshop <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+								<li><a href="">Géologie <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+								<li><a href="">Hydrologie <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+								<li><a href="">Numérique <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+								<li><a href="">Réalité augmentée <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
 							</ul><!-- .tag -->
 	
+	                       <div class="edit-buttons" ng-show="editable">
+                                <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
 							<p class="location"><img src="./img/location.png" alt="Location" />
-							<span ng-if="projectsheet.project.location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</span>
-							<span ng-if="! projectsheet.project.location">N/C</span>
-                            
+    							<span ng-if="projectsheet.project.location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</span>
+	       						<span ng-if="! projectsheet.project.location">N/C</span>
 							</p>
 	
+	                        <div class="edit-buttons" ng-show="editable">
+                                <button><span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
 							<ul class="phases">
 								<li><span>Phase 1</span></li>
 								<li><span>Phase 2</span></li>
@@ -62,6 +68,9 @@
 								<li>Phase 2</li>
 							</ul><!-- .phase -->
 	
+	                       <div class="edit-buttons" ng-show="editable">
+                                <button><span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
 							<p>Fin de projet: {{projectsheet.project.end_date || "N/C" }}<br />Mise à jour il y a 2 jours</p>
 					
 						</div><!-- .sideproject -->
@@ -85,13 +94,17 @@
 					<tab heading="Projet">
 						<section>
 							<h3>A propos du projet</h3>
-							<p>{{projectsheet.project.description}}</p>
+							<div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
+                                <button> <span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
+							<p editable-textarea="projectsheet.project.description" e-form="DescBtnForm" e-rows="4" e-cols="85" onbeforesave="update('Project', projectsheet.project.id , 'description', $data)">{{projectsheet.project.description}}</p>
+                            
 						</section> 
-						<form method="post" action="" class="edit">
+						<!-- <form method="post" action="" class="edit">
 							<section>
-								<div class="edit-buttons">
-									<button <span class="glyphicon glyphicon-pencil"></span></button>
-								</div>
+								 <div class="edit-buttons">
+                                    <button <span class="glyphicon glyphicon-pencil"></span></button>
+                                </div>
 								<h3>A propos du projet</h3>
 								<textarea rows="4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
 							</section>
@@ -99,17 +112,13 @@
 								<button class="dark cancel">Annuler</button>
 								<button class="dark">Valider</button>
 							</p>
-						</form>
-						<section>
-							<div class="edit-buttons">
-								<button><span class="glyphicon glyphicon-pencil"></span></button>
-							</div>
-							<h3>Public Cible</h3>
-							<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</section>
+						</form>  -->
 						<section ng-repeat="q_a in projectsheet.q_a">
 							<h3>{{q_a.question}}</h3>
-							<p>{{q_a.answer}}</p>
+							<div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
+                                <button><span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
+							<p editable-textarea="q_a.answer" e-form="AnswerBtnForm"  e-rows="4" e-cols="85" onbeforesave="update('ProjectSheetItem', q_a.id , 'answer', $data)">{{q_a.answer}}</p>
 						</section>
 					</tab>
 					<tab heading="Actus">
@@ -378,7 +387,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="box box-solo box-red">
-						<a href="">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
+						<a ui-sref="project-list">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
 					</div>
 				</div>
 
