@@ -28,6 +28,7 @@
   	"underscore": "~1.7.0",
   	"restangular": "~1.4.0",
   	"angular-ui-router": "~0.2.11",    
-	"slug" : "~0.7.1"
+	"slug" : "~0.7.1",
+	"angular-xeditable" : "~0.1.8"
   }
 }
