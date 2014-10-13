@@ -220,13 +220,16 @@ div.toolbar {
 	section {
 		position: relative;
 		margin-bottom: 1em;
-		padding: 1em 1em 2em;
+		padding: 1em 1em 0;
 		color: $color-content-section;
 		background-color: $color-content-section-bg;
 		h3 {
 			margin-bottom: 1em;
 			font-weight: bold;
 			text-transform: uppercase;
+		}
+		p:last-child {
+			padding-bottom: 2em;
 		}
 	}
 	section:nth-child(even) {

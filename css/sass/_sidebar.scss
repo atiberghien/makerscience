@@ -23,34 +23,43 @@
 			background: $color-resource url('../img/bg/shape-right-bg..png') 175px -110px no-repeat;
 		}
 
-		ul.submenu {
+		ul.submenu, ul.nav-tabs {
 			clear: both;
 			padding: 2em 0;
+			border-bottom: none;
 			li {
 				display: inline-block;
 				border-right: 1px solid $color-sidebar-submenu-border;
+				background-color: transparent;
 				&:last-child {
 					border: none;
 				}
-			}
-			a {
-				display: inline-block;
-				padding: 1em 0.75em;
-				font-size: 0.8em;
-				color: $color-sidebar-submenu;
-				text-transform: uppercase;
-				line-height: 1.2em;
-				span {
-					display: block;
-				}
-				&.selected {
-					background-color: $color-sidebar-submenu-bg;
-				}
-				&:hover {
-					background-color: $color-sidebar-submenu-bg;
-					text-decoration: none;
-				}
+				&> a {
+					display: inline-block;
+					margin: 0;
+					padding: 1em 0.75em;
+					font-size: 0.8em;
+					color: $color-sidebar-submenu;
+					text-transform: uppercase;
+					line-height: 1.2em;
+					border: none;
+					@include border-radius(0);
+					span {
+						display: block;
+					}
+					&.selected {
+						background-color: $color-sidebar-submenu-bg;
+					}
+					&:hover {
+						background-color: $color-sidebar-submenu-bg;
+						text-decoration: none;
+					}
 			
+				}
+
+			}
+			li.active a {
+					background-color: $color-sidebar-submenu-bg;
 			}
 		}
 		div.member {

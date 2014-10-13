@@ -4,11 +4,11 @@
 <div class="container-fluid">
 
 	<ul id="sidenav" class="project">
-	    <li><a href=""><span class="glyphicon glyphicon-th-large"></span>Projet</a></li>
-	    <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
-	    <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
-	    <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
-    </ul><!-- #nav -->
+		<li><a href=""><span class="glyphicon glyphicon-th-large"></span>Projet</a></li>
+		<li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
+		<li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
+		<li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
+	</ul><!-- #nav -->
 
 	<ng-include src="'views/base/header.html'"></ng-include>
 	
@@ -18,11 +18,11 @@
 
 			<div class="intro edit">
 				
-				<h1>{{projectsheet.project.title}}</h1>
-				
 				<div class="edit-buttons" ng-show="editable">
-                    <button><span class="glyphicon glyphicon-pencil"></span></button>
-                </div>
+					<button><span class="glyphicon glyphicon-pencil"></span></button>
+				</div>
+
+				<h1>{{projectsheet.project.title}}</h1>
 				<h2>{{projectsheet.project.baseline}}</h2>
 				<h3><span>Fiche Projet</span></h3>
 
@@ -36,42 +36,50 @@
 		
 						<div class="sideproject">
 
-							<div class="edit-buttons" ng-show="editable">
-								<button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
+							<div class="editable">
+								<div class="edit-buttons" ng-show="editable">
+									<button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
+								</div>
+								<input type="text" ng-show="addTag"/>
+								<ul class="tags tags-project">
+									<li><a href="">Créativité <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+									<li><a href="">Workshop <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+									<li><a href="">Géologie <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+									<li><a href="">Hydrologie <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+									<li><a href="">Numérique <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+									<li><a href="">Réalité augmentée <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+								</ul><!-- .tag -->
 							</div>
-							<input type="text" ng-show="addTag"/>
-							<ul class="tags tags-project">
-								<li><a href="">Créativité <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-								<li><a href="">Workshop <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-								<li><a href="">Géologie <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-								<li><a href="">Hydrologie <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-								<li><a href="">Numérique <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-								<li><a href="">Réalité augmentée <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-							</ul><!-- .tag -->
 	
-	                       <div class="edit-buttons" ng-show="editable">
-                                <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
-							<p class="location"><img src="./img/location.png" alt="Location" />
-    							<span ng-if="projectsheet.project.location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</span>
-	       						<span ng-if="! projectsheet.project.location">N/C</span>
-							</p>
+							<div class="editable">
+								<div class="edit-buttons" ng-show="editable">
+									<button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
+								</div>
+								<p class="location"><img src="./img/location.png" alt="Location" />
+	    							<span ng-if="projectsheet.project.location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</span>
+		       						<span ng-if="! projectsheet.project.location">N/C</span>
+								</p>
+							</div>
 	
-	                        <div class="edit-buttons" ng-show="editable">
-                                <button><span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
-							<ul class="phases">
-								<li><span>Phase 1</span></li>
-								<li><span>Phase 2</span></li>
-								<li class="selected"><span>Phase 3</span></li>
-								<li><span>Phase 4</span></li>
-								<li>Phase 2</li>
-							</ul><!-- .phase -->
-	
-	                       <div class="edit-buttons" ng-show="editable">
-                                <button><span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
-							<p>Fin de projet: {{projectsheet.project.end_date || "N/C" }}<br />Mise à jour il y a 2 jours</p>
+							<div class="editable">
+								<div class="edit-buttons" ng-show="editable">
+								<button><span class="glyphicon glyphicon-pencil"></span></button>
+								</div>
+								<ul class="phases">
+									<li><span>Phase 1</span></li>
+									<li><span>Phase 2</span></li>
+									<li class="selected"><span>Phase 3</span></li>
+									<li><span>Phase 4</span></li>
+									<li>Phase 2</li>
+								</ul><!-- .phase -->
+							</div>
+							
+							<div class="editable">
+								<div class="edit-buttons" ng-show="editable">
+									<button><span class="glyphicon glyphicon-pencil"></span></button>
+								</div>
+								<p>Fin de projet: {{projectsheet.project.end_date || "N/C" }}<br />Mise à jour il y a 2 jours</p>
+							</div>
 					
 						</div><!-- .sideproject -->
 	
@@ -93,10 +101,10 @@
 				<tabset class="nav-tabs-project">
 					<tab heading="Projet">
 						<section>
-							<h3>A propos du projet</h3>
 							<div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
-                                <button> <span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
+								<button> <span class="glyphicon glyphicon-pencil"></span></button>
+							</div>
+							<h3>A propos du projet</h3>
 							<p editable-textarea="projectsheet.project.description" e-form="DescBtnForm" e-rows="4" e-cols="85" onbeforesave="update('Project', projectsheet.project.id , 'description', $data)">{{projectsheet.project.description}}</p>
                             
 						</section> 
@@ -231,23 +239,42 @@
 						<li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span>S'abonner</a></li>
 					</ul>
 					<h3>La communauté</h3>
-					<!-- #WARNING <li> tags mustn't have any space or extra space will appear in the browser -->
-					<ul class="submenu"
-						><li><a class="selected" href=""><span>06</span>L'équipe projet</a></li
-						><li><a href=""><span>500</span>Personnes ressources</a></li
-						><li><a href=""><span>300</span>Abonnés</a></li
-					></ul>
-					<div class="member">
-						<img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
-						<p>Mathieu Corain <em>Chef de projet</em></p>
-					</div><!-- .member -->
-					<div class="member member-edit">
-						<form>
-							<button class="remove"><span class="glyphicon glyphicon-remove"></span></button>
-							<img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
-							<p>Mathieu Corain <em>Chef de projet</em></p>
-						</form>
-					</div><!-- .member -->
+					<tabset>
+						<tab>
+							<tab-heading>
+								<span>06</span>L'équipe projet
+							</tab-heading>
+							<div class="member">
+								<img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
+								<p>Mathieu Corain <em>Chef de projet</em></p>
+							</div><!-- .member -->
+							<div class="member member-edit">
+								<form>
+									<button class="remove"><span class="glyphicon glyphicon-remove"></span></button>
+									<img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
+									<p>Mathieu Corain <em>Chef de projet</em></p>
+								</form>
+							</div><!-- .member -->
+						</tab>
+						<tab>
+							<tab-heading>
+								<span>500</span>Personnes ressources
+							</tab-heading>
+							<div class="member">
+								<img src="./img/users/user-default.png" alt="User #firstname #lastname" />
+								<p>#username <em>#role</em></p>
+							</div><!-- .member -->
+						</tab>
+						<tab>
+							<tab-heading>
+								<span>300</span>Abonnés
+							</tab-heading>
+							<div class="member">
+								<img src="./img/users/user-default.png" alt="User #firstname #lastname" />
+								<p>#username <em>#role</em></p>
+							</div><!-- .member -->
+						</tab>
+					</tabset>
 				</section><!-- .community -->
 	
 				<section class="comments">
