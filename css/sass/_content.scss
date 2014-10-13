@@ -479,13 +479,14 @@ div.toolbar {
 ul.boxes {
 	margin-top: 4em;
 	margin-bottom: 1em;
+	margin-right: -2.5%;
 	li.box {
 		display: inline-block;
-		width: 19.25%;
+		width: 31.35%;
+		width: 30.2%;
 		height: $boxes-height;
-		margin-bottom: 0.55%;
-		margin-right: 0.55%;
-		margin-right: 0.65%;
+		margin-bottom: 2.5%;
+		margin-right: 2.4%;
 		padding: 0;
 		vertical-align: top;
 		background: #ccc;
@@ -499,6 +500,9 @@ ul.boxes {
 		width: 100%;
     	}
 	&.boxes-small {
+		width: 19.25%;
+		margin-right: 0.65%;
+		margin-bottom: 0.55%;
 		font-size: 0.75em;
 		li.box {
 			height: $boxes-small-height;
