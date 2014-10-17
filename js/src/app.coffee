@@ -51,6 +51,15 @@ angular.module('makerscience', ['projectsheet', 'restangular', 'ui.bootstrap', '
                 controller: 'ProjectSheetCtrl'
                 templateUrl: 'views/catalog/project_detail.html'
         )
+        .state('resource-list',
+                url: '/r/list',
+                controller: 'ProjectListCtrl'
+                templateUrl: 'views/catalog/resource_list.html'
+        )
+        .state('new-resource',
+                url: '/r/new',
+                templateUrl: 'views/catalog/new_resource.html'
+        )
         .state('resourcesheet',
                 url: '/r/',
                 templateUrl: 'views/catalog/resource_detail.html'
@@ -63,6 +72,7 @@ angular.module('makerscience', ['projectsheet', 'restangular', 'ui.bootstrap', '
                 url: '/u/list',
                 templateUrl: 'views/profile/profile_list.html'
         )
+        
 ])
 .run((editableOptions) ->
     editableOptions.theme = 'bs3'; #bootstrap3 theme. Can be also 'bs2', 'default'
