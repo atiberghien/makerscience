@@ -69,3 +69,28 @@ module.controller("ProjectSheetCreateCtrl", ($scope, $state, ProjectSheet, Proje
             $state.go('projectsheet', {'slug' : projectResult.slug})            
         )
 )
+module.controller("PopularityCtrl", ($scope, $state) ->
+    $scope.votePopularity = false
+    $scope.previousUserRatings = {}
+    $scope.userRatings = {}
+    
+    $scope.popularityItems =
+        'Original' : 
+            'maxPopularityScore' : 100
+            'objectPopularityScore' : 70 
+        'Fun' : 
+            'maxPopularityScore' : 100
+            'objectPopularityScore' : 50 
+        'Prometteur' : 
+            'maxPopularityScore' : 100
+            'objectPopularityScore' : 15 
+    
+    $scope.saveUserRating = () ->
+        angular.forEach($scope.userRatings, (value, key) -> 
+            if $scope.previousUserRatings[key]
+                $scope.popularityItems[key].objectPopularityScore -=  $scope.previousUserRatings[key]
+            $scope.previousUserRatings[key] = value
+            $scope.popularityItems[key].objectPopularityScore += value
+        )
+        $scope.votePopularity = false
+)
