@@ -61,8 +61,16 @@
 				
 						<div class="col-md-8">
 					
-							<input type="text" name="project-name" placeholder="Nom du projet" ng-model="projectsheet.project.title"/>
-							<textarea name="project-tagline" placeholder="En une phrase" rows="4" ng-model="projectsheet.project.baseline"></textarea>
+							<input type="text" 
+							       name="project-name" 
+							       placeholder="Nom du projet" 
+							       ng-model="projectsheet.project.title"/>
+							
+							<textarea name="project-tagline" 
+							          placeholder="Résumez votre projet en une courte phrase" 
+							          rows="4" 
+							          ng-model="projectsheet.project.baseline">
+				            </textarea>
 							<button class="button button-add">Quels sont les domaines (tags)?</button>
 
 							<ul class="tags tags-edit">
@@ -111,7 +119,10 @@
 				
 					</div><!-- .row -->
 					
-					<textarea name="project-about" placeholder="A propos du projet?"rows="4" ng-model="projectsheet.project.description"></textarea>
+					<textarea name="project-about" 
+					          placeholder="Résumez votre projet en quelques lignes"
+					          rows="4" 
+					          ng-model="projectsheet.project.description"></textarea>
 
 					<textarea ng-model="projectsheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
 					
