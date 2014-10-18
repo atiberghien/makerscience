@@ -74,6 +74,9 @@ angular.module('makerscience', ['projectsheet', 'restangular', 'ui.bootstrap', '
         )
         
 ])
-.run((editableOptions) ->
-    editableOptions.theme = 'bs3'; #bootstrap3 theme. Can be also 'bs2', 'default'
+.run((editableOptions, editableThemes) ->
+    editableOptions.theme = 'bs3'
+    editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
+    editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
+)
 )
