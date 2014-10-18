@@ -1,6 +1,8 @@
 <link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 <link href="css/print.css" media="print" rel="stylesheet" type="text/css" />
 <link href="js/vendor/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+<link rel='stylesheet' href='js/vendor/textAngular/dist/textAngular.min.css'>
+<link rel='stylesheet' href='css/font-awesome/css/font-awesome.min.css'>
 <div class="container-fluid">
 
 	<ul id="sidenav" class="project">
@@ -105,7 +107,14 @@
 								<button> <span class="glyphicon glyphicon-pencil"></span></button>
 							</div>
 							<h3>A propos du projet</h3>
-							<p editable-textarea="projectsheet.project.description" e-form="DescBtnForm" e-rows="4" e-cols="85" onbeforesave="update('Project', projectsheet.project.id , 'description', $data)">{{projectsheet.project.description}}</p>
+							
+							<p editable-text-angular="projectsheet.project.description" 
+							     e-form="DescBtnForm" 
+							     e-rows="4" 
+							     e-cols="85" 
+							     onbeforesave="update('Project', projectsheet.project.id , 'description', $data)"
+							     ng-bind-html="projectsheet.project.description">
+							</p>
                             
 						</section> 
 						<section ng-repeat="q_a in projectsheet.q_a">
@@ -113,7 +122,7 @@
 							<div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-							<p editable-textarea="q_a.answer" e-form="AnswerBtnForm"  e-rows="4" e-cols="85" onbeforesave="update('ProjectSheetItem', q_a.id , 'answer', $data)">{{q_a.answer}}</p>
+							<p editable-textarea="q_a.answer" e-form="AnswerBtnForm"  e-rows="4" e-cols="85" onbeforesave="update('ProjectSheetItem', q_a.id , 'answer', $data)"><span ng-bind-html="q_a.answer"></span></p>
 						</section>
 					</tab>
 					<tab heading="Actus">

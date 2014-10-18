@@ -1,5 +1,5 @@
 angular.module('projectsheet', ['projectsheet.controllers', 'projectsheet.services', 'projectsheet.directives'])
-angular.module('makerscience', ['projectsheet', 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable'])
+angular.module('makerscience', ['projectsheet', 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'ngSanitize'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -79,4 +79,10 @@ angular.module('makerscience', ['projectsheet', 'restangular', 'ui.bootstrap', '
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
 )
+
+angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) -> 
+    return editableDirectiveFactory(
+            directiveName : 'editableTextAngular'
+            inputTpl : '<div text-angular></div>'
+    )]
 )
