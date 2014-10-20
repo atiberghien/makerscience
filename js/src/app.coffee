@@ -1,5 +1,6 @@
-angular.module('projectsheet', ['projectsheet.controllers', 'projectsheet.services', 'projectsheet.directives'])
-angular.module('makerscience', ['projectsheet', 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'ngSanitize'])
+angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
+angular.module('makerscience.catalog', ['makerscience.catalog.controllers'])
+angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'ngSanitize', 'ngTagsInput'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -43,7 +44,7 @@ angular.module('makerscience', ['projectsheet', 'restangular', 'ui.bootstrap', '
         )
         .state('new-projectsheet',
                 url: '/p/new',
-                controller: 'ProjectSheetCreateCtrl'
+                controller: 'MakerscienceProjectSheetCreateCtrl'
                 templateUrl: 'views/catalog/new_project.html'
         )
         .state('projectsheet',

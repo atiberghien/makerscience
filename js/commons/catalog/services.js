@@ -2,7 +2,7 @@
 (function() {
   var module;
 
-  module = angular.module("projectsheet.services", ['restangular']);
+  module = angular.module("commons.catalog.services", ['restangular']);
 
   module.factory('Project', function(Restangular) {
     return Restangular.service('project');

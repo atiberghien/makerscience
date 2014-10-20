@@ -1,4 +1,4 @@
-module = angular.module("projectsheet.services", ['restangular'])
+module = angular.module("commons.catalog.services", ['restangular'])
 
 
 # Services

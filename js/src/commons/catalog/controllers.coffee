@@ -1,4 +1,4 @@
-module = angular.module("projectsheet.controllers", ['projectsheet.services'])
+module = angular.module("commons.catalog.controllers", ['commons.catalog.services'])
 
 module.controller("ProjectListCtrl", ($scope, Project) ->
 	$scope.projects = Project.getList().$object;
@@ -6,6 +6,7 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
 
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Project, PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
     ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
+        console.log(projectsheetResult)
         $scope.projectsheet = projectsheetResult.objects[0]
         projectID = getObjectIdFromURI($scope.projectsheet.project)
         Project.one(projectID).get().then((projectResult) ->
@@ -51,6 +52,7 @@ module.controller("ProjectSheetCreateCtrl", ($scope, $state, ProjectSheet, Proje
     )
     
     $scope.save = (projectsheet) ->
+        console.log("ProjectSheetCreateCtrl.save()")
         $scope.projectsheet = angular.copy(projectsheet);
         if $scope.projectsheet.project.begin_date is undefined
             $scope.projectsheet.project.begin_date = new Date()
