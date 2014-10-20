@@ -1,6 +1,7 @@
 <link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-<link href="css/admin.css" media="screen, projection" rel="stylesheet" type="text/css" />
 <link href="css/print.css" media="print" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css"> 
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css"> 
 <div class="admin container-fluid">
 	
 	<ng-include src="'views/base/header.html'"></ng-include>
@@ -50,7 +51,7 @@
 	
 		<div class="col-md-12">
 
-			<div id="content" class="new-project" ng-controller="ProjectSheetCreateCtrl">
+			<div id="content" class="new-project">
 
 				<h2>Créer un projet</h2>
 				<h3>Nouveau projet</h3>
@@ -71,15 +72,11 @@
 							          rows="4" 
 							          ng-model="projectsheet.project.baseline">
 				            </textarea>
-							<button class="button button-add">Quels sont les domaines (tags)?</button>
-
-							<ul class="tags tags-edit">
-							    <!--
-								<li><button>Community management <span class="glyphicon glyphicon-remove"></span></button></li>
-								<li><button>Gamification <span class="glyphicon glyphicon-remove"></span></button></li>
-								<li><button>Journalisme <span class="glyphicon glyphicon-remove"></span></button></li>
-								-->
-							</ul><!-- tags -->
+							<span class="button button-add">Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</span>
+                            <tags-input ng-model="tags"
+                                        placeholder="Ajouter un mot-clé">
+		                      <auto-complete source="loadItems($query)"></auto-complete>
+		                    </tags-input>
 							
 						</div>
 					
@@ -92,7 +89,7 @@
 								<input type="text" name="postalcode" placeholder="Code Postal" />
 							</fieldset>
 							<fieldset class="phases">
-								<p>Etat d'avencement</p>
+								<p>Etat d'avancement</p>
 								<label for="phase1" class="selected">
 									<input id="phase1" type="radio" name="phase" value="1" />
 									<img src="./img/phase.png" alt="Phase 1" />
@@ -105,7 +102,7 @@
 								</label>
 								<label for="phase3">
 									<input id="phase3" type="radio" name="phase" value="3" />
-									<img src="./img/phase-selected.png" alt="Phase 3" />
+									<img src="./img/phase.png" alt="Phase 3" />
 									Phase 3
 								</label>
 								<label for="phase4">
