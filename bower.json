@@ -23,14 +23,15 @@
   ],
   "dependencies": {
   	"jquery": "~2.1.1",
-  	"angular": "~1.2.26",
+  	"angular": "~1.2.27",
   	"angular-bootstrap" : "~0.11.2",
   	"underscore": "~1.7.0",
   	"restangular": "~1.4.0",
-  	"angular-ui-router": "~0.2.11",    
-	"slug" : "~0.7.1",
+  	"angular-ui-router": "~0.2.12",    
+	"slug" : "~0.8.0",
 	"angular-xeditable" : "~0.1.8",
 	"textAngular" : "~1.3.0-pre4",
-	"rangy-official" : "~1.3.0-alpha"
+	"rangy-official" : "~1.3.0-alpha",
+	"ng-tags-input" : "2.1.1"
   }
 }
