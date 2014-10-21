@@ -1,0 +1,7 @@
+module = angular.module("commons.graffiti.services", ['restangular'])
+
+
+# Services
+module.factory('Tag', (Restangular) ->
+    return Restangular.service('tag')
+)
