@@ -45,7 +45,7 @@
 				<h2>Créer un projet</h2>
 				<h3>Nouveau projet</h3>
 				
-				<form method="post" action="">
+				<form ng-controller="MakerscienceProjectSheetCreateCtrl">
 				
 					<div class="row">
 				
@@ -137,7 +137,7 @@
 					
 					<p class="right">
 						<button class="button cancel" type="submit">Annuler</button>
-						<button class="button" type="submit" ng-click="save(projectsheet)" >Enregistrer et publier</button>
+						<button class="button" ng-click="saveMakerscienceProject(projectsheet)" >Enregistrer et publier</button>
 					</p>
 					
 				</form>

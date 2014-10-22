@@ -6,7 +6,6 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
 
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Project, PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
     ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
-        console.log(projectsheetResult)
         $scope.projectsheet = projectsheetResult.objects[0]
         projectID = getObjectIdFromURI($scope.projectsheet.project)
         Project.one(projectID).get().then((projectResult) ->
@@ -45,14 +44,13 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Proje
     
 )
 
-module.controller("ProjectSheetCreateCtrl", ($scope, $state, ProjectSheet, Project, PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
+module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
     $scope.projectsheet = {}
     ProjectSheetTemplate.one().get({'slug' : 'makerscience'}).then((templateResult) ->
         $scope.template = templateResult.objects[0]
     )
-    
-    $scope.save = (projectsheet) ->
-        console.log("ProjectSheetCreateCtrl.save()")
+    $scope.saveProject = (projectsheet) ->
+        console.log("ProjectSheetCreateCtrl.saveProject()")
         $scope.projectsheet = angular.copy(projectsheet);
         if $scope.projectsheet.project.begin_date is undefined
             $scope.projectsheet.project.begin_date = new Date()
@@ -61,16 +59,19 @@ module.controller("ProjectSheetCreateCtrl", ($scope, $state, ProjectSheet, Proje
             $scope.projectsheet.project = projectResult.resource_uri
             $scope.projectsheet.template = $scope.template.resource_uri
             
-            postAnswer = (itemURI, answer) ->
-                itemID = getObjectIdFromURI(itemURI)
-                ProjectSheetItem.one(itemID).patch({'answer': answer})
-                    
+            
+            console.log("PPLOP")
             ProjectSheet.post($scope.projectsheet).then((projectsheetResult) ->
-                postAnswer(itemURI, $scope.projectsheet.answers[i]) for itemURI, i in projectsheetResult.items
+                console.log(projectsheetResult.items)
+                angular.forEach(projectsheetResult.items, (itemURI, index) ->
+                    itemID = getObjectIdFromURI(itemURI)
+                    ProjectSheetItem.one(itemID).patch({'answer': $scope.projectsheet.answers[index]})
+                )
             )
-            $state.go('projectsheet', {'slug' : projectResult.slug})            
         )
+        
 )
+
 module.controller("PopularityCtrl", ($scope, $state) ->
     $scope.votePopularity = false
     $scope.previousUserRatings = {}

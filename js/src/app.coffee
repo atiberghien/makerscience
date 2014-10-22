@@ -44,7 +44,6 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
         )
         .state('new-projectsheet',
                 url: '/p/new',
-                controller: 'MakerscienceProjectSheetCreateCtrl'
                 templateUrl: 'views/catalog/new_project.html'
         )
         .state('projectsheet',
