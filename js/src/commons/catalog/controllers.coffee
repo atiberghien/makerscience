@@ -52,20 +52,18 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
         $scope.projectsheet = angular.copy(projectsheet);
         if $scope.projectsheet.project.begin_date is undefined
             $scope.projectsheet.project.begin_date = new Date()
+
         $scope.projectsheet.project.slug = slug($scope.projectsheet.project.title)
 
-        Project.post($scope.projectsheet.project).then((projectResult) ->
-            $scope.projectsheet.project.resource_uri = projectResult.resource_uri
-            $scope.projectsheet.template = $scope.template.resource_uri
+        $scope.projectsheet.template = $scope.template.resource_uri
 
-            ProjectSheet.post($scope.projectsheet).then((projectsheetResult) ->
-                if $scope.projectsheet.answers
-                    angular.forEach(projectsheetResult.items, (itemURI, index) ->
-                        itemID = getObjectIdFromURI(itemURI)
-                        ProjectSheetItem.one(itemID).patch({'answer': $scope.projectsheet.answers[index]})
-                    )
-            )
-            return $scope.projectsheet.project
+        ProjectSheet.post($scope.projectsheet).then((projectsheetResult) ->
+            if $scope.projectsheet.answers
+                angular.forEach(projectsheetResult.items, (itemURI, index) ->
+                    itemID = getObjectIdFromURI(itemURI)
+                    ProjectSheetItem.one(itemID).patch({'answer': $scope.projectsheet.answers[index]})
+                )
+            return projectsheetResult
         )
 
 )

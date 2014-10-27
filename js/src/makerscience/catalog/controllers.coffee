@@ -6,8 +6,8 @@ module.controller("MakerscienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.saveMakerscienceProject = (projectsheet) ->
         console.log("MakerscienceProjectSheetCreateCtrl.save()")
-        $scope.saveProject(projectsheet).then((project) ->
+        $scope.saveProject(projectsheet).then((projectsheet) ->
             # MakerScienceProject.post({'parent' : parent_uri, 'tags' : ['tag1', 'tag2', 'tag3', 'tag4']})
-            $state.go("projectsheet", {slug : project.slug})
+            $state.go("projectsheet", {slug : $scope.projectsheet.project.slug})
         )
 )
