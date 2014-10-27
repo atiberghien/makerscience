@@ -55,9 +55,9 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
         $scope.projectsheet.project.slug = slug($scope.projectsheet.project.title)
 
         Project.post($scope.projectsheet.project).then((projectResult) ->
-            $scope.projectsheet.project = projectResult.resource_uri
+            $scope.projectsheet.project.resource_uri = projectResult.resource_uri
             $scope.projectsheet.template = $scope.template.resource_uri
-        ).then( ->
+
             ProjectSheet.post($scope.projectsheet).then((projectsheetResult) ->
                 if $scope.projectsheet.answers
                     angular.forEach(projectsheetResult.items, (itemURI, index) ->
