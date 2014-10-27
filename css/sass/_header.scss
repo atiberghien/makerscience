@@ -1,8 +1,24 @@
 header {
 	background-color: $color-header-bg;
+	border-bottom: 1px solid $color-header-border;
+	#menu {
+		padding-left: 150px + $grid-gutter-width;
+		font-size: 0.9em;
+	}
 	form {
 		display: inline;
-	}	
+		padding: 0.75em 0;
+		button {
+			padding: 0.5em 1em;
+			background-color: $color-blue !important;
+			border: none;
+		}
+	}
+	.navbar-brand {
+		position: absolute;
+		bottom: 0;
+		left: $grid-gutter-width;
+	}
 }
 
 #intro {

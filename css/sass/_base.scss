@@ -1,7 +1,8 @@
 $page-width: 1100px;
+$home-slide-height: 393px;
 $needs-height: 220px;
 $boxes-height: 20em;
-$boxes-small-height: 19em;
+$boxes-small-height: 212px;
 $bloc-height: 300px;
 $linked-height: 20em;
 $intro-height: 25em;
@@ -15,6 +16,9 @@ body {
 }
 a {
 	text-decoration: none;
+}
+strong {
+	font-weight: bold;
 }
 
 .right {
@@ -33,6 +37,25 @@ a {
 span.fixme {
 	font-weight: bold;
 	background-color: yellow;
+}
+
+h3.category {
+	z-index: 200;
+	position: absolute;
+	top: 2em;
+	left: -6px;
+	padding-top: 13px;
+	font-size: 1.1em;
+	background: transparent url('../img/fiche-project.png') top left no-repeat;
+	span {
+		display: block;
+		padding: 0.75em 1.25em;
+		color: #fff;
+		text-transform: uppercase;
+		border: 3px solid $color-intro-h3-border;
+		@include border-radius(3px);
+		background-color: $color-blue;
+	}
 }
 
 /*

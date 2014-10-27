@@ -6,68 +6,11 @@
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	 <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+	 <link rel="stylesheet" href="css/screen.css">
 </head>
 <body>
 <ui-view>
-<link href="css/dev.css" media="screen, projection" rel="stylesheet" type="text/css" />
-<div class="row">
-	<div class="col-md-4">
-	
-		<ul class="colors">
-			<li class="dark-grey"></li>
-			<li class="chocolate"></li>
-			<li class="light-grey"></li>
-			<li class="green"></li>
-			<li class="blue"></li>
-			<li class="purple"></li>
-			<li class="orange"></li>
-			<li class="red"></li>
-		</ul>
 
-	</div>
-
-	<!-- spacer -->	
-	<div class="col-md-1"></div>
-	
-	<div class="col-md-7">
-
-		<h1>MakerScience</h1>
-
-		<h2>HTML Templates</h2>
-		<ul>
-			<li>
-				Profils
-				<ul>
-					<li><a ui-sref="profile">Fiche Profil (statique)</a></li>
-					<li><a ui-sref="profile-list">Listing Profils (statique)</a></li>
-				</ul>
-			</li>
-			<li>
-				Projets
-				<ul>
-					<li><a ui-sref="projectsheet">Fiche Projet (statique)</a> <em>En cours</em></li>
-					<li><a href="views/profile/edit_project.html">Fiche Projet (édition)</a> <span class="glyphicon glyphicon-ok"></span></li>
-					<li><a ui-sref="new-projectsheet">Nouveau Projet</a> <em>En cours</em></li>
-					<li><a ui-sref="resourcesheet">Fiche Ressource (statique)</a></li>
-					<li><a ui-sref="project-list">Listing Projets/Ressources</a> <em>En cours</em></li>
-				</ul>
-			</li>
-		</ul>
-		
-		
-		<h2>Links</h2>
-		<ul>
-			<li><a href="http://projects.nonetype.net/">Redmine: http://projects.nonetype.net/</a></li>
-			<li><a href="http://lite4.framapad.org/p/makerscience">Writeboard: http://lite4.framapad.org/p/makerscience</a></li>
-		</ul>
-		
-		<footer>
-			<span class="glyphicon glyphicon-ok"></span> = Approved
-		</footer>
-
-	</div>
-	
-</div><!-- .row -->
 </ui-view>
 <script src="js/vendor/jquery/dist/jquery.min.js"></script>
 <script src="js/vendor/angular/angular.js"></script>

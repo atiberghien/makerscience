@@ -7,30 +7,24 @@
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" ui-sref="home"><img src="./img/logo.jpg" alt="Logo MakerScience" /></a>
+					<a class="navbar-brand" ui-sref="home"><img src="./img/logo-large.png" alt="Logo MakerScience" /></a>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a ui-sref="home" class="nav-home">Accueil</a></li>
 						<li><a ui-sref="profile-list" class="nav-members">A propos</a></li>
-						<li><a ui-sref="profile-list" class="nav-members">Communauté</a></li>
+						<li><a ui-sref="profile-list" class="nav-members">Membres</a></li>
 						<li><a ui-sref="project-list" class="nav-projects">Projets</a></li>
 						<li><a ui-sref="resource-list" class="nav-projects">Ressources</a></li>
-						<li><a href="" class="nav-forum">Discussions</a></li>
+						<li><a href="" class="nav-forum">Forum</a></li>
 					</ul>
 					<button class="user pull-right">
 						<img src="./img/users/user-default.png" alt="User" />
 					</button>
-					<form class="navbar-form navbar-right" role="search">
-						<div class="input-group">
-							<input type="text" name="search-term" class="form-control" placeholder="Search" /> <span class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<span class="glyphicon glyphicon-search"></span>
-								</button>
-							</span>
-						</div>
-						<!-- /input-group -->
+					<form class="navbar-right" role="search">
+						<!-- #TODO Need to find out how the search form should work -->
+						<button type="button"><span class="glyphicon glyphicon-search"></span>	</button>
 					</form>
 				</div>
 				<!-- /.navbar-collapse -->
