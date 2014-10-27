@@ -1,158 +1,158 @@
 <link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
 <link href="css/print.css" media="print" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css"> 
-<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css"> 
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
 <div class="admin container-fluid">
-	
-	<ng-include src="'views/base/header.html'"></ng-include>
-	
-	<div id="intro" class="intro-project-create">
 
-		<h1>Le numérique et l'innovation</h1>
-		<h2>Au coeur de tous <em>les projets</em></h2>
-		<button>A vous de jouer!</button>
+    <ng-include src="'views/base/header.html'"></ng-include>
 
-	</div><!-- #intro -->
+    <div id="intro" class="intro-project-create">
 
-	<div class="toolbar">
-		<div class="row container">
-			<div class="container-xs-height">
-				<div class="row-xs-height">
-					<div class="col-md-2 col-xs-height col-middle blue">
-						<h3>Les tags populaires <span class="glyphicon glyphicon-chevron-right"></span></h3>
-					</div>
-					<div class="col-md-8 col-xs-height col-middle" ng-controller="TagListCtrl">
-						<ul class="tags tags-listing">
-							<li ng-repeat="tag in tags"><a href="">{{tag.name}}</a></li>
-						</ul>
-					</div>
-					<div class="col-md-2 col-xs-height col-middle blue">
-						<form method="post" action="">
-							<button type="submit"><span class="glyphicon glyphicon-search"></span></button>
-						</form>
-					</div>
-				</div><!-- .row-xs-height -->
-			</div><!-- .container-xs-height -->
-		</div><!-- .container.row -->
-	</div><!-- .toolbar -->
+        <h1>Le numérique et l'innovation</h1>
+        <h2>Au coeur de tous <em>les projets</em></h2>
+        <button>A vous de jouer!</button>
 
-	<div class="row container">
-	
-		<div class="col-md-12">
+    </div><!-- #intro -->
 
-			<div id="content" class="new-project">
+    <div class="toolbar">
+        <div class="row container">
+            <div class="container-xs-height">
+                <div class="row-xs-height">
+                    <div class="col-md-2 col-xs-height col-middle blue">
+                        <h3>Les tags populaires <span class="glyphicon glyphicon-chevron-right"></span></h3>
+                    </div>
+                    <div class="col-md-8 col-xs-height col-middle" ng-controller="TagListCtrl">
+                        <ul class="tags tags-listing">
+                            <li ng-repeat="tag in tags"><a href="">{{tag.name}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-xs-height col-middle blue">
+                        <form method="post" action="">
+                            <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                        </form>
+                    </div>
+                </div><!-- .row-xs-height -->
+            </div><!-- .container-xs-height -->
+        </div><!-- .container.row -->
+    </div><!-- .toolbar -->
 
-				<h2>Créer un projet</h2>
-				<h3>Nouveau projet</h3>
-				
-				<form ng-controller="MakerscienceProjectSheetCreateCtrl">
-				
-					<div class="row">
-				
-						<div class="col-md-8">
-					
-							<input type="text" 
-							       name="project-name" 
-							       placeholder="Nom du projet" 
-							       ng-model="projectsheet.project.title"/>
-							
-							<textarea name="project-tagline" 
-							          placeholder="Résumez votre projet en une courte phrase" 
-							          rows="4" 
-							          ng-model="projectsheet.project.baseline">
-				            </textarea>
-				            <div ng-controller="TagAutoCompleteCtrl">
-							<h3>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h3>
+    <div class="row container">
+
+        <div class="col-md-12">
+
+            <div id="content" class="new-project">
+
+                <h2>Créer un projet</h2>
+                <h3>Nouveau projet</h3>
+
+                <form ng-controller="MakerscienceProjectSheetCreateCtrl">
+
+                    <div class="row">
+
+                        <div class="col-md-8">
+
+                            <input type="text"
+                                   name="project-name"
+                                   placeholder="Nom du projet"
+                                   ng-model="projectsheet.project.title"/>
+
+                            <textarea name="project-tagline"
+                                      placeholder="Résumez votre projet en une courte phrase"
+                                      rows="4"
+                                      ng-model="projectsheet.project.baseline">
+                            </textarea>
+                            <div ng-controller="TagAutoCompleteCtrl">
+                            <h3>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h3>
                             <tags-input ng-model="tags"
                                         placeholder="Ajouter un mot-clé">
-		                      <auto-complete source="loadTags($query)"></auto-complete>
-		                    </tags-input>
-		                    </div>
-							
-						</div>
-					
-						<div class="col-md-4">
+                              <auto-complete source="loadTags($query)"></auto-complete>
+                            </tags-input>
+                            </div>
 
-							<button class="button button-photo-upload">Photo de couverture</button>
-							<fieldset class="geolocalisation">
-								<input type="text" name="address" placeholder="Adresse" />
-								<input type="text" name="city" placeholder="Ville" />
-								<input type="text" name="postalcode" placeholder="Code Postal" />
-							</fieldset>
-							<fieldset class="phases">
-								<p>Etat d'avancement</p>
-								<label for="phase1" class="selected">
-									<input id="phase1" type="radio" name="phase" value="1" />
-									<img src="./img/phase.png" alt="Phase 1" />
-									Début
-								</label>
-								<label for="phase2">
-									<input id="phase2" type="radio" name="phase" value="2" />
-									<img src="./img/phase.png" alt="Phase 2" />
-									Phase 2
-								</label>
-								<label for="phase3">
-									<input id="phase3" type="radio" name="phase" value="3" />
-									<img src="./img/phase.png" alt="Phase 3" />
-									Phase 3
-								</label>
-								<label for="phase4">
-									<input id="phase4" type="radio" name="phase" value="4" />
-									<img src="./img/phase.png" alt="Phase 4" />
-									Phase 4
-								</label>
-							</fieldset>
-						
-						</div>
-				
-					</div><!-- .row -->
-					
-					<textarea name="project-about" 
-					          placeholder="Résumez votre projet en quelques lignes"
-					          rows="4" 
-					          ng-model="projectsheet.project.description"></textarea>
+                        </div>
 
-					<textarea ng-model="projectsheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
-					
-					
-					<div class="row">
+                        <div class="col-md-4">
 
-						<div class="col-md-6">
-							<fieldset class="needs-idea">
-								<h4>Vos besoins?</h4>
-								<h5>Idée</h5>
-								<textarea name="project-idea" placeholder="Champ de texte..." rows="4"></textarea>
-								<button class="right">Suivant</button>
-							</fieldset>
-							<button class="button button-add">Gallerie photo et vidéo</button>
-						</div>
-					
-						<div class="col-md-6">
-							<fieldset class="fixme">
-								<h4><span class="fixme">#FIXME</span><br />Lien vers une fiche ressource<br />(voir design)</h4>
-							</fieldset>
-						</div>
-						
-					</div><!-- .row -->
-					
-					<p class="right">
-						<button class="button cancel" type="submit">Annuler</button>
-						<button class="button" ng-click="saveMakerscienceProject(projectsheet)" >Enregistrer et publier</button>
-					</p>
-					
-				</form>
-				
-			</div><!-- #content -->
+                            <button class="button button-photo-upload">Photo de couverture</button>
+                            <fieldset class="geolocalisation">
+                                <input type="text" name="address" placeholder="Adresse" />
+                                <input type="text" name="city" placeholder="Ville" />
+                                <input type="text" name="postalcode" placeholder="Code Postal" />
+                            </fieldset>
+                            <fieldset class="phases">
+                                <p>Etat d'avancement</p>
+                                <label for="phase1" class="selected">
+                                    <input id="phase1" type="radio" name="phase" value="1" />
+                                    <img src="./img/phase.png" alt="Phase 1" />
+                                    Début
+                                </label>
+                                <label for="phase2">
+                                    <input id="phase2" type="radio" name="phase" value="2" />
+                                    <img src="./img/phase.png" alt="Phase 2" />
+                                    Phase 2
+                                </label>
+                                <label for="phase3">
+                                    <input id="phase3" type="radio" name="phase" value="3" />
+                                    <img src="./img/phase.png" alt="Phase 3" />
+                                    Phase 3
+                                </label>
+                                <label for="phase4">
+                                    <input id="phase4" type="radio" name="phase" value="4" />
+                                    <img src="./img/phase.png" alt="Phase 4" />
+                                    Phase 4
+                                </label>
+                            </fieldset>
 
-		</div><!-- .row -->
-		
-	</div><!-- .row .container -->
+                        </div>
 
-	<footer>
-		<ul>
-			<li><a href=""><img src="./img/footer/social-twitter.gif" alt="Twitter" /></a></li>
-			<li><a href=""><img src="./img/footer/social-facebook.gif" alt="Facebook" /></a></li>
-			<li><a href=""><img src="./img/footer/social-google.gif" alt="Google+" /></a></li>
-		</ul>
-	</footer>
+                    </div><!-- .row -->
+
+                    <textarea name="project-about"
+                              placeholder="Résumez votre projet en quelques lignes"
+                              rows="4"
+                              ng-model="projectsheet.project.description"></textarea>
+
+                    <textarea ng-model="projectsheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
+
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <fieldset class="needs-idea">
+                                <h4>Vos besoins?</h4>
+                                <h5>Idée</h5>
+                                <textarea name="project-idea" placeholder="Champ de texte..." rows="4"></textarea>
+                                <button class="right">Suivant</button>
+                            </fieldset>
+                            <button class="button button-add">Gallerie photo et vidéo</button>
+                        </div>
+
+                        <div class="col-md-6">
+                            <fieldset class="fixme">
+                                <h4><span class="fixme">#FIXME</span><br />Lien vers une fiche ressource<br />(voir design)</h4>
+                            </fieldset>
+                        </div>
+
+                    </div><!-- .row -->
+
+                    <p class="right">
+                        <button class="button cancel" type="submit">Annuler</button>
+                        <button class="button" ng-click="saveMakerscienceProject(projectsheet)" >Enregistrer</button>
+                    </p>
+
+                </form>
+
+            </div><!-- #content -->
+
+        </div><!-- .row -->
+
+    </div><!-- .row .container -->
+
+    <footer>
+        <ul>
+            <li><a href=""><img src="./img/footer/social-twitter.gif" alt="Twitter" /></a></li>
+            <li><a href=""><img src="./img/footer/social-facebook.gif" alt="Facebook" /></a></li>
+            <li><a href=""><img src="./img/footer/social-google.gif" alt="Google+" /></a></li>
+        </ul>
+    </footer>
 </div><!-- .container-fluid -->

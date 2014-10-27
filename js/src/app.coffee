@@ -31,7 +31,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
 .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', ($locationProvider, $stateProvider, $urlRouterProvider) ->
         $locationProvider.html5Mode(config.useHtml5Mode)
         $urlRouterProvider.otherwise("/")
-        
+
         $stateProvider.state('home',
                 url: '/',
                 controller: 'ProjectListCtrl'
@@ -48,7 +48,6 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
         )
         .state('projectsheet',
                 url: '/p/:slug',
-                controller: 'ProjectSheetCtrl'
                 templateUrl: 'views/catalog/project_detail.html'
         )
         .state('resource-list',
@@ -72,7 +71,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
                 url: '/u/list',
                 templateUrl: 'views/profile/profile_list.html'
         )
-        
+
 ])
 .run((editableOptions, editableThemes) ->
     editableOptions.theme = 'bs3'
@@ -80,7 +79,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
 )
 
-angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) -> 
+angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->
     return editableDirectiveFactory(
             directiveName : 'editableTextAngular'
             inputTpl : '<div text-angular></div>'
