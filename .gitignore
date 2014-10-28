@@ -1,0 +1,6 @@
+/.project
+/css/.sass-cache/
+/js/*.js
+/js/commons/
+/js/makerscience/
+/js/vendor/

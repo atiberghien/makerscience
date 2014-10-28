@@ -34,8 +34,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
 
         $stateProvider.state('home',
                 url: '/',
-                controller: 'ProjectListCtrl'
-                templateUrl: 'views/catalog/homepage.html'
+                templateUrl: 'index.html'
         )
         .state('project-list',
                 url: '/p/list',
