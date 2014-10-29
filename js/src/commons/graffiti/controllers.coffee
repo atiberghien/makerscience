@@ -6,7 +6,7 @@ module.controller("TagListCtrl", ($scope, Tag) ->
 
 module.controller("TagAutoCompleteCtrl", ($scope, $q, Tag) ->
     tags = Tag.getList()
-    
+
     $scope.loadTags = (query) ->
         deferred = $q.defer()
         availableTags = []
@@ -14,7 +14,6 @@ module.controller("TagAutoCompleteCtrl", ($scope, $q, Tag) ->
             if tag.name.indexOf(query) > -1
                 tmpTag =
                     'text' : tag.name
-                
                 availableTags.push(tmpTag)
         )
         deferred.resolve(availableTags)

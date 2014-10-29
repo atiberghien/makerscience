@@ -7,32 +7,33 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Project,
                                        PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
 
-    ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
-        $scope.projectsheet = projectsheetResult.objects[0]
-        projectID = getObjectIdFromURI($scope.projectsheet.project)
-        Project.one(projectID).get().then((projectResult) ->
-            $scope.projectsheet.project = projectResult
-            if $scope.projectsheet.project.location
-                postalAddressId = getObjectIdFromURI($scope.projectsheet.project.location)
-                $scope.projectsheet.project.location = PostalAddress.one(postalAddressId).get().$object
-        )
+    $scope.init = ->
+        return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
+            $scope.projectsheet = projectsheetResult.objects[0]
+            projectID = getObjectIdFromURI($scope.projectsheet.project)
+            Project.one(projectID).get().then((projectResult) ->
+                $scope.projectsheet.project = projectResult
+                if $scope.projectsheet.project.location
+                    postalAddressId = getObjectIdFromURI($scope.projectsheet.project.location)
+                    $scope.projectsheet.project.location = PostalAddress.one(postalAddressId).get().$object
+            )
 
-        $scope.projectsheet.q_a = []
-        templateID = getObjectIdFromURI($scope.projectsheet.template)
+            $scope.projectsheet.q_a = []
+            templateID = getObjectIdFromURI($scope.projectsheet.template)
 
-        ProjectSheetTemplate.one(templateID).get().then((templateResult) ->
-            angular.forEach(templateResult.questions, (question, index) ->
-                itemID = getObjectIdFromURI($scope.projectsheet.items[index])
-                ProjectSheetItem.one(itemID).get().then((itemResult) ->
-                    item =
-                        'question' : question
-                        'answer' : itemResult.answer
-                        'id' : itemResult.id
-                    $scope.projectsheet.q_a.push(item)
+            ProjectSheetTemplate.one(templateID).get().then((templateResult) ->
+                angular.forEach(templateResult.questions, (question, index) ->
+                    itemID = getObjectIdFromURI($scope.projectsheet.items[index])
+                    ProjectSheetItem.one(itemID).get().then((itemResult) ->
+                        item =
+                            'question' : question
+                            'answer' : itemResult.answer
+                            'id' : itemResult.id
+                        $scope.projectsheet.q_a.push(item)
+                    )
                 )
             )
         )
-    )
     $scope.update = (resourceName, resourceId, fieldName, data) ->
         putData = {}
         putData[fieldName] = data
@@ -43,10 +44,13 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Proje
 
 module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, PostalAddress,
                                              ProjectSheetTemplate, ProjectSheetItem) ->
-    $scope.projectsheet = {}
-    ProjectSheetTemplate.one().get({'slug' : 'makerscience'}).then((templateResult) ->
-        $scope.template = templateResult.objects[0]
-    )
+
+    $scope.init = (templateSlug) ->
+        $scope.projectsheet = {}
+        ProjectSheetTemplate.one().get({'slug' : templateSlug}).then((templateResult) ->
+            $scope.template = templateResult.objects[0]
+        )
+
     $scope.saveProject = (projectsheet) ->
         console.log("ProjectSheetCreateCtrl.saveProject()")
         $scope.projectsheet = angular.copy(projectsheet);

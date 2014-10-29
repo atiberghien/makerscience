@@ -1,6 +1,8 @@
 angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
 angular.module('makerscience.catalog', ['makerscience.catalog.controllers'])
-angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'ngSanitize', 'ngTagsInput'])
+angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'restangular',
+                                'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular',
+                                'ngSanitize', 'ngTagsInput', 'angularMoment'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -38,7 +40,6 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
         )
         .state('project-list',
                 url: '/p/list',
-                controller: 'ProjectListCtrl'
                 templateUrl: 'views/catalog/project_list.html'
         )
         .state('new-projectsheet',
@@ -51,7 +52,6 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
         )
         .state('resource-list',
                 url: '/r/list',
-                controller: 'ProjectListCtrl'
                 templateUrl: 'views/catalog/resource_list.html'
         )
         .state('new-resource',
@@ -72,10 +72,12 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
         )
 
 ])
-.run((editableOptions, editableThemes) ->
+.run((editableOptions, editableThemes, amMoment) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
+
+    amMoment.changeLocale('fr');
 )
 
 angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->

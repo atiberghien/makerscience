@@ -3,286 +3,282 @@
 <link href="js/vendor/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 <link rel='stylesheet' href='css/textAngular.css'>
 <link rel='stylesheet' href='css/font-awesome/css/font-awesome.min.css'>
-<div class="container-fluid" ng-controller="ProjectSheetCtrl">
+<div class="container-fluid" ng-controller="MakerScienceProjectSheetCtrl">
 
-	<ul id="sidenav" class="project">
-		<li><a href=""><span class="glyphicon glyphicon-th-large"></span>Projet</a></li>
-		<li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
-		<li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
-		<li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
-	</ul><!-- #nav -->
+    <ul id="sidenav" class="project">
+        <li><a href=""><span class="glyphicon glyphicon-th-large"></span>Projet</a></li>
+        <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
+        <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
+        <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
+    </ul><!-- #nav -->
 
-	<ng-include src="'views/base/header.html'"></ng-include>
-	
-	<div id="intro" class="intro-project" >
+    <ng-include src="'views/base/header.html'"></ng-include>
 
-		<div class="container">
+    <div id="intro" class="intro-project" >
 
-			<div class="intro edit">
-				
-				<div class="edit-buttons" ng-show="editable">
-					<button><span class="glyphicon glyphicon-pencil"></span></button>
-				</div>
+        <div class="container">
 
-				<h1>{{projectsheet.project.title}}</h1>
-				<h2>{{projectsheet.project.baseline}}</h2>
-				<h3><span>Fiche Projet</span></h3>
+            <div class="intro edit">
 
-				<div class="row">
+                <div class="edit-buttons" ng-show="editable">
+                    <button><span class="glyphicon glyphicon-pencil"></span></button>
+                </div>
 
-					<div class="col-md-8">
-						<img src="img/bacasable.jpg" alt="Project Image" />
-					</div>
-					
-					<div class="col-md-4">
-		
-						<div class="sideproject">
+                <h1>{{projectsheet.project.title}}</h1>
+                <h2>{{projectsheet.project.baseline}}</h2>
+                <h3><span>Fiche Projet</span></h3>
 
-							<div class="editable">
-								<div class="edit-buttons" ng-show="editable">
-									<button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
-								</div>
-								<input type="text" ng-show="addTag"/>
-								<ul class="tags tags-project">
-									<li><a href="">Créativité <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-									<li><a href="">Workshop <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-									<li><a href="">Géologie <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-									<li><a href="">Hydrologie <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-									<li><a href="">Numérique <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-									<li><a href="">Réalité augmentée <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-								</ul><!-- .tag -->
-							</div>
-	
-							<div class="editable">
-								<div class="edit-buttons" ng-show="editable">
-									<button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
-								</div>
-								<p class="location"><img src="./img/location.png" alt="Location" />
-	    							<span ng-if="projectsheet.project.location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</span>
-		       						<span ng-if="! projectsheet.project.location">N/C</span>
-								</p>
-							</div>
-	
-							<div class="editable">
-								<div class="edit-buttons" ng-show="editable">
-								<button><span class="glyphicon glyphicon-pencil"></span></button>
-								</div>
-								<ul class="phases">
-									<li><span>Phase 1</span></li>
-									<li><span>Phase 2</span></li>
-									<li class="selected"><span>Phase 3</span></li>
-									<li><span>Phase 4</span></li>
-									<li>Phase 2</li>
-								</ul><!-- .phase -->
-							</div>
-							
-							<div class="editable">
-								<div class="edit-buttons" ng-show="editable">
-									<button><span class="glyphicon glyphicon-pencil"></span></button>
-								</div>
-								<p>Fin de projet: {{projectsheet.project.end_date || "N/C" }}<br />Mise à jour il y a 2 jours</p>
-							</div>
-					
-						</div><!-- .sideproject -->
-	
-					</div><!-- .col-md-4 -->
+                <div class="row">
 
-				</div><!-- .row -->
+                    <div class="col-md-8">
+                        <img src="img/bacasable.jpg" alt="Project Image" />
+                    </div>
 
-			</div><!-- .intro -->
+                    <div class="col-md-4">
 
-		</div><!-- .container -->
+                        <div class="sideproject">
 
-	</div><!-- #intro -->
-	
-	<div class="row container">
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable">
+                                    <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
+                                </div>
+                                <input type="text" ng-show="addTag"/>
+                                <ul class="tags tags-project">
+                                    <li ng-repeat="tag in projectsheet.tags"><a href="">{{tag.name}} <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
+                                </ul><!-- .tag -->
+                            </div>
 
-		<div class="col-md-8">		
-			<div id="content">
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable">
+                                    <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
+                                </div>
+                                <p class="location"><img src="./img/location.png" alt="Location" />
+                                    <span ng-if="projectsheet.project.location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</span>
+                                       <span ng-if="! projectsheet.project.location">N/C</span>
+                                </p>
+                            </div>
 
-				<tabset class="nav-tabs-project">
-					<tab heading="Projet">
-						<section>
-							<div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
-								<button> <span class="glyphicon glyphicon-pencil"></span></button>
-							</div>
-							<h3>A propos du projet</h3>
-							
-							<p editable-text-angular="projectsheet.project.description" 
-							     e-form="DescBtnForm" 
-							     e-rows="4" 
-							     e-cols="85" 
-							     onbeforesave="update('Project', projectsheet.project.id , 'description', $data)"
-							     ng-bind-html="projectsheet.project.description">
-							</p>
-                            
-						</section> 
-						<section ng-repeat="q_a in projectsheet.q_a">
-							<h3>{{q_a.question}}</h3>
-							<div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable">
+                                <button><span class="glyphicon glyphicon-pencil"></span></button>
+                                </div>
+                                <ul class="phases">
+                                    <li><span>Phase 1</span></li>
+                                    <li><span>Phase 2</span></li>
+                                    <li class="selected"><span>Phase 3</span></li>
+                                    <li><span>Phase 4</span></li>
+                                    <li>Phase 2</li>
+                                </ul><!-- .phase -->
+                            </div>
+
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable">
+                                    <button><span class="glyphicon glyphicon-pencil"></span></button>
+                                </div>
+                                <p>Fin de projet: {{projectsheet.project.end_date || "N/C" }}<br />
+                                    Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
+                            </div>
+
+                        </div><!-- .sideproject -->
+
+                    </div><!-- .col-md-4 -->
+
+                </div><!-- .row -->
+
+            </div><!-- .intro -->
+
+        </div><!-- .container -->
+
+    </div><!-- #intro -->
+
+    <div class="row container">
+
+        <div class="col-md-8">
+            <div id="content">
+
+                <tabset class="nav-tabs-project">
+                    <tab heading="Projet">
+                        <section>
+                            <div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
+                                <button> <span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
+                            <h3>A propos du projet</h3>
+
+                            <p editable-text-angular="projectsheet.project.description"
+                                 e-form="DescBtnForm"
+                                 e-rows="4"
+                                 e-cols="85"
+                                 onbeforesave="update('Project', projectsheet.project.id , 'description', $data)"
+                                 ng-bind-html="projectsheet.project.description">
+                            </p>
+
+                        </section>
+                        <section ng-repeat="q_a in projectsheet.q_a">
+                            <h3>{{q_a.question}}</h3>
+                            <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-							<p editable-textarea="q_a.answer" e-form="AnswerBtnForm"  e-rows="4" e-cols="85" onbeforesave="update('ProjectSheetItem', q_a.id , 'answer', $data)"><span ng-bind-html="q_a.answer"></span></p>
-						</section>
-					</tab>
-					<tab heading="Actus">
-						<section>
-							<h3>Actus</h3>
-							<p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</section>
-					</tab>
-					<tab heading="Discussions">
-						<section>
-							<h3>Discussions</h3>
-							<p>Ced do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</section>
-					</tab>
-				</tabset>
-				
-				<div class="row">
-					<div class="col-md-8">
-						<div class="needs">
-							<ul class="actions">
-								<li><a href=""><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
-							</ul>
-							<h3>Besoins</h3>
-							<carousel id="carousel-needs" class="carousel-no-indicators carousel-text-links">
-								<slide class="needs-idea">
-									<h4>Idée</h4>
-									<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-								</slide>
-								<slide class="needs-skills">
-									<h4>Compétence</h4>
-									<p>Ccaecat cupidatat nxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-								</slide>
-								<slide class="needs-hardware">
-									<h4>Matériel</h4>
-									<p>Rur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-								</slide>
-								<slide class="needs-financing">
-									<h4>Financement</h4>
-									<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-								</slide>
-							</carousel>
-						</div><!-- .needs -->
-					</div>
-					<div class="col-md-4">
-						<div class="interested">
-							<h3><a href="">Intéressé?</a></h3>
-						</div><!-- .interested -->
-					</div>
-				</div><!-- .row -->
-				
-				<tabset class="nav-tabs-slide">
-					<tab>
-						<tab-heading>
-							<span class="glyphicon glyphicon-picture"></span>
-						</tab-heading>
-						<carousel class="carousel-no-indicators">
-							<slide>
-								<img src="img/slides/slide_one.png" alt="Slide One">
-							</slide>
-							<slide>
-								<img src="img/slides/slide_two.png" alt="Slide Two">
-							</slide>
-							<slide>
-								<img src="img/slides/slide_three.png" alt="Slide Three">
-							</slide>
-						</carousel>
-					</tab>
-					<tab>
-						<tab-heading>
-							<span class="glyphicon glyphicon-facetime-video"></span>
-						</tab-heading>
-						<carousel>
-							<slide>
-								<img src="img/slides/slide_two.png" alt="Slide Two">
-							</slide>
-							<slide>
-								<img src="img/slides/slide_three.png" alt="Slide Three">
-							</slide>
-						</carousel>
-					</tab>
-				</tabset>
-				
-				<section class="linked linked-project" >
-					<carousel class="carousel-no-indicators carousel-text-links">
-						<slide class="left-aligned">
-							<h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
-							<h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
-							<h5><a href="">Tournée nationale 2014</a></h5>
-							<img src="./img/bacasable.jpg" alt="Image background" />
-						</slide>
-						<slide class="left-aligned">
-							<h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
-							<h4><a href="">bkfjei oifjeoiw jfe:</a></h4>
-							<h5><a href="">fwoi jfiwj  foiwj firwj  fiwjr</a></h5>
-							<img src="./img/bacasable.jpg" alt="Image background" />
-						</slide>
-					</carousel>
-				</section>						
+                            <p editable-textarea="q_a.answer" e-form="AnswerBtnForm"  e-rows="4" e-cols="85" onbeforesave="update('ProjectSheetItem', q_a.id , 'answer', $data)"><span ng-bind-html="q_a.answer"></span></p>
+                        </section>
+                    </tab>
+                    <tab heading="Actus">
+                        <section>
+                            <h3>Actus</h3>
+                            <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </section>
+                    </tab>
+                    <tab heading="Discussions">
+                        <section>
+                            <h3>Discussions</h3>
+                            <p>Ced do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </section>
+                    </tab>
+                </tabset>
 
-			</div><!-- #content -->
-			
-		</div><!-- .col-md-8 -->
-		
-		<div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="needs">
+                            <ul class="actions">
+                                <li><a href=""><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
+                            </ul>
+                            <h3>Besoins</h3>
+                            <carousel id="carousel-needs" class="carousel-no-indicators carousel-text-links">
+                                <slide class="needs-idea">
+                                    <h4>Idée</h4>
+                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </slide>
+                                <slide class="needs-skills">
+                                    <h4>Compétence</h4>
+                                    <p>Ccaecat cupidatat nxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </slide>
+                                <slide class="needs-hardware">
+                                    <h4>Matériel</h4>
+                                    <p>Rur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </slide>
+                                <slide class="needs-financing">
+                                    <h4>Financement</h4>
+                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </slide>
+                            </carousel>
+                        </div><!-- .needs -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="interested">
+                            <h3><a href="">Intéressé?</a></h3>
+                        </div><!-- .interested -->
+                    </div>
+                </div><!-- .row -->
 
-			<div id="sidebar">
+                <tabset class="nav-tabs-slide">
+                    <tab>
+                        <tab-heading>
+                            <span class="glyphicon glyphicon-picture"></span>
+                        </tab-heading>
+                        <carousel class="carousel-no-indicators">
+                            <slide>
+                                <img src="img/slides/slide_one.png" alt="Slide One">
+                            </slide>
+                            <slide>
+                                <img src="img/slides/slide_two.png" alt="Slide Two">
+                            </slide>
+                            <slide>
+                                <img src="img/slides/slide_three.png" alt="Slide Three">
+                            </slide>
+                        </carousel>
+                    </tab>
+                    <tab>
+                        <tab-heading>
+                            <span class="glyphicon glyphicon-facetime-video"></span>
+                        </tab-heading>
+                        <carousel>
+                            <slide>
+                                <img src="img/slides/slide_two.png" alt="Slide Two">
+                            </slide>
+                            <slide>
+                                <img src="img/slides/slide_three.png" alt="Slide Three">
+                            </slide>
+                        </carousel>
+                    </tab>
+                </tabset>
 
-	            <ng-include src="'views/catalog/block/community.html'"></ng-include>
-				<ng-include src="'views/catalog/block/comments.html'"></ng-include>
+                <section class="linked linked-project" >
+                    <carousel class="carousel-no-indicators carousel-text-links">
+                        <slide class="left-aligned">
+                            <h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
+                            <h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
+                            <h5><a href="">Tournée nationale 2014</a></h5>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+                        </slide>
+                        <slide class="left-aligned">
+                            <h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
+                            <h4><a href="">bkfjei oifjeoiw jfe:</a></h4>
+                            <h5><a href="">fwoi jfiwj  foiwj firwj  fiwjr</a></h5>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+                        </slide>
+                    </carousel>
+                </section>
+
+            </div><!-- #content -->
+
+        </div><!-- .col-md-8 -->
+
+        <div class="col-md-4">
+
+            <div id="sidebar">
+
+                <ng-include src="'views/catalog/block/community.html'"></ng-include>
+                <ng-include src="'views/catalog/block/comments.html'"></ng-include>
                 <ng-include src="'views/catalog/block/popularity.html'"></ng-include>
 
-			</div><!-- #sidebar -->
-			
-		</div><!-- .col-md-4 -->
+            </div><!-- #sidebar -->
 
-	</div><!-- .row -->
+        </div><!-- .col-md-4 -->
 
-	<div class="row container">
+    </div><!-- .row -->
 
-		<ul class="boxes">
-			<li class="box box-solo box-red">
-				<a href="">Projets Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
-			</li>
-			<li class="box">
-				<h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-				<h4><a href="">Il était une fois...</a></h4>
-				<h5><a href="">Le Tyrannosaurus Rex</a></h5>
-				<img src="./img/bacasable.jpg" alt="Image background" />
-			</li>
-			<li class="box">
-				<h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-				<h4><a href="">Il était une fois...</a></h4>
-				<h5><a href="">Le Tyrannosaurus Rex</a></h5>
-				<img src="./img/bacasable.jpg" alt="Image background" />
-			</li>
-			<li class="box">
-				<h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-				<h4><a href="">Il était une fois...</a></h4>
-				<h5><a href="">Le Tyrannosaurus Rex</a></h5>
-				<img src="./img/bacasable.jpg" alt="Image background" />
-			</li>
-			<li class="box">
-				<h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-				<h4><a href="">Il était une fois...</a></h4>
-				<h5><a href="">Le Tyrannosaurus Rex</a></h5>
-				<img src="./img/bacasable.jpg" alt="Image background" />
-			</li>
-			<li class="box box-solo box-red">
-				<a ui-sref="project-list">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
-			</li>
-		</ul>
+    <div class="row container">
 
-	</div><!-- .row .container -->
+        <ul class="boxes">
+            <li class="box box-solo box-red">
+                <a href="">Projets Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </li>
+            <li class="box">
+                <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                <h4><a href="">Il était une fois...</a></h4>
+                <h5><a href="">Le Tyrannosaurus Rex</a></h5>
+                <img src="./img/bacasable.jpg" alt="Image background" />
+            </li>
+            <li class="box">
+                <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
+                <h4><a href="">Il était une fois...</a></h4>
+                <h5><a href="">Le Tyrannosaurus Rex</a></h5>
+                <img src="./img/bacasable.jpg" alt="Image background" />
+            </li>
+            <li class="box">
+                <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
+                <h4><a href="">Il était une fois...</a></h4>
+                <h5><a href="">Le Tyrannosaurus Rex</a></h5>
+                <img src="./img/bacasable.jpg" alt="Image background" />
+            </li>
+            <li class="box">
+                <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
+                <h4><a href="">Il était une fois...</a></h4>
+                <h5><a href="">Le Tyrannosaurus Rex</a></h5>
+                <img src="./img/bacasable.jpg" alt="Image background" />
+            </li>
+            <li class="box box-solo box-red">
+                <a ui-sref="project-list">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </li>
+        </ul>
 
-	<footer>
-		<ul>
-			<li><a href=""><img src="./img/footer/social-twitter.gif" alt="Twitter" /></a></li>
-			<li><a href=""><img src="./img/footer/social-facebook.gif" alt="Facebook" /></a></li>
-			<li><a href=""><img src="./img/footer/social-google.gif" alt="Google+" /></a></li>
-		</ul>
-	</footer>
+    </div><!-- .row .container -->
+
+    <footer>
+        <ul>
+            <li><a href=""><img src="./img/footer/social-twitter.gif" alt="Twitter" /></a></li>
+            <li><a href=""><img src="./img/footer/social-facebook.gif" alt="Facebook" /></a></li>
+            <li><a href=""><img src="./img/footer/social-google.gif" alt="Google+" /></a></li>
+        </ul>
+    </footer>
 
 </div><!-- .container-fluid -->
