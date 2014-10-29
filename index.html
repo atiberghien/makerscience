@@ -64,8 +64,8 @@
                         </div>
                         <div class="col-md-7">
                             <ul>
-                                <li><a href="">Parcourez les projets</a></li>
-                                <li><a href="">Ajoutez votre projet</a></li>
+                                <li><a ui-sref="project-list">Parcourez les projets</a></li>
+                                <li><a ui-sref="new-projectsheet">Ajoutez votre projet</a></li>
                                 <li><a href="">Exprimez vos idées</a></li>
                             </ul>
                         </div>
@@ -80,7 +80,7 @@
                         <div class="col-md-7">
                             <ul>
                                 <li><a href="">Participez à la communauté</a></li>
-                                <li><a href="">Trouvez des contacts</a></li>
+                                <li><a ui-sref="profile-list">Trouvez des contacts</a></li>
                                 <li><a href="">Discutez sur le forum</a></li>
                             </ul>
                         </div>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-md-7">
                             <ul>
-                                <li><a href="">Parcourez les fiches ressources</a></li>
+                                <li><a ui-sref="resource-list">Parcourez les fiches ressources</a></li>
                                 <li><a href="">Partagez votre expérience</a></li>
                                 <li><a href="">Posez vos questions</a></li>
                             </ul>
@@ -107,66 +107,17 @@
         <div class="home-fullwidth">
             <div class="row">
                 <ul>
-                    <li><a href=""><span class="glyphicon glyphicon-tasks"></span>Projets</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
+                    <li><a href="" ng-init="showProject=true" ng-click="showProject=true"><span class="glyphicon glyphicon-tasks"></span>Projets</a></li>
+                    <li><a href="" ng-click="showProject=!showProject"><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
                 </ul>
             </div><!-- .row -->
         </div><!-- .home-fullwidth -->
 
         <div class="row row-home">
-
-            <ul class="boxes boxes-small">
-                <li class="box">
+            <ul class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl" ng-show="showProject">
+                <li class="box" ng-repeat="project in projects | limitTo:7" >
                     <img src="./img/bacasable.jpg" alt="Image background" />
                     <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                    <div class="description">
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Contributeur: Marina Lopez</a></h5>
-                    </div>
-                </li>
-                <li class="box">
-                    <img src="./img/bacasable.jpg" alt="Image background" />
-                    <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                    <div class="description">
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Contributeur: Audrey Bardon</a></h5>
-                    </div>
-                </li>
-                <li class="box">
-                    <img src="./img/bacasable.jpg" alt="Image background" />
-                    <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                    <div class="description">
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Contributeur: Audrey Bardon</a></h5>
-                    </div>
-                </li>
-                <li class="box">
-                    <img src="./img/bacasable.jpg" alt="Image background" />
-                    <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                    <div class="description">
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Contributeur: Marina Lopez</a></h5>
-                    </div>
-                </li>
-                <li class="box">
-                    <img src="./img/bacasable.jpg" alt="Image background" />
-                    <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                    <div class="description">
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Contributeur: Marina Lopez</a></h5>
-                    </div>
-                </li>
-                <li class="box">
-                    <img src="./img/bacasable.jpg" alt="Image background" />
-                    <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                    <div class="description">
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Contributeur: Audrey Bardon</a></h5>
-                    </div>
-                </li>
-                <li class="box">
-                    <img src="./img/bacasable.jpg" alt="Image background" />
-                    <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
                     <div class="description">
                         <h4><a href="">Il était une fois...</a></h4>
                         <h5><a href="">Contributeur: Marina Lopez</a></h5>
@@ -174,6 +125,19 @@
                 </li>
                 <li class="box box-solo box-blue">
                     <a ui-sref="project-list">Voir tous les projets <span class="glyphicon glyphicon-chevron-right"></span></a>
+                </li>
+            </ul>
+            <ul class="boxes boxes-small" ng-controller="MakerScienceResourceListCtrl" ng-show="!showProject">
+                <li class="box" ng-repeat="resource in resources | limitTo:7">
+                    <img src="./img/bacasable.jpg" alt="Image background" />
+                    <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                    <div class="description">
+                        <h4><a href="">Il était une fois...</a></h4>
+                        <h5><a href="">Contributeur: Marina Lopez</a></h5>
+                    </div>
+                </li>
+                <li class="box box-solo box-blue">
+                    <a ui-sref="resource-list">Voir toutes les ressources <span class="glyphicon glyphicon-chevron-right"></span></a>
                 </li>
             </ul>
 
@@ -240,31 +204,18 @@
 
             <div class="col-md-5">
 
-                <div class="home-tags">
+                <div class="home-tags" ng-controller="TagListCtrl">
                     <h2>Tags</h2>
                     <ul class="tags">
-                        <li><a href="">foo</a></li>
-                        <li><a href="">bar</a></li>
-                        <li><a href="">long one</a></li>
-                        <li><a href="">foo</a></li>
-                        <li><a href="">bar</a></li>
-                        <li><a href="">foo</a></li>
-                        <li><a href="">long one</a></li>
-                        <li><a href="">foo</a></li>
-                        <li><a href="">long one</a></li>
-                        <li><a href="">bar</a></li>
-                        <li><a href="">foo</a></li>
-                        <li><a href="">bar</a></li>
-                        <li><a href="">foo</a></li>
-                        <li><a href="">foo</a></li>
-                        <li><a href="">long one</a></li>
-                        <li><a href="">bar</a></li>
+                        <li ng-repeat="tag in tags"><a href="">{{tag.name}}</a></li>
                     </ul>
                 </div><!-- .home-tags -->
 
                 <div class="home-twitter">
-                    <h2>Sur Twitter</h2>
-                    <p>#TODO - Voir avec Alban comment importer le feed twitter</p>
+                    <a class="twitter-timeline"
+                       href="https://twitter.com/atiberghien"
+                       data-widget-id="527467059685257216"></a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                 </div><!-- .home-tweeter -->
 
             </div>
