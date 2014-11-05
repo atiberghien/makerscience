@@ -14,27 +14,7 @@
 
     </div><!-- #intro -->
 
-    <div class="toolbar">
-        <div class="row container">
-            <div class="container-xs-height">
-                <div class="row-xs-height">
-                    <div class="col-md-2 col-xs-height col-middle blue">
-                        <h3>Les tags populaires <span class="glyphicon glyphicon-chevron-right"></span></h3>
-                    </div>
-                    <div class="col-md-8 col-xs-height col-middle" ng-controller="TagListCtrl">
-                        <ul class="tags tags-listing">
-                            <li ng-repeat="tag in tags"><a href="">{{tag.name}}</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-2 col-xs-height col-middle blue">
-                        <form method="post" action="">
-                            <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
-                        </form>
-                    </div>
-                </div><!-- .row-xs-height -->
-            </div><!-- .container-xs-height -->
-        </div><!-- .container.row -->
-    </div><!-- .toolbar -->
+    <ng-include src="'views/catalog/block/popular_tags.html'"></ng-include>
 
     <div class="row container">
 
