@@ -20,6 +20,9 @@ div.toolbar {
 		&.orange {
 			background-color: $color-red;
 		}
+		&.green {
+			background-color: $color-green;
+		}
 	}
 	h3 {
 		color: #fff;
@@ -38,7 +41,7 @@ div.toolbar {
 			text-align: center;
 			button[type="submit"] {
 				color: #fff;
-				background-color: $color-blue;
+				background-color: transparent;
 				font-size: 2.25em;
 				border: none;
 			}
