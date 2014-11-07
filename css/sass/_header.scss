@@ -71,10 +71,27 @@ header {
 		}
 	}
 	&.intro-project-create {
-		padding: 8em 0;
-		text-align: center;
 		background-color: $color-intro-project-bg;
 		background-image: url('../img/bg/header-project-create.gif');
+	}
+	&.intro-resource {
+		background-color: $color-intro-resource-bg;
+		background-image: url('../img/bg/header-resource-bg.png');
+		h3 {
+			background-image: url('../img/fiche-resource.png');
+			span {
+				background-color: $color-intro-h3-resource-bg;
+			}
+		}
+	}
+	&.intro-resource-create {
+		background-color: $color-intro-resource-bg;
+		background-image: url('../img/bg/header-resource-bg.png');
+	}
+	&.intro-project-create,
+	&.intro-resource-create {
+		padding: 8em 0;
+		text-align: center;
 		h1, h2 {
 			font-size: 3em;
 			line-height: 1em;
@@ -96,15 +113,14 @@ header {
 			text-transform: uppercase;
 			@include border-radius(3px);
 		}
-	}
-	&.intro-resource {
-		background-color: $color-intro-resource-bg;
-		background-image: url('../img/bg/header-resource-bg.png');
-		h3 {
-			background-image: url('../img/fiche-resource.png');
-			span {
-				background-color: $color-intro-h3-resource-bg;
-			}
+		button {
+			padding: 0.75em 1em;
+			font-size: 2em;
+			color: $color-intro-listing;
+			border: 2px solid $color-intro-listing;
+			background-color: transparent;
+			text-transform: uppercase;
+			@include border-radius(3px);
 		}
 	}
 	&.intro-listing {

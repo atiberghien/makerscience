@@ -8504,28 +8504,49 @@ header .navbar-brand {
 }
 /* line 73, sass/_header.scss */
 #intro.intro-project-create {
-  padding: 8em 0;
-  text-align: center;
   background-color: #f2f2f2;
   background-image: url("../img/bg/header-project-create.gif");
 }
-/* line 78, sass/_header.scss */
-#intro.intro-project-create h1, #intro.intro-project-create h2 {
+/* line 77, sass/_header.scss */
+#intro.intro-resource {
+  background-color: #21083b;
+  background-image: url("../img/bg/header-resource-bg.png");
+}
+/* line 80, sass/_header.scss */
+#intro.intro-resource h3 {
+  background-image: url("../img/fiche-resource.png");
+}
+/* line 82, sass/_header.scss */
+#intro.intro-resource h3 span {
+  background-color: #30c9ad;
+}
+/* line 87, sass/_header.scss */
+#intro.intro-resource-create {
+  background-color: #21083b;
+  background-image: url("../img/bg/header-resource-bg.png");
+}
+/* line 92, sass/_header.scss */
+#intro.intro-project-create, #intro.intro-resource-create {
+  padding: 8em 0;
+  text-align: center;
+}
+/* line 95, sass/_header.scss */
+#intro.intro-project-create h1, #intro.intro-project-create h2, #intro.intro-resource-create h1, #intro.intro-resource-create h2 {
   font-size: 3em;
   line-height: 1em;
   text-transform: uppercase;
 }
-/* line 83, sass/_header.scss */
-#intro.intro-project-create h2 {
+/* line 100, sass/_header.scss */
+#intro.intro-project-create h2, #intro.intro-resource-create h2 {
   margin-bottom: 1.25em;
   font-weight: normal;
 }
-/* line 86, sass/_header.scss */
-#intro.intro-project-create h2 em {
+/* line 103, sass/_header.scss */
+#intro.intro-project-create h2 em, #intro.intro-resource-create h2 em {
   border-bottom: 4px solid white;
 }
-/* line 90, sass/_header.scss */
-#intro.intro-project-create button {
+/* line 107, sass/_header.scss */
+#intro.intro-project-create button, #intro.intro-resource-create button {
   padding: 0.75em 1em;
   font-size: 2em;
   color: white;
@@ -8538,27 +8559,28 @@ header .navbar-brand {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 100, sass/_header.scss */
-#intro.intro-resource {
-  background-color: #21083b;
-  background-image: url("../img/bg/header-resource-bg.png");
+/* line 116, sass/_header.scss */
+#intro.intro-project-create button, #intro.intro-resource-create button {
+  padding: 0.75em 1em;
+  font-size: 2em;
+  color: white;
+  border: 2px solid white;
+  background-color: transparent;
+  text-transform: uppercase;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
 }
-/* line 103, sass/_header.scss */
-#intro.intro-resource h3 {
-  background-image: url("../img/fiche-resource.png");
-}
-/* line 105, sass/_header.scss */
-#intro.intro-resource h3 span {
-  background-color: #30c9ad;
-}
-/* line 110, sass/_header.scss */
+/* line 126, sass/_header.scss */
 #intro.intro-listing {
   padding: 0;
   text-align: center;
   background-color: #f2f2f2;
   background-image: none;
 }
-/* line 116, sass/_header.scss */
+/* line 132, sass/_header.scss */
 #intro.intro-listing #carousel-photos .item {
   padding: 17em 2em;
   background-color: #000;
@@ -8566,30 +8588,30 @@ header .navbar-brand {
   background-position: center center;
   background-size: cover;
 }
-/* line 123, sass/_header.scss */
+/* line 139, sass/_header.scss */
 #intro.intro-listing #carousel-photos .carousel-indicators {
   bottom: 4em;
 }
-/* line 127, sass/_header.scss */
+/* line 143, sass/_header.scss */
 #intro.intro-listing h1, #intro.intro-listing h2 {
   margin: 0;
   font-size: 3em;
   line-height: 1.5em;
   text-transform: uppercase;
 }
-/* line 133, sass/_header.scss */
+/* line 149, sass/_header.scss */
 #intro.intro-listing h1 {
   font-weight: normal;
 }
-/* line 136, sass/_header.scss */
+/* line 152, sass/_header.scss */
 #intro.intro-listing h2 {
   margin-bottom: 1.25em;
 }
-/* line 138, sass/_header.scss */
+/* line 154, sass/_header.scss */
 #intro.intro-listing h2 em {
   border-bottom: 4px solid white;
 }
-/* line 142, sass/_header.scss */
+/* line 158, sass/_header.scss */
 #intro.intro-listing button {
   padding: 0.75em 1em;
   font-size: 2em;
@@ -8603,70 +8625,70 @@ header .navbar-brand {
   -o-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 152, sass/_header.scss */
+/* line 168, sass/_header.scss */
 #intro.intro-profil {
   background: #453936 url("../img/bg/header-profil.png") center center no-repeat;
   background-size: cover;
 }
-/* line 155, sass/_header.scss */
+/* line 171, sass/_header.scss */
 #intro.intro-profil .col-md-4 {
   padding-right: 0;
   /* remove gutter */
 }
-/* line 158, sass/_header.scss */
+/* line 174, sass/_header.scss */
 #intro.intro-profil .col-md-8 {
   padding-left: 0;
   /* remove gutter */
 }
-/* line 161, sass/_header.scss */
+/* line 177, sass/_header.scss */
 #intro.intro-profil img.profil {
   display: block;
   width: 250px;
   height: 250px;
   margin: 2em auto;
 }
-/* line 167, sass/_header.scss */
+/* line 183, sass/_header.scss */
 #intro.intro-profil h2 {
   padding: 0 1em;
   font-size: 1.2em;
   line-height: 1.25em;
 }
-/* line 172, sass/_header.scss */
+/* line 188, sass/_header.scss */
 #intro.intro-profil h5 {
   margin-bottom: 0.5em;
   font-size: 1.2em;
   font-weight: bold;
 }
-/* line 176, sass/_header.scss */
+/* line 192, sass/_header.scss */
 #intro.intro-profil h5.bio {
   margin-top: 2em;
 }
-/* line 179, sass/_header.scss */
+/* line 195, sass/_header.scss */
 #intro.intro-profil h5.skills {
   margin-top: 2em;
 }
-/* line 183, sass/_header.scss */
+/* line 199, sass/_header.scss */
 #intro.intro-profil p {
   margin-bottom: 0.25em;
   line-height: 1.5em;
 }
-/* line 187, sass/_header.scss */
+/* line 203, sass/_header.scss */
 #intro.intro-profil p.location {
   text-transform: uppercase;
 }
-/* line 190, sass/_header.scss */
+/* line 206, sass/_header.scss */
 #intro.intro-profil ul.skills {
   margin-bottom: 3em;
 }
 
-/* line 196, sass/_header.scss */
+/* line 212, sass/_header.scss */
 .intro {
   position: relative;
   margin: 4em 15px;
   font-size: 0.8em;
   border: 2px solid white;
 }
-/* line 202, sass/_header.scss */
+/* line 218, sass/_header.scss */
 .intro div.sideproject {
   position: relative;
   margin-right: -1px;
@@ -8675,16 +8697,16 @@ header .navbar-brand {
   color: black;
   background-color: #f2f2f2;
 }
-/* line 208, sass/_header.scss */
+/* line 224, sass/_header.scss */
 .intro div.sideproject p.location img {
   margin-right: 1em;
   vertical-align: middle;
 }
-/* line 214, sass/_header.scss */
+/* line 230, sass/_header.scss */
 .intro ul.phases {
   margin: 1em 0;
 }
-/* line 216, sass/_header.scss */
+/* line 232, sass/_header.scss */
 .intro ul.phases li {
   display: inline-block;
   width: 44px;
@@ -8695,22 +8717,22 @@ header .navbar-brand {
   background: url("../img/phase.png") center center no-repeat;
   text-transform: uppercase;
 }
-/* line 225, sass/_header.scss */
+/* line 241, sass/_header.scss */
 .intro ul.phases li.selected {
   color: #fe9903;
   background-image: url("../img/phase-selected.png");
 }
-/* line 229, sass/_header.scss */
+/* line 245, sass/_header.scss */
 .intro ul.phases li span {
   display: none;
 }
-/* line 232, sass/_header.scss */
+/* line 248, sass/_header.scss */
 .intro ul.phases li:last-child {
   width: auto;
   margin: 0;
   background-image: none;
 }
-/* line 241, sass/_header.scss */
+/* line 257, sass/_header.scss */
 .intro ul.details li {
   margin-bottom: 1em;
   padding-left: 63px;
@@ -8719,34 +8741,34 @@ header .navbar-brand {
   background-position: center left;
   background-repeat: no-repeat;
 }
-/* line 248, sass/_header.scss */
+/* line 264, sass/_header.scss */
 .intro ul.details li.level-average {
   font-weight: bold;
   background-image: url("../img/details/details-level-average.png");
 }
-/* line 252, sass/_header.scss */
+/* line 268, sass/_header.scss */
 .intro ul.details li.duration {
   background-image: url("../img/details/details-duration.png");
 }
-/* line 255, sass/_header.scss */
+/* line 271, sass/_header.scss */
 .intro ul.details li.cost {
   background-image: url("../img/details/details-cost.png");
 }
 
-/* line 262, sass/_header.scss */
+/* line 278, sass/_header.scss */
 .intro-project .intro p.location {
   margin: 2em 0;
 }
 
-/* line 268, sass/_header.scss */
+/* line 284, sass/_header.scss */
 .intro-project .intro > .row, .intro-resource .intro > .row {
   overflow: hidden;
 }
-/* line 271, sass/_header.scss */
+/* line 287, sass/_header.scss */
 .intro-project .intro .row > div:first-child, .intro-resource .intro .row > div:first-child {
   position: relative;
 }
-/* line 274, sass/_header.scss */
+/* line 290, sass/_header.scss */
 .intro-project .intro .row > div:first-child img, .intro-resource .intro .row > div:first-child img {
   position: absolute;
   top: 0;
@@ -10288,11 +10310,11 @@ div.badges h3 {
   background-image: url("../img/needs/needs-idea.png");
 }
 /* line 43, sass/_forms.scss */
-.admin #content form fieldset.geolocalisation {
+.admin #content form fieldset.compact {
   padding: 0;
 }
 /* line 45, sass/_forms.scss */
-.admin #content form fieldset.geolocalisation input {
+.admin #content form fieldset.compact input {
   margin: 0;
 }
 /* line 49, sass/_forms.scss */
