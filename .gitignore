@@ -4,3 +4,5 @@
 /js/commons/
 /js/makerscience/
 /js/vendor/
+.sass-cache/
+doc.html

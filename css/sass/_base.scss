@@ -117,8 +117,11 @@ ul.tags {
 			background-color: $color-purple;
 		}
 	}
-	&.tags-listing a {
+	&.tags-project a {
 		background-color: $color-blue;
+	}
+	&.tags-resource a {
+		background-color: $color-green;
 	}
 	a:hover {
 		text-decoration: none;

@@ -14,13 +14,13 @@ div.toolbar {
 	}
 	.col-xs-height {
 		height: 8em;
-		&.blue {
+		&.project {
 			background-color: $color-blue;
 		}
-		&.orange {
+		&.member {
 			background-color: $color-red;
 		}
-		&.green {
+		&.resource {
 			background-color: $color-green;
 		}
 	}

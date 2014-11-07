@@ -2,15 +2,15 @@
     <div class="row container">
         <div class="container-xs-height">
             <div class="row-xs-height">
-                <div class="col-md-2 col-xs-height col-middle {{color}}">
+                <div class="col-md-2 col-xs-height col-middle {{type}}">
                     <h3>Les tags populaires <span class="glyphicon glyphicon-chevron-right"></span></h3>
                 </div>
                 <div class="col-md-8 col-xs-height col-middle" ng-controller="TagListCtrl">
-                    <ul class="tags tags-listing">
+                    <ul class="tags tags-{{type}}">
                         <li ng-repeat="tag in tags"><a href="">{{tag.name}}</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2 col-xs-height col-middle {{color}}">
+                <div class="col-md-2 col-xs-height col-middle {{type}}">
                     <form method="post" action="">
                         <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
                     </form>
