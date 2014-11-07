@@ -111,6 +111,16 @@ div.toolbar {
 			}
 		}
 	}
+	&.project {
+		section.title {
+			background-color: $color-blue;
+		}
+	}
+	&.resource {
+		section.title {
+			background-color: $color-green;
+		}
+	}
 	ul.nav-tabs {
 		margin-bottom: 1em;
 		border: none;
@@ -189,6 +199,13 @@ div.toolbar {
 			background-color: $color-content-tab-project-active-bg;
 			border: 2px solid $color-content-tab-active;
 		}
+	}
+	.nav-tabs-resource ul.nav-tabs {
+			margin-bottom: 3em;
+			&> li.active a {
+				background-color: $color-content-tab-resource-active-bg;
+				border: 2px solid $color-content-tab-active;
+			}
 	}
 	.nav-tabs-slide {
 		ul.nav-tabs {
