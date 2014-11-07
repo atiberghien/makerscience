@@ -187,25 +187,34 @@ div.toolbar {
 	.nav-tabs-slide ul.nav-tabs {
 		margin: 0;
 	}
+	.nav-tabs-listing ul.nav-tabs a {
+		border: 2px solid transparent;
+	}
 	.nav-tabs-listing ul.nav-tabs {
-			margin-bottom: 3em;
-			&> li.active a {
-				background-color: $color-content-tab-listing-active-bg;
-				border: 2px solid $color-content-tab-active;
-			}
+		margin-bottom: 3em;
+		&> li.active a, &>li a:hover {
+			color: #fff;
+			background-color: $color-content-tab-listing-active-bg;
+			border-color: $color-content-tab-active;
+			@include transition(all .2s ease-in-out);
+		}
 	}
 	.nav-tabs-project ul.nav-tabs {
-		> li.active a {
+		&> li.active a, &>li a:hover {
+			color: #fff;
 			background-color: $color-content-tab-project-active-bg;
-			border: 2px solid $color-content-tab-active;
+			border-color: $color-content-tab-active;
+			@include transition(all .2s ease-in-out);
 		}
 	}
 	.nav-tabs-resource ul.nav-tabs {
-			margin-bottom: 3em;
-			&> li.active a {
-				background-color: $color-content-tab-resource-active-bg;
-				border: 2px solid $color-content-tab-active;
-			}
+		margin-bottom: 3em;
+		&> li.active a, &> li a:hover {
+			color: #fff;
+			background-color: $color-content-tab-resource-active-bg;
+			border-color: $color-content-tab-active;
+			@include transition(all .2s ease-in-out);
+		}
 	}
 	.nav-tabs-slide {
 		ul.nav-tabs {
