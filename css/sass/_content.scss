@@ -507,40 +507,37 @@ div.toolbar {
 		
 }
 ul.boxes {
-	margin-top: 4em;
-	margin-bottom: 1em;
-	margin-right: -2.5%;
+	margin: 0 $grid-gutter-width / 2;
+	text-align: justify;
+	&:first-child {
+		margin-top: 4em;
+	}
+	&:before {
+		content: '';
+		display: block;
+		width: 100%;
+	}
+	&:after {
+		content: '';
+		display: inline-block;
+		width: 100%;
+	}
 	li.box {
 		display: inline-block;
 		width: 31.35%;
 		width: 30.2%;
 		height: $boxes-height;
-		margin-bottom: 2.5%;
-		margin-right: 2.4%;
+		margin-bottom: $grid-gutter-width;
+		margin-right: 0;
 		padding: 0;
 		vertical-align: top;
 		background: #ccc;
   	}
-  	li:last-child {
-  		margin-right: 0;
-  	}
-  	li:last-child:after {
-		content: '';
-		display: inline-block;
-		width: 100%;
-    	}
 	&.boxes-small {
-		margin-top: $grid-gutter-width / 2; /* modified for the homepage */
-		margin-bottom: $grid-gutter-width / 2; /* modified for the homepage */
 		font-size: 0.75em;
 		li.box {
-			width: 19.25%;
-			width: 21.7%; /* modified for the homepage */
+			width: 19%;
 			height: $boxes-small-height;
-			margin-right: 0.65%;
-			margin-right: $grid-gutter-width; /* modified for the homepage */
-			margin-bottom: 0.55%;
-			margin-bottom: $grid-gutter-width / 2; /* modified for the homepage */
 			div.description {
 				position: absolute;
 				bottom: 0;
@@ -550,43 +547,56 @@ ul.boxes {
 		}
 		li.box-solo a {
 			padding-top: 40%;
-			padding-top: 32.5%; /* modified for the homepage */
 			padding-left: 1.5em;
 			font-size: 1.5em;
-			font-size: 2.1em; /* modified for the homepage */
+		}
+		h3, h4, h5 {
+			opacity: 0.9;
 		}
 		h3 {
-			position: absolute;
-			top: 0;
-			left: 0;
+			height: 25px;
+			line-height: 25px;
 			img {
 				display: inline;
+				position: relative;
+				/* FIXME This can be removed when we have the correctly size images*/
+				width: 25px;
+				height: 25px;
 			}
 		}
 		h4, h5 {
+			display: inline-block;
+			height: 1.5em;
+			padding: 0;
 			font-size: 1.1em;
 			line-height: 1.5em;
-			opacity: 1;
+			text-transform: uppercase;
 			a {
 				display: block;
 			}
 		}
-		h4 a {
-			padding-top: 0.75em;
-			padding-bottom: 0;
-		}
-		h5 a {
-			padding-top: 0;
-			padding-bottom: 0.6em;
-			text-transform: none;
-		}
 		img {
-			position: static;
+			position: absolute;
+			top: 0;
+			left: 0;
 			display: block;
 		}
 	}
 	&:last-child {
 		margin-bottom: 4em;
+	}
+	.boxes-small-home {
+		margin-top: $grid-gutter-width / 2;
+		margin-bottom: $grid-gutter-width / 2;
+		li.box {
+			width: 21.7%;
+			margin-right: $grid-gutter-width;
+			margin-bottom: $grid-gutter-width / 2;
+		}
+		li.box-solo a {
+			padding-top: 32.5%;
+			font-size: 2.1em;
+		}
 	}
 }
 .boxes {
@@ -610,7 +620,7 @@ ul.boxes {
 			@include opacity(0.8);
 		}
 		h4 a, h5 a {
-			padding: 0.5em 1em;
+			padding: 0.2em 1em;
 			text-transform: uppercase;
 			text-decoration: none;
 			background-color: $color-boxes-title-bg;
