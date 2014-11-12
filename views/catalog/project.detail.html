@@ -1,9 +1,6 @@
-<link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
-<link href="css/print.css" media="print" rel="stylesheet" type="text/css" />
 <link href="js/vendor/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 <link rel='stylesheet' href='css/textAngular.css'>
-<link rel='stylesheet' href='css/font-awesome/css/font-awesome.min.css'>
-<div class="container-fluid" ng-controller="MakerScienceProjectSheetCtrl">
+<div ng-controller="MakerScienceProjectSheetCtrl">
 
     <ul id="sidenav" class="project">
         <li><a href=""><span class="glyphicon glyphicon-th-large"></span>Projet</a></li>
@@ -12,8 +9,6 @@
         <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
     </ul><!-- #nav -->
 
-    <ng-include src="'views/base/header.html'"></ng-include>
-
     <div id="intro" class="intro-project" >
 
         <div class="container">
@@ -21,11 +16,18 @@
             <div class="intro edit">
 
                 <div class="edit-buttons" ng-show="editable">
-                    <button><span class="glyphicon glyphicon-pencil"></span></button>
+                    <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
                 </div>
 
                 <h1>{{projectsheet.project.title}}</h1>
-                <h2>{{projectsheet.project.baseline}}</h2>
+
+                <h2 editable-text="projectsheet.project.baseline"
+                    e-form="BaselineBtnForm"
+                    onbeforesave="update('Project', projectsheet.project.id , 'baseline', $data)"
+                    ng-bind-html="projectsheet.project.baseline">{{ projectsheet.project.baseline }}
+                </h2>
                 <h3><span>Fiche Projet</span></h3>
 
                 <div class="row">
@@ -50,12 +52,23 @@
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
-                                    <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button ng-click="AddressForm.$show()" ng-hide="AddressForm.$visible">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
                                 </div>
-                                <p class="location"><img src="./img/location.png" alt="Location" />
-                                    <span ng-if="projectsheet.project.location">{{projectsheet.project.location.street_address}}, {{projectsheet.project.location.country}}</span>
-                                       <span ng-if="! projectsheet.project.location">N/C</span>
-                                </p>
+                                <form editable-form name="AddressForm" onaftersave="update('Project', projectsheet.project.id , 'location', $data)">
+                                    <p class="location"><img src="./img/location.png" alt="Location" />
+                                        <span editable-text="projectsheet.project.location.street_address" e-name="street_address">{{ projectsheet.project.location.street_address }}</span>
+                                        <span editable-text="projectsheet.project.location.address_locality" e-name="address_locality">{{ projectsheet.project.location.address_locality }}</span>
+                                        <span  editable-select="projectsheet.project.location.country" e-ng-options="s.value as s.text for s in countries">
+                                            {{ showCountry() }}
+                                        </span>
+                                        <span ng-show="AddressForm.$visible">
+                                            <button type="submit" class="btn btn-primary" ng-disabled="AddressForm.$waiting">Enregistrer</button>
+                                            <button type="button" class="btn btn-default" ng-disabled="AddressForm.$waiting" ng-click="AddressForm.$cancel()">Annuler</button>
+                                        </span
+                                    </p>
+                                </form>
                             </div>
 
                             <div class="editable">
@@ -273,6 +286,4 @@
 
     </div><!-- .row .container -->
 
-    <ng-include src="'views/base/footer.html'"></ng-include>
-
-</div><!-- .container-fluid -->
+</div>

@@ -1,0 +1,192 @@
+<div class="container">
+
+    <div class="home-slide">
+        <div class="row">
+            <div class="col-md-7">
+                <h3 class="category"><span>Fiche projet</span></h3>
+                <carousel class="carousel-no-indicators">
+                    <slide>
+                        <img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3>La fête de la science!</h3>
+                            <h4>Contributeur: <strong>Audrey BARDON</strong></h4>
+                        </div>
+                    </slide>
+                    <slide>
+                        <img src="./img/uploads/home-slide-two.jpg" alt="Loading slide two..." />
+                        <div class="description">
+                            <h3>La fête de la science!</h3>
+                            <h4>Contributeur: <strong>Audrey BARDON</strong></h4>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+            <div class="col-md-5">
+                <div class="home-join">
+                    <h2>Rejoindre la communauté MakerScience!</h2>
+                    <ul>
+                        <li><img src="./img/home/home-share-facebook.png" alt="Facebook" /></li>
+                        <li><img src="./img/home/home-share-twitter.png" alt="Twitter" /></li>
+                        <li><img src="./img/home/home-share-google.png" alt="Google+" /></li>
+                    </ul>
+                    <p><a href="">S'inscrire</a></p>
+                    <p><a href="" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
+                </div>
+            </div>
+        </div><!-- .row -->
+    </div><!-- .home-slide -->
+
+    <div class="home-links">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row projects">
+                    <div class="col-md-5">
+                        <img src="./img/home/home-links-projects.png" alt="Stimulez des idées et des projets" />
+                        <h3>Stimulez des idées et des projets</h3>
+                    </div>
+                    <div class="col-md-7">
+                        <ul>
+                            <li><a ui-sref="project.list">Parcourez les projets</a></li>
+                            <li><a ui-sref="project.new">Ajoutez votre projet</a></li>
+                            <li><a href="">Exprimez vos idées</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+            <div class="col-md-4">
+                <div class="row community">
+                    <div class="col-md-5">
+                        <img src="./img/home/home-links-community.png" alt="Echangez et rencontrez" />
+                        <h3>Echangez et rencontrez</h3>
+                    </div>
+                    <div class="col-md-7">
+                        <ul>
+                            <li><a ui-sref="profile.list">Participez à la communauté</a></li>
+                            <li><a ui-sref="profile.list">Trouvez des contacts</a></li>
+                            <li><a href="">Discutez sur le forum</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+            <div class="col-md-4">
+                <div class="row resources">
+                    <div class="col-md-5">
+                        <img src="./img/home/home-links-resources.png" alt="Trouvez des méthodes, des outils, des réponses" />
+                        <h3>Trouvez des méthodes, des outils, des réponses</h3>
+                    </div>
+                    <div class="col-md-7">
+                        <ul>
+                            <li><a ui-sref="resource.list">Parcourez les fiches ressources</a></li>
+                            <li><a ui-sref="resource.new">Partagez votre expérience</a></li>
+                            <li><a href="">Posez vos questions</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+        </div><!-- row -->
+    </div><!-- .home-links -->
+
+    <div class="home-fullwidth">
+        <div class="row">
+            <ul>
+                <li><a href="" ng-init="showProject=true" ng-click="showProject=true"><span class="glyphicon glyphicon-tasks"></span>Projets</a></li>
+                <li><a href="" ng-click="showProject=!showProject"><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
+            </ul>
+        </div><!-- .row -->
+    </div><!-- .home-fullwidth -->
+
+    <div class="row row-home">
+        <ul class="boxes boxes-small boxes-small-home" ng-controller="MakerScienceProjectListCtrl" ng-show="showProject">
+            <li class="box" ng-repeat="project in projects | limitTo:7" >
+                <img src="./img/bacasable.jpg" alt="Image background" />
+                <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                <div class="description">
+                    <h4><a href="">Il était une fois...</a></h4>
+                    <h5><a href="">Contributeur: Marina Lopez</a></h5>
+                </div>
+            </li>
+            <li class="box box-solo box-blue">
+                <a ui-sref="project.list">Voir tous les projets <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </li>
+        </ul>
+        <ul class="boxes boxes-small" ng-controller="MakerScienceResourceListCtrl" ng-show="!showProject">
+            <li class="box" ng-repeat="resource in resources | limitTo:7">
+                <img src="./img/bacasable.jpg" alt="Image background" />
+                <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                <div class="description">
+                    <h4><a href="">Il était une fois...</a></h4>
+                    <h5><a href="">Contributeur: Marina Lopez</a></h5>
+                </div>
+            </li>
+            <li class="box box-solo box-blue">
+                <a ui-sref="resource.list">Voir toutes les ressources <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </li>
+        </ul>
+
+    </div><!-- .row -->
+
+    <div class="row row-home">
+        <div class="col-md-7">
+            <div class=" home-community">
+                <h2>Membres de la communauté</h2>
+
+                <div class="boxes boxes-profils">
+
+                    <ul class="members members-small" ng-controller="MakerScienceProfileListCtrl" >
+                        <li ng-repeat="profile in profiles">
+                            <img src="./img/uploads/profil-gaetan-priour.jpg" alt="Photo of {{profile.first_name}} {{profile.last_name}}" class="img-circle" />
+                            <h3>{{profile.first_name}} <strong>{{profile.last_name}}<strong></h3>
+                            <h4>Intégrateur Web & Mobile</h4>
+                            <h5><span class="glyphicon glyphicon-map-marker"></span> Montpellier</h5>
+                        </li>
+                        <li class="member-solo">
+                            <a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </li>
+                    </ul><!-- .members -->
+
+                </div><!-- .boxes -->
+            </div><!--  .home-community -->
+
+            <div class="home-forum">
+                <h2>Discussion // Forum //</h2>
+                <h4>Sujet: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar lectus ut nibh consectetur feugiat.</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar lectus ut nibh consectetur feugiat. Donec euismod, metus vel varius finibus, arcu risus consequat nisl, vitae rhoncus sapien arcu vel nibh. In hac habitasse platea dictumst. Morbi a lectus a purus dapibus tempus. Donec at felis quam. Etiam bibendum odio risus, eu bibendum mauris condimentum et. Aenean est enim, venenatis non arcu sed, imperdiet pretium enim. Proin at venenatis elit, nec auctor erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <h4>Sujet: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar lectus ut nibh consectetur feugiat.</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar lectus ut nibh consectetur feugiat. Donec euismod, metus vel varius finibus, arcu risus consequat nisl, vitae rhoncus sapien arcu vel nibh. In hac habitasse platea dictumst. Morbi a lectus a purus dapibus tempus. Donec at felis quam. Etiam bibendum odio risus, eu bibendum mauris condimentum et. Aenean est enim, venenatis non arcu sed, imperdiet pretium enim. Proin at venenatis elit, nec auctor erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <p>Donec euismod, metus vel varius finibus, arcu risus consequat nisl, vitae rhoncus sapien arcu vel nibh. In hac habitasse platea dictumst. Morbi a lectus a purus dapibus tempus. Donec at felis quam. Etiam bibendum odio risus, eu bibendum mauris condimentum et. Aenean est enim, venenatis non arcu sed, imperdiet pretium enim. Proin at venenatis elit, nec auctor erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <h4>Sujet: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar lectus ut nibh consectetur feugiat.</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar lectus ut nibh consectetur feugiat. Donec euismod, metus vel varius finibus, arcu risus consequat nisl, vitae rhoncus sapien arcu vel nibh. In hac habitasse platea dictumst. Morbi a lectus a purus dapibus tempus. Donec at felis quam. Etiam bibendum odio risus, eu bibendum mauris condimentum et. Aenean est enim, venenatis non arcu sed, imperdiet pretium enim. Proin at venenatis elit, nec auctor erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            </div><!-- .home-forum -->
+
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="home-tags" ng-controller="TagListCtrl">
+                <h2>Tags</h2>
+                <ul class="tags">
+                    <li ng-repeat="tag in tags"><a href="">{{tag.name}}</a></li>
+                </ul>
+            </div><!-- .home-tags -->
+
+            <div>
+                <a class="twitter-timeline"
+                href="https://twitter.com/atiberghien"
+                data-widget-id="527467059685257216"></a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div><!-- .home-tweeter -->
+
+        </div>
+
+    </div><!-- .row -->
+
+    <div class="row home-follow">
+        <ul>
+            <li><a href=""><img src="./img/home/home-share-facebook-large.png" alt="Facebook" /></a></li>
+            <li><a href=""><img src="./img/home/home-share-twitter-large.png" alt="Twitter" /></a></li>
+            <li><a href=""><img src="./img/home/home-share-google-large.png" alt="Google+" /></a></li>
+        </ul>
+        <h4>Suivez nous sur les réseaux sociaux</h4>
+    </div><!-- .row -->
+
+</div><!-- .container -->

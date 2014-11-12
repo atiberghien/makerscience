@@ -4,10 +4,18 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
     $scope.projects = Project.getList().$object
 )
 
-module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Project,
+module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet, Project,
                                        PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
 
     $scope.init = ->
+
+        $scope.countries = [
+            {value: 0, symbol: 'FR', text: 'France'},
+            {value: 1, symbol: 'EN', text: 'Angleterre'},
+            {value: 2, symbol: 'ES', text: 'Espagne'}
+        ]
+
+
         return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
             $scope.projectsheet = projectsheetResult.objects[0]
             projectID = getObjectIdFromURI($scope.projectsheet.project)
@@ -16,6 +24,11 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, ProjectSheet, Proje
                 if $scope.projectsheet.project.location
                     postalAddressId = getObjectIdFromURI($scope.projectsheet.project.location)
                     $scope.projectsheet.project.location = PostalAddress.one(postalAddressId).get().$object
+
+                    $scope.showCountry = ->
+                        country = $scope.projectsheet.project.location.country || 'FR'
+                        selected = $filter('filter')($scope.countries, {symbol: country})
+                        return selected[0].text
             )
 
             $scope.projectsheet.q_a = []
@@ -52,7 +65,6 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
         )
 
     $scope.saveProject = (projectsheet) ->
-        console.log("ProjectSheetCreateCtrl.saveProject()")
         $scope.projectsheet = angular.copy(projectsheet);
         if $scope.projectsheet.project.begin_date is undefined
             $scope.projectsheet.project.begin_date = new Date()

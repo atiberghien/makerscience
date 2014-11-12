@@ -8,7 +8,7 @@ module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource)
     $scope.projects = MakerScienceResource.getList().$object
 )
 
-module.controller("MakerscienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject) ->
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $scope.tags = []
 
@@ -27,11 +27,10 @@ module.controller("MakerscienceProjectSheetCreateCtrl", ($scope, $state, $contro
 module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, Tag) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
 
-
     $scope.init().then( ->
         $scope.projectsheet.tags = []
-        MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((MakerScienceProjectResult) ->
-            project = MakerScienceProjectResult.objects[0]
+        MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
+            project = makerScienceProjectResult.objects[0]
             angular.forEach(project.tags, (tagURI) ->
                 tagID = getObjectIdFromURI(tagURI)
                 Tag.one(tagID).get().then((tagResult) ->
@@ -41,4 +40,12 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
             $scope.projectsheet.modified = project.modified
         )
     )
+)
+
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource) ->
+
+)
+
+module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, Tag) ->
+
 )

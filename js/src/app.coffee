@@ -1,8 +1,11 @@
 angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
-angular.module('makerscience.catalog', ['makerscience.catalog.controllers'])
-angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'restangular',
+angular.module('commons.accounts', ['commons.accounts.services'])
+angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services'])
+angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
+angular.module('makerscience.base', ['makerscience.base.controllers'])
+angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base', 'restangular',
                                 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular',
-                                'ngSanitize', 'ngTagsInput', 'angularMoment'])
+                                'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -14,7 +17,6 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
 .config((RestangularProvider) ->
         RestangularProvider.setBaseUrl(config.rest_uri)
         RestangularProvider.setRequestSuffix('?format=json');
-        # RestangularProvider.setDefaultHeaders({"Authorization": "ApiKey pipo:46fbf0f29a849563ebd36176e1352169fd486787"});
         # Tastypie patch
         RestangularProvider.setResponseExtractor((response, operation, what, url) ->
                 newResponse = null;
@@ -28,56 +30,85 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'rest
                 return newResponse
         )
 )
-
+# Google auth config
+.config(['TokenProvider', '$locationProvider', (TokenProvider, $locationProvider) ->
+    TokenProvider.extendConfig(
+        clientId: '255067193649-gsukme1nnpu55pfd7q3b589lhmih3qg1.apps.googleusercontent.com',
+        redirectUri: 'http://localhost:8001/oauth2callback.html',
+        scopes: ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
+    )
+])
+# Unisson auth config
+.config((loginServiceProvider) ->
+    loginServiceProvider.setBaseUrl(config.loginBaseUrl)
+)
 # URI config
 .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', ($locationProvider, $stateProvider, $urlRouterProvider) ->
+
         $locationProvider.html5Mode(config.useHtml5Mode)
         $urlRouterProvider.otherwise("/")
 
         $stateProvider.state('home',
                 url: '/',
-                templateUrl: 'index.html'
+                templateUrl: 'views/homepage.html'
         )
-        .state('project-list',
-                url: '/p/list',
-                templateUrl: 'views/catalog/project_list.html'
+        .state('project',
+                url: '/p/'
+                abstract: true,
+                templateUrl : 'views/catalog/project.html'
         )
-        .state('new-projectsheet',
-                url: '/p/new',
-                templateUrl: 'views/catalog/new_project.html'
+        .state('project.list',
+                url: 'list',
+                templateUrl: 'views/catalog/project.list.html'
         )
-        .state('projectsheet',
-                url: '/p/:slug',
-                templateUrl: 'views/catalog/project_detail.html'
+        .state('project.new',
+                url: 'new',
+                templateUrl: 'views/catalog/project.new.html'
         )
-        .state('resource-list',
-                url: '/r/list',
-                templateUrl: 'views/catalog/resource_list.html'
+        .state('project.detail',
+                url: ':slug',
+                templateUrl: 'views/catalog/project.detail.html'
         )
-        .state('new-resource',
-                url: '/r/new',
-                templateUrl: 'views/catalog/new_resource.html'
+        .state('resource',
+                url : '/r/',
+                abstract : true,
+                templateUrl : 'views/catalog/resource.html'
         )
-        .state('resourcesheet',
-                url: '/r/',
-                templateUrl: 'views/catalog/resource_detail.html'
+        .state('resource.list',
+                url: 'list',
+                templateUrl: 'views/catalog/resource.list.html'
+        )
+        .state('resource.new',
+                url: 'new',
+                templateUrl: 'views/catalog/resource.new.html'
+        )
+        .state('resource.detail',
+                url: ':id',
+                templateUrl: 'views/catalog/resource.detail.html'
         )
         .state('profile',
-                url: '/u',
-                templateUrl: 'views/profile/profile.html'
+                url : '/u/',
+                abstract : true,
+                templateUrl : 'views/profile/profile.html'
         )
-        .state('profile-list',
-                url: '/u/list',
-                templateUrl: 'views/profile/profile_list.html'
+        .state('profile.list',
+                url: 'list',
+                templateUrl: 'views/profile/profile.list.html'
+        )
+        .state('profile.detail',
+                url: ':id',
+                templateUrl: 'views/profile/profile.detail.html'
         )
 
 ])
-.run((editableOptions, editableThemes, amMoment) ->
+.run(($rootScope, editableOptions, editableThemes, amMoment, loginService) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
 
     amMoment.changeLocale('fr');
+
+    $rootScope.loginService = loginService
 )
 
 angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->

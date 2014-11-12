@@ -1,37 +1,43 @@
 <header>
-	<div class="container">
-		<nav id="menu" class="navbar" role="navigation">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" ui-sref="home"><img src="./img/logo-large.png" alt="Logo MakerScience" /></a>
-				</div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li><a ui-sref="home" class="nav-home">Accueil</a></li>
-						<li><a ui-sref="profile-list" class="nav-members">A propos</a></li>
-						<li><a ui-sref="profile-list" class="nav-members">Membres</a></li>
-						<li><a ui-sref="project-list" class="nav-projects">Projets</a></li>
-						<li><a ui-sref="resource-list" class="nav-projects">Ressources</a></li>
-						<li><a href="" class="nav-forum">Forum</a></li>
-					</ul>
-					<button class="user pull-right">
-						<img src="./img/users/user-default.png" alt="User" />
-					</button>
-					<form class="navbar-right" role="search">
-						<!-- #TODO Need to find out how the search form should work -->
-						<button type="button"><span class="glyphicon glyphicon-search"></span>	</button>
-					</form>
-				</div>
-				<!-- /.navbar-collapse -->
-			</div>
-			<!-- /.container-fluid -->
-		</nav>
-		<!-- #menu -->
-	</div>
-	<!-- .container -->
+    <div class="container">
+        <nav id="menu" class="navbar" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" ui-sref="home"><img src="./img/logo-large.png" alt="Logo MakerScience" /></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="home" class="nav-home">Accueil</a></li>
+                        <li><a ui-sref="about" class="nav-members">A propos</a></li>
+                        <li><a ui-sref="profile.list" class="nav-members">Membres</a></li>
+                        <li><a ui-sref="project.list" class="nav-projects">Projets</a></li>
+                        <li><a ui-sref="resource.list" class="nav-projects">Ressources</a></li>
+                        <li><a href="" class="nav-forum">Forum</a></li>
+                    </ul>
+                    <button class="user pull-right" ng-show="!authVars.isAuthenticated" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
+                    <a ui-sref="profile" ng-if="authVars.isAuthenticated">
+                        <img src="./img/users/user-default.png" alt="User" />
+                        {{authVars.user.first_name}} {{authVars.user.last_name}}
+                    </a>
+                    <div ng-show="showLoginPanel">
+                        <a ng-click="showLoginPanel=false">Fermer</a>
+                        <button ng-click="authenticateGoogle()">Avec Google</button>
+                    </div>
+                    <form class="navbar-right" role="search">
+                        <!-- #TODO Need to find out how the search form should work -->
+                        <button type="button"><span class="glyphicon glyphicon-search"></span>	</button>
+                    </form>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- #menu -->
+    </div>
+    <!-- .container -->
 </header>
