@@ -697,56 +697,74 @@ ul.boxes {
 		}
 	}
 
-	ul.members li {
-		display: inline-block;
-		position: relative;
-		margin-bottom: 2em;
-		text-align: center;
-		background-color: $color-member-bg;
-		@include box-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
-		&.member-added {
-			background-color: $color-member-added-bg;
-		}
-		button {
-			position: absolute;
-			top: 0;
-			right: 0;
-			padding: 0.5em 0.75em;
-			color: #fff;
-			background-color: $color-dark-grey;
-			border: none;
-			&:hover {
-				background-color: $color-orange;
+	ul.members {
+	
+		text-align: justify;
+		
+		li {
+			display: inline-block;
+			position: relative;
+			width: $page-width / 4 - $grid-gutter-width;
+			margin-bottom: 2em;
+			text-align: center;
+			background-color: $color-member-bg;
+			@include box-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
+			&.member-added {
+				background-color: $color-member-added-bg;
+			}
+			button {
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0.5em 0.75em;
+				color: #fff;
+				background-color: $color-dark-grey;
+				border: none;
+				&:hover {
+					background-color: $color-orange;
+				}
+			}
+			img {
+				width: 140px;
+				height: 140px;
+				margin: 1em 0 0.25em;
+			}
+			h3 {
+				text-transform: uppercase;
+				strong {
+					font-weight: bold;
+				}
+			}
+			h4 {
+				height: 2em;
+				margin-bottom: 1em;
+				font-size: 0.8em;
+				line-height: 1.25em;
+			}
+			h5 {
+				padding: 0.8em 0;
+				color: #fff;
+				background-color: $color-dark-grey;
+				text-transform: uppercase;
+				span {
+					margin-right: 0.5em;
+					font-size: 1.75em;
+					vertical-align: middle;
+				}
 			}
 		}
-		img {
-			width: 140px;
-			height: 140px;
-			margin: 1em 0 0.25em;
+		
+		&:before {
+			content: '';
+			display: block;
+			width: 100%;
 		}
-		h3 {
-			text-transform: uppercase;
-			strong {
-				font-weight: bold;
-			}
+		&:after {
+			content: '';
+			display: inline-block;
+			width: 100%;
 		}
-		h4 {
-			height: 2em;
-			margin-bottom: 1em;
-			font-size: 0.8em;
-			line-height: 1.25em;
-		}
-		h5 {
-			padding: 0.8em 0;
-			color: #fff;
-			background-color: $color-dark-grey;
-			text-transform: uppercase;
-			span {
-				margin-right: 0.5em;
-				font-size: 1.75em;
-				vertical-align: middle;
-			}
-		}
+		
 	}
 	ul.members-small li {
 		width: 27.4%;
