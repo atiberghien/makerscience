@@ -20,10 +20,12 @@
                         <li><a href="" class="nav-forum">Forum</a></li>
                     </ul>
                     <button class="user pull-right" ng-show="!authVars.isAuthenticated" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
-                    <a ui-sref="profile.detail" ng-if="authVars.isAuthenticated">
-                        <img src="./img/users/user-default.png" alt="User" />
-                        {{authVars.user.first_name}} {{authVars.user.last_name}}
-                    </a>
+                    <div>
+                        <a ui-sref="profile.detail" ng-if="authVars.isAuthenticated">
+                            <img src="./img/users/user-default.png" alt="User" />
+                            {{authVars.user.first_name}} {{authVars.user.last_name}}
+                        </a>
+                    </div>
                     <div ng-show="showLoginPanel">
                         <a ng-click="showLoginPanel=false">Fermer</a>
                         <button ng-click="authenticateGoogle()">Avec Google</button>
