@@ -50,13 +50,32 @@
 				margin-bottom: 1em;
 				label {
 					display: inline-block;
+					padding-top: 50px;
 					margin-top: 1em;
-					padding-right: 1em;
+					margin-right: 1em;
 					text-align: center;
 					font-size: 0.9em;
-					img {
-						display: block;
-						margin: 0 auto 1em auto;
+					background: url('../img/icons/project/project-grey.png') top center no-repeat;
+					cursor: pointer;
+					&.phase1 {
+						&.selected, &:hover {
+							background-image: url('../img/icons/project/project-white.png');
+						}
+					}
+					&.phase2 {
+						&.selected, &:hover {
+							background-image: url('../img/icons/project/project-red.png');
+						}
+					}
+					&.phase3 {
+						&.selected, &:hover {
+							background-image: url('../img/icons/project/project-orange.png');
+						}
+					}
+					&.phase4 {
+						&.selected, &:hover {
+							background-image: url('../img/icons/project/project-green.png');
+						}
 					}
 				}
 				label > input {
