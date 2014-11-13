@@ -29,14 +29,16 @@
 	form {
 		input[type=text], button {
 			color: $color-menu-form;
-			background-color: $color-menu-form-bg;
+		}
+		button.user {
+			margin-left: 1.5em;
+			border: none;
+			background-color: transparent;
+		}
+		button.connect {
+			margin-left: 0.5em;
 		}
 	}
 	
-	button.user {
-		margin-left: 1.5em;
-		border: none;
-		background-color: transparent;
-	}
 }
 

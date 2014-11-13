@@ -175,12 +175,29 @@ form.login {
 		li {
 			margin: 0 1.5em;
 			button {
+				width: 49px;
+				height: 49px;
+				margin: 0 1em;
 				background-color: transparent;
 				border: none;
-				/* FIXME remove this when we'll have the colored icons */
-				@include transition(all .2s ease);
-				&:hover {
-					opacity: 0.5;
+				@include transition(all .5s ease);
+				&.connect-with-facebook {
+					background: transparent url('../img/home/home-share-facebook.png') center center no-repeat;
+					&:hover {
+						background-image: url('../img/home/home-share-facebook-hover.png');
+					}
+				}
+				&.connect-with-twitter {
+					background: transparent url('../img/home/home-share-twitter.png') center center no-repeat;
+					&:hover {
+						background-image: url('../img/home/home-share-twitter-hover.png');
+					}
+				}
+				&.connect-with-google {
+					background: transparent url('../img/home/home-share-google.png') center center no-repeat;
+					&:hover {
+						background-image: url('../img/home/home-share-google-hover.png');
+					}
 				}
 			}
 		}

@@ -130,6 +130,7 @@ ul.tags {
 }
 
 button, a {
+	@include transition(all 0.2s ease);
 	&.large {
 		display: block;
 		width: 100%;

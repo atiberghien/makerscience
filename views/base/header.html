@@ -19,16 +19,23 @@
                         <li><a ui-sref="resource.list" class="nav-projects">Ressources</a></li>
                         <li><a href="" class="nav-forum">Forum</a></li>
                     </ul>
-                    <button class="user pull-right" ng-show="!authVars.isAuthenticated" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
+					<form class="navbar-right">
+						<button class="connect" ng-show="!authVars.isAuthenticated" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
+					</form>
                     <div>
                         <a ui-sref="profile.detail" ng-if="authVars.isAuthenticated">
                             <img src="./img/users/user-default.png" alt="User" />
                             {{authVars.user.first_name}} {{authVars.user.last_name}}
                         </a>
                     </div>
-                    <div ng-show="showLoginPanel">
-                        <a ng-click="showLoginPanel=false">Fermer</a>
+                    <div class="login-panel" ng-show="showLoginPanel">
+                        <p class="right">
+                        	<button class="close" ng-click="showLoginPanel=false"><img src="./img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
+                        </p>
+                    	<ng-include src="'/views/base/login.html'"></ng-include>
+                    	<!--
                         <button ng-click="authenticateGoogle()">Avec Google</button>
+                        -->
                     </div>
                     <form class="navbar-right" role="search">
                         <!-- #TODO Need to find out how the search form should work -->
