@@ -22,16 +22,7 @@
                 </carousel>
             </div>
             <div class="col-md-5">
-                <div class="home-join">
-                    <h2>Rejoindre la communauté MakerScience!</h2>
-                    <ul>
-                        <li><img src="./img/home/home-share-facebook.png" alt="Facebook" /></li>
-                        <li><img src="./img/home/home-share-twitter.png" alt="Twitter" /></li>
-                        <li><img src="./img/home/home-share-google.png" alt="Google+" /></li>
-                    </ul>
-                    <p><a href="">S'inscrire</a></p>
-                    <p><a href="" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
-                </div>
+                <div class="home-join" ng-include="'./views/base/login.html'"> </div><!-- .home-join -->
             </div>
         </div><!-- .row -->
     </div><!-- .home-slide -->
@@ -135,7 +126,7 @@
                     <ul class="members members-small" ng-controller="MakerScienceProfileListCtrl" >
                         <li ng-repeat="profile in profiles">
                             <img src="./img/uploads/profil-gaetan-priour.jpg" alt="Photo of {{profile.first_name}} {{profile.last_name}}" class="img-circle" />
-                            <h3>{{profile.first_name}} <strong>{{profile.last_name}}<strong></h3>
+                            <h3>{{profile.first_name}} <strong>{{profile.last_name}}</strong></h3>
                             <h4>Intégrateur Web & Mobile</h4>
                             <h5><span class="glyphicon glyphicon-map-marker"></span> Montpellier</h5>
                         </li>
