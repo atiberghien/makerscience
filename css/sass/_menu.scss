@@ -6,9 +6,10 @@
 		padding: 0.25em 0;
 		color: $color-menu-a;
 		text-transform: uppercase;
+		border-bottom: 4px solid transparent;
 		&.selected, &:hover {
 			background-color: transparent;
-			border-bottom: 4px solid #666;
+			border-color: $color-light-grey;
 			&.nav-members {
 				border-color: $color-menu-members;
 			}
