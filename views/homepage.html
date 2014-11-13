@@ -1,3 +1,14 @@
+<style>
+li.resourceToggleOff a {
+    width : 10% !important ;
+    transition: width 1s;
+}
+li.resourceToggleOn a {
+    width : 81% !important;
+    transition: width 1s;
+}
+</style>
+
 <div class="container">
 
     <div class="home-slide">
@@ -91,10 +102,10 @@
     </div><!-- .home-links -->
 
     <div class="home-fullwidth">
-        <div class="row">
+        <div class="row" ng-init="showProject=true">
             <ul>
-                <li><a href="" ng-init="showProject=true" ng-click="showProject=true"><span class="glyphicon glyphicon-tasks"></span>Projets</a></li>
-                <li><a href="" ng-click="showProject=!showProject"><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
+                <li><a href="" ng-init="showProject=true" ng-click="showProject=true;resourceToggleClass='resourceToggleOff'"><span class="glyphicon glyphicon-tasks"></span>Projets</a></li>
+                <li ng-class="resourceToggleClass"><a href="" ng-click="showProject=false;resourceToggleClass='resourceToggleOn'"><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
             </ul>
         </div><!-- .row -->
     </div><!-- .home-fullwidth -->
