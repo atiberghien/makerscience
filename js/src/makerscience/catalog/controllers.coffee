@@ -19,7 +19,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         )
         $scope.saveProject(projectsheet).then((projectsheet) ->
             MakerScienceProject.post({'parent' : projectsheet.project, 'tags' : tagsParam}).then(->
-                $state.go("projectsheet", {slug : $scope.projectsheet.project.slug})
+                $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
             )
         )
 )
