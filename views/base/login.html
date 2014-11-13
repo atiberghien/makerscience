@@ -1,3 +1,4 @@
+<!--
 <div ng-controller="LoginModalCtrl">
     <script type="text/ng-template" id="loginModalContent.html">
         <div class="modal-header">
@@ -10,32 +11,31 @@
         </div>
     </script>
 </div>
+-->
 <!--
 
 Used in 3 places:
-	- Homepage top bar
-	- Homepage right panel
-	- Anywhere when an action requires login
+    - Homepage top bar
+    - Homepage right panel
+    - Anywhere when an action requires login
 
 Form fields are currently disabled using disabled="disabled"
 
 -->
 <form method="post" action="" class="login">
-	<button class="close"><span class="glyphicon glyphicon-remove-circle"></span></button>
-	<h3>Inscrivez-vous via les réseaux sociaux</h3>
-	<ul>
-		<li><button><img src="./img/home/home-share-facebook.png" alt="Facebook" /></button></li>
-		<li><button><img src="./img/home/home-share-twitter.png" alt="Twitter" /></button></li>
-		<li><button><img src="./img/home/home-share-google.png" alt="Google+" /></button></li>
-	</ul>
-	<p class="or">Ou</p>
-	<fieldset>
-		<input type="text" name="name" placeholder="Prénom, Nom" disabled="disabled" />
-		<input type="email" name="email" placeholder="Votre e-mail" disabled="disabled" />
-		<input type="password" name="password" placeholder="Mot de passe" disabled="disabled" />
-		<p class="right">
-			<button type="submit" disabled="disabled">Valider</button>
-		</p>
-	</fieldset>
+    <h3>Inscrivez-vous via les réseaux sociaux</h3>
+    <ul>
+        <li><button><img src="./img/home/home-share-facebook.png" alt="Facebook" /></button></li>
+        <li><button><img src="./img/home/home-share-twitter.png" alt="Twitter" /></button></li>
+        <li><button ng-click="authenticateGoogle()"><img src="./img/home/home-share-google.png" alt="Google+" /></button></li>
+    </ul>
+    <p class="or">Ou</p>
+    <fieldset>
+        <input type="text" name="name" placeholder="Prénom, Nom" disabled="disabled" />
+        <input type="email" name="email" placeholder="Votre e-mail" disabled="disabled" />
+        <input type="password" name="password" placeholder="Mot de passe" disabled="disabled" />
+        <p class="right">
+            <button type="submit" disabled="disabled">Valider</button>
+        </p>
+    </fieldset>
 </form>
-
