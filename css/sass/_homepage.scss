@@ -91,6 +91,10 @@
 			border-color: $color-blue;
 		}
 	}
+	button.close {
+		color: #fff;
+		text-align: right;
+	}
 }
 .home-links {
 	margin: $grid-gutter-width ($grid-gutter-width / 2);
