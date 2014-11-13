@@ -4,7 +4,7 @@ angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'mak
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers'])
 angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base', 'restangular',
-                                'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular',
+                                'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth'])
 
 # CORS

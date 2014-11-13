@@ -11,9 +11,15 @@
                 <div class="row">
 
                     <div class="col-md-4">
-                        <img src="./img/uploads/profil-audrey-bardon.jpg" alt="Photo of {{profile.parent.user.first_name}} {{profile.parent.user.last_name}}" class="profil img-circle" />
+                        <gravatar-image data-gravatar-email="profile.parent.user.email"
+                                        data-gravatar-size="200"
+                                        data-gravatar-rating="pg"
+                                        data-gravatar-default="mm"
+                                        data-gravatar-secure="true"
+                                        data-gravatar-css-class="profil img-circle">
+                        </gravatar-image>
                         <h1>{{profile.parent.user.first_name}} {{profile.parent.user.last_name}}</h1>
-                        <h2>Chargée de projets innovation & communauté / Blogueuse / Exploratrice / Veilleuse</h2>
+                        <h2>{{profile.activity}}</h2>
                     </div>
 
                     <div class="col-md-8">
@@ -30,9 +36,7 @@
                             </ul><!-- .tag -->
 
                             <h5 class="bio">Présentation</h5>
-                            <p>Je suis actuellement chargée de projets innovation & communautés à Science Animation, dans le cadre du projet Inmédiats.</p>
-                            <p>Ce grand projet porté par plusieurs centres de culture scientifique consiste à développer, expérimenter et promouvoir de nouvelles formes de médiation et de diffusion des savoirs par l’utilisation de technologies numériques innovantes.</p>
-                            <p>Intérêts particuliers : l'innovation sous toutes ses formes, la culture numérique, les pratiques innovantes, inspirantes et stimulantes dans la diffusion des savoirs.</p>
+                            <p>{{profile.bio}}</p>
 
                             <h5 class="skills">Compétences</h5>
                             <ul class="tags skills">
@@ -45,8 +49,8 @@
 
                             <div class="row">
 
-                                <div class="col-md-6">
-                                    <p class="location"><img src="./img/location.png" alt="Location" /> Toulouse</p>
+                                <div class="col-md-6" >
+                                    <p class="location"><img src="./img/location.png" alt="Location" /> {{profile.location.address_locality}}</p>
                                 </div>
 
                                 <div class="col-md-6">
@@ -56,7 +60,7 @@
                                         <button class="share-google"></button>
                                         <button class="share-email"></button>
                                     </form>
-                                    <p class="right">Mise à jour il y a 2 jours</p>
+                                    <p class="right">Mise à jour <span am-time-ago="profile.modified"></span></p>
                                 </div>
 
                             </div><!-- .row -->
