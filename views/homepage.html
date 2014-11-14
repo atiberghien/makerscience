@@ -40,7 +40,7 @@ li.resourceToggleOn a {
                         <li><a href="http://twitter.com"><img src="./img/home/home-share-twitter.png" alt="Twitter" /></a></li>
                         <li><a href="http://plus.google.com"><img src="./img/home/home-share-google.png" alt="Google+" /></a></li>
                     </ul>
-                    <p ng-show="!authVars.isAuthenticated"><a href="." ng-click="showLoginPanel=true">S'inscrire</a></p>
+                    <p ng-show="!authVars.isAuthenticated"><a ng-click="showLoginPanel=true">S'inscrire</a></p>
                     <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
                 </div>
                 <div class="home-join" ng-show="showLoginPanel" >
