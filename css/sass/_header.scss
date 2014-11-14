@@ -18,6 +18,7 @@ header {
 		}
 	}
 	.navbar-brand {
+		z-index: 1000;
 		position: absolute;
 		bottom: 0;
 		left: $grid-gutter-width;
