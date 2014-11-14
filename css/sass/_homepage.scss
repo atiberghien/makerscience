@@ -201,6 +201,10 @@
 		}
     }
 }
+.home-projects-resources {
+	position: relative;
+	height: $boxes-small-height + $grid-gutter-width * 2;
+}
 .home-community {
     margin-bottom: $grid-gutter-width;
     padding-right: 0;

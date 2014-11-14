@@ -102,9 +102,9 @@
         </div><!-- .row -->
     </div><!-- .home-fullwidth -->
 
-    <div class="row row-home">
-        <div class="boxes boxes-small boxes-small-home" ng-controller="MakerScienceProjectListCtrl" ng-show="showProject">
-            <div class="box" ng-repeat="project in projects | limitTo:7" >
+    <div class="row row-home home-projects-resources">
+        <div ng-class="projectToggleClass" class="boxes boxes-small boxes-small-home animate-show animate-slide-right" ng-controller="MakerScienceProjectListCtrl">
+            <div class="box" ng-repeat="project in projects | limitTo:4" >
                 <img src="./img/bacasable.jpg" alt="Image background" />
                 <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                 <div class="description">
@@ -116,8 +116,8 @@
                 <a ui-sref="project.list">Voir tous les projets <span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
         </div><!-- .boxes -->
-        <div class="boxes boxes-small boxes-small-home" ng-controller="MakerScienceResourceListCtrl" ng-show="!showProject">
-            <div class="box" ng-repeat="resource in resources | limitTo:7">
+        <div ng-class="resourceToggleClass" class="boxes boxes-small boxes-small-home animate-show animate-slide-left" ng-controller="MakerScienceResourceListCtrl">
+            <div class="box" ng-repeat="resource in resources | limitTo:4">
                 <img src="./img/bacasable.jpg" alt="Image background" />
                 <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                 <div class="description">
@@ -125,7 +125,7 @@
                     <h5><a href="">Contributeur: Marina Lopez</a></h5>
                 </div>
             </div><!-- .box -->
-            <div class="box box-solo box-blue">
+            <div class="box box-solo box-green">
                 <a ui-sref="resource.list">Voir toutes les ressources <span class="glyphicon glyphicon-chevron-right"></span></a>
             </div>
         </div><!-- .boxes -->
