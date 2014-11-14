@@ -147,14 +147,19 @@ li.resourceToggleOn a {
             <div class=" home-community">
                 <h2>Membres de la communauté</h2>
 
-                <div class="boxes boxes-profils">
-
-                    <ul class="members members-small" ng-controller="MakerScienceProfileListCtrl" >
-                        <li ng-repeat="profile in profiles">
-                            <img src="./img/uploads/profil-gaetan-priour.jpg" alt="Photo of {{profile.first_name}} {{profile.last_name}}" class="img-circle" />
-                            <h3>{{profile.first_name}} <strong>{{profile.last_name}}</strong></h3>
-                            <h4>Intégrateur Web & Mobile</h4>
-                            <h5><span class="glyphicon glyphicon-map-marker"></span> Montpellier</h5>
+                <div class="boxes boxes-profils" ng-controller="MakerScienceProfileListCtrl">
+                    <ul class="members members-small" ng-repeat="baseProfile in profiles">
+                        <li ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)">
+                            <gravatar-image data-gravatar-email="profile.parent.user.email"
+                                            data-gravatar-size="85"
+                                            data-gravatar-rating="pg"
+                                            data-gravatar-default="mm"
+                                            data-gravatar-secure="true"
+                                            data-gravatar-css-class="img-circle">
+                            </gravatar-image>
+                            <h3><a ui-sref="profile.detail({id:profile.id})">{{profile.parent.user.first_name}} <strong>{{profile.parent.user.last_name}}</a></strong></h3>
+                            <h4>{{profile.activity}}</h4>
+                            <h5 ng-if="profile.location"><span class="glyphicon glyphicon-map-marker"></span> {{profile.location.address_locality}}</h5>
                         </li>
                         <li class="member-solo">
                             <a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a>
