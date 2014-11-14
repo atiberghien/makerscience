@@ -95,8 +95,9 @@
     <div class="home-fullwidth">
         <div class="row" ng-init="showProject=true">
             <ul>
-                <li><a href="" ng-init="showProject=true" ng-click="showProject=true;resourceToggleClass='resourceToggleOff'"><span class="glyphicon glyphicon-tasks"></span>Projets</a></li>
-                <li ng-class="resourceToggleClass"><a href="" ng-click="showProject=false;resourceToggleClass='resourceToggleOn'"><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
+            	<!-- No white space between the </li><li> tags or it will show as space in the rendered page -->
+                <li ng-class="projectToggleClass" ng-init="projectToggleClass='projectToggleOn';resourceToggleClass='resourceToggleOff'"><a href="" ng-init="showProject=true" ng-click="showProject=true;projectToggleClass='projectToggleOn';resourceToggleClass='resourceToggleOff'"><span class="glyphicon glyphicon-tasks"></span>Projets</a></li
+                ><li ng-class="resourceToggleClass"><a href="" ng-click="showProject=false;projectToggleClass='projectToggleOff';resourceToggleClass='resourceToggleOn'"><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
             </ul>
         </div><!-- .row -->
     </div><!-- .home-fullwidth -->
