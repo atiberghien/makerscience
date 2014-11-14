@@ -1,0 +1,9 @@
+li.resourceToggleOff a {
+    width : 10% !important ;
+}
+li.resourceToggleOn a {
+    width : 81% !important;
+}
+li.resourceToggleOff a, li.resourceToggleOn a {
+    @include transition(width 1s ease);
+}
