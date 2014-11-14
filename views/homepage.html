@@ -33,9 +33,9 @@
                     <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
                 </div>
                 <div class="home-join" ng-show="showLoginPanel" >
-                   	<p class="right">
-                   		<button class="close-login" ng-click="showLoginPanel=false"><img src="./img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
-                   	</p>
+                       <p class="right">
+                           <button class="close-login" ng-click="showLoginPanel=false"><img src="./img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
+                       </p>
                     <ng-include src="'./views/base/login.html'"></ng-include>
                 </div><!-- .home-join -->
             </div>
@@ -93,9 +93,9 @@
     </div><!-- .home-links -->
 
     <div class="home-fullwidth">
-        <div class="row" ng-init="showProject=true">
+        <div class="row" ng-init="showProject=true;">
             <ul>
-            	<!-- No white space between the </li><li> tags or it will show as space in the rendered page -->
+                <!-- No white space between the </li><li> tags or it will show as space in the rendered page -->
                 <li ng-class="projectToggleClass" ng-init="projectToggleClass='projectToggleOn';resourceToggleClass='resourceToggleOff'"><a href="" ng-init="showProject=true" ng-click="showProject=true;projectToggleClass='projectToggleOn';resourceToggleClass='resourceToggleOff'"><span class="glyphicon glyphicon-tasks"></span>Projets</a></li
                 ><li ng-class="resourceToggleClass"><a href="" ng-click="showProject=false;projectToggleClass='projectToggleOff';resourceToggleClass='resourceToggleOn'"><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
             </ul>
@@ -106,9 +106,9 @@
         <div ng-class="projectToggleClass" class="boxes boxes-small boxes-small-home animate-show animate-slide-right" ng-controller="MakerScienceProjectListCtrl">
             <div class="box" ng-repeat="project in projects | limitTo:4" >
                 <img src="./img/bacasable.jpg" alt="Image background" />
-                <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                <h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                 <div class="description">
-                    <h4><a href="">Il était une fois...</a></h4>
+                    <h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title}}</a></h4>
                     <h5><a href="">Contributeur: Marina Lopez</a></h5>
                 </div>
             </div><!-- .box -->
@@ -119,9 +119,9 @@
         <div ng-class="resourceToggleClass" class="boxes boxes-small boxes-small-home animate-show animate-slide-left" ng-controller="MakerScienceResourceListCtrl">
             <div class="box" ng-repeat="resource in resources | limitTo:4">
                 <img src="./img/bacasable.jpg" alt="Image background" />
-                <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                <h3>{{resource.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                 <div class="description">
-                    <h4><a href="">Il était une fois...</a></h4>
+                    <h4><a ui-sref="resource.detail({ slug: resource.slug })">{{re<source src="http://" type="mimetype">.title}}</a></h4>
                     <h5><a href="">Contributeur: Marina Lopez</a></h5>
                 </div>
             </div><!-- .box -->

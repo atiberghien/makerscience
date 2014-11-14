@@ -38,11 +38,11 @@
                                       ng-model="projectsheet.project.baseline">
                             </textarea>
                             <div ng-controller="TagAutoCompleteCtrl">
-                            <h3>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h3>
-                            <tags-input ng-model="tags"
-                                        placeholder="Ajouter un mot-clé">
-                              <auto-complete source="loadTags($query)"></auto-complete>
-                            </tags-input>
+                                <h3>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h3>
+                                <tags-input ng-model="tags"
+                                            placeholder="Ajouter un mot-clé">
+                                  <auto-complete source="loadTags($query)"></auto-complete>
+                                </tags-input>
                             </div>
 
                         </div>
