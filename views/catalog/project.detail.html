@@ -1,4 +1,6 @@
 <link href="js/vendor/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
 <link rel='stylesheet' href='css/textAngular.css'>
 <div ng-controller="MakerScienceProjectSheetCtrl">
 
@@ -41,13 +43,22 @@
                         <div class="sideproject">
 
                             <div class="editable">
-                                <div class="edit-buttons" ng-show="editable">
+                                <div class="edit-buttons" ng-show="editable" ng-init="addTag=false">
                                     <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
                                 </div>
-                                <input type="text" ng-show="addTag"/>
-                                <ul class="tags tags-project">
-                                    <li ng-repeat="tag in projectsheet.tags"><a href="">{{tag.name}} <span class="glyphicon glyphicon-remove" ng-show="editable"></span></a></li>
-                                </ul><!-- .tag -->
+                                <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
+                                    <tags-input ng-model="$parent.projectsheet.tags"
+                                                placeholder="Ajouter un mot-clé"
+                                                on-tag-added="$parent.addTagFromProject($tag)"
+                                                on-tag-removed="$parent.removeTagFromProject($tag)">
+                                                <auto-complete source="loadTags($query)"></auto-complete>
+                                    </tags-input>
+                                </div>
+                                <div ng-show="addTag==false">
+                                    <ul class="tags tags-project">
+                                        <li ng-repeat="tag in projectsheet.tags"><a href="">{{tag.text}}</a></li>
+                                    </ul><!-- .tag -->
+                                </div>
                             </div>
 
                             <div class="editable">
@@ -86,12 +97,20 @@
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
-                                    <button><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button ng-click="EndDateBtnForm.$show()" ng-hide="EndDateBtnForm.$visible">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
                                 </div>
-                                <p>Fin de projet: {{projectsheet.project.end_date || "N/C" }}<br />
-                                    Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
+                                <p editable-bsdate="projectsheet.project.end_date"
+                                    e-form="EndDateBtnForm"
+                                    onbeforesave="update('Project', projectsheet.project.id , 'end_date', $data)"
+                                    e-datepicker-popup="dd/MM/yyyy"
+                                    ng-bind-html="projectsheet.project.end_date">Fin de projet: {{projectsheet.project.end_date || "N/C" }}
+                                </p>
                             </div>
-
+                            <div class="editable">
+                                <p>Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
+                            </div>
                         </div><!-- .sideproject -->
 
                     </div><!-- .col-md-4 -->
