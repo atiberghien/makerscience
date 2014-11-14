@@ -44,7 +44,9 @@ li.resourceToggleOn a {
                     <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
                 </div>
                 <div class="home-join" ng-show="showLoginPanel" >
-                    <button class="close" ng-click="showLoginPanel=false"><span class="glyphicon glyphicon-remove-circle"></span></button>
+                   	<p class="right">
+                   		<button class="close-login" ng-click="showLoginPanel=false"><img src="./img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
+                   	</p>
                     <ng-include src="'./views/base/login.html'"></ng-include>
                 </div><!-- .home-join -->
             </div>

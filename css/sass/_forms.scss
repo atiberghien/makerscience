@@ -162,7 +162,7 @@
 form.login {
 	position: relative;
 	margin-top: 1em;
-	button.close {
+	button.close-login {
 		position: absolute;
 		top: -30px;
 		right: -15px;
@@ -173,7 +173,6 @@ form.login {
 	ul {
 		margin: 1.5em 0 0.75em;
 		li {
-			margin: 0 1.5em;
 			button {
 				width: 49px;
 				height: 49px;
@@ -225,3 +224,15 @@ form.login {
 		border: none;
 	}
 }
+
+button.close-login {
+	height: 24px;
+	width: 24px;
+	border: none;
+	background-color: transparent;
+	opacity: 0.9;
+	&:hover {
+		opacity: 1;
+	}
+}
+
