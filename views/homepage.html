@@ -113,19 +113,19 @@ li.resourceToggleOn a {
     </div><!-- .home-fullwidth -->
 
     <div class="row row-home">
-        <ul class="boxes boxes-small boxes-small-home" ng-controller="MakerScienceProjectListCtrl" ng-show="showProject">
-            <li class="box" ng-repeat="project in projects | limitTo:7" >
+        <div class="boxes boxes-small boxes-small-home" ng-controller="MakerScienceProjectListCtrl" ng-show="showProject">
+            <div class="box" ng-repeat="project in projects | limitTo:7" >
                 <img src="./img/bacasable.jpg" alt="Image background" />
                 <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                 <div class="description">
                     <h4><a href="">Il était une fois...</a></h4>
                     <h5><a href="">Contributeur: Marina Lopez</a></h5>
                 </div>
-            </li>
-            <li class="box box-solo box-blue">
+            </div><!-- .box -->
+            <div class="box box-solo box-blue">
                 <a ui-sref="project.list">Voir tous les projets <span class="glyphicon glyphicon-chevron-right"></span></a>
-            </li>
-        </ul>
+            </div>
+        </div>
         <ul class="boxes boxes-small" ng-controller="MakerScienceResourceListCtrl" ng-show="!showProject">
             <li class="box" ng-repeat="resource in resources | limitTo:7">
                 <img src="./img/bacasable.jpg" alt="Image background" />
