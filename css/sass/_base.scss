@@ -1,8 +1,10 @@
 $page-width: 1100px;
 $home-slide-height: 393px;
 $needs-height: 220px;
-$boxes-height: 20em;
-$boxes-small-height: 200px;
+$boxes-width: ($page-width - $grid-gutter-width * 5) / 4;
+$boxes-height: $boxes-width;
+$boxes-small-width: ($page-width - $grid-gutter-width * 4) / 5;
+$boxes-small-height: $boxes-small-width;
 $bloc-height: 300px;
 $linked-height: 20em;
 $intro-height: 25em;
@@ -14,9 +16,13 @@ body {
 	@include background-image(linear-gradient(#333, #bdbdbd, #333));
 	*/
 }
-a {
+a, a:focus {
 	text-decoration: none;
 	cursor: pointer;
+	/*
+	If needed, the dotted border around the focused links can be removed with this line:
+	outline: none;
+	*/
 }
 strong {
 	font-weight: bold;

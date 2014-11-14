@@ -92,7 +92,7 @@ div.toolbar {
 		}
 		#carousel-weekly {
 			.boxes-listing {
-				margin: 0 0 1em 0;
+				margin-bottom: $grid-gutter-width;
 				padding: 0 0 3em 0;
 			}
 			.carousel-indicators li {
@@ -248,7 +248,7 @@ div.toolbar {
 	}
 	section {
 		position: relative;
-		margin-bottom: 1em;
+		margin-bottom: $grid-gutter-width;
 		padding: 1em 1em 0;
 		color: $color-content-section;
 		background-color: $color-content-section-bg;
@@ -506,12 +506,12 @@ div.toolbar {
 	}
 		
 }
-ul.boxes {
-	margin: 0 $grid-gutter-width / 2;
-	text-align: justify;
-	&:first-child {
-		margin-top: 4em;
-	}
+
+
+.boxes {
+
+	margin-right: -$grid-gutter-width;
+
 	&:before {
 		content: '';
 		display: block;
@@ -522,90 +522,15 @@ ul.boxes {
 		display: inline-block;
 		width: 100%;
 	}
-	li.box {
-		display: inline-block;
-		width: 31.35%;
-		width: 30.2%;
-		height: $boxes-height;
-		margin-bottom: $grid-gutter-width;
-		margin-right: 0;
-		padding: 0;
-		vertical-align: top;
-		background: #ccc;
-  	}
-	&.boxes-small {
-		font-size: 0.75em;
-		li.box {
-			width: 19%;
-			height: $boxes-small-height;
-			div.description {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				right: 0;
-			}
-		}
-		li.box-solo a {
-			padding-top: 40%;
-			padding-left: 1.5em;
-			font-size: 1.5em;
-		}
-		h3, h4, h5 {
-			opacity: 0.9;
-		}
-		h3 {
-			height: 25px;
-			line-height: 25px;
-			img {
-				display: inline;
-				position: relative;
-				/* FIXME This can be removed when we have the correctly size images*/
-				width: 25px;
-				height: 25px;
-			}
-		}
-		h4, h5 {
-			display: inline-block;
-			height: 1.5em;
-			padding: 0;
-			font-size: 1.1em;
-			line-height: 1.5em;
-			text-transform: uppercase;
-			a {
-				display: block;
-			}
-		}
-		img {
-			position: absolute;
-			top: 0;
-			left: 0;
-			display: block;
-		}
-	}
-	&:last-child {
-		margin-bottom: 4em;
-	}
-	.boxes-small-home {
-		margin-top: $grid-gutter-width / 2;
-		margin-bottom: $grid-gutter-width / 2;
-		li.box {
-			width: 21.7%;
-			margin-right: $grid-gutter-width;
-			margin-bottom: $grid-gutter-width / 2;
-		}
-		li.box-solo a {
-			padding-top: 32.5%;
-			font-size: 2.1em;
-		}
-	}
-}
-.boxes {
-	margin: 2em 15px 4em;
 	.box {
+		display: inline-block;
 		position: relative;
 		height: $boxes-height;
-		margin-bottom: 2em;
+		width: $boxes-width;
+		margin-right: $grid-gutter-width;
+		margin-bottom: $grid-gutter-width;
 		color: $color-boxes;
+		vertical-align: top;
 		h3, h4, h5 {
 			z-index: 10;
 			position: relative;
@@ -613,6 +538,7 @@ ul.boxes {
 		h3 {
 			display: inline-block;
 			padding: 0 0.25em 0 1em;
+			font-size: 0.9em;
 			text-transform: uppercase;
 			background-color: $color-boxes-title-bg;
 		}
@@ -621,9 +547,21 @@ ul.boxes {
 		}
 		h4 a, h5 a {
 			padding: 0.2em 1em;
-			text-transform: uppercase;
+			font-size: 0.9em;
+			line-height: 1.25em;
 			text-decoration: none;
 			background-color: $color-boxes-title-bg;
+		}
+		h4 a {
+			padding-top: 0.75em;
+			padding-bottom: 0;
+			text-transform: uppercase;
+		}
+		h5 a {
+			padding-bottom: 0;
+			padding-bottom: 0.75em;
+			font-size: 0.9em;
+			color: $color-light-grey;
 		}
 		a {
 			display: inline-block;
@@ -643,21 +581,24 @@ ul.boxes {
 			width: 100%;
 			height: 100%;
 		}
-		&.box-blue {
-			background-color: $color-blue;
+		div.description {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			h4, h5 {
+				@include opacity(0.95);
+			}
+			h4 a, h5 a {
+				display: block;
+				background-color: $color-dark-grey;
+			}
 		}
-		&.box-green {
-			background-color: $color-green;
-		}
-		&.box-orange {
-			background-color: $color-orange;
-		}
-		&.box-purple {
-			background-color: $color-purple;
-		}
-		&.box-red {
-			background-color: $color-red;
-		}
+		&.box-blue { background-color: $color-blue; }
+		&.box-green { background-color: $color-green; }
+		&.box-orange { background-color: $color-orange; }
+		&.box-purple { background-color: $color-purple; }
+		&.box-red { background-color: $color-red; }
 		&.box-solo {
 			a {
 				height: 100%;
@@ -678,35 +619,42 @@ ul.boxes {
 			}
 		}
 	}
+
 	&.boxes-listing {
-		margin: 2em 15px 2em;
-		padding: 3em 1em 2em;
 		.box {
-			height: 180px;
-			margin-bottom: 0;
-			font-size: 0.85em;
 			@include box-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
-		}
-		h3 img {
-			width: 28px;
-		}
-		h4, h5 {
-			font-size: 0.9em;
-			background-color: $color-dark-grey;
-			a {
-				color: #fff;			
-			}
-		}
-		h4 {
-			padding: 0.75em 0 0 0.75em;
-			text-transform: uppercase;
-		}
-		h5 {
-			margin-bottom: 2.5em;
-			padding: 0 0 0.75em 0.75em;
 		}
 	}
 
+	&.boxes-small {
+		font-size: 0.75em;
+		.box {
+			height: $boxes-small-height;
+			width: $boxes-small-width;
+			div.description {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+		}
+	}
+	
+	&.boxes-small-home {
+		margin-top: $grid-gutter-width / 2;
+		margin-left: $grid-gutter-width / 2;
+		margin-bottom: $grid-gutter-width / 2;
+		.box {
+			margin-right: $grid-gutter-width / 2;
+			margin-bottom: $grid-gutter-width / 2;
+		}
+		.box-solo a {
+			padding-top: 32.5%;
+			font-size: 2.1em;
+		}
+	}
+
+	
 	ul.members {
 	
 		text-align: justify;

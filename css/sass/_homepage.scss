@@ -153,41 +153,57 @@
 .home-fullwidth {
     margin: 0 $grid-gutter-width;
     ul {
-        overflow: hidden;
-        background-color: $color-blue;
+    	overflow: hidden;
+        li {
+        	display: inline-block;
+        	vertical-align: top;
+        }
+        li:first-child {
+	        background-color: $color-blue;
+        }
+        li:last-child {
+            background-color: $color-green;
+        }
         a {
             display: block;
+            height: 80px;
+            width: 100%;
+        	padding: 1.6em 2em 2.4em;
             color: #fff;
             text-transform: uppercase;
             &:hover {
                 text-decoration: none;
             }
         }
-        li:first-child a {
-            float: left;
-            padding: 1.5em 0 0 3em;
-            font-size: 1.1em;
-            font-weight: bold;
-            span {
-                padding-right: 0.75em;
-                font-size: 2.5em;
-                vertical-align: middle;
-            }
-        }
-        li:last-child a {
-            float: right;
-            width: 10%;
-            padding: 1.5em 0 1em;
-            font-size: 0.8em;
-            text-align: center;
-            background-color: $color-green;
-            span {
-                display: block;
-                margin-bottom: 0.25em;
-                font-size: 2.5em;
-            }
-        }
+		li.projectToggleOn, li.resourceToggleOn {
+			width: 87.5%;
+			a {
+		        font-size: 1.1em;
+		        font-weight: bold;
+		        span {
+		        	display: inline;
+		            padding-right: 0.75em;
+		            font-size: 2.5em;
+		            vertical-align: middle;
+		        }
+			}
+		}
+		li.projectToggleOff, li.resourceToggleOff {
+			width: 12.5%;
+			a {
+		        font-size: 0.8em;
+		        text-align: center;
+		        span {
+		            display: block;
+		            font-size: 2.5em;
+		        }
+			}
+		}
     }
+}
+.home-projects-resources {
+	position: relative;
+	height: $boxes-small-height + $grid-gutter-width * 2;
 }
 .home-community {
     margin-bottom: $grid-gutter-width;
