@@ -245,17 +245,20 @@ button.close-login {
 	}
 }
 
-tags-input div.tags {
-    input {
-        margin: 0 !important;
-        padding: 0 !important;
-        background-color: transparent !important;
-    }
-    li.tag-item {
-        background-color: $color-blue !important;
-        @include border-radius(1px);
-        a, a.remove-button {
+tags-input {
+    margin-bottom: 1em;
+    div.tags {
+        input {
+            margin: 0 0 0 0.5em !important;
+            padding: 0 !important;
+            background-color: transparent !important;
+        }
+        li.tag-item {
             background-color: $color-blue !important;
+            @include border-radius(1px);
+            a, a.remove-button {
+                background-color: $color-blue !important;
+            }
         }
     }
 }
