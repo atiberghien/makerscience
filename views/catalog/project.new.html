@@ -84,7 +84,10 @@
                               rows="4"
                               ng-model="projectsheet.project.description"></textarea>
 
-                    <textarea ng-model="projectsheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
+                    <fieldset class="question" ng-repeat="question in template.questions">
+                        <h4>{{question}}</h4>
+                        <textarea ng-model="projectsheet.answers[$index]" name="question_{{$index}}" placeholder="Indiquez la réponse ici..." rows="4"></textarea>
+                    </fieldset>
 
 
                     <div class="row">
