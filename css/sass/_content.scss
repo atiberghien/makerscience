@@ -657,11 +657,13 @@ div.toolbar {
 	
 	ul.members {
 	
-		text-align: justify;
+	    margin-right: -$grid-gutter-width;
+	
 		li {
 			display: inline-block;
 			position: relative;
-			width: $page-width / 4 - $grid-gutter-width;
+			width: $boxes-width - 1px;
+			margin-right: $grid-gutter-width;
 			margin-bottom: 2em;
 			text-align: center;
 			background-color: $color-member-bg;
@@ -708,6 +710,9 @@ div.toolbar {
 					font-size: 1.75em;
 					vertical-align: middle;
 				}
+			}
+			&:hover {
+			    background-color: $color-orange;
 			}
 		}
 		a {
