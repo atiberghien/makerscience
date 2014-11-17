@@ -137,8 +137,8 @@
                 <h2>Membres de la communauté</h2>
 
                 <div class="boxes boxes-profils" ng-controller="MakerScienceProfileListCtrl">
-                    <ul class="members members-small" ng-repeat="baseProfile in profiles">
-                        <li ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)">
+                    <ul class="members members-small" >
+                        <li ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)" ng-repeat="baseProfile in profiles">
                             <a ui-sref="profile.detail({id:profile.id})">
                                 <gravatar-image data-gravatar-email="profile.parent.user.email"
                                                 data-gravatar-size="85"
