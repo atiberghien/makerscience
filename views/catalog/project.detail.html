@@ -69,11 +69,12 @@
                                 </div>
                                 <form editable-form name="AddressForm" onaftersave="update('Project', projectsheet.project.id , 'location', $data)">
                                     <p class="location"><img src="./img/location.png" alt="Location" />
-                                        <span editable-text="projectsheet.project.location.street_address" e-name="street_address">{{ projectsheet.project.location.street_address }}</span>
-                                        <span editable-text="projectsheet.project.location.address_locality" e-name="address_locality">{{ projectsheet.project.location.address_locality }}</span>
-                                        <span  editable-select="projectsheet.project.location.country" e-ng-options="s.value as s.text for s in countries">
-                                            {{ showCountry() }}
-                                        </span>
+                                        <span editable-text="projectsheet.project.location.street_address" 
+                                              e-name="street_address">{{ projectsheet.project.location.street_address }}</span>
+                                        <span editable-text="projectsheet.project.location.street_address"
+                                              e-name="street_address">{{ projectsheet.project.location.postal_code }}</span>
+                                        <span editable-text="projectsheet.project.location.address_locality"
+                                              e-name="address_locality">{{ projectsheet.project.location.address_locality }}</span>
                                         <span ng-show="AddressForm.$visible">
                                             <button type="submit" class="btn btn-primary" ng-disabled="AddressForm.$waiting">Enregistrer</button>
                                             <button type="button" class="btn btn-default" ng-disabled="AddressForm.$waiting" ng-click="AddressForm.$cancel()">Annuler</button>
