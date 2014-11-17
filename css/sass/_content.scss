@@ -662,11 +662,12 @@ div.toolbar {
 		li {
 			display: inline-block;
 			position: relative;
-			width: $boxes-width - 1px;
+			width: $boxes-width - 1px; /* need to fix extra space added by Angular between </li><li> */
 			margin-right: $grid-gutter-width;
 			margin-bottom: 2em;
 			text-align: center;
 			background-color: $color-member-bg;
+			vertical-align: middle;
 			@include box-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
 			&.member-added {
 				background-color: $color-member-added-bg;
@@ -723,70 +724,64 @@ div.toolbar {
 		    text-decoration: none;
 	    }
 		
-		&:before {
-			content: '';
-			display: block;
-			width: 100%;
-		}
-		&:after {
-			content: '';
-			display: inline-block;
-			width: 100%;
-		}
-		
 	}
-	ul.members-small li {
-	    position: relative;
-		height: $boxes-small-height - $grid-gutter-width;
-		width: $boxes-member-home-width;
-		margin-right: $grid-gutter-width;
-		margin-bottom: $grid-gutter-width / 2;
-		background-color: #fff;
-		&:hover {
-		    background-color: $color-light-grey;
+	ul.members-small {
+	    margin-right: 0;
+	    li {
+	        position: relative;
+		    height: $boxes-small-height - $grid-gutter-width;
+		    width: $boxes-member-home-width;
+		    margin-right: $grid-gutter-width;
+		    margin-bottom: $grid-gutter-width / 2;
+		    background-color: #fff;
+		    &:hover {
+		        background-color: $color-light-grey;
+	        }
+		    h3 {
+			    margin-bottom: 0.1em;
+			    font-size: 0.85em;
+			    color: $color-dark-grey;
+		    }
+		    h4 {
+			    font-size: 0.75em;
+		    }
+		    h5 {
+		        position: absolute;
+		        bottom: 0;
+		        left: 0;
+		        right: 0;
+			    font-size: 0.7em;
+		    }
+		    img {
+			    width: 85px;
+			    height: 85px;
+			    margin-top: 0.75em;
+		    }
+		    &.member-solo {
+		        div {
+		            display: table;
+		            height: 100%;
+			        vertical-align: top;
+			        a {
+				        display: table-cell;
+				        padding: 0 1em;
+				        color: $color-dark-grey;
+				        text-transform: uppercase;
+				        text-align: left;
+				        font-weight: bold;
+				        line-height: 1.25em;
+				        vertical-align: middle;
+				        @include transition(all 0.1s ease);
+				        &:hover {
+					        text-decoration: none;
+					        color: $color-pink;
+					        background-color: $color-dark-grey;
+				        }
+			        }
+			    }
+		    }
 	    }
-		h3 {
-			margin-bottom: 0.1em;
-			font-size: 0.85em;
-			color: $color-dark-grey;
-		}
-		h4 {
-			font-size: 0.75em;
-		}
-		h5 {
-		    position: absolute;
-		    bottom: 0;
-		    left: 0;
-		    right: 0;
-			font-size: 0.7em;
-		}
-		img {
-			width: 85px;
-			height: 85px;
-			margin-top: 0.75em;
-		}
-		&.member-solo {
-		    float: right;
-		    display: table;
-			vertical-align: top;
-			a {
-				display: table-cell;
-				padding: 0 1em;
-				color: $color-dark-grey;
-				text-transform: uppercase;
-				text-align: left;
-				font-weight: bold;
-				line-height: 1.25em;
-				vertical-align: middle;
-				@include transition(all 0.1s ease);
-				&:hover {
-					text-decoration: none;
-					color: $color-pink;
-					background-color: $color-dark-grey;
-				}
-			}
-		}
-	}
+    }
 }
 div.badges {
 	margin-bottom: 4em;
