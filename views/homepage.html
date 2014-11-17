@@ -113,7 +113,7 @@
                 </div>
             </div><!-- .box -->
             <div class="box box-solo box-blue">
-                <a ui-sref="project.list">Voir tous les projets <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <div><a ui-sref="project.list">Voir tous les projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
             </div>
         </div><!-- .boxes -->
         <div ng-class="resourceToggleClass" class="boxes boxes-small boxes-small-home animate-show animate-slide-left" ng-controller="MakerScienceResourceListCtrl">
@@ -126,7 +126,7 @@
                 </div>
             </div><!-- .box -->
             <div class="box box-solo box-green">
-                <a ui-sref="resource.list">Voir toutes les ressources <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <div><a ui-sref="resource.list">Voir toutes les ressources <span class="glyphicon glyphicon-chevron-right"></span></a></div>
             </div>
         </div><!-- .boxes -->
     </div><!-- .row -->
@@ -152,7 +152,7 @@
                                 <h5 ng-if="profile.location"><span class="glyphicon glyphicon-map-marker"></span> {{profile.location.address_locality}}</h5>
                             </a>
                         </li
-                        ><li class="member-solo">
+                        ><li class="box-solo">
                             <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                         </li>
                     </ul><!-- .members -->

@@ -619,7 +619,29 @@ div.toolbar {
 			}
 		}
 	}
-
+	
+	/* Extra div to vertically center text no matter how many lines we have */
+	.box-solo {
+        div {
+            display: table;
+            height: 100%;
+	        vertical-align: top;
+	        a {
+		        display: table-cell;
+		        padding: 0 1em;
+		        text-transform: uppercase;
+		        text-align: left;
+		        font-weight: bold;
+		        line-height: 1.25em;
+		        vertical-align: middle;
+		        @include transition(all 0.1s ease);
+		        &:hover {
+			        text-decoration: none;
+		        }
+	        }
+	    }
+    }
+    
 	&.boxes-listing {
 		.box {
 			@include box-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
@@ -649,13 +671,12 @@ div.toolbar {
 			margin-bottom: $grid-gutter-width / 2;
 		}
 		.box-solo a {
-			padding-top: 32.5%;
 			font-size: 2.1em;
 		}
 	}
 
 	
-	ul.members {
+	.members {
 	
 	    margin-right: -$grid-gutter-width;
 	
@@ -757,28 +778,14 @@ div.toolbar {
 			    height: 85px;
 			    margin-top: 0.75em;
 		    }
-		    &.member-solo {
-		        div {
-		            display: table;
-		            height: 100%;
-			        vertical-align: top;
-			        a {
-				        display: table-cell;
-				        padding: 0 1em;
-				        color: $color-dark-grey;
-				        text-transform: uppercase;
-				        text-align: left;
-				        font-weight: bold;
-				        line-height: 1.25em;
-				        vertical-align: middle;
-				        @include transition(all 0.1s ease);
-				        &:hover {
-					        text-decoration: none;
-					        color: $color-pink;
-					        background-color: $color-dark-grey;
-				        }
-			        }
-			    }
+		    &.box-solo {
+		        a {
+		        	color: $color-dark-grey;
+		        	&:hover {
+		                color: $color-pink;
+		                background-color: $color-dark-grey;
+	                }
+		        }
 		    }
 	    }
     }
