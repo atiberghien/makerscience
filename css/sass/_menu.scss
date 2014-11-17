@@ -40,5 +40,23 @@
 		}
 	}
 	
+	.user {
+	    margin-left: $grid-gutter-width;
+	    a, img {
+            display: inline-block;
+	        vertical-align: middle;
+        }
+        img {
+            margin-left: 0.5em;
+            opacity: 0.9;
+        }
+        a:hover {
+            text-decoration: none;
+            img {
+                opacity: 1;
+           }
+        }
+    }
+	
 }
 

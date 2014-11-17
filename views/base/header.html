@@ -22,10 +22,10 @@
 					<form class="navbar-right">
 						<button class="connect" ng-show="!authVars.isAuthenticated" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
 					</form>
-                    <div>
-                        <a ui-sref="profile.detail" ng-if="authVars.isAuthenticated">
-                            <img src="./img/users/user-default.png" alt="User" />
+                    <div class="navbar-right user" ng-if="authVars.isAuthenticated">
+                        <a ui-sref="profile.detail">
                             {{authVars.user.first_name}} {{authVars.user.last_name}}
+                            <img src="./img/users/user-default.png" alt="User" />
                         </a>
                     </div>
                     <div class="login-panel" ng-show="showLoginPanel">
