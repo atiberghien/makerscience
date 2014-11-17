@@ -603,7 +603,7 @@ div.toolbar {
 			a {
 				height: 100%;
 				padding: 1em;
-				font-size: 2.25em;
+				font-size: 1.75em;
 				font-weight: bold;
 				line-height: 1.25em;
 				text-transform: uppercase;
@@ -653,6 +653,7 @@ div.toolbar {
 		.box {
 			height: $boxes-small-height;
 			width: $boxes-small-width;
+			margin-right: $grid-gutter-width / 2;
 			div.description {
 				position: absolute;
 				bottom: 0;
@@ -790,6 +791,13 @@ div.toolbar {
 	    }
     }
 }
+
+.content-member .boxes-small {
+    .box {
+        width: 194px; /* FIXME need to figure out why on this page boxes are a bit larger */
+    }
+}
+
 div.badges {
 	margin-bottom: 4em;
 	padding: 2em;
