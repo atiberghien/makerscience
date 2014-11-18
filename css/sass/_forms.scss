@@ -189,12 +189,12 @@
 			    &.button-geolocalisation, &.button-photo-upload, &.button-add {
 				    width: 100%;
 				    margin-bottom: 0.75em;
-                    color: $color-form-text;
-                    background-color: $color-light-grey;
+                    color: $color-form-text !important;
+                    background-color: $color-light-grey !important;
 				    background-repeat: no-repeat;
 				    background-position: center left;
 				    text-align: left;
-				    border: none;
+                    border: none !important;
 			    }
 			    &.button-geolocalisation {
 				    padding-left: 65px;
@@ -202,10 +202,7 @@
 			    }
 			    &.button-photo-upload {
 				    padding-left: 65px;
-                    color: $color-form-text !important;
-                    background-color: $color-light-grey !important;
 				    background-image: url('../img/icons/buttons/icon-photo.png');
-                    border: none !important;
 			    }
 			    &.button-add {
 				    background-image: url('../img/icons/buttons/icon-add.png');
