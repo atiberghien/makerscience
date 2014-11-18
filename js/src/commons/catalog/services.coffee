@@ -19,3 +19,7 @@ module.factory('ProjectSheetTemplate', (Restangular) ->
 module.factory('ProjectSheetItem', (Restangular) ->
     return Restangular.service('projectsheetsuggesteditem')
 )
+
+module.factory('ProjectProgress', (Restangular) ->
+    return Restangular.service('projectprogress')
+)

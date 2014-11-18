@@ -27,20 +27,11 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, Tag, TaggedItem) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
 
-    $scope.init().then( ->
-        $scope.projectsheet.tags = []
+    $scope.init().then((projectSheetResult) ->
         MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
-            project = makerScienceProjectResult.objects[0]
-            angular.forEach(project.tags, (tagURI) ->
-                tagID = getObjectIdFromURI(tagURI)
-                Tag.one(tagID).get().then((tagResult) ->
-                    TaggedItem.one().customGET("makerscienceproject/"+project.id+"/"+tagID).then((taggdItemResult) ->
-                        $scope.projectsheet.tags.push({text : tagResult.name, taggedItemURI : taggdItemResult.resource_uri})
-                    )
-                )
-            )
-            $scope.projectsheet.id = project.id
-            $scope.projectsheet.modified = project.modified
+            $scope.projectsheet = makerScienceProjectResult.objects[0]
+            $scope.projectsheet.items = projectSheetResult.items
+            $scope.projectsheet.q_a = projectSheetResult.q_a
         )
     )
 
