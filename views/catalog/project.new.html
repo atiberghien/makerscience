@@ -33,18 +33,23 @@
                                    placeholder="Nom du projet"
                                    ng-model="projectsheet.project.title"/>
 
-                            <h4>Résumez votre projet en une courte phrase</h4>
-                            <text-angular name="project-tagline"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
-                                      ng-model="projectsheet.project.baseline">
-                            </text-angular>
-                            <div ng-controller="TagAutoCompleteCtrl">
-                                <h4>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h4>
-                                <tags-input ng-model="tags"
-                                            placeholder="Ajouter un mot-clé">
-                                  <auto-complete source="loadTags($query)"></auto-complete>
-                                </tags-input>
-                            </div>
+                            <fieldset class="new-project">
+                                <h4>Résumez votre projet en une courte phrase</h4>
+                                <text-angular name="project-tagline"
+                                          ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                          ng-model="projectsheet.project.baseline">
+                                </text-angular>
+                            </fieldset>
+                            
+                            <fieldset class="new-project">
+                                <div ng-controller="TagAutoCompleteCtrl">
+                                    <h4>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h4>
+                                    <tags-input ng-model="tags"
+                                                placeholder="Ajouter un mot-clé">
+                                      <auto-complete source="loadTags($query)"></auto-complete>
+                                    </tags-input>
+                                </div>
+                            </fieldset>
 
                         </div>
 
@@ -80,7 +85,7 @@
 
                     </div><!-- .row -->
 
-                    <fieldset class="question">
+                    <fieldset class="new-project">
                         <h4>Résumez votre projet en quelques lignes</h4>
                         <text-angular name="project-about"
                                       ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
@@ -89,7 +94,7 @@
                         </text-angular>
                     </fieldset>
 
-                    <fieldset class="question" ng-repeat="question in template.questions">
+                    <fieldset class="new-project" ng-repeat="question in template.questions">
                         <h4>{{question}}</h4>
                         <text-angular ng-model="projectsheet.answers[$index]"
                                       ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
