@@ -26,16 +26,23 @@
 
                         <div class="col-md-8">
 
-                            <input type="text"
-                                   name="resource-name"
-                                   placeholder="Nom de la ressource"
-                                   ng-model="projectsheet.resource.title"/>
+                            <fieldset class="fake-placeholder">
+                                <h4>Nom de la ressource</h4>
+                                <input type="text"
+                                       name="resource-name"
+                                       placeholder=">"
+                                       ng-model="projectsheet.resource.title"/>
+                           </fieldset>
 
-                            <textarea name="resource-tagline"
-                                      placeholder="Résumez la ressource en une courte phrase"
-                                      rows="4"
-                                      ng-model="projectsheet.resource.baseline">
-                            </textarea>
+                            <fieldset class="fake-placeholder">
+                                <h4>Résumez la ressource en une courte phrase</h4>
+                                <textarea name="resource-tagline"
+                                          placeholder=">"
+                                          rows="4"
+                                          ng-model="projectsheet.resource.baseline">
+                                </textarea>
+                           </fieldset>
+
                             <div ng-controller="TagAutoCompleteCtrl">
                             <h3>Quels sont les mots-clés associés à votre ressource ? (thématiques, type de projet, outils...)</h3>
                             <tags-input ng-model="tags"
