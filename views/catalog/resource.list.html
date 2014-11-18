@@ -222,16 +222,14 @@
             <tabset class="nav-tabs-resource">
                 <tab heading="Nouveautés">
                     <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl">
-                        <div class="row">
-                            <div class="col-md-3" ng-repeat="project in projects">
-                                <div class="box">
-                                    <h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                    <img src="./img/bacasable.jpg" alt="Image background" />
-                                </div>
+						<div class="box" ng-repeat="project in projects">
+                            <h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+							<div class="description">
                                 <h4><a ui-sref="resource.detail">{{project.title}}</a></h4>
                                 <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                            </div>
-                        </div><!-- .row -->
+							</div><!-- .description -->
+                        </div>
                     </div><!-- .boxes -->
                 </tab>
                 <tab heading="Les mieux notés">
