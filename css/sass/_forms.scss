@@ -182,7 +182,8 @@
 			    &.button-geolocalisation, &.button-photo-upload, &.button-add {
 				    width: 100%;
 				    margin-bottom: 0.75em;
-				    color: #fff;
+                    color: $color-form-text;
+                    background-color: $color-light-grey;
 				    background-repeat: no-repeat;
 				    background-position: center left;
 				    text-align: left;
@@ -194,7 +195,10 @@
 			    }
 			    &.button-photo-upload {
 				    padding-left: 65px;
+                    color: $color-form-text !important;
+                    background-color: $color-light-grey !important;
 				    background-image: url('../img/icons/buttons/icon-photo.png');
+                    border: none !important;
 			    }
 			    &.button-add {
 				    background-image: url('../img/icons/buttons/icon-add.png');
@@ -241,94 +245,18 @@
 			        border: 2px solid $color-green;
 			        border-right: 2px solid $color-dark-green;
 			        border-bottom: 2px solid $color-dark-green;
-			            &.cancel {
-			                color: $color-dark-green;
-            			    background-color: transparent;
-            			    border-color: $color-dark-green;
-			            }
+		            &.cancel {
+		                color: $color-dark-green;
+        			    background-color: transparent;
+        			    border-color: $color-dark-green;
+		            }
                 }
             }
         }
 
 
     }
-
-    form.login {
-	    position: relative;
-	    margin-top: 1em;
-	    button.close-login {
-		    position: absolute;
-		    top: -30px;
-		    right: -15px;
-	    }
-	    h3 {
-		    font-size: 1.1em;
-	    }
-	    ul {
-		    margin: 1.5em 0 0.75em;
-		    li {
-			    button {
-				    width: 49px;
-				    height: 49px;
-				    margin: 0 1em;
-				    background-color: transparent;
-				    border: none;
-				    @include transition(all .5s ease);
-				    &.connect-with-facebook {
-					    background: transparent url('../img/home/home-share-facebook.png') center center no-repeat;
-					    &:hover {
-						    background-image: url('../img/home/home-share-facebook-hover.png');
-					    }
-				    }
-				    &.connect-with-twitter {
-					    background: transparent url('../img/home/home-share-twitter.png') center center no-repeat;
-					    &:hover {
-						    background-image: url('../img/home/home-share-twitter-hover.png');
-					    }
-				    }
-				    &.connect-with-google {
-					    background: transparent url('../img/home/home-share-google.png') center center no-repeat;
-					    &:hover {
-						    background-image: url('../img/home/home-share-google-hover.png');
-					    }
-				    }
-			    }
-		    }
-	    }
-	    p.or {
-		    text-transform: uppercase;
-	    }
-	    fieldset {
-		    margin-top: 1em;
-	    }
-	    input {
-		    width: 100%;
-		    margin-bottom: 1em;
-		    padding: 0.5em 0.75em;
-		    font-size: 0.9em;
-		    background-color: #a13535;
-		    border: none;
-	    }
-	    button[type=submit] {
-		    padding: 0.25em 2.5em;
-		    font-size: 0.85em;
-		    color: $color-pink;
-		    background-color: #fff;
-		    border: none;
-	    }
-    }
-
-    button.close-login {
-	    height: 24px;
-	    width: 24px;
-	    border: none;
-	    background-color: transparent;
-	    opacity: 0.9;
-	    &:hover {
-		    opacity: 1;
-	    }
-    }
-
+    
     tags-input {
         margin-bottom: 1em;
         div.tags {
@@ -347,5 +275,81 @@
         }
     }
     
+}
+
+form.login {
+    position: relative;
+    margin-top: 1em;
+    button.close-login {
+	    position: absolute;
+	    top: -30px;
+	    right: -15px;
+    }
+    h3 {
+	    font-size: 1.1em;
+    }
+    ul {
+	    margin: 1.5em 0 0.75em;
+	    li {
+		    button {
+			    width: 49px;
+			    height: 49px;
+			    margin: 0 1em;
+			    background-color: transparent;
+			    border: none;
+			    @include transition(all .5s ease);
+			    &.connect-with-facebook {
+				    background: transparent url('../img/home/home-share-facebook.png') center center no-repeat;
+				    &:hover {
+					    background-image: url('../img/home/home-share-facebook-hover.png');
+				    }
+			    }
+			    &.connect-with-twitter {
+				    background: transparent url('../img/home/home-share-twitter.png') center center no-repeat;
+				    &:hover {
+					    background-image: url('../img/home/home-share-twitter-hover.png');
+				    }
+			    }
+			    &.connect-with-google {
+				    background: transparent url('../img/home/home-share-google.png') center center no-repeat;
+				    &:hover {
+					    background-image: url('../img/home/home-share-google-hover.png');
+				    }
+			    }
+		    }
+	    }
+    }
+    p.or {
+	    text-transform: uppercase;
+    }
+    fieldset {
+	    margin-top: 1em;
+    }
+    input {
+	    width: 100%;
+	    margin-bottom: 1em;
+	    padding: 0.5em 0.75em;
+	    font-size: 0.9em;
+	    background-color: #a13535;
+	    border: none;
+    }
+    button[type=submit] {
+	    padding: 0.25em 2.5em;
+	    font-size: 0.85em;
+	    color: $color-pink;
+	    background-color: #fff;
+	    border: none;
+    }
+}
+
+button.close-login {
+    height: 24px;
+    width: 24px;
+    border: none;
+    background-color: transparent;
+    opacity: 0.9;
+    &:hover {
+	    opacity: 1;
+    }
 }
 
