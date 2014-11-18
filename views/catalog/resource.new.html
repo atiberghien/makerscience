@@ -43,13 +43,15 @@
                                 </textarea>
                            </fieldset>
 
-                            <div ng-controller="TagAutoCompleteCtrl">
-                            <h3>Quels sont les mots-clés associés à votre ressource ? (thématiques, type de projet, outils...)</h3>
-                            <tags-input ng-model="tags"
-                                        placeholder="Ajouter un mot-clé">
-                              <auto-complete source="loadTags($query)"></auto-complete>
-                            </tags-input>
-                            </div>
+                            <fieldset class="fake-placeholder">
+                                <div ng-controller="TagAutoCompleteCtrl">
+                                <h4>Quels sont les mots-clés associés à votre ressource ? (thématiques, type de projet, outils...)</h4>
+                                <tags-input ng-model="tags"
+                                            placeholder="Ajouter un mot-clé">
+                                  <auto-complete source="loadTags($query)"></auto-complete>
+                                </tags-input>
+                                </div>
+                            </fieldset>
 
                         </div>
 
