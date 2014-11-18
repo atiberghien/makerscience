@@ -144,6 +144,13 @@
         		        margin: 0;
         		    }
 			    }
+			    &.fake-placeholder {
+			        input {
+			            margin-bottom: 0;
+			            padding-left: 0;
+			            padding-bottom: 0;
+			        }
+			    }
 		    }
 		    input, textarea {
 			    width: 100%;

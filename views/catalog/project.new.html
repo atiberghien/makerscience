@@ -28,15 +28,21 @@
 
                         <div class="col-md-8">
 
-                            <input type="text"
-                                   name="project-name"
-                                   placeholder="Nom du projet"
-                                   ng-model="projectsheet.project.title"/>
+                            <fieldset class="fake-placeholder">
+                                <h4>Nom du projet</h4>
+                                <input type="text"
+                                       name="project-name"
+                                       placeholder=">"
+                                       ng-model="projectsheet.project.title"/>
+                           </fieldset>
 
-                            <input type="text"
-                                       name="project-baseline"
-                                       placeholder="Résumez votre projet en une courte phrase"
-                                       ng-model="projectsheet.project.baseline"/>
+                            <fieldset class="fake-placeholder">
+                                <h4>Résumez votre projet en une courte phrase</h4>
+                                <input type="text"
+                                           name="project-baseline"
+                                           placeholder=">"
+                                           ng-model="projectsheet.project.baseline"/>
+                           </fieldset>
 
                             <fieldset class="new-project">
                                 <div ng-controller="TagAutoCompleteCtrl">
