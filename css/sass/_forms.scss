@@ -46,7 +46,7 @@
 					margin: 0;
 				}
 			}
-			&.phases {
+			&.phases, &.levels {
 				margin-bottom: 1em;
 				label {
 					display: inline-block;
@@ -55,8 +55,15 @@
 					margin-right: 1em;
 					text-align: center;
 					font-size: 0.9em;
-					background: url('../img/icons/project/project-grey.png') top center no-repeat;
 					cursor: pointer;
+				}
+				label > input {
+					display: none;
+				}
+			}
+			&.phases {
+				label {
+					background: url('../img/icons/project/project-grey.png') top center no-repeat;
 					&.phase1 {
 						&.selected, &:hover {
 							background-image: url('../img/icons/project/project-white.png');
@@ -78,8 +85,15 @@
 						}
 					}
 				}
-				label > input {
-					display: none;
+			}
+			&.levels {
+				label {
+				    width: 50px;
+					background: url('../img/level.png') top center no-repeat;
+					opacity: 0.75;
+					&.selected, &:hover {
+					    opacity: 1;
+					}
 				}
 			}
 			&.new-project {
