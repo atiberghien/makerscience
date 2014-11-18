@@ -15,7 +15,7 @@
 
         <div class="col-md-12">
 
-            <div id="content" class="new-project">
+            <div id="content" class="new-resource">
 
                 <h2>Créer une ressource</h2>
                 <h3>Nouvelle ressource</h3>
@@ -49,25 +49,24 @@
                         <div class="col-md-4">
 
                             <button class="button button-photo-upload">Photo de couverture</button>
-                            <fieldset class="compact">
-                                <input type="text" name="address" placeholder="Adresse" />
-                                <input type="text" name="city" placeholder="Ville" />
-                                <input type="text" name="postalcode" placeholder="Code Postal" />
-                            </fieldset>
                             <fieldset class="levels">
                                 <p>Niveau</p>
-                                <label for="level1" class="selected">
+                                <label for="level1" class="level1 selected">
                                     <input id="level1" type="radio" name="level" value="1" />
                                     Facile
                                 </label>
-                                <label for="level2">
+                                <label for="level2" class="level2">
                                     <input id="level2" type="radio" name="level" value="2" />
                                     Moyen
                                 </label>
-                                <label for="level3">
+                                <label for="level3" class="level3">
                                     <input id="level3" type="radio" name="level" value="3" />
                                     Difficile
                                 </label>
+                            </fieldset>
+                            <fieldset class="compact">
+                                <input type="text" name="duration" placeholder="Durée" />
+                                <input type="text" name="cost" placeholder="Coût" />
                             </fieldset>
 
                         </div>
@@ -103,7 +102,7 @@
                     </div><!-- .row -->
 
                     <p class="right">
-                        <button class="button cancel" type="submit">Annuler</button>
+                        <button class="button cancel">Annuler</button>
                         <button class="button" ng-click="saveMakerscienceProject(projectsheet)" >Enregistrer</button>
                     </p>
 

@@ -1,279 +1,351 @@
-.admin #content {
+.admin {
 
-	form {
-	
-		fieldset {
-			margin-bottom: 0.75em;
-			padding: 1em;
-			background-color: $color-light-grey;
-			&.needs-idea, &.fixme {
-				height: 15em;
-				margin-top: 1.5em;
-				padding: 1.5em 1.5em 2.5em;
-				background-color: $color-light-grey;
-				background-position: 1.5em 4em;
-				background-repeat: no-repeat;
-				h4 {
-					font-size: 0.9em;
-					font-weight: bold;
-				}
-				h5 {
-					margin-top: 0.5em;
-					margin-left: 25%;
-					font-size: 1.5em;
-					text-transform: uppercase;
-				}
-				textarea {
-					width: 75%;
-					margin-left: 25%;
-					padding: 0;
-					background-color: transparent;
-				}
-				button.right {
-					float: right;
-					padding: 0;
-					font-size: 0.85em;
-					background-color: transparent;
-					border: none;
-				}
-			}
-			&.needs-idea {
-				background-image: url('../img/needs/needs-idea.png');
-			}
-			&.compact {
-				padding: 0;
-				input {
-					margin: 0;
-				}
-			}
-			&.phases, &.levels {
-				margin-bottom: 1em;
-				label {
-					display: inline-block;
-					padding-top: 50px;
-					margin-top: 1em;
-					margin-right: 1em;
-					text-align: center;
-					font-size: 0.9em;
-					cursor: pointer;
-				}
-				label > input {
-					display: none;
-				}
-			}
-			&.phases {
-				label {
-					background: url('../img/icons/project/project-grey.png') top center no-repeat;
-					&.phase1 {
-						&.selected, &:hover {
-							background-image: url('../img/icons/project/project-white.png');
-						}
-					}
-					&.phase2 {
-						&.selected, &:hover {
-							background-image: url('../img/icons/project/project-red.png');
-						}
-					}
-					&.phase3 {
-						&.selected, &:hover {
-							background-image: url('../img/icons/project/project-orange.png');
-						}
-					}
-					&.phase4 {
-						&.selected, &:hover {
-							background-image: url('../img/icons/project/project-green.png');
-						}
-					}
-				}
-			}
-			&.levels {
-				label {
-				    width: 50px;
-					background: url('../img/level.png') top center no-repeat;
-					opacity: 0.75;
-					&.selected, &:hover {
-					    opacity: 1;
-					}
-				}
-			}
-			&.new-project {
-			    h4 {
-			        margin-bottom: 0.5em;
-			        font-weight: bold;
-		        }
-    		    textarea {
-    		        padding: 0;
-    		        margin: 0;
-    		    }
-			}
-		}
-		input, textarea {
-			width: 100%;
-			margin-bottom: 0.75em;
-			padding: 1em;
-			color: $color-form-text;
-			background-color: $color-form-input-bg;
-			border: none;
-			@include placeholder($color-form-text);
-		}
-		textarea {
-			display: block;
-		}
-		ul.phases {
-			margin: 1em 0 0;
-			li {
-				display: inline-block;
-			}
-			button {
-				font-size: 0.9em;
-				text-align: center;
-				border: none;
-				background-color: transparent;
-				img {
-					display: block;
-					margin: 0 auto 1em;
-				}
-			}
-		}
-		button.button {
-			padding: 1em;
-			color: #fff;
-			background-color: $color-blue;
-			border: 2px solid $color-blue;
-			border-right: 2px solid #126d9a;
-			border-bottom: 2px solid #126d9a;
-			&[type="submit"] {
-				padding: 0.7em 1em;
-			}
-			&.button-geolocalisation, &.button-photo-upload, &.button-add {
-				width: 100%;
-				margin-bottom: 0.75em;
-				color: $color-form-text;
-				background-color: $color-light-grey;
-				background-repeat: no-repeat;
-				background-position: center left;
-				text-align: left;
-				border: none;
-			}
-			&.button-geolocalisation {
-				padding-left: 65px;
-				background-image: url('../img/icons/buttons/icon-geolocalisation.png');
-			}
-			&.button-photo-upload {
-				padding-left: 65px;
-				background-image: url('../img/icons/buttons/icon-photo.png');
-			}
-			&.button-add {
-				background-image: url('../img/icons/buttons/icon-add.png');
-				background-position: 100% 50%;
-			}
-		}
-		button.cancel {
-			background-color: transparent;
-			border-color: $color-blue;
-		}
-		button.fullwidth {
-			width: 100%;
-		}
-		p.right button {
-			margin-left: 0.75em;
-		}
-		
-	}
+    #content {
 
-}
+	    margin-top: 2em;
+	    margin-bottom: 10em;
+	    padding: $grid-gutter-width;
+	    background: $color-content-edit-bg;
 
-form.login {
-	position: relative;
-	margin-top: 1em;
-	button.close-login {
-		position: absolute;
-		top: -30px;
-		right: -15px;
-	}
-	h3 {
-		font-size: 1.1em;
-	}
-	ul {
-		margin: 1.5em 0 0.75em;
-		li {
-			button {
-				width: 49px;
-				height: 49px;
-				margin: 0 1em;
-				background-color: transparent;
-				border: none;
-				@include transition(all .5s ease);
-				&.connect-with-facebook {
-					background: transparent url('../img/home/home-share-facebook.png') center center no-repeat;
-					&:hover {
-						background-image: url('../img/home/home-share-facebook-hover.png');
-					}
-				}
-				&.connect-with-twitter {
-					background: transparent url('../img/home/home-share-twitter.png') center center no-repeat;
-					&:hover {
-						background-image: url('../img/home/home-share-twitter-hover.png');
-					}
-				}
-				&.connect-with-google {
-					background: transparent url('../img/home/home-share-google.png') center center no-repeat;
-					&:hover {
-						background-image: url('../img/home/home-share-google-hover.png');
-					}
-				}
-			}
-		}
-	}
-	p.or {
-		text-transform: uppercase;
-	}
-	fieldset {
-		margin-top: 1em;
-	}
-	input {
-		width: 100%;
-		margin-bottom: 1em;
-		padding: 0.5em 0.75em;
-		font-size: 0.9em;
-		background-color: #a13535;
-		border: none;
-	}
-	button[type=submit] {
-		padding: 0.25em 2.5em;
-		font-size: 0.85em;
-		color: $color-pink;
-		background-color: #fff;
-		border: none;
-	}
-}
-
-button.close-login {
-	height: 24px;
-	width: 24px;
-	border: none;
-	background-color: transparent;
-	opacity: 0.9;
-	&:hover {
-		opacity: 1;
-	}
-}
-
-tags-input {
-    margin-bottom: 1em;
-    div.tags {
-        input {
-            margin: 0 0 0 0.5em !important;
-            padding: 0 !important;
-            background-color: transparent !important;
+	    h2, h3 {
+		    font-size: 1.5em;
+		    text-transform: uppercase;
+	    }
+        h2 {
+            margin-top: -$grid-gutter-width;
+            margin-right: -$grid-gutter-width;
+            margin-left: -$grid-gutter-width;
+            margin-bottom: $grid-gutter-width * 1.5;
+            padding: $grid-gutter-width;
+            color: #fff;
+            font-weight: bold;
+       }
+       
+        h3 {
+		    margin: 1em 0;
+            color: $color-strong-grey;
         }
-        li.tag-item {
-            background-color: $color-blue !important;
-            @include border-radius(1px);
-            a, a.remove-button {
+
+	    form {
+	
+		    fieldset {
+			    margin-bottom: 0.75em;
+			    padding: 1em;
+			    background-color: $color-light-grey;
+			    &.needs-idea, &.fixme {
+				    height: 15em;
+				    margin-top: 1.5em;
+				    padding: 1.5em 1.5em 2.5em;
+				    background-color: $color-light-grey;
+				    background-position: 1.5em 4em;
+				    background-repeat: no-repeat;
+				    h4 {
+					    font-size: 0.9em;
+					    font-weight: bold;
+				    }
+				    h5 {
+					    margin-top: 0.5em;
+					    margin-left: 25%;
+					    font-size: 1.5em;
+					    text-transform: uppercase;
+				    }
+				    textarea {
+					    width: 75%;
+					    margin-left: 25%;
+					    padding: 0;
+					    background-color: transparent;
+				    }
+				    button.right {
+					    float: right;
+					    padding: 0;
+					    font-size: 0.85em;
+					    background-color: transparent;
+					    border: none;
+				    }
+			    }
+			    &.needs-idea {
+				    background-image: url('../img/needs/needs-idea.png');
+			    }
+			    &.compact {
+				    padding: 0;
+				    input {
+					    margin: 0;
+				    }
+			    }
+			    &.phases, &.levels {
+				    margin-bottom: 1em;
+				    label {
+					    display: inline-block;
+					    padding-top: 50px;
+					    margin-top: 1em;
+					    margin-right: 1em;
+					    text-align: center;
+					    font-size: 0.9em;
+					    cursor: pointer;
+				    }
+				    label > input {
+					    display: none;
+				    }
+			    }
+			    &.phases {
+				    label {
+					    background: url('../img/icons/project/project-grey.png') top center no-repeat;
+					    &.phase1 {
+						    &.selected, &:hover {
+							    background-image: url('../img/icons/project/project-white.png');
+						    }
+					    }
+					    &.phase2 {
+						    &.selected, &:hover {
+							    background-image: url('../img/icons/project/project-red.png');
+						    }
+					    }
+					    &.phase3 {
+						    &.selected, &:hover {
+							    background-image: url('../img/icons/project/project-orange.png');
+						    }
+					    }
+					    &.phase4 {
+						    &.selected, &:hover {
+							    background-image: url('../img/icons/project/project-green.png');
+						    }
+					    }
+				    }
+			    }
+			    &.levels {
+				    label {
+				        margin-right: 1em;
+					    background: url('../img/icons/resource/resource-level-default.png') top center no-repeat;
+                        &.level1 {
+					        &.selected, &:hover {
+							    background-image: url('../img/icons/resource/resource-level-easy.png');
+					        }
+				        }
+                        &.level2 {
+					        &.selected, &:hover {
+							    background-image: url('../img/icons/resource/resource-level-medium.png');
+					        }
+				        }
+                        &.level3 {
+					        &.selected, &:hover {
+							    background-image: url('../img/icons/resource/resource-level-hard.png');
+					        }
+				        }
+				    }
+			    }
+			    &.new-project {
+			        h4 {
+			            margin-bottom: 0.5em;
+			            color: $color-strong-grey;
+			            font-weight: bold;
+		            }
+        		    textarea {
+        		        padding: 0;
+        		        margin: 0;
+        		    }
+			    }
+		    }
+		    input, textarea {
+			    width: 100%;
+			    margin-bottom: 0.75em;
+			    padding: 1em;
+			    color: $color-form-text;
+			    background-color: $color-form-input-bg;
+			    border: none;
+			    @include placeholder($color-form-text);
+		    }
+		    textarea {
+			    display: block;
+		    }
+		    ul.phases {
+			    margin: 1em 0 0;
+			    li {
+				    display: inline-block;
+			    }
+			    button {
+				    font-size: 0.9em;
+				    text-align: center;
+				    border: none;
+				    background-color: transparent;
+				    img {
+					    display: block;
+					    margin: 0 auto 1em;
+				    }
+			    }
+		    }
+		    button.button {
+			    padding: 1em;
+			    color: #fff;
+			    &[type="submit"] {
+				    padding: 0.7em 1em;
+			    }
+			    &.button-geolocalisation, &.button-photo-upload, &.button-add {
+				    width: 100%;
+				    margin-bottom: 0.75em;
+				    color: #fff;
+				    background-repeat: no-repeat;
+				    background-position: center left;
+				    text-align: left;
+				    border: none;
+			    }
+			    &.button-geolocalisation {
+				    padding-left: 65px;
+				    background-image: url('../img/icons/buttons/icon-geolocalisation.png');
+			    }
+			    &.button-photo-upload {
+				    padding-left: 65px;
+				    background-image: url('../img/icons/buttons/icon-photo.png');
+			    }
+			    &.button-add {
+				    background-image: url('../img/icons/buttons/icon-add.png');
+				    background-position: 100% 50%;
+			    }
+		    }
+		    button.fullwidth {
+			    width: 100%;
+		    }
+		    p.right button {
+			    margin-left: 0.75em;
+		    }
+		
+	    }
+	    
+        /* Projects */
+        &.new-project {
+            h2 {
+                background-color: $color-blue;
+            }
+            form {
+                button.button {
+                    background-color: $color-blue;
+			        border: 2px solid $color-blue;
+			        border-right: 2px solid $color-dark-blue;
+			        border-bottom: 2px solid $color-dark-blue;
+			        &.cancel {
+			            color: $color-dark-blue;
+        			    background-color: transparent;
+        			    border-color: $color-dark-blue;
+    			    }
+		        }
+            }
+        }
+       
+        /* Resources */
+        &.new-resource {
+            h2 {
+                background-color: $color-green;
+            }
+            form {
+                button.button {
+                    background-color: $color-green;
+			        border: 2px solid $color-green;
+			        border-right: 2px solid $color-dark-green;
+			        border-bottom: 2px solid $color-dark-green;
+			            &.cancel {
+			                color: $color-dark-green;
+            			    background-color: transparent;
+            			    border-color: $color-dark-green;
+			            }
+                }
+            }
+        }
+
+
+    }
+
+    form.login {
+	    position: relative;
+	    margin-top: 1em;
+	    button.close-login {
+		    position: absolute;
+		    top: -30px;
+		    right: -15px;
+	    }
+	    h3 {
+		    font-size: 1.1em;
+	    }
+	    ul {
+		    margin: 1.5em 0 0.75em;
+		    li {
+			    button {
+				    width: 49px;
+				    height: 49px;
+				    margin: 0 1em;
+				    background-color: transparent;
+				    border: none;
+				    @include transition(all .5s ease);
+				    &.connect-with-facebook {
+					    background: transparent url('../img/home/home-share-facebook.png') center center no-repeat;
+					    &:hover {
+						    background-image: url('../img/home/home-share-facebook-hover.png');
+					    }
+				    }
+				    &.connect-with-twitter {
+					    background: transparent url('../img/home/home-share-twitter.png') center center no-repeat;
+					    &:hover {
+						    background-image: url('../img/home/home-share-twitter-hover.png');
+					    }
+				    }
+				    &.connect-with-google {
+					    background: transparent url('../img/home/home-share-google.png') center center no-repeat;
+					    &:hover {
+						    background-image: url('../img/home/home-share-google-hover.png');
+					    }
+				    }
+			    }
+		    }
+	    }
+	    p.or {
+		    text-transform: uppercase;
+	    }
+	    fieldset {
+		    margin-top: 1em;
+	    }
+	    input {
+		    width: 100%;
+		    margin-bottom: 1em;
+		    padding: 0.5em 0.75em;
+		    font-size: 0.9em;
+		    background-color: #a13535;
+		    border: none;
+	    }
+	    button[type=submit] {
+		    padding: 0.25em 2.5em;
+		    font-size: 0.85em;
+		    color: $color-pink;
+		    background-color: #fff;
+		    border: none;
+	    }
+    }
+
+    button.close-login {
+	    height: 24px;
+	    width: 24px;
+	    border: none;
+	    background-color: transparent;
+	    opacity: 0.9;
+	    &:hover {
+		    opacity: 1;
+	    }
+    }
+
+    tags-input {
+        margin-bottom: 1em;
+        div.tags {
+            input {
+                margin: 0 0 0 0.5em !important;
+                padding: 0 !important;
+                background-color: transparent !important;
+            }
+            li.tag-item {
                 background-color: $color-blue !important;
+                @include border-radius(1px);
+                a, a.remove-button {
+                    background-color: $color-blue !important;
+                }
             }
         }
     }
+    
 }
 

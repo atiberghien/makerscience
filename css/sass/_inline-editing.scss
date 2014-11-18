@@ -155,28 +155,6 @@ div.editable-controls {
 
 #content {
 
-	&.new-project {
-	
-		margin-top: 2em;
-		margin-bottom: 10em;
-		padding: 1.5em;
-		background: $color-content-edit-bg url('../img/bg/edit-bg.jpg') 50% 170% no-repeat;
-		h2, h3 {
-			color: $color-content-edit;
-			font-size: 1.5em;
-			text-transform: uppercase;
-		}
-		h2 {
-			margin: 1em 0 3em;
-			font-weight: bold;
-		}
-		h3 {
-			margin: 1em 0;
-		}
-
-	}
-	
-
 	.bloc-links {
 		height: auto;
 		margin-bottom: 0.25em;
