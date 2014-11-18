@@ -55,180 +55,29 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <div class="boxes boxes-listing">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
+                        <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl">
+                            <div class="box" ng-repeat="project in projects | limitTo:4">
+                                <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                                <img src="./img/bacasable.jpg" alt="Image background" />
+                                <div class="description">
+                                    <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
                                     <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                            </div><!-- .row -->
+                                </div><!-- .description -->
+                            </div><!-- .box -->
                         </div><!-- .boxes -->
                     </div><!-- item -->
-                    <div class="item">
-                        <div class="boxes boxes-listing">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-green.png" alt="Green project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                            </div><!-- .row -->
-                        </div><!-- .boxes -->
-                    </div><!-- item -->
-                    <div class="item">
-                        <div class="boxes boxes-listing">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-green.png" alt="Green project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                            </div><!-- .row -->
-                        </div><!-- .boxes -->
-                    </div><!-- item -->
-                    <div class="item">
-                        <div class="boxes boxes-listing">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-green.png" alt="Green project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="box">
-                                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                        <img src="./img/bacasable.jpg" alt="Image background" />
-                                    </div>
-                                    <h4><a href="">Il était une fois...</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div>
-                            </div><!-- .row -->
-
-                        </div><!-- .boxes -->
-                    </div>
-                    <div class="item" style="background-image: url('./img/slides/slide-project-two.jpg')">
-                        <h1>Coup de  sur</h1>
-                        <h2>La fête des sciences à <em>Toulouse</em></h2>
-                    </div>
-                    <div class="item" style="background-image: url('./img/slides/slide-project-three.jpg')">
-                        <h1>Coup de projecteur sur</h1>
-                        <h2><em>La fête des  à Toulouse</em></h2>
-                    </div>
-                </div>
-
-            </div><!-- .carousel -->
+                </div><!-- .carousel-inner -->
 
             <tabset class="nav-tabs-resource">
                 <tab heading="Nouveautés">
                     <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl">
-						<div class="box" ng-repeat="project in projects">
-                            <h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                        <div class="box" ng-repeat="project in projects">
+                            <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                             <img src="./img/bacasable.jpg" alt="Image background" />
-							<div class="description">
-                                <h4><a ui-sref="resource.detail">{{project.title}}</a></h4>
+                            <div class="description">
+                                <h4><a ui-sref="resource.detail">{{project.parent.title}}</a></h4>
                                 <h5><a href="">Contributeur: Alain Duvert</a></h5>
-							</div><!-- .description -->
+                            </div><!-- .description -->
                         </div>
                     </div><!-- .boxes -->
                 </tab>

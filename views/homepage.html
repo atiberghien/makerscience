@@ -106,9 +106,9 @@
         <div ng-class="projectToggleClass" class="boxes boxes-small boxes-small-home animate-show animate-slide-right" ng-controller="MakerScienceProjectListCtrl">
             <div class="box" ng-repeat="project in projects | limitTo:4" >
                 <img src="./img/bacasable.jpg" alt="Image background" />
-                <h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                 <div class="description">
-                    <h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title}}</a></h4>
+                    <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
                     <h5><a href="">Contributeur: Marina Lopez</a></h5>
                 </div>
             </div><!-- .box -->
