@@ -33,14 +33,11 @@
                                    placeholder="Nom du projet"
                                    ng-model="projectsheet.project.title"/>
 
-                            <fieldset class="new-project">
-                                <h4>Résumez votre projet en une courte phrase</h4>
-                                <text-angular name="project-tagline"
-                                          ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
-                                          ng-model="projectsheet.project.baseline">
-                                </text-angular>
-                            </fieldset>
-                            
+                            <input type="text"
+                                       name="project-baseline"
+                                       placeholder="Résumez votre projet en une courte phrase"
+                                       ng-model="projectsheet.project.baseline"/>
+
                             <fieldset class="new-project">
                                 <div ng-controller="TagAutoCompleteCtrl">
                                     <h4>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h4>
@@ -61,25 +58,16 @@
                                 <input type="text" name="postalcode" placeholder="Code Postal" ng-model="projectsheet.project.location.postal_code" />
                                 <input type="text" name="city" placeholder="Ville" ng-model="projectsheet.project.location.address_locality"/>
                             </fieldset>
-                            <fieldset class="phases">
-                                <p>Etat d'avancement</p>
-                                <label for="phase1" class="phase1 selected">
-                                    <input id="phase1" type="radio" name="phase" value="1" checked="checked" />
-                                    Début
-                                </label>
-                                <label for="phase2" class="phase2">
-                                    <input id="phase2" type="radio" name="phase" value="2" />
-                                    Phase 2
-                                </label>
-                                <label for="phase3" class="phase3">
-                                    <input id="phase3" type="radio" name="phase" value="3" />
-                                    Phase 3
-                                </label>
-                                <label for="phase4" class="phase4">
-                                    <input id="phase4" type="radio" name="phase" value="4" />
-                                    Phase 4
+
+                            <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
+                                <p>État d'avancement</p>
+                                <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
+                                       ng-repeat="progress in progressRange"
+                                       ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri">
+                                    {{progress.label}}
                                 </label>
                             </fieldset>
+
 
                         </div>
 

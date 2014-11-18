@@ -8,46 +8,26 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
                                        PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
 
     $scope.init = ->
-
-        $scope.countries = [
-            {value: 0, symbol: 'FR', text: 'France'},
-            {value: 1, symbol: 'EN', text: 'Angleterre'},
-            {value: 2, symbol: 'ES', text: 'Espagne'}
-        ]
-
-
         return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
-            $scope.projectsheet = projectsheetResult.objects[0]
-            projectID = getObjectIdFromURI($scope.projectsheet.project)
-            Project.one(projectID).get().then((projectResult) ->
-                $scope.projectsheet.project = projectResult
-                if $scope.projectsheet.project.location
-                    postalAddressId = getObjectIdFromURI($scope.projectsheet.project.location)
-                    $scope.projectsheet.project.location = PostalAddress.one(postalAddressId).get().$object
-
-                    $scope.showCountry = ->
-                        country = $scope.projectsheet.project.location.country || 'FR'
-                        selected = $filter('filter')($scope.countries, {symbol: country})
-                        return selected[0].text
-            )
-
-            $scope.projectsheet.q_a = []
-            templateID = getObjectIdFromURI($scope.projectsheet.template)
-
+            projectsheet = projectsheetResult.objects[0]
+            projectsheet.q_a = []
+            
+            templateID = getObjectIdFromURI(projectsheet.template)
             ProjectSheetTemplate.one(templateID).get().then((templateResult) ->
                 angular.forEach(templateResult.questions, (question, index) ->
-                    itemID = getObjectIdFromURI($scope.projectsheet.items[index])
+                    itemID = getObjectIdFromURI(projectsheet.items[index])
                     ProjectSheetItem.one(itemID).get().then((itemResult) ->
                         item =
                             'question' : question
                             'answer' : itemResult.answer
                             'id' : itemResult.id
-                        $scope.projectsheet.q_a.push(item)
+                        projectsheet.q_a.push(item)
                     )
                 )
+                return projectsheet
             )
         )
-    $scope.update = (resourceName, resourceId, fieldName, data) ->
+    $scope.updateProject = (resourceName, resourceId, fieldName, data) ->
         putData = {}
         putData[fieldName] = data
         switch resourceName
@@ -108,4 +88,21 @@ module.controller("PopularityCtrl", ($scope, $state) ->
             $scope.popularityItems[key].objectPopularityScore += value
         )
         $scope.votePopularity = false
+)
+
+module.controller("ProjectProgressCtrl", ($scope, ProjectProgress) ->
+    $scope.progressRange = []
+    $scope.selectedClasses = {}
+
+    $scope.updateProgressChoice = (progressChoice) ->
+        angular.forEach($scope.progressRange, (progress) ->
+            $scope.selectedClasses[progress.id] = ""
+        )
+        $scope.selectedClasses[progressChoice.id] = "selected"
+
+    $scope.init = (projectProgressRangeSlug) ->
+        ProjectProgress.getList({'range__slug' : projectProgressRangeSlug}).then((progressRangeResult) ->
+            $scope.progressRange = progressRangeResult
+            $scope.updateProgressChoice($scope.progressRange[0])
+        )
 )
