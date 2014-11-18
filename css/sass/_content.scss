@@ -556,6 +556,9 @@ div.toolbar {
 		a {
 			display: inline-block;
 			color: $color-boxes;
+			span {
+			    text-decoration: underline;
+            }			    
 		}
 		h3 img {
 			margin-left: 0.5em;
