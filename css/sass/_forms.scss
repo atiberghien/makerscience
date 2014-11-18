@@ -224,7 +224,11 @@
         /* Projects */
         &.new-project {
             h2 {
+                margin-bottom: $grid-gutter-width;
                 background-color: $color-blue;
+            }
+            h2 + p {
+                margin-bottom: $grid-gutter-width;
             }
             form {
                 button.button {
