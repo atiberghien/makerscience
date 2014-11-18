@@ -42,82 +42,46 @@
                 <h4>"Spécial Fablab"</h4>
             </section>
 
-			<div id="carousel-weekly" class="carousel slide" data-ride="carousel-weekly">
+            <div id="carousel-weekly" class="carousel slide" data-ride="carousel-weekly">
 
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#carousel-weekly" data-slide-to="0" class="active"></li>
-					<li data-target="#carousel-weekly" data-slide-to="1"></li>
-					<li data-target="#carousel-weekly" data-slide-to="2"></li>
-					<li data-target="#carousel-weekly" data-slide-to="3"></li>
-				</ol>
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-weekly" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-weekly" data-slide-to="1"></li>
+                    <li data-target="#carousel-weekly" data-slide-to="2"></li>
+                    <li data-target="#carousel-weekly" data-slide-to="3"></li>
+                </ol>
 
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-					<div class="item active">
-						<div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
-							<div class="box" ng-repeat="project in projects | limitTo:4">
-								<h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-								<img src="./img/bacasable.jpg" alt="Image background" />
-								<div class="description">
-									<h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title}}</a></h4>
-									<h5><a href="">Par: <span class="name">Alain Duvert</span></a></h5>
-								</div><!-- .description -->
-							</div><!-- .box -->
-						</div><!-- .boxes -->
-					</div><!-- item -->
-					<div class="item">
-						<div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
-							<div class="box" ng-repeat="project in projects | limitTo:4">
-								<h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-								<img src="./img/bacasable.jpg" alt="Image background" />
-								<div class="description">
-									<h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title}}</a></h4>
-									<h5><a href="">Par: <span class="name">Alain Duvert</span></a></h5>
-								</div><!-- .description -->
-							</div><!-- .box -->
-						</div><!-- .boxes -->
-					</div><!-- item -->
-					<div class="item">
-						<div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
-							<div class="box" ng-repeat="project in projects | limitTo:4">
-								<h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-								<img src="./img/bacasable.jpg" alt="Image background" />
-								<div class="description">
-									<h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title}}</a></h4>
-									<h5><a href="">Par: <span class="name">Alain Duvert</span></a></h5>
-								</div><!-- .description -->
-							</div><!-- .box -->
-						</div><!-- .boxes -->
-					</div><!-- item -->
-					<div class="item">
-						<div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
-							<div class="box" ng-repeat="project in projects | limitTo:4">
-								<h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-								<img src="./img/bacasable.jpg" alt="Image background" />
-								<div class="description">
-									<h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title}}</a></h4>
-									<h5><a href="">Par: <span class="name">Alain Duvert</span></a></h5>
-								</div><!-- .description -->
-							</div><!-- .box -->
-						</div><!-- .boxes -->
-					</div><!-- item -->
-				</div><!-- .carousel-inner -->
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
+                            <div class="box" ng-repeat="project in projects | limitTo:4">
+                                <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                                <img src="./img/bacasable.jpg" alt="Image background" />
+                                <div class="description">
+                                    <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
+                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
+                                </div><!-- .description -->
+                            </div><!-- .box -->
+                        </div><!-- .boxes -->
+                    </div><!-- item -->
+                </div><!-- .carousel-inner -->
 
-			</div><!-- #carousel-weekly -->
+            </div><!-- #carousel-weekly -->
 
             <tabset class="nav-tabs-listing">
                 <tab heading="Nouveautés ">
-					<div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
-						<div class="box" ng-repeat="project in projects">
-							<h3>{{project.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-							<img src="./img/bacasable.jpg" alt="Image background" />
-							<div class="description">
-								<h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title}}</a></h4>
-								<h5><a href="">Par: <span class="name">Alain Duvert</span></a></h5>
-							</div><!-- .description -->
-						</div><!-- .box -->
-					</div><!-- .boxes -->
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
+                        <div class="box" ng-repeat="project in projects">
+                            <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+                            <div class="description">
+                                <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
+                                <h5><a href="">Contributeur: Alain Duvert</a></h5>
+                            </div><!-- .description -->
+                        </div><!-- .box -->
+                    </div><!-- .boxes -->
                 </tab>
                 <tab heading="Les mieux notés">
                     Les mieux notés
