@@ -231,6 +231,11 @@
                 margin-bottom: $grid-gutter-width;
             }
             form {
+			    fieldset.fake-placeholder {
+			        input, textarea {
+			            @include placeholder($color-blue);
+			        }
+		        }
                 button.button {
                     background-color: $color-blue;
 			        border: 2px solid $color-blue;
@@ -251,6 +256,11 @@
                 background-color: $color-green;
             }
             form {
+			    fieldset.fake-placeholder {
+			        input, textarea {
+			            @include placeholder($color-green);
+			        }
+		        }
                 button.button {
                     background-color: $color-green;
 			        border: 2px solid $color-green;
