@@ -205,7 +205,6 @@
 				    background-image: url('../img/icons/buttons/icon-photo.png');
 			    }
 			    &.button-add {
-				    background-image: url('../img/icons/buttons/icon-add.png');
 				    background-position: 100% 50%;
 			    }
 		    }
@@ -246,6 +245,9 @@
 		            &.button-photo-upload {
 			            background-image: url('../img/icons/buttons/icon-photo-project.png');
 		            }
+			        &.button-add {
+				        background-image: url('../img/icons/buttons/icon-add-project.png');
+			        }
 		        }
             }
         }
@@ -274,6 +276,9 @@
 		            &.button-photo-upload {
 			            background-image: url('../img/icons/buttons/icon-photo-resource.png');
 		            }
+			        &.button-add {
+				        background-image: url('../img/icons/buttons/icon-add-resource.png');
+			        }
                 }
             }
         }
