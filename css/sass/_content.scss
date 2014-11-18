@@ -543,14 +543,16 @@ div.toolbar {
 			background-color: $color-boxes-title-bg;
 		}
 		h4 a {
-			padding-top: 0.75em;
+			padding-top: 0.25em;
 			padding-bottom: 0;
+			line-height: 1.75em;
 			text-transform: uppercase;
 		}
 		h5 a {
 			padding-bottom: 0;
-			padding-bottom: 0.75em;
+			padding-bottom: 0.25em;
 			font-size: 0.9em;
+			line-height: 2em;
 			color: $color-light-grey;
 		}
 		a {
