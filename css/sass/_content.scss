@@ -656,6 +656,35 @@ div.toolbar {
 			    font-size: 1.25em;
 			    text-transform: uppercase;
 		    }
+		    &> a {
+		        position: relative;
+		        display: block;
+		        height: $boxes-large-height;
+		        h3, h4, h5, {
+		            float: left;
+		            clear: left;
+		            display: inline;
+		            padding: 0.5em $grid-gutter-width / 3;
+        			background-color: $color-boxes-title-bg;
+		        }
+		        h3 {
+		            padding: 0 $grid-gutter-width / 3;
+		        }
+		       &> img {
+		            position: absolute;
+		            top: 0;
+		            left: 0;
+		            right: 0;
+		            bottom: 0;
+		            height: 100%;
+		            width: 100%;
+	            }
+		    }
+		    &> a, &>div > a {
+	            &:hover {
+	                opacity: 0.8;
+	            }
+		    }
 			&.box-solo {
 			    a {
 			        font-size: 2.25em;
