@@ -246,7 +246,7 @@ header {
 
 	div.sideproject {
 		position: relative;
-		min-height: 400px;
+		min-height: $home-slide-height;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */
 		padding: 2em;
 		color: $color-intro;
@@ -323,6 +323,7 @@ header {
 			left: $grid-gutter-width / 2;
 			display: block;
 			width: 100%;
+			height: $home-slide-height;
 		}	
 	}
 }
