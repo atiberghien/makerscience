@@ -243,6 +243,9 @@
         			    background-color: transparent;
         			    border-color: $color-dark-blue;
     			    }
+		            &.button-photo-upload {
+			            background-image: url('../img/icons/buttons/icon-photo-project.png');
+		            }
 		        }
             }
         }
@@ -267,6 +270,9 @@
 		                color: $color-dark-green;
         			    background-color: transparent;
         			    border-color: $color-dark-green;
+		            }
+		            &.button-photo-upload {
+			            background-image: url('../img/icons/buttons/icon-photo-resource.png');
 		            }
                 }
             }
