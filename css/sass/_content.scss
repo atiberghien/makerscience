@@ -512,16 +512,6 @@ div.toolbar {
 
 	margin-right: -$grid-gutter-width;
 
-	&:before {
-		content: '';
-		display: block;
-		width: 100%;
-	}
-	&:after {
-		content: '';
-		display: inline-block;
-		width: 100%;
-	}
 	.box {
 		display: inline-block;
 		position: relative;
