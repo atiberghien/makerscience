@@ -643,6 +643,10 @@ div.toolbar {
 		}
 	}
 
+    &.boxes-spaced {
+        margin-top: $grid-gutter-width;
+    }
+    
 	&.boxes-small {
 		font-size: 0.75em;
 		.box {
