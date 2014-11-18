@@ -645,6 +645,23 @@ div.toolbar {
 
     &.boxes-spaced {
         margin-top: $grid-gutter-width;
+        margin-bottom: $grid-gutter-width;
+    }
+    
+    &.boxes-large {
+		.box {
+			height: $boxes-large-height;
+			width: $boxes-large-width;
+			h4, h5 {
+			    font-size: 1.25em;
+			    text-transform: uppercase;
+		    }
+			&.box-solo {
+			    a {
+			        font-size: 2.25em;
+			    }
+			}
+		}
     }
     
 	&.boxes-small {

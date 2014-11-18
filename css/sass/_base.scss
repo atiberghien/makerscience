@@ -3,6 +3,8 @@ $home-slide-height: 393px;
 $needs-height: 220px;
 $boxes-width: ($page-width - $grid-gutter-width * 5) / 4;
 $boxes-height: $boxes-width;
+$boxes-large-width: ($page-width - $grid-gutter-width * 4) / 3;
+$boxes-large-height: $boxes-large-width;
 $boxes-small-width: ($page-width - $grid-gutter-width * 4) / 5;
 $boxes-small-height: $boxes-small-width;
 $boxes-member-home-width: 27.4%;
