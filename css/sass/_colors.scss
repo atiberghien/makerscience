@@ -1,14 +1,19 @@
 /* MakerScience colors */
 $color-blue: #2497d0;
 $color-chocolate: #453936;
+$color-dark-blue: #126d9a;
+$color-dark-green: #1a814e;
 $color-dark-grey: #2f2f2f;
 $color-dark-red: #a13535;
 $color-green: #30c9ad;
 $color-light-grey: #e8e8e8;
+$color-medium-grey: #d3d7da;
 $color-orange: #fa920b;
 $color-pink: #ff5353;
 $color-purple: #5a4b84;
 $color-red: #c30;
+$color-strong-grey: #656565;
+$color-very-light-grey: #ebebeb;
 
 /* Sections colors */
 $color-profil: $color-chocolate;
@@ -78,7 +83,7 @@ $color-content-section-bg: #fff;
 $color-content-section-bg-even: $color-light-grey;
 $color-content-listing-bg: $color-light-grey;
 $color-content-edit: #fff;
-$color-content-edit-bg: #999;
+$color-content-edit-bg: $color-medium-grey;
 $color-needs: $color-text;
 $color-needs-bg: #2695cd;
 $color-needs-h3: #fff;
@@ -108,7 +113,7 @@ $color-member-added-bg: $color-orange;
 
 /* Forms */
 $color-form-text: #535353;
-$color-form-input-bg: #ebebeb;
+$color-form-input-bg: $color-very-light-grey;
 
 /* Sidebar */
 $color-sidebar-action: #fff;
