@@ -648,6 +648,50 @@ div.toolbar {
         margin-bottom: $grid-gutter-width;
     }
     
+    /* FIXME Need to merge this with normal boxes if we can agree on a standard way to "link" boxes */
+	&.boxes-medium {
+		.box {
+			h4, h5 {
+				font-size: 1.1em;
+				text-transform: uppercase;
+			}
+			&> a {
+				position: relative;
+				display: block;
+				height: $boxes-height;
+				h3, h4, h5, {
+					float: left;
+					clear: left;
+					display: inline;
+					padding: 0.5em $grid-gutter-width / 3;
+					background-color: $color-boxes-title-bg;
+				}
+				h3 {
+					padding: 0 $grid-gutter-width / 3;
+				}
+				&> img {
+					position: absolute;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					height: 100%;
+					width: 100%;
+				}
+			}
+			&> a, &>div > a {
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+			&.box-solo {
+				a {
+					font-size: 2.25em;
+				}
+			}
+		}
+	}
+	
     &.boxes-large {
 		.box {
 			height: $boxes-large-height;
