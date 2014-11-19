@@ -61,28 +61,6 @@
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
-                                    <button ng-click="AddressForm.$show()" ng-hide="AddressForm.$visible">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </div>
-                                <form editable-form name="AddressForm" onaftersave="update('Project', projectsheet.parent.id , 'location', $data)">
-                                    <p class="location"><img src="./img/location.png" alt="Location" />
-                                        <span editable-text="projectsheet.parent.location.street_address"
-                                              e-name="street_address">{{ projectsheet.parent.location.street_address }}</span>
-                                        <span editable-text="projectsheet.parent.location.street_address"
-                                              e-name="street_address">{{ projectsheet.parent.location.postal_code }}</span>
-                                        <span editable-text="projectsheet.parent.location.address_locality"
-                                              e-name="address_locality">{{ projectsheet.parent.location.address_locality }}</span>
-                                        <span ng-show="AddressForm.$visible">
-                                            <button type="submit" class="btn btn-primary" ng-disabled="AddressForm.$waiting">Enregistrer</button>
-                                            <button type="button" class="btn btn-default" ng-disabled="AddressForm.$waiting" ng-click="AddressForm.$cancel()">Annuler</button>
-                                        </span
-                                    </p>
-                                </form>
-                            </div>
-
-                            <div class="editable">
-                                <div class="edit-buttons" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                                 </div>
                                 <fieldset class="phases">
@@ -167,7 +145,7 @@
                 </tabset>
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="needs">
                             <ul class="actions">
                                 <li><a href=""><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
@@ -192,11 +170,6 @@
                                 </slide>
                             </carousel>
                         </div><!-- .needs -->
-                    </div>
-                    <div class="col-md-4">
-                        <div class="interested">
-                            <h3><a href="">Intéressé?</a></h3>
-                        </div><!-- .interested -->
                     </div>
                 </div><!-- .row -->
 
