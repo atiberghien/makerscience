@@ -21,7 +21,7 @@
 
                 <h2>Créer un projet</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                
+
                 <h3>Nouveau projet</h3>
 
                 <form ng-controller="MakerScienceProjectSheetCreateCtrl" ng-init="init('projet-makerscience')">
@@ -61,11 +61,6 @@
                         <div class="col-md-4">
 
                             <button class="button button-photo-upload">Photo de couverture</button>
-                            <fieldset class="compact">
-                                <input type="text" name="address" placeholder="Adresse" ng-model="projectsheet.project.location.street_address"/>
-                                <input type="text" name="postalcode" placeholder="Code Postal" ng-model="projectsheet.project.location.postal_code" />
-                                <input type="text" name="city" placeholder="Ville" ng-model="projectsheet.project.location.address_locality"/>
-                            </fieldset>
 
                             <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
                                 <p>État d'avancement</p>
@@ -95,8 +90,7 @@
                         <text-angular ng-model="projectsheet.answers[$index]"
                                       ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
                                       name="question_{{$index}}"
-                                      e-rows=4
-                                      >
+                                      e-rows="4">
                         </text-angular>
                     </fieldset>
 

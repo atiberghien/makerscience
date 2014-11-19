@@ -85,14 +85,14 @@
                     <textarea name="project-about"
                               placeholder="Résumez votre projet en quelques lignes"
                               rows="4"
-                              ng-model="projectsheet.project.description"></textarea>
+                              ng-model="projectsheet.parent.description"></textarea>
 
                     <textarea ng-model="projectsheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
 
 
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <fieldset class="needs-idea">
                                 <h4>Vos besoins?</h4>
                                 <h5>Idée</h5>
@@ -100,12 +100,6 @@
                                 <button class="right">Suivant</button>
                             </fieldset>
                             <button class="button button-add">Gallerie photo et vidéo</button>
-                        </div>
-
-                        <div class="col-md-6">
-                            <fieldset class="fixme">
-                                <h4><span class="fixme">#FIXME</span><br />Lien vers une fiche ressource<br />(voir design)</h4>
-                            </fieldset>
                         </div>
 
                     </div><!-- .row -->

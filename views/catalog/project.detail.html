@@ -26,7 +26,7 @@
 
                 <h2 editable-text="projectsheet.parent.baseline"
                     e-form="BaselineBtnForm"
-                    onbeforesave="update('Project', projectsheet.parent.id , 'baseline', $data)"
+                    onbeforesave="updateProject('Project', projectsheet.parent.id , 'baseline', $data)"
                     ng-bind-html="projectsheet.parent.baseline">{{ projectsheet.parent.baseline }}
                 </h2>
                 <h3><span>Fiche Projet</span></h3>
@@ -44,41 +44,21 @@
                                 <div class="edit-buttons" ng-show="editable" ng-init="addTag=false">
                                     <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
                                 </div>
+
                                 <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
-                                    <tags-input ng-model="$parent.projectsheet.tags"
+                                    <tags-input ng-model="$parent.preparedTags"
                                                 placeholder="Ajouter un mot-clé"
                                                 on-tag-added="$parent.addTagFromProject($tag)"
                                                 on-tag-removed="$parent.removeTagFromProject($tag)">
                                                 <auto-complete source="loadTags($query)"></auto-complete>
                                     </tags-input>
                                 </div>
+
                                 <div ng-show="addTag==false">
                                     <ul class="tags tags-project">
-                                        <li ng-repeat="tag in projectsheet.tags"><a href="">{{tag.name}}</a></li>
-                                    </ul><!-- .tag -->
+                                        <li ng-repeat="tag in preparedTags"><a href="">{{tag.text}}</a></li>
+                                    </ul>
                                 </div>
-                            </div>
-
-                            <div class="editable">
-                                <div class="edit-buttons" ng-show="editable">
-                                    <button ng-click="AddressForm.$show()" ng-hide="AddressForm.$visible">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </div>
-                                <form editable-form name="AddressForm" onaftersave="update('Project', projectsheet.parent.id , 'location', $data)">
-                                    <p class="location"><img src="./img/location.png" alt="Location" />
-                                        <span editable-text="projectsheet.parent.location.street_address"
-                                              e-name="street_address">{{ projectsheet.parent.location.street_address }}</span>
-                                        <span editable-text="projectsheet.parent.location.street_address"
-                                              e-name="street_address">{{ projectsheet.parent.location.postal_code }}</span>
-                                        <span editable-text="projectsheet.parent.location.address_locality"
-                                              e-name="address_locality">{{ projectsheet.parent.location.address_locality }}</span>
-                                        <span ng-show="AddressForm.$visible">
-                                            <button type="submit" class="btn btn-primary" ng-disabled="AddressForm.$waiting">Enregistrer</button>
-                                            <button type="button" class="btn btn-default" ng-disabled="AddressForm.$waiting" ng-click="AddressForm.$cancel()">Annuler</button>
-                                        </span
-                                    </p>
-                                </form>
                             </div>
 
                             <div class="editable">
@@ -102,7 +82,7 @@
                                 </div>
                                 <p editable-bsdate="projectsheet.parent.end_date"
                                     e-form="EndDateBtnForm"
-                                    onbeforesave="update('Project', projectsheet.parent.id , 'end_date', $data)"
+                                    onbeforesave="updateProject('Project', projectsheet.parent.id , 'end_date', $data)"
                                     e-datepicker-popup="dd/MM/yyyy"
                                     ng-bind-html="projectsheet.parent.end_date">Fin de projet: {{projectsheet.parent.end_date || "N/C" }}
                                 </p>
@@ -138,8 +118,8 @@
                             <p editable-text-angular="projectsheet.parent.description"
                                  e-form="DescBtnForm"
                                  e-rows="4"
-                                 e-cols="85"
-                                 onbeforesave="update('Project', projectsheet.parent.id , 'description', $data)"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 onbeforesave="updateProject('Project', projectsheet.parent.id , 'description', $data)"
                                  ng-bind-html="projectsheet.parent.description">
                             </p>
 
@@ -149,7 +129,13 @@
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <p editable-textarea="q_a.answer" e-form="AnswerBtnForm"  e-rows="4" e-cols="85" onbeforesave="update('ProjectSheetItem', q_a.id , 'answer', $data)"><span ng-bind-html="q_a.answer"></span></p>
+                            <p editable-text-angular="q_a.answer"
+                                 e-form="AnswerBtnForm"
+                                 e-rows="4"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 onbeforesave="updateProject('ProjectSheetItem', q_a.id , 'answer', $data)"
+                                 ng-bind-html="q_a.answer">
+                            </p>
                         </section>
                     </tab>
                     <tab heading="Actus">
@@ -167,7 +153,7 @@
                 </tabset>
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="needs">
                             <ul class="actions">
                                 <li><a href=""><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
@@ -192,11 +178,6 @@
                                 </slide>
                             </carousel>
                         </div><!-- .needs -->
-                    </div>
-                    <div class="col-md-4">
-                        <div class="interested">
-                            <h3><a href="">Intéressé?</a></h3>
-                        </div><!-- .interested -->
                     </div>
                 </div><!-- .row -->
 
@@ -268,7 +249,7 @@
     </div><!-- .row -->
 
     <div class="row container">
-    
+
         <div class="col-md-12">
 
             <ul class="boxes boxes-large boxes-spaced">
@@ -315,7 +296,7 @@
                     </div>
                 </li>
             </ul>
-            
+
         </div>
 
     </div><!-- .row .container -->
