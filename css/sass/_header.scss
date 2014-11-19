@@ -1,49 +1,55 @@
-header {
-	background-color: $color-header-bg;
-	border-bottom: 1px solid $color-header-border;
-	#menu {
-		padding-left: 150px + $grid-gutter-width;
-		font-size: 0.9em;
+form.search-full-width {
+	position: relative;
+	margin: 0 $grid-gutter-width / 2;
+	background-color: #fff;
+	text-align: justify;
+	input, button {
+		padding: 0.6em 1em;
+		border: none;
 	}
-	form {
-		display: inline;
-		padding: 0.75em 0;
-		button {
-			padding: 0.5em 1em;
-			background-color: $color-blue !important;
-			border: none;
-			&:hover {
-				background-color: $color-green !important;
-			}
-		}
+	input {
+		width: 99%;
 	}
-	.navbar-brand {
-		z-index: 1000;
-		position: absolute;
-		bottom: 0;
-		left: $grid-gutter-width;
-	}
-	.login-panel {
-		z-index: 1000;
+	button {
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 375px;
-		padding: $grid-gutter-width / 2;
 		color: #fff;
-		background: $color-pink url('../img/bg/shape-top-bg.png') center -100px no-repeat;
-		text-align: center;
-		border: 2px solid #fff;
-		@include box-shadow(3px 3px 3px rgba(0, 0, 0, 0.25));
-		form.login {
-			ul {
-				margin: 1em 0 2em;
+		background-color: $color-blue;
+	}
+}
+div.action-bar {
+	margin-bottom: $grid-gutter-width;
+	&.authenticated {
+		margin-bottom: 0;
+		background-color: $color-pink;
+		.authenticated {
+			padding: 7px $grid-gutter-width;
+			a {
+				color: #fff;
+				font-size: 0.9em;
+				text-transform: uppercase;
+			}
+			img {
+				vertical-align: middle;
+				width: 30px;
+				height: 30px;
+			}
+			ul.toolbar {
+				float: right;
 				li {
-				    display: inline-block;
-				    margin: 0 0.25em;
-				    button {
-				    	background-color: transparent !important;
-				    }
+					float: left;
+					margin-left: 1.5em;
+					text-align: center;
+					font-size: 0.7em;
+					span {
+						display: block;
+						font-size: 1.75em;
+					}
+					a:hover {
+						color: #000;
+						text-decoration: none;
+					}
 				}
 			}
 		}
