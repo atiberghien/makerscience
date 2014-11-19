@@ -26,7 +26,7 @@
 
                 <h2 editable-text="projectsheet.parent.baseline"
                     e-form="BaselineBtnForm"
-                    onbeforesave="update('Project', projectsheet.parent.id , 'baseline', $data)"
+                    onbeforesave="updateProject('Project', projectsheet.parent.id , 'baseline', $data)"
                     ng-bind-html="projectsheet.parent.baseline">{{ projectsheet.parent.baseline }}
                 </h2>
                 <h3><span>Fiche Projet</span></h3>
@@ -82,7 +82,7 @@
                                 </div>
                                 <p editable-bsdate="projectsheet.parent.end_date"
                                     e-form="EndDateBtnForm"
-                                    onbeforesave="update('Project', projectsheet.parent.id , 'end_date', $data)"
+                                    onbeforesave="updateProject('Project', projectsheet.parent.id , 'end_date', $data)"
                                     e-datepicker-popup="dd/MM/yyyy"
                                     ng-bind-html="projectsheet.parent.end_date">Fin de projet: {{projectsheet.parent.end_date || "N/C" }}
                                 </p>
@@ -118,8 +118,8 @@
                             <p editable-text-angular="projectsheet.parent.description"
                                  e-form="DescBtnForm"
                                  e-rows="4"
-                                 e-cols="85"
-                                 onbeforesave="update('Project', projectsheet.parent.id , 'description', $data)"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 onbeforesave="updateProject('Project', projectsheet.parent.id , 'description', $data)"
                                  ng-bind-html="projectsheet.parent.description">
                             </p>
 
@@ -129,7 +129,13 @@
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <p editable-textarea="q_a.answer" e-form="AnswerBtnForm"  e-rows="4" e-cols="85" onbeforesave="update('ProjectSheetItem', q_a.id , 'answer', $data)"><span ng-bind-html="q_a.answer"></span></p>
+                            <p editable-text-angular="q_a.answer"
+                                 e-form="AnswerBtnForm"
+                                 e-rows="4"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 onbeforesave="updateProject('ProjectSheetItem', q_a.id , 'answer', $data)"
+                                 ng-bind-html="q_a.answer">
+                            </p>
                         </section>
                     </tab>
                     <tab heading="Actus">
@@ -243,7 +249,7 @@
     </div><!-- .row -->
 
     <div class="row container">
-    
+
         <div class="col-md-12">
 
             <ul class="boxes boxes-large boxes-spaced">
@@ -290,7 +296,7 @@
                     </div>
                 </li>
             </ul>
-            
+
         </div>
 
     </div><!-- .row .container -->
