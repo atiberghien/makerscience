@@ -24,16 +24,20 @@ div.action-bar {
 		margin-bottom: 0;
 		background-color: $color-pink;
 		.authenticated {
-			padding: 7px $grid-gutter-width;
+			padding: 10px $grid-gutter-width;
 			a {
 				color: #fff;
-				font-size: 0.9em;
 				text-transform: uppercase;
+				&:hover {
+					text-decoration: none;
+					color: $color-dark-grey;
+				}
 			}
 			img {
 				vertical-align: middle;
 				width: 30px;
 				height: 30px;
+				margin-right: 0.5em;
 			}
 			ul.toolbar {
 				float: right;
@@ -50,6 +54,72 @@ div.action-bar {
 						color: #000;
 						text-decoration: none;
 					}
+				}
+			}
+		}
+	}
+	form.login {
+		margin: 0 $grid-gutter-width / 2;
+		padding: 0.5em ($grid-gutter-width / 2) 0;
+		h3, p.or {
+			display: none;
+		}
+		ul {
+			position: absolute;
+			right: 12em;
+			margin: 0;
+			padding: 0;
+		}
+		ul, li, fieldset, input, button {
+			display: inline;
+		}
+		li button {
+			width: 30px;
+			height: 30px;
+			margin: 0 0.25em;
+			@include transition(all .5s ease);
+			&.connect-with-facebook {
+				background: transparent url('../img/icons/social/facebook-small-white.png') center center no-repeat;
+				&:hover {
+					background-image: url('../img/icons/social/facebook-small.png');
+				}
+			}
+			&.connect-with-twitter {
+				background: transparent url('../img/icons/social/twitter-small-white.png') center center no-repeat;
+				&:hover {
+					background-image: url('../img/icons/social/twitter-small.png');
+				}
+			}
+			&.connect-with-google {
+				background: transparent url('../img/icons/social/google-small-white.png') center center no-repeat;
+				&:hover {
+					background-image: url('../img/icons/social/google-small.png');
+				}
+			}
+		}
+		fieldset {
+			margin: 0;
+			input {
+				width: 20em;
+				margin-right: 2em;
+				padding: 0.25em 0.5em;
+				color: #fff;
+				background-color: transparent;
+				border-bottom: 2px solid #fff;
+				@include placeholder(#fff);
+			}
+			button {
+				position: absolute;
+				top: 0.75em;
+				right: 0;
+				color: #fff;
+				background-color: transparent;
+				border: 2px solid #fff;
+				@include transition(all .2s ease);
+				&:hover {
+					color: $color-pink !important;
+					background-color: #fff !important;
+					@include border-radius(2px);
 				}
 			}
 		}

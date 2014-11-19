@@ -19,23 +19,20 @@ Used in 3 places:
     - Homepage right panel
     - Anywhere when an action requires login
 
-Form fields are currently disabled using disabled="disabled"
+Form fields are currently disabled using 
 
 -->
 <form method="post" action="" class="login">
-    <h3>Inscrivez-vous via les réseaux sociaux</h3>
-    <ul>
-        <li><button class="connect-with-facebook"></button></li>
-        <li><button class="connect-with-twitter"></button></li>
-        <li><button class="connect-with-google" ng-click="authenticateGoogle()"></button></li>
-    </ul>
-    <p class="or">Ou</p>
-    <fieldset>
-        <input type="text" name="name" placeholder="Prénom, Nom" disabled="disabled" />
-        <input type="email" name="email" placeholder="Votre e-mail" disabled="disabled" />
-        <input type="password" name="password" placeholder="Mot de passe" disabled="disabled" />
-        <p class="right">
-            <button type="submit" disabled="disabled">Valider</button>
-        </p>
-    </fieldset>
+	<h3>Inscrivez-vous via les réseaux sociaux</h3>
+	<ul>
+		<li><button class="connect-with-facebook"></button></li>
+		<li><button class="connect-with-twitter"></button></li>
+		<li><button class="connect-with-google" ng-click="authenticateGoogle()"></button></li>
+	</ul>
+	<p class="or">Ou</p>
+	<fieldset>
+		<input type="text" name="login" placeholder="Login"  />
+		<input type="password" name="password" placeholder="Mot de passe"  />
+		<button type="submit" >Connection</button>
+	</fieldset>
 </form>
