@@ -41,6 +41,10 @@ div.editable-controls {
 
 #content {
 	section {
+		.edit-buttons {
+			top: auto;
+			bottom: 0;
+		}
 		form.editable-wrap {
 			width: 100%;
 			div.editable-controls {
