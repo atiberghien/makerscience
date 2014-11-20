@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
-<div class="admin">
+<div class="admin" >
     <div id="intro" class="intro-resource-create">
 
         <h1>Le numérique et l'innovation</h1>
@@ -31,7 +31,7 @@
                                 <input type="text"
                                        name="resource-name"
                                        placeholder=">"
-                                       ng-model="projectsheet.resource.title"/>
+                                       ng-model="resourcesheet.project.title"/>
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
@@ -39,7 +39,7 @@
                                 <textarea name="resource-tagline"
                                           placeholder=">"
                                           rows="4"
-                                          ng-model="projectsheet.resource.baseline">
+                                          ng-model="resourcesheet.project.baseline">
                                 </textarea>
                            </fieldset>
 
@@ -85,9 +85,9 @@
                     <textarea name="project-about"
                               placeholder="Résumez votre projet en quelques lignes"
                               rows="4"
-                              ng-model="projectsheet.parent.description"></textarea>
+                              ng-model="resourcesheet.project.description"></textarea>
 
-                    <textarea ng-model="projectsheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
+                    <textarea ng-model="resourcesheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
 
 
                     <div class="row">
@@ -106,7 +106,7 @@
 
                     <p class="right">
                         <button class="button cancel">Annuler</button>
-                        <button class="button" ng-click="saveMakerscienceProject(projectsheet)" >Enregistrer</button>
+                        <button class="button" ng-click="saveMakerscienceResource(resourcesheet)" >Enregistrer</button>
                     </p>
 
                 </form>

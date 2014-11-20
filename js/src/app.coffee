@@ -83,7 +83,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
                 templateUrl: 'views/catalog/resource.new.html'
         )
         .state('resource.detail',
-                url: ':id',
+                url: ':slug',
                 templateUrl: 'views/catalog/resource.detail.html'
         )
         .state('profile',

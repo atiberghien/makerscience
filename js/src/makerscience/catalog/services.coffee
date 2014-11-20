@@ -7,5 +7,5 @@ module.factory('MakerScienceProject', (Restangular) ->
 )
 
 module.factory('MakerScienceResource', (Restangular) ->
-    return Restangular.service('makerscience/project')
+    return Restangular.service('makerscience/resource')
 )
