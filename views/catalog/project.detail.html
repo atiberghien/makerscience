@@ -109,7 +109,7 @@
 
                 <tabset class="nav-tabs-project">
                     <tab heading="Projet">
-                        <section ng-class="{'editable': DescBtnForm.$visible}">
+                        <section>
                             <div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
                                 <button> <span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
@@ -124,7 +124,7 @@
                             </p>
 
                         </section>
-                        <section ng-class="{'editable': DescBtnForm.$visible}" ng-repeat="q_a in projectsheet.q_a">
+                        <section ng-repeat="q_a in projectsheet.q_a">
                             <h3>{{q_a.question}}</h3>
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
