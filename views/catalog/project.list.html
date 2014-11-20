@@ -1,31 +1,19 @@
 <div id="intro" class="intro-listing">
 
-    <div id="carousel-photos" class="carousel slide" data-ride="carousel-photos">
-
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-photos" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-photos" data-slide-to="1"></li>
-            <li data-target="#carousel-photos" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active" style="background-image: url('./img/slides/slide-project-one.jpg')">
-                <h1>Coup de projecteur sur</h1>
-                <h2><em>La fête des sciences à Toulouse</em></h2>
-            </div>
-            <div class="item" style="background-image: url('./img/slides/slide-project-two.jpg')">
-                <h1>Coup de  sur</h1>
-                <h2>La fête des sciences à <em>Toulouse</em></h2>
-            </div>
-            <div class="item" style="background-image: url('./img/slides/slide-project-three.jpg')">
-                <h1>Coup de projecteur sur</h1>
-                <h2><em>La fête des  à Toulouse</em></h2>
-            </div>
-        </div>
-
-    </div><!-- .carousel -->
+	<carousel interval="5000">
+		<slide  style="background-image: url('./img/slides/slide-project-one.jpg')">
+            <h1>Coup de projecteur sur</h1>
+            <h2><em>La fête des sciences à Toulouse</em></h2>
+		</slide>
+        <slide style="background-image: url('./img/slides/slide-project-two.jpg')">
+            <h1>Coup de  sur</h1>
+            <h2>La fête des sciences à <em>Toulouse</em></h2>
+		</slide>
+        <slide style="background-image: url('./img/slides/slide-project-three.jpg')">
+            <h1>Coup de projecteur sur</h1>
+            <h2><em>La fête des  à Toulouse</em></h2>
+		</slide>
+	</carousel>
 
 </div><!-- #intro -->
 
@@ -42,33 +30,44 @@
                 <h4>"Spécial Fablab"</h4>
             </section>
 
-            <div id="carousel-weekly" class="carousel slide" data-ride="carousel-weekly">
-
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-weekly" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-weekly" data-slide-to="1"></li>
-                    <li data-target="#carousel-weekly" data-slide-to="2"></li>
-                    <li data-target="#carousel-weekly" data-slide-to="3"></li>
-                </ol>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
-                            <div class="box" ng-repeat="project in projects | limitTo:4">
-                                <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                                <img src="./img/bacasable.jpg" alt="Image background" />
-                                <div class="description">
-                                    <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
-                                    <h5><a href="">Contributeur: Alain Duvert</a></h5>
-                                </div><!-- .description -->
-                            </div><!-- .box -->
-                        </div><!-- .boxes -->
-                    </div><!-- item -->
-                </div><!-- .carousel-inner -->
-
-            </div><!-- #carousel-weekly -->
+			<carousel id="carousel-weekly">
+				<slide>
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
+                        <div class="box" ng-repeat="project in projects | limitTo:4">
+                            <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+                            <div class="description">
+                                <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
+                                <h5><a href="">Contributeur: Alain Duvert</a></h5>
+                            </div><!-- .description -->
+                        </div><!-- .box -->
+                    </div><!-- .boxes -->
+				</slide>
+				<slide>
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
+                        <div class="box" ng-repeat="project in projects | limitTo:4">
+                            <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+                            <div class="description">
+                                <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
+                                <h5><a href="">Contributeur: Alain Duvert</a></h5>
+                            </div><!-- .description -->
+                        </div><!-- .box -->
+                    </div><!-- .boxes -->
+				</slide>
+				<slide>
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl">
+                        <div class="box" ng-repeat="project in projects | limitTo:4">
+                            <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+                            <div class="description">
+                                <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
+                                <h5><a href="">Contributeur: Alain Duvert</a></h5>
+                            </div><!-- .description -->
+                        </div><!-- .box -->
+                    </div><!-- .boxes -->
+				</slide>
+			</carousel>
 
             <tabset class="nav-tabs-listing">
                 <tab heading="Nouveautés ">

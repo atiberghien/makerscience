@@ -1,31 +1,19 @@
 <div id="intro" class="intro-listing">
 
-    <div id="carousel-photos" class="carousel slide" data-ride="carousel-photos">
-
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-photos" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-photos" data-slide-to="1"></li>
-            <li data-target="#carousel-photos" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active" style="background-image: url('./img/slides/slide-project-one.jpg')">
-                <h1>Coup de projecteur sur</h1>
-                <h2><em>La fête des sciences à Toulouse</em></h2>
-            </div>
-            <div class="item" style="background-image: url('./img/slides/slide-project-two.jpg')">
-                <h1>Coup de  sur</h1>
-                <h2>La fête des sciences à <em>Toulouse</em></h2>
-            </div>
-            <div class="item" style="background-image: url('./img/slides/slide-project-three.jpg')">
-                <h1>Coup de projecteur sur</h1>
-                <h2><em>La fête des  à Toulouse</em></h2>
-            </div>
-        </div>
-
-    </div><!-- .carousel -->
+	<carousel interval="5000">
+		<slide  style="background-image: url('./img/slides/slide-project-one.jpg')">
+            <h1>Coup de projecteur sur</h1>
+            <h2><em>La fête des sciences à Toulouse</em></h2>
+		</slide>
+        <slide style="background-image: url('./img/slides/slide-project-two.jpg')">
+            <h1>Coup de  sur</h1>
+            <h2>La fête des sciences à <em>Toulouse</em></h2>
+		</slide>
+        <slide style="background-image: url('./img/slides/slide-project-three.jpg')">
+            <h1>Coup de projecteur sur</h1>
+            <h2><em>La fête des  à Toulouse</em></h2>
+		</slide>
+	</carousel>
 
 </div><!-- #intro -->
 
@@ -67,6 +55,8 @@
                         </div><!-- .boxes -->
                     </div><!-- item -->
                 </div><!-- .carousel-inner -->
+                
+            </div><!-- #caroussel-weekly -->
 
             <tabset class="nav-tabs-resource">
                 <tab heading="Nouveautés">

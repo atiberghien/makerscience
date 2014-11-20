@@ -91,9 +91,15 @@ div.toolbar {
 			}
 		}
 		#carousel-weekly {
+			a.carousel-control {
+				display: none;
+			}
 			.boxes-listing {
 				margin-bottom: $grid-gutter-width;
 				padding: 0 0 3em 0;
+				.box {
+					text-align: left; /* fix carousel auto-centering */
+				}
 			}
 			.carousel-indicators li {
 				height: 1em;
