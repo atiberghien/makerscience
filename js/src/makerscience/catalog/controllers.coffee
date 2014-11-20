@@ -20,7 +20,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
         $scope.saveProject(projectsheet).then((projectsheet) ->
             MakerScienceProject.post({'parent' : projectsheet.project, 'tags' : tagsParam}).then(->
-                $state.go("project.detail", {slug : $scope.projectsheet.parent.slug})
+                $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
             )
         )
 )
@@ -36,13 +36,17 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
             $scope.projectsheet.q_a = projectSheetResult.q_a
 
             angular.forEach($scope.projectsheet.tags, (tag) ->
-                TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.parent.id+"/"+tag.id).then((taggdItemResult) ->
+                TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/"+tag.id).then((taggdItemResult) ->
                     $scope.preparedTags.push({text : tag.name, taggedItemURI : taggdItemResult.resource_uri})
                 )
             )
 
-            console.log($scope.projectsheet)
-
+            $scope.similars = []
+            TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/similars").then((projectIDsResult) ->
+                angular.forEach(projectIDsResult, (projectId) ->
+                    $scope.similars.push(MakerScienceProject.one(projectId).get().$object)
+                )
+            )
         )
     )
 
@@ -52,7 +56,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     $scope.removeTagFromProject = (tag) ->
         taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
         TaggedItem.one(taggedItemID).remove()
-
 )
 
 module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource) ->
