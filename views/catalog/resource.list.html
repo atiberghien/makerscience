@@ -56,11 +56,11 @@
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl">
-                            <div class="box" ng-repeat="project in projects | limitTo:4">
-                                <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                            <div class="box" ng-repeat="resource in resources">
+                                <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                                 <img src="./img/bacasable.jpg" alt="Image background" />
                                 <div class="description">
-                                    <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
+                                    <h4><a ui-sref="resource.detail({ slug: resource.parent.slug })">{{resource.parent.title}}</a></h4>
                                     <h5><a href="">Par: <span class="link">Alain Duvert</span></a></h5>
                                 </div><!-- .description -->
                             </div><!-- .box -->
@@ -71,11 +71,11 @@
             <tabset class="nav-tabs-resource">
                 <tab heading="Nouveautés">
                     <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl">
-                        <div class="box" ng-repeat="project in projects">
-                            <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
+                        <div class="box" ng-repeat="resource in resources">
+                            <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                             <img src="./img/bacasable.jpg" alt="Image background" />
                             <div class="description">
-                                <h4><a ui-sref="resource.detail">{{project.parent.title}}</a></h4>
+                                <h4><a ui-sref="resource.detail({ slug: resource.parent.slug })">{{resource.parent.title}}</a></h4>
                                 <h5><a href="">Par: <span class="link">Alain Duvert</span></a></h5>
                             </div><!-- .description -->
                         </div>
