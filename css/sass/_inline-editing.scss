@@ -41,32 +41,46 @@ div.editable-controls {
 
 #content {
 	section {
-		form.editable-wrap div.editable-controls {
-			margin-right: -1em;
-			margin-left: -1em;
-			textarea {
-				display: block;
+		form.editable-wrap {
+			width: 100%;
+			div.editable-controls {
 				width: 100%;
-				@include border-radius(0);
-				&:focus {
-					border-color: $color-dark-grey;
-					box-shadow: none;
+				.ta-scroll-window > .ta-bind {
+					padding: 1em;
 				}
-			}
-			.editable-buttons {
-				display: block;
-				button {
-					float: right;
-					padding: 0.5em 1em;
+				textarea, div.editable-input {
+					display: block;
+					width: 100%;
 					@include border-radius(0);
-					&.btn-primary {
-						color: #fff;
-						background-color: $color-dark-grey;
-						border-color: $color-dark-grey;
+					.ta-text {
+						margin: 0.5em 0;
+						width: 100%;
 					}
-					&.btn-default {
-						color: $color-dark-grey;
-						background-color: #fff;
+					&:focus {
+						border-color: $color-dark-grey;
+						box-shadow: none;
+					}
+				}
+				.editable-buttons {
+					display: block;
+					button {
+						float: right;
+						margin-bottom: 0.75em;
+						padding: 0.5em 1em;
+						@include border-radius(0);
+						&.btn-primary {
+							color: #fff;
+							background-color: $color-dark-grey;
+							border-color: $color-dark-grey;
+						}
+						&.btn-default {
+							color: $color-dark-grey;
+							background-color: #fff;
+						}
+						&:hover {
+							color: #fff;
+							background-color: $color-red;
+						}
 					}
 				}
 			}
