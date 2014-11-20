@@ -2,9 +2,60 @@
 	Stylesheet used for the administration of MakerScience
 */
 
+#intro,
+#content {
+	.editable-buttons {
+		button {
+			margin-bottom: 0.75em;
+			padding: 0.5em 1em;
+			@include border-radius(0);
+			&.btn-primary {
+				color: #fff;
+				background-color: $color-dark-grey;
+				border-color: $color-dark-grey;
+			}
+			&.btn-default {
+				color: $color-dark-grey;
+				background-color: #fff;
+			}
+			&:hover {
+				color: #fff;
+				background-color: $color-red;
+				border-color: $color-red;
+			}
+		}
+	}
+}
+
+#intro .editable-buttons button.btn-primary {
+	float: right;
+}
+
 #intro.edit {
 	div.editable div.edit-buttons {
 		right: -2em;
+	}
+}
+
+#intro {
+	div.intro.edit {
+		&> div.edit-buttons {
+			top: 6em;
+		}
+		form.editable-text {
+			width: 100%;
+			margin-bottom: 1em;
+			div.editable-controls {
+				display: block;
+				width: 90%;
+				margin: 0 auto;
+				text-align: center;
+				input {
+					width: 75%;
+					text-align: center;
+				}
+			}
+		}
 	}
 }
 
@@ -41,14 +92,16 @@ div.editable-controls {
 
 #content {
 	section {
-		.edit-buttons {
-			top: auto;
-			bottom: 0;
-		}
 		form.editable-wrap {
 			width: 100%;
 			div.editable-controls {
 				width: 100%;
+				.editable-buttons {
+					display: block;
+					button {
+						float: right;
+					}
+				}
 				.ta-scroll-window > .ta-bind {
 					padding: 1em;
 				}
@@ -63,28 +116,6 @@ div.editable-controls {
 					&:focus {
 						border-color: $color-dark-grey;
 						box-shadow: none;
-					}
-				}
-				.editable-buttons {
-					display: block;
-					button {
-						float: right;
-						margin-bottom: 0.75em;
-						padding: 0.5em 1em;
-						@include border-radius(0);
-						&.btn-primary {
-							color: #fff;
-							background-color: $color-dark-grey;
-							border-color: $color-dark-grey;
-						}
-						&.btn-default {
-							color: $color-dark-grey;
-							background-color: #fff;
-						}
-						&:hover {
-							color: #fff;
-							background-color: $color-red;
-						}
 					}
 				}
 			}
