@@ -367,59 +367,33 @@
 
     <div class="row container">
 
-        <div class="boxes">
+                <div class="col-md-12">
 
-            <div class="row">
+                    <ul class="boxes boxes-medium boxes-spaced">
+                        <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
+                        <li class="box box-solo box-red">
+                            <div>
+                                <a href="">Ressources Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </div>
+                        </li
+                        ><li class="box" ng-repeat="resource in similars">
+                            <a ui-sref="resource.detail({ slug: resource.parent.slug })">
+                                <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
+                                <h4>{{resource.parent.baseline}}</h4>
+                                <h5>{{resource.parent.title}}</h5>
+                                <img src="./img/bacasable.jpg" alt="Image background" />
+                            </a>
+                        </li
+                        ><li class="box box-solo box-red">
+                            <div>
+                                <a ui-sref="resource-list">Plus de ressource <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </div>
+                        </li>
+                    </ul>
 
-                <div class="col-md-4">
-                    <div class="box box-solo box-purple">
-                        <a href="">Ressources similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/resource/resource-red.png" alt="Red Resource" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/resource/resource-orange.png" alt="Orange Resource" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </div>
-                </div>
-
-            </div><!-- .row -->
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/resource/resource-green.png" alt="Green Resource" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/resource/resource-red.png" alt="Red Resource" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box box-solo box-purple">
-                        <a href="">Plus de ressources <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    </div>
                 </div>
 
-            </div><!-- .row -->
+            </div><!-- .row .container -->
 
         </div><!-- .boxes -->
 
