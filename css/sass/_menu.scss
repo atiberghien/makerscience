@@ -95,4 +95,9 @@ header {
 		left: $grid-gutter-width;
 	}
 	
+	/* Override bootstrap style */
+	.nav > li > a:focus {
+		background-color: transparent;
+	}
+	
 }
