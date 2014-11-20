@@ -233,7 +233,10 @@ div.action-bar {
 		text-align: center;
 		background-color: $color-intro-project-bg;
 		background-image: none;
-		#carousel-photos {
+		div.carousel {
+			a.carousel-control {
+				display: none;
+			}
 			.item {
 				padding: 17em 2em;
 				background-color: #000;
