@@ -216,7 +216,7 @@
 		    }
 		
 	    }
-	    
+
         /* Projects */
         &.new-project {
             h2 {
@@ -304,6 +304,21 @@
     }
     
 }
+
+fieldset.phases {
+	p {
+		margin-bottom: 0.5em;
+	}
+	label {
+		width: auto;
+		margin-bottom: 1em;
+		margin-right: 1.5em;
+		padding-top: 34px;
+		background-repeat: no-repeat;
+		background-position: top center;
+	}
+}
+
 
 form.login {
     position: relative;

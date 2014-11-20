@@ -75,9 +75,9 @@
                                 <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
                                     <p>État d'avancement</p>
                                     <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
+                                           style="background-image: url('http://data.nonetype.net{{progress.icon}}')"
                                            ng-repeat="progress in progressRange"
-                                           ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri"
-                                           data-img="http://data.nonetype.net{{progress.icon}}">
+                                           ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri">
                                         {{progress.label}}
                                     </label>
                                 </fieldset>
