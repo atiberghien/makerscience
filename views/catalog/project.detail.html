@@ -65,11 +65,19 @@
                                 <div class="edit-buttons" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                                 </div>
-                                <fieldset class="phases">
+                                <!--<fieldset class="phases">
                                     <p>État d'avancement</p>
                                     <label class="phase{{projectsheet.parent.progress.order+1}}">
                                         <img src="{{projectsheet.parent.progress.icon}}" />
                                         {{projectsheet.parent.progress.label}}
+                                    </label>
+                                </fieldset>-->
+                                <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
+                                    <p>État d'avancement</p>
+                                    <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
+                                           ng-repeat="progress in progressRange"
+                                           ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri">
+                                        {{progress.label}}
                                     </label>
                                 </fieldset>
                             </div>
