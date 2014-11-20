@@ -257,16 +257,16 @@
                     <div>
                         <a href="">Projets Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
-                </li>
-                <li class="box" ng-repeat="project in similars">
+                </li
+                ><li class="box" ng-repeat="project in similars">
                     <a ui-sref="project.detail({ slug: project.parent.slug })">
                         <h3>{{project.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
                         <h4>{{project.parent.baseline}}</h4>
                         <h5>{{project.parent.title}}</h5>
                         <img src="./img/bacasable.jpg" alt="Image background" />
                     </a>
-                </li>
-                <li class="box box-solo box-red">
+                </li
+                ><li class="box box-solo box-red">
                     <div>
                         <a ui-sref="project-list">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
