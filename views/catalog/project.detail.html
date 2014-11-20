@@ -76,7 +76,8 @@
                                     <p>État d'avancement</p>
                                     <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
                                            ng-repeat="progress in progressRange"
-                                           ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri">
+                                           ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri"
+                                           data-img="FIXME">
                                         {{progress.label}}
                                     </label>
                                 </fieldset>
