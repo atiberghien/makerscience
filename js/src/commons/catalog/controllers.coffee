@@ -11,7 +11,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
         return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
             projectsheet = projectsheetResult.objects[0]
             projectsheet.q_a = []
-            
+
             templateID = getObjectIdFromURI(projectsheet.template)
             ProjectSheetTemplate.one(templateID).get().then((templateResult) ->
                 angular.forEach(templateResult.questions, (question, index) ->
@@ -95,9 +95,7 @@ module.controller("ProjectProgressCtrl", ($scope, ProjectProgress) ->
     $scope.selectedClasses = {}
 
     $scope.updateProgressChoice = (progressChoice) ->
-        angular.forEach($scope.progressRange, (progress) ->
-            $scope.selectedClasses[progress.id] = ""
-        )
+        $scope.selectedClasses = {}
         $scope.selectedClasses[progressChoice.id] = "selected"
 
     $scope.init = (projectProgressRangeSlug) ->

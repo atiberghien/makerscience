@@ -107,3 +107,13 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
         taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
         TaggedItem.one(taggedItemID).remove()
 )
+
+
+module.controller("ResourceLevelCtrl", ($scope) ->
+    $scope.level = 1
+    $scope.selectedClasses = {"1" : "selected"}
+
+    $scope.updateLevelChoice = (progressChoice) ->
+        $scope.selectedClasses = {}
+        $scope.selectedClasses[progressChoice] = "selected"
+)

@@ -5,7 +5,7 @@
 
 <div ng-controller="MakerScienceResourceSheetCtrl">
     <ul id="sidenav" class="resource">
-        <li><a href="" class="selected"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
+        <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
         <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
         <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
     </ul><!-- #nav -->
@@ -17,6 +17,12 @@
             <div class="intro">
 
                 <h1>{{resourcesheet.parent.title}}</h1>
+
+                <div class="edit-buttons" ng-show="editable">
+                    <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </button>
+                </div>
 
                 <h2 editable-text="resourcesheet.parent.baseline"
                     e-form="BaselineBtnForm"
@@ -57,12 +63,48 @@
                             </div>
 
                             <ul class="details">
-                                <li class="level-average">Niveau moyen</li>
-                                <li class="duration">8H</li>
-                                <li class="cost">0 euros</li>
+                                <li class="level-average">
+                                    <div class="edit-buttons" ng-show="editable">
+                                        <button ng-click="LevelBtnForm.$show()" ng-hide="LevelBtnForm.$visible">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                    </div>
+
+                                    Niveau <span editable-text="resourcesheet.level"
+                                                 e-form="LevelBtnForm"
+                                                 onbeforesave="updateResourceSheet(resourcesheet.id , 'level', $data)"
+                                                 ng-bind-html="resourcesheet.level">{{ resourcesheet.level }}
+                                            </span>
+                                </li>
+                                <li class="duration">
+                                    <div class="edit-buttons" ng-show="editable">
+                                        <button ng-click="DurationBtnForm.$show()" ng-hide="DurationBtnForm.$visible">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                    </div>
+
+                                    <span editable-text="resourcesheet.duration"
+                                            e-form="DurationBtnForm"
+                                            onbeforesave="updateResourceSheet(resourcesheet.id , 'duration', $data)"
+                                            ng-bind-html="resourcesheet.duration">{{ resourcesheet.duration }}
+                                    </span>
+                                </li>
+                                <li class="cost">
+                                    <div class="edit-buttons" ng-show="editable">
+                                        <button ng-click="CostBtnForm.$show()" ng-hide="CostBtnForm.$visible">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                    </div>
+
+                                    <span editable-text="resourcesheet.cost"
+                                    e-form="CostBtnForm"
+                                    onbeforesave="updateResourceSheet(resourcesheet.id , 'cost', $data)"
+                                    ng-bind-html="resourcesheet.cost">{{ resourcesheet.cost }} euros
+                                </span>
+                                </li>
                             </ul><!-- .details -->
 
-                            <p>Mise à jour il y a 2 jours</p>
+                            <p>Mise à jour <span am-time-ago="resourcesheet.modified"></span></p>
 
                         </div><!-- .sideproject -->
 
@@ -81,105 +123,81 @@
         <div class="col-md-8">
             <div id="content">
 
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs nav-tabs-resource" role="tablist">
-                    <li class="active"><a href="#project" role="tab" data-toggle="tab">Ressource</a></li>
-                    <li><a href="#actus" role="tab" data-toggle="tab">Actus</a></li>
-                    <li><a href="#discussions" role="tab" data-toggle="tab">Discussions</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div class="tab-pane active" id="project">
+                <tabset class="nav-tabs-resource">
+                    <tab heading="Ressource">
                         <section>
+                            <div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
+                                <button> <span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
                             <h3>A propos de la ressource</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                            <p editable-text-angular="resourcesheet.parent.description"
+                            e-form="DescBtnForm"
+                            e-rows="4"
+                            e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                            onbeforesave="updateProject('Project', projectsheet.parent.id , 'description', $data)"
+                            ng-bind-html="resourcesheet.parent.description">
+                        </p>
                         </section>
-                        <section>
-                            <h3>Public Cible</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <section ng-repeat="q_a in resourcesheet.q_a">
+                            <h3>{{q_a.question}}</h3>
+                            <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
+                                <button><span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
+                            <p editable-text-angular="q_a.answer"
+                               e-form="AnswerBtnForm"
+                               e-rows="4"
+                               e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                               onbeforesave="updateProject('ProjectSheetItem', q_a.id , 'answer', $data)"
+                               ng-bind-html="q_a.answer">
+                            </p>
                         </section>
-                        <section>
-                            <h3>Quel est le contenu scientifique</h3>
-                            <p>En voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </section>
-                        <section>
-                            <h3>A quoi va ressembler le projet</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </section>
-                        <section>
-                            <h3>Ou en sommes nous?</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </section>
-                        <section>
-                            <h3>Questionnement</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </section>
-                        <section>
-                            <h3>Quel le contenu scientifique</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum:</p>
-                            <ul>
-                                <li><a href="">https://www.youtube.com/watch?v=WkuN2JIRnEY</a></li>
-                                <li><a href="">https://www.youtube.com/watch?v=4kfq3RnEY</a></li>
-                                <li><a href="">https://www.youtube.com/watch?v=3hkfjh398f38h</a></li>
-                                <li><a href="">https://www.youtube.com/watch?v=jhrh83kfje</a></li>
-                            </ul>
-                        </section>
-                    </div><!-- #project -->
-                    <div class="tab-pane" id="actus">
+                    </tab>
+                    <tab heading="Actus">
                         <section>
                             <h3>Actus</h3>
                             <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </section>
-                    </div><!-- #actus -->
-                    <div class="tab-pane" id="discussions">
+                    </tab>
+                    <tab heading="Discussions">
                         <section>
                             <h3>Discussions</h3>
                             <p>Ced do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                         </section>
-                    </div><!-- #discussions -->
-                </div>
+                    </tab>
+                </tabset>
 
-                <ul class="nav nav-tabs nav-tabs-slide" role="tablist">
-                    <li class="active"><a href="#photos" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span></a></li>
-                    <li><a href="#videos" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-facetime-video"></span></a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="photos">
-                        <div id="carousel-photos" class="carousel slide" data-ride="carousel-photos">
-
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-photos" data-slide-to="0" class="active"></li>
-                                <li data-target="#carousel-photos" data-slide-to="1"></li>
-                                <li data-target="#carousel-photos" data-slide-to="2"></li>
-                            </ol>
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <img src="img/slides/slide_one.png" alt="Slide One">
-                                    <div class="carousel-caption">Slide One</div>
-                                </div>
-                                <div class="item">
-                                    <img src="img/slides/slide_two.png" alt="Slide Two">
-                                    <div class="carousel-caption">Slide Two</div>
-                                </div>
-                                <div class="item">
-                                    <img src="img/slides/slide_three.png" alt="Slide Three">
-                                    <div class="carousel-caption">Slide Three</div>
-                                </div>
-                            </div>
-
-                            <!-- Controls -->
-                            <a class="left carousel-control" href="#carousel-photos" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-                            <a class="right carousel-control" href="#carousel-photos" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-                        </div><!-- .carousel -->
-                    </div><!-- #photos -->
-                    <div class="tab-pane" id="videos">
-                        Videos
-                    </div>
-                </div><!-- .tab-content -->
+                <tabset class="nav-tabs-slide">
+                    <tab>
+                        <tab-heading>
+                            <span class="glyphicon glyphicon-picture"></span>
+                        </tab-heading>
+                        <carousel class="carousel-no-indicators">
+                            <slide>
+                                <img src="img/slides/slide_one.png" alt="Slide One">
+                            </slide>
+                            <slide>
+                                <img src="img/slides/slide_two.png" alt="Slide Two">
+                            </slide>
+                            <slide>
+                                <img src="img/slides/slide_three.png" alt="Slide Three">
+                            </slide>
+                        </carousel>
+                    </tab>
+                    <tab>
+                        <tab-heading>
+                            <span class="glyphicon glyphicon-facetime-video"></span>
+                        </tab-heading>
+                        <carousel>
+                            <slide>
+                                <img src="img/slides/slide_two.png" alt="Slide Two">
+                            </slide>
+                            <slide>
+                                <img src="img/slides/slide_three.png" alt="Slide Three">
+                            </slide>
+                        </carousel>
+                    </tab>
+                </tabset>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -251,14 +269,20 @@
                 </div><!-- .row -->
 
                 <section class="linked linked-resource" >
-                    <h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
-                    <h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
-                    <h5><a href="">Tournée nationale 2014</a></h5>
-                    <img src="./img/bacasable.jpg" alt="Image background" />
-                    <ul class="nav">
-                        <li><a href="">Précédent</a></li>
-                        <li><a href="">Suivant</a></li>
-                    </ul><!-- .links -->
+                    <carousel class="carousel-no-indicators carousel-text-links">
+                        <slide class="left-aligned">
+                            <h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
+                            <h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
+                            <h5><a href="">Tournée nationale 2014</a></h5>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+                        </slide>
+                        <slide class="left-aligned">
+                            <h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
+                            <h4><a href="">bkfjei oifjeoiw jfe:</a></h4>
+                            <h5><a href="">fwoi jfiwj  foiwj firwj  fiwjr</a></h5>
+                            <img src="./img/bacasable.jpg" alt="Image background" />
+                        </slide>
+                    </carousel>
                 </section>
 
             </div><!-- #content -->
@@ -268,96 +292,15 @@
         <div class="col-md-4">
 
             <div id="sidebar">
-                <section class="community community-resource">
-                    <ul class="actions">
-                        <li><a href=""><span class="glyphicon glyphicon-user"></span>Rejoindre</a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span>J'ai testé</a></li>
-                    </ul>
-                    <h3>La communauté</h3>
-                    <!-- #WARNING <li> tags mustn't have any space or extra space will appear in the browser -->
-                    <ul class="submenu"
-                        ><li><a class="selected" href=""><span>06</span>L'équipe projet</a></li
-                        ><li><a href=""><span>500</span>Personnes ressources</a></li
-                        ><li><a href=""><span>300</span>Abonnés</a></li
-                    ></ul>
-                    <div class="member">
-                        <img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
-                        <p>Mathieu Corain <em>Chef de projet</em></p>
-                    </div><!-- .member -->
-                    <div class="member">
-                        <img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
-                        <p>Mathieu Corain <em>Chef de projet</em></p>
-                    </div><!-- .member -->
-                    <div class="member">
-                        <img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
-                        <p>Mathieu Corain <em>Chef de projet</em></p>
-                    </div><!-- .member -->
-                </section><!-- .community -->
+                <ng-include src="'views/catalog/block/community.html'"></ng-include>
 
                 <section class="solo">
                     <h3>J'aimerais bien tester!</h3>
                 </section>
 
-                <section class="comments">
+                <ng-include src="'views/catalog/block/comments.html'"></ng-include>
 
-                    <h3>Commentaires</h3>
-
-                    <div class="comment">
-                        <span class="date">50mn</span>
-                        <div class="author">
-                            <img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
-                            <p>Mathieu Corain <em>Chef de projet</em></p>
-                        </div>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-                    </div><!-- .comment -->
-
-                    <div class="comment">
-                        <span class="date">50mn</span>
-                        <div class="author">
-                            <img src="./img/users/user-default.png" alt="User Unknown" />
-                            <p>Anonymous user <em>Fan</em></p>
-                        </div>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-                    </div><!-- .comment -->
-
-                    <div class="comment">
-                        <span class="date">50mn</span>
-                        <div class="author">
-                            <img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
-                            <p>Mathieu Corain <em>Chef de projet</em></p>
-                        </div>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-                    </div><!-- .comment -->
-
-                    <p><a href="">Voir plus</a></p>
-
-                </section><!-- .comments -->
-
-                <section class="popularity popularity-green">
-                    <ul class="actions">
-                        <li><a href=""><span class="glyphicon glyphicon-star-empty"></span>Vote</a></li>
-                    </ul>
-                    <h3>Popularité</h3>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>Original</td>
-                                <td class="percent"><span><span style="width: 90%"></span></span></td>
-                                <td>40 <small>pt</small></td>
-                            </tr>
-                            <tr>
-                                <td>Fun</td>
-                                <td class="percent"><span><span style="width: 31%"></span></span></td>
-                                <td>26 <small>pt</small></td>
-                            </tr>
-                            <tr>
-                                <td>Prometteur</td>
-                                <td class="percent"><span><span style="width: 49%"></span></span></td>
-                                <td>15 <small>pt</small></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+                <ng-include src="'views/catalog/block/popularity.html'"></ng-include>
 
             </div><!-- #sidebar -->
 
@@ -367,59 +310,33 @@
 
     <div class="row container">
 
-        <div class="boxes">
+                <div class="col-md-12">
 
-            <div class="row">
+                    <ul class="boxes boxes-medium boxes-spaced">
+                        <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
+                        <li class="box box-solo box-red">
+                            <div>
+                                <a href="">Ressources Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </div>
+                        </li
+                        ><li class="box" ng-repeat="resource in similars">
+                            <a ui-sref="resource.detail({ slug: resource.parent.slug })">
+                                <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
+                                <h4>{{resource.parent.baseline}}</h4>
+                                <h5>{{resource.parent.title}}</h5>
+                                <img src="./img/bacasable.jpg" alt="Image background" />
+                            </a>
+                        </li
+                        ><li class="box box-solo box-red">
+                            <div>
+                                <a ui-sref="resource-list">Plus de ressource <span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </div>
+                        </li>
+                    </ul>
 
-                <div class="col-md-4">
-                    <div class="box box-solo box-purple">
-                        <a href="">Ressources similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/resource/resource-red.png" alt="Red Resource" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/resource/resource-orange.png" alt="Orange Resource" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </div>
-                </div>
-
-            </div><!-- .row -->
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/resource/resource-green.png" alt="Green Resource" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/resource/resource-red.png" alt="Red Resource" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="box box-solo box-purple">
-                        <a href="">Plus de ressources <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    </div>
                 </div>
 
-            </div><!-- .row -->
+            </div><!-- .row .container -->
 
         </div><!-- .boxes -->
 
