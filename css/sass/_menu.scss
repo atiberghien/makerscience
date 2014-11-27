@@ -49,6 +49,7 @@ header {
 			}
 			button.connect {
 				margin-left: 0.5em;
+				font-weight: bold;
 				@include transition(all .2s ease);
 				&:hover {
 					background-color: $color-pink !important;
