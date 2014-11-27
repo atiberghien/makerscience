@@ -149,7 +149,7 @@ button, a {
 		font-size: 1.5em;
 		text-align: center;
 		text-transform: uppercase;
-		&.large-orange, &.large-red {
+		&.large-orange, &.large-red, &.large-purple {
 			color: #fff;
 			border: none;
 		}
@@ -158,6 +158,9 @@ button, a {
 		}
 		&.large-red {
 			background-color: $color-red;
+		}
+		&.large-purple {
+			background-color: $color-purple;
 		}
 		&:hover {
 			text-decoration: none;
