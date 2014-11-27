@@ -256,22 +256,6 @@
 .home-twitter {
     background-color: #fff;
 }
-.home-follow {
-    margin: 0 $grid-gutter-width / 2 $grid-gutter-width;
-    padding: 1.75em 1.5em 1em;
-    color: #fff;
-    font-size: 0.9em;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    background-color: $color-blue;
-    background: $color-blue url('../img/bg/home-follow-bg.jpg') center center no-repeat;
-    background-size: cover;
-    li {
-        display: inline-block;
-        margin: 0 1.25em 0.5em;
-    }
-}
 footer {
     ul:first-child {
         li a {
