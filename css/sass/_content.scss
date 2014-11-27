@@ -78,10 +78,13 @@ div.toolbar {
 		padding-bottom: 4em;
 		section.title {
 			padding: 1.5em 2em;
+			padding: $grid-gutter-width;
 			color: #fff;
 			background-color: $color-blue;
 			text-transform: uppercase;
 			h3 {
+				margin-bottom: 0.5em;
+				font-family: LatoLight;
 				font-size: 1.3em;
 				font-weight: normal;
 			}
@@ -140,6 +143,7 @@ div.toolbar {
 		&> li {
 			 a {
 			 	font-size: 1.4em;
+			 	font-weight: bold;
 				color: $color-content-tab;
 				background-color: $color-content-tab-bg;
 			}
@@ -530,6 +534,8 @@ div.toolbar {
 		h3, h4, h5 {
 			z-index: 10;
 			position: relative;
+			font-family: "LatoLight";
+			font-weight: bold;
 		}
 		h3 {
 			display: inline-block;
@@ -542,23 +548,19 @@ div.toolbar {
 			@include opacity(0.8);
 		}
 		h4 a, h5 a {
-			padding: 0.2em 1em;
-			font-size: 0.9em;
-			line-height: 1.25em;
+			padding: 0.2em $grid-gutter-width / 2;
+			line-height: 1.5em;
 			text-decoration: none;
 			background-color: $color-boxes-title-bg;
 		}
 		h4 a {
-			padding-top: 0.25em;
+			padding-top: 0.75em;
 			padding-bottom: 0;
-			line-height: 1.75em;
 			text-transform: uppercase;
 		}
 		h5 a {
-			padding-bottom: 0;
-			padding-bottom: 0.25em;
-			font-size: 0.9em;
-			line-height: 2em;
+			padding-top: 0;
+			padding-bottom: 0.75em;
 			color: $color-light-grey;
 		}
 		a {
@@ -604,6 +606,7 @@ div.toolbar {
 			a {
 				height: 100%;
 				padding: 1em;
+				font-family: "LatoBlack";
 				font-size: 1.75em;
 				font-weight: bold;
 				line-height: 1.25em;
@@ -744,7 +747,7 @@ div.toolbar {
     }
     
 	&.boxes-small {
-		font-size: 0.75em;
+		font-size: 0.85em;
 		.box {
 			height: $boxes-small-height;
 			width: $boxes-small-width;
@@ -877,6 +880,7 @@ div.toolbar {
 		    &.box-solo {
 		        a {
 		        	color: $color-dark-grey;
+		        	font-family: "LatoBlack";
 		        	&:hover {
 		                color: $color-pink;
 		                background-color: $color-dark-grey;
