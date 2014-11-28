@@ -50,6 +50,12 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         )
     )
 
+    $scope.updateMakerScienceProjectSheet = (resourceName, resourceId, fieldName, data) ->
+        putData = {}
+        putData[fieldName] = data
+        switch resourceName
+            when 'MakerScienceProject' then MakerScienceProject.one(resourceId).patch(putData)
+
     $scope.addTagFromProject = (tag) ->
         TaggedItem.one().customPOST({tag : {name: tag.text}}, "makerscienceproject/"+$scope.projectsheet.id, {})
 
@@ -99,6 +105,12 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
             )
         )
     )
+
+    $scope.updateMakerScienceResourceSheet = (resourceName, resourceId, fieldName, data) ->
+        putData = {}
+        putData[fieldName] = data
+        switch resourceName
+            when 'MakerScienceResource' then MakerScienceResource.one(resourceId).patch(putData)
 
     $scope.addTagFromResource = (tag) ->
         TaggedItem.one().customPOST({tag : {name: tag.text}}, "makerscienceresource/"+$scope.resource.id, {})
