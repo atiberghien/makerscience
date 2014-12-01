@@ -26,7 +26,7 @@
 
                 <h2 editable-text="resourcesheet.parent.baseline"
                     e-form="BaselineBtnForm"
-                    onbeforesave="updateProject('Project', resourcesheet.parent.id , 'baseline', $data)"
+                    onbeforesave="updateProjectSheet('Project', resourcesheet.parent.id , 'baseline', $data)"
                     ng-bind-html="resourcesheet.parent.baseline">{{ resourcesheet.parent.baseline }}
                 </h2>
                 <h3><span>Fiche Resource</span></h3>
@@ -135,7 +135,7 @@
                             e-form="DescBtnForm"
                             e-rows="4"
                             e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
-                            onbeforesave="updateProject('Project', projectsheet.parent.id , 'description', $data)"
+                            onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
                             ng-bind-html="resourcesheet.parent.description">
                         </p>
                         </section>
@@ -148,7 +148,7 @@
                                e-form="AnswerBtnForm"
                                e-rows="4"
                                e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
-                               onbeforesave="updateProject('ProjectSheetItem', q_a.id , 'answer', $data)"
+                               onbeforesave="updateProjectSheet('ProjectSheetItem', q_a.id , 'answer', $data)"
                                ng-bind-html="q_a.answer">
                             </p>
                         </section>

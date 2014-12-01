@@ -27,7 +27,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
                 return projectsheet
             )
         )
-    $scope.updateProject = (resourceName, resourceId, fieldName, data) ->
+    $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
         putData = {}
         putData[fieldName] = data
         switch resourceName
