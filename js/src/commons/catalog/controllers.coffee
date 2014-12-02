@@ -5,13 +5,12 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
 )
 
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet, Project,
-                                       PostalAddress, ProjectSheetTemplate, ProjectSheetItem) ->
+                                       PostalAddress, ProjectSheetTemplate, ProjectSheetItem, BucketFile, Bucket) ->
 
     $scope.init = ->
         return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
             projectsheet = projectsheetResult.objects[0]
             projectsheet.q_a = []
-            
             templateID = getObjectIdFromURI(projectsheet.template)
             ProjectSheetTemplate.one(templateID).get().then((templateResult) ->
                 angular.forEach(templateResult.questions, (question, index) ->
@@ -33,6 +32,28 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
         switch resourceName
             when 'Project' then Project.one(resourceId).patch(putData)
             when 'ProjectSheetItem' then ProjectSheetItem.one(resourceId).patch(putData)
+            when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
+
+    $scope.loadBucketFiles = (BucketUri) ->
+        console.log(" ==== getting bucket ", BucketUri)
+        Bucket.one(getObjectIdFromURI(BucketUri)).get().then((data)->
+                console.log(" Got bucket ! ", data)
+                $scope.bucket = data.files
+            )
+
+    $scope.updateCover = (projectsheetId, coverUri)->
+        putData = 
+            cover:coverUri
+        ProjectSheet.one(projectsheetId).patch(putData).then((data)->
+            $scope.projectsheet.cover = data.cover
+            )
+        
+        
+    # $scope.$watch('projectsheet.cover.resource_uri', (newVal, oldVal) ->
+    #     if (newVal != oldVal)
+    #         console.log( " Cover URI changed ! Nv = "+newVal+" old val = "+oldVal)
+    #         ProjectSheet.one()
+    # )
 )
 
 module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, PostalAddress,
@@ -106,3 +127,8 @@ module.controller("ProjectProgressCtrl", ($scope, ProjectProgress) ->
             $scope.updateProgressChoice($scope.progressRange[0])
         )
 )
+
+module.controller("ProjectCoverCtrl", ($scope, Bucket, ProjectSheet) ->
+    
+
+)   

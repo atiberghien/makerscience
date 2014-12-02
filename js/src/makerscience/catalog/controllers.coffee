@@ -32,6 +32,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     $scope.init().then((projectSheetResult) ->
         MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
             $scope.projectsheet = makerScienceProjectResult.objects[0]
+            $scope.projectsheet.cover = projectSheetResult.cover
+            $scope.projectsheet.bucket = projectSheetResult.bucket
+            $scope.projectsheet.original_projectsheet_id = projectSheetResult.id
             $scope.projectsheet.items = projectSheetResult.items
             $scope.projectsheet.q_a = projectSheetResult.q_a
 

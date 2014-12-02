@@ -33,8 +33,9 @@
 
                 <div class="row">
 
-                    <div class="col-md-8">
-                        <img src="img/bacasable.jpg" alt="Project Image" />
+                    <div class="col-md-8" >
+                        <img ng-src="{{ config.media_uri }}{{ projectsheet.cover.thumbnail_url+'?width=711' || 'img/bacasable.jpg'}}" alt="Project Image" />
+                       
                     </div>
 
                     <div class="col-md-4">
@@ -98,6 +99,15 @@
                             </div>
                             <div class="editable">
                                 <p>Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
+                            </div>
+                            <div class="editable" ng-show="editable" style="padding-top:inherit"><!-- ng-controller="ProjectCoverCtrl" -->
+                                <p>Image de couverture</p>
+                                <a href="#" editable-select="projectsheet.cover.resource_uri" 
+                                            onshow="loadBucketFiles(projectsheet.bucket)"
+                                            onbeforesave="updateCover(projectsheet.original_projectsheet_id, $data)"
+                                            e-ng-options="bucketfile.resource_uri as bucketfile.filename for bucketfile in bucket">
+                                    {{ projectsheet.cover.filename || 'non choisie' }}
+                                </a>
                             </div>
                         </div><!-- .sideproject -->
 

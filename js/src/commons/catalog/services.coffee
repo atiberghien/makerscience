@@ -23,3 +23,11 @@ module.factory('ProjectSheetItem', (Restangular) ->
 module.factory('ProjectProgress', (Restangular) ->
     return Restangular.service('projectprogress')
 )
+
+module.factory('BucketFile', (Restangular) ->
+    return Restangular.service('bucket/file')
+)
+
+module.factory('Bucket', (Restangular) ->
+    return Restangular.service('bucket/bucket')
+)
