@@ -4,11 +4,13 @@ form.search-full-width {
 	background-color: #fff;
 	text-align: justify;
 	input, button {
-		padding: 0.6em 1em;
+		padding: 0.5em 1em;
 		border: none;
 	}
 	input {
 		width: 99%;
+		border-left: 1px solid $color-very-light-grey;
+		border-bottom: 1px solid $color-very-light-grey;
 	}
 	button {
 		position: absolute;
@@ -137,8 +139,9 @@ div.action-bar {
 	h1 {
 		margin: 1.5em 0 0.5em;
 		color: $color-intro-h1;
+		font-size: 3em;
+		font-family: LatoBlack;
 		font-weight: bold;
-		font-size: 2.2em;
 		text-transform: uppercase;
 	}
 	h2 {
@@ -250,7 +253,7 @@ div.action-bar {
 		}
 		h1, h2 {
 			margin: 0;
-			font-size: 3em;
+			font-size: 3.5em;
 			line-height: 1.5em;
 			text-transform: uppercase;
 		}
@@ -260,7 +263,7 @@ div.action-bar {
 		h2 {
 			margin-bottom: 1.25em;
 			em {
-				border-bottom: 4px solid $color-intro-listing;
+				border-bottom: 9px solid $color-intro-listing;
 			}
 		}
 		button {

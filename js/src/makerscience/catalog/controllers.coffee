@@ -53,6 +53,12 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         )
     )
 
+    $scope.updateMakerScienceProjectSheet = (resourceName, resourceId, fieldName, data) ->
+        putData = {}
+        putData[fieldName] = data
+        switch resourceName
+            when 'MakerScienceProject' then MakerScienceProject.one(resourceId).patch(putData)
+
     $scope.addTagFromProject = (tag) ->
         TaggedItem.one().customPOST({tag : {name: tag.text}}, "makerscienceproject/"+$scope.projectsheet.id, {})
 
@@ -103,10 +109,26 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
         )
     )
 
+    $scope.updateMakerScienceResourceSheet = (resourceName, resourceId, fieldName, data) ->
+        putData = {}
+        putData[fieldName] = data
+        switch resourceName
+            when 'MakerScienceResource' then MakerScienceResource.one(resourceId).patch(putData)
+
     $scope.addTagFromResource = (tag) ->
         TaggedItem.one().customPOST({tag : {name: tag.text}}, "makerscienceresource/"+$scope.resource.id, {})
 
     $scope.removeTagFromResource = (tag) ->
         taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
         TaggedItem.one(taggedItemID).remove()
+)
+
+
+module.controller("ResourceLevelCtrl", ($scope) ->
+    $scope.level = 1
+    $scope.selectedClasses = {"1" : "selected"}
+
+    $scope.updateLevelChoice = (progressChoice) ->
+        $scope.selectedClasses = {}
+        $scope.selectedClasses[progressChoice] = "selected"
 )

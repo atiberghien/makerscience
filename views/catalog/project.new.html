@@ -103,7 +103,16 @@
                                 <textarea name="project-idea" placeholder="Champ de texte..." rows="4"></textarea>
                                 <button class="right">Suivant</button>
                             </fieldset>
-                            <button class="button button-add">Gallerie photo et vidéo</button>
+                            <fieldset class="addPhotosVideos">
+                            	<label for="addPhotosVideos">Ajouter d'autres photos ou des vidéos</label>
+                            	<button class="addPhotos" id="addPhotosVideos"><span class="glyphicon glyphicon-camera"></span></button
+                            	><button class="addVideos" ng-click="addPhotosVideos=!addPhotosVideos"><span class="glyphicon glyphicon-facetime-video"></span></button>
+	                            <div ng-show="addPhotosVideos">
+	                            	<input type="text" name="video-youtube" class="video-youtube" placeholder="http://youtu.be/Pib8eYDSFEI" />
+	                            	<input type="text" name="video-vimeo" class="video-vimeo" placeholder="http://vime.be/Pib8eYDSFEI" />
+	                            	<button class="button">Valider</button>
+	                            </div>
+                            </fieldset>
                         </div>
 
                         <div class="col-md-6">

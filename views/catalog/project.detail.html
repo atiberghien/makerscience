@@ -26,7 +26,7 @@
 
                 <h2 editable-text="projectsheet.parent.baseline"
                     e-form="BaselineBtnForm"
-                    onbeforesave="updateProject('Project', projectsheet.parent.id , 'baseline', $data)"
+                    onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'baseline', $data)"
                     ng-bind-html="projectsheet.parent.baseline">{{ projectsheet.parent.baseline }}
                 </h2>
                 <h3><span>Fiche Projet</span></h3>
@@ -66,13 +66,6 @@
                                 <div class="edit-buttons" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                                 </div>
-                                <!--<fieldset class="phases">
-                                    <p>État d'avancement</p>
-                                    <label class="phase{{projectsheet.parent.progress.order+1}}">
-                                        <img src="{{projectsheet.parent.progress.icon}}" />
-                                        {{projectsheet.parent.progress.label}}
-                                    </label>
-                                </fieldset>-->
                                 <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
                                     <p>État d'avancement</p>
                                     <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
@@ -92,7 +85,7 @@
                                 </div>
                                 <p editable-bsdate="projectsheet.parent.end_date"
                                     e-form="EndDateBtnForm"
-                                    onbeforesave="updateProject('Project', projectsheet.parent.id , 'end_date', $data)"
+                                    onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'end_date', $data)"
                                     e-datepicker-popup="dd/MM/yyyy"
                                     ng-bind-html="projectsheet.parent.end_date">Fin de projet: {{projectsheet.parent.end_date || "N/C" }}
                                 </p>
@@ -138,7 +131,7 @@
                                  e-form="DescBtnForm"
                                  e-rows="4"
                                  e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
-                                 onbeforesave="updateProject('Project', projectsheet.parent.id , 'description', $data)"
+                                 onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
                                  ng-bind-html="projectsheet.parent.description">
                             </p>
 
@@ -152,7 +145,7 @@
                                  e-form="AnswerBtnForm"
                                  e-rows="4"
                                  e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
-                                 onbeforesave="updateProject('ProjectSheetItem', q_a.id , 'answer', $data)"
+                                 onbeforesave="updateProjectSheet('ProjectSheetItem', q_a.id , 'answer', $data)"
                                  ng-bind-html="q_a.answer">
                             </p>
                         </section>

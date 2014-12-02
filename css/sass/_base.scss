@@ -13,7 +13,7 @@ $linked-height: 20em;
 $intro-height: 25em;
 
 body {
-	font: 0.85em/1.5em sans-serif;
+	font: 0.85em/1.5em Lato, sans-serif;
 	background-color: $color-bg;
 	/*
 	@include background-image(linear-gradient(#333, #bdbdbd, #333));
@@ -149,7 +149,7 @@ button, a {
 		font-size: 1.5em;
 		text-align: center;
 		text-transform: uppercase;
-		&.large-orange, &.large-red {
+		&.large-orange, &.large-red, &.large-purple {
 			color: #fff;
 			border: none;
 		}
@@ -158,6 +158,9 @@ button, a {
 		}
 		&.large-red {
 			background-color: $color-red;
+		}
+		&.large-purple {
+			background-color: $color-purple;
 		}
 		&:hover {
 			text-decoration: none;

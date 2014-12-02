@@ -26,7 +26,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
                 return projectsheet
             )
         )
-    $scope.updateProject = (resourceName, resourceId, fieldName, data) ->
+    $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
         putData = {}
         putData[fieldName] = data
         switch resourceName
@@ -116,9 +116,7 @@ module.controller("ProjectProgressCtrl", ($scope, ProjectProgress) ->
     $scope.selectedClasses = {}
 
     $scope.updateProgressChoice = (progressChoice) ->
-        angular.forEach($scope.progressRange, (progress) ->
-            $scope.selectedClasses[progress.id] = ""
-        )
+        $scope.selectedClasses = {}
         $scope.selectedClasses[progressChoice.id] = "selected"
 
     $scope.init = (projectProgressRangeSlug) ->
