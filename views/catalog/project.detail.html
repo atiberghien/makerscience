@@ -199,18 +199,18 @@
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
                         <carousel class="carousel-no-indicators">
-                            <div ng-repeat=" img in ">
-
-                            </div>
-                            <slide>
-                                <img src="img/slides/slide_one.png" alt="Slide One">
-                            </slide>
-                            <slide>
-                                <img src="img/slides/slide_two.png" alt="Slide Two">
-                            </slide>
-                            <slide>
-                                <img src="img/slides/slide_three.png" alt="Slide Three">
-                            </slide>
+                                <slide ng-if="projectsheet.bucket.files.length" ng-repeat=" img in projectsheet.bucket.files">
+                                    <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?width=683' }}" alt="Slide">
+                                </slide>
+                                <slide ng-if="!projectsheet.bucket.files.length">
+                                    <img src="img/slides/slide_one.png" alt="Slide One">
+                                </slide>
+                                <slide ng-if="!projectsheet.bucket.files.length">
+                                    <img src="img/slides/slide_two.png" alt="Slide Two">
+                                </slide>
+                                <slide ng-if="!projectsheet.bucket.files.length">
+                                    <img src="img/slides/slide_three.png" alt="Slide Three">
+                                </slide>
                         </carousel>
                     </tab>
                     <tab>
