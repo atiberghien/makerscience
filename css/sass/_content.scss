@@ -133,8 +133,6 @@ div.toolbar {
 	ul.nav-tabs {
 		margin-bottom: 1em;
 		border: none;
-	}
-	ul.nav-tabs {
 		&.nav-tabs-seance,
 		&.nav-tabs-slide,
 		&.nav-tabs-listing {
@@ -166,18 +164,18 @@ div.toolbar {
 				background-color: $color-content-tab-seance-active-bg;
 			}
 		}
-		&.nav-tabs-slide {
-			font-size: 1.3em;
-			&>li a {
-				color: $color-content-tab-slide;
-				background-color: $color-content-tab-slide-bg;
-				@include border-radius(0);
-			}
-			&>li.active a {
-				background-color: $color-content-tab-slide-active-bg;
-				border: 2px solid $color-content-tab-active;
-			}
-		}
+/*		&.nav-tabs-slide {*/
+/*			font-size: 1.3em;*/
+/*			&>li a {*/
+/*				color: $color-content-tab-slide;*/
+/*				background-color: $color-content-tab-slide-bg;*/
+/*				@include border-radius(0);*/
+/*			}*/
+/*			&>li.active a {*/
+/*				background-color: $color-content-tab-slide-active-bg;*/
+/*				border: 2px solid $color-content-tab-active;*/
+/*			}*/
+/*		}*/
 		&.nav-tabs-listing {
 			margin-bottom: 3em;
 			&> li.active a {
@@ -235,8 +233,21 @@ div.toolbar {
 				@include border-radius(0);
 			}
 			&>li.active a {
-				background-color: $color-content-tab-slide-active-bg;
 				border: 2px solid $color-content-tab-active;
+			}
+		}
+		&.nav-tabs-slide-project {
+			ul.nav-tabs {
+				&>li.active a {
+					background-color: $color-blue;
+				}
+			}
+		}
+		&.nav-tabs-slide-resource {
+			ul.nav-tabs {
+				&>li.active a {
+					background-color: $color-green;
+				}
 			}
 		}
 	}
