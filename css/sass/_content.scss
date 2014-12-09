@@ -118,6 +118,9 @@ div.toolbar {
 			h5 {
 				margin-bottom: 0;
 			}
+			.text-center {
+				text-align: justify; /* prevent bootstrap from centering items in the carousel */
+			}
 		}
 	}
 	&.project {
