@@ -84,7 +84,7 @@ div.toolbar {
 			text-transform: uppercase;
 			h3 {
 				margin-bottom: 0.5em;
-				font-family: LatoLight;
+				font-family: latolight;
 				font-size: 1.3em;
 				font-weight: normal;
 			}
@@ -534,7 +534,7 @@ div.toolbar {
 		h3, h4, h5 {
 			z-index: 10;
 			position: relative;
-			font-family: "LatoLight";
+			font-family: latolight;
 			font-weight: bold;
 		}
 		h3 {
@@ -606,7 +606,7 @@ div.toolbar {
 			a {
 				height: 100%;
 				padding: 1em;
-				font-family: "LatoBlack";
+				font-family: latoblack;
 				font-size: 1.75em;
 				font-weight: bold;
 				line-height: 1.25em;
@@ -880,7 +880,7 @@ div.toolbar {
 		    &.box-solo {
 		        a {
 		        	color: $color-dark-grey;
-		        	font-family: "LatoBlack";
+		        	font-family: latoblack;
 		        	&:hover {
 		                color: $color-pink;
 		                background-color: $color-dark-grey;
