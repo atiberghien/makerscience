@@ -32,9 +32,11 @@
 			    margin-bottom: 0.75em;
 			    padding: 1em;
 			    background-color: $color-light-grey;
-			    &.needs-idea, &.fixme {
+			    &.needs-idea, &.needs, &.fixme {
 				    height: 15em;
-				    margin-top: 1.5em;
+				    height: $grid-gutter-width * 6;
+				    height: auto; /* FIXME */
+				    margin-top: $grid-gutter-width;
 				    padding: 1.5em 1.5em 2.5em;
 				    background-color: $color-light-grey;
 				    background-position: 1.5em 4em;
@@ -65,6 +67,96 @@
 			    }
 			    &.needs-idea {
 				    background-image: url('../img/needs/needs-idea.png');
+				    h4 {
+				    	font-size: 1em;
+				    	text-transform: uppercase;
+				    }
+			    }
+			    &.needs {
+			    	&.needs-select, &.needs-save {
+			    		background-image: none;
+			    		h4 {
+			    			font-size: 1.2em;
+			    		}
+			    	}
+			    	&.needs-select {
+			    		padding-bottom: 3em;
+			    		p {
+			    			margin: 1.5em 0 1em;
+			    			font-size: 1.4em;
+			    			font-weight: bold;
+				    		text-align: center;
+			    			text-transform: uppercase;
+			    		}
+			    		button, ul {
+			    			width: 75%;
+			    		}
+			    		button, li {
+			    			color: #fff;
+			    			background-color: $color-blue;
+			    		}
+			    		button, button span {
+			    			font-size: 1.4em;
+			    			font-weight: bold;
+			    			vertical-align: middle;
+			    		}
+			    		button {
+			    			display: block;
+			    			margin: 0 auto;
+			    			padding: 0 0 0 1em;
+			    			line-height: 2.5em;
+			    			border: none;
+			    			text-align: left;
+			    			&:active, &:focus {
+			    				outline: 0; /* remove border on Chrome */
+			    			}
+							span {
+								top: 0;
+								float: right;
+								padding-right: 0.5em;
+								padding-left: 0.5em;
+								background-color: $color-dark-blue;
+				    			line-height: 2em;
+							}
+			    		}
+			    		ul {
+			    			z-index: 1;
+			    			position: relative;
+			    			margin: 1px auto;
+							li {
+								padding-left: 5%;
+								font-size: 1.4em;
+								font-weight: bold;
+								line-height: 3em;
+								@include transition(background-color 0.2s ease);
+								&:hover {
+									cursor: pointer;
+									background-color: $color-dark-blue;
+								}
+							}
+						}
+			    	}
+			    	&.needs-save {
+			    		padding-bottom: $grid-gutter-width / 2;
+			    		background: $color-light-grey url('../img/needs/needs-idea.png') 5% 50% no-repeat;
+			    		h5 {
+			    			margin-left: 0;
+			    			font-weight: bold;
+			    		}
+			    		textarea {
+			    			display: inline;
+			    			margin: $grid-gutter-width / 2 0;
+			    			padding: 1em;
+			    			font-size: 1.1em;
+			    			background-color: #fff;
+			    			@include border-radius(3px);
+			    		}
+			    		button {
+			    			padding-top: 0.3em;
+			    			padding-bottom: 0.4em;
+			    			font-size: 1.1em;
+			    		}
+			    	}
 			    }
 			    &.addPhotosVideos {
 			    	text-align: right;

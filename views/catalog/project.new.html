@@ -97,11 +97,32 @@
                     <div class="row">
 
                         <div class="col-md-6">
-                            <fieldset class="needs-idea">
-                                <h4>Vos besoins?</h4>
-                                <h5>Idée</h5>
-                                <textarea name="project-idea" placeholder="Champ de texte..." rows="4"></textarea>
-                                <button class="right">Suivant</button>
+                            <fieldset class="needs needs-select">
+                                <h4>Vos besoins</h4>
+                                <p>Précisez ici vos besoins du moment.</p>
+                                <!-- Button's value should take the selected <li>'s value -->
+                                <button ng-click="showNeedsMenu=!showNeedsMenu">Nouvelles idées <span class="glyphicon glyphicon-chevron-down"></span></button>
+                                <!-- Alban: Need to change the ng-click event to update the button's value and go to the next step -->
+                                <ul ng-show="showNeedsMenu">
+                                	<li ng-click="showNeedsMenu=!showNeedsMenu">Nouvelles idées</li>
+                                	<li ng-click="showNeedsMenu=!showNeedsMenu">Compétences</li>
+                                	<li ng-click="showNeedsMenu=!showNeedsMenu">Matériel</li>
+                                	<li ng-click="showNeedsMenu=!showNeedsMenu">Financement</li>
+                                	<li ng-click="showNeedsMenu=!showNeedsMenu">Conseils</li>
+                                	<li ng-click="showNeedsMenu=!showNeedsMenu">Avis</li>
+                                </ul>
+                            </fieldset>
+                            <fieldset class="needs needs-save">
+                                <h4>Vos besoins</h4>
+                                <h5>Nouvelles Idées <!-- Alban: need to replace this by the selected option above --></h5>
+                                <p class="right">
+	                                <textarea name="project-idea" placeholder="Vous avez besoin d'idées fraîches pour votre projet? Précisez ici votre besoin..." rows="4"></textarea>
+                                </p>
+                                <p class="right">
+		                            <button class="button cancel">Annuler</button>
+		                            <button class="button">Enregistrer</button>
+		                            <button class="button">Enregistrer et ajouter</button>
+	                            </p>
                             </fieldset>
                             <fieldset class="addPhotosVideos">
                             	<label for="addPhotosVideos">Ajouter d'autres photos ou des vidéos</label>
