@@ -16,6 +16,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
 # Tastypie
 .config((RestangularProvider) ->
         RestangularProvider.setBaseUrl(config.rest_uri)
+        RestangularProvider.setDefaultHeaders({"Authorization": "ApiKey dataserver:f68ff7afb86637e66778f700c35cb2df1d24c231"});
         RestangularProvider.setRequestSuffix('?format=json');
         # Tastypie patch
         RestangularProvider.setResponseExtractor((response, operation, what, url) ->
@@ -109,6 +110,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
     amMoment.changeLocale('fr');
 
     $rootScope.loginService = loginService
+    $rootScope.config = config
 )
 
 angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->

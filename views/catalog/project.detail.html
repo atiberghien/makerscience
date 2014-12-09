@@ -33,8 +33,9 @@
 
                 <div class="row">
 
-                    <div class="col-md-8">
-                        <img src="img/bacasable.jpg" alt="Project Image" />
+                    <div class="col-md-8" >
+                        <img ng-if="projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Project Image" />
+                        <img ng-if="!projectsheet.cover" src="img/bacasable.jpg" alt="Project Image" />
                     </div>
 
                     <div class="col-md-4">
@@ -92,6 +93,15 @@
                             <div class="editable">
                                 <p>Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
                             </div>
+                            <div class="editable" ng-show="editable" style="padding-top:inherit"><!-- ng-controller="ProjectCoverCtrl" -->
+                                <p>Image de couverture</p>
+                                <a href="#" editable-select="projectsheet.cover.resource_uri" 
+                                            onshow="loadBucketFiles(projectsheet.bucket)"
+                                            onbeforesave="updateCover(projectsheet.original_projectsheet_id, $data)"
+                                            e-ng-options="bucketfile.resource_uri as bucketfile.filename for bucketfile in bucket">
+                                    {{ projectsheet.cover.filename || 'non choisie' }}
+                                </a>
+                            </div>
                         </div><!-- .sideproject -->
 
                     </div><!-- .col-md-4 -->
@@ -118,7 +128,7 @@
                             <h3>A propos du projet</h3>
 
                             <p editable-text-angular="projectsheet.parent.description"
-                                 e-form="DescBtnForm"
+                                 e-form="DescBtnForm"c
                                  e-rows="4"
                                  e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
                                  onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
@@ -189,15 +199,18 @@
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
                         <carousel class="carousel-no-indicators">
-                            <slide>
-                                <img src="img/slides/slide_one.png" alt="Slide One">
-                            </slide>
-                            <slide>
-                                <img src="img/slides/slide_two.png" alt="Slide Two">
-                            </slide>
-                            <slide>
-                                <img src="img/slides/slide_three.png" alt="Slide Three">
-                            </slide>
+                                <slide ng-if="projectsheet.bucket.files.length" ng-repeat=" img in projectsheet.bucket.files">
+                                    <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?width=683' }}" alt="Slide">
+                                </slide>
+                                <slide ng-if="!projectsheet.bucket.files.length">
+                                    <img src="img/slides/slide_one.png" alt="Slide One">
+                                </slide>
+                                <slide ng-if="!projectsheet.bucket.files.length">
+                                    <img src="img/slides/slide_two.png" alt="Slide Two">
+                                </slide>
+                                <slide ng-if="!projectsheet.bucket.files.length">
+                                    <img src="img/slides/slide_three.png" alt="Slide Three">
+                                </slide>
                         </carousel>
                     </tab>
                     <tab>
