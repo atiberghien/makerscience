@@ -339,8 +339,10 @@
     
     tags-input {
         div.tags {
+        	border: none;
+        	background-color: transparent;
+        	box-shadow: none;
             input {
-                margin: 0 0 0 0.5em !important;
                 padding: 0 !important;
                 background-color: transparent !important;
             }
