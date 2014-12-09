@@ -102,6 +102,13 @@
     padding: $grid-gutter-width 0;
     background-color: #fff;
     font-size: 1.05em;
+	.col-md-4 {
+		&:first-child {
+    		padding-left: $grid-gutter-width / 2 + 5px;
+		}
+		padding-left: 0;
+		padding-right: 0;
+	}
     img {
         display: block;
         margin: 0 auto 0.75em;
@@ -116,7 +123,7 @@
     ul {
         margin-top: 0.5em;
         a {
-            font-size: 0.9em;
+            font-size: 0.87em;
             font-weight: bold;
             color: $color-dark-grey;
             @include transition(color 1s ease);
