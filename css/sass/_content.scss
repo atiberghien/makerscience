@@ -559,20 +559,23 @@ div.toolbar {
 			background-color: $color-boxes-title-bg;
 		}
 		h4, h5 {
+			padding: 0.2em $grid-gutter-width / 2;
+			line-height: 1.5em;
+			background-color: $color-boxes-title-bg;
 			@include opacity(0.8);
 		}
 		h4 a, h5 a {
-			padding: 0.2em $grid-gutter-width / 2;
-			line-height: 1.5em;
 			text-decoration: none;
-			background-color: $color-boxes-title-bg;
 		}
-		h4 a {
+		h4 a:hover, h5 a:hover {
+			text-decoration: underline;
+		}
+		h4 {
 			padding-top: 0.75em;
 			padding-bottom: 0;
 			text-transform: uppercase;
 		}
-		h5 a {
+		h5 {
 			padding-top: 0;
 			padding-bottom: 0.75em;
 			color: $color-light-grey;
@@ -604,11 +607,12 @@ div.toolbar {
 			left: 0;
 			right: 0;
 			h4, h5 {
+				display: block;
+				background-color: $color-dark-grey;
 				@include opacity(0.95);
 			}
 			h4 a, h5 a {
-				display: block;
-				background-color: $color-dark-grey;
+				display: inline;
 			}
 		}
 		&.box-blue { background-color: $color-blue; }
