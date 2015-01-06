@@ -52,6 +52,12 @@ span.fixme {
 	background-color: yellow;
 }
 
+button.button {
+	color: #fff;
+	background-color: $color-blue;
+	border: none;
+}
+
 h2.boxed {
 	padding: 1.25em;
 	color: #fff;

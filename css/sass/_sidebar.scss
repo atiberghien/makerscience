@@ -105,6 +105,7 @@
 	
 	section.comments {
 	
+		position: relative;
 		color: $color-sidebar-comments;
 		background-color: $color-sidebar-comments-bg;
 		
@@ -153,6 +154,30 @@
 				text-decoration: underline;
 			}
 		}
+		
+		&.comments-add {
+			.comment {
+				border-bottom: none;
+			}
+			fieldset {
+				padding: 0 2em;
+			}
+			textarea {
+				width: 100%;
+				height: 15em;
+				padding: 1em;
+			}
+			button {
+				margin: $grid-gutter-width / 2 0 $grid-gutter-width;
+				width: 100%;
+				padding: 0.5em;
+				font-size: 1.25em;
+				font-weight: bold;
+				text-transform: uppercase;
+				@include border-radius(1px);
+			}
+		}
+		
 	}
 	
 	section.popularity {
