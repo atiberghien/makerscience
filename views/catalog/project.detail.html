@@ -71,7 +71,8 @@
                                     <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
                                            style="background-image: url('http://data.nonetype.net{{progress.icon}}')"
                                            ng-repeat="progress in progressRange"
-                                           ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri">
+                                           ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri"
+                                           tooltip="{{progress.label}} + Explication?">
                                         {{progress.label}}
                                     </label>
                                 </fieldset>
