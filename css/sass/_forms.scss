@@ -32,7 +32,7 @@
 			    margin-bottom: 0.75em;
 			    padding: 1em;
 			    background-color: $color-light-grey;
-			    &.needs-idea, &.needs, &.fixme {
+			    &.needs-idea, &.needs, &.linked-idea, &.fixme {
 				    height: 15em;
 				    height: $grid-gutter-width * 6;
 				    height: auto; /* FIXME */
@@ -42,14 +42,21 @@
 				    background-position: 1.5em 4em;
 				    background-repeat: no-repeat;
 				    h4 {
-					    font-size: 0.9em;
+		    			font-size: 1.2em;
 					    font-weight: bold;
+				    	text-transform: uppercase;
 				    }
 				    h5 {
 					    margin-top: 0.5em;
 					    margin-left: 25%;
 					    font-size: 1.5em;
 					    text-transform: uppercase;
+				    }
+				    p {
+				    	margin-bottom: 1em;
+				    	&:last-child {
+				    		margin-bottom: 0;
+				    	}
 				    }
 				    textarea {
 					    width: 75%;
@@ -67,17 +74,10 @@
 			    }
 			    &.needs-idea {
 				    background-image: url('../img/needs/needs-idea.png');
-				    h4 {
-				    	font-size: 1em;
-				    	text-transform: uppercase;
-				    }
 			    }
 			    &.needs {
 			    	&.needs-select, &.needs-save {
 			    		background-image: none;
-			    		h4 {
-			    			font-size: 1.2em;
-			    		}
 			    	}
 			    	&.needs-select {
 			    		padding-bottom: 3em;
