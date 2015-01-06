@@ -216,6 +216,7 @@
     }
 }
 .home-projects-resources {
+	overflow: hidden; /* prevent horizontal scrollbar */
 	position: relative;
 	height: $boxes-small-height + $grid-gutter-width * 2;
 }
