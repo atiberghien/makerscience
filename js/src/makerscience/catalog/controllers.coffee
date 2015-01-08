@@ -1,4 +1,4 @@
-module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers'])
+module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers', 'angularFileUpload'])
 
 module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) ->
     $scope.projects = MakerScienceProject.getList().$object
@@ -8,8 +8,14 @@ module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource)
     $scope.resources = MakerScienceResource.getList().$object
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject) ->
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, @$http, FileUploader, MakerScienceProject) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
+    $scope.uploader = new FileUploader(
+        url: config.bucket_uri
+        headers :
+            Authorization : @$http.defaults.headers.common.Authorization
+    )
+
     $scope.tags = []
 
     $scope.saveMakerscienceProject = (projectsheet) ->
@@ -20,7 +26,17 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
         $scope.saveProject(projectsheet).then((projectsheet) ->
             MakerScienceProject.post({'parent' : projectsheet.project, 'tags' : tagsParam}).then(->
-                $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
+                angular.forEach($scope.uploader.queue, (item) ->
+                    item.formData.push(
+                        bucket : projectsheet.bucket.id
+                    )
+                    item.headers =
+                       Authorization : $scope.uploader.headers["Authorization"]
+                )
+                $scope.uploader.onCompleteAll(->
+                    $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
+                )
+                $scope.uploader.uploadAll()
             )
         )
 )

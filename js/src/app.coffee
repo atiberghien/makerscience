@@ -1,6 +1,6 @@
 angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
 angular.module('commons.accounts', ['commons.accounts.services'])
-angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services'])
+angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers'])
 angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base', 'restangular',
@@ -16,7 +16,6 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
 # Tastypie
 .config((RestangularProvider) ->
         RestangularProvider.setBaseUrl(config.rest_uri)
-        RestangularProvider.setDefaultHeaders({"Authorization": "ApiKey dataserver:f68ff7afb86637e66778f700c35cb2df1d24c231"});
         RestangularProvider.setRequestSuffix('?format=json');
         # Tastypie patch
         RestangularProvider.setResponseExtractor((response, operation, what, url) ->
