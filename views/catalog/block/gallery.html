@@ -1,13 +1,17 @@
 <div class="modal-header">
     <h3 class="modal-title">Galerie</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body modal-gallery">
     <tabset class="nav-tabs-project">
         <tab heading="Photos">
             <section>
                 <input type="file" nv-file-select="" uploader="uploader" multiple />
-                <ul>
+                <ul class="thumbnails">
                     <li ng-repeat="item in uploader.queue" style="float: left;text-align: center;">
+                    	<!--
+                    		Selected photo: change the span class from "glyphicon-star-empty" to "glyphicon-star"
+                    	-->
+                    	<span class="glyphicon glyphicon-star-empty"></span>
                         <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
                         <div>{{ item.file.name }} ({{ item.file.size/1024/1024|number:2 }} Mb)</div>
                         <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">

@@ -1,0 +1,32 @@
+.modal-gallery {
+	input[type=file] {
+		margin: 1em 0;
+	}
+	ul.thumbnails {
+		overflow: hidden; /* restore block size */
+		margin: 1em 0;
+		li {
+			position: relative;
+			margin-right: 0.5em;
+			padding: 0.5em;
+			background-color: $color-light-cream;
+			border: 2px solid $color-light-grey;
+			&> span {
+				position: absolute;
+				top: 5px;
+				right: 5px;
+				font-size: 1.25em;
+				cursor: pointer;
+				&:hover {
+					color: $color-pink;
+				}
+			}
+			button {
+				margin-top: 0.5em;
+			}
+			&:hover {
+				border-color: $color-blue;
+			}
+		}
+	}
+}
