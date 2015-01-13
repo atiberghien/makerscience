@@ -128,30 +128,18 @@
 
     <div class="row row-home">
         <div class="col-md-7">
+        
             <div class=" home-community">
                 <h2>Membres de la communauté</h2>
-
                 <div class="boxes boxes-profils" ng-controller="MakerScienceProfileListCtrl">
                     <ul class="members members-small" >
                         <li ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)" ng-repeat="baseProfile in profiles">
-                            <a ui-sref="profile.detail({id:profile.id})">
-                                <gravatar-image data-gravatar-email="profile.parent.user.email"
-                                                data-gravatar-size="85"
-                                                data-gravatar-rating="pg"
-                                                data-gravatar-default="mm"
-                                                data-gravatar-secure="true"
-                                                data-gravatar-css-class="img-circle">
-                                </gravatar-image>
-                                <h3>{{profile.parent.user.first_name}} <strong>{{profile.parent.user.last_name}}</strong></h3>
-                                <h4>{{profile.activity}}</h4>
-                                <h5 ng-if="profile.location"><span class="glyphicon glyphicon-map-marker"></span> {{profile.location.address_locality}}</h5>
-                            </a>
+                        	<ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
                         </li
                         ><li class="box-solo">
                             <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                         </li>
                     </ul><!-- .members -->
-
                 </div><!-- .boxes -->
             </div><!--  .home-community -->
 
