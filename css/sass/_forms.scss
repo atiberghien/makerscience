@@ -93,6 +93,7 @@
 			    				margin-top: 1em;
 			    				button {
 			    					display: inline-block;
+			    					padding: 0.5em 1em;
 			    				}
 			    			}
 			    		}
@@ -125,6 +126,16 @@
 			    			padding-bottom: 0.4em;
 			    			font-size: 1.1em;
 			    		}
+			    	}
+			    }
+			    &.linked-idea {
+			    	input {
+			    		background-color: #fff;
+			    	}
+		    		p.right {
+		    			button {
+		    				padding: 0.5em 1em;
+		    			}
 			    	}
 			    }
 			    &.addPhotosVideos {
