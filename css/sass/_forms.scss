@@ -32,7 +32,7 @@
 			    margin-bottom: 0.75em;
 			    padding: 1em;
 			    background-color: $color-light-grey;
-			    &.needs-idea, &.needs, &.linked-idea, &.fixme {
+			    &.needs-idea, &.needs-select, &.linked-idea, &.fixme {
 				    height: 15em;
 				    height: $grid-gutter-width * 6;
 				    height: auto; /* FIXME */
@@ -77,63 +77,32 @@
 			    }
 			    &.needs {
 			    	&.needs-select, &.needs-save {
+			    		height: auto;
 			    		background-image: none;
 			    	}
 			    	&.needs-select {
-			    		padding-bottom: 3em;
-			    		p {
-			    			margin: 1.5em 0 1em;
-			    			font-size: 1.4em;
-			    			font-weight: bold;
-				    		text-align: center;
-			    			text-transform: uppercase;
-			    		}
-			    		button, ul {
-			    			width: 75%;
-			    		}
-			    		button, li {
-			    			color: #fff;
-			    			background-color: $color-blue;
-			    		}
-			    		button, button span {
-			    			font-size: 1.4em;
-			    			font-weight: bold;
-			    			vertical-align: middle;
-			    		}
-			    		button {
-			    			display: block;
-			    			margin: 0 auto;
-			    			padding: 0 0 0 1em;
-			    			line-height: 2.5em;
-			    			border: none;
-			    			text-align: left;
-			    			&:active, &:focus {
-			    				outline: 0; /* remove border on Chrome */
+			    		padding-bottom: 0.25em;
+			    		button.dropdown-toggle {
+			    			.caret {
+			    				margin-left: 1em;
 			    			}
-							span {
-								top: 0;
-								float: right;
-								padding-right: 0.5em;
-								padding-left: 0.5em;
-								background-color: $color-dark-blue;
-				    			line-height: 2em;
-							}
 			    		}
-			    		ul {
-			    			z-index: 1;
-			    			position: relative;
-			    			margin: 1px auto;
-							li {
-								padding-left: 5%;
-								font-size: 1.4em;
-								font-weight: bold;
-								line-height: 3em;
-								@include transition(background-color 0.2s ease);
-								&:hover {
-									cursor: pointer;
-									background-color: $color-dark-blue;
-								}
-							}
+			    		p {
+			    			margin-bottom: 1em;
+			    			&.right {
+			    				margin-top: 1em;
+			    				button {
+			    					display: inline-block;
+			    				}
+			    			}
+			    		}
+						textarea {
+							width: 100%;
+							margin: 0;
+							padding: 1em;
+							background-color: #fff;
+							border: 1px solid #ccc;
+							@include border-radius(2px);
 						}
 			    	}
 			    	&.needs-save {

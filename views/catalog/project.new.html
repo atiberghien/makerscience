@@ -102,27 +102,31 @@
                     </fieldset>
 
                     <fieldset class="needs needs-select">
-                        <h4>Vos besoins</h4>
+		                <h4>Vos besoins</h4>
+                       <p>Descrivez votre besoin</p>
+                    	<div class="row">
+                    		<div class="col-md-5">
+								<div class="btn-group" dropdown is-open="status.isopen">
+									<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">Nouvelles idées <span class="caret"></span></button>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Nouvelles idées</a></li>
+										<li><a href="#">Compétences</a></li>
+										<li><a href="#">Matériel</a></li>
+										<li><a href="#">Financement</a></li>
+										<li><a href="#">Conseils</a></li>
+										<li><a href="#">Avis</a></li>
+									</ul>
+								</div>
+			                </div>
+			                <div class="col-md-7">
+				                <textarea name="project-idea" placeholder="Vous avez besoin d'idées fraîches pour votre projet? Précisez ici vos besoins du moment ..." rows="2"></textarea>
+	                        </div>
+                        </div><!-- .row -->
                         <p class="right">
-                            <textarea name="project-idea" placeholder="Vous avez besoin d'idées fraîches pour votre projet? Précisez ici vos besoins du moment ..." rows="4"></textarea>
-                        </p>
-                        <button ng-click="showNeedsMenu=!showNeedsMenu">Nouvelles idées <span class="glyphicon glyphicon-chevron-down"></span></button>
-                        <ul ng-show="showNeedsMenu">
-                            <li ng-click="showNeedsMenu=!showNeedsMenu">Nouvelles idées</li>
-                            <li ng-click="showNeedsMenu=!showNeedsMenu">Compétences</li>
-                            <li ng-click="showNeedsMenu=!showNeedsMenu">Matériel</li>
-                            <li ng-click="showNeedsMenu=!showNeedsMenu">Financement</li>
-                            <li ng-click="showNeedsMenu=!showNeedsMenu">Conseils</li>
-                            <li ng-click="showNeedsMenu=!showNeedsMenu">Avis</li>
-                        </ul>
-                        <p class="right">
-                            <textarea name="project-idea" placeholder="Descrivez votre besoin" rows="4"></textarea>
-                        </p>
-                        <p>
-                            <button class="button cancel">Supprimer</button>
                             <button class="button">Ajouter</button>
                         </p>
                     </fieldset>
+                    
                     <fieldset class="linked-idea">
                         <h4>Ressources</h4>
                         <p>Voulez-vous associer votre projet à des pages ressources ?</p>

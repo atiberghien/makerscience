@@ -68,6 +68,9 @@ div.toolbar {
 	}
 }
 
+ui-view> div.container {
+	margin-top: 200px;
+}
 
 #content, #sidebar {
 	margin-top: 3em;
@@ -391,7 +394,6 @@ div.toolbar {
 	}
 	.needs {
 		position: relative;
-		font-size: 0.9em;
 		color: $color-needs;
 		background: $color-needs-bg url('../img/bg/content-blue-bg.png') center left no-repeat;
 		#carousel-needs {
