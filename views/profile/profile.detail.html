@@ -75,127 +75,43 @@
         <div class="col-md-12">
         
             <div id="content" class="content-member">
+		        
+				<div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+		            <div class="box box-solo box-blue">
+		                <div><a href="">Mes projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+		            </div>
+					<div class="box" ng-repeat="project in projects | limitTo:4">
+						<ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+					</div><!-- .box -->
+				</div><!-- .boxes -->
 
-                <ul class="boxes boxes-small">
-                    <li class="box box-solo box-blue">
-                        <div><a href="">Mes projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                </ul>
-
-                <ul class="boxes boxes-small">
-                    <li class="box box-solo box-red">
+				<div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+                    <div class="box box-solo box-red">
                         <div><a href="">Les projets que je suis <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                </ul>
+                    </div>
+					<div class="box" ng-repeat="project in projects | limitTo:4">
+						<ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+					</div><!-- .box -->
+				</div><!-- .boxes -->
 
-                <ul class="boxes boxes-small">
-                    <li class="box box-solo box-green">
+				<div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+                    <div class="box box-solo box-green">
                         <div><a href="">Mes fiches ressources <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                </ul>
+                    </div>
+					<div class="box" ng-repeat="project in projects | limitTo:4">
+						<ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+					</div><!-- .box -->
+				</div><!-- .boxes -->
 
-                <ul class="boxes boxes-small">
-                    <li class="box box-solo box-purple">
+				<div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+                    <div class="box box-solo box-purple">
                         <div><a href="">Les ressources qui m'intéressent <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                    <li class="box">
-                        <h3>28 Avril, 2014<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4><a href="">Il était une fois...</a></h4>
-                        <h5><a href="">Le Tyrannosaurus Rex</a></h5>
-                        <img src="./img/bacasable.jpg" alt="Image background" />
-                    </li>
-                </ul>
-                
+                    </div>
+					<div class="box" ng-repeat="project in projects | limitTo:4">
+						<ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+					</div><!-- .box -->
+				</div><!-- .boxes -->
+
             </div><!-- .content-member -->
             
         </div><!-- .col-md-12 -->
