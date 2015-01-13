@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <h3 class="modal-title">Galerie</h3>
+</div>
+<div class="modal-body">
+    <tabset class="nav-tabs-project">
+        <tab heading="Photos">
+            <section>
+                <input type="file" nv-file-select="" uploader="uploader" multiple />
+                <ul>
+                    <li ng-repeat="item in uploader.queue" style="float: left;text-align: center;">
+                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                        <div>{{ item.file.name }} ({{ item.file.size/1024/1024|number:2 }} Mb)</div>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> Supprimer
+                        </button>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                    <span class="glyphicon glyphicon-trash"></span> Supprimer tout
+                </button>
+            </section>
+        </tab>
+        <tab heading="Vidéos">
+            <section>
+                <input type="text" name="video-youtube" class="video-youtube" placeholder="http://youtu.be/Pib8eYDSFEI" />
+                <input type="text" name="video-vimeo" class="video-vimeo" placeholder="http://vime.be/Pib8eYDSFEI" />
+            </section>
+        </tab>
+    </tabset>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

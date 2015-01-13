@@ -60,8 +60,15 @@
 
                         <div class="col-md-4">
 
-                            <button class="button button-photo-upload">Photo de couverture</button>
-
+                            <fieldset class="addPhotosVideos" ng-controller="GalleryCtrl">
+                                <label ng-click="open()">Ajouter des médias</label>
+                                <button class="addPhotos" ng-click="open()">
+                                    <span class="glyphicon glyphicon-camera"></span>
+                                </button>
+                                <button class="addVideos" ng-click="open()">
+                                    <span class="glyphicon glyphicon-facetime-video"></span>
+                                </button>
+                            </fieldset>
                             <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
                                 <p>État d'avancement</p>
                                 <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
@@ -124,53 +131,12 @@
                         </p>
                     </fieldset>
 
-                    <div class="row">
-
-                        <div class="col-md-6">
-                            <fieldset class="addPhotosVideos">
-                                <label for="addPhotosVideos">Ajouter d'autres photos ou des vidéos</label>
-                                <button class="addPhotos" id="addPhotosVideos"><span class="glyphicon glyphicon-camera"></span></button
-                                ><button class="addVideos" ng-click="addPhotosVideos=!addPhotosVideos"><span class="glyphicon glyphicon-facetime-video"></span></button>
-                                <div ng-show="addPhotosVideos">
-                                    <input type="text" name="video-youtube" class="video-youtube" placeholder="http://youtu.be/Pib8eYDSFEI" />
-                                    <input type="text" name="video-vimeo" class="video-vimeo" placeholder="http://vime.be/Pib8eYDSFEI" />
-                                    <button class="button">Valider</button>
-                                </div>
-                            </fieldset>
-                        </div>
-
-
-                    </div>
-
-                    <div class="progress" style="">
-                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
-                    </div>
                     <p class="right">
                         <button class="button cancel">Annuler</button>
                         <button class="button" ng-click="saveMakerscienceProject(projectsheet)" >Enregistrer</button>
                     </p>
-
-                    <div>
-                        <input type="file" nv-file-select="" uploader="uploader" multiple />
-                        <ul>
-                            <li ng-repeat="item in uploader.queue" style="float: left;text-align: center;">
-                                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                                <div>{{ item.file.name }} ({{ item.file.size/1024/1024|number:2 }} Mb)</div>
-                                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                                    <span class="glyphicon glyphicon-trash"></span> Supprimer
-                                </button>
-                            </li>
-                        </ul>
-                        <!--
-                        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
-                            <span class="glyphicon glyphicon-upload"></span> Téléverser tout
-                        </button>
-                        <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading" disabled="disabled">
-                            <span class="glyphicon glyphicon-ban-circle"></span> Annuler tout
-                        </button> -->
-                        <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
-                            <span class="glyphicon glyphicon-trash"></span> Supprimer tout
-                        </button>
+                    <div class="progress" style="">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
                     </div>
                 </form>
 

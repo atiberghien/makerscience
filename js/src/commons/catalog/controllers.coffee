@@ -37,18 +37,18 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
     $scope.loadBucketFiles = (BucketUri) ->
         console.log(" ==== getting bucket ", BucketUri)
         Bucket.one(getObjectIdFromURI(BucketUri)).get().then((data)->
-                console.log(" Got bucket ! ", data)
-                $scope.bucket = data.files
-            )
+            console.log(" Got bucket ! ", data)
+            $scope.bucket = data.files
+        )
 
     $scope.updateCover = (projectsheetId, coverUri)->
-        putData = 
+        putData =
             cover:coverUri
         ProjectSheet.one(projectsheetId).patch(putData).then((data)->
             $scope.projectsheet.cover = data.cover
             )
-        
-        
+
+
     # $scope.$watch('projectsheet.cover.resource_uri', (newVal, oldVal) ->
     #     if (newVal != oldVal)
     #         console.log( " Cover URI changed ! Nv = "+newVal+" old val = "+oldVal)
@@ -127,6 +127,31 @@ module.controller("ProjectProgressCtrl", ($scope, ProjectProgress) ->
 )
 
 module.controller("ProjectCoverCtrl", ($scope, Bucket, ProjectSheet) ->
-    
 
-)   
+)
+
+module.controller("GalleryCtrl", ($scope, $modal, $log) ->
+    $scope.open = ->
+        modalInstance = $modal.open(
+            templateUrl: 'views/catalog/block/gallery.html'
+            controller: 'GalleryInstanceCtrl'
+            size: 'lg'
+            resolve:
+                uploader: ->
+                    return $scope.uploader;
+        )
+
+        modalInstance.result.then((selectedItem) ->
+            $scope.selected = selectedItem
+        , () ->
+            $log.info('Modal dismissed at: ' + new Date())
+        )
+)
+
+module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, uploader) ->
+    $scope.uploader = uploader
+    $scope.ok = ->
+        $modalInstance.close($scope.uploader)
+    $scope.cancel = ->
+        $modalInstance.dismiss('cancel')
+)
