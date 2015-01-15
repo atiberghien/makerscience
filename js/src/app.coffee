@@ -3,9 +3,10 @@ angular.module('commons.accounts', ['commons.accounts.services'])
 angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers'])
-angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base', 'restangular',
-                                'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective',
-                                'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth'])
+angular.module('makerscience.map', ['makerscience.map.controllers'])
+angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
+                                'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective',
+                                'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -98,6 +99,10 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
         .state('profile.detail',
                 url: ':id',
                 templateUrl: 'views/profile/profile.detail.html'
+        )
+        .state('map',
+                url: '/map/',
+                templateUrl: 'views/map/map.html'
         )
 
 ])

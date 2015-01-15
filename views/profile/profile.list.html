@@ -33,7 +33,7 @@
                     <div class="boxes boxes-profils">
                         <ul class="members">
                             <li ng-repeat="baseProfile in profiles" ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)">
-                            	<ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
+                                <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
                             </li>
                         </ul><!-- .members -->
                     </div><!-- .boxes -->
@@ -57,9 +57,7 @@
 
             </div><!-- .tab-content -->
 
-            <form method="post" action="">
-                <button class="large large-orange">Cartographie de la communauté</button>
-            </form>
+            <a class="large large-orange" ui-sref="map">Cartographie de la communauté</a>
 
         </div><!-- #content -->
 
