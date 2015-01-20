@@ -4,13 +4,14 @@
 </div><!-- #intro -->
 
 <form class="form-inline mapsearch">
-	<label for="search">Titre / Exemple / Membre de MakerScience</label>
-	<input type="text" name="search" class="form-control" placeholder="Recherche..." />
-	<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+    <label for="search">Titre / Exemple / Membre de MakerScience</label>
+    <input type="text" name="search" class="form-control" placeholder="Recherche..." />
+    <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
 </form>
 
 <div ng-controller="MakerScienceMapCtrl">
-        <leaflet id="membersmap" defaults="defaults" center="center"  height="600px" ></leaflet>
+        <!-- http://tombatossals.github.io/angular-leaflet-directive/#!/examples/customized-markers -->
+        <leaflet id="membersmap" defaults="defaults" markers="markers" center="center"  height="600px" ></leaflet>
 </div>
 
 <link href='js/vendor/leaflet/dist/leaflet.css' rel='stylesheet' >

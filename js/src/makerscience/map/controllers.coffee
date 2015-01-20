@@ -13,5 +13,12 @@ module.controller("MakerScienceMapCtrl", ($scope, leafletData) ->
             lat: 46.43
             lng: 2.35
             zoom: 5
+        markers:
+            devTeam:
+                lat: 44.5175
+                lng: 3.5
+                message: "The MakerScience dev squad"
+                focus: true,
+                draggable: false
     )
 )
