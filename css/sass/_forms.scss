@@ -520,3 +520,27 @@ button.close-login {
     }
 }
 
+form.mapsearch {
+	padding: 1.25em;
+	text-align: center;
+	background-color: #fff;
+	label {
+		margin-right: 1em;
+		vertical-align: middle;
+		font-size: 1.25em;
+		font-weight: bold;
+		text-transform: uppercase;
+	}
+	input {
+		width: 25% !important; /* override bootstrap's style */
+	}
+	button {
+		color: #fff;
+		background-color: $color-pink;
+		&:hover {
+			color: #fff;
+			background-color: $color-blue;
+		}
+	}
+}
+

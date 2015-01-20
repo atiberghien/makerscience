@@ -1,4 +1,16 @@
-<link href='js/vendor/leaflet/dist/leaflet.css' rel='stylesheet' >
+<div id="intro" class="intro-project-create" style="background-image: url('./img/bg/header-listing-profils.jpg')">
+    <h1>La communauté</h1>
+    <h2>Tous ensemble pour <em>l'innovation</em></h2>
+</div><!-- #intro -->
+
+<form class="form-inline mapsearch">
+	<label for="search">Titre / Exemple / Membre de MakerScience</label>
+	<input type="text" name="search" class="form-control" placeholder="Recherche..." />
+	<button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+</form>
+
 <div ng-controller="MakerScienceMapCtrl">
-        <leaflet id="membersmap" defaults="defaults" center="center" width="800px" height="600px" ></leaflet>
+        <leaflet id="membersmap" defaults="defaults" center="center"  height="600px" ></leaflet>
 </div>
+
+<link href='js/vendor/leaflet/dist/leaflet.css' rel='stylesheet' >
