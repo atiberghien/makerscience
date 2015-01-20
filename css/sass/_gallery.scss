@@ -29,4 +29,29 @@
 			}
 		}
 	}
+	section.video {
+		form {
+			margin: 1em 0;
+			input {
+				width: 50%;
+			}
+		}
+		ul.links {
+			li {
+				button.transparent {
+					opacity: 0.1;
+					width: auto;
+					height: auto;
+					padding: none;
+					border: none;
+					background-color: transparent;
+					cursor: pointer;
+					&:hover {
+						opacity: 1;
+						color: $color-red;
+					}
+				}
+			}
+		}
+	}
 }

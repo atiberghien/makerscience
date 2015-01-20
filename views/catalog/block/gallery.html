@@ -25,9 +25,17 @@
             </section>
         </tab>
         <tab heading="Vidéos">
-            <section>
-                <input type="text" name="video-youtube" class="video-youtube" placeholder="http://youtu.be/Pib8eYDSFEI" />
-                <input type="text" name="video-vimeo" class="video-vimeo" placeholder="http://vime.be/Pib8eYDSFEI" />
+            <section class="video">
+            	<form class="form-inline">
+		        	<input type="text" name="newlink" class="form-control" placeholder="Lien vers la video" />
+		        	<button class="btn btn-primary">Ajouter</button>
+		        </form>
+            	<ul class="list-group links">
+            		<li class="list-group-item">http://youtu.be/hEF398FJ3 <button class="transparent"><span class="glyphicon glyphicon-trash"></span></button></li>
+            		<li class="list-group-item">http://youtu.be/fje30fjeoij <button class="transparent"><span class="glyphicon glyphicon-trash"></span></button></li>
+            		<li class="list-group-item">http://youtu.be/pfkq42jkj49 <button class="transparent"><span class="glyphicon glyphicon-trash"></span></button></li>
+            		<li class="list-group-item">http://youtu.be/kjeJ37FFj3lk <button class="transparent"><span class="glyphicon glyphicon-trash"></span></button></li>
+            	</ul>
             </section>
         </tab>
     </tabset>
