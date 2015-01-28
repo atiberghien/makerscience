@@ -40,17 +40,6 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
         Bucket.one(getObjectIdFromURI(BucketUri)).get().then((data)->
             $scope.bucket = data.files
         )
-
-    $scope.updateCover = (projectsheetId, coverUri)->
-        ProjectSheet.one(projectsheetId).patch({cover:voverUri}).then((data)->
-            $scope.projectsheet.cover = data.cover
-        )
-
-    # $scope.$watch('projectsheet.cover.resource_uri', (newVal, oldVal) ->
-    #     if (newVal != oldVal)
-    #         console.log( " Cover URI changed ! Nv = "+newVal+" old val = "+oldVal)
-    #         ProjectSheet.one()
-    # )
 )
 
 module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, PostalAddress,
@@ -62,7 +51,7 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
         headers :
             Authorization : @$http.defaults.headers.common.Authorization
     )
-    $scope.favorite = "plop" #To define which photo will be the cover
+    $scope.favorite = "-1" #To define which photo will be the cover
     $scope.videos = {}
 
 
@@ -104,7 +93,7 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
             if $scope.uploader.getIndexOfItem(fileItem) == $scope.favorite
                 ProjectSheet.one(projectsheetID).patch({cover:response.resource_uri})
 
-    $scope.saveVideos = (projectsheetID ) ->
+    $scope.saveVideos = (projectsheetID) ->
         ProjectSheet.one(projectsheetID).patch({videos:$scope.videos})
 
     $scope.openGallery = ->
@@ -149,7 +138,7 @@ module.controller("PopularityCtrl", ($scope, $state) ->
         $scope.votePopularity = false
 )
 
-module.controller("ProjectProgressCtrl", ($scope, ProjectProgress) ->
+module.controller("ProjectProgressCtrl", ($scope, Project, ProjectProgress) ->
     $scope.progressRange = []
     $scope.selectedClasses = {}
 
@@ -157,11 +146,13 @@ module.controller("ProjectProgressCtrl", ($scope, ProjectProgress) ->
         $scope.selectedClasses = {}
         $scope.selectedClasses[progressChoice.id] = "selected"
 
-    $scope.init = (projectProgressRangeSlug) ->
+    $scope.init = (projectID, projectProgressRangeSlug) ->
+
         ProjectProgress.getList({'range__slug' : projectProgressRangeSlug}).then((progressRangeResult) ->
             $scope.progressRange = progressRangeResult
             $scope.updateProgressChoice($scope.progressRange[0])
         )
+
 )
 
 module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, params) ->

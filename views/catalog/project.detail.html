@@ -63,8 +63,8 @@
                             </div>
 
                             <div class="editable">
-                                <div class="edit-buttons" ng-show="editable">
-                                <button><span class="glyphicon glyphicon-pencil"></span></button>
+                                <div class="edit-buttons" ng-show="editable" ng-init="editWIP=false">
+                                    <button ng-click="editWIP = ! editWIP"><span class="glyphicon glyphicon-pencil"></span></button>
                                 </div>
                                 <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
                                     <p>État d'avancement</p>
@@ -72,14 +72,19 @@
                                         <label ng-if="progress.id!=projectsheet.parent.progress.id"
                                                style="background-image: url('../img/icons/project/project-grey.png');float:left"
                                                tooltip="{{progress.label}} + Explication?">
-                                            {{progress.label}}
+                                            <span ng-if="!editWIP">{{progress.label}}</span>
+                                            <a ng-if="editWIP"
+                                               ng-click="updateProjectSheet('Project', projectsheet.parent.id, 'progress', progress.resource_uri);projectsheet.parent.progress=progress">{{progress.label}}</a>
                                         </label>
                                         <label ng-if="progress.id==projectsheet.parent.progress.id"
                                                style="background-image: url('{{$root.config.media_uri}}{{progress.icon}}');float:left"
                                                tooltip="{{progress.label}} + Explication?">
-                                            {{progress.label}}
+                                            <span ng-if="!editWIP">{{progress.label}}</span>
+                                            <a ng-if="editWIP"
+                                               ng-click="updateProjectSheet('Project', projectsheet.parent.id, 'progress', progress.resource_uri);projectsheet.parent.progress=progress">{{progress.label}}</a>
                                         </label>
                                     </div>
+                                    </fieldset>
 
                                 </fieldset>
                             </div>
@@ -93,14 +98,14 @@
                                 <p editable-bsdate="projectsheet.parent.end_date"
                                     e-form="EndDateBtnForm"
                                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'end_date', $data)"
-                                    e-datepicker-popup="dd/MM/yyyy"
-                                    ng-bind-html="projectsheet.parent.end_date">Fin de projet: {{projectsheet.parent.end_date || "N/C" }}
+                                    e-datepicker-popup="dd/MM/yyyy">Fin de projet: {{projectsheet.parent.end_date|date:"dd/MM/yyyy" || "N/C" }}
                                 </p>
                             </div>
                             <div class="editable">
                                 <p>Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
                             </div>
-                            <div class="editable" ng-show="editable" style="padding-top:inherit"><!-- ng-controller="ProjectCoverCtrl" -->
+
+                            <!-- <div class="editable" ng-show="editable" style="padding-top:inherit">
                                 <p>Image de couverture</p>
                                 <a href="#" editable-select="base_projectsheet.cover.resource_uri"
                                             onshow="loadBucketFiles(base_projectsheet.bucket)"
@@ -108,7 +113,7 @@
                                             e-ng-options="bucketfile.resource_uri as bucketfile.filename for bucketfile in bucket">
                                     {{ base_projectsheet.cover.filename || 'non choisie' }}
                                 </a>
-                            </div>
+                            </div> -->
                         </div><!-- .sideproject -->
 
                     </div><!-- .col-md-4 -->
