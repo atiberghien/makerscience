@@ -7,6 +7,7 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet, Project,
                                        PostalAddress, ProjectSheetTemplate, ProjectSheetItem, BucketFile, Bucket) ->
 
+
     $scope.init = ->
         return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
             projectsheet = projectsheetResult.objects[0]
@@ -26,6 +27,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
                 return projectsheet
             )
         )
+
     $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
         putData = {}
         putData[fieldName] = data
@@ -35,19 +37,14 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
             when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
 
     $scope.loadBucketFiles = (BucketUri) ->
-        console.log(" ==== getting bucket ", BucketUri)
         Bucket.one(getObjectIdFromURI(BucketUri)).get().then((data)->
-            console.log(" Got bucket ! ", data)
             $scope.bucket = data.files
         )
 
     $scope.updateCover = (projectsheetId, coverUri)->
-        putData =
-            cover:coverUri
-        ProjectSheet.one(projectsheetId).patch(putData).then((data)->
+        ProjectSheet.one(projectsheetId).patch({cover:voverUri}).then((data)->
             $scope.projectsheet.cover = data.cover
-            )
-
+        )
 
     # $scope.$watch('projectsheet.cover.resource_uri', (newVal, oldVal) ->
     #     if (newVal != oldVal)
@@ -57,7 +54,17 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
 )
 
 module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, PostalAddress,
-                                             ProjectSheetTemplate, ProjectSheetItem) ->
+                                             ProjectSheetTemplate, ProjectSheetItem,
+                                             @$http, FileUploader, $modal) ->
+
+    $scope.uploader = new FileUploader(
+        url: config.bucket_uri
+        headers :
+            Authorization : @$http.defaults.headers.common.Authorization
+    )
+    $scope.favorite = "plop" #To define which photo will be the cover
+    $scope.videos = {}
+
 
     $scope.init = (templateSlug) ->
         $scope.projectsheet = {}
@@ -83,6 +90,37 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
             return projectsheetResult
         )
 
+    $scope.savePhotos = (projectsheetID, bucketID) ->
+        angular.forEach($scope.uploader.queue, (item) ->
+            item.formData.push(
+                bucket : bucketID
+            )
+            item.headers =
+               Authorization : $scope.uploader.headers["Authorization"]
+        )
+        $scope.uploader.uploadAll()
+
+        $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
+            if $scope.uploader.getIndexOfItem(fileItem) == $scope.favorite
+                ProjectSheet.one(projectsheetID).patch({cover:response.resource_uri})
+
+    $scope.saveVideos = (projectsheetID ) ->
+        ProjectSheet.one(projectsheetID).patch({videos:$scope.videos})
+
+    $scope.openGallery = ->
+        modalInstance = $modal.open(
+            templateUrl: 'views/catalog/block/gallery.html'
+            controller: 'GalleryInstanceCtrl'
+            size: 'lg'
+            resolve:
+                params: ->
+                    return {uploader : $scope.uploader, videos : $scope.videos, favorite : $scope.favorite}
+        )
+        modalInstance.result.then((result)->
+            $scope.favorite = result.favorite
+        , () ->
+            return
+        )
 )
 
 module.controller("PopularityCtrl", ($scope, $state) ->
@@ -126,32 +164,27 @@ module.controller("ProjectProgressCtrl", ($scope, ProjectProgress) ->
         )
 )
 
-module.controller("ProjectCoverCtrl", ($scope, Bucket, ProjectSheet) ->
+module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, params) ->
+    $scope.uploader = params.uploader
+    $scope.videos = params.videos
+    $scope.favorite = params.favorite
 
-)
-
-module.controller("GalleryCtrl", ($scope, $modal, $log) ->
-    $scope.open = ->
-        modalInstance = $modal.open(
-            templateUrl: 'views/catalog/block/gallery.html'
-            controller: 'GalleryInstanceCtrl'
-            size: 'lg'
-            resolve:
-                uploader: ->
-                    return $scope.uploader;
-        )
-
-        modalInstance.result.then((selectedItem) ->
-            $scope.selected = selectedItem
-        , () ->
-            $log.info('Modal dismissed at: ' + new Date())
-        )
-)
-
-module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, uploader) ->
-    $scope.uploader = uploader
     $scope.ok = ->
-        $modalInstance.close($scope.uploader)
+        result =
+            uploader : $scope.uploader
+            videos : $scope.videos
+            favorite : $scope.favorite
+        $modalInstance.close(result)
+
     $scope.cancel = ->
         $modalInstance.dismiss('cancel')
+
+    $scope.addVideo = (newVideosURL) ->
+        $scope.videos[newVideosURL] = null
+
+    $scope.delVideo = (videosURL) ->
+        delete $scope.videos[videosURL]
+
+    $scope.setFavorite = (item) ->
+        $scope.favorite = $scope.uploader.getIndexOfItem(item)
 )

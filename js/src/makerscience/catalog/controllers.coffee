@@ -1,4 +1,4 @@
-module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers', 'angularFileUpload'])
+module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers'])
 
 module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) ->
     $scope.projects = MakerScienceProject.getList().$object
@@ -8,15 +8,30 @@ module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource)
     $scope.resources = MakerScienceResource.getList().$object
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, @$http, FileUploader, MakerScienceProject) ->
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
-    $scope.uploader = new FileUploader(
-        url: config.bucket_uri
-        headers :
-            Authorization : @$http.defaults.headers.common.Authorization
-    )
 
     $scope.tags = []
+
+    $scope.needTypes = ["Nouvelles idées", "Compétences", "Matériel", "Financement", "Conseils", "Avis"]
+    $scope.newNeed =
+        type : $scope.needTypes[0]
+        description : ""
+    $scope.needs = {}
+    needsIndex = 0
+
+    $scope.allResources = []
+    $scope.newLinkedResource = null
+    $scope.linkedResources = {}
+
+    MakerScienceResource.getList().then((resourceResults)->
+        angular.forEach(resourceResults, (resource) ->
+            $scope.allResources.push(
+                resource_uri : resource.resource_uri
+                title : resource.parent.title
+            )
+        )
+    )
 
     $scope.saveMakerscienceProject = (projectsheet) ->
         tagsParam = []
@@ -25,20 +40,41 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         )
 
         $scope.saveProject(projectsheet).then((projectsheet) ->
-            MakerScienceProject.post({'parent' : projectsheet.project, 'tags' : tagsParam}).then(->
-                angular.forEach($scope.uploader.queue, (item) ->
-                    item.formData.push(
-                        bucket : projectsheet.bucket.id
-                    )
-                    item.headers =
-                       Authorization : $scope.uploader.headers["Authorization"]
-                )
-                $scope.uploader.onCompleteAll(->
-                    $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
-                )
-                $scope.uploader.uploadAll()
+            makerscienceProjectData =
+                parent : projectsheet.project
+                tags : tagsParam
+                linked_resources : Object.keys($scope.linkedResources)
+
+            MakerScienceProject.post(makerscienceProjectData).then(->
+
+                $scope.savePhotos(projectsheet.id, projectsheet.bucket.id)
+                $scope.saveVideos(projectsheet.id)
+
+                $scope.uploader.onCompleteAll = () ->
+                    # $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
+
             )
         )
+
+    $scope.addNeed = (newNeed) ->
+        if newNeed.type && newNeed.description
+            $scope.needs[needsIndex] = newNeed
+            $scope.newNeed =
+                type : $scope.needTypes[0]
+                description : ""
+            needsIndex += 1
+
+    $scope.delNeed = (index) ->
+        delete $scope.needs[index]
+
+    $scope.addLinkedResource = (newLinkedResource) ->
+        if newLinkedResource
+            $scope.linkedResources[newLinkedResource.originalObject.resource_uri] = newLinkedResource.originalObject
+            $scope.newLinkedResource = null
+            $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
+
+    $scope.delLinkedResource = (uri) ->
+        delete $scope.linkedResources[uri]
 )
 
 module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, Tag, TaggedItem) ->
@@ -47,12 +83,8 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
 
     $scope.init().then((projectSheetResult) ->
         MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
+            $scope.base_projectsheet = projectSheetResult
             $scope.projectsheet = makerScienceProjectResult.objects[0]
-            $scope.projectsheet.cover = projectSheetResult.cover
-            $scope.projectsheet.bucket = projectSheetResult.bucket
-            $scope.projectsheet.original_projectsheet_id = projectSheetResult.id
-            $scope.projectsheet.items = projectSheetResult.items
-            $scope.projectsheet.q_a = projectSheetResult.q_a
 
             angular.forEach($scope.projectsheet.tags, (tag) ->
                 TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/"+tag.id).then((taggdItemResult) ->

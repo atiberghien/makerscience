@@ -7,36 +7,51 @@
     <tabset>
         <tab>
             <tab-heading>
-                <span>06</span>L'équipe projet
+                <span>{{projectsheet.parent.team[0].members.length}}</span>L'équipe projet
             </tab-heading>
-            <div class="member">
-                <img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
-                <p>Mathieu Corain <em>Chef de projet</em></p>
+            <div class="member" ng-repeat="member in projectsheet.parent.team[0].members">
+                <gravatar-image data-gravatar-email="member.user.email"
+                    data-gravatar-size="52"
+                    data-gravatar-rating="pg"
+                    data-gravatar-default="mm"
+                    data-gravatar-secure="true"
+                    data-gravatar-css-class="img-circle">
+                </gravatar-image>
+                <p>{{member.user.first_name}} {{member.user.last_name}}</p>
             </div><!-- .member -->
-            <div class="member member-edit">
+            <!-- <div class="member member-edit">
                 <form>
                     <button class="remove"><span class="glyphicon glyphicon-remove"></span></button>
                     <img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
                     <p>Mathieu Corain <em>Chef de projet</em></p>
                 </form>
+            </div> -->
+        </tab>
+        <tab>
+            <tab-heading>
+                <span>0</span>
+                <ng-pluralize count="0"
+                             when="{'0': 'Personne ressource',
+                                 'one': 'Personne ressource',
+                                 'other': 'Personnes ressources'}">
+                 </ng-pluralize>
+
+            </tab-heading>
+            <div class="member">
+
             </div><!-- .member -->
         </tab>
         <tab>
             <tab-heading>
-                <span>500</span>Personnes ressources
+                <span>0</span>
+                <ng-pluralize count="0"
+                            when="{'0': 'Abonné',
+                            'one': 'Abonné',
+                            'other': 'Abonnés'}">
+            </ng-pluralize>
             </tab-heading>
             <div class="member">
-                <img src="./img/users/user-default.png" alt="User #firstname #lastname" />
-                <p>#username <em>#role</em></p>
-            </div><!-- .member -->
-        </tab>
-        <tab>
-            <tab-heading>
-                <span>300</span>Abonnés
-            </tab-heading>
-            <div class="member">
-                <img src="./img/users/user-default.png" alt="User #firstname #lastname" />
-                <p>#username <em>#role</em></p>
+
             </div><!-- .member -->
         </tab>
     </tabset>

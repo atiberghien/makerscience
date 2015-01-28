@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
 <link rel='stylesheet' href='css/textAngular.css'>
+<link rel='stylesheet' href='js/vendor/angucomplete-alt/angucomplete-alt.css'>
 <div class="admin">
 
     <div id="intro" class="intro-project-create">
@@ -25,9 +26,7 @@
                 <h3>Nouveau projet</h3>
 
                 <form ng-controller="MakerScienceProjectSheetCreateCtrl" ng-init="init('projet-makerscience')">
-
                     <div class="row">
-
                         <div class="col-md-8">
 
                             <fieldset class="fake-placeholder">
@@ -60,12 +59,12 @@
 
                         <div class="col-md-4">
 
-                            <fieldset class="addPhotosVideos" ng-controller="GalleryCtrl">
-                                <label ng-click="open()">Ajouter des médias</label>
-                                <button class="addPhotos" ng-click="open()">
+                            <fieldset class="addPhotosVideos">
+                                <label ng-click="openGallery()">Ajouter des médias</label>
+                                <button class="addPhotos" ng-click="openGallery()">
                                     <span class="glyphicon glyphicon-camera"></span>
                                 </button>
-                                <button class="addVideos" ng-click="open()">
+                                <button class="addVideos" ng-click="openGallery()">
                                     <span class="glyphicon glyphicon-facetime-video"></span>
                                 </button>
                             </fieldset>
@@ -107,14 +106,9 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="btn-group" dropdown is-open="status.isopen">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">Nouvelles idées <span class="caret"></span></button>
+                                    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">{{newNeed.type}}<span class="caret"></span></button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Nouvelles idées</a></li>
-                                        <li><a href="#">Compétences</a></li>
-                                        <li><a href="#">Matériel</a></li>
-                                        <li><a href="#">Financement</a></li>
-                                        <li><a href="#">Conseils</a></li>
-                                        <li><a href="#">Avis</a></li>
+                                        <li ng-repeat="needType in needTypes"><a ng-click="newNeed.type=needType">{{needType}}</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -122,12 +116,22 @@
                                 <text-angular name="project-need"
                                               ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
                                               e-placeholder="Descrivez votre besoin"
+                                              ng-model="newNeed.description"
                                               e-rows="3">
                                 </text-angular>
                             </div>
                             <div class="col-md-2">
-                                <button class="button">Ajouter le besoin</button>
+                                <button class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
                             </div>
+                        </div>
+                        <div class="row">
+                            <ul class="list-group">
+                                <li ng-repeat="(index, need) in needs">
+                                    <label>{{need.type}}</label>
+                                    <span ng-bind-html="need.description"></span>
+                                    <button class="transparent" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span></button>
+                                </li>
+                            </ul>
                         </div>
                     </fieldset>
 
@@ -136,12 +140,28 @@
                         <p>Voulez-vous associer votre projet à des pages ressources ?</p>
                         <div class="row">
                             <div class="col-md-10">
-                                <input type="text" name="linked-idea" placeholder="Nom de la ressource" />
+                                <angucomplete-alt id="linked-idea"
+                                                placeholder="Nom de la ressource"
+                                                pause="100"
+                                                selected-object="newLinkedResource"
+                                                local-data="allResources"
+                                                search-fields="title"
+                                                title-field="title"
+                                                text-no-results="Aucune ressource trouvée"
+                                                minlength="3"/>
                             </div>
                             <div class="col-md-2">
-                                <button class="button">Lier la ressource</button>
+                                <button class="button" ng-click="addLinkedResource(newLinkedResource)">Lier la ressource</button>
                             </div>
-                        </p>
+                        </div>
+                        <div class="row">
+                            <ul class="list-group">
+                                <li ng-repeat="(uri, resource) in linkedResources">
+                                    <label>{{resource.title}}</label>
+                                    <button class="transparent" ng-click="delLinkedResource(uri)"><span class="glyphicon glyphicon-trash"></span></button>
+                                </li>
+                            </ul>
+                        </div>
                     </fieldset>
 
                     <p class="right">

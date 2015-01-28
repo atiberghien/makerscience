@@ -34,8 +34,8 @@
                 <div class="row">
 
                     <div class="col-md-8" >
-                        <img ng-if="projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Project Image" />
-                        <img ng-if="!projectsheet.cover" src="img/bacasable.jpg" alt="Project Image" />
+                        <img ng-if="base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ base_projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Project Image" />
+                        <img ng-if="!base_projectsheet.cover" src="img/bacasable.jpg" alt="Project Image" />
                     </div>
 
                     <div class="col-md-4">
@@ -68,13 +68,19 @@
                                 </div>
                                 <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
                                     <p>État d'avancement</p>
-                                    <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
-                                           style="background-image: url('http://data.nonetype.net{{progress.icon}}')"
-                                           ng-repeat="progress in progressRange"
-                                           ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri"
-                                           tooltip="{{progress.label}} + Explication?">
-                                        {{progress.label}}
-                                    </label>
+                                    <div ng-repeat="progress in progressRange|orderBy:'order'">
+                                        <label ng-if="progress.id!=projectsheet.parent.progress.id"
+                                               style="background-image: url('../img/icons/project/project-grey.png');float:left"
+                                               tooltip="{{progress.label}} + Explication?">
+                                            {{progress.label}}
+                                        </label>
+                                        <label ng-if="progress.id==projectsheet.parent.progress.id"
+                                               style="background-image: url('{{$root.config.media_uri}}{{progress.icon}}');float:left"
+                                               tooltip="{{progress.label}} + Explication?">
+                                            {{progress.label}}
+                                        </label>
+                                    </div>
+
                                 </fieldset>
                             </div>
 
@@ -96,11 +102,11 @@
                             </div>
                             <div class="editable" ng-show="editable" style="padding-top:inherit"><!-- ng-controller="ProjectCoverCtrl" -->
                                 <p>Image de couverture</p>
-                                <a href="#" editable-select="projectsheet.cover.resource_uri" 
-                                            onshow="loadBucketFiles(projectsheet.bucket)"
-                                            onbeforesave="updateCover(projectsheet.original_projectsheet_id, $data)"
+                                <a href="#" editable-select="base_projectsheet.cover.resource_uri"
+                                            onshow="loadBucketFiles(base_projectsheet.bucket)"
+                                            onbeforesave="updateCover(base_projectsheet.id, $data)"
                                             e-ng-options="bucketfile.resource_uri as bucketfile.filename for bucketfile in bucket">
-                                    {{ projectsheet.cover.filename || 'non choisie' }}
+                                    {{ base_projectsheet.cover.filename || 'non choisie' }}
                                 </a>
                             </div>
                         </div><!-- .sideproject -->
@@ -137,7 +143,7 @@
                             </p>
 
                         </section>
-                        <section ng-repeat="q_a in projectsheet.q_a">
+                        <section ng-repeat="q_a in base_projectsheet.q_a">
                             <h3>{{q_a.question}}</h3>
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
@@ -200,17 +206,11 @@
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
                         <carousel class="carousel-no-indicators">
-                                <slide ng-if="projectsheet.bucket.files.length" ng-repeat=" img in projectsheet.bucket.files">
+                                <slide ng-if="base_projectsheet.bucket.files.length" ng-repeat="img in base_projectsheet.bucket.files">
                                     <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?width=683' }}" alt="Slide">
                                 </slide>
-                                <slide ng-if="!projectsheet.bucket.files.length">
+                                <slide ng-if="!base_projectsheet.bucket.files.length">
                                     <img src="img/slides/slide_one.png" alt="Slide One">
-                                </slide>
-                                <slide ng-if="!projectsheet.bucket.files.length">
-                                    <img src="img/slides/slide_two.png" alt="Slide Two">
-                                </slide>
-                                <slide ng-if="!projectsheet.bucket.files.length">
-                                    <img src="img/slides/slide_three.png" alt="Slide Three">
                                 </slide>
                         </carousel>
                     </tab>
@@ -219,31 +219,28 @@
                             <span class="glyphicon glyphicon-facetime-video"></span>
                         </tab-heading>
                         <carousel>
-                            <slide>
-                                <img src="img/slides/slide_two.png" alt="Slide Two">
+                            <slide ng-if="base_projectsheet.videos" ng-repeat="(url, comment) in base_projectsheet.videos">
+                                <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
+                                    <a href="{{url}}">Watch</a>
+                                </embed-video>
                             </slide>
-                            <slide>
-                                <img src="img/slides/slide_three.png" alt="Slide Three">
+                            <slide ng-if="!base_projectsheet.videos">
+                                <img src="img/slides/slide_one.png" alt="Slide One">
                             </slide>
                         </carousel>
                     </tab>
                 </tabset>
 
-                <section class="linked linked-project" >
-                    <carousel class="carousel-no-indicators carousel-text-links">
-                        <slide class="left-aligned">
-                            <div class="edit-buttons" ng-click="" ng-hide="!editable" ng-show="editable">
-                                <button><span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
+
+                <section class="linked linked-project">
+                    <div class="edit-buttons" ng-click="" ng-hide="!editable" ng-show="editable">
+                        <button>Lier des ressources  <span class="glyphicon glyphicon-pencil"></span></button>
+                    </div>
+                    <carousel class="carousel-no-indicators carousel-text-links" >
+                        <slide class="left-aligned" ng-repeat="resource in projectsheet.linked_resources">
                             <h3><a href="">Ressources associées</a></h3>
-                            <h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
-                            <h5><a href="">Tournée nationale 2014</a></h5>
-                            <img src="./img/bacasable.jpg" alt="Image background" />
-                        </slide>
-                        <slide class="left-aligned">
-                            <h3><a href="">Ressources associées</a></h3>
-                            <h4><a href="">bkfjei oifjeoiw jfe:</a></h4>
-                            <h5><a href="">fwoi jfiwj  foiwj firwj  fiwjr</a></h5>
+                            <h4><a href="">{{resource.parent.title}}</a></h4>
+                            <h5><a href="">{{resource.parent.baseline}}</a></h5>
                             <img src="./img/bacasable.jpg" alt="Image background" />
                         </slide>
                     </carousel>
@@ -254,10 +251,8 @@
         </div><!-- .col-md-8 -->
 
         <div class="col-md-4">
-
             <div id="sidebar">
-
-                <ng-include onload="parentColor='project'" src="'views/catalog/block/community.html'"></ng-include>
+                <ng-include onload="parentColor='project';projectsheet=projectsheet" src="'views/catalog/block/community.html'"></ng-include>
                 <ng-include src="'views/catalog/block/comments.html'"></ng-include>
                 <ng-include onload="parentColor='project'" src="'views/catalog/block/popularity.html'"></ng-include>
 
@@ -270,8 +265,8 @@
     <div class="row container">
 
         <div class="col-md-12">
-        
-        	<h2 class="boxed boxed-project"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+
+            <h2 class="boxed boxed-project"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
 
             <ul class="boxes boxes-medium boxes-spaced">
                 <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
@@ -289,7 +284,7 @@
                     </div>
                 </li>
             </ul>
-            
+
             <a ui-sref="project.new" class="large large-red">Créer un projet</a>
 
         </div>
