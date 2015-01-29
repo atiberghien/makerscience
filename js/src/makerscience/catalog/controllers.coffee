@@ -32,11 +32,12 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
             )
         )
     )
+    $scope.linkedResources = []
 
     $scope.saveMakerscienceProject = (projectsheet) ->
         tagsParam = []
         angular.forEach($scope.tags, (tag) ->
-            tagsParam.push(tag.text)
+            tagsParam.push({name : tag.text, slug : slug(tag.text)})
         )
 
         $scope.saveProject(projectsheet).then((projectsheet) ->
@@ -119,7 +120,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
     $scope.saveMakerscienceResource = (resourcesheet) ->
         tagsParam = []
         angular.forEach($scope.tags, (tag) ->
-            tagsParam.push(tag.text)
+            tagsParam.push({name : tag.text, slug : slug(tag.text)})
         )
 
         $scope.saveProject(resourcesheet).then((resourcesheet) ->
