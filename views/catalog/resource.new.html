@@ -1,7 +1,10 @@
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
-<div class="admin" >
-    <div id="intro" class="intro-resource-create">
+<link rel='stylesheet' href='css/textAngular.css'>
+<link rel='stylesheet' href='js/vendor/angucomplete-alt/angucomplete-alt.css'>
+<div class="admin">
+
+<div id="intro" class="intro-resource-create">
 
         <h1>Le numérique et l'innovation</h1>
         <h2>Au coeur de tous <em>les projets</em></h2>
@@ -18,12 +21,12 @@
             <div id="content" class="new-resource">
 
                 <h2>Créer une ressource</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
                 <h3>Nouvelle ressource</h3>
 
                 <form ng-controller="MakerScienceResourceSheetCreateCtrl" ng-init="init('projet-makerscience')">
-
                     <div class="row">
-
                         <div class="col-md-8">
 
                             <fieldset class="fake-placeholder">
@@ -36,20 +39,19 @@
 
                             <fieldset class="fake-placeholder">
                                 <h4>Résumez la ressource en une courte phrase</h4>
-                                <textarea name="resource-tagline"
-                                          placeholder=">"
-                                          rows="4"
-                                          ng-model="resourcesheet.project.baseline">
-                                </textarea>
+                                <input type="text"
+                                           name="resource-baseline"
+                                           placeholder=">"
+                                          ng-model="resourcesheet.project.baseline"/>
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
                                 <div ng-controller="TagAutoCompleteCtrl">
-                                <h4>Quels sont les mots-clés associés à votre ressource ? (thématiques, type de projet, outils...)</h4>
-                                <tags-input ng-model="tags"
-                                            placeholder="Ajouter un mot-clé">
-                                  <auto-complete source="loadTags($query)"></auto-complete>
-                                </tags-input>
+                                    <h4>Quels sont les mots-clés associés à votre ressource ? (thématiques, type de projet, outils...)</h4>
+                                    <tags-input ng-model="tags"
+                                                placeholder="Ajouter un mot-clé">
+                                      <auto-complete source="loadTags($query)"></auto-complete>
+                                    </tags-input>
                                 </div>
                             </fieldset>
 
@@ -57,8 +59,16 @@
 
                         <div class="col-md-4">
 
-                            <button class="button button-photo-upload">Photo de couverture</button>
-                            <fieldset class="levels" ng-controller="ResourceLevelCtrl" ng-init="$parent.resourcesheet.level=1">
+                            <fieldset class="addPhotosVideos">
+                                <label ng-click="openGallery()">Ajouter des médias</label>
+                                <button class="addPhotos" ng-click="openGallery()">
+                                    <span class="glyphicon glyphicon-camera"></span>
+                                </button>
+                                <button class="addVideos" ng-click="openGallery()">
+                                    <span class="glyphicon glyphicon-facetime-video"></span>
+                                </button>
+                            </fieldset>
+							<fieldset class="levels" ng-controller="ResourceLevelCtrl" ng-init="$parent.resourcesheet.level=1">
                                 <p>Niveau</p>
                                 <label class="level1 {{selectedClasses[1]}}"
                                     ng-click="updateLevelChoice(level);$parent.resourcesheet.level=level">
@@ -84,27 +94,58 @@
 
                     </div><!-- .row -->
 
-                    <textarea name="project-about"
-                              placeholder="Résumez votre projet en quelques lignes"
-                              rows="4"
-                              ng-model="resourcesheet.project.description"></textarea>
+					<fieldset class="new-resource">
+                        <h4>Résumez votre ressource en quelques lignes</h4>
+                        <text-angular name="resource-about"
+                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                      ng-model="resourcesheet.project.description"
+                                      e-rows="4">
+                        </text-angular>
+                    </fieldset>
 
-                    <textarea ng-model="resourcesheet.answers[$index]" name="question_{{$index}}" placeholder="{{question}} "rows="4" ng-repeat="question in template.questions"></textarea>
+                    <fieldset class="new-resource" ng-repeat="item in QAItems">
+                        <h4>{{item.questionLabel}}</h4>
+                        <text-angular ng-model="item.answer"
+                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                      name="question_{{$index}}"
+                                      e-rows="4">
+                        </text-angular>
+                    </fieldset>
 
-
-                    <div class="row">
-
-                        <div class="col-md-12">
-                            <fieldset class="needs-idea">
-                                <h4>Vos besoins?</h4>
-                                <h5>Idée</h5>
-                                <textarea name="project-idea" placeholder="Champ de texte..." rows="4"></textarea>
-                                <button class="right">Suivant</button>
-                            </fieldset>
-                            <button class="button button-add">Gallerie photo et vidéo</button>
+                    <fieldset class="needs needs-select">
+                        <h4>Vos besoins</h4>
+                        <p>Vous avez besoin d'idées fraîches pour votre ressource? Précisez ici vos besoins du moment ...</p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="btn-group" dropdown is-open="status.isopen">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">{{newNeed.type}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-repeat="needType in needTypes"><a ng-click="newNeed.type=needType">{{needType}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <text-angular name="project-need"
+                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                              e-placeholder="Descrivez votre besoin"
+                                              ng-model="newNeed.description"
+                                              e-rows="3">
+                                </text-angular>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
+                            </div>
                         </div>
-
-                    </div><!-- .row -->
+                        <div class="row">
+                            <ul class="list-group">
+                                <li ng-repeat="(index, need) in needs">
+                                    <label>{{need.type}}</label>
+                                    <span ng-bind-html="need.description"></span>
+                                    <button class="transparent" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </fieldset>
 
                     <p class="right">
                         <button class="button cancel">Annuler</button>

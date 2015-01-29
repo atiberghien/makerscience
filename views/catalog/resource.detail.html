@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
 <link rel='stylesheet' href='css/textAngular.css'>
-
 <div ng-controller="MakerScienceResourceSheetCtrl">
-    <ul id="sidenav" class="resource">
+
+<ul id="sidenav" class="resource">
         <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
         <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
         <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
@@ -16,13 +16,13 @@
 
             <div class="intro">
 
-                <h1>{{resourcesheet.parent.title}}</h1>
-
                 <div class="edit-buttons" ng-show="editable">
                     <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                 </div>
+
+                <h1>{{resourcesheet.parent.title}}</h1>
 
                 <h2 editable-text="resourcesheet.parent.baseline"
                     e-form="BaselineBtnForm"
@@ -33,14 +33,14 @@
 
                 <div class="row">
 
-                    <div class="col-md-8">
-                        <img src="img/bacasable.jpg" alt="Project Image" />
+                    <div class="col-md-8" >
+                        <img ng-if="resourcesheet.base_resourcesheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_resourcesheet.cover.thumbnail_url+'?height=393'}}" alt="Resource Image" />
+                        <img ng-if="!resourcesheet.base_resourcesheet.cover" src="img/bacasable.jpg" alt="Resource Image" />
                     </div>
 
                     <div class="col-md-4">
 
                         <div class="sideproject">
-
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="addTag=false">
                                     <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -139,17 +139,17 @@
                             ng-bind-html="resourcesheet.parent.description">
                         </p>
                         </section>
-                        <section ng-repeat="q_a in resourcesheet.q_a">
-                            <h3>{{q_a.question}}</h3>
+                        <section ng-repeat="item in resourcesheet.base_resourcesheet.items">
+                            <h3>{{item.question.text}}</h3>
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <p editable-text-angular="q_a.answer"
-                               e-form="AnswerBtnForm"
-                               e-rows="4"
-                               e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
-                               onbeforesave="updateProjectSheet('ProjectSheetItem', q_a.id , 'answer', $data)"
-                               ng-bind-html="q_a.answer">
+                            <p editable-text-angular="item.answer"
+                                 e-form="AnswerBtnForm"
+                                 e-rows="4"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 onbeforesave="updateProjectSheet('ProjectSheetItem', item.id , 'answer', $data)"
+                                 ng-bind-html="item.answer">
                             </p>
                         </section>
                     </tab>
@@ -173,15 +173,12 @@
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
                         <carousel class="carousel-no-indicators">
-                            <slide>
-                                <img src="img/slides/slide_one.png" alt="Slide One">
-                            </slide>
-                            <slide>
-                                <img src="img/slides/slide_two.png" alt="Slide Two">
-                            </slide>
-                            <slide>
-                                <img src="img/slides/slide_three.png" alt="Slide Three">
-                            </slide>
+                                <slide ng-if="resourcesheet.base_resourcesheet.bucket.files.length" ng-repeat="img in resourcesheet.base_resourcesheet.bucket.files">
+                                    <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
+                                </slide>
+                                <slide ng-if="!resourcesheet.base_resourcesheet.bucket.files.length">
+                                    <img src="img/slides/slide_one.png" alt="Slide One">
+                                </slide>
                         </carousel>
                     </tab>
                     <tab>
@@ -189,11 +186,13 @@
                             <span class="glyphicon glyphicon-facetime-video"></span>
                         </tab-heading>
                         <carousel>
-                            <slide>
-                                <img src="img/slides/slide_two.png" alt="Slide Two">
+                            <slide ng-if="resourcesheet.base_resourcesheet.videos" ng-repeat="(url, comment) in resourcesheet.base_resourcesheet.videos">
+                                <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
+                                    <a href="{{url}}">Watch</a>
+                                </embed-video>
                             </slide>
-                            <slide>
-                                <img src="img/slides/slide_three.png" alt="Slide Three">
+                            <slide ng-if="!resourcesheet.base_resourcesheet.videos">
+                                <img src="img/slides/slide_one.png" alt="Slide One">
                             </slide>
                         </carousel>
                     </tab>
