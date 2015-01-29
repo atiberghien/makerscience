@@ -51,7 +51,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                 $scope.saveVideos(projectsheet.id)
 
                 $scope.uploader.onCompleteAll = () ->
-                    # $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
+                    $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
 
             )
         )
@@ -81,22 +81,19 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $scope.preparedTags = []
 
-    $scope.init().then((projectSheetResult) ->
-        MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
-            $scope.base_projectsheet = projectSheetResult
-            $scope.projectsheet = makerScienceProjectResult.objects[0]
+    MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
+        $scope.projectsheet = makerScienceProjectResult.objects[0]
 
-            angular.forEach($scope.projectsheet.tags, (tag) ->
-                TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/"+tag.id).then((taggdItemResult) ->
-                    $scope.preparedTags.push({text : tag.name, taggedItemURI : taggdItemResult.resource_uri})
-                )
+        angular.forEach($scope.projectsheet.tags, (tag) ->
+            TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/"+tag.id).then((taggdItemResult) ->
+                $scope.preparedTags.push({text : tag.name, taggedItemURI : taggdItemResult.resource_uri})
             )
+        )
 
-            $scope.similars = []
-            TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/similars").then((projectIDsResult) ->
-                angular.forEach(projectIDsResult, (projectId) ->
-                    $scope.similars.push(MakerScienceProject.one(projectId).get().$object)
-                )
+        $scope.similars = []
+        TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/similars").then((projectIDsResult) ->
+            angular.forEach(projectIDsResult, (projectId) ->
+                $scope.similars.push(MakerScienceProject.one(projectId).get().$object)
             )
         )
     )

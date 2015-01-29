@@ -4,28 +4,12 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
     $scope.projects = Project.getList().$object
 )
 
-module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet, Project,
-                                       PostalAddress, ProjectSheetTemplate, ProjectSheetItem, BucketFile, Bucket) ->
+module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet, Project, ProjectSheetItem, Bucket) ->
 
 
     $scope.init = ->
         return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
-            projectsheet = projectsheetResult.objects[0]
-            projectsheet.q_a = []
-            templateID = getObjectIdFromURI(projectsheet.template)
-            ProjectSheetTemplate.one(templateID).get().then((templateResult) ->
-                angular.forEach(templateResult.questions, (question, index) ->
-                    itemID = getObjectIdFromURI(projectsheet.items[index])
-                    ProjectSheetItem.one(itemID).get().then((itemResult) ->
-                        item =
-                            'question' : question
-                            'answer' : itemResult.answer
-                            'id' : itemResult.id
-                        projectsheet.q_a.push(item)
-                    )
-                )
-                return projectsheet
-            )
+            return projectsheetResult.objects[0]
         )
 
     $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
@@ -54,28 +38,33 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
     $scope.favorite = "-1" #To define which photo will be the cover
     $scope.videos = {}
 
-
     $scope.init = (templateSlug) ->
         $scope.projectsheet = {}
+        $scope.QAItems = []
+
         ProjectSheetTemplate.one().get({'slug' : templateSlug}).then((templateResult) ->
-            $scope.template = templateResult.objects[0]
+            template = templateResult.objects[0]
+            angular.forEach(template.questions, (question)->
+                $scope.QAItems.push(
+                    questionLabel : question.text
+                    question : question.resource_uri
+                    answer : ""
+                )
+            )
+            $scope.projectsheet.template = template.resource_uri
         )
 
-    $scope.saveProject = (projectsheet) ->
-        $scope.projectsheet = angular.copy(projectsheet);
+    $scope.saveProject = ->
         if $scope.projectsheet.project.begin_date is undefined
             $scope.projectsheet.project.begin_date = new Date()
 
         $scope.projectsheet.project.slug = slug($scope.projectsheet.project.title)
 
-        $scope.projectsheet.template = $scope.template.resource_uri
-
         ProjectSheet.post($scope.projectsheet).then((projectsheetResult) ->
-            if $scope.projectsheet.answers
-                angular.forEach(projectsheetResult.items, (itemURI, index) ->
-                    itemID = getObjectIdFromURI(itemURI)
-                    ProjectSheetItem.one(itemID).patch({'answer': $scope.projectsheet.answers[index]})
-                )
+            angular.forEach($scope.QAItems, (q_a) ->
+                q_a.projectsheet = projectsheetResult.resource_uri
+                ProjectSheetItem.post(q_a)
+            )
             return projectsheetResult
         )
 

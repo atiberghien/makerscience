@@ -91,9 +91,9 @@
                         </text-angular>
                     </fieldset>
 
-                    <fieldset class="new-project" ng-repeat="question in template.questions">
-                        <h4>{{question}}</h4>
-                        <text-angular ng-model="projectsheet.answers[$index]"
+                    <fieldset class="new-project" ng-repeat="item in QAItems">
+                        <h4>{{item.questionLabel}}</h4>
+                        <text-angular ng-model="item.answer"
                                       ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
                                       name="question_{{$index}}"
                                       e-rows="4">
@@ -166,7 +166,7 @@
 
                     <p class="right">
                         <button class="button cancel">Annuler</button>
-                        <button class="button" ng-click="saveMakerscienceProject(projectsheet)" >Enregistrer</button>
+                        <button class="button" ng-click="saveMakerscienceProject()" >Enregistrer</button>
                     </p>
                     <div class="progress" style="">
                         <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
