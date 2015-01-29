@@ -8,8 +8,22 @@ module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource)
     $scope.resources = MakerScienceResource.getList().$object
 )
 
+module.controller('MakerScienceLinkedResourceAutoCompleteCtrl', ($scope, MakerScienceResource) ->
+
+    $scope.allAvailableResources = []
+    MakerScienceResource.getList().then((resourceResults)->
+        angular.forEach(resourceResults, (resource) ->
+            $scope.allAvailableResources.push(
+                fullObject: resource
+                title : resource.parent.title
+            )
+        )
+    )
+)
+
 module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
+    $controller('MakerScienceLinkedResourceAutoCompleteCtrl', {$scope: $scope})
 
     $scope.tags = []
 
@@ -20,18 +34,6 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     $scope.needs = {}
     needsIndex = 0
 
-    $scope.allResources = []
-    $scope.newLinkedResource = null
-    $scope.linkedResources = {}
-
-    MakerScienceResource.getList().then((resourceResults)->
-        angular.forEach(resourceResults, (resource) ->
-            $scope.allResources.push(
-                resource_uri : resource.resource_uri
-                title : resource.parent.title
-            )
-        )
-    )
     $scope.linkedResources = []
 
     $scope.saveMakerscienceProject = (projectsheet) ->
@@ -47,6 +49,8 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                 linked_resources : Object.keys($scope.linkedResources)
 
             MakerScienceProject.post(makerscienceProjectData).then(->
+
+
 
                 $scope.savePhotos(projectsheet.id, projectsheet.bucket.id)
                 $scope.saveVideos(projectsheet.id)
@@ -76,14 +80,19 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.delLinkedResource = (uri) ->
         delete $scope.linkedResources[uri]
+
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, Tag, TaggedItem) ->
+module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, Tag, TaggedItem) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
+    $controller('MakerScienceLinkedResourceAutoCompleteCtrl', {$scope: $scope})
+
     $scope.preparedTags = []
+    $scope.linkedResources = []
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
+        $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
         angular.forEach($scope.projectsheet.tags, (tag) ->
             TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/"+tag.id).then((taggdItemResult) ->
@@ -111,6 +120,19 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     $scope.removeTagFromProject = (tag) ->
         taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
         TaggedItem.one(taggedItemID).remove()
+
+
+    $scope.addLinkedResource = (newLinkedResource) ->
+        if newLinkedResource
+            resource = newLinkedResource.originalObject.fullObject
+            $scope.linkedResources.push(resource)
+            $scope.projectsheet.linked_resources.push(resource.resource_uri)
+            $scope.newLinkedResource = null
+            MakerScienceProject.one($scope.projectsheet.id).patch({linked_resources : $scope.projectsheet.linked_resources})
+            $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
+
+    $scope.delLinkedResource = (uri) ->
+        delete $scope.linkedResources[uri]
 )
 
 module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource) ->

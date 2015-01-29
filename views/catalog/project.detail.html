@@ -106,10 +106,9 @@
                             </div>
 
                             <div class="editable" ng-show="editable" style="padding-top:inherit">
-
-                                <a ng-click="openGallery()">Changer la photo de couverture</a>
+                                <a ng-click="openGallery(projectsheet.base_projectsheet)">Changer la photo de couverture</a>
                             </div>
-                            <a ng-click="openGallery(projectsheet.base_projectsheet)">Changer la photo de couverture</a>
+
                         </div><!-- .sideproject -->
 
                     </div><!-- .col-md-4 -->
@@ -201,6 +200,9 @@
                     </div>
                 </div><!-- .row -->
 
+                <div class="editable" ng-show="editable" style="padding-top:inherit">
+                    <a ng-click="openGallery(projectsheet.base_projectsheet)">Gérer la gallerie</a>
+                </div>
                 <tabset class="nav-tabs-slide nav-tabs-slide-project">
                     <tab>
                         <tab-heading>
@@ -233,12 +235,26 @@
                 </tabset>
 
 
-                <section class="linked linked-project">
-                    <div class="edit-buttons" ng-click="" ng-hide="!editable" ng-show="editable">
-                        <button>Lier des ressources  <span class="glyphicon glyphicon-pencil"></span></button>
+                <section class="linked linked-project" ng-init="linkResources=True">
+                    <div class="edit-buttons" ng-hide="!editable" ng-show="editable">
+                        <button ng-click="linkResources=!linkResources" ><span class="glyphicon glyphicon-pencil"></span></button>
+                        <div ng-show="linkResources">
+                            <angucomplete-alt id="linked-idea"
+                                            placeholder="Nom de la ressource"
+                                            pause="100"
+                                            selected-object="newLinkedResource"
+                                            local-data="allAvailableResources"
+                                            search-fields="title"
+                                            title-field="title"
+                                            text-no-results="Aucune ressource trouvée"
+                                            minlength="3"/>
+                        </div>
+                        <div ng-show="linkResources">
+                            <button class="button" ng-click="addLinkedResource(newLinkedResource)">Lier la ressource</button>
+                        </div>
                     </div>
                     <carousel class="carousel-no-indicators carousel-text-links" >
-                        <slide class="left-aligned" ng-repeat="resource in projectsheet.linked_resources">
+                        <slide class="left-aligned" ng-repeat="resource in linkedResources">
                             <h3><a href="">Ressources associées</a></h3>
                             <h4><a href="">{{resource.parent.title}}</a></h4>
                             <h5><a href="">{{resource.parent.baseline}}</a></h5>
