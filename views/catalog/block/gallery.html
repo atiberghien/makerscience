@@ -7,9 +7,19 @@
             <section>
                 <input type="file" nv-file-select="" uploader="uploader" multiple />
                 <ul class="thumbnails">
+                    <li ng-repeat="file in bucket.files" style="float: left;text-align: center;">
+                        <img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" height="100px"/>
+                        <div>{{ file.filename }}</div>
+                        <button type="button" class="btn btn-xs" ng-click="updateFavorite(file)">
+                            <span class="glyphicon glyphicon-star"></span> Couverture
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="removePicture(file)">
+                            <span class="glyphicon glyphicon-trash"></span> Supprimer
+                        </button>
+                    </li>
                     <li ng-repeat="item in uploader.queue" style="float: left;text-align: center;">
                         <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                        <div>{{ item.file.name }} ({{ item.file.size/1024/1024|number:2 }} Mb)</div>
+                        <div>{{ item.file.name }}</div>
                         <button type="button" class="btn btn-xs" ng-click="setFavorite(item)">
                             <span class="glyphicon glyphicon-star"></span> Couverture
                         </button>

@@ -4,8 +4,9 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
     $scope.projects = Project.getList().$object
 )
 
-module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet, Project, ProjectSheetItem, Bucket) ->
-
+module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet,
+                                        Project, ProjectSheetItem, Bucket,
+                                        @$http, FileUploader, $modal) ->
 
     $scope.init = ->
         return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
@@ -20,9 +21,16 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
             when 'ProjectSheetItem' then ProjectSheetItem.one(resourceId).patch(putData)
             when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
 
-    $scope.loadBucketFiles = (BucketUri) ->
-        Bucket.one(getObjectIdFromURI(BucketUri)).get().then((data)->
-            $scope.bucket = data.files
+    $scope.openGallery = (projectsheet) ->
+        modalInstance = $modal.open(
+            templateUrl: 'views/catalog/block/gallery.html'
+            controller: 'GalleryInstanceCtrl'
+            size: 'lg'
+            resolve:
+                params: ->
+                    return {
+                        projectsheet : projectsheet
+                    }
         )
 )
 
@@ -144,10 +152,33 @@ module.controller("ProjectProgressCtrl", ($scope, Project, ProjectProgress) ->
 
 )
 
-module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, params) ->
-    $scope.uploader = params.uploader
-    $scope.videos = params.videos
-    $scope.favorite = params.favorite
+module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params, FileUploader, ProjectSheet, BucketFile) ->
+
+    if params.projectsheet
+        $scope.uploader = new FileUploader(
+            url: config.bucket_uri
+            headers :
+                Authorization : @$http.defaults.headers.common.Authorization
+        )
+        $scope.bucket = params.projectsheet.bucket
+        $scope.projectsheet = params.projectsheet
+        $scope.videos = params.projectsheet.videos
+
+        $scope.uploader.onAfterAddingFile = (item) ->
+            item.formData.push(
+                bucket : $scope.bucket.id
+            )
+            item.headers =
+               Authorization : $scope.uploader.headers["Authorization"]
+            item.upload()
+
+        $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
+            $scope.uploader.removeFromQueue(fileItem)
+            $scope.bucket.files.push(response)
+    else
+        $scope.uploader = params.uploader
+        $scope.videos = params.videos
+        $scope.favorite = params.favorite
 
     $scope.ok = ->
         result =
@@ -161,10 +192,25 @@ module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, params) ->
 
     $scope.addVideo = (newVideosURL) ->
         $scope.videos[newVideosURL] = null
+        if $scope.projectsheet #EDIT MODE
+            ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.videos})
 
     $scope.delVideo = (videosURL) ->
         delete $scope.videos[videosURL]
+        if $scope.projectsheet #EDIT MODE
+            ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.videos})
 
     $scope.setFavorite = (item) ->
         $scope.favorite = $scope.uploader.getIndexOfItem(item)
+
+
+    $scope.removePicture = (file) ->#EDIT MODE
+        fileIndex = $scope.bucket.files.indexOf(file)
+        $scope.bucket.files.splice(fileIndex, 1)
+        BucketFile.one(file.id).remove()
+
+    $scope.updateFavorite = (file) ->#EDIT MODE
+        $scope.projectsheet.cover = file
+        ProjectSheet.one($scope.projectsheet.id).patch({cover:file.resource_uri})
+
 )

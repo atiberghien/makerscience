@@ -34,7 +34,7 @@
                 <div class="row">
 
                     <div class="col-md-8" >
-                        <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Project Image" />
+                        <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?height=393'}}" alt="Project Image" />
                         <img ng-if="!projectsheet.base_projectsheet.cover" src="img/bacasable.jpg" alt="Project Image" />
                     </div>
 
@@ -105,15 +105,11 @@
                                 <p>Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
                             </div>
 
-                            <!-- <div class="editable" ng-show="editable" style="padding-top:inherit">
-                                <p>Image de couverture</p>
-                                <a href="#" editable-select="projectsheet.base_projectsheet.cover.resource_uri"
-                                            onshow="loadBucketFiles(projectsheet.base_projectsheet.bucket)"
-                                            onbeforesave="updateCover(projectsheet.base_projectsheet.id, $data)"
-                                            e-ng-options="bucketfile.resource_uri as bucketfile.filename for bucketfile in bucket">
-                                    {{ projectsheet.base_projectsheet.cover.filename || 'non choisie' }}
-                                </a>
-                            </div> -->
+                            <div class="editable" ng-show="editable" style="padding-top:inherit">
+
+                                <a ng-click="openGallery()">Changer la photo de couverture</a>
+                            </div>
+                            <a ng-click="openGallery(projectsheet.base_projectsheet)">Changer la photo de couverture</a>
                         </div><!-- .sideproject -->
 
                     </div><!-- .col-md-4 -->
@@ -212,7 +208,7 @@
                         </tab-heading>
                         <carousel class="carousel-no-indicators">
                                 <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
-                                    <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?width=683' }}" alt="Slide">
+                                    <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
                                 </slide>
                                 <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
                                     <img src="img/slides/slide_one.png" alt="Slide One">
