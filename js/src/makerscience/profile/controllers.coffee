@@ -14,9 +14,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, Users, Profi
                 $scope.profile.parent = profileResult
                 Users.one(profileResult.username).get().then((userResult)->
                     $scope.profile.parent.user = userResult
-                    if $scope.profile.location
-                        postalAddressId = getObjectIdFromURI($scope.profile.location)
-                        $scope.profile.location = PostalAddress.one(postalAddressId).get().$object
                 )
             )
         )

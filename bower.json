@@ -40,6 +40,7 @@
     "angular-leaflet-directive" : "~0.7.11",
     "leaflet.markercluster" : "~0.4.0",
     "ng-videosharing-embed" : "~0.2.4",
-    "angucomplete-alt" : "~0.0.36"
+    "angucomplete-alt" : "~0.0.36",
+    "geocoder-service" : "~0.0.2"
   }
 }

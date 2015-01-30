@@ -6,7 +6,8 @@ angular.module('makerscience.base', ['makerscience.base.controllers'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
-                                'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"])
+                                'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
+                                'geocoder-service'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
