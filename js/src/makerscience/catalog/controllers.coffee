@@ -113,7 +113,13 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
             when 'MakerScienceProject' then MakerScienceProject.one(resourceId).patch(putData)
 
     $scope.addTagFromProject = (tag) ->
-        TaggedItem.one().customPOST({tag : {name: tag.text}}, "makerscienceproject/"+$scope.projectsheet.id, {})
+        Tag.one().get({name:tag.text}).then((tagResult)->
+            if tagResult.objects.length == 1
+                TaggedItem.one().customPOST({tag : tagResult.objects[0]}, "makerscienceproject/"+$scope.projectsheet.id, {})
+            else
+                TaggedItem.one().customPOST({tag : {name : tag.text}}, "makerscienceproject/"+$scope.projectsheet.id, {})
+        )
+
 
     $scope.removeTagFromProject = (tag) ->
         taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
@@ -183,8 +189,13 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
             when 'MakerScienceResource' then MakerScienceResource.one(resourceId).patch(putData)
 
     $scope.addTagFromResource = (tag) ->
-        TaggedItem.one().customPOST({tag : {name: tag.text}}, "makerscienceresource/"+$scope.resource.id, {})
-
+        Tag.one().get({name:tag.text}).then((tagResult)->
+            if tagResult.objects.length == 1
+                TaggedItem.one().customPOST({tag : tagResult.objects[0]}, "makerscienceresource/"+$scope.projectsheet.id, {})
+            else
+                TaggedItem.one().customPOST({tag : {name : tag.text}}, "makerscienceresource/"+$scope.projectsheet.id, {})
+        )
+        
     $scope.removeTagFromResource = (tag) ->
         taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
         TaggedItem.one(taggedItemID).remove()
