@@ -53,7 +53,7 @@ div.toolbar {
 			background-color: $color-red;
 		}
 	}
-	
+
 	&.toolbar-profils {
 		text-align: right;
 		form {
@@ -139,11 +139,6 @@ ui-view> div.container {
 	ul.nav-tabs {
 		margin-bottom: 1em;
 		border: none;
-		&.nav-tabs-seance,
-		&.nav-tabs-slide,
-		&.nav-tabs-listing {
-			margin: 0;
-		}
 		&> li {
 			 a {
 			 	font-size: 1.4em;
@@ -155,21 +150,21 @@ ui-view> div.container {
 				color: $color-content-tab-active;
 			}
 		}
-		&.nav-tabs-project > li.active a {
-			background-color: $color-content-tab-project-active-bg;
-			border: 2px solid $color-content-tab-active;
-		}
-		&.nav-tabs-resource > li.active a {
-			background-color: $color-content-tab-resource-active-bg;
-			border: 2px solid $color-content-tab-active;
-		}
-		&.nav-tabs-seance {
-			font-size: 0.8em;
-			text-transform: uppercase;
-			&> li.active a {
-				background-color: $color-content-tab-seance-active-bg;
-			}
-		}
+		// &.nav-tabs-project > li.active a {
+		// 	background-color: $color-content-tab-project-active-bg;
+		// 	border: 2px solid $color-content-tab-active;
+		// }
+		// &.nav-tabs-resource > li.active a {
+		// 	background-color: $color-content-tab-resource-active-bg;
+		// 	border: 2px solid $color-content-tab-active;
+		// }
+		// &.nav-tabs-seance {
+		// 	font-size: 0.8em;
+		// 	text-transform: uppercase;
+		// 	&> li.active a {
+		// 		background-color: $color-content-tab-seance-active-bg;
+		// 	}
+		// }
 /*		&.nav-tabs-slide {*/
 /*			font-size: 1.3em;*/
 /*			&>li a {*/
@@ -182,23 +177,24 @@ ui-view> div.container {
 /*				border: 2px solid $color-content-tab-active;*/
 /*			}*/
 /*		}*/
-		&.nav-tabs-listing {
-			margin-bottom: 3em;
-			&> li.active a {
-				background-color: $color-content-tab-listing-active-bg;
-				border: 2px solid $color-content-tab-active;
-			}
-		}
-		&.nav-tabs-profils {
-			&> li.active a {
-				background-color: $color-orange;
-			}
-		}
+		// &.nav-tabs-listing {
+		// 	margin-bottom: 3em;
+		// 	&> li.active a {
+		// 		background-color: $color-content-tab-listing-active-bg;
+		// 		border: 2px solid $color-content-tab-active;
+		// 	}
+		// }
+		// &.nav-tabs-profils {
+		// 	&> li.active a {
+		// 		background-color: $color-orange;
+		// 	}
+		// }
 	}
 	/* Added to work with bootstrapui's extra div around the ul  */
 	/* FIXME Might need to remove redundant code above once all elements have been moved to angular */
 	.nav-tabs-listing ul.nav-tabs,
-	.nav-tabs-slide ul.nav-tabs {
+	.nav-tabs-slide ul.nav-tabs,
+	.nav-tabs-seance ul.nav-tabs {
 		margin: 0;
 	}
 	.nav-tabs-listing ul.nav-tabs a {
@@ -257,8 +253,15 @@ ui-view> div.container {
 			}
 		}
 	}
+	.nav-tabs-seance ul.nav-tabs {
+		font-size: 0.8em;
+		text-transform: uppercase;
+		&> li.active a {
+			background-color: $color-content-tab-seance-active-bg;
+		}
+	}
 	/* end of new bootstrap UI amends */
-	
+
 	.tab-content-listing {
 		padding: 0;
 		.boxes-listing {
@@ -289,9 +292,9 @@ ui-view> div.container {
 		}
 	}
 	section:nth-child(even) {
-		background-color: $color-content-section-bg-even;	
+		background-color: $color-content-section-bg-even;
 	}
-	
+
 	section.linked {
 		position: relative;
 		height: $linked-height;
@@ -383,7 +386,7 @@ ui-view> div.container {
 			color: $color-needs-h3;
 			font-size: 1.5em;
 			font-weight: bold;
-			
+
 		}
 		h4 {
 			font-size: 1.4em;
@@ -532,7 +535,7 @@ ui-view> div.container {
 			font-weight: normal;
 		}
 	}
-		
+
 }
 
 
@@ -594,7 +597,7 @@ ui-view> div.container {
 			color: $color-boxes;
 			span.link {
 			    text-decoration: underline;
-            }			    
+            }
 		}
 		h3 img {
 			margin-left: 0.5em;
@@ -644,7 +647,7 @@ ui-view> div.container {
 			}
 		}
 	}
-	
+
 	/* Extra div to vertically center text no matter how many lines we have */
 	.box-solo {
         div {
@@ -666,7 +669,7 @@ ui-view> div.container {
 	        }
 	    }
     }
-    
+
 	&.boxes-listing {
 		.box {
 			@include box-shadow(0 1px 1px rgba(0, 0, 0, 0.25));
@@ -677,7 +680,7 @@ ui-view> div.container {
         margin-top: $grid-gutter-width;
         margin-bottom: $grid-gutter-width;
     }
-    
+
     /* FIXME Need to merge this with normal boxes if we can agree on a standard way to "link" boxes */
 	&.boxes-medium {
 		.box {
@@ -721,7 +724,7 @@ ui-view> div.container {
 			}
 		}
 	}
-	
+
     &.boxes-large {
 		.box {
 			height: $boxes-large-height;
@@ -766,7 +769,7 @@ ui-view> div.container {
 			}
 		}
     }
-    
+
 	&.boxes-small {
 		font-size: 0.85em;
 		.box {
@@ -781,7 +784,7 @@ ui-view> div.container {
 			}
 		}
 	}
-	
+
 	&.boxes-small-home {
 		margin-top: $grid-gutter-width / 2;
 		margin-left: $grid-gutter-width / 2;
@@ -795,11 +798,11 @@ ui-view> div.container {
 		}
 	}
 
-	
+
 	.members {
-	
+
 	    margin-right: -$grid-gutter-width;
-	
+
 		li {
 			display: inline-block;
 			position: relative;
@@ -864,7 +867,7 @@ ui-view> div.container {
 		a:hover {
 		    text-decoration: none;
 	    }
-		
+
 	}
 	ul.members-small {
 	    margin-right: 0;
