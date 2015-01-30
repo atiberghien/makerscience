@@ -162,7 +162,7 @@ module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params
         )
         $scope.bucket = params.projectsheet.bucket
         $scope.projectsheet = params.projectsheet
-        $scope.videos = params.projectsheet.videos
+        $scope.videos = if params.projectsheet.videos then params.projectsheet.videos else {}
 
         $scope.uploader.onAfterAddingFile = (item) ->
             item.formData.push(
