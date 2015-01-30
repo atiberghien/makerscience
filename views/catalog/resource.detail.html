@@ -15,7 +15,7 @@
 
         <div class="container">
 
-            <div class="intro">
+            <div class="intro edit">
 
                 <div class="edit-buttons edit-resource-baseline" ng-show="editable">
                     <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
@@ -36,6 +36,11 @@
                     <div class="col-md-8" >
                         <img ng-if="resourcesheet.base_resourcesheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_resourcesheet.cover.thumbnail_url+'?height=393'}}" alt="Resource Image" />
                         <img ng-if="!resourcesheet.base_resourcesheet.cover" src="img/bacasable.jpg" alt="Resource Image" />
+                        <div class="editable" ng-show="editable" style="padding-top:inherit">
+                            <div class="edit-buttons edit-cover-image">
+                                <button ng-click="openGallery(resourcesheet.resourcesheet)"><span class="glyphicon glyphicon-camera"></span></button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-md-4">
