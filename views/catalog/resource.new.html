@@ -21,7 +21,7 @@
             <div id="content" class="new-resource">
 
                 <h2>Créer une ressource</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
                 <h3>Nouvelle ressource</h3>
 
@@ -34,7 +34,7 @@
                                 <input type="text"
                                        name="resource-name"
                                        placeholder=">"
-                                       ng-model="resourcesheet.project.title"/>
+                                       ng-model="projectsheet.project.title"/>
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
@@ -42,7 +42,7 @@
                                 <input type="text"
                                            name="resource-baseline"
                                            placeholder=">"
-                                          ng-model="resourcesheet.project.baseline"/>
+                                          ng-model="projectsheet.project.baseline"/>
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
@@ -68,20 +68,20 @@
                                     <span class="glyphicon glyphicon-facetime-video"></span>
                                 </button>
                             </fieldset>
-							<fieldset class="levels" ng-controller="ResourceLevelCtrl" ng-init="$parent.resourcesheet.level=1">
+                            <fieldset class="levels" ng-controller="ResourceLevelCtrl" ng-init="$parent.projectsheet.level=1">
                                 <p>Niveau</p>
                                 <label class="level1 {{selectedClasses[1]}}"
-                                    ng-click="updateLevelChoice(level);$parent.resourcesheet.level=level">
+                                    ng-click="updateLevelChoice(level);$parent.projectsheet.level=level">
                                     <input id="level3" type="radio" ng-model="level" value="1" />
                                     Facile
                                 </label>
                                 <label class="level1 {{selectedClasses[2]}}"
-                                        ng-click="updateLevelChoice(level);$parent.resourcesheet.level=level">
+                                        ng-click="updateLevelChoice(level);$parent.projectsheet.level=level">
                                     <input id="level3" type="radio" ng-model="level" value="2" />
                                     Moyen
                                 </label>
                                 <label class="level1 {{selectedClasses[3]}}"
-                                    ng-click="updateLevelChoice(level);$parent.resourcesheet.level=level">
+                                    ng-click="updateLevelChoice(level);$parent.projectsheet.level=level">
                                     <input id="level3" type="radio" ng-model="level" value="3" />
                                     Difficile
                                 </label>
@@ -94,11 +94,11 @@
 
                     </div><!-- .row -->
 
-					<fieldset class="new-resource">
+                    <fieldset class="new-resource">
                         <h4>Résumez votre ressource en quelques lignes</h4>
                         <text-angular name="resource-about"
                                       ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
-                                      ng-model="resourcesheet.project.description"
+                                      ng-model="projectsheet.project.description"
                                       e-rows="4">
                         </text-angular>
                     </fieldset>
@@ -149,7 +149,7 @@
 
                     <p class="right">
                         <button class="button cancel">Annuler</button>
-                        <button class="button" ng-click="saveMakerscienceResource(resourcesheet)" >Enregistrer</button>
+                        <button class="button" ng-click="saveMakerscienceResource()" >Enregistrer</button>
                     </p>
 
                 </form>

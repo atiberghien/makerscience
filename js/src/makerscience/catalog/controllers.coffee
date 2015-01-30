@@ -37,24 +37,23 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.linkedResources = []
 
-    $scope.saveMakerscienceProject = (projectsheet) ->
-        tagsParam = []
-        angular.forEach($scope.tags, (tag) ->
-            tagsParam.push({name : tag.text, slug : slug(tag.text)})
-        )
-
-        $scope.saveProject(projectsheet).then((projectsheet) ->
+    $scope.saveMakerscienceProject = () ->
+        $scope.saveProject().then((projectsheetResult) ->
             makerscienceProjectData =
-                parent : projectsheet.project
-                tags : tagsParam
-                linked_resources : Object.keys($scope.linkedResources)
+                parent : projectsheetResult.project
+                tags : $scope.tags.map((tag) ->
+                        return tag.text
+                    )
+                linked_resources : $scope.linkedResources.map((resource) ->
+                        return resource.resource_uri
+                    )
 
             MakerScienceProject.post(makerscienceProjectData).then(->
-                $scope.savePhotos(projectsheet.id, projectsheet.bucket.id)
-                $scope.saveVideos(projectsheet.id)
+                $scope.savePhotos(projectsheetResult.id, projectsheetResult.bucket.id)
+                $scope.saveVideos(projectsheetResult.id)
 
                 $scope.uploader.onCompleteAll = () ->
-                    $state.go("project.detail", {slug : $scope.projectsheet.project.slug})
+                    $state.go("project.detail", {slug : projectsheetResult.project.slug})
             )
         )
 
@@ -137,17 +136,19 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
 
 module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
+
     $scope.tags = []
 
-    $scope.saveMakerscienceResource = (resourcesheet) ->
-        tagsParam = []
-        angular.forEach($scope.tags, (tag) ->
-            tagsParam.push({name : tag.text, slug : slug(tag.text)})
-        )
+    $scope.saveMakerscienceResource = () ->
+        $scope.saveProject().then((resourcesheetResult) ->
+            makerscienceResourceData =
+                parent : resourcesheetResult.project
+                tags : $scope.tags.map((tag) ->
+                        return tag.text
+                    )
 
-        $scope.saveProject(resourcesheet).then((resourcesheet) ->
-            MakerScienceResource.post({'parent' : resourcesheet.project, 'tags' : tagsParam}).then(->
-                $state.go("resource.detail", {slug : $scope.resourcesheet.project.slug})
+            MakerScienceResource.post(makerscienceResourceData).then(->
+                $state.go("resource.detail", {slug : $scope.projectsheet.project.slug})
             )
         )
 )
