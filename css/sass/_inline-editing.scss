@@ -224,8 +224,21 @@ div.editable-controls {
 			}
 		}
 	}
+
+	/* prevent cursor change on this fake tab */
+	ul.nav.nav-tabs li.editable:hover * {
+		cursor: pointer !important;
+	}
+	
+	div.editable-gallery {
+		margin-top: 1px;
+		padding: $grid-gutter-width * 3 $grid-gutter-width;
+		text-align: center;
+		background-color: $color-light-grey;
+	}
 	
 }
+
 #sidebar {
 
 	div.member-edit {

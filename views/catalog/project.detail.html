@@ -201,9 +201,6 @@
                     </div>
                 </div><!-- .row -->
 
-                <div class="editable" ng-show="editable" style="padding-top:inherit">
-                    <a ng-click="openGallery(projectsheet.base_projectsheet)">Gérer la gallerie</a>
-                </div>
                 <tabset class="nav-tabs-slide nav-tabs-slide-project">
                     <tab>
                         <tab-heading>
@@ -232,6 +229,11 @@
                                 <img src="img/slides/slide_one.png" alt="Slide One">
                             </slide>
                         </carousel>
+                    </tab>
+                    <tab ng-show="editable" disabled="true" class="editable">
+                        <tab-heading>
+                            <span ng-click="openGallery(projectsheet.base_projectsheet)" class="glyphicon glyphicon-pencil"></span>
+                        </tab-heading>
                     </tab>
                 </tabset>
 
