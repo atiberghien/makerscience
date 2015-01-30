@@ -40,7 +40,7 @@
 #intro {
 	div.intro.edit {
 		&> div.edit-buttons {
-			top: 6em;
+			top: 7.5em;
 		}
 		div.edit-cover-image {
 			margin-right: -$grid-gutter-width;
@@ -85,9 +85,6 @@
 	div.tags {
 		position: relative;
 	}
-	.edit-resource-baseline {
-		margin-top: 7.5em;
-    }
 	.intro > form {
 		width: 100%;
 		text-align: center;
