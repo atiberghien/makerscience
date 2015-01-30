@@ -61,8 +61,26 @@
 			}
 		}
 	}
-	div.sideproject div.edit-buttons {
-		right: -20px;
+	div.sideproject {
+		form {
+			input, button.btn {
+				margin-bottom: 0;
+			}
+			.editable-controls, .editable-buttons {
+				line-height: 1em;
+			}
+		}
+		button.btn {
+			padding: 0.5em;
+		}
+		div.edit-buttons {
+			right: -20px;
+		}
+		ul.details {
+			form.editable-text input.editable-input {
+				width: 5em !important;
+			}
+		}
 	}
 	div.tags {
 		position: relative;
