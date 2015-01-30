@@ -1,3 +1,13 @@
+#header {
+/*	position: fixed;*/
+/*	top: 0;*/
+/*	left: 0;*/
+/*	right: 0;*/
+/*	z-index: 1000;*/
+/*	background-color: $color-bg;*/
+/*	@include box-shadow(0 10px 2px rgba(0,0,0,.25));*/
+}
+
 form.search-full-width {
 	position: relative;
 	margin: 0 $grid-gutter-width / 2;
@@ -373,16 +383,14 @@ div.action-bar {
 			text-transform: uppercase;
 			background-position: center left;
 			background-repeat: no-repeat;
-			&.level-average {
+			&.level-1, &.level-2, &.level-3 {
 				font-weight: bold;
-				background-image: url('../img/details/details-level-average.png');
 			}
-			&.duration {
-				background-image: url('../img/details/details-duration.png');
-			}
-			&.cost {
-				background-image: url('../img/details/details-cost.png');
-			}
+			&.level-1 { background-image: url('../img/icons/resource/resource-level-1.png'); }
+			&.level-2 { background-image: url('../img/icons/resource/resource-level-2.png'); }
+			&.level-3 { background-image: url('../img/icons/resource/resource-level-3.png'); }
+			&.duration { background-image: url('../img/icons/resource/details-duration.png'); }
+			&.cost { background-image: url('../img/details/details-cost.png'); }
 		}
 	}
 	

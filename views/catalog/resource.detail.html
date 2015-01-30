@@ -2,9 +2,10 @@
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
 <link rel='stylesheet' href='css/textAngular.css'>
+
 <div ng-controller="MakerScienceResourceSheetCtrl">
 
-<ul id="sidenav" class="resource">
+    <ul id="sidenav" class="resource">
         <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
         <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
         <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
@@ -63,7 +64,7 @@
                             </div>
 
                             <ul class="details">
-                                <li class="level-average">
+                                <li class="level-{{ resourcesheet.level }}">
                                     <div class="edit-buttons" ng-show="editable">
                                         <button ng-click="LevelBtnForm.$show()" ng-hide="LevelBtnForm.$visible">
                                             <span class="glyphicon glyphicon-pencil"></span>
@@ -97,10 +98,10 @@
                                     </div>
 
                                     <span editable-text="resourcesheet.cost"
-                                    e-form="CostBtnForm"
-                                    onbeforesave="updateResourceSheet(resourcesheet.id , 'cost', $data)"
-                                    ng-bind-html="resourcesheet.cost">{{ resourcesheet.cost }} euros
-                                </span>
+                                        e-form="CostBtnForm"
+                                        onbeforesave="updateResourceSheet(resourcesheet.id , 'cost', $data)"
+                                        ng-bind-html="resourcesheet.cost">{{ resourcesheet.cost }} euros
+                                    </span>
                                 </li>
                             </ul><!-- .details -->
 
@@ -305,39 +306,36 @@
 
         </div><!-- .col-md-4 -->
 
-    </div><!-- .row -->
+    </div><!-- .row .container -->
 
     <div class="row container">
 
-                <div class="col-md-12">
+        <div class="col-md-12">
 
-                    <ul class="boxes boxes-medium boxes-spaced">
-                        <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
-                        <li class="box box-solo box-green">
-                            <div>
-                                <a href="">Ressources Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-                        </li
-                        ><li class="box" ng-repeat="resource in similars">
-                            <a ui-sref="resource.detail({ slug: resource.parent.slug })">
-                                <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                                <h4>{{resource.parent.baseline}}</h4>
-                                <h5>{{resource.parent.title}}</h5>
-                                <img src="./img/bacasable.jpg" alt="Image background" />
-                            </a>
-                        </li
-                        ><li class="box box-solo box-green">
-                            <div>
-                                <a ui-sref="resource-list">Plus de ressource <span class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-                        </li>
-                    </ul>
+            <ul class="boxes boxes-medium boxes-spaced">
+                <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
+                <li class="box box-solo box-green">
+                    <div>
+                        <a href="">Ressources Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                </li
+                ><li class="box" ng-repeat="resource in similars">
+                    <a ui-sref="resource.detail({ slug: resource.parent.slug })">
+                        <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
+                        <h4>{{resource.parent.baseline}}</h4>
+                        <h5>{{resource.parent.title}}</h5>
+                        <img src="./img/bacasable.jpg" alt="Image background" />
+                    </a>
+                </li
+                ><li class="box box-solo box-green">
+                    <div>
+                        <a ui-sref="resource-list">Plus de ressource <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
+                </li>
+            </ul>
 
-                </div>
-
-            </div><!-- .row .container -->
-
-        </div><!-- .boxes -->
+        </div>
 
     </div><!-- .row .container -->
-</div>
+
+</div><!-- ng-controller -->
