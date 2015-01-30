@@ -348,7 +348,7 @@ div.action-bar {
 			vertical-align: middle;
 		}
 	}
-	
+
 	ul.phases {
 		margin: 1em 0;
 		li {
@@ -374,9 +374,10 @@ div.action-bar {
 			}
 		}
 	}
-	
+
 	ul.details {
 		li {
+			position: relative;
 			margin-bottom: 1em;
 			padding-left: 63px;
 			line-height: 48px;
@@ -390,10 +391,16 @@ div.action-bar {
 			&.level-2 { background-image: url('../img/icons/resource/resource-level-2.png'); }
 			&.level-3 { background-image: url('../img/icons/resource/resource-level-3.png'); }
 			&.duration { background-image: url('../img/icons/resource/details-duration.png'); }
-			&.cost { background-image: url('../img/details/details-cost.png'); }
+			&.cost { background-image: url('../img/icons/resource/details-cost.png'); }
+			div.edit-buttons button {
+				line-height: 1.7em;
+			}
+			form.editable-text input.editable-input {
+				width: 3em !important;
+			}
 		}
 	}
-	
+
 }
 .intro-project .intro p.location {
 	margin: 2em 0;
@@ -403,7 +410,7 @@ div.action-bar {
 	.intro {
 		& > .row {
 			overflow: hidden;
-		}	
+		}
 		.row > div:first-child {
 			position: relative;
 		}
@@ -414,6 +421,6 @@ div.action-bar {
 			display: block;
 			width: 100%;
 			//height: $home-slide-height;
-		}	
+		}
 	}
 }

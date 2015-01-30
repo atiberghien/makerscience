@@ -24,7 +24,6 @@
                 </div>
 
                 <h1>{{resourcesheet.parent.title}}</h1>
-
                 <h2 editable-text="resourcesheet.parent.baseline"
                     e-form="BaselineBtnForm"
                     onbeforesave="updateProjectSheet('Project', resourcesheet.parent.id , 'baseline', $data)"
@@ -100,8 +99,8 @@
                                     <span editable-text="resourcesheet.cost"
                                         e-form="CostBtnForm"
                                         onbeforesave="updateResourceSheet(resourcesheet.id , 'cost', $data)"
-                                        ng-bind-html="resourcesheet.cost">{{ resourcesheet.cost }} euros
-                                    </span>
+                                        ng-bind-html="resourcesheet.cost">{{ resourcesheet.cost }}
+                                    </span> euros
                                 </li>
                             </ul><!-- .details -->
 
