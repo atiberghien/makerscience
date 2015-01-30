@@ -148,13 +148,16 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
     $scope.saveMakerscienceResource = () ->
         $scope.saveProject().then((resourcesheetResult) ->
             makerscienceResourceData =
+                level : $scope.projectsheet.level
+                duration : $scope.projectsheet.duration
+                cost : $scope.projectsheet.cost
                 parent : resourcesheetResult.project
                 tags : $scope.tags.map((tag) ->
                         return tag.text
                     )
 
             MakerScienceResource.post(makerscienceResourceData).then(->
-                $state.go("resource.detail", {slug : $scope.projectsheet.project.slug})
+                # $state.go("resource.detail", {slug : $scope.projectsheet.project.slug})
             )
         )
 )
@@ -165,7 +168,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
     $scope.preparedTags = []
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
-        $scope.resourcesheet = makerScienceResourceResult.objects[0]
+        $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
         angular.forEach($scope.resourcesheet.tags, (tag) ->
             TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/"+tag.id).then((taggdItemResult) ->
                 $scope.preparedTags.push({text : tag.name, taggedItemURI : taggdItemResult.resource_uri})
@@ -173,7 +176,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
         )
 
         $scope.similars = []
-        TaggedItem.one().customGET("makerscienceresource/"+$scope.projectsheet.id+"/similars").then((similarResults) ->
+        TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
                 if similar.type == 'makerscienceresource'
                     $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
@@ -191,11 +194,11 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
     $scope.addTagFromResource = (tag) ->
         Tag.one().get({name:tag.text}).then((tagResult)->
             if tagResult.objects.length == 1
-                TaggedItem.one().customPOST({tag : tagResult.objects[0]}, "makerscienceresource/"+$scope.projectsheet.id, {})
+                TaggedItem.one().customPOST({tag : tagResult.objects[0]}, "makerscienceresource/"+$scope.resourcesheet.id, {})
             else
-                TaggedItem.one().customPOST({tag : {name : tag.text}}, "makerscienceresource/"+$scope.projectsheet.id, {})
+                TaggedItem.one().customPOST({tag : {name : tag.text}}, "makerscienceresource/"+$scope.resourcesheet.id, {})
         )
-        
+
     $scope.removeTagFromResource = (tag) ->
         taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
         TaggedItem.one(taggedItemID).remove()

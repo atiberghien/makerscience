@@ -37,9 +37,9 @@
                         <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?height=393'}}" alt="Project Image" />
                         <img ng-if="!projectsheet.base_projectsheet.cover" src="img/bacasable.jpg" alt="Project Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
-                        	<div class="edit-buttons edit-cover-image">
-                        	    <button ng-click="openGallery(projectsheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
-                    	    </div>
+                            <div class="edit-buttons edit-cover-image">
+                                <button ng-click="openGallery(projectsheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
+                            </div>
                         </div>
                     </div>
 
@@ -272,7 +272,7 @@
 
         <div class="col-md-4">
             <div id="sidebar">
-                <ng-include onload="parentColor='project';projectsheet=projectsheet" src="'views/catalog/block/community.html'"></ng-include>
+                <ng-include onload="parentColor='project'" src="'views/catalog/block/community.html'"></ng-include>
                 <ng-include src="'views/catalog/block/comments.html'"></ng-include>
                 <ng-include onload="parentColor='project'" src="'views/catalog/block/popularity.html'"></ng-include>
 

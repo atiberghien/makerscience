@@ -47,12 +47,11 @@
                                     <div class="edit-buttons" ng-show="editable" ng-init="addTag=false">
                                         <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
                                     </div>
-
                                     <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
                                         <tags-input ng-model="$parent.preparedTags"
                                                     placeholder="Ajouter un mot-clé"
-                                                    on-tag-added="$parent.addTagFromProject($tag)"
-                                                    on-tag-removed="$parent.removeTagFromProject($tag)">
+                                                    on-tag-added="$parent.addTagFromResource($tag)"
+                                                    on-tag-removed="$parent.removeTagFromResource($tag)">
                                                     <auto-complete source="loadTags($query)"></auto-complete>
                                         </tags-input>
                                     </div>
