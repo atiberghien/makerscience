@@ -105,6 +105,25 @@
 							border: 1px solid #ccc;
 							@include border-radius(2px);
 						}
+						ul.list-group {
+							margin: $grid-gutter-width / 2 0;
+							li {
+								margin: $grid-gutter-width / 2 0;
+								border-bottom: 1px solid $color-medium-grey;
+								div div:last-child {
+									text-align: right;
+								}
+								&:last-child {
+									border-bottom: none;
+								}
+							}
+							label {
+								font-weight: bold;
+							}
+							button span {
+								margin-right: 0.5em;
+							}
+						}
 			    	}
 			    	&.needs-save {
 			    		padding-bottom: $grid-gutter-width / 2;
