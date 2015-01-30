@@ -42,6 +42,10 @@
 		&> div.edit-buttons {
 			top: 6em;
 		}
+		div.edit-cover-image {
+			margin-right: -$grid-gutter-width;
+			font-size: 1.5em;
+		}
 		form.editable-text {
 			width: 100%;
 			margin-bottom: 1em;
