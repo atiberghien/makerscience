@@ -99,9 +99,10 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         )
 
         $scope.similars = []
-        TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/similars").then((projectIDsResult) ->
-            angular.forEach(projectIDsResult, (projectId) ->
-                $scope.similars.push(MakerScienceProject.one(projectId).get().$object)
+        TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/similars").then((similarResults) ->
+            angular.forEach(similarResults, (similar) ->
+                if similar.type == 'makerscienceproject'
+                    $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
             )
         )
     )
@@ -165,9 +166,10 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
         )
 
         $scope.similars = []
-        TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/similars").then((resourceIDsResult) ->
-            angular.forEach(resourceIDsResult, (resourceId) ->
-                $scope.similars.push(MakerScienceResource.one(resourceId).get().$object)
+        TaggedItem.one().customGET("makerscienceresource/"+$scope.projectsheet.id+"/similars").then((similarResults) ->
+            angular.forEach(similarResults, (similar) ->
+                if similar.type == 'makerscienceresource'
+                    $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
             )
         )
     )
