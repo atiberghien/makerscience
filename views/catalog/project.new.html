@@ -160,14 +160,18 @@
                                 <button class="button" ng-click="addLinkedResource(newLinkedResource)">Lier la ressource</button>
                             </div>
                         </div>
-                        <div class="row">
-                            <ul class="list-group">
-                                <li ng-repeat="resource in linkedResources">
-                                    <label>{{resource.parent.title}}</label>
-                                    <button class="transparent" ng-click="delLinkedResource(resource)"><span class="glyphicon glyphicon-trash"></span></button>
-                                </li>
-                            </ul>
-                        </div>
+                        <ul class="list-group">
+                            <li ng-repeat="resource in linkedResources">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <label>{{resource.parent.title}}</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-danger" ng-click="delLinkedResource(resource)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                     </div>
+                                </div>
+                            </li>
+                        </ul>
                     </fieldset>
 
                     <p class="right">
