@@ -266,10 +266,16 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="bloc bloc-about">
+                        <div class="bloc bloc-about" ng-init="user = ">
                             <h3>A propos<br /> des créateurs de la fiche</h3>
-                            <img src="./img/users/user-large-audrey.png" alt="Audrey Bardon" />
-                            <p class="author">Audrey Bardon<em>utilise régulièrement le livetweet</em></p>
+                            <gravatar-image data-gravatar-email="resourcesheet.parent.team[0].members[0].user.email"
+                                            data-gravatar-size="120"
+                                            data-gravatar-rating="pg"
+                                            data-gravatar-default="mm"
+                                            data-gravatar-secure="true"
+                                            data-gravatar-css-class="profil img-circle">
+                            </gravatar-image>
+                            <p class="author">{{resourcesheet.parent.team[0].members[0].user.first_name}} {{resourcesheet.parent.team[0].members[0].user.last_name}}<em>{{profile.activity}}</em></p>
                         </div>
                     </div>
                 </div><!-- .row -->
