@@ -148,7 +148,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
 
             MakerScienceResource.post(makerscienceResourceData).then(->
-                $state.go("resource.detail", {slug : $scope.resourcesheet.project.slug})
+                $state.go("resource.detail", {slug : $scope.projectsheet.project.slug})
             )
         )
 )
