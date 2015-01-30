@@ -2,23 +2,17 @@
 
     <div class="home-slide">
         <div class="row">
-            <div class="col-md-7">
-                <h3 class="category"><span>Fiche projet</span></h3>
+            <div class="col-md-7" ng-controller="MakerScienceProjectListCtrl">
                 <carousel class="carousel-no-indicators">
-                    <slide>
-                        <img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
-                        <div class="description">
-                            <h3>La fête de la science!</h3>
-                            <h4>Contributeur: <strong>Audrey BARDON</strong></h4>
-                        </div>
-                    </slide>
-                    <slide>
-                        <img src="./img/uploads/home-slide-two.jpg" alt="Loading slide two..." />
-                        <div class="description">
-                            <h3>La fête de la science!</h3>
-                            <h4>Contributeur: <strong>Audrey BARDON</strong></h4>
-                        </div>
-                    </slide>
+                        <slide ng-repeat="project in projects | filter:{featured:true}">
+                            <h3 class="category"><span>Fiche projet</span></h3>
+                            <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
+                            <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                            <div class="description">
+                                <h3>{{project.parent.title}}</h3>
+                                <h4>Contributeur: <strong>{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</strong></h4>
+                            </div>
+                        </slide>
                 </carousel>
             </div>
             <div class="col-md-5" ng-init="showLoginPanel=false">
@@ -128,13 +122,13 @@
 
     <div class="row row-home">
         <div class="col-md-7">
-        
+
             <div class=" home-community">
                 <h2>Membres de la communauté</h2>
                 <div class="boxes boxes-profils" ng-controller="MakerScienceProfileListCtrl">
                     <ul class="members members-small" >
                         <li ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)" ng-repeat="baseProfile in profiles">
-                        	<ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
+                            <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
                         </li
                         ><li class="box-solo">
                             <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
