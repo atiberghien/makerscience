@@ -198,6 +198,11 @@
                             </slide>
                         </carousel>
                     </tab>
+                    <tab ng-show="editable" disabled="true" class="editable">
+                        <tab-heading>
+                            <span ng-click="openGallery(resourcesheet.base_resourcesheet)" class="glyphicon glyphicon-pencil"></span>
+                        </tab-heading>
+                    </tab>
                 </tabset>
 
                 <div class="row">
