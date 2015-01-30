@@ -162,9 +162,9 @@
                         </div>
                         <div class="row">
                             <ul class="list-group">
-                                <li ng-repeat="(uri, resource) in linkedResources">
-                                    <label>{{resource.title}}</label>
-                                    <button class="transparent" ng-click="delLinkedResource(uri)"><span class="glyphicon glyphicon-trash"></span></button>
+                                <li ng-repeat="resource in linkedResources">
+                                    <label>{{resource.parent.title}}</label>
+                                    <button class="transparent" ng-click="delLinkedResource(resource)"><span class="glyphicon glyphicon-trash"></span></button>
                                 </li>
                             </ul>
                         </div>

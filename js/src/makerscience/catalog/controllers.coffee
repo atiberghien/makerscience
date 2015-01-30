@@ -11,6 +11,7 @@ module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource)
 module.controller('MakerScienceLinkedResourceAutoCompleteCtrl', ($scope, MakerScienceResource) ->
 
     $scope.allAvailableResources = []
+
     MakerScienceResource.getList().then((resourceResults)->
         angular.forEach(resourceResults, (resource) ->
             $scope.allAvailableResources.push(
@@ -69,13 +70,14 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         delete $scope.needs[index]
 
     $scope.addLinkedResource = (newLinkedResource) ->
-        if newLinkedResource
-            $scope.linkedResources[newLinkedResource.originalObject.resource_uri] = newLinkedResource.originalObject
+        if newLinkedResource && $scope.linkedResources.indexOf(newLinkedResource.originalObject.fullObject) < 0
+            $scope.linkedResources.push(newLinkedResource.originalObject.fullObject)
             $scope.newLinkedResource = null
             $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
 
-    $scope.delLinkedResource = (uri) ->
-        delete $scope.linkedResources[uri]
+    $scope.delLinkedResource = (resource) ->
+        resourceIndex = $scope.linkedResources.indexOf(resource)
+        $scope.linkedResources.pop(resourceIndex)
 
 )
 
@@ -119,16 +121,17 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
 
 
     $scope.addLinkedResource = (newLinkedResource) ->
-        if newLinkedResource
-            resource = newLinkedResource.originalObject.fullObject
+        resource = newLinkedResource.originalObject.fullObject
+        if newLinkedResource && $scope.linkedResources.indexOf(resource) < 0
             $scope.linkedResources.push(resource)
             $scope.projectsheet.linked_resources.push(resource.resource_uri)
             $scope.newLinkedResource = null
             MakerScienceProject.one($scope.projectsheet.id).patch({linked_resources : $scope.projectsheet.linked_resources})
             $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
 
-    $scope.delLinkedResource = (uri) ->
-        delete $scope.linkedResources[uri]
+    $scope.delLinkedResource = (resource) ->
+        resourceIndex = $scope.linkedResources.indexOf(resource)
+        $scope.linkedResources.pop(resourceIndex)
 )
 
 module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource) ->
