@@ -175,10 +175,18 @@ module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params
         $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
             $scope.uploader.removeFromQueue(fileItem)
             $scope.bucket.files.push(response)
+            if $scope.bucket.files.length == 1
+                $scope.updateFavorite(response)
+
     else
         $scope.uploader = params.uploader
         $scope.videos = params.videos
         $scope.favorite = params.favorite
+        $scope.cover = null
+
+        $scope.uploader.onAfterAddingFile = (item) ->
+            if $scope.uploader.queue.length == 1
+                $scope.setFavorite(item)
 
     $scope.ok = ->
         result =
@@ -200,8 +208,9 @@ module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params
         if $scope.projectsheet #EDIT MODE
             ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.videos})
 
-    $scope.setFavorite = (item) ->
-        $scope.favorite = $scope.uploader.getIndexOfItem(item)
+    $scope.setFavorite = (file) ->
+        $scope.cover = file
+        $scope.favorite = $scope.uploader.getIndexOfItem(file)
 
 
     $scope.removePicture = (file) ->#EDIT MODE

@@ -1,11 +1,12 @@
 <div class="modal-header">
-    <h3 class="modal-title">Galerie</h3>
+    <h3 class="modal-title">Gallerie</h3>
 </div>
 <div class="modal-body modal-gallery">
     <tabset class="nav-tabs-project">
         <tab heading="Photos">
             <section>
                 <input type="file" nv-file-select="" uploader="uploader" multiple />
+                Couverture : {{cover.file.name || projectsheet.cover.filename || 'Aucune image'}}
                 <ul class="thumbnails">
                     <li ng-repeat="file in bucket.files" style="float: left;text-align: center;">
                         <img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" height="100px"/>
@@ -17,13 +18,13 @@
                             <span class="glyphicon glyphicon-trash"></span> Supprimer
                         </button>
                     </li>
-                    <li ng-repeat="item in uploader.queue" style="float: left;text-align: center;">
-                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
-                        <div>{{ item.file.name }}</div>
-                        <button type="button" class="btn btn-xs" ng-click="setFavorite(item)">
+                    <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
+                        <div ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
+                        <div>{{ file.file.name }}</div>
+                        <button type="button" class="btn btn-xs" ng-click="setFavorite(file)">
                             <span class="glyphicon glyphicon-star"></span> Couverture
                         </button>
-                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
                             <span class="glyphicon glyphicon-trash"></span> Supprimer
                         </button>
                     </li>
