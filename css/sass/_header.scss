@@ -138,6 +138,21 @@ div.action-bar {
 	}
 }
 
+div.crumbs {
+	ul {
+		margin: 0 $grid-gutter-width 1em;
+	}
+	li {
+		display: inline;
+	}
+	li, a {
+		color: $color-crumbs-grey;
+	}
+	a:hover {
+		color: $color-blue;
+	}
+}
+
 #intro {
 	padding: 2em 0;
 	background-size: cover;

@@ -1,61 +1,75 @@
-<header>
-	<nav id="menu" class="navbar" role="navigation">
+<div id="header">
+
+	<header>
+		<nav id="menu" class="navbar" role="navigation">
+			<div class="container">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" ui-sref="home"><img src="./img/logo.png" alt="Logo MakerScience" /></a>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li><a ui-sref="home" class="selected">Accueil</a></li>
+							<li><a ui-sref="about">A propos</a></li>
+							<li><a ui-sref="profile.list">Membres</a></li>
+							<li><a ui-sref="project.list">Projets</a></li>
+							<li><a ui-sref="resource.list">Ressources</a></li>
+							<li><a href="" class="nav-forum">Forum</a></li>
+						</ul>
+						<form class="navbar-right" ng-show="!authVars.isAuthenticated && !showLoginPanel">
+							<button class="connect" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
+						</form>
+						<!-- Showing when loggin in and when logged in -->
+						<form method="post" class="navbar-right" role="search" ng-show="authVars.isAuthenticated || showLoginPanel">
+							<ng-include src="'/views/base/search.html'"></ng-include>
+						</form>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
+			</div><!-- .container -->
+		</nav><!-- #menu -->
+	</header>
+
+	<div class="action-bar" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
 		<div class="container">
-			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" ui-sref="home"><img src="./img/logo.png" alt="Logo MakerScience" /></a>
-				</div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li><a ui-sref="home" class="selected">Accueil</a></li>
-						<li><a ui-sref="about">A propos</a></li>
-						<li><a ui-sref="profile.list">Membres</a></li>
-						<li><a ui-sref="project.list">Projets</a></li>
-						<li><a ui-sref="resource.list">Ressources</a></li>
-						<li><a href="" class="nav-forum">Forum</a></li>
-					</ul>
-					<form class="navbar-right" ng-show="!authVars.isAuthenticated && !showLoginPanel">
-						<button class="connect" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
-					</form>
-					<!-- Showing when loggin in and when logged in -->
-					<form method="post" class="navbar-right" role="search" ng-show="authVars.isAuthenticated || showLoginPanel">
-						<ng-include src="'/views/base/search.html'"></ng-include>
-					</form>
-				</div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
+
+			<!-- When not logged in -->
+			<form method="post" ng-show="!authVars.isAuthenticated && !showLoginPanel" ng-class="{'search-full-width': !authVars.isAuthenticated}">
+				<ng-include src="'/views/base/search.html'"></ng-include>
+			</form>
+
+			<!-- When logging in -->
+			<div class="authenticated" ng-show="showLoginPanel">
+				<ng-include src="'/views/base/login.html'"></ng-include>
+			</div>
+
+			<!-- When logged in -->
+			<div class="authenticated" ng-if="authVars.isAuthenticated">
+				<a ui-sref="profile.detail">
+					<img src="./img/users/user-default.png" alt="Photo of {{authVars.user.first_name}} {{authVars.user.last_name}}" />
+					{{authVars.user.first_name}} <strong>{{authVars.user.last_name}}</strong>
+				</a>
+				<ul class="toolbar">
+					<li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
+					<li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
+					<li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
+				</ul><!-- #sidenav -->
+			</div>
 		</div><!-- .container -->
-	</nav><!-- #menu -->
-</header>
+	</div>
 
-<div class="action-bar" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
-	<div class="container">
+	<div class="crumbs">
+		<div class="container">
+			<ul>
+				<li><a href="">Accueil</a> / </li>
+				<li><a href="">Expériences partagées</a> / </li>
+				<li>Former les jeunes au livetweet</a></li>
+			</ul>
+		</div><!-- .container -->
+	</div><!-- .crumbs -->
 
-		<!-- When not logged in -->
-		<form method="post" ng-show="!authVars.isAuthenticated && !showLoginPanel" ng-class="{'search-full-width': !authVars.isAuthenticated}">
-			<ng-include src="'/views/base/search.html'"></ng-include>
-		</form>
-
-		<!-- When logging in -->
-		<div class="authenticated" ng-show="showLoginPanel">
-			<ng-include src="'/views/base/login.html'"></ng-include>
-		</div>
-
-		<!-- When logged in -->
-		<div class="authenticated" ng-if="authVars.isAuthenticated">
-			<a ui-sref="profile.detail">
-				<img src="./img/users/user-default.png" alt="Photo of {{authVars.user.first_name}} {{authVars.user.last_name}}" />
-				{{authVars.user.first_name}} <strong>{{authVars.user.last_name}}</strong>
-			</a>
-			<ul class="toolbar">
-				<li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
-				<li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
-				<li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
-			</ul><!-- #sidenav -->
-		</div>
-	</div><!-- .container -->
-</div>
+</div><!-- #header -->
