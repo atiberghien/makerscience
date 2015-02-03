@@ -22,7 +22,7 @@ module.controller('MakerScienceLinkedResourceAutoCompleteCtrl', ($scope, MakerSc
     )
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource) ->
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource, TaggedItem) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceAutoCompleteCtrl', {$scope: $scope})
 
@@ -41,14 +41,14 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         $scope.saveProject().then((projectsheetResult) ->
             makerscienceProjectData =
                 parent : projectsheetResult.project
-                tags : $scope.tags.map((tag) ->
-                        return tag.text
-                    )
                 linked_resources : $scope.linkedResources.map((resource) ->
                         return resource.resource_uri
                     )
 
-            MakerScienceProject.post(makerscienceProjectData).then(->
+            MakerScienceProject.post(makerscienceProjectData).then((makerscienceProjectResult)->
+                angular.forEach($scope.tags, (tag)->
+                    TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id, {})
+                )
                 $scope.savePhotos(projectsheetResult.id, projectsheetResult.bucket.id)
                 $scope.saveVideos(projectsheetResult.id)
 
@@ -80,7 +80,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, Tag, TaggedItem) ->
+module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('MakerScienceLinkedResourceAutoCompleteCtrl', {$scope: $scope})
 
@@ -91,10 +91,8 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         $scope.projectsheet = makerScienceProjectResult.objects[0]
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
-        angular.forEach($scope.projectsheet.tags, (tag) ->
-            TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/"+tag.id).then((taggdItemResult) ->
-                $scope.preparedTags.push({text : tag.name, taggedItemURI : taggdItemResult.resource_uri})
-            )
+        angular.forEach($scope.projectsheet.tags, (taggedItem) ->
+            $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
         )
 
         $scope.similars = []
@@ -113,17 +111,10 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
             when 'MakerScienceProject' then MakerScienceProject.one(resourceId).patch(putData)
 
     $scope.addTagFromProject = (tag) ->
-        Tag.one().get({name:tag.text}).then((tagResult)->
-            if tagResult.objects.length == 1
-                TaggedItem.one().customPOST({tag : tagResult.objects[0]}, "makerscienceproject/"+$scope.projectsheet.id, {})
-            else
-                TaggedItem.one().customPOST({tag : {name : tag.text}}, "makerscienceproject/"+$scope.projectsheet.id, {})
-        )
-
+        TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+$scope.projectsheet.id, {})
 
     $scope.removeTagFromProject = (tag) ->
-        taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
-        TaggedItem.one(taggedItemID).remove()
+        TaggedItem.one(tag.taggedItemId).remove()
 
 
     $scope.addLinkedResource = (newLinkedResource) ->
@@ -140,7 +131,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         $scope.linkedResources.pop(resourceIndex)
 )
 
-module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource) ->
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, TaggedItem) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
 
     $scope.tags = []
@@ -152,27 +143,26 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 duration : $scope.projectsheet.duration
                 cost : $scope.projectsheet.cost
                 parent : resourcesheetResult.project
-                tags : $scope.tags.map((tag) ->
-                        return tag.text
-                    )
 
-            MakerScienceResource.post(makerscienceResourceData).then(->
+            MakerScienceResource.post(makerscienceResourceData).then((makerscienceResourceResult)->
+                angular.forEach($scope.tags, (tag)->
+                    TaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id, {})
+                )
                 # $state.go("resource.detail", {slug : $scope.projectsheet.project.slug})
             )
         )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, Tag, TaggedItem) ->
+module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
 
     $scope.preparedTags = []
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
-        angular.forEach($scope.resourcesheet.tags, (tag) ->
-            TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/"+tag.id).then((taggdItemResult) ->
-                $scope.preparedTags.push({text : tag.name, taggedItemURI : taggdItemResult.resource_uri})
-            )
+
+        angular.forEach($scope.projectsheet.tags, (taggedItem) ->
+            $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
         )
 
         $scope.similars = []
@@ -184,24 +174,17 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
         )
     )
 
-
     $scope.updateMakerScienceResourceSheet = (resourceName, resourceId, fieldName, data) ->
         putData = {}
         putData[fieldName] = data
         switch resourceName
             when 'MakerScienceResource' then MakerScienceResource.one(resourceId).patch(putData)
 
-    $scope.addTagFromResource = (tag) ->
-        Tag.one().get({name:tag.text}).then((tagResult)->
-            if tagResult.objects.length == 1
-                TaggedItem.one().customPOST({tag : tagResult.objects[0]}, "makerscienceresource/"+$scope.resourcesheet.id, {})
-            else
-                TaggedItem.one().customPOST({tag : {name : tag.text}}, "makerscienceresource/"+$scope.resourcesheet.id, {})
-        )
+    $scope.addTagFromProject = (tag) ->
+        TaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+$scope.projectsheet.id, {})
 
-    $scope.removeTagFromResource = (tag) ->
-        taggedItemID = getObjectIdFromURI(tag.taggedItemURI)
-        TaggedItem.one(taggedItemID).remove()
+    $scope.removeTagFromProject = (tag) ->
+        TaggedItem.one(tag.taggedItemId).remove()
 )
 
 
