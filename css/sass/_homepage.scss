@@ -51,15 +51,24 @@
         margin: 0 0 $grid-gutter-width / 2;
     }
     &>div {
-        // height: $home-slide-height;
+        display: table;
+        height: $home-slide-height - $grid-gutter-width * 2 - 2*4px;
         padding: $grid-gutter-width;
         color: #fff;
         background: $color-pink url('../img/bg/shape-top-bg.png') center -100px no-repeat;
         text-align: center;
         border: 3px solid #fff;
+        vertical-align: top;
+        div.join {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        p.buttons {
+            line-height: 6em;
+        }
         a.button {
             display: inline;
-            margin: 0 1em;
+            margin: $grid-gutter-width 1em;
         }
     }
     h2 {

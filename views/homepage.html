@@ -19,17 +19,19 @@
                 <div class="home-join">
                     <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
                     <div ng-show="!showLoginPanel">
-                        <h2>Rejoindre la communauté MakerScience!</h2>
-                        <p ng-show="!authVars.isAuthenticated">
-                            <a class="button" ng-click="showLoginPanel=true">S'inscrire</a>
-                            <a class="button" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</a>
-                        </p>
+                        <div class="join">
+                            <h2>Rejoindre la communauté MakerScience!</h2>
+                            <p class="buttons" ng-show="!authVars.isAuthenticated">
+                                <a class="button" ng-click="showLoginPanel=true">S'inscrire</a>
+                                <a class="button" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</a>
+                            </p>
+                        </div><!-- .join -->
                     </div>
                     <div ng-show="showLoginPanel" >
                        <p class="right">
                            <button class="close-login" ng-click="showLoginPanel=false"><img src="./img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
                        </p>
-                        <ng-include src="'./views/base/login.html'"></ng-include>
+                       <ng-include src="'./views/base/login.html'"></ng-include>
                     </div>
                 </div><!-- .home-join -->
             </div>
