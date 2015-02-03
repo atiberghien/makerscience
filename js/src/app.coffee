@@ -7,7 +7,7 @@ angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
-                                'geocoder-service'])
+                                'geocoder-service', 'ncy-angular-breadcrumb'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -52,58 +52,93 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
 
         $stateProvider.state('home',
                 url: '/',
-                templateUrl: 'views/homepage.html'
+                templateUrl: 'views/homepage.html',
+                ncyBreadcrumb:
+                    label: 'Accueil'
         )
         .state('project',
                 url: '/p/'
                 abstract: true,
                 templateUrl : 'views/catalog/project.html'
+                ncyBreadcrumb:
+                    parent: 'home'
         )
         .state('project.list',
                 url: 'list',
-                templateUrl: 'views/catalog/project.list.html'
+                templateUrl: 'views/catalog/project.list.html',
+                ncyBreadcrumb:
+                    label: 'Projets'
         )
         .state('project.new',
                 url: 'new',
-                templateUrl: 'views/catalog/project.new.html'
+                templateUrl: 'views/catalog/project.new.html',
+                ncyBreadcrumb:
+                    label: 'Nouveau projet'
+                    parent : 'project.list'
         )
         .state('project.detail',
                 url: ':slug',
-                templateUrl: 'views/catalog/project.detail.html'
+                templateUrl: 'views/catalog/project.detail.html',
+                controller : 'MakerScienceProjectSheetCtrl'
+                ncyBreadcrumb:
+                    label: '{{projectsheet.parent.title}}'
+                    parent : 'project.list'
         )
         .state('resource',
                 url : '/r/',
                 abstract : true,
                 templateUrl : 'views/catalog/resource.html'
+                ncyBreadcrumb:
+                    parent: 'home'
         )
         .state('resource.list',
                 url: 'list',
                 templateUrl: 'views/catalog/resource.list.html'
+                ncyBreadcrumb:
+                    label: 'Expériences'
         )
         .state('resource.new',
                 url: 'new',
                 templateUrl: 'views/catalog/resource.new.html'
+                ncyBreadcrumb:
+                    label: 'Nouvelle expérience'
+                    parent : 'resource.list'
         )
         .state('resource.detail',
                 url: ':slug',
                 templateUrl: 'views/catalog/resource.detail.html'
+                controller: 'MakerScienceResourceSheetCtrl'
+                ncyBreadcrumb:
+                    label: '{{projectsheet.parent.title}}'
+                    parent : 'resource.list'
         )
         .state('profile',
                 url : '/u/',
                 abstract : true,
                 templateUrl : 'views/profile/profile.html'
+                ncyBreadcrumb:
+                    parent: 'home'
         )
         .state('profile.list',
                 url: 'list',
                 templateUrl: 'views/profile/profile.list.html'
+                ncyBreadcrumb:
+                    label: 'Communauté'
         )
         .state('profile.detail',
                 url: ':id',
                 templateUrl: 'views/profile/profile.detail.html'
+                controller : 'MakerScienceProfileCtrl'
+                ncyBreadcrumb:
+                    label: '{{profile.full_name}}'
+                    parent : 'profile.list'
         )
         .state('map',
                 url: '/map/',
                 templateUrl: 'views/map/map.html'
+                ncyBreadcrumb:
+                    label: 'Carte de la communauté'
+                    parent : 'profile.list'
         )
 
 ])

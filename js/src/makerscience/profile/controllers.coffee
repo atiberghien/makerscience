@@ -6,18 +6,7 @@ module.controller("MakerScienceProfileListCtrl", ($scope, MakerScienceProfile) -
 
 module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, Users, Profile, MakerScienceProfile, PostalAddress) ->
 
-    $scope.init = (profileID) ->
-        MakerScienceProfile.one(profileID).get().then((makerScienceProfileResult) ->
-            $scope.profile = makerScienceProfileResult
-            baseProfileID = getObjectIdFromURI(makerScienceProfileResult.parent)
-            Profile.one(baseProfileID).get().then((profileResult)->
-                $scope.profile.parent = profileResult
-                Users.one(profileResult.username).get().then((userResult)->
-                    $scope.profile.parent.user = userResult
-                )
-            )
-        )
-
-    if $stateParams.id
-        $scope.init($stateParams.id)
+    MakerScienceProfile.one($stateParams.id).get().then((makerScienceProfileResult) ->
+        $scope.profile = makerScienceProfileResult
+    )
 )

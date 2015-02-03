@@ -4,7 +4,7 @@
         <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
     </ul><!-- #nav -->
 
-    <div id="intro" class="intro-profil" ng-controller="MakerScienceProfileCtrl">
+    <div id="intro" class="intro-profil">
         <div class="container">
             <div class="intro">
                 <div class="row">
@@ -71,49 +71,49 @@
     </div><!-- #intro -->
 
     <div class="row container">
-    
-        <div class="col-md-12">
-        
-            <div id="content" class="content-member">
-		        
-				<div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
-		            <div class="box box-solo box-blue">
-		                <div><a href="">Mes projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-		            </div>
-					<div class="box" ng-repeat="project in projects | limitTo:4">
-						<ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-					</div><!-- .box -->
-				</div><!-- .boxes -->
 
-				<div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+        <div class="col-md-12">
+
+            <div id="content" class="content-member">
+
+                <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+                    <div class="box box-solo box-blue">
+                        <div><a href="">Mes projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                    <div class="box" ng-repeat="project in projects | limitTo:4">
+                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                    </div><!-- .box -->
+                </div><!-- .boxes -->
+
+                <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
                     <div class="box box-solo box-red">
                         <div><a href="">Les projets que je suis <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                     </div>
-					<div class="box" ng-repeat="project in projects | limitTo:4">
-						<ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-					</div><!-- .box -->
-				</div><!-- .boxes -->
+                    <div class="box" ng-repeat="project in projects | limitTo:4">
+                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                    </div><!-- .box -->
+                </div><!-- .boxes -->
 
-				<div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+                <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
                     <div class="box box-solo box-green">
                         <div><a href="">Mes fiches ressources <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                     </div>
-					<div class="box" ng-repeat="project in projects | limitTo:4">
-						<ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-					</div><!-- .box -->
-				</div><!-- .boxes -->
+                    <div class="box" ng-repeat="project in projects | limitTo:4">
+                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                    </div><!-- .box -->
+                </div><!-- .boxes -->
 
-				<div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+                <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
                     <div class="box box-solo box-purple">
                         <div><a href="">Les ressources qui m'intéressent <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                     </div>
-					<div class="box" ng-repeat="project in projects | limitTo:4">
-						<ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-					</div><!-- .box -->
-				</div><!-- .boxes -->
+                    <div class="box" ng-repeat="project in projects | limitTo:4">
+                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                    </div><!-- .box -->
+                </div><!-- .boxes -->
 
             </div><!-- .content-member -->
-            
+
         </div><!-- .col-md-12 -->
 
     </div><!-- .row .container -->
