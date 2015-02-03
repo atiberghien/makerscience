@@ -16,21 +16,21 @@
                 </carousel>
             </div>
             <div class="col-md-5" ng-init="showLoginPanel=false">
-                <div class="home-join" ng-show="!showLoginPanel">
-                    <h2>Rejoindre la communauté MakerScience!</h2>
-                    <ul>
-                        <li><a href="http://facebook.com"><img src="./img/home/home-share-facebook.png" alt="Facebook" /></a></li>
-                        <li><a href="http://twitter.com"><img src="./img/home/home-share-twitter.png" alt="Twitter" /></a></li>
-                        <li><a href="http://plus.google.com"><img src="./img/home/home-share-google.png" alt="Google+" /></a></li>
-                    </ul>
-                    <p ng-show="!authVars.isAuthenticated"><a ng-click="showLoginPanel=true">S'inscrire</a></p>
+                <div class="home-join">
                     <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
-                </div>
-                <div class="home-join" ng-show="showLoginPanel" >
+                    <div ng-show="!showLoginPanel">
+                        <h2>Rejoindre la communauté MakerScience!</h2>
+                        <p ng-show="!authVars.isAuthenticated">
+                            <a class="button" ng-click="showLoginPanel=true">S'inscrire</a>
+                            <a class="button" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</a>
+                        </p>
+                    </div>
+                    <div ng-show="showLoginPanel" >
                        <p class="right">
                            <button class="close-login" ng-click="showLoginPanel=false"><img src="./img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
                        </p>
-                    <ng-include src="'./views/base/login.html'"></ng-include>
+                        <ng-include src="'./views/base/login.html'"></ng-include>
+                    </div>
                 </div><!-- .home-join -->
             </div>
         </div><!-- .row -->
@@ -87,55 +87,59 @@
     </div><!-- .home-links -->
 
     <div class="home-fullwidth">
-        <div class="row" ng-init="showProject=true;">
-            <ul>
-                <!-- No white space between the </li><li> tags or it will show as space in the rendered page -->
-                <li ng-class="projectToggleClass" ng-init="projectToggleClass='projectToggleOn';resourceToggleClass='resourceToggleOff'"><a href="" ng-init="showProject=true" ng-click="showProject=true;projectToggleClass='projectToggleOn';resourceToggleClass='resourceToggleOff'"><span class="glyphicon glyphicon-tasks"></span>Projets</a></li
-                ><li ng-class="resourceToggleClass"><a href="" ng-click="showProject=false;projectToggleClass='projectToggleOff';resourceToggleClass='resourceToggleOn'"><span class="glyphicon glyphicon-book"></span>Ressources</a></li>
-            </ul>
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="projects"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+                <div class="boxes boxes-small boxes-small-home boxes-projects" ng-controller="MakerScienceProjectListCtrl">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="project in projects | limitTo:3" >
+                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                    </div
+                    ><div class="box box-solo box-blue">
+                        <div><a ui-sref="project.list">Voir tous les <br />projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
+            <div class="col-md-4">
+                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Experiences</h2>
+                <div class="boxes boxes-small boxes-small-home boxes-resources" ng-controller="MakerScienceResourceListCtrl">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="resource in resources | limitTo:3">
+                        <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                    </div
+                    ><div class="box box-solo box-green">
+                        <div><a ui-sref="resource.list">Voir toutes les expériences <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
+            <div class="col-md-4">
+                <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
+                <div class="boxes boxes-small boxes-small-home members" ng-controller="MakerScienceProfileListCtrl">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)" ng-repeat="baseProfile in profiles | limitTo:3">
+                        <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
+                    </div
+                    ><div class="box box-solo box-pink">
+                        <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
         </div><!-- .row -->
     </div><!-- .home-fullwidth -->
 
-    <div class="row row-home home-projects-resources">
-        <div ng-class="projectToggleClass" class="boxes boxes-small boxes-small-home animate-show animate-slide-right" ng-controller="MakerScienceProjectListCtrl">
-            <div class="box" ng-repeat="project in projects | limitTo:4" >
-                <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-            </div><!-- .box -->
-            <div class="box box-solo box-blue">
-                <div><a ui-sref="project.list">Voir tous les projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-            </div>
-        </div><!-- .boxes -->
-        <div ng-class="resourceToggleClass" class="boxes boxes-small boxes-small-home animate-show animate-slide-left" ng-controller="MakerScienceResourceListCtrl">
-            <div class="box" ng-repeat="resource in resources | limitTo:4">
-                <img src="./img/bacasable.jpg" alt="Image background" />
-                <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
-                <div class="description">
-                    <h4><a ui-sref="resource.detail({ slug: resource.parent.slug })">{{resource..parent.title}}</a></h4>
-                    <h5><a href="">Par Marina Lopez</a></h5>
-                </div>
-            </div><!-- .box -->
-            <div class="box box-solo box-green">
-                <div><a ui-sref="resource.list">Voir toutes les ressources <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-            </div>
-        </div><!-- .boxes -->
+    <div class="row home-tags">
+        <div class="col-md-12">
+            <div class="home-tags" ng-controller="TagListCtrl">
+                <h2>Tags</h2>
+                <ul class="tags">
+                    <li ng-repeat="tag in tags"><a href="">{{tag.name}}</a></li>
+                </ul>
+            </div><!-- .home-tags -->
+        </div>
     </div><!-- .row -->
 
     <div class="row row-home">
         <div class="col-md-7">
-
-            <div class=" home-community">
-                <h2>Membres de la communauté</h2>
-                <div class="boxes boxes-profils" ng-controller="MakerScienceProfileListCtrl">
-                    <ul class="members members-small" >
-                        <li ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)" ng-repeat="baseProfile in profiles">
-                            <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
-                        </li
-                        ><li class="box-solo">
-                            <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                        </li>
-                    </ul><!-- .members -->
-                </div><!-- .boxes -->
-            </div><!--  .home-community -->
 
             <div class="home-forum">
                 <h2>Discussion // Forum //</h2>
@@ -152,14 +156,7 @@
 
         <div class="col-md-5">
 
-            <div class="home-tags" ng-controller="TagListCtrl">
-                <h2>Tags</h2>
-                <ul class="tags">
-                    <li ng-repeat="tag in tags"><a href="">{{tag.name}}</a></li>
-                </ul>
-            </div><!-- .home-tags -->
-
-            <div>
+            <div class="home-twitter">
                 <a class="twitter-timeline"
                 href="https://twitter.com/atiberghien"
                 data-widget-id="527467059685257216"></a>

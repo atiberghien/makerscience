@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
 <link rel='stylesheet' href='css/textAngular.css'>
+
 <div ng-controller="MakerScienceProjectSheetCtrl">
 
     <ul id="sidenav" class="project">
@@ -23,7 +24,6 @@
                 </div>
 
                 <h1>{{projectsheet.parent.title}}</h1>
-
                 <h2 editable-text="projectsheet.parent.baseline"
                     e-form="BaselineBtnForm"
                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'baseline', $data)"
@@ -207,12 +207,12 @@
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
                         <carousel class="carousel-no-indicators">
-                                <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
-                                    <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
-                                </slide>
-                                <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
-                                    <img src="img/slides/slide_one.png" alt="Slide One">
-                                </slide>
+                            <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
+                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
+                            </slide>
+                            <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
+                                <img src="img/slides/slide_one.png" alt="Slide One">
+                            </slide>
                         </carousel>
                     </tab>
                     <tab>
@@ -237,8 +237,7 @@
                     </tab>
                 </tabset>
 
-
-                <section class="linked linked-project" ng-init="linkResources=True">
+                <section class="linked linked-project" ng-init="linkResources=True" ng-show="linkResources">
                     <div class="edit-buttons" ng-hide="!editable" ng-show="editable">
                         <button ng-click="linkResources=!linkResources" ><span class="glyphicon glyphicon-pencil"></span></button>
                         <div ng-show="linkResources">

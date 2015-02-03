@@ -11,6 +11,7 @@
 						</button>
 						<a class="navbar-brand" ui-sref="home"><img src="./img/logo.png" alt="Logo MakerScience" /></a>
 					</div>
+					<p class="navbar-tagline">Plateforme collaborative pour<br />la médiation des sciences, des techniques et des innovations</p>
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
@@ -21,11 +22,13 @@
 							<li><a ui-sref="resource.list">Ressources</a></li>
 							<li><a href="" class="nav-forum">Forum</a></li>
 						</ul>
+						<!--
 						<form class="navbar-right" ng-show="!authVars.isAuthenticated && !showLoginPanel">
 							<button class="connect" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
 						</form>
+						-->
 						<!-- Showing when loggin in and when logged in -->
-						<form method="post" class="navbar-right" role="search" ng-show="authVars.isAuthenticated || showLoginPanel">
+						<form method="post" class="navbar-right" role="search">
 							<ng-include src="'/views/base/search.html'"></ng-include>
 						</form>
 					</div><!-- /.navbar-collapse -->
@@ -36,11 +39,6 @@
 
 	<div class="action-bar" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
 		<div class="container">
-
-			<!-- When not logged in -->
-			<form method="post" ng-show="!authVars.isAuthenticated && !showLoginPanel" ng-class="{'search-full-width': !authVars.isAuthenticated}">
-				<ng-include src="'/views/base/search.html'"></ng-include>
-			</form>
 
 			<!-- When logging in -->
 			<div class="authenticated" ng-show="showLoginPanel">

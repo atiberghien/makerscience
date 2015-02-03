@@ -33,7 +33,6 @@ form.search-full-width {
 div.action-bar {
 	margin-bottom: $grid-gutter-width;
 	&.authenticated {
-		margin-bottom: 0;
 		background-color: $color-pink;
 		.authenticated {
 			padding: 10px $grid-gutter-width;
@@ -139,6 +138,7 @@ div.action-bar {
 }
 
 div.crumbs {
+	display: none;
 	ul {
 		margin: 0 $grid-gutter-width 1em;
 	}

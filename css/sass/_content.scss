@@ -626,6 +626,7 @@ ui-view> div.container {
 		&.box-orange { background-color: $color-orange; }
 		&.box-purple { background-color: $color-purple; }
 		&.box-red { background-color: $color-red; }
+		&.box-pink { background-color: $color-pink; }
 		&.box-solo {
 			a {
 				height: 100%;
@@ -782,28 +783,39 @@ ui-view> div.container {
 				left: 0;
 				right: 0;
 			}
+			&.box-solo a {
+				font-size: 1.5em;
+				line-height: 1.5em;
+				font-family: "LatoLight";
+			}
 		}
 	}
 
 	&.boxes-small-home {
 		margin-top: $grid-gutter-width / 2;
-		margin-left: $grid-gutter-width / 2;
 		margin-bottom: $grid-gutter-width / 2;
 		.box {
-			margin-right: $grid-gutter-width / 2;
-			margin-bottom: $grid-gutter-width / 2;
+			width: $boxes-home-width !important; /* Need to overide the member's style */
+			height: $boxes-home-height;
+			margin-right: $grid-gutter-width / 2 !important; /* Need to overide the member's style */
+			margin-bottom: $grid-gutter-width / 2; /* Need to overide the member's style */
+			&>img {
+				width: inherit;
+				height: inherit;
+			}
 		}
 		.box-solo a {
 			font-size: 2.1em;
 		}
 	}
 
-
-	.members {
+	.members, /* FIXME remove this line when Member's page has been moved from LI to DIV */
+	&.members {
 
 	    margin-right: -$grid-gutter-width;
 
-		li {
+		/* FIXME need to remove the li when member's page has been moved from LI to DIV */
+		li, div.box {
 			display: inline-block;
 			position: relative;
 			width: $boxes-width - 1px; /* need to fix extra space added by Angular between </li><li> */
@@ -860,6 +872,9 @@ ui-view> div.container {
 			    background-color: $color-orange;
 			}
 		}
+		div.box {
+			width: inherit;
+		}
 		a {
 		    display: block;
 		    color: $color-dark-grey;
@@ -868,57 +883,40 @@ ui-view> div.container {
 		    text-decoration: none;
 	    }
 
+		&.boxes-small {
+			margin-right: 0;
+			div {
+				position: relative;
+				margin-right: $grid-gutter-width;
+				margin-bottom: $grid-gutter-width / 2;
+				background-color: #fff;
+				&:hover {
+					background-color: $color-light-grey;
+				}
+				h3 {
+					margin-bottom: 0.1em;
+					font-size: 0.85em;
+					color: $color-dark-grey;
+				}
+				h4 {
+					font-size: 0.75em;
+				}
+				h5 {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+					font-size: 0.7em;
+				}
+				img {
+					width: 85px;
+					height: 85px;
+					margin-top: 0.75em;
+				}
+			}
+		}
 	}
-	ul.members-small {
-	    margin-right: 0;
-	    li {
-	        position: relative;
-		    height: $boxes-small-height - $grid-gutter-width;
-		    width: $boxes-member-home-width;
-		    margin-right: $grid-gutter-width;
-		    margin-bottom: $grid-gutter-width / 2;
-		    background-color: #fff;
-		    &:hover {
-		        background-color: $color-light-grey;
-	        }
-		    h3 {
-			    margin-bottom: 0.1em;
-			    font-size: 0.85em;
-			    color: $color-dark-grey;
-		    }
-		    h4 {
-			    font-size: 0.75em;
-		    }
-		    h5 {
-		        position: absolute;
-		        bottom: 0;
-		        left: 0;
-		        right: 0;
-			    font-size: 0.7em;
-		    }
-		    img {
-			    width: 85px;
-			    height: 85px;
-			    margin-top: 0.75em;
-		    }
-		    &.box-solo {
-		        a {
-		        	color: $color-dark-grey;
-		        	font-family: latoblack;
-		        	&:hover {
-		                color: $color-pink;
-		                background-color: $color-dark-grey;
-	                }
-		        }
-		    }
-	    }
-    }
-}
 
-.content-member .boxes-small {
-    .box {
-        width: 194px; /* FIXME need to figure out why on this page boxes are a bit larger */
-    }
 }
 
 div.badges {

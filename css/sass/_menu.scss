@@ -2,7 +2,7 @@ header {
 	padding-top: 50px;
 	background-color: $color-header-bg;
 	#menu {
-		margin: 50px 0 0 0;
+		margin: 125px 0 0 0;
 		font-size: 0.95em;
 		background-color: $color-very-dark-blue;
 		&.navbar {
@@ -12,12 +12,21 @@ header {
 			position: relative; /* to place the logo / brand within */
 			.navbar-brand {
 				position: absolute;
-				top: -75px;
+				top: -160px;
 				left: $grid-gutter-width;
+				img {
+					margin-left: -15px;
+				}
 			}
 		}
+		.navbar-tagline {
+			margin-top: -90px;
+			margin-left: 275px;
+			font-size: 1.9em;
+			line-height: 1.25em;
+		}
 		.nav.navbar-nav {
-			padding-left: 140px; /* space for the logo */
+			padding-left: 200px; /* space for the logo */
 		}
 		ul.navbar-nav:first-child a {
 			margin: 1em 0.75em;
@@ -31,7 +40,7 @@ header {
 				border-color: $color-blue;
 			}
 		}
-	
+
 		form {
 			input[type=text], button {
 				padding: 0.25em 1em;
@@ -57,7 +66,7 @@ header {
 				}
 			}
 		}
-	
+
 		.user {
 		    margin-left: $grid-gutter-width;
 		    a, img {
@@ -75,7 +84,7 @@ header {
 		     }
 		  }
 	    }
-	
+
 	}
 	form {
 		display: inline;
@@ -95,10 +104,10 @@ header {
 		bottom: 0;
 		left: $grid-gutter-width;
 	}
-	
+
 	/* Override bootstrap style */
 	.nav > li > a:focus {
 		background-color: transparent;
 	}
-	
+
 }
