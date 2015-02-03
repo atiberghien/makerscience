@@ -44,6 +44,12 @@
                 font-size: 1.1em;
             }
         }
+        .carousel-inner {
+            overflow: visible; /* show the top left category wrapping around the slide */
+            h3.category {
+                left: -21px;
+            }
+        }
     }
 }
 .home-join {
