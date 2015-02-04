@@ -29,7 +29,7 @@
                     onbeforesave="updateProjectSheet('Project', resourcesheet.parent.id , 'baseline', $data)"
                     ng-bind-html="resourcesheet.parent.baseline">{{ resourcesheet.parent.baseline }}
                 </h2>
-                <h3><span>Fiche Resource</span></h3>
+                <h3><span>Expérience partagée</span></h3>
 
                 <div class="row">
 
@@ -131,12 +131,12 @@
             <div id="content">
 
                 <tabset class="nav-tabs-resource">
-                    <tab heading="Ressource">
+                    <tab heading="Expérience">
                         <section>
                             <div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
                                 <button> <span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <h3>A propos de la ressource</h3>
+                            <h3>A propos de l'expérience</h3>
 
                             <p editable-text-angular="resourcesheet.parent.description"
                             e-form="DescBtnForm"
@@ -259,7 +259,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="bloc bloc-links">
-                            <h3>Liens et ressources</h3>
+                            <h3>Liens et expériences</h3>
                             <ul>
                                 <li><a href="">Science-animation: Voir le lien</a></li>
                             </ul>
@@ -283,7 +283,7 @@
                 <section class="linked linked-resource" >
                     <carousel class="carousel-no-indicators carousel-text-links">
                         <slide class="left-aligned">
-                            <h3><a href="">Ressources associées</a></h3>
+                            <h3><a href="">Expériences associées</a></h3>
                             <h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
                             <h5><a href="">Tournée nationale 2014</a></h5>
                             <img src="./img/bacasable.jpg" alt="Image background" />
@@ -328,7 +328,7 @@
                 <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
                 <li class="box box-solo box-green">
                     <div>
-                        <a href="">Ressources Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <a href="">Expériences Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
                 </li
                 ><li class="box" ng-repeat="resource in similars">
@@ -341,12 +341,12 @@
                 </li
                 ><li class="box box-solo box-green">
                     <div>
-                        <a ui-sref="resource-list">Plus de ressource <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <a ui-sref="resource-list">Plus d'expériences <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
                 </li>
             </ul>
 
-            <a ui-sref="resource.new" class="large large-purple">Créer une ressource</a>
+            <a ui-sref="resource.new" class="large large-purple">Créer une expérience</a>
 
         </div>
 

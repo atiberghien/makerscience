@@ -137,7 +137,7 @@ ui-view> div.container {
 		}
 	}
 	ul.nav-tabs {
-		margin-bottom: 1em;
+		margin-bottom: $grid-gutter-width;
 		border: none;
 		&> li {
 			 a {
@@ -145,53 +145,14 @@ ui-view> div.container {
 			 	font-weight: bold;
 				color: $color-content-tab;
 				background-color: $color-content-tab-bg;
+				border-color: $color-light-grey;
 			}
 			&.active a {
 				color: $color-content-tab-active;
 			}
 		}
-		// &.nav-tabs-project > li.active a {
-		// 	background-color: $color-content-tab-project-active-bg;
-		// 	border: 2px solid $color-content-tab-active;
-		// }
-		// &.nav-tabs-resource > li.active a {
-		// 	background-color: $color-content-tab-resource-active-bg;
-		// 	border: 2px solid $color-content-tab-active;
-		// }
-		// &.nav-tabs-seance {
-		// 	font-size: 0.8em;
-		// 	text-transform: uppercase;
-		// 	&> li.active a {
-		// 		background-color: $color-content-tab-seance-active-bg;
-		// 	}
-		// }
-/*		&.nav-tabs-slide {*/
-/*			font-size: 1.3em;*/
-/*			&>li a {*/
-/*				color: $color-content-tab-slide;*/
-/*				background-color: $color-content-tab-slide-bg;*/
-/*				@include border-radius(0);*/
-/*			}*/
-/*			&>li.active a {*/
-/*				background-color: $color-content-tab-slide-active-bg;*/
-/*				border: 2px solid $color-content-tab-active;*/
-/*			}*/
-/*		}*/
-		// &.nav-tabs-listing {
-		// 	margin-bottom: 3em;
-		// 	&> li.active a {
-		// 		background-color: $color-content-tab-listing-active-bg;
-		// 		border: 2px solid $color-content-tab-active;
-		// 	}
-		// }
-		// &.nav-tabs-profils {
-		// 	&> li.active a {
-		// 		background-color: $color-orange;
-		// 	}
-		// }
 	}
 	/* Added to work with bootstrapui's extra div around the ul  */
-	/* FIXME Might need to remove redundant code above once all elements have been moved to angular */
 	.nav-tabs-listing ul.nav-tabs,
 	.nav-tabs-slide ul.nav-tabs,
 	.nav-tabs-seance ul.nav-tabs {
@@ -218,7 +179,6 @@ ui-view> div.container {
 		}
 	}
 	.nav-tabs-resource ul.nav-tabs {
-		margin-bottom: 3em;
 		&> li.active a, &> li a:hover {
 			color: #fff;
 			background-color: $color-content-tab-resource-active-bg;
@@ -720,7 +680,8 @@ ui-view> div.container {
 			}
 			&.box-solo {
 				a {
-					font-size: 2.25em;
+					font-size: 1.75em;
+					font-family: "LatoLight";
 				}
 			}
 		}
