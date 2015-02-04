@@ -1,5 +1,5 @@
 header {
-	padding-top: 50px;
+	padding-top: $grid-gutter-width;
 	background-color: $color-header-bg;
 	#menu {
 		margin: 125px 0 0 0;
@@ -12,7 +12,7 @@ header {
 			position: relative; /* to place the logo / brand within */
 			.navbar-brand {
 				position: absolute;
-				top: -160px;
+				top: -120px;
 				left: $grid-gutter-width;
 				img {
 					margin-left: -15px;
@@ -20,16 +20,15 @@ header {
 			}
 		}
 		.navbar-tagline {
-			margin-top: -90px;
-			margin-left: 275px;
-			font-size: 1.9em;
+			margin-top: -70px;
+			margin-left: 240px;
+			font-size: 1.4em;
 			line-height: 1.25em;
 		}
 		.nav.navbar-nav {
-			padding-left: 200px; /* space for the logo */
+			padding-left: 170px; /* space for the logo */
 		}
 		ul.navbar-nav:first-child a {
-			margin: 1em 0.75em;
 			margin: 1em 0.75em 0;
 			padding: 0.25em 0 0 0;
 			color: $color-menu-a;
