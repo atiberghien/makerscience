@@ -2,9 +2,9 @@
 
     <div class="home-slide">
         <div class="row">
-            <div class="col-md-7" ng-controller="MakerScienceProjectListCtrl">
+            <div class="col-md-7" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3, true)">
                 <carousel class="carousel-no-indicators">
-                        <slide ng-repeat="project in projects | filter:{featured:true}">
+                        <slide ng-repeat="project in projects">
                             <h3 class="category"><span>Fiche projet</span></h3>
                             <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
                             <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
@@ -92,10 +92,10 @@
         <div class="row">
             <div class="col-md-4">
                 <h2 class="projects"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
-                <div class="boxes boxes-small boxes-small-home boxes-projects" ng-controller="MakerScienceProjectListCtrl">
+                <div class="boxes boxes-small boxes-small-home boxes-projects" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3)">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                    <div class="box" ng-repeat="project in projects | limitTo:3" >
-                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                    <div class="box" ng-repeat="project in projects" >
+                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include> -->
                     </div
                     ><div class="box box-solo box-blue">
                         <div><a ui-sref="project.list">Voir tous les <br />projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
@@ -103,10 +103,10 @@
                 </div><!-- .boxes -->
             </div><!-- .col-md-4 -->
             <div class="col-md-4">
-                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Experiences</h2>
-                <div class="boxes boxes-small boxes-small-home boxes-resources" ng-controller="MakerScienceResourceListCtrl">
+                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
+                <div class="boxes boxes-small boxes-small-home boxes-resources" ng-controller="MakerScienceResourceListCtrl" ng-init="init(3)">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                    <div class="box" ng-repeat="resource in resources | limitTo:3">
+                    <div class="box" ng-repeat="resource in resources">
                         <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                     </div
                     ><div class="box box-solo box-green">
@@ -116,10 +116,10 @@
             </div><!-- .col-md-4 -->
             <div class="col-md-4">
                 <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
-                <div class="boxes boxes-small boxes-small-home members" ng-controller="MakerScienceProfileListCtrl">
+                <div class="boxes boxes-small boxes-small-home members" ng-controller="MakerScienceProfileListCtrl" ng-init="init(3)">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                    <div class="box" ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)" ng-repeat="baseProfile in profiles | limitTo:3">
-                        <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
+                    <div class="box" ng-repeat="profile in profiles">
+                        <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
                     </div
                     ><div class="box box-solo box-pink">
                         <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>

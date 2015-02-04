@@ -26,14 +26,14 @@
             </ul>
 
             <!-- Tab panes -->
-            <div class="tab-content tab-content-profils" ng-controller="MakerScienceProfileListCtrl">
+            <div class="tab-content tab-content-profils" ng-controller="MakerScienceProfileListCtrl" ng-init="init()">
 
                 <div class="tab-pane active" id="community">
 
                     <div class="boxes boxes-profils">
                         <ul class="members">
-                            <li ng-repeat="baseProfile in profiles" ng-controller="MakerScienceProfileCtrl" ng-init="init(baseProfile.id)">
-                                <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=baseProfile"></ng-include>
+                            <li ng-repeat="profile in profiles">
+                                <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
                             </li>
                         </ul><!-- .members -->
                     </div><!-- .boxes -->

@@ -1,11 +1,22 @@
 module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers'])
 
 module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) ->
-    $scope.projects = MakerScienceProject.getList().$object
+    $scope.init = (limit, featured) ->
+        params = {}
+        if limit
+            params['limit'] = limit
+        if featured
+            params['featured'] = featured
+        $scope.projects = MakerScienceProject.getList(params).$object
 )
 
 module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource) ->
-    $scope.resources = MakerScienceResource.getList().$object
+    $scope.limit = 1000
+
+    $scope.init = (limit, featured) ->
+        if limit
+            $scope.limit = limit
+        $scope.resources = MakerScienceResource.getList({limit:$scope.limit}).$object
 )
 
 module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResource) ->

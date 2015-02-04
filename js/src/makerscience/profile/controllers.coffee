@@ -1,7 +1,11 @@
 module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'commons.accounts.services'])
 
 module.controller("MakerScienceProfileListCtrl", ($scope, MakerScienceProfile) ->
-    $scope.profiles = MakerScienceProfile.getList().$object
+    $scope.init = (limit) ->
+        params = {}
+        if limit
+            params['limit'] = limit
+        $scope.profiles = MakerScienceProfile.getList(params).$object
 )
 
 module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, Users, Profile, MakerScienceProfile, PostalAddress) ->

@@ -1,19 +1,19 @@
 <div id="intro" class="intro-listing">
 
-	<carousel interval="5000">
-		<slide  style="background-image: url('./img/slides/slide-project-one.jpg')">
+    <carousel interval="5000">
+        <slide  style="background-image: url('./img/slides/slide-project-one.jpg')">
             <h1>Coup de projecteur sur</h1>
             <h2><em>La fête des sciences à Toulouse</em></h2>
-		</slide>
+        </slide>
         <slide style="background-image: url('./img/slides/slide-project-two.jpg')">
             <h1>Coup de  sur</h1>
             <h2>La fête des sciences à <em>Toulouse</em></h2>
-		</slide>
+        </slide>
         <slide style="background-image: url('./img/slides/slide-project-three.jpg')">
             <h1>Coup de projecteur sur</h1>
             <h2><em>La fête des  à Toulouse</em></h2>
-		</slide>
-	</carousel>
+        </slide>
+    </carousel>
 
 </div><!-- #intro -->
 
@@ -43,7 +43,7 @@
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
-                        <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl">
+                        <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
                             <div class="box" ng-repeat="resource in resources">
                                 <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                                 <img src="./img/bacasable.jpg" alt="Image background" />
@@ -55,12 +55,12 @@
                         </div><!-- .boxes -->
                     </div><!-- item -->
                 </div><!-- .carousel-inner -->
-                
+
             </div><!-- #caroussel-weekly -->
 
             <tabset class="nav-tabs-resource">
                 <tab heading="Nouveautés">
-                    <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl">
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
                         <div class="box" ng-repeat="resource in resources">
                             <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-red.png" alt="Red project" /></h3>
                             <img src="./img/bacasable.jpg" alt="Image background" />
