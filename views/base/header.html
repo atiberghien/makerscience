@@ -37,9 +37,8 @@
         </nav><!-- #menu -->
     </header>
 
-    <div class="action-bar" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
+    <div class="action-bar" ng-show="authVars.isAuthenticated || showLoginPanel" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
         <div class="container">
-
 
             <!-- When logging in -->
             <div class="authenticated" ng-show="showLoginPanel">
@@ -58,6 +57,7 @@
                     <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
                 </ul><!-- #sidenav -->
             </div>
+
         </div><!-- .container -->
     </div>
 
