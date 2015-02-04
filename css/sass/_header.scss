@@ -160,10 +160,9 @@ div.crumbs {
 	background-repeat: no-repeat;
 	h1, h2 {
 		text-align: center;
-		background-color: rgba(0, 0, 0, 0.5);
 	}
 	h1 {
-		padding: 1.5em 0 0.5em;
+		margin: 1.5em 0 0.5em;
 		color: $color-intro-h1;
 		font-size: 3em;
 		font-family: LatoBlack;
@@ -171,7 +170,7 @@ div.crumbs {
 		text-transform: uppercase;
 	}
 	h2 {
-		padding: 0 0 2em 0;
+		margin: 0 0 2em 0;
 		font-size: 1.5em;
 		font-weight: bold;
 		color: $color-intro-h2;
@@ -192,6 +191,18 @@ div.crumbs {
 			text-transform: uppercase;
 			border: 3px solid $color-intro-h3-border;
 			@include border-radius(3px);
+		}
+	}
+	div.intro {
+		h1, h2 {
+			margin: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+		h1 {
+			padding: 1.5em 0 0.5em;
+		}
+		h2 {
+			padding: 0 0 2em 0;
 		}
 	}
 	&.intro-project {
