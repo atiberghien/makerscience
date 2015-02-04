@@ -31,7 +31,3 @@ module.factory('BucketFile', (Restangular) ->
 module.factory('Bucket', (Restangular) ->
     return Restangular.service('bucket/bucket')
 )
-
-module.factory('BucketFile', (Restangular) ->
-    return Restangular.service('bucket/file')
-)
