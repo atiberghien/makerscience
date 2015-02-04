@@ -140,6 +140,20 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
                     label: 'Carte de la communauté'
                     parent : 'profile.list'
         )
+        .state('about',
+                url: '/about/',
+                templateUrl: 'views/base/about.html'
+                ncyBreadcrumb:
+                    label: 'A propos'
+                    parent : 'home'
+        )
+        .state('forum',
+                url: '/forum/',
+                templateUrl: 'views/base/forum.html'
+                ncyBreadcrumb:
+                    label: 'Forum'
+                    parent : 'home'
+        )
 
 ])
 .run(($rootScope, editableOptions, editableThemes, amMoment, loginService) ->
