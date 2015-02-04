@@ -36,7 +36,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
 .config(['TokenProvider', '$locationProvider', (TokenProvider, $locationProvider) ->
     TokenProvider.extendConfig(
         clientId: '255067193649-gsukme1nnpu55pfd7q3b589lhmih3qg1.apps.googleusercontent.com',
-        redirectUri: 'http://localhost:8001/oauth2callback.html',
+        redirectUri: config.oauthBaseUrl+'/oauth2callback.html',
         scopes: ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
     )
 ])
