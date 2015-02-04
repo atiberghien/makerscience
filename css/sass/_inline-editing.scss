@@ -73,6 +73,9 @@
 		button.btn {
 			padding: 0.5em;
 		}
+		div.editable {
+			min-height: 40px; /* Fix issue when there are no tags by giving it a minimum height */
+		}
 		div.edit-buttons {
 			right: -20px;
 		}
@@ -263,14 +266,14 @@ div.editable-controls {
 	ul.nav.nav-tabs li.editable:hover * {
 		cursor: pointer !important;
 	}
-	
+
 	div.editable-gallery {
 		margin-top: 1px;
 		padding: $grid-gutter-width * 3 $grid-gutter-width;
 		text-align: center;
 		background-color: $color-light-grey;
 	}
-	
+
 }
 
 #sidebar {
