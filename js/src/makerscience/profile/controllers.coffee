@@ -8,9 +8,9 @@ module.controller("MakerScienceProfileListCtrl", ($scope, MakerScienceProfile) -
         $scope.profiles = MakerScienceProfile.getList(params).$object
 )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, Users, Profile, MakerScienceProfile, PostalAddress) ->
+module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile) ->
 
-    MakerScienceProfile.one($stateParams.id).get().then((makerScienceProfileResult) ->
-        $scope.profile = makerScienceProfileResult
+    MakerScienceProfile.one($stateParams.id).get().then((makerscienceProfileResult) ->
+        $scope.profile = makerscienceProfileResult
     )
 )
