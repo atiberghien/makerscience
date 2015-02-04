@@ -57,6 +57,9 @@ button.button {
 	color: #fff;
 	background-color: $color-blue;
 	border: none;
+	&.button-resource {
+		background-color: $color-resource;
+	}
 }
 
 h2.boxed {
