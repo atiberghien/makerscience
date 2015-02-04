@@ -4,15 +4,50 @@
         <div class="row">
             <div class="col-md-7" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3, true)">
                 <carousel class="carousel-no-indicators">
-                        <slide ng-repeat="project in projects">
-                            <h3 class="category"><span>Fiche projet</span></h3>
-                            <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
-                            <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
-                            <div class="description">
-                                <h3>{{project.parent.title}}</h3>
-                                <h4>Par <strong>{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</strong></h4>
-                            </div>
-                        </slide>
+                    <!-- Presentation -->
+                    <slide>
+                        <a href=""><img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." /></a>
+                    </slide>
+                    <!-- First Project -->
+                    <slide>
+                        <h3 class="category"><span>Fiche projet 1</span></h3>
+                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
+                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3>{{project.parent.title}}</h3>
+                            <h4>Par <strong>{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</strong></h4>
+                        </div>
+                    </slide>
+                    <!-- Second Project -->
+                    <slide>
+                        <h3 class="category"><span>Fiche projet 2</span></h3>
+                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
+                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3>{{project.parent.title}}</h3>
+                            <h4>Par <strong>{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</strong></h4>
+                        </div>
+                    </slide>
+                    <!-- First Resource -->
+                    <slide>
+                        <h3 class="category"><span>Fiche expérience 1</span></h3>
+                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
+                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3>{{project.parent.title}}</h3>
+                            <h4>Par <strong>{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</strong></h4>
+                        </div>
+                    </slide>
+                    <!-- Second Resource -->
+                    <slide>
+                        <h3 class="category"><span>Fiche expérience 2</span></h3>
+                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
+                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3>{{project.parent.title}}</h3>
+                            <h4>Par <strong>{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</strong></h4>
+                        </div>
+                    </slide>
                 </carousel>
             </div>
             <div class="col-md-5" ng-init="showLoginPanel=false">
