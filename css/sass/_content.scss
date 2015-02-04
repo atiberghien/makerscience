@@ -212,6 +212,9 @@ ui-view> div.container {
 				}
 			}
 		}
+		.carousel-inner .item img {
+			width: 100%;
+		}
 	}
 	.nav-tabs-seance ul.nav-tabs {
 		font-size: 0.8em;
