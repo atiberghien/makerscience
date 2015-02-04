@@ -5,6 +5,7 @@
     <img class="background" src="./img/bacasable.jpg" alt="Image background" />
 </a>
 <div class="description">
+    <!-- Temporarily hidden -->
     <h4><a ui-sref="resource.detail({ slug: resource.parent.slug })">{{resource.parent.title}}</a></h4>
     <h5>Par
         <a ui-sref="profile.detail({id:resource.parent.team[0].members[0].id})">
@@ -12,3 +13,4 @@
         </a>
     </h5>
 </div>
+<p class="baseline"><a ui-sref="resource.detail({ slug: resource.parent.slug })">{{resource.parent.baseline}}</a></p>
