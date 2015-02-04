@@ -1,12 +1,12 @@
 <section class="popularity popularity-{{parentColor}}" ng-controller="PopularityCtrl">
     <h3 ng-show="!votePopularity">Popularité</h3>
     <h3 ng-show="votePopularity">Voter le projet</h3>
-    
-    <ul class="actions" ">
+
+    <ul class="actions">
         <li><a href="" ng-click="votePopularity=!votePopularity" ng-show="!votePopularity"><span class="glyphicon glyphicon-star-empty"></span>Vote</a></li>
         <li><button class="solo" ng-click="saveUserRating()" ng-show="votePopularity">OK</button></li>
     </ul>
-    
+
     <table ng-show="!votePopularity" >
         <tbody>
             <tr ng-repeat="(label, values) in popularityItems">
@@ -16,7 +16,7 @@
             </tr>
         </tbody>
     </table>
-    
+
     <div ng-show="votePopularity">
         <div ng-repeat="(label, value) in popularityItems">
         <label for="rating-original">{{label}}</label>
