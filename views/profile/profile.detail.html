@@ -76,12 +76,15 @@
 
             <div id="content" class="content-member">
 
-                <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+                <div class="boxes boxes-small">
                     <div class="box box-solo box-blue">
                         <div><a href="">Mes projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                     </div>
-                    <div class="box" ng-repeat="project in projects | limitTo:4">
-                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                    <div class="box" ng-repeat="team in profile.teams | limitTo:4">
+                        <span ng-controller="MakerScienceProjectSheetGetters" ng-init="getProjectByURI(team.project)">
+                            <ng-include src="'views/catalog/block/project_thumb.html'" onload="project=project"></ng-include>
+                        </span>
+
                     </div><!-- .box -->
                 </div><!-- .boxes -->
 
