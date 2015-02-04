@@ -100,7 +100,6 @@ module.controller("MakerScienceProjectSheetGetters", ($scope, MakerScienceProjec
             $scope.project = makerScienceProjectResult
         )
     $scope.getProjectByURI = (uri) ->
-        console.log(uri)
         id = getObjectIdFromURI(uri)
         return $scope.getProjectByID(id)
 )
