@@ -97,7 +97,7 @@
                     <fieldset class="new-resource">
                         <h4>Résumez votre ressource en quelques lignes</h4>
                         <text-angular name="resource-about"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                       ng-model="projectsheet.project.description"
                                       e-rows="4">
                         </text-angular>
@@ -106,7 +106,7 @@
                     <fieldset class="new-resource" ng-repeat="item in QAItems">
                         <h4>{{item.questionLabel}}</h4>
                         <text-angular ng-model="item.answer"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                       name="question_{{$index}}"
                                       e-rows="4">
                         </text-angular>
@@ -126,7 +126,7 @@
                             </div>
                             <div class="col-md-7">
                                 <text-angular name="project-need"
-                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                               e-placeholder="Descrivez votre besoin"
                                               ng-model="newNeed.description"
                                               e-rows="3">

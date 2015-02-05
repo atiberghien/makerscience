@@ -138,7 +138,7 @@
                             <p editable-text-angular="projectsheet.parent.description"
                                  e-form="DescBtnForm"
                                  e-rows="4"
-                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
                                  ng-bind-html="projectsheet.parent.description">
                             </p>
@@ -152,7 +152,7 @@
                             <p editable-text-angular="item.answer"
                                  e-form="AnswerBtnForm"
                                  e-rows="4"
-                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateProjectSheet('ProjectSheetItem', item.id , 'answer', $data)"
                                  ng-bind-html="item.answer">
                             </p>
