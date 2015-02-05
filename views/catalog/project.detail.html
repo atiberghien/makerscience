@@ -76,14 +76,14 @@
                                     <div ng-repeat="progress in progressRange|orderBy:'order'">
                                         <label ng-if="progress.id!=projectsheet.parent.progress.id"
                                                style="background-image: url('../img/icons/project/project-grey.png');float:left"
-                                               tooltip="{{progress.label}} + Explication?">
+                                               tooltip="{{progress.label}} - {{progress.description}}">
                                             <span ng-if="!editWIP">{{progress.label}}</span>
                                             <a ng-if="editWIP"
                                                ng-click="updateProjectSheet('Project', projectsheet.parent.id, 'progress', progress.resource_uri);projectsheet.parent.progress=progress">{{progress.label}}</a>
                                         </label>
                                         <label ng-if="progress.id==projectsheet.parent.progress.id"
                                                style="background-image: url('{{$root.config.media_uri}}{{progress.icon}}');float:left"
-                                               tooltip="{{progress.label}} + Explication?">
+                                               tooltip="{{progress.label}} - {{progress.description}}">
                                             <span ng-if="!editWIP">{{progress.label}}</span>
                                             <a ng-if="editWIP"
                                                ng-click="updateProjectSheet('Project', projectsheet.parent.id, 'progress', progress.resource_uri);projectsheet.parent.progress=progress">{{progress.label}}</a>
