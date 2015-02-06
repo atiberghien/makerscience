@@ -23,7 +23,7 @@ $color-vimeo: #1aa777; /* green */
 $color-youtube: #cb2824; /* red */
 
 /* Sections colors */
-$color-profil: $color-chocolate;
+$color-profile: $color-chocolate;
 $color-project: $color-blue;
 $color-resource: $color-green;
 
@@ -48,7 +48,7 @@ $color-menu-projects: #3297cd;
 $color-menu-resources: #3c9;
 $color-menu-form: #fff;
 $color-menu-form-bg: #e4e4e4;
-$color-menu-members: $color-profil;
+$color-menu-members: $color-profile;
 
 /* Intro */
 $color-intro: #000;
@@ -77,6 +77,7 @@ $color-toolbar-bg: #ddd9da;
 $color-content-tab: #000;
 $color-content-tab-bg: #fff;
 $color-content-tab-active: #fff;
+$color-content-tab-profile-active-bg: $color-profile;
 $color-content-tab-project-active-bg: $color-project;
 $color-content-tab-resource-active-bg: $color-resource;
 $color-content-tab-seance-active-bg: $color-purple;

@@ -317,8 +317,8 @@ div.crumbs {
 			@include border-radius(3px);
 		}
 	}
-	&.intro-profil {
-		background: $color-chocolate url('../img/bg/header-profil.png') center center no-repeat;
+	&.intro-profile {
+		background: $color-chocolate url('../img/bg/header-profile.png') center center no-repeat;
 		background-size: cover;
 		.col-md-4 {
 			padding-right: 0; /* remove gutter */
@@ -326,7 +326,7 @@ div.crumbs {
 		.col-md-8 {
 			padding-left: 0; /* remove gutter */
 		}
-		img.profil {
+		img.profile {
 			display: block;
 			width: 250px;
 			height: 250px;

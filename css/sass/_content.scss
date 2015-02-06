@@ -54,7 +54,7 @@ div.toolbar {
 		}
 	}
 
-	&.toolbar-profils {
+	&.toolbar-profile {
 		text-align: right;
 		form {
 			button {
@@ -186,6 +186,14 @@ ui-view> div.container {
 			@include transition(all .2s ease-in-out);
 		}
 	}
+	.nav-tabs-profile ul.nav-tabs {
+		&> li.active a, &> li a:hover {
+			color: #fff;
+			background-color: $color-content-tab-profile-active-bg;
+			border-color: $color-content-tab-active;
+			@include transition(all .2s ease-in-out);
+		}
+	}
 	.nav-tabs-slide {
 		ul.nav-tabs {
 			font-size: 1.3em;
@@ -232,9 +240,9 @@ ui-view> div.container {
 			padding: 0;
 		}
 	}
-	.tab-content-profils {
+	.tab-content-profile {
 		padding: 0;
-		.boxes-profils {
+		.boxes-profiles {
 			margin: 0;
 			padding: 0;
 		}

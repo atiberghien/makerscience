@@ -5,7 +5,7 @@
 
 </div><!-- #intro -->
 
-<div class="toolbar toolbar-profils">
+<div class="toolbar toolbar-profile">
     <div class="row container">
         <form method="post" action="">
             <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
@@ -20,17 +20,17 @@
         <div id="content">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs nav-tabs-profils" role="tablist">
+            <ul class="nav nav-tabs nav-tabs-profile" role="tablist">
                 <li class="active"><a href="#community" role="tab" data-toggle="tab">Communauté</a></li>
                 <li><a href="#other" role="tab" data-toggle="tab">Autre</a></li>
             </ul>
 
             <!-- Tab panes -->
-            <div class="tab-content tab-content-profils" ng-controller="MakerScienceProfileListCtrl" ng-init="init()">
+            <div class="tab-content tab-content-profile" ng-controller="MakerScienceProfileListCtrl" ng-init="init()">
 
                 <div class="tab-pane active" id="community">
 
-                    <div class="boxes boxes-profils">
+                    <div class="boxes boxes-profiles">
                         <ul class="members">
                             <li ng-repeat="profile in profiles">
                                 <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
