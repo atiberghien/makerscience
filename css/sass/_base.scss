@@ -5,8 +5,6 @@ $boxes-width: ($page-width - $grid-gutter-width * 5) / 4;
 $boxes-height: $boxes-width;
 $boxes-home-width: (($page-width - ($grid-gutter-width) * 2) / 3 - $grid-gutter-width) / 2;
 $boxes-home-height: $boxes-home-width;
-$boxes-large-width: ($page-width - $grid-gutter-width * 4) / 3;
-$boxes-large-height: $boxes-large-width;
 $boxes-small-width: ($page-width - $grid-gutter-width * 4) / 5;
 $boxes-small-height: $boxes-small-width;
 $bloc-height: 300px;
