@@ -211,9 +211,9 @@ div.crumbs {
 	}
 	&.intro-project {
 		background-color: $color-intro-project-bg;
-		background-image: url('../img/bg/header-project-bg.jpg');
+		background-image: url('/img/bg/header-project-bg.jpg');
 		h3 {
-			background-image: url('../img/fiche-project.png');
+			background-image: url('/img/fiche-project.png');
 			span {
 				background-color: $color-intro-h3-project-bg;
 			}
@@ -221,13 +221,13 @@ div.crumbs {
 	}
 	&.intro-project-create {
 		background-color: $color-intro-project-bg;
-		background-image: url('../img/bg/header-project-create.gif');
+		background-image: url('/img/bg/header-project-create.gif');
 	}
 	&.intro-resource {
 		background-color: $color-intro-resource-bg;
-		background-image: url('../img/bg/header-resource-bg.png');
+		background-image: url('/img/bg/header-resource-bg.gif');
 		h3 {
-			background-image: url('../img/fiche-resource.png');
+			background-image: url('/img/fiche-resource.png');
 			span {
 				background-color: $color-intro-h3-resource-bg;
 			}
