@@ -35,7 +35,7 @@ form.search-full-width {
 	}
 }
 div.action-bar {
-	margin-bottom: $grid-gutter-width / 2;
+	margin: -$grid-gutter-width 0 $grid-gutter-width;
 	&.authenticated {
 		background-color: $color-pink;
 		.authenticated {
