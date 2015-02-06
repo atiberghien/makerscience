@@ -264,6 +264,7 @@
         &.boxes.members {
             .box {
                 box-shadow: none;
+                height: $boxes-home-height;
                 margin-right: 0 !important;
                 &:hover {
                     background-color: $color-pink;
