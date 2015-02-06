@@ -202,19 +202,7 @@
                 </div><!-- .row -->
 
                 <tabset class="nav-tabs-slide nav-tabs-slide-project">
-                    <tab>
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-picture"></span>
-                        </tab-heading>
-                        <carousel class="carousel-no-indicators">
-                            <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
-                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
-                            </slide>
-                            <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
-                                <img src="img/slides/slide_one.png" alt="Slide One">
-                            </slide>
-                        </carousel>
-                    </tab>
+                    <!-- Put the videos first as otherwise they won't load in the tab -->
                     <tab>
                         <tab-heading>
                             <span class="glyphicon glyphicon-facetime-video"></span>
@@ -226,6 +214,19 @@
                                 </embed-video>
                             </slide>
                             <slide ng-if="!projectsheet.base_projectsheet.videos">
+                                <img src="img/slides/slide_one.png" alt="Slide One">
+                            </slide>
+                        </carousel>
+                    </tab>
+                    <tab>
+                        <tab-heading>
+                            <span class="glyphicon glyphicon-picture"></span>
+                        </tab-heading>
+                        <carousel class="carousel-no-indicators">
+                            <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
+                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
+                            </slide>
+                            <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
                                 <img src="img/slides/slide_one.png" alt="Slide One">
                             </slide>
                         </carousel>
