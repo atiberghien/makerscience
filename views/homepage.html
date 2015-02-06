@@ -3,53 +3,28 @@
     <div class="home-slide">
         <div class="row">
             <div class="col-md-7" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3, true)">
-                <carousel class="carousel-no-indicators">
+                <carousel class="carousel-no-indicators" ng-controller="HomepageFeaturedListCtrl">
                     <!-- Presentation -->
                     <slide>
-                        <a href=""><img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." /></a>
+                        <a ui-sref="forum"><img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." /></a>
                     </slide>
-                    <!-- First Project -->
-                    <slide>
-                        <h3 class="category"><span>Fiche projet 1</span></h3>
+                    <slide ng-repeat="project in projects">
+                        <h3 class="category"><span>Projet</span></h3>
                         <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
                         <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
-                            <!-- FIXME Project title and author are not working-->
-                            <h3>XXX{{project.parent.title}}</h3>
-                            <h4>Par <strong><a ui-sref="profile.detail({id:project.parent.team[0].members[0].id})">XXX{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</a></strong></h4>
+                            <h3>{{project.parent.title}}</h3>
+                            <h4>Par <strong><a ui-sref="profile.detail({id:project.parent.team[0].members[0].id})">{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</a></strong></h4>
                         </div>
                     </slide>
-                    <!-- Second Project -->
-                    <slide>
-                        <h3 class="category"><span>Fiche projet 2</span></h3>
-                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
-                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                    <slide ng-repeat="resource in resources">
+                        <h3 class="category"><span>Expérience</span></h3>
+                        <img ng-if="resource.base_projectsheet.cover" ng-src="{{config.media_uri}}{{resource.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
+                        <img ng-if="!resource.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
-                            <!-- FIXME Project title and author are not working-->
-                            <h3>XXX{{project.parent.title}}</h3>
-                            <h4>Par <strong><a ui-sref="profile.detail({id:project.parent.team[0].members[0].id})">XXX{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</a></strong></h4>
-                        </div>
-                    </slide>
-                    <!-- First Resource -->
-                    <slide>
-                        <h3 class="category"><span>Fiche expérience 1</span></h3>
-                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
-                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
-                        <div class="description">
-                            <!-- FIXME Project title and author are not working-->
-                            <h3>XXX{{project.parent.title}}</h3>
-                            <h4>Par <strong><a ui-sref="profile.detail({id:project.parent.team[0].members[0].id})">XXX{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</a></strong></h4>
-                        </div>
-                    </slide>
-                    <!-- Second Resource -->
-                    <slide>
-                        <h3 class="category"><span>Fiche expérience 2</span></h3>
-                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
-                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
-                        <div class="description">
-                            <!-- FIXME Project title and author are not working-->
-                            <h3>XXX{{project.parent.title}}</h3>
-                            <h4>Par <strong><a ui-sref="profile.detail({id:project.parent.team[0].members[0].id})">XXX{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</a></strong></h4>
+                            <h3>{{resource.parent.title}}</h3>
+                            <h4>Par <strong><a ui-sref="profile.detail({id:resource.parent.team[0].members[0].id})">
+                                {{resource.parent.team[0].members[0].user.first_name}} {{resource.parent.team[0].members[0].user.last_name}}</a></strong></h4>
                         </div>
                     </slide>
                 </carousel>
