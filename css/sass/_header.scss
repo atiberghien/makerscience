@@ -8,6 +8,10 @@
 /*	@include box-shadow(0 10px 2px rgba(0,0,0,.25));*/
 }
 
+header {
+	margin-bottom: $grid-gutter-width;
+}
+
 form.search-full-width {
 	position: relative;
 	margin: 0 $grid-gutter-width / 2;
@@ -138,7 +142,7 @@ div.action-bar {
 }
 
 div.crumbs {
-	margin-top: $grid-gutter-width / 2;
+	margin-top: -($grid-gutter-width / 2);
 	ol {
 		margin: 0 $grid-gutter-width 1em;
 		background-color: transparent;
