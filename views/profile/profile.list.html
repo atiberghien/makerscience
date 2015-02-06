@@ -19,43 +19,18 @@
 
         <div id="content">
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs nav-tabs-profile" role="tablist">
-                <li class="active"><a href="#community" role="tab" data-toggle="tab">Communauté</a></li>
-                <li><a href="#other" role="tab" data-toggle="tab">Autre</a></li>
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content tab-content-profile" ng-controller="MakerScienceProfileListCtrl" ng-init="init()">
-
-                <div class="tab-pane active" id="community">
-
-                    <div class="boxes boxes-profiles">
-                        <ul class="members">
-                            <li ng-repeat="profile in profiles">
-                                <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
-                            </li>
-                        </ul><!-- .members -->
+            <tabset class="nav-tabs-profile">
+                <tab heading="Communauté">
+                    <div class="boxes boxes-profiles" ng-controller="MakerScienceProfileListCtrl"  ng-init="init()">
+                        <div class="box" ng-repeat="profile in profiles">
+                            <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
+                        </div><!-- .box -->
                     </div><!-- .boxes -->
-
-                    <!--
-                    <div class="right">
-                        <ul class="pagination">
-                            <li><a href="#">1</a></li>
-                            <li class="active"><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                        </ul>
-                    </div>
-                    -->
-
-                </div><!-- #community -->
-
-                <div class="tab-pane" id="other">
-                </div><!-- #bestrated -->
-
-            </div><!-- .tab-content -->
+                </tab>
+                <tab heading="Autre">
+                    Autre...
+                </tab>
+            </tabset>
 
             <a class="large large-orange" ui-sref="map">Cartographie de la communauté</a>
 

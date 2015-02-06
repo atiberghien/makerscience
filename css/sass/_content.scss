@@ -571,8 +571,8 @@ ui-view> div.container {
 			display: inline-block;
 			color: $color-boxes;
 			span.link {
-			    text-decoration: underline;
-            }
+				text-decoration: underline;
+			}
 		}
 		h3 img {
 			margin-left: 0.5em;
@@ -650,25 +650,25 @@ ui-view> div.container {
 
 	/* Extra div to vertically center text no matter how many lines we have */
 	.box-solo {
-        div {
-            display: table;
-            height: 100%;
-	        vertical-align: top;
-	        a {
-		        display: table-cell;
-		        padding: 0 1em;
-		        text-transform: uppercase;
-		        text-align: left;
-		        font-weight: bold;
-		        line-height: 1.25em;
-		        vertical-align: middle;
-		        @include transition(all 0.1s ease);
-		        &:hover {
-			        text-decoration: none;
-		        }
-	        }
-	    }
-    }
+		div {
+			display: table;
+			height: 100%;
+			vertical-align: top;
+			a {
+				display: table-cell;
+				padding: 0 1em;
+				text-transform: uppercase;
+				text-align: left;
+				font-weight: bold;
+				line-height: 1.25em;
+				vertical-align: middle;
+				@include transition(all 0.1s ease);
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
 
 	&.boxes-listing {
 		.box {
@@ -676,12 +676,12 @@ ui-view> div.container {
 		}
 	}
 
-    &.boxes-spaced {
-        margin-top: $grid-gutter-width;
-        margin-bottom: $grid-gutter-width;
-    }
+	&.boxes-spaced {
+		margin-top: $grid-gutter-width;
+		margin-bottom: $grid-gutter-width;
+	}
 
-    /* FIXME Need to merge this with normal boxes if we can agree on a standard way to "link" boxes */
+	/* FIXME Need to merge this with normal boxes if we can agree on a standard way to "link" boxes */
 	&.boxes-medium {
 		.box {
 			h4, h5 {
@@ -765,15 +765,16 @@ ui-view> div.container {
 	}
 
 	.members, /* FIXME remove this line when Member's page has been moved from LI to DIV */
-	&.members {
+	&.members,
+	&.boxes-profiles {
 
-	    margin-right: -$grid-gutter-width;
+		margin-right: -$grid-gutter-width;
 
-		/* FIXME need to remove the li when member's page has been moved from LI to DIV */
-		li, div.box {
+		div.box {
 			display: inline-block;
 			position: relative;
 			width: $boxes-width - 1px; /* need to fix extra space added by Angular between </li><li> */
+			height: $boxes-width + $grid-gutter-width / 2;
 			margin-right: $grid-gutter-width;
 			margin-bottom: 2em;
 			text-align: center;
@@ -800,43 +801,54 @@ ui-view> div.container {
 				height: 140px;
 				margin: 1em 0 0.25em;
 			}
+			h3, h4, h5 {
+				line-height: 1em;
+			}
 			h3 {
+				position: relative;
+				padding: 0;
+				background-color: transparent;
 				text-transform: uppercase;
+				font-weight: 400;
 				strong {
 					font-weight: bold;
 				}
 			}
 			h4 {
-				height: 2em;
 				margin-bottom: 1em;
+				padding: 0;
 				font-size: 0.8em;
 				line-height: 1.25em;
+				background-color: transparent;
+				text-transform: none;
 			}
 			h5 {
-				padding: 0.8em 0;
+				position: absolute;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				padding: 0.5em 0 0.25em;
 				color: #fff;
 				background-color: $color-dark-grey;
 				text-transform: uppercase;
 				span {
 					margin-right: 0.5em;
+					margin-bottom: 0.25em;
 					font-size: 1.75em;
 					vertical-align: middle;
 				}
 			}
 			&:hover {
-			    background-color: $color-orange;
+				background-color: $color-orange;
 			}
 		}
-		div.box {
-			width: inherit;
-		}
 		a {
-		    display: block;
-		    color: $color-dark-grey;
-	    }
+			display: block;
+			color: $color-dark-grey;
+		}
 		a:hover {
-		    text-decoration: none;
-	    }
+			text-decoration: none;
+		}
 
 		&.boxes-small {
 			margin-right: 0;
