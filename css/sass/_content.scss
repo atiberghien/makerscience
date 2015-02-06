@@ -587,6 +587,12 @@ ui-view> div.container {
 			h4 a, h5 a {
 				display: inline;
 			}
+			h5 a {
+				text-decoration: underline;
+				&:hover {
+					color: $color-blue;
+				}
+			}
 		}
 		p.baseline a {
 			opacity: 0;
