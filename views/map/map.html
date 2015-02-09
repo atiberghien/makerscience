@@ -13,57 +13,41 @@
     <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
 </form>
 
-<div class="map">
-	<div class="member-info member-info-hidden" ng-class="showMemberInfo ? 'member-info-visible' : 'member-info-hidden'">
+<div class="map" ng-controller="MakerScienceMapCtrl">
+    <div class="member-info member-info-hidden" ng-class="showMemberInfo ? 'member-info-visible' : 'member-info-hidden'">
         <a class="toggle" ng-click="showMemberInfo = !showMemberInfo"><span class="glyphicon glyphicon-option-vertical"></span></a>
-		<img src="/img/uploads/some-user.png" alt="Loading profile photo..." />
-		<div class="member">
-			<p>Maxime Lechapelier</p>
-			<p>Ingénieur Informatique</p>
-		</div><!-- .member -->
-		<div class="content">
-			<h5>Il participe à ces projets</h5>
-            <h6 id="anchor1">Anchor 1</h6>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Un second bloc de text</p>
-            <h6 id="anchor2">Anchor 2</h6>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Un second bloc de text</p>
-            <h6 id="anchor3">Anchor 3</h6>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Un second bloc de text</p>
-            <h6 id="anchor4">Anchor 4</h6>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Du texte sur une ligne</p>
-            <p>Un second bloc de text</p>
-            <p class="scroll-buttons">
-                <a href=""><img ng-click="gotoAnchor(4)" src="/img/icons/scroll_down.png" alt="Scroll Down" /></a>
-                <a href=""><img ng-click="gotoAnchor(1)" src="/img/icons/scroll_up.png" alt="Scroll Up" /></a>
+        <div ng-show="spottedProfile">
+            <gravatar-image data-gravatar-email="spottedProfile.parent.user.email"
+                data-gravatar-size="120"
+                data-gravatar-rating="pg"
+                data-gravatar-default="mm"
+                data-gravatar-secure="true"
+                data-gravatar-css-class="img-circle">
+            </gravatar-image>
+            <div class="member">
+                <p>{{spottedProfile.full_name}}</p>
+                <p>{{spottedProfile.activity}}</p>
+            </div><!-- .member -->
+            <div class="content">
+                <h5>Il participe à ces projets</h5>
+                <div class="boxes boxes-small" >
+                    <div id="anchor{{$index}}" class="box" ng-repeat="project in spottedProfile.projects">
+                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                    </div><!-- .box -->
+                </div><!-- .boxes -->
+                <p class="scroll-buttons">
+                    <a href=""><img ng-click="gotoAnchor(3)" src="/img/icons/scroll_down.png" alt="Scroll Down" /></a>
+                    <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll_up.png" alt="Scroll Up" /></a>
+                </p>
+            </div>
+        </div>
+        <div ng-show="!spottedProfile">
+            <p>
+                Sélectionner un membre sur la carte pour en savoir plus ...
             </p>
-		    <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
-		        <div class="box" ng-repeat="project in projects">
-		            <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-		        </div><!-- .box -->
-		    </div><!-- .boxes -->
-	    </div><!-- .content -->
-	</div><!-- .member-info -->
-	<div ng-controller="MakerScienceMapCtrl">
-		    <!-- http://tombatossals.github.io/angular-leaflet-directive/#!/examples/customized-markers -->
-		    <leaflet id="membersmap" defaults="defaults" markers="markers" center="center" height="1000px" ></leaflet>
-	</div>
+        </div>
+    </div><!-- .member-info -->
+    <div>
+        <leaflet id="membersmap" defaults="defaults" markers="markers" center="center" height="1000px" ></leaflet>
+    </div>
 </div>

@@ -1,55 +1,20 @@
 module = angular.module("makerscience.map.controllers", [])
 
-module.controller("MakerScienceMapCtrl", ($scope, leafletData, geocoderService, MakerScienceProfile) ->
+module.run(['$anchorScroll', ($anchorScroll) ->
+  $anchorScroll.yOffset = 50
+])
 
-    $scope.latitude = null
-    $scope.longitude = null
-    $scope.geocodeError = false
-    $scope.isFinished = false
-    $scope.address = '1600 Pennsylvania Avenue NW, Washington, D.C. 20500'
+module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leafletData, leafletEvents, geocoderService, gravatarImageService, MakerScienceProfile, MakerScienceProject) ->
 
-    geocoderService.getLatLong($scope.address).then((latlng)->
-        $scope.latitude = latlng.lat()
-        $scope.longitude = latlng.lng()
+    $scope.gotoAnchor = (x) ->
+        newHash = 'anchor' + x
+        if $location.hash() != newHash
+            $location.hash('anchor' + x)
+        else
+            $anchorScroll()
 
-        console.log($scope.latitude)
-        console.log($scope.longitude)
-
-    , () ->
-        $scope.geocodeError = true
-    ).finally(() ->
-        $scope.isFinished = true
-    )
-
-
-
-    # define user's icons
-    user_icons =
-            user_default:
-                iconUrl: 'img/users/user-default.png' # Used when we don't have a photo for the user
-                shadowUrl: 'img/users/user-shadow.png'
-                iconSize: [30, 30]
-                shadowSize:   [44, 44]
-                iconAnchor:   [15, 15]
-                shadowAnchor: [22, 22]
-
-            # Small icon
-            user_01:
-                iconUrl: 'img/users/user-mathieu.png' # The only parameter that will need to change and be fetched dynamically
-                shadowUrl: 'img/users/user-shadow.png'
-                iconSize: [30, 30]
-                shadowSize:   [44, 44]
-                iconAnchor:   [15, 15]
-                shadowAnchor: [22, 22]
-
-            # Large icon
-            user_01_hover:
-                iconUrl: 'img/users/user-mathieu.png' # The only parameter that will need to change and be fetched dynamically
-                shadowUrl: 'img/users/user-shadow.png'
-                iconSize: [52, 51]
-                shadowSize:   [67, 67]
-                iconAnchor:   [25, 25]
-                shadowAnchor: [33, 33]
+    $scope.spottedProfile = null
+    $scope.showMemberInfo = false
 
     angular.extend($scope,
         defaults :
@@ -64,56 +29,60 @@ module.controller("MakerScienceMapCtrl", ($scope, leafletData, geocoderService, 
             lat: 46.43
             lng: 2.35
             zoom: 5
+        markers : {}
     )
 
+    MakerScienceProfile.getList().then((profileResults) ->
+        angular.forEach(profileResults, (profile) ->
+            geocoderService.getLatLong(profile.location.address_locality).then((latlng)->
+                icon =
+                    iconUrl: gravatarImageService.getImageSrc("alban.tiberghien@gmail.com", 30)
+                    shadowUrl: 'img/users/user-shadow.png'
+                    iconSize: [30, 30]
+                    shadowSize:   [44, 44]
+                    iconAnchor:   [15, 15]
+                    shadowAnchor: [22, 22]
 
-    markers = {}
-
-    MakerScienceProfile.getList().then((profiles) ->
-        angular.forEach(profiles, (profile) ->
-            markers[profile.id]=
-                group: "center"
-                lat: 44.5175
-                lng: 3.5
-                message: profile.first_name + " " + profile.last_name
-                draggable: false
-                icon: user_icons.user_default
+                $scope.markers[profile.id]=
+                    group: "center"
+                    lat: latlng.lat()
+                    lng: latlng.lng()
+                    draggable: false
+                    icon: icon
+                    icon_standard : icon
+                    icon_hover:
+                        iconUrl: gravatarImageService.getImageSrc("alban.tiberghien@gmail.com", 52)
+                        shadowUrl: 'img/users/user-shadow.png'
+                        iconSize: [52, 51]
+                        shadowSize:   [67, 67]
+                        iconAnchor:   [25, 25]
+                        shadowAnchor: [33, 33]
+            )
         )
-        console.log(markers)
-        angular.extend($scope, markers)
+    )
+    $scope.$on('leafletDirectiveMarker.click', (event, args) ->
+        marker = $scope.markers[args.markerName]
+        marker.icon = marker.icon_hover
+
+        MakerScienceProfile.one(args.markerName).get().then((profileResult)->
+            $scope.spottedProfile = profileResult
+            $scope.spottedProfile.projects = []
+
+            angular.forEach($scope.spottedProfile.teams, (team) ->
+                MakerScienceProject.one().get({parent__id : getObjectIdFromURI(team.project)}).then((makerscienceProjectResults) ->
+                    if makerscienceProjectResults.objects.length == 1
+                        $scope.spottedProfile.projects.push(makerscienceProjectResults.objects[0])
+                )
+            )
+            $scope.showMemberInfo = true
+        )
     )
 
-
-
-    # )
-    #     markers:
-    #         devTeam:
-    #             group: "center"
-    #             lat: 44.5175
-    #             lng: 3.5
-    #             message: "The MakerScience dev squad"
-    #             draggable: false
-    #             icon: user_icons.user_default
-    #         capitalParis:
-    #             group: "center"
-    #             lat: 48.854755
-    #             lng: 2.347246
-    #             message: "Paris"
-    #             draggable: false
-    #             icon: user_icons.user_01
-    #         user02:
-    #             group: "center"
-    #             lat: 48.84
-    #             lng: 2.35
-    #             message: "User 02"
-    #             draggable: false
-    #             icon: user_icons.user_default
-    #         user03:
-    #             group: "center"
-    #             lat: 48.81
-    #             lng: 2.30
-    #             message: "User 03"
-    #             draggable: false
-    #             icon: user_icons.user_default
-    # )
+    $scope.$on("leafletDirectiveMap.click", (event, args) ->
+        if $scope.spottedProfile
+            marker = $scope.markers[$scope.spottedProfile.id]
+            marker.icon = marker.icon_standard
+            $scope.spottedProfile = null
+        $scope.showMemberInfo = false
+    )
 )
