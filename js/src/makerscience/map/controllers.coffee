@@ -36,7 +36,7 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
         angular.forEach(profileResults, (profile) ->
             geocoderService.getLatLong(profile.location.address_locality).then((latlng)->
                 icon =
-                    iconUrl: gravatarImageService.getImageSrc("alban.tiberghien@gmail.com", 30)
+                    iconUrl: gravatarImageService.getImageSrc(profile.parent.user.email, 30, null, 'mm')
                     shadowUrl: 'img/users/user-shadow.png'
                     iconSize: [30, 30]
                     shadowSize:   [44, 44]
@@ -51,7 +51,7 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
                     icon: icon
                     icon_standard : icon
                     icon_hover:
-                        iconUrl: gravatarImageService.getImageSrc("alban.tiberghien@gmail.com", 52)
+                        iconUrl: gravatarImageService.getImageSrc(profile.parent.user.email, 52, null, 'mm')
                         shadowUrl: 'img/users/user-shadow.png'
                         iconSize: [52, 51]
                         shadowSize:   [67, 67]
