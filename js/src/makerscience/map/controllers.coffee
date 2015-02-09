@@ -32,7 +32,7 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
         markers : {}
     )
 
-    MakerScienceProfile.getList().then((profileResults) ->
+    MakerScienceProfile.getList({location__isnull : false}).then((profileResults) ->
         angular.forEach(profileResults, (profile) ->
             geocoderService.getLatLong(profile.location.address_locality).then((latlng)->
                 icon =
