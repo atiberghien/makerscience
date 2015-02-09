@@ -45,6 +45,8 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
 
                 $scope.markers[profile.id]=
                     group: "center"
+                    groupOption :
+                        showCoverageOnHover : false
                     lat: latlng.lat()
                     lng: latlng.lng()
                     draggable: false
