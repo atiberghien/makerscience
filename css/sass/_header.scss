@@ -162,6 +162,9 @@ div.crumbs {
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
+	.col-md-4 {
+		max-height: 400px;
+	}
 	h1, h2 {
 		text-align: center;
 	}
@@ -326,16 +329,26 @@ div.crumbs {
 		.col-md-8 {
 			padding-left: 0; /* remove gutter */
 		}
+		div.intro {
+			background-color: rgba(0,0,0,0.85);
+			h1, h2 {
+				background-color: transparent;
+			}
+			h1 {
+				padding: 0 0 $grid-gutter-width / 2 0;
+				font-size: 2em;
+			}
+			h2 {
+				padding-top: 4px; /* to be aligned with the editing buttons */
+				font-size: 1.4em;
+				line-height: 1.25em;
+			}
+		}
 		img.profile {
 			display: block;
 			width: 250px;
 			height: 250px;
 			margin: 2em auto;
-		}
-		h2 {
-			padding: 0 1em;
-			font-size: 1.2em;
-			line-height: 1.25em;
 		}
 		h5 {
 			margin-bottom: 0.5em;
@@ -367,7 +380,7 @@ div.crumbs {
 	font-size: 0.8em;
 	border: 2px solid $color-intro-border;
 
-	div.sideproject {
+	div.side-header {
 		position: relative;
 		min-height: $home-slide-height;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */

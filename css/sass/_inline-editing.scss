@@ -61,7 +61,21 @@
 			}
 		}
 	}
-	div.sideproject {
+	div.side-header {
+		&.editing {
+			padding-right: 4em;
+			.edit-buttons {
+				right: -4em;
+				&.edit-buttons-location {
+					right: 0;
+				}
+			}
+			p.location form input[type=text]:first-child {
+				width: 5em;
+				padding-right: 0.5em;
+				padding-left: 0.5em;
+			}
+		}
 		form {
 			input, button.btn {
 				margin-bottom: 0;
@@ -95,6 +109,54 @@
 			width: 100%;
 			input {
 				width: 50%;
+			}
+		}
+	}
+	&.intro-profile {
+		div.intro {
+			.col-md-4 {
+				form {
+					width: 100%;
+					text-align: center;
+					input[type=text] {
+						width: 8em;
+						padding-right: 0.5em;
+						padding-left: 0.5em;
+					}
+				}
+			}
+			.col-md-8 {
+				.bio {
+					.editable-controls {
+						width: 100%;
+					}
+					form {
+						text-area {
+							width: 100%;
+						}
+						&.form-inline {
+							width: 100%;
+							div.editable-input {
+								width: 100%;
+							}
+						}
+					}
+					.ta-text {
+						margin: 0.5em 0 0.75em;
+						width: 100%;
+						&.ta-scroll-window {
+							min-height: 200px;
+						}
+						div.ta-bind {
+							min-height: 200px;
+							padding: 1em;
+						}
+					}
+					span.editable-buttons {
+						display: block;
+						text-align: right;
+					}
+				}
 			}
 		}
 	}
