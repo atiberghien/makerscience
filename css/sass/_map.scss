@@ -15,7 +15,7 @@ body {
 		bottom: 50px;
 		width: $map-sidebar-width;
 		padding-left: $map-sidebar-toggle; /* make space for the side toggle */
-		background-color: $color-light-grey;
+		background-color: #fff;
 		@include transition(right 0.5s ease);
 		@include box-shadow(0 0 10px rgba(0,0,0,.5));
 		// &:hover,
@@ -88,6 +88,11 @@ body {
 					opacity: 0.8;
 				}
 			}
+		}
+		p.notice {
+			margin-top: 100%;
+			padding: $grid-gutter-width;
+			text-align: center;
 		}
 	}
 }

@@ -18,11 +18,11 @@
         <a class="toggle" ng-click="showMemberInfo = !showMemberInfo"><span class="glyphicon glyphicon-option-vertical"></span></a>
         <div ng-show="spottedProfile">
             <gravatar-image data-gravatar-email="spottedProfile.parent.user.email"
-                data-gravatar-size="120"
+                data-gravatar-size="222"
                 data-gravatar-rating="pg"
                 data-gravatar-default="mm"
                 data-gravatar-secure="true"
-                data-gravatar-css-class="img-circle">
+                data-gravatar-css-class="img-rectangle">
             </gravatar-image>
             <div class="member">
                 <p>{{spottedProfile.full_name}}</p>
@@ -42,12 +42,12 @@
             </div>
         </div>
         <div ng-show="!spottedProfile">
-            <p>
+            <p class="notice">
                 Sélectionner un membre sur la carte pour en savoir plus ...
             </p>
         </div>
     </div><!-- .member-info -->
     <div>
-        <leaflet id="membersmap" defaults="defaults" markers="markers" center="center" height="1000px" ></leaflet>
+        <leaflet id="membersmap" defaults="defaults" markers="markers" center="center" height="700px" ></leaflet>
     </div>
 </div>
