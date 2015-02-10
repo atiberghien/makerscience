@@ -62,7 +62,8 @@
 
                                 <div ng-show="addTag==false">
                                     <ul class="tags tags-project">
-                                        <li ng-repeat="tag in preparedTags"><a href="">{{tag.text}}</a></li>
+                                        <li ng-repeat="tag in preparedTags | limitTo:10"><a href="">{{tag.text}}</a></li>
+                                        <li><a href="" tooltip="Voir tous les tags" data-toggle="modal" data-target="#allTags">...</a></li>
                                     </ul>
                                 </div>
                             </div>
