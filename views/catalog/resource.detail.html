@@ -29,7 +29,7 @@
                     onbeforesave="updateProjectSheet('Project', resourcesheet.parent.id , 'baseline', $data)"
                     ng-bind-html="resourcesheet.parent.baseline">{{ resourcesheet.parent.baseline }}
                 </h2>
-                <h3><span>Fiche Resource</span></h3>
+                <h3><span>Expérience partagée</span></h3>
 
                 <div class="row">
 
@@ -45,7 +45,7 @@
 
                     <div class="col-md-4">
 
-                        <div class="sideproject">
+                        <div class="side-header">
 
                             <div class="tags">
                                 <div class="editable">
@@ -54,7 +54,7 @@
                                     </div>
                                     <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
                                         <tags-input ng-model="$parent.preparedTags"
-                                                    placeholder="Ajouter un mot-clé"
+                                                    placeholder="> Mot-clé"
                                                     on-tag-added="$parent.addTagFromResource($tag)"
                                                     on-tag-removed="$parent.removeTagFromResource($tag)">
                                                     <auto-complete source="loadTags($query)"></auto-complete>
@@ -113,7 +113,7 @@
 
                             <p>Mise à jour <span am-time-ago="resourcesheet.modified"></span></p>
 
-                        </div><!-- .sideproject -->
+                        </div><!-- .side-header -->
 
                     </div><!-- .col-md-4 -->
 
@@ -131,17 +131,17 @@
             <div id="content">
 
                 <tabset class="nav-tabs-resource">
-                    <tab heading="Ressource">
+                    <tab heading="Expérience">
                         <section>
                             <div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
                                 <button> <span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <h3>A propos de la ressource</h3>
+                            <h3>A propos de l'expérience</h3>
 
                             <p editable-text-angular="resourcesheet.parent.description"
                             e-form="DescBtnForm"
                             e-rows="4"
-                            e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                            e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                             onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
                             ng-bind-html="resourcesheet.parent.description">
                         </p>
@@ -154,7 +154,7 @@
                             <p editable-text-angular="item.answer"
                                  e-form="AnswerBtnForm"
                                  e-rows="4"
-                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateProjectSheet('ProjectSheetItem', item.id , 'answer', $data)"
                                  ng-bind-html="item.answer">
                             </p>
@@ -259,7 +259,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="bloc bloc-links">
-                            <h3>Liens et ressources</h3>
+                            <h3>Liens et expériences</h3>
                             <ul>
                                 <li><a href="">Science-animation: Voir le lien</a></li>
                             </ul>
@@ -273,7 +273,7 @@
                                             data-gravatar-rating="pg"
                                             data-gravatar-default="mm"
                                             data-gravatar-secure="true"
-                                            data-gravatar-css-class="profil img-circle">
+                                            data-gravatar-css-class="profile img-circle">
                             </gravatar-image>
                             <p class="author">{{resourcesheet.parent.team[0].members[0].user.first_name}} {{resourcesheet.parent.team[0].members[0].user.last_name}}<em>{{profile.activity}}</em></p>
                         </div>
@@ -283,7 +283,7 @@
                 <section class="linked linked-resource" >
                     <carousel class="carousel-no-indicators carousel-text-links">
                         <slide class="left-aligned">
-                            <h3><a href="">Ressources associées</a></h3>
+                            <h3><a href="">Expériences associées</a></h3>
                             <h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
                             <h5><a href="">Tournée nationale 2014</a></h5>
                             <img src="./img/bacasable.jpg" alt="Image background" />
@@ -328,7 +328,7 @@
                 <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
                 <li class="box box-solo box-green">
                     <div>
-                        <a href="">Ressources Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <a href="">Expériences Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
                 </li
                 ><li class="box" ng-repeat="resource in similars">
@@ -341,12 +341,12 @@
                 </li
                 ><li class="box box-solo box-green">
                     <div>
-                        <a ui-sref="resource-list">Plus de ressource <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <a ui-sref="resource-list">Plus d'expériences <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
                 </li>
             </ul>
 
-            <a ui-sref="resource.new" class="large large-purple">Créer une ressource</a>
+            <a ui-sref="resource.new" class="large large-purple">Partager une expérience</a>
 
         </div>
 

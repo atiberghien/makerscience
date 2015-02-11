@@ -45,7 +45,7 @@
 
                     <div class="col-md-4">
 
-                        <div class="sideproject">
+                        <div class="side-header">
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="addTag=false">
                                     <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -53,7 +53,7 @@
 
                                 <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
                                     <tags-input ng-model="$parent.preparedTags"
-                                                placeholder="Ajouter un mot-clé"
+                                                placeholder="> Mot-clé"
                                                 on-tag-added="$parent.addTagFromProject($tag)"
                                                 on-tag-removed="$parent.removeTagFromProject($tag)">
                                                 <auto-complete source="loadTags($query)"></auto-complete>
@@ -62,7 +62,8 @@
 
                                 <div ng-show="addTag==false">
                                     <ul class="tags tags-project">
-                                        <li ng-repeat="tag in preparedTags"><a href="">{{tag.text}}</a></li>
+                                        <li ng-repeat="tag in preparedTags | limitTo:10"><a href="">{{tag.text}}</a></li>
+                                        <li><a href="" tooltip="Voir tous les tags" data-toggle="modal" data-target="#allTags">...</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -76,14 +77,14 @@
                                     <div ng-repeat="progress in progressRange|orderBy:'order'">
                                         <label ng-if="progress.id!=projectsheet.parent.progress.id"
                                                style="background-image: url('../img/icons/project/project-grey.png');float:left"
-                                               tooltip="{{progress.label}} + Explication?">
+                                               tooltip="{{progress.label}} - {{progress.description}}">
                                             <span ng-if="!editWIP">{{progress.label}}</span>
                                             <a ng-if="editWIP"
                                                ng-click="updateProjectSheet('Project', projectsheet.parent.id, 'progress', progress.resource_uri);projectsheet.parent.progress=progress">{{progress.label}}</a>
                                         </label>
                                         <label ng-if="progress.id==projectsheet.parent.progress.id"
                                                style="background-image: url('{{$root.config.media_uri}}{{progress.icon}}');float:left"
-                                               tooltip="{{progress.label}} + Explication?">
+                                               tooltip="{{progress.label}} - {{progress.description}}">
                                             <span ng-if="!editWIP">{{progress.label}}</span>
                                             <a ng-if="editWIP"
                                                ng-click="updateProjectSheet('Project', projectsheet.parent.id, 'progress', progress.resource_uri);projectsheet.parent.progress=progress">{{progress.label}}</a>
@@ -110,7 +111,7 @@
                                 <p>Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
                             </div>
 
-                        </div><!-- .sideproject -->
+                        </div><!-- .side-header -->
 
                     </div><!-- .col-md-4 -->
 
@@ -138,7 +139,7 @@
                             <p editable-text-angular="projectsheet.parent.description"
                                  e-form="DescBtnForm"
                                  e-rows="4"
-                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
                                  ng-bind-html="projectsheet.parent.description">
                             </p>
@@ -152,7 +153,7 @@
                             <p editable-text-angular="item.answer"
                                  e-form="AnswerBtnForm"
                                  e-rows="4"
-                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateProjectSheet('ProjectSheetItem', item.id , 'answer', $data)"
                                  ng-bind-html="item.answer">
                             </p>
@@ -202,19 +203,7 @@
                 </div><!-- .row -->
 
                 <tabset class="nav-tabs-slide nav-tabs-slide-project">
-                    <tab>
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-picture"></span>
-                        </tab-heading>
-                        <carousel class="carousel-no-indicators">
-                            <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
-                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
-                            </slide>
-                            <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
-                                <img src="img/slides/slide_one.png" alt="Slide One">
-                            </slide>
-                        </carousel>
-                    </tab>
+                    <!-- Put the videos first as otherwise they won't load in the tab -->
                     <tab>
                         <tab-heading>
                             <span class="glyphicon glyphicon-facetime-video"></span>
@@ -230,6 +219,26 @@
                             </slide>
                         </carousel>
                     </tab>
+                    <tab>
+                        <tab-heading>
+                            <span class="glyphicon glyphicon-picture"></span>
+                        </tab-heading>
+                        <carousel class="carousel-no-indicators">
+                            <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
+                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
+                            </slide>
+                            <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
+                                <img src="img/slides/slide_one.png" alt="Slide One">
+                            </slide>
+                            <!-- DEBUGGING with 2 hard coded slides -->
+                            <slide>
+                                <img src="img/slides/slide_one.png" alt="Slide One">
+                            </slide>
+                            <slide>
+                                <img src="img/slides/slide_two.png" alt="Slide Two">
+                            </slide>
+                        </carousel>
+                    </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
                         <tab-heading>
                             <span ng-click="openGallery(projectsheet.base_projectsheet)" class="glyphicon glyphicon-pencil"></span>
@@ -242,17 +251,17 @@
                         <button ng-click="linkResources=!linkResources" ><span class="glyphicon glyphicon-pencil"></span></button>
                         <div ng-show="linkResources">
                             <angucomplete-alt id="linked-idea"
-                                            placeholder="Nom de la ressource"
+                                            placeholder="Nom de l'expérience"
                                             pause="100"
                                             selected-object="newLinkedResource"
                                             local-data="allAvailableResources"
                                             search-fields="title"
                                             title-field="title"
-                                            text-no-results="Aucune ressource trouvée"
+                                            text-no-results="Aucune expérience trouvée"
                                             minlength="3"/>
                         </div>
                         <div ng-show="linkResources">
-                            <button class="button" ng-click="addLinkedResource(newLinkedResource);updateLinkedResources()">Lier la ressource</button>
+                            <button class="button" ng-click="addLinkedResource(newLinkedResource);updateLinkedResources()">Lier à l'éxpérience</button>
                         </div>
                     </div>
                     <carousel class="carousel-no-indicators carousel-text-links" >
@@ -273,6 +282,9 @@
             <div id="sidebar">
                 <ng-include onload="parentColor='project'" src="'views/catalog/block/community.html'"></ng-include>
                 <ng-include src="'views/catalog/block/comments.html'"></ng-include>
+                <section class="button">
+                    <a href="">Contactez en privé les porteurs</a>
+                </section>
                 <ng-include onload="parentColor='project'" src="'views/catalog/block/popularity.html'"></ng-include>
 
             </div><!-- #sidebar -->

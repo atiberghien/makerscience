@@ -20,17 +20,17 @@
 
             <div id="content" class="new-resource">
 
-                <h2>Créer une ressource</h2>
+                <h2>Créer une expérience</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-                <h3>Nouvelle ressource</h3>
+                <h3>Nouvelle expérience</h3>
 
                 <form ng-controller="MakerScienceResourceSheetCreateCtrl" ng-init="init('projet-makerscience')">
                     <div class="row">
                         <div class="col-md-8">
 
                             <fieldset class="fake-placeholder">
-                                <h4>Nom de la ressource</h4>
+                                <h4>Nom de l'expérience</h4>
                                 <input type="text"
                                        name="resource-name"
                                        placeholder=">"
@@ -38,7 +38,7 @@
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
-                                <h4>Résumez la ressource en une courte phrase</h4>
+                                <h4>Résumez l'expérience en une courte phrase</h4>
                                 <input type="text"
                                            name="resource-baseline"
                                            placeholder=">"
@@ -47,9 +47,9 @@
 
                             <fieldset class="fake-placeholder">
                                 <div ng-controller="TagAutoCompleteCtrl">
-                                    <h4>Quels sont les mots-clés associés à votre ressource ? (thématiques, type de projet, outils...)</h4>
+                                    <h4>Quels sont les mots-clés associés à votre expérience ? (thématiques, type de projet, outils...)</h4>
                                     <tags-input ng-model="tags"
-                                                placeholder="Ajouter un mot-clé">
+                                                placeholder="> Mot-clé">
                                       <auto-complete source="loadTags($query)"></auto-complete>
                                     </tags-input>
                                 </div>
@@ -95,9 +95,9 @@
                     </div><!-- .row -->
 
                     <fieldset class="new-resource">
-                        <h4>Résumez votre ressource en quelques lignes</h4>
+                        <h4>Résumez votre expérience en quelques lignes</h4>
                         <text-angular name="resource-about"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                       ng-model="projectsheet.project.description"
                                       e-rows="4">
                         </text-angular>
@@ -106,7 +106,7 @@
                     <fieldset class="new-resource" ng-repeat="item in QAItems">
                         <h4>{{item.questionLabel}}</h4>
                         <text-angular ng-model="item.answer"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                       name="question_{{$index}}"
                                       e-rows="4">
                         </text-angular>
@@ -114,7 +114,7 @@
 
                     <fieldset class="needs needs-select">
                         <h4>Vos besoins</h4>
-                        <p>Vous avez besoin d'idées fraîches pour votre ressource? Précisez ici vos besoins du moment ...</p>
+                        <p>Vous avez besoin d'idées fraîches pour votre expérience? Précisez ici vos besoins du moment ...</p>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="btn-group" dropdown is-open="status.isopen">
@@ -126,7 +126,7 @@
                             </div>
                             <div class="col-md-7">
                                 <text-angular name="project-need"
-                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol']]"
+                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                               e-placeholder="Descrivez votre besoin"
                                               ng-model="newNeed.description"
                                               e-rows="3">

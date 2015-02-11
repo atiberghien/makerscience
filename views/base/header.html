@@ -15,12 +15,12 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a ui-sref="home" class="selected">Accueil</a></li>
-                            <li><a ui-sref="about">A propos</a></li>
-                            <li><a ui-sref="profile.list">Membres</a></li>
-                            <li><a ui-sref="project.list">Projets</a></li>
-                            <li><a ui-sref="resource.list">Ressources</a></li>
-                            <li><a ui-sref="forum" class="nav-forum">Forum</a></li>
+                            <li><a ui-sref="home" ng-class="{ selected: $state.includes('home') }">Accueil</a></li>
+                            <li><a ui-sref="about" ng-class="{ selected: $state.includes('about') }">A propos</a></li>
+                            <li><a ui-sref="profile.list" ng-class="{ selected: $state.includes('profile.list') }">Membres</a></li>
+                            <li><a ui-sref="project.list" ng-class="{ selected: $state.includes('project.list') }">Projets</a></li>
+                            <li><a ui-sref="resource.list" ng-class="{ selected: $state.includes('resource.list') }">Expériences</a></li>
+                            <li><a ui-sref="forum" ng-class="{ selected: $state.includes('forum') }">Forum</a></li>
                         </ul>
                         <!--
                         <form class="navbar-right" ng-show="!authVars.isAuthenticated && !showLoginPanel">
@@ -37,9 +37,8 @@
         </nav><!-- #menu -->
     </header>
 
-    <div class="action-bar" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
+    <div class="action-bar" ng-show="authVars.isAuthenticated || showLoginPanel" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
         <div class="container">
-
 
             <!-- When logging in -->
             <div class="authenticated" ng-show="showLoginPanel">
@@ -58,10 +57,11 @@
                     <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
                 </ul><!-- #sidenav -->
             </div>
+
         </div><!-- .container -->
     </div>
 
-    <div class="crumbs">
+    <div class="crumbs" ng-hide="$state.includes('home')">
         <div class="container">
             <div ncy-breadcrumb></div>
         </div><!-- .container -->

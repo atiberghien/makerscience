@@ -8,6 +8,10 @@
 /*	@include box-shadow(0 10px 2px rgba(0,0,0,.25));*/
 }
 
+header {
+	margin-bottom: $grid-gutter-width;
+}
+
 form.search-full-width {
 	position: relative;
 	margin: 0 $grid-gutter-width / 2;
@@ -31,7 +35,7 @@ form.search-full-width {
 	}
 }
 div.action-bar {
-	margin-bottom: $grid-gutter-width;
+	margin: -$grid-gutter-width 0 $grid-gutter-width;
 	&.authenticated {
 		background-color: $color-pink;
 		.authenticated {
@@ -138,9 +142,10 @@ div.action-bar {
 }
 
 div.crumbs {
-	display: none;
-	ul {
+	margin-top: -($grid-gutter-width / 2);
+	ol {
 		margin: 0 $grid-gutter-width 1em;
+		background-color: transparent;
 	}
 	li {
 		display: inline;
@@ -154,10 +159,12 @@ div.crumbs {
 }
 
 #intro {
-	padding: 2em 0;
 	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
+	.col-md-4 {
+		max-height: 400px;
+	}
 	h1, h2 {
 		text-align: center;
 	}
@@ -193,11 +200,23 @@ div.crumbs {
 			@include border-radius(3px);
 		}
 	}
+	div.intro {
+		h1, h2 {
+			margin: 0;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+		h1 {
+			padding: 1.5em 0 0.5em;
+		}
+		h2 {
+			padding: 0 0 2em 0;
+		}
+	}
 	&.intro-project {
 		background-color: $color-intro-project-bg;
-		background-image: url('../img/bg/header-project-bg.jpg');
+		background-image: url('/img/bg/header-project-bg.jpg');
 		h3 {
-			background-image: url('../img/fiche-project.png');
+			background-image: url('/img/fiche-project.png');
 			span {
 				background-color: $color-intro-h3-project-bg;
 			}
@@ -205,13 +224,13 @@ div.crumbs {
 	}
 	&.intro-project-create {
 		background-color: $color-intro-project-bg;
-		background-image: url('../img/bg/header-project-create.gif');
+		background-image: url('/img/bg/header-project-create.gif');
 	}
 	&.intro-resource {
 		background-color: $color-intro-resource-bg;
-		background-image: url('../img/bg/header-resource-bg.png');
+		background-image: url('/img/bg/header-resource-bg.gif');
 		h3 {
-			background-image: url('../img/fiche-resource.png');
+			background-image: url('/img/fiche-resource.png');
 			span {
 				background-color: $color-intro-h3-resource-bg;
 			}
@@ -301,8 +320,8 @@ div.crumbs {
 			@include border-radius(3px);
 		}
 	}
-	&.intro-profil {
-		background: $color-chocolate url('../img/bg/header-profil.png') center center no-repeat;
+	&.intro-profile {
+		background: $color-chocolate url('../img/bg/header-profile.png') center center no-repeat;
 		background-size: cover;
 		.col-md-4 {
 			padding-right: 0; /* remove gutter */
@@ -310,16 +329,26 @@ div.crumbs {
 		.col-md-8 {
 			padding-left: 0; /* remove gutter */
 		}
-		img.profil {
+		div.intro {
+			background-color: rgba(0,0,0,0.85);
+			h1, h2 {
+				background-color: transparent;
+			}
+			h1 {
+				padding: 0 0 $grid-gutter-width / 2 0;
+				font-size: 2em;
+			}
+			h2 {
+				padding-top: 4px; /* to be aligned with the editing buttons */
+				font-size: 1.4em;
+				line-height: 1.25em;
+			}
+		}
+		img.profile {
 			display: block;
 			width: 250px;
 			height: 250px;
 			margin: 2em auto;
-		}
-		h2 {
-			padding: 0 1em;
-			font-size: 1.2em;
-			line-height: 1.25em;
 		}
 		h5 {
 			margin-bottom: 0.5em;
@@ -351,7 +380,7 @@ div.crumbs {
 	font-size: 0.8em;
 	border: 2px solid $color-intro-border;
 
-	div.sideproject {
+	div.side-header {
 		position: relative;
 		min-height: $home-slide-height;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */

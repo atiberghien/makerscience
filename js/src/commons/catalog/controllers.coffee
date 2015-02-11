@@ -115,13 +115,13 @@ module.controller("PopularityCtrl", ($scope, $state) ->
     $scope.userRatings = {}
 
     $scope.popularityItems =
-        'Original' :
+        'Inspirant' :
             'maxPopularityScore' : 100
             'objectPopularityScore' : 70
-        'Fun' :
+        'Réconfortant' :
             'maxPopularityScore' : 100
             'objectPopularityScore' : 50
-        'Prometteur' :
+        'Utile' :
             'maxPopularityScore' : 100
             'objectPopularityScore' : 15
 

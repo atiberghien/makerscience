@@ -156,7 +156,7 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
         )
 
 ])
-.run(($rootScope, editableOptions, editableThemes, amMoment, loginService) ->
+.run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
@@ -165,6 +165,8 @@ angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'make
 
     $rootScope.loginService = loginService
     $rootScope.config = config
+    $rootScope.$state = $state
+    $rootScope.$stateParams = $stateParams
 )
 
 angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->

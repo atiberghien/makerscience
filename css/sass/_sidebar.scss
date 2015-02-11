@@ -2,20 +2,20 @@
 	font-size: 0.9em;
 
 	section {
-		margin-bottom: 2em;
+		margin-bottom: $grid-gutter-width;
 		h3 {
-			padding: 2em;
+			padding: $grid-gutter-width;
 			font-weight: bold;
 			text-transform: uppercase;
 		}
 	}
-	
+
 	section.community {
 
 		position: relative;
 		padding-bottom: 2em;
 		color: $color-sidebar-community;
-		
+
 		&.community-project {
 			background: $color-project url('../img/bg/shape-right-bg.png') 175px -110px no-repeat;
 		}
@@ -54,7 +54,7 @@
 						background-color: $color-sidebar-submenu-bg;
 						text-decoration: none;
 					}
-			
+
 				}
 
 			}
@@ -88,9 +88,9 @@
 				font-size: 0.8em;
 			}
 		}
-		
+
 	}
-	
+
 	section.solo {
 		color: white;
 		background-color: $color-purple;
@@ -102,13 +102,13 @@
 			text-transform: uppercase;
 		}
 	}
-	
+
 	section.comments {
-	
+
 		position: relative;
 		color: $color-sidebar-comments;
 		background-color: $color-sidebar-comments-bg;
-		
+
 		div.comment {
 			position: relative;
 			margin-bottom: 1.5em;
@@ -145,7 +145,16 @@
 				text-align: justify;
 			}
 		}
-		> p {
+		/* Top paragraph under the heading */
+		h3 + p {
+			margin: 0 $grid-gutter-width $grid-gutter-width / 2;
+			font-family: "LatoLight";
+			font-size: 1.25em;
+			line-height: 1.75em;
+			text-transform: uppercase;
+		}
+		/* Voir plus link at the bottom */
+		> p:last-child {
 			padding: 1em 0 2em;
 			text-align: center;
 			a {
@@ -154,7 +163,7 @@
 				text-decoration: underline;
 			}
 		}
-		
+
 		&.comments-add {
 			.comment {
 				border-bottom: none;
@@ -177,15 +186,32 @@
 				@include border-radius(1px);
 			}
 		}
-		
+
 	}
-	
+
+	section.button {
+		a {
+			display: block;
+			padding: $grid-gutter-width * 2 $grid-gutter-width;
+			font-family: "LatoLight";
+			font-size: 2.25em;
+			line-height: 1.7em;
+			color: #fff;
+			background-color: $color-red;
+			text-align: center;
+			text-transform: uppercase;
+			&:hover {
+				background-color: $color-blue;
+			}
+		}
+	}
+
 	section.popularity {
 
 		position: relative;
 		padding-bottom: 2em;
 		color: $color-sidebar-popularity;
-		
+
 		&.popularity-project {
 			background: $color-blue url('../img/bg/sidebar-blue-bg.png') 175px -110px no-repeat;
 		}
@@ -217,7 +243,7 @@
 				}
 			}
 		}
-		
+
 		/* Rating widget */
 		label {
 			display: inline-block;
@@ -234,7 +260,7 @@
 			font-size: 1em;
 			font-weight: bold;
 		}
-			
+
 	}
-	
+
 }

@@ -1,0 +1,19 @@
+<!-- Modal showing all tags for a project / resource -->
+<div class="modal fade" id="allTags">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Tous les tags</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="tags tags-project">
+                </ul>
+                    <li ng-repeat="tag in preparedTags"><a href="">{{tag.text}}</a></li>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

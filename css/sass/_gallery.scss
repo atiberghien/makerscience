@@ -8,7 +8,8 @@
 		li {
 			position: relative;
 			margin-right: 0.5em;
-			padding: 0.5em;
+			margin: 0 ($grid-gutter-width / 2) ($grid-gutter-width / 2) 0;
+			padding: $grid-gutter-width / 2;
 			background-color: $color-light-cream;
 			border: 2px solid $color-light-grey;
 			&> span {
@@ -25,7 +26,7 @@
 				margin-top: 0.5em;
 			}
 			&:hover {
-				border-color: $color-blue;
+				border-color: $color-medium-grey;
 			}
 		}
 	}
