@@ -1,10 +1,11 @@
 angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
 angular.module('commons.accounts', ['commons.accounts.services'])
+angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
 angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
-angular.module('makerscience', ['commons.catalog', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
+angular.module('makerscience', ['commons.catalog', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
                                 'geocoder-service', 'ncy-angular-breadcrumb'])
