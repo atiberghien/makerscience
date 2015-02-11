@@ -50,7 +50,7 @@
 
                                 <div ng-show="addInterest==true" ng-controller="TagAutoCompleteCtrl">
                                     <tags-input ng-model="$parent.preparedInterestTags"
-                                                placeholder="Ajouter un mot-clé"
+                                                placeholder="> Mot-clé"
                                                 on-tag-added="$parent.addTagToProfile('in', $tag)"
                                                 on-tag-removed="$parent.removeTagFromProfile($tag)">
                                                 <auto-complete source="loadTags($query)"></auto-complete>
@@ -89,7 +89,7 @@
 
                                 <div ng-show="addSkill==true" ng-controller="TagAutoCompleteCtrl">
                                     <tags-input ng-model="$parent.preparedSkillTags"
-                                                placeholder="Ajouter un mot-clé"
+                                                placeholder="> Mot-clé"
                                                 on-tag-added="$parent.addTagToProfile('sk', $tag)"
                                                 on-tag-removed="$parent.removeTagFromProfile($tag)">
                                                 <auto-complete source="loadTags($query)"></auto-complete>

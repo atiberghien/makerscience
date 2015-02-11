@@ -53,7 +53,7 @@
 
                                 <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
                                     <tags-input ng-model="$parent.preparedTags"
-                                                placeholder="Ajouter un mot-clé"
+                                                placeholder="> Mot-clé"
                                                 on-tag-added="$parent.addTagFromProject($tag)"
                                                 on-tag-removed="$parent.removeTagFromProject($tag)">
                                                 <auto-complete source="loadTags($query)"></auto-complete>
@@ -251,17 +251,17 @@
                         <button ng-click="linkResources=!linkResources" ><span class="glyphicon glyphicon-pencil"></span></button>
                         <div ng-show="linkResources">
                             <angucomplete-alt id="linked-idea"
-                                            placeholder="Nom de la ressource"
+                                            placeholder="Nom de l'expérience"
                                             pause="100"
                                             selected-object="newLinkedResource"
                                             local-data="allAvailableResources"
                                             search-fields="title"
                                             title-field="title"
-                                            text-no-results="Aucune ressource trouvée"
+                                            text-no-results="Aucune expérience trouvée"
                                             minlength="3"/>
                         </div>
                         <div ng-show="linkResources">
-                            <button class="button" ng-click="addLinkedResource(newLinkedResource);updateLinkedResources()">Lier la ressource</button>
+                            <button class="button" ng-click="addLinkedResource(newLinkedResource);updateLinkedResources()">Lier à l'éxpérience</button>
                         </div>
                     </div>
                     <carousel class="carousel-no-indicators carousel-text-links" >

@@ -54,7 +54,7 @@
                                     </div>
                                     <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
                                         <tags-input ng-model="$parent.preparedTags"
-                                                    placeholder="Ajouter un mot-clé"
+                                                    placeholder="> Mot-clé"
                                                     on-tag-added="$parent.addTagFromResource($tag)"
                                                     on-tag-removed="$parent.removeTagFromResource($tag)">
                                                     <auto-complete source="loadTags($query)"></auto-complete>
@@ -346,7 +346,7 @@
                 </li>
             </ul>
 
-            <a ui-sref="resource.new" class="large large-purple">Créer une expérience</a>
+            <a ui-sref="resource.new" class="large large-purple">Partager une expérience</a>
 
         </div>
 
