@@ -52,7 +52,7 @@ body {
 				background-color: $color-pink;
 			}
 		}
-		h5 {
+		.content > h5 {
 			padding: $grid-gutter-width / 2 0;
 			font-weight: bold;
 			text-transform: uppercase;
