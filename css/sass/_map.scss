@@ -7,6 +7,9 @@ body {
 .map {
 	position: relative;
 	/* Sidebar */
+	.leaflet-marker-icon {
+		@include border-radius(50%);
+	}
 	.member-info {
 		z-index: 100;
 		overflow: hidden;
