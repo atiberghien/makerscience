@@ -76,6 +76,10 @@ body {
 			padding: 0 $grid-gutter-width / 2;
 			background-color: #fff;
 		}
+		div.boxes.boxes-small {
+			overflow: scroll;
+			height: $boxes-small-height;
+		}
 		p.scroll-buttons {
 			position: absolute;
 			right: 0;
