@@ -142,9 +142,9 @@ div.action-bar {
 }
 
 div.crumbs {
-	margin-top: -($grid-gutter-width / 2);
+	margin-top: -$grid-gutter-width;
 	ol {
-		margin: 0 $grid-gutter-width 1em;
+		margin: 0.5em $grid-gutter-width 0.5em;
 		background-color: transparent;
 	}
 	li {
