@@ -794,7 +794,7 @@ ui-view> div.container {
 				background-color: $color-dark-grey;
 				border: none;
 				&:hover {
-					background-color: $color-orange;
+					background-color: $color-profile;
 				}
 			}
 			img {
@@ -839,8 +839,16 @@ ui-view> div.container {
 					vertical-align: middle;
 				}
 			}
-			&:hover {
+			&.selected {
 				background-color: $color-pink;
+			}
+			button.add-member {
+				display: none;
+			}
+			&:hover {
+				button.add-member {
+					display: block;
+				}
 			}
 		}
 		a {
