@@ -1,12 +1,15 @@
 module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers'])
 
 module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) ->
+    $scope.limit = 12
+
     $scope.init = (limit, featured) ->
         params = {}
         if limit
-            params['limit'] = limit
+             $scope.limit = limit
         if featured
             params['featured'] = featured
+        params['limit'] = $scope.limit
         $scope.projects = MakerScienceProject.getList(params).$object
 )
 

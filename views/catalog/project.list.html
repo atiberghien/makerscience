@@ -56,7 +56,7 @@
 
             <tabset class="nav-tabs-listing">
                 <tab heading="Nouveautés">
-                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init()">
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init(12)">
                         <div class="box" ng-repeat="project in projects">
                             <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
                         </div><!-- .box -->
