@@ -265,3 +265,25 @@
 	}
 
 }
+
+.sidebar-profiles {
+	margin: $grid-gutter-width 0;
+	h4 {
+		margin-bottom: 0.5em;
+	}
+	.input-group {
+		margin-bottom: 1em;
+	}
+	.panel-body {
+		padding: 0;
+		ul a {
+			display: block;
+			padding: 0.5em 1em;
+			&:hover {
+				color:#fff;
+				background-color: $color-profile;
+				text-decoration: none;
+			}
+		}
+	}
+}
