@@ -6,7 +6,17 @@
                 <carousel class="carousel-no-indicators" ng-controller="HomepageFeaturedListCtrl">
                     <!-- Presentation -->
                     <slide>
-                        <a ui-sref="forum"><img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." /></a>
+                    	<div class="caption">
+                    		<div>
+				            	<h1>Makerscience : site collaboratif pour tous ceux qui s’emploient à mettre la science, la technique et l'innovation à portée de tous</h1>
+				            	<p>Faciliter la réalisation de projets</p>
+				            	<p>Favoriser les échanges et rencontres</p>
+				            	<p>Valoriser toutes les personnes investies</p>
+				            </div>
+		                </div>
+                        <a ui-sref="forum">
+                        	<img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        </a>
                     </slide>
                     <slide ng-repeat="project in projects">
                         <h3 class="category"><span>Projet</span></h3>
