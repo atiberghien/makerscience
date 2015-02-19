@@ -10,3 +10,6 @@ js/src/config.coffee
 /js/vendor/
 .sass-cache/
 doc.html
+# OSX CRAP
+.DS_Store
+/node_modules/
