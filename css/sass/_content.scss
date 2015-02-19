@@ -61,7 +61,7 @@ div.toolbar {
 				padding: 1.35em 1.5em;
 				font-size: 2.25em;
 				color: #fff;
-				background-color: $color-orange;
+				background-color: $color-profile;
 				border: none;
 			}
 		}
@@ -533,6 +533,7 @@ ui-view> div.container {
 			position: relative;
 			font-family: latolight;
 			font-weight: bold;
+			white-space: nowrap;
 		}
 		h3 {
 			z-index: 1;
@@ -793,7 +794,7 @@ ui-view> div.container {
 				background-color: $color-dark-grey;
 				border: none;
 				&:hover {
-					background-color: $color-orange;
+					background-color: $color-profile;
 				}
 			}
 			img {
@@ -838,8 +839,16 @@ ui-view> div.container {
 					vertical-align: middle;
 				}
 			}
+			&.selected {
+				background-color: $color-pink;
+			}
+			button.add-member {
+				display: none;
+			}
 			&:hover {
-				background-color: $color-orange;
+				button.add-member {
+					display: block;
+				}
 			}
 		}
 		a {

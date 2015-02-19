@@ -105,7 +105,7 @@ module.controller("MakerScienceProjectSheetGetters", ($scope, MakerScienceProjec
 )
 
 
-module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem) ->
+module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
@@ -113,6 +113,13 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
+        console.log(' Projectsheet loaded')
+        
+        # add comments data to $scope
+        $scope.resource_type = 'makerscienceproject'
+        $scope.resource_id = $scope.projectsheet.id
+        $scope.comments = Comment.one().customGETLIST($scope.resource_type+'/'+$scope.resource_id).$object
+
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
@@ -170,13 +177,18 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem) ->
+module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
 
     $scope.preparedTags = []
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
+        
+        # add comments data to $scope
+        $scope.resource_type = 'makerscienceresource'
+        $scope.resource_id = $scope.projectsheet.id
+        $scope.comments = Comment.one().customGETLIST($scope.resource_type+'/'+$scope.resource_id).$object
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
             $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
