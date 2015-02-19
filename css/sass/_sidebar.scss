@@ -266,7 +266,7 @@
 
 }
 
-.sidebar-profiles {
+.sidebar-filters {
 	margin: $grid-gutter-width 0;
 	h4 {
 		margin-bottom: 0.5em;
@@ -281,9 +281,21 @@
 			padding: 0.5em 1em;
 			&:hover {
 				color:#fff;
-				background-color: $color-profile;
 				text-decoration: none;
 			}
 		}
 	}
+	
+	&.sidebar-profiles {
+		.panel-body ul a:hover {
+				background-color: $color-profile;
+		}
+	}
+	
+	&.sidebar-projects {
+		.panel-body ul a:hover {
+				background-color: $color-project;
+		}
+	}
+	
 }
