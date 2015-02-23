@@ -108,7 +108,7 @@ module.controller("MakerScienceProjectSheetGetters", ($scope, MakerScienceProjec
 )
 
 
-module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment) ->
+module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
@@ -123,6 +123,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         $scope.resource_id = $scope.projectsheet.id
         $scope.comments = Comment.one().customGETLIST($scope.resource_type+'/'+$scope.resource_id).$object
 
+        # add community to scope
+        $scope.community = ObjectProfileLink.one().customGETLIST($scope.resource_type+'/'+$scope.resource_id).$object
+        
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
