@@ -1,7 +1,12 @@
 module = angular.module("commons.ucomment.controllers", ['commons.ucomment.services'])
 
 module.controller("CommentCtrl", ($scope, $rootScope, Comment) ->
-    
+    """
+    controlling comments attached to a resource. Requires that parent scope has:
+    - $scope.comments
+    - $scope.resource_type
+    - $scope.resource_id
+    """
     console.log("==== Comments controller ====")
 
     $scope.newcommentForm =
