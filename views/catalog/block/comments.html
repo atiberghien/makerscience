@@ -6,7 +6,7 @@
         </ul>
         <h3>Commentaires</h3>
         <p>Partagez vos questions, vos avis, vos pistes d'améliorations</p>
-<!-- 
+<!--
         <div class="comment" >
             <div class="author">
                 <img src="./img/users/user-mathieu.png" alt="User Mathieu Corain" />
@@ -27,7 +27,13 @@
                 </div>
                 <span class="date">{{comment.submit_date | date:"dd/MM/yyyy - h:m"}}</span>
                 <div class="author">
-                    <img src="./img/users/user-default.png" alt="User Unknown" />
+                    <gravatar-image ng-if="comment.user.email" data-gravatar-email="comment.user.email"
+                        data-gravatar-size="40"
+                        data-gravatar-rating="pg"
+                        data-gravatar-default="mm"
+                        data-gravatar-secure="true"
+                        data-gravatar-css-class="img-circle">
+                    </gravatar-image>
                     <p>{{comment.user.first_name}} {{comment.user.last_name}}</p>
                 </div>
                 <p style="word-wrap: break-word;">{{comment.comment}}</p>
@@ -61,5 +67,5 @@
 
     </section><!-- .comments -->
 
-    
+
 </div>
