@@ -155,6 +155,21 @@ angular.module('makerscience', ['commons.catalog', 'commons.ucomment', 'makersci
                     label: 'Forum'
                     parent : 'home'
         )
+        .state('tags',
+                url: '/tags/',
+                templateUrl: 'views/base/tag_listing.html'
+                ncyBreadcrumb:
+                    label: 'Tags'
+                    parent : 'home'
+        )
+        .state('tag',
+                url: '/tag/:slug',
+                templateUrl: 'views/base/tagged_objects.html'
+                controller : 'TaggedItemCtrl'
+                ncyBreadcrumb:
+                    label: '{{tag.slug}}'
+                    parent : 'tags'
+        )
 
 ])
 .run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams) ->

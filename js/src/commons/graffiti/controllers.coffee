@@ -20,7 +20,18 @@ module.controller("TagAutoCompleteCtrl", ($scope, $q, Tag) ->
         return deferred.promise
 )
 
-module.controller("TaggedItemCtrl", ($scope, $modal, TaggedItem) ->
+module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, Tag, TaggedItem) ->
+
+    $scope.taggedItems = []
+    $scope.tag = null
+
+    if $stateParams.slug
+        Tag.one().get({slug:$stateParams.slug}).then((tagResult) ->
+            $scope.tag = tagResult.objects[0]
+            if $scope.tag.weight > 0
+                $scope.taggedItems = TaggedItem.getList({'tag__slug' : $stateParams.slug}).$object
+        )
+
 
     $scope.addTag = (objectTypeName, resourceId, tag) ->
         TaggedItem.one().customPOST({tag : tag.text}, objectTypeName+"/"+resourceId, {})
