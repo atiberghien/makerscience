@@ -47,27 +47,7 @@
 
                         <div class="side-header">
 
-                            <div class="tags">
-                                <div class="editable">
-                                    <div class="edit-buttons" ng-show="editable" ng-init="addTag=false">
-                                        <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
-                                    </div>
-                                    <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
-                                        <tags-input ng-model="$parent.preparedTags"
-                                                    placeholder="> Mot-clé"
-                                                    on-tag-added="$parent.addTagFromResource($tag)"
-                                                    on-tag-removed="$parent.removeTagFromResource($tag)">
-                                                    <auto-complete source="loadTags($query)"></auto-complete>
-                                        </tags-input>
-                                    </div>
-
-                                    <div ng-show="addTag==false">
-                                        <ul class="tags tags-project">
-                                            <li ng-repeat="tag in preparedTags"><a href="">{{tag.text}}</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div><!-- .tags -->
+                            <ng-include onload="objectTypeName='makerscienceresource'" src="'views/catalog/block/tags_widget.html'"></ng-include>
 
                             <ul class="details">
                                 <li class="level-{{ resourcesheet.level }}">

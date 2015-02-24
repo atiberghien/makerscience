@@ -110,14 +110,14 @@ module.controller("MakerScienceProjectSheetGetters", ($scope, MakerScienceProjec
 
 module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
+    $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.preparedTags = []
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
-        console.log(' Projectsheet loaded')
-        
+
         # add comments data to $scope
         $scope.resource_type = 'makerscienceproject'
         $scope.resource_id = $scope.projectsheet.id
@@ -150,12 +150,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         putData[fieldName] = data
         switch resourceName
             when 'MakerScienceProject' then MakerScienceProject.one(resourceId).patch(putData)
-
-    $scope.addTagFromProject = (tag) ->
-        TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+$scope.projectsheet.id, {})
-
-    $scope.removeTagFromProject = (tag) ->
-        TaggedItem.one(tag.taggedItemId).remove()
 )
 
 module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, TaggedItem) ->
@@ -182,12 +176,13 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
 module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
-
+    $controller('TaggedItemCtrl', {$scope: $scope})
+    
     $scope.preparedTags = []
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
-        
+
         # add comments data to $scope
         $scope.resource_type = 'makerscienceresource'
         $scope.resource_id = $scope.projectsheet.id
@@ -211,12 +206,6 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
         putData[fieldName] = data
         switch resourceName
             when 'MakerScienceResource' then MakerScienceResource.one(resourceId).patch(putData)
-
-    $scope.addTagFromProject = (tag) ->
-        TaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+$scope.projectsheet.id, {})
-
-    $scope.removeTagFromProject = (tag) ->
-        TaggedItem.one(tag.taggedItemId).remove()
 )
 
 
