@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-8 col-xs-height col-middle" ng-controller="TagListCtrl">
                     <ul class="tags tags-{{type}}">
-                        <li ng-repeat="tag in tags | | limitTo:25"><a ui-sref="tag({slug:tag.slug})">{{tag.name}}</a></li>
+                        <li ng-repeat="tag in tags | limitTo:25"><a ui-sref="tag({slug:tag.slug})">{{tag.name}}</a></li>
                         <li><a ng-show="tags.length > 25" ui-sref="tags" tooltip="Voir tous les tags">...</a></li>
 
                     </ul>
