@@ -2,43 +2,43 @@
     <div id="content" class="listing">
             <h1>Tous les objets taggés avec « {{tag.name}} »</h1>
 
-            <div class="col-md-12">
+            <div class="col-md-12" ng-controller="MakerScienceObjectGetter">
                 <h2>Projets</h2>
                 <ul>
-                    <li ng-repeat="item in items = (taggedItems| filter:{object_type_name:'makerscienceproject'})">
+                    <li ng-repeat="item in projectItems = (taggedItems| filter:{object_type_name:'makerscienceproject'})">
                         <div class="boxes boxes-listing">
                             <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
                                 <ng-include src="'views/catalog/block/project_thumb.html'"></ng-include>
                             </div>
                         </div>
                     </li>
-                    <li ng-hide="items.length">Aucun projet taggé</li>
+                    <li ng-hide="projectItems.length">Aucun projet taggé</li>
                 </ul>
             </div>
             <div class="col-md-12">
                 <h2>Expériences</h2>
                 <ul>
-                    <li ng-repeat="item in items = (taggedItems| filter:{object_type_name:'makerscienceresource'})">
+                    <li ng-repeat="item in resourceItems = (taggedItems| filter:{object_type_name:'makerscienceresource'})">
                         <div class="boxes boxes-listing">
                             <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
                                 <ng-include src="'views/catalog/block/resource_thumb.html'"></ng-include>
                             </div><!-- .box -->
                         </div><!-- .boxes -->
                     </li>
-                    <li ng-hide="items.length">Aucune expérience taggée</li>
+                    <li ng-hide="resourceItems.length">Aucune expérience taggée</li>
                 </ul>
             </div>
             <div class="col-md-12">
                 <h2>Profils</h2>
                 <ul>
-                    <li ng-repeat="item in items = (taggedItems| filter:{object_type_name:'makerscienceprofile'})">
+                    <li ng-repeat="item in profileItems = (taggedItems| filter:{object_type_name:'makerscienceprofile'})">
                         <div class="boxes boxes-profiles">
                             <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
                                 <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
                             </div><!-- .box -->
                         </div><!-- .boxes -->
                     </li>
-                    <li ng-hide="items.length">Aucun profil taggé</li>
+                    <li ng-hide="profileItems.length">Aucun profil taggé</li>
                 </ul>
             </div>
         </div>
