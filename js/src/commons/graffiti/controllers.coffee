@@ -28,7 +28,7 @@ module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, Tag, TaggedIt
     if $stateParams.slug
         Tag.one().get({slug:$stateParams.slug}).then((tagResult) ->
             $scope.tag = tagResult.objects[0]
-            if $scope.tag.weight > 0
+            if $scope.tag && $scope.tag.weight > 0
                 $scope.taggedItems = TaggedItem.getList({'tag__slug' : $stateParams.slug}).$object
         )
 
