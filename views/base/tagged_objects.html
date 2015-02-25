@@ -1,41 +1,46 @@
 <div class="container">
+    <div id="content" class="listing">
+            <h1>Tous les objets taggés avec « {{tag.name}} »</h1>
 
-<h1>Tous les objets taggés avec « {{tag.name}} »</h1>
-
-<label ng-if="taggedItems.length == 0">Aucun</label>
-
-<div ng-if="taggedItems.length > 0" ng-controller="MakerScienceObjectGetter">
-    <h2>Projets</h2>
-    <ul>
-        <li ng-repeat="item in taggedItems| filter:{object_type_name:'makerscienceproject'}">
-            <div class="boxes boxes-listing">
-                <div class="box" ng-init="getObject(item.object_type_name, item.object_id)">
-                    <ng-include src="'views/catalog/block/project_thumb.html'"></ng-include>
-                </div>
+            <div class="col-md-12">
+                <h2>Projets</h2>
+                <ul>
+                    <li ng-repeat="item in items = (taggedItems| filter:{object_type_name:'makerscienceproject'})">
+                        <div class="boxes boxes-listing">
+                            <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
+                                <ng-include src="'views/catalog/block/project_thumb.html'"></ng-include>
+                            </div>
+                        </div>
+                    </li>
+                    <li ng-hide="items.length">Aucun projet taggé</li>
+                </ul>
             </div>
-        </li>
-    </ul>
-    <h2>Expériences</h2>
-    <ul>
-        <li ng-repeat="item in taggedItems| filter:{object_type_name:'makerscienceresource'}">
-            <div class="boxes boxes-listing">
-                <div class="box" ng-init="getObject(item.object_type_name, item.object_id)">
-                    <ng-include src="'views/catalog/block/resource_thumb.html'"></ng-include>
-                </div><!-- .box -->
-            </div><!-- .boxes -->
-        </li>
-    </ul>
-    <h2>Profiles</h2>
-    <ul>
-        <li ng-repeat="item in taggedItems| filter:{object_type_name:'makerscienceprofile'}">
-            <div class="boxes boxes-profiles">
-                <div class="box" ng-init="getObject(item.object_type_name, item.object_id)">
-                    <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
-                </div><!-- .box -->
-            </div><!-- .boxes -->
-        </li>
-    </ul>
-</div>
-
-
+            <div class="col-md-12">
+                <h2>Expériences</h2>
+                <ul>
+                    <li ng-repeat="item in items = (taggedItems| filter:{object_type_name:'makerscienceresource'})">
+                        <div class="boxes boxes-listing">
+                            <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
+                                <ng-include src="'views/catalog/block/resource_thumb.html'"></ng-include>
+                            </div><!-- .box -->
+                        </div><!-- .boxes -->
+                    </li>
+                    <li ng-hide="items.length">Aucune expérience taggée</li>
+                </ul>
+            </div>
+            <div class="col-md-12">
+                <h2>Profils</h2>
+                <ul>
+                    <li ng-repeat="item in items = (taggedItems| filter:{object_type_name:'makerscienceprofile'})">
+                        <div class="boxes boxes-profiles">
+                            <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
+                                <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
+                            </div><!-- .box -->
+                        </div><!-- .boxes -->
+                    </li>
+                    <li ng-hide="items.length">Aucun profil taggé</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
