@@ -11,14 +11,13 @@
 
         <div class="col-md-12">
 
-            <section class="title">
+            <!-- <section class="title">
                 <h3>Sélection thématique</h3>
                 <h4>"Spécial Fablab"</h4>
             </section>
 
             <div id="carousel-weekly" class="carousel slide" data-ride="carousel-weekly">
 
-                <!-- Indicators -->
                 <ol class="carousel-indicators">
                     <li data-target="#carousel-weekly" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-weekly" data-slide-to="1"></li>
@@ -26,36 +25,41 @@
                     <li data-target="#carousel-weekly" data-slide-to="3"></li>
                 </ol>
 
-                <!-- Wrapper for slides -->
                 <div class="carousel-inner">
                     <div class="item active">
                         <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
                             <div class="box" ng-repeat="resource in resources">
                                 <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
-                            </div><!-- .box -->
-                        </div><!-- .boxes -->
-                    </div><!-- item -->
-                </div><!-- .carousel-inner -->
-
-            </div><!-- #caroussel-weekly -->
-
-            <tabset class="nav-tabs-resource">
-                <tab heading="Nouveautés">
-                    <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
-                        <div class="box" ng-repeat="resource in resources">
-                            <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                            </div>
                         </div>
-                    </div><!-- .boxes -->
-                </tab>
-                <tab heading="Les mieux notés">
-                    Les mieux notés
-                </tab>
-                <tab heading="Les plus vus">
-                    Les plus vus
-                </tab>
-            </tabset>
+                    </div>
+                </div>
 
-            <a ui-sref="resource.new" class="large large-purple">Partager une expérience</a>
+            </div> -->
+            <div class="row">
+                <div class="col-md-9">
+                    <tabset class="nav-tabs-resource">
+                        <tab heading="Nouveautés">
+                            <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
+                                <div class="box" ng-repeat="resource in resources">
+                                    <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                                </div>
+                            </div>
+                        </tab>
+                        <tab heading="Les mieux notés">
+                            Les mieux notés
+                        </tab>
+                        <tab heading="Les plus vus">
+                            Les plus vus
+                        </tab>
+                    </tabset>
+
+                    <a ui-sref="resource.new" class="large large-purple">Partager une expérience</a>
+                </div>
+                <div class="col-md-3">
+                    <ng-include src="'views/catalog/block/filters.html'"></ng-include>
+                </div>
+            </div>
 
         </div><!-- .col-md-12 -->
 
