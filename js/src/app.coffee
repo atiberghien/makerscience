@@ -183,6 +183,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.ucomment', 'makersci
     $rootScope.config = config
     $rootScope.$state = $state
     $rootScope.$stateParams = $stateParams
+
+    $rootScope.Math = window.Math
 )
 
 angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->
