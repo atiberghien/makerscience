@@ -8,9 +8,14 @@
     <div id="content" class="tags">
         <div class="col-md-12">
 
-
+            <!--
+                ALBAN: I updated the boxes to use the new version without the UL > LI, and removed a line containing an ng-init, it works, but I left the old version in case you need it...
+                Once we're ok with the new version, I'll update the boxes for the resources and members.
+            -->
             <div ng-controller="MakerScienceObjectGetter">
-                <h2 class="projects"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+
+                <!-- OLD VERSION WITH UL>LI -->
+                <h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
                 <ul>
                     <li ng-repeat="item in projectItems = (taggedItems| filter:{object_type_name:'makerscienceproject'})">
                         <div class="boxes boxes-listing">
@@ -21,32 +26,45 @@
                     </li>
                     <li ng-hide="projectItems.length" class="center">Aucun projet taggé</li>
                 </ul>
-            </div>
 
-            <h2 class="resources clear"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
-            <ul>
-                <li ng-repeat="item in resourceItems = (taggedItems| filter:{object_type_name:'makerscienceresource'})">
-                    <div class="boxes boxes-listing">
-                        <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
-                            <ng-include src="'views/catalog/block/resource_thumb.html'"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
-                </li>
-                <li ng-hide="resourceItems.length" class="center">Aucune expérience taggée</li>
-            </ul>
+                <!-- NEW VERSION WITHOUT UL>LI -->
+                <h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+                <div class="boxes boxes-medium">
+                    <div class="box" ng-repeat="item in projectItems = (taggedItems| filter:{object_type_name:'makerscienceproject'})">
+                        <ng-include src="'views/catalog/block/project_thumb.html'"></ng-include>
+                    </div>
+                    <div class="box box-solo box-blue">
+                        <div>
+                            <a>Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        </div>
+                    </div>
+                </div><!-- .boxes -->
 
-            <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Profils</h2>
-            <ul>
-                <li ng-repeat="item in profileItems = (taggedItems| filter:{object_type_name:'makerscienceprofile'})">
-                    <div class="boxes boxes-profiles">
-                        <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
-                            <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
-                </li>
-                <li ng-hide="profileItems.length" class="center">Aucun profil taggé</li>
-            </ul>
+                <h2 class="resources clear"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
+                <ul>
+                    <li ng-repeat="item in resourceItems = (taggedItems| filter:{object_type_name:'makerscienceresource'})">
+                        <div class="boxes boxes-listing">
+                            <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
+                                <ng-include src="'views/catalog/block/resource_thumb.html'"></ng-include>
+                            </div><!-- .box -->
+                        </div><!-- .boxes -->
+                    </li>
+                    <li ng-hide="resourceItems.length" class="center">Aucune expérience taggée</li>
+                </ul>
 
+                <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Profils</h2>
+                <ul>
+                    <li ng-repeat="item in profileItems = (taggedItems| filter:{object_type_name:'makerscienceprofile'})">
+                        <div class="boxes boxes-profiles">
+                            <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
+                                <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
+                            </div><!-- .box -->
+                        </div><!-- .boxes -->
+                    </li>
+                    <li ng-hide="profileItems.length" class="center">Aucun profil taggé</li>
+                </ul>
+
+            </div><!-- ng-controller -->
         </div><!-- .col-md-12 -->
     </div><!-- #content -->
 </div><!-- .containter -->
