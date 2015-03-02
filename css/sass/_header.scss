@@ -200,6 +200,19 @@ div.crumbs {
 			@include border-radius(3px);
 		}
 	}
+	button {
+		padding: 0.75em 1em;
+		font-size: 2em;
+		color: $color-intro-listing;
+		border: 2px solid $color-intro-listing;
+		background-color: transparent;
+		text-transform: uppercase;
+		@include border-radius(3px);
+		&:hover {
+			color: invert($color-intro-listing);
+			background-color: $color-intro-listing;
+		}
+	}
 	div.intro {
 		h1, h2 {
 			margin: 0;
@@ -256,24 +269,6 @@ div.crumbs {
 				border-bottom: 4px solid $color-intro-listing;
 			}
 		}
-		button {
-			padding: 0.75em 1em;
-			font-size: 2em;
-			color: $color-intro-listing;
-			border: 2px solid $color-intro-listing;
-			background-color: transparent;
-			text-transform: uppercase;
-			@include border-radius(3px);
-		}
-		button {
-			padding: 0.75em 1em;
-			font-size: 2em;
-			color: $color-intro-listing;
-			border: 2px solid $color-intro-listing;
-			background-color: transparent;
-			text-transform: uppercase;
-			@include border-radius(3px);
-		}
 	}
 	&.intro-listing {
 		padding: 0;
@@ -309,15 +304,6 @@ div.crumbs {
 			em {
 				border-bottom: 9px solid $color-intro-listing;
 			}
-		}
-		button {
-			padding: 0.75em 1em;
-			font-size: 2em;
-			color: $color-intro-listing;
-			border: 2px solid $color-intro-listing;
-			background-color: transparent;
-			text-transform: uppercase;
-			@include border-radius(3px);
 		}
 	}
 	&.intro-profile {
@@ -374,6 +360,9 @@ div.crumbs {
 	}
 	&.intro-tags {
 		padding: $grid-gutter-width 0;
+		button {
+			margin-bottom: $grid-gutter-width;
+		}
 	}
 }
 
