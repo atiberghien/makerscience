@@ -12,20 +12,6 @@
 
             <div ng-controller="MakerScienceObjectGetter">
 
-                <!-- OLD VERSION WITH UL>LI
-                <h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
-                <ul>
-                    <li ng-repeat="item in projectItems = (taggedItems| filter:{object_type_name:'makerscienceproject'})">
-                        <div class="boxes boxes-listing">
-                            <div class="box" ng-init="getObject(item.object_type_name, item.object_id)" style="float:left">
-                                <ng-include src="'views/catalog/block/project_thumb.html'"></ng-include>
-                            </div>
-                        </div>
-                    </li>
-                    <li ng-hide="projectItems.length" class="center">Aucun projet taggé</li>
-                </ul>-->
-
-                <!-- NEW VERSION WITHOUT UL>LI -->
                 <h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
                 <div class="boxes boxes-medium">
                     <div class="box" ng-repeat="item in projectItems = (taggedItems| filter:{object_type_name:'makerscienceproject'})">
