@@ -1,19 +1,22 @@
-<!-- Modal showing all tags for a project / resource -->
-<div class="modal fade" id="allTags">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Tous les tags</h4>
-            </div>
-            <div class="modal-body">
-                <ul class="tags tags-project">
-                </ul>
-                    <li ng-repeat="tag in preparedTags"><a href="">{{tag.text}}</a></li>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<div class="modal-header">
+    <h3 class="modal-title">Tous les tags</h3>
+</div>
+<div class="modal-body modal-gallery">
+    <div ng-show="editTag==true" ng-controller="TagAutoCompleteCtrl">
+        <tags-input ng-model="preparedTags"
+                    placeholder="> Mot-clé"
+                    on-tag-added="addTag(objectTypeName, taggedObject.id, $tag)"
+                    on-tag-removed="removeTag($tag)">
+                    <auto-complete source="loadTags($query)"></auto-complete>
+        </tags-input>
+    </div>
+    <div ng-show="editTag==false">
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in preparedTags"><a href="">{{tag.text}}</a></li>
+        </ul>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

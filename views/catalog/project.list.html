@@ -1,20 +1,6 @@
-<div id="intro" class="intro-listing">
-
-    <carousel interval="5000">
-        <slide  style="background-image: url('./img/slides/slide-project-one.jpg')">
-            <h1>Coup de projecteur sur</h1>
-            <h2><em>La fête des sciences à Toulouse</em></h2>
-        </slide>
-        <slide style="background-image: url('./img/slides/slide-project-two.jpg')">
-            <h1>Coup de  sur</h1>
-            <h2>La fête des sciences à <em>Toulouse</em></h2>
-        </slide>
-        <slide style="background-image: url('./img/slides/slide-project-three.jpg')">
-            <h1>Coup de projecteur sur</h1>
-            <h2><em>La fête des  à Toulouse</em></h2>
-        </slide>
-    </carousel>
-
+<div id="intro" class="intro-project-create" style="background-image: url('./img/bg/header-listing-projects.jpg')">
+    <h1>Découvrez de nombreux projets</h1>
+    <h2>enthousiasmants et inspirants</h1>
 </div><!-- #intro -->
 
 <ng-include src="'views/catalog/block/popular_tags.html'" ng-init="type='project'"></ng-include>
@@ -25,7 +11,7 @@
 
         <div class="col-md-12">
 
-            <section class="title">
+            <!-- <section class="title">
                 <h3>Sélection thématique</h3>
                 <h4>"Spécial Fablab"</h4>
             </section>
@@ -35,42 +21,62 @@
                     <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl" ng-init="init()">
                         <div class="box" ng-repeat="project in projects | limitTo:4">
                             <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
+                        </div>
+                    </div>
                 </slide>
                 <slide>
                     <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl" ng-init="init()">
                         <div class="box" ng-repeat="project in projects | limitTo:4">
                             <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
+                        </div>
+                    </div>
                 </slide>
                 <slide>
                     <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init()">
                         <div class="box" ng-repeat="project in projects | limitTo:4">
                             <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
+                        </div>
+                    </div>
                 </slide>
-            </carousel>
+            </carousel> -->
 
-            <tabset class="nav-tabs-listing">
-                <tab heading="Nouveautés">
-                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init()">
-                        <div class="box" ng-repeat="project in projects">
-                            <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
-                </tab>
-                <tab heading="Les mieux notés">
-                    Les mieux notés
-                </tab>
-                <tab heading="Les plus vus">
-                    Les plus vus
-                </tab>
-            </tabset>
+            <div class="row">
+                <div class="col-md-9">
 
-            <a ui-sref="project.new" class="large large-red">Créer un projet</a>
+                    <tabset class="nav-tabs-listing">
+                        <tab heading="Nouveautés">
+                            <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init(12)">
+                                <div class="box" ng-repeat="project in projects">
+                                    <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                                </div><!-- .box -->
+                            </div><!-- .boxes -->
+                        </tab>
+                        <tab heading="Les mieux notés">
+                            Les mieux notés ... coming soon
+                        </tab>
+                        <tab heading="Les plus vus">
+                            Les plus vus ... coming soon
+                        </tab>
+                        <tab heading="Les plus récents">
+                            Les plus récents ... coming soon
+                        </tab>
+                        <tab heading="Les plus populaires">
+                            Les plus populaires ... coming soon
+                        </tab>
+                        <tab heading="Sélection thématique">
+                            Sélection thématique
+                        </tab>
+                        <tab heading="Le hasard fait bien les choses">
+                            Le hasard fait bien les choses ... coming soon
+                        </tab>
+                    </tabset>
+
+                    <a ui-sref="project.new" class="large large-red">Créer un projet</a>
+
+                </div>
+                <div class="col-md-3">
+                    <ng-include src="'views/catalog/block/filters.html'"></ng-include>
+                </div>
 
         </div><!-- .col-md-12 -->
 

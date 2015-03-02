@@ -46,27 +46,7 @@
                     <div class="col-md-4">
 
                         <div class="side-header">
-                            <div class="editable">
-                                <div class="edit-buttons" ng-show="editable" ng-init="addTag=false">
-                                    <button ng-click="addTag = ! addTag"><span class="glyphicon glyphicon-pencil"></span></button>
-                                </div>
-
-                                <div ng-show="addTag==true" ng-controller="TagAutoCompleteCtrl">
-                                    <tags-input ng-model="$parent.preparedTags"
-                                                placeholder="> Mot-clé"
-                                                on-tag-added="$parent.addTagFromProject($tag)"
-                                                on-tag-removed="$parent.removeTagFromProject($tag)">
-                                                <auto-complete source="loadTags($query)"></auto-complete>
-                                    </tags-input>
-                                </div>
-
-                                <div ng-show="addTag==false">
-                                    <ul class="tags tags-project">
-                                        <li ng-repeat="tag in preparedTags | limitTo:10"><a href="">{{tag.text}}</a></li>
-                                        <li><a href="" tooltip="Voir tous les tags" data-toggle="modal" data-target="#allTags">...</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <ng-include onload="objectTypeName='makerscienceproject'" src="'views/catalog/block/tags_widget.html'"></ng-include>
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="editWIP=false">
@@ -204,39 +184,33 @@
 
                 <!-- Angular UI Tabs -->
                 <tabset class="nav-tabs-slide nav-tabs-slide-project">
-                    <tab>
+                    <tab ng-init="currentImg=0">
                         <tab-heading>
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
-                        <carousel class="carousel-no-indicators">
-                            <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
-                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
-                            </slide>
-                            <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
-                                <img src="img/slides/slide_one.png" alt="Slide One">
-                            </slide>
-                            <slide>
-                                <img src="img/slides/slide_one.png" alt="Slide One">
-                            </slide>
-                            <slide>
-                                <img src="img/slides/slide_two.png" alt="Slide Two">
-                            </slide>
-                        </carousel>
+                        <div ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files" ng-show="$index==currentImg">
+                            <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}" alt="Slide">
+                        </div>
+                        <button ng-click="currentImg = Math.abs((currentImg - 1) % projectsheet.base_projectsheet.bucket.files.length)">Préc.</button>
+                        <button ng-click="currentImg = (currentImg + 1) % projectsheet.base_projectsheet.bucket.files.length">Suiv.</button>
+                        <div ng-if="!projectsheet.base_projectsheet.bucket.files.length">
+                            <img src="img/slides/slide_one.png" alt="Slide One">
+                        </div>
                     </tab>
-                    <tab>
+                    <tab ng-init="currentVid=0">
                         <tab-heading>
                             <span class="glyphicon glyphicon-facetime-video"></span>
                         </tab-heading>
-                        <carousel>
-                            <slide ng-if="projectsheet.base_projectsheet.videos" ng-repeat="(url, comment) in projectsheet.base_projectsheet.videos">
-                                <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
-                                    <a href="{{url}}">Watch</a>
-                                </embed-video>
-                            </slide>
-                            <slide ng-if="!projectsheet.base_projectsheet.videos">
-                                <img src="img/slides/slide_one.png" alt="Slide One">
-                            </slide>
-                        </carousel>
+                        <div ng-if="projectsheet.base_projectsheet.videos" ng-repeat="(url, comment) in projectsheet.base_projectsheet.videos" ng-show="$index==currentImg">
+                            <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
+                                <a href="{{url}}">Watch</a>
+                            </embed-video>
+                        </div>
+                        <button ng-click="currentImg = Math.abs((currentImg - 1) % projectsheet.base_projectsheet.videos.length)">Préc.</button>
+                        <button ng-click="currentImg = (currentImg + 1) % projectsheet.base_projectsheet.videos.length">Suiv.</button>
+                        <div ng-if="!projectsheet.base_projectsheet.videos">
+                            <img src="img/slides/slide_one.png" alt="Slide One">
+                        </div>
                     </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
                         <tab-heading>
@@ -246,16 +220,14 @@
                 </tabset>
 
                 <!-- Bootstrap Tabs -->
-                <div role="tabpanel">
+                <!-- <div role="tabpanel">
 
-                    <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation"><a href="#photos" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span></a></li>
                         <li role="presentation"><a href="#videos" onclick="alert('pause');" aria-controls="profile" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-facetime-video"></span></a></li>
                         <li role="presentation" ng-show="editable" disabled="true" class="editable"><a ng-click="openGallery(projectsheet.base_projectsheet)" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span></a></li>
                     </ul>
 
-                    <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="photos">
                             <carousel class="carousel-no-indicators">
@@ -287,7 +259,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div> -->
 
 
                 <section class="linked linked-project" ng-init="linkResources=True" ng-show="linkResources">
@@ -355,7 +327,7 @@
                 </li
                 ><li class="box box-solo box-blue">
                     <div>
-                        <a ui-sref="project-list">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
+                        <a ui-sref="project.list">Plus de projets <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
                 </li>
             </ul>

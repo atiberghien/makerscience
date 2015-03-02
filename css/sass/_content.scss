@@ -20,6 +20,9 @@ div.toolbar {
 		&.member {
 			background-color: $color-red;
 		}
+		&.profile {
+			background-color : $color-profile;
+		}
 		&.resource {
 			background-color: $color-green;
 		}

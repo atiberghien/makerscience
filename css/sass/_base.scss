@@ -151,20 +151,17 @@ ul.tags {
 		background-color: $color-blue;
 		@include border-radius(1px);
 	}
-	&.tags-project a {
-		background-color: $color-tags-project-bg;
-	}
 	&.tags-resource a {
-		background-color: $color-tags-resource-bg;
+		background-color: $color-resource;
 		&:hover {
 			background-color: $color-purple;
 		}
 	}
 	&.tags-project a {
-		background-color: $color-blue;
+		background-color: $color-project;
 	}
-	&.tags-resource a {
-		background-color: $color-green;
+	&.tags-profile a {
+		background-color: $color-profile;
 	}
 	a:hover {
 		text-decoration: none;
