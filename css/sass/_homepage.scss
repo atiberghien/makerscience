@@ -223,24 +223,6 @@
 		padding-right: 0;
 		padding-left: $grid-gutter-width / 2;
 	}
-	h2 {
-		padding: 0.75em;
-		color: #fff;
-		font-size: 1.25em;
-		text-transform: uppercase;
-		&.projects {
-			background-color: $color-blue;
-		}
-		&.resources {
-			background-color: $color-green;
-		}
-		&.members {
-			background-color: $color-pink
-		}
-		span {
-			margin-right: 0.5em;
-		}
-	}
 	ul {
 		overflow: hidden;
 		li {

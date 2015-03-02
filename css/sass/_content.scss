@@ -139,6 +139,19 @@ ui-view> div.container {
 			background-color: $color-green;
 		}
 	}
+	&.tags {
+		h1 {
+			margin-bottom: $grid-gutter-width;
+			font-size: 2em;
+			font-family: "LatoLight";
+		}
+		h2 {
+			margin-bottom: $grid-gutter-width;
+		}
+		li.center {
+			margin: $grid-gutter-width;
+		}
+	}
 	ul.nav-tabs {
 		margin-bottom: $grid-gutter-width;
 		border: none;
@@ -240,6 +253,7 @@ ui-view> div.container {
 	.nav-tabs-slide {
 		.tab-content {
 			position: relative;
+			height: 300px;
 			button {
 				position: absolute;
 				top: 0;
@@ -259,6 +273,18 @@ ui-view> div.container {
 				}
 				&:hover {
 					background-color: rgba(0,0,0, 0.1);
+				}
+			}
+			.tab-pane {
+				div.animate-hide {
+					position: absolute;
+					top: 0;
+					left: 0;
+					opacity: 1;
+					@include transition(all 1s ease-in-out);
+				}
+				div.animate-hide.ng-hide {
+					opacity: 0;
 				}
 			}
 		}

@@ -372,6 +372,9 @@ div.crumbs {
 			margin-bottom: 3em;
 		}
 	}
+	&.intro-tags {
+		padding: $grid-gutter-width 0;
+	}
 }
 
 .intro {
