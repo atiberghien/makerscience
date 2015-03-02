@@ -265,6 +265,7 @@ ui-view> div.container {
 				color: #fff;
 				background-color: transparent;
 				border: none;
+				outline: none; /* remove outline on Chrome */
 				&:first-child {
 					left: 0;
 				}
@@ -290,7 +291,9 @@ ui-view> div.container {
 		}
 		img {
 			display: block;
-			width: 100%;
+			/* Trying with fixed dimensions */
+			width: 683px;
+			height: 300px;
 		}
 	}
 /* End of Alban's hand made tabs slides */
