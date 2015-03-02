@@ -236,6 +236,39 @@ ui-view> div.container {
 	}
 	/* end of new bootstrap UI amends */
 
+	/* Alban's hand made tabs slides */
+	.nav-tabs-slide {
+		.tab-content {
+			position: relative;
+			button {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				height: 100%;
+				padding-right: 1em;
+				padding-left: 1em;
+				font-size: 2em;
+				color: #fff;
+				background-color: transparent;
+				border: none;
+				&:first-child {
+					left: 0;
+				}
+				&:last-child {
+					right: 0;
+				}
+				&:hover {
+					background-color: rgba(0,0,0, 0.1);
+				}
+			}
+		}
+		img {
+			display: block;
+			width: 100%;
+		}
+	}
+/* End of Alban's hand made tabs slides */
+
 	.tab-content-listing {
 		padding: 0;
 		.boxes-listing {
