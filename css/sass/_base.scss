@@ -85,24 +85,20 @@ h2.boxed {
 		background-color: $color-blue;
 	}
 }
-h2.projects, h2.resources, h2.members {
+h2.default, h2.projects, h2.resources, h2.members, h2.tags {
 	padding: 0.75em;
-	color: #fff;
 	font-size: 1.25em;
+	color: #fff;
+	background-color: $color-dark-grey;
 	text-transform: uppercase;
 	span {
 		margin-right: 0.5em;
 	}
 }
-h2.projects {
-	background-color: $color-blue;
-}
-h2.resources {
-	background-color: $color-green;
-}
-h2.members {
-	background-color: $color-pink
-}
+h2.projects { background-color: $color-blue }
+h2.resources { background-color: $color-green }
+h2.members { background-color: $color-pink }
+h2.tags { background-color: $color-red }
 
 h3.category {
 	z-index: 200;
