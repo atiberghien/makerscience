@@ -65,21 +65,6 @@
     <div class="home-links">
         <div class="row">
             <div class="col-md-4">
-                <div class="row projects">
-                    <div class="col-md-4">
-                        <img src="./img/home/home-links-projects.png" alt="Stimulez des idées et des projets" />
-                        <h3>Stimulez des idées et des projets</h3>
-                    </div>
-                    <div class="col-md-8">
-                        <ul>
-                            <li><a ui-sref="project.list">Parcourez les projets</a></li>
-                            <li><a ui-sref="project.new">Ajoutez votre projet</a></li>
-                            <li><a ui-sref="forum">Exprimez vos idées</a></li>
-                        </ul>
-                    </div>
-                </div><!-- .row -->
-            </div>
-            <div class="col-md-4">
                 <div class="row community">
                     <div class="col-md-4">
                         <img src="./img/home/home-links-community.png" alt="Echangez et rencontrez" />
@@ -89,7 +74,22 @@
                         <ul>
                             <li><a ui-sref="profile.list">Participez à la communauté</a></li>
                             <li><a ui-sref="profile.list">Trouvez des contacts</a></li>
-                            <li><a ui-sref="forum">Discutez sur le forum</a></li>
+                            <li><a ui-sref="forum">Discutez avec les membres</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+            <div class="col-md-4">
+                <div class="row projects">
+                    <div class="col-md-4">
+                        <img src="./img/home/home-links-projects.png" alt="Stimulez des idées et des projets" />
+                        <h3>Stimulez des idées et des projets</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <ul>
+                            <li><a ui-sref="project.list">Parcourez les projets</a></li>
+                            <li><a ui-sref="project.new">Ajoutez votre projet</a></li>
+                            <li><a ui-sref="map">Localisez des porteurs</a></li>
                         </ul>
                     </div>
                 </div><!-- .row -->
@@ -102,7 +102,7 @@
                     </div>
                     <div class="col-md-8">
                         <ul>
-                            <li><a ui-sref="resource.list">Parcourez les expériences</a></li>
+                            <li><a ui-sref="resource.list">Parcourez les expériences partagées</a></li>
                             <li><a ui-sref="resource.new">Partagez votre expérience</a></li>
                             <li><a ui-sref="forum">Posez vos questions</a></li>
                         </ul>
@@ -114,6 +114,18 @@
 
     <div class="home-fullwidth">
         <div class="row">
+            <div class="col-md-4">
+                <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
+                <div class="boxes boxes-small boxes-small-home members" ng-controller="MakerScienceProfileListCtrl" ng-init="init(3)">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="profile in profiles">
+                        <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
+                    </div
+                    ><div class="box box-solo box-pink">
+                        <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
             <div class="col-md-4">
                 <h2 class="projects"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
                 <div class="boxes boxes-small boxes-small-home boxes-projects" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3)">
@@ -127,7 +139,7 @@
                 </div><!-- .boxes -->
             </div><!-- .col-md-4 -->
             <div class="col-md-4">
-                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
+                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Expériences partagées</h2>
                 <div class="boxes boxes-small boxes-small-home boxes-resources" ng-controller="MakerScienceResourceListCtrl" ng-init="init(3)">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
                     <div class="box" ng-repeat="resource in resources">
@@ -138,28 +150,16 @@
                     </div>
                 </div><!-- .boxes -->
             </div><!-- .col-md-4 -->
-            <div class="col-md-4">
-                <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
-                <div class="boxes boxes-small boxes-small-home members" ng-controller="MakerScienceProfileListCtrl" ng-init="init(3)">
-                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                    <div class="box" ng-repeat="profile in profiles">
-                        <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
-                    </div
-                    ><div class="box box-solo box-pink">
-                        <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                    </div>
-                </div><!-- .boxes -->
-            </div><!-- .col-md-4 -->
         </div><!-- .row -->
     </div><!-- .home-fullwidth -->
 
     <div class="row home-tags">
         <div class="col-md-12">
             <div class="home-tags" ng-controller="TagListCtrl">
-                <h2>Tags</h2>
+                <h2>Tags / Mots clés</h2>
                 <ul class="tags">
                     <li ng-repeat="tag in tags | limitTo : 25 "><a ui-sref="tag({slug:tag.slug})">{{tag.name}}</a></li>
-                    <li><a ng-show="tags.length > 25" ui-sref="tags" tooltip="Voir tous les tags">...</a></li>
+                    <li><a ng-show="tags.length > 25" ui-sref="tags" tooltip="Cherchez d’autres tags">Cherchez d’autres tags</a></li>
                 </ul>
             </div><!-- .home-tags -->
         </div>
