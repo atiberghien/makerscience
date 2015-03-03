@@ -282,9 +282,9 @@ ul.pagination {
 	z-index: 1000;
 	position: absolute;
 	top: 0;
-	right: 0;
+	right: $grid-gutter-width / 2;
 	bottom: 0;
-	left: 0;
+	left: $grid-gutter-width / 2;
 	background-color: gray;
 	background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
 	opacity: 0.5;
