@@ -12,6 +12,7 @@ $linked-height: 20em;
 $intro-height: 25em;
 $map-sidebar-width: 242px;
 $map-sidebar-toggle: 20px;
+$forum-home-members: 28px;
 
 body {
 	font: 0.85em/1.5em latoregular, sans-serif;
@@ -85,7 +86,7 @@ h2.boxed {
 		background-color: $color-blue;
 	}
 }
-h2.default, h2.projects, h2.resources, h2.members, h2.tags {
+h2.default, h2.projects, h2.resources, h2.members, h2.tags, h2.forum {
 	padding: 0.75em;
 	font-size: 1.25em;
 	color: #fff;
@@ -95,10 +96,11 @@ h2.default, h2.projects, h2.resources, h2.members, h2.tags {
 		margin-right: 0.5em;
 	}
 }
-h2.projects { background-color: $color-blue }
-h2.resources { background-color: $color-green }
-h2.members { background-color: $color-pink }
+h2.projects { background-color: $color-project }
+h2.resources { background-color: $color-resource }
+h2.members { background-color: $color-profile }
 h2.tags { background-color: $color-red }
+h2.forum { background-color: $color-forum }
 
 h3.category {
 	z-index: 200;
@@ -164,7 +166,7 @@ ul.tags {
 	a, button {
 		display: inline-block;
 		margin: 0 0.25em 0.5em 0;
-		padding: 0.25em 1em;
+		padding: 0.2em 1em 0.25em;
 		color: $color-tags;
 		background-color: $color-blue;
 		@include border-radius(1px);
@@ -270,4 +272,20 @@ ul.pagination {
 		background-color: $color-orange;
 		border-color: $color-orange;
 	}
+}
+
+/*
+	Add a layer to show work in progress or future features
+	!!! Parent must have position: relative
+*/
+.preview {
+	z-index: 1000;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: gray;
+	background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+	opacity: 0.5;
 }

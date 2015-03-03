@@ -14,8 +14,7 @@
 		text-transform: uppercase;
 	}
 }
-.home-community,
-.home-forum {
+.home-community {
 	padding: $grid-gutter-width;
 }
 
@@ -330,23 +329,99 @@
 }
 .home-forum {
 	margin-bottom: $grid-gutter-width;
-	background-color: $color-light-grey;
+	background-color: #fff;
 	h2 {
-		margin-bottom: $grid-gutter-width;
-	}
-	h4 {
-		margin-top: $grid-gutter-width;
-		margin-bottom: $grid-gutter-width / 2;
-		font-size: 0.9em;
-		font-weight: bold;
-		line-height: 1.25em;
-		text-transform: uppercase;
+		a {
+			float: right;
+			padding-right: 0.25em;
+			color: #fff;
+			font-size: 0.85em;
+			font-weight: normal;
+			text-transform: none;
+		}
 	}
 	p {
 		margin-bottom: 1em;
 		font-size: 0.9em;
 		line-height: 1.5em;
 		word-spacing: 0.01em;
+	}
+	section {
+		position: relative;
+		ul.members li {
+			float: right;
+			img {
+				width: $forum-home-members;
+				margin-left: 3px;
+			}
+			&.count a {
+				display: inline-block;
+				height: $forum-home-members - 2px; /* don't ask why -2px */
+				width: $forum-home-members;
+				color: #fff;
+				background-color: $color-forum;
+				font-size: 0.8em;
+				font-weight: bold;
+				text-align: center;
+				vertical-align: middle;
+				line-height: $forum-home-members - 2px; /* don't ask why -2px */
+				@include border-radius(50%);
+				&:hover {
+					background-color: $color-red;
+					text-decoration: none;
+				}
+			}
+		}
+		header {
+			img.member {
+				position: absolute;
+				top: $grid-gutter-width / 2;
+				left: $grid-gutter-width / 2;
+			}
+			h3, h4 {
+				margin-left: 65px;
+			}
+			h3 {
+				margin-top: 0.25em;
+				margin-bottom: 0.25em;
+				font-size: 1.15em;
+			}
+			h4 {
+				font-size: 0.95em;
+			}
+		}
+		p.question {
+			position: relative;
+			padding-left: 32px;
+			font-size: 1.2em;
+			font-weight: bold;
+			line-height: 1.25em;
+			span {
+				position: absolute;
+				top: 0;
+				left: 0;
+				margin-right: 0.5em;
+				padding: 0 0.5em;
+				color: #fff;
+				background-color: $color-forum;
+				font-size: 0.9em;
+				font-weight: bold;
+				@include border-radius(50%);
+			}
+		}
+		p.comments-count {
+			float: right;
+			font-size: 1.15em;
+			span {
+				font-size: 1.25em;
+				vertical-align: middle;
+			}
+		}
+		ul.tags li.more a {
+			color: #fff;
+			background-color: $color-blue;
+			@include border-radius(50%);
+		}
 	}
 }
 .home-tags {
