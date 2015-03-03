@@ -134,6 +134,14 @@ angular.module('makerscience', ['commons.catalog', 'commons.ucomment', 'makersci
                     label: '{{profile.full_name}}'
                     parent : 'profile.list'
         )
+        .state('profile.dashboard',
+                url: ':id/dashboard',
+                templateUrl: 'views/profile/profile.dashboard.html'
+                controller : 'MakerScienceProfileCtrl'
+                ncyBreadcrumb:
+                    label: '{{profile.full_name}}'
+                    parent : 'profile.detail'
+        ),
         .state('map',
                 url: '/map/',
                 templateUrl: 'views/map/map.html'
