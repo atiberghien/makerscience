@@ -1,4 +1,4 @@
-<section class="community community-{{parentColor}}">
+<section class="community community-{{parentColor}}" ng-controller="CommunityCtrl">
     <ul class="actions">
         <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span>J'aime</a></li>
         <li><a href=""><span class="glyphicon glyphicon-user"></span>Contribuer</a></li>
@@ -7,17 +7,10 @@
     <tabset>
         <tab>
             <tab-heading>
-                <span>{{projectsheet.parent.team[0].members.length}}</span>L'équipe projet
+                <span>{{(community | filter: {level:0}).length }}</span>L'équipe projet
             </tab-heading>
-            <div class="member" ng-repeat="member in projectsheet.parent.team[0].members">
-                <gravatar-image data-gravatar-email="member.user.email"
-                    data-gravatar-size="52"
-                    data-gravatar-rating="pg"
-                    data-gravatar-default="mm"
-                    data-gravatar-secure="true"
-                    data-gravatar-css-class="img-circle">
-                </gravatar-image>
-                <p>{{member.user.first_name}} {{member.user.last_name}}</p>
+            <div class="member" ng-repeat="member in community | filter: {level:0}">
+                 <ng-include src="'views/catalog/block/community_profile_thumb.html'" scope="" onload="member = member"></ng-include>
             </div><!-- .member -->
             <!-- <div class="member member-edit">
                 <form>
@@ -29,7 +22,7 @@
         </tab>
         <tab>
             <tab-heading>
-                <span>0</span>
+                <span>{{(community | filter: {level:1}).length }}</span>
                 <ng-pluralize count="0"
                              when="{'0': 'Personne ressource',
                                  'one': 'Personne ressource',
@@ -37,21 +30,21 @@
                  </ng-pluralize>
 
             </tab-heading>
-            <div class="member">
-
+            <div class="member" ng-repeat="member in community | filter: {level:1}">
+                <ng-include src="'views/catalog/block/community_profile_thumb.html'" scope="" onload="member = member"></ng-include>
             </div><!-- .member -->
         </tab>
         <tab>
             <tab-heading>
-                <span>0</span>
+                <span>{{(community | filter: {level:2}).length }}</span>
                 <ng-pluralize count="0"
                             when="{'0': 'Abonné',
                             'one': 'Abonné',
                             'other': 'Abonnés'}">
             </ng-pluralize>
             </tab-heading>
-            <div class="member">
-
+            <div class="member" ng-repeat="member in community | filter: {level:2}">
+                <ng-include src="'views/catalog/block/community_profile_thumb.html'" scope="" onload="member = member"></ng-include>
             </div><!-- .member -->
         </tab>
     </tabset>

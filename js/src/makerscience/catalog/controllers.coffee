@@ -95,7 +95,17 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         delete $scope.needs[index]
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment) ->
+module.controller("MakerScienceProjectSheetGetters", ($scope, MakerScienceProject) ->
+
+    $scope.getProjectByID = (id) ->
+        MakerScienceProject.one(id).get().then((makerScienceProjectResult) ->
+            $scope.project = makerScienceProjectResult
+        )
+    $scope.getProjectByURI = (uri) ->
+        id = getObjectIdFromURI(uri)
+        return $scope.getProjectByID(id)
+)
+module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
