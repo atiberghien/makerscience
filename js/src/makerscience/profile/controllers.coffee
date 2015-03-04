@@ -19,7 +19,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
         $scope.member_projects = []
         $scope.member_resources = []
 
-        linkedProjects = ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).$object)
+        linkedProjects = ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).$object
         angular.forEach(linkedProjects, (linkedProject) ->
             MakerScienceProject.one().get({parent__id : linkedProjects.object_id}).then((makerscienceProjectResults) ->
                 if makerscienceProjectResults.objects.length == 1
