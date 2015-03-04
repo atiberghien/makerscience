@@ -41,7 +41,7 @@
                 </div><!-- .boxes -->
 
                 <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Profils</h2>
-                <div class="boxes boxes-medium boxes-profiles">
+                <div class="boxes boxes-medium">
                     <div class="box" ng-repeat="item in profileItems = (taggedItems| filter:{object_type_name:'makerscienceprofile'})">
                         <div ng-init="getObject(item.object_type_name, item.object_id)">
                             <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
