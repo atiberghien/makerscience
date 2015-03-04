@@ -1,4 +1,4 @@
-module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers'])
+module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers', "commons.accounts.controllers"])
 
 module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) ->
     $scope.limit = 12
@@ -108,6 +108,7 @@ module.controller("MakerScienceProjectSheetGetters", ($scope, MakerScienceProjec
 module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
+    $controller('CommunityCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.preparedTags = []
@@ -115,10 +116,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
-        # add comments data to $scope
-        $scope.resource_type = 'makerscienceproject'
-        $scope.resource_id = $scope.projectsheet.id
-        $scope.comments = Comment.one().customGETLIST($scope.resource_type+'/'+$scope.resource_id).$object
+        $scope.comments = Comment.one().customGETLIST('makerscienceproject'+'/'+$scope.projectsheet.id).$object
+
+        $scope.community = ObjectProfileLink.one().customGETLIST('project'+'/'+$scope.projectsheet.parent.id).$object
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 

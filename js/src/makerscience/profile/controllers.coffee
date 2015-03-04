@@ -8,7 +8,7 @@ module.controller("MakerScienceProfileListCtrl", ($scope, MakerScienceProfile) -
         $scope.profiles = MakerScienceProfile.getList(params).$object
 )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile, MakerScienceProject, MakerScienceResource, MakerScienceProfileTaggedItem, PostalAddress) ->
+module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile, MakerScienceProject, MakerScienceResource, MakerScienceProfileTaggedItem, ObjectProfileLink, PostalAddress) ->
 
     MakerScienceProfile.one($stateParams.id).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
@@ -19,12 +19,13 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
         $scope.member_projects = []
         $scope.member_resources = []
 
-        angular.forEach($scope.profile.teams, (team) ->
-            MakerScienceProject.one().get({parent__id : getObjectIdFromURI(team.project)}).then((makerscienceProjectResults) ->
+        linkedProjects = ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).$object)
+        angular.forEach(linkedProjects, (linkedProject) ->
+            MakerScienceProject.one().get({parent__id : linkedProjects.object_id}).then((makerscienceProjectResults) ->
                 if makerscienceProjectResults.objects.length == 1
                     $scope.member_projects.push(makerscienceProjectResults.objects[0])
                 else
-                    MakerScienceResource.one().get({parent__id : getObjectIdFromURI(team.project)}).then((makerscienceResourceResults) ->
+                    MakerScienceResource.one().get({parent__id : linkedProjects.object_id}).then((makerscienceResourceResults) ->
                         if makerscienceResourceResults.objects.length == 1
                             $scope.member_resources.push(makerscienceResourceResults.objects[0])
                     )
