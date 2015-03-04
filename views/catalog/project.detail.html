@@ -219,49 +219,6 @@
                     </tab>
                 </tabset>
 
-                <!-- Bootstrap Tabs -->
-                <!-- <div role="tabpanel">
-
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation"><a href="#photos" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span></a></li>
-                        <li role="presentation"><a href="#videos" onclick="alert('pause');" aria-controls="profile" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-facetime-video"></span></a></li>
-                        <li role="presentation" ng-show="editable" disabled="true" class="editable"><a ng-click="openGallery(projectsheet.base_projectsheet)" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-pencil"></span></a></li>
-                    </ul>
-
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="photos">
-                            <carousel class="carousel-no-indicators">
-                                <slide ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
-                                    <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url+'?height=683' }}" alt="Slide">
-                                </slide>
-                                <slide ng-if="!projectsheet.base_projectsheet.bucket.files.length">
-                                    <img src="img/slides/slide_one.png" alt="Slide One">
-                                </slide>
-                                <slide>
-                                    <img src="img/slides/slide_one.png" alt="Slide One">
-                                </slide>
-                                <slide>
-                                    <img src="img/slides/slide_two.png" alt="Slide Two">
-                                </slide>
-                            </carousel>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="videos">
-                            <carousel>
-                                <slide ng-if="projectsheet.base_projectsheet.videos" ng-repeat="(url, comment) in projectsheet.base_projectsheet.videos">
-                                    <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
-                                        <a href="{{url}}">Watch</a>
-                                    </embed-video>
-                                </slide>
-                                <slide ng-if="!projectsheet.base_projectsheet.videos">
-                                    <img src="img/slides/slide_one.png" alt="Slide One">
-                                </slide>
-                            </carousel>
-                        </div>
-                    </div>
-
-                </div> -->
-
-
                 <section class="linked linked-project" ng-init="linkResources=True" ng-show="linkResources">
                     <div class="edit-buttons" ng-hide="!editable" ng-show="editable">
                         <button ng-click="linkResources=!linkResources" ><span class="glyphicon glyphicon-pencil"></span></button>

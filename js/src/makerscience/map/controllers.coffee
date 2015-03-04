@@ -70,8 +70,9 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
             $scope.spottedProfile = profileResult
             $scope.spottedProfile.projects = []
 
-            angular.forEach($scope.spottedProfile.teams, (team) ->
-                MakerScienceProject.one().get({parent__id : getObjectIdFromURI(team.project)}).then((makerscienceProjectResults) ->
+            linkedProjects = ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).$object)
+            angular.forEach(linkedProjects, (linkedProject) ->
+                MakerScienceProject.one().get({parent__id : linkedProjects.object_id}).then((makerscienceProjectResults) ->
                     if makerscienceProjectResults.objects.length == 1
                         $scope.spottedProfile.projects.push(makerscienceProjectResults.objects[0])
                 )
