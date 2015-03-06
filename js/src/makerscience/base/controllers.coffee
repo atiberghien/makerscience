@@ -1,5 +1,14 @@
 module = angular.module("makerscience.base.controllers", ['makerscience.catalog.controllers', 'makerscience.profile.controllers'])
 
+module.controller('CurrentMakerScienceProfileCtrl', ($scope, $rootScope, MakerScienceProfile) ->
+    $rootScope.$watch('authVars.user', (newValue, oldValue) ->
+        if newValue != oldValue
+            MakerScienceProfile.one().get({parent__user__id : $rootScope.authVars.user.id}).then((profileResult)->
+                $rootScope.currentMakerScienceProfile = profileResult.objects[0]
+            )
+    )
+)
+
 module.controller('LoginModalCtrl', ($scope, $modal) ->
     $scope.$watch('authVars.loginrequired', (newValue, oldValue) ->
         if oldValue == false && newValue == true
