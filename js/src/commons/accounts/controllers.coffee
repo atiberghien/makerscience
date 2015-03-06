@@ -1,6 +1,6 @@
 module = angular.module("commons.accounts.controllers", ['commons.accounts.services'])
 
-module.controller("CommunityCtrl", ($scope, ObjectProfileLink) ->
+module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
     """
     Controller pour la manipulation des data d'une communauté liée à un objet partagé (project, fiche resource, etc.    )
     La sémantique des niveaux d'implication est à préciser en fonction de la resource.
@@ -10,7 +10,32 @@ module.controller("CommunityCtrl", ($scope, ObjectProfileLink) ->
     - 2 -> fan/follower
     """
 
-    $scope.addMember = (profileId, level, detail)->
-        return true
+    $scope.profiles = Profile.getList().$object
+    $scope.candidate = null
 
+    $scope.init = (objectTypeName) ->
+
+        $scope.$on(objectTypeName+'Ready', (event, args) ->
+            $scope.objectTypeName = objectTypeName
+            $scope.object = args[objectTypeName]
+            $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
+        )
+
+    $scope.refreshCommunity = (objectTypeName, objectId) ->
+        $scope.community = ObjectProfileLink.one().customGETLIST(objectTypeName+'/'+objectId).$object
+
+    $scope.addMember = (profile, level, detail, isValidated)->
+        ObjectProfileLink.one().customPOST(
+            profile:profile,
+            level: level,
+            detail : detail,
+            isValidated:isValidated
+        , $scope.objectTypeName+'/'+$scope.object.id).then((objectProfileLinkResult) ->
+            $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
+        )
+
+    $scope.removeMember = (member) ->
+        ObjectProfileLink.one(member.id).remove().then(()->
+            $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
+        )
 )

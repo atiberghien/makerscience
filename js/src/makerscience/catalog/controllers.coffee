@@ -108,7 +108,6 @@ module.controller("MakerScienceProjectSheetGetters", ($scope, MakerScienceProjec
 module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
-    $controller('CommunityCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.preparedTags = []
@@ -116,10 +115,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
+        $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
+
         $scope.comments = Comment.one().customGETLIST('makerscienceproject'+'/'+$scope.projectsheet.id).$object
-
-        $scope.community = ObjectProfileLink.one().customGETLIST('project'+'/'+$scope.projectsheet.parent.id).$object
-
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
@@ -179,11 +177,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
-
-        # add comments data to $scope
-        $scope.resource_type = 'makerscienceresource'
-        $scope.resource_id = $scope.projectsheet.id
-        $scope.comments = Comment.one().customGETLIST($scope.resource_type+'/'+$scope.resource_id).$object
+        $scope.comments = Comment.one().customGETLIST('makerscienceresource/'+$scope.projectsheet.id).$object
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
             $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
