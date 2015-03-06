@@ -177,6 +177,9 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
+
+        $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
+
         $scope.comments = Comment.one().customGETLIST('makerscienceresource/'+$scope.projectsheet.id).$object
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
