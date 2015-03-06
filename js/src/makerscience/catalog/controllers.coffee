@@ -116,8 +116,8 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
+        $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
 
-        $scope.comments = Comment.one().customGETLIST('makerscienceproject'+'/'+$scope.projectsheet.id).$object
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
@@ -179,8 +179,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
-
-        $scope.comments = Comment.one().customGETLIST('makerscienceresource/'+$scope.projectsheet.id).$object
+        $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
             $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})

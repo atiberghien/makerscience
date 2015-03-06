@@ -4,12 +4,20 @@ module.controller("CommentCtrl", ($scope, $rootScope, Comment) ->
     """
     controlling comments attached to a resource. Requires that parent scope has:
     - $scope.comments
-    - $scope.resource_type
-    - $scope.resource_id
     """
-    
+
     $scope.newcommentForm =
         text: ""
+
+    $scope.init = (objectTypeName) ->
+        $scope.$on(objectTypeName+'Ready', (event, args) ->
+            $scope.objectTypeName = objectTypeName
+            $scope.object = args[objectTypeName]
+            $scope.refreshComments($scope.objectTypeName, $scope.object.id)
+        )
+
+    $scope.refreshComments = (objectTypeName, objectId) ->
+        $scope.comments = Comment.one().customGETLIST(objectTypeName+'/'+objectId).$object
 
     $scope.isCommentAuthor = (comment)->
         """
@@ -35,7 +43,7 @@ module.controller("CommentCtrl", ($scope, $rootScope, Comment) ->
 
 
     $scope.postComment = ()->
-        Comment.one().customPOST({comment_text:$scope.newcommentForm.text}, $scope.resource_type+'/'+$scope.resource_id).then((newcomment)->
+        Comment.one().customPOST({comment_text:$scope.newcommentForm.text}, $scope.objectTypeName+'/'+$scope.object.id).then((newcomment)->
                 $scope.comments.push(newcomment)
                 $scope.newcommentForm.text = ''
                 $scope.commenting = false
