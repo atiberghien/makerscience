@@ -15,21 +15,12 @@
                 <div class="col-md-9">
 
                     <tabset class="nav-tabs-listing">
-                        <tab heading="Nouveautés">
+                        <tab heading="Les plus récents">
                             <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init(12)">
                                 <div class="box" ng-repeat="project in projects">
                                     <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
                                 </div><!-- .box -->
                             </div><!-- .boxes -->
-                        </tab>
-                        <tab heading="Les mieux notés">
-                            Les mieux notés ... coming soon
-                        </tab>
-                        <tab heading="Les plus vus">
-                            Les plus vus ... coming soon
-                        </tab>
-                        <tab heading="Les plus récents">
-                            Les plus récents ... coming soon
                         </tab>
                         <tab heading="Les plus populaires">
                             Les plus populaires ... coming soon
