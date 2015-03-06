@@ -6,10 +6,40 @@
 /*	z-index: 1000;*/
 /*	background-color: $color-bg;*/
 /*	@include box-shadow(0 10px 2px rgba(0,0,0,.25));*/
-}
 
-header {
-	margin-bottom: $grid-gutter-width;
+	header {
+		margin-bottom: $grid-gutter-width;
+		background-color: $color-header-bg;
+		@include transition(all 0.5s ease-in-out);
+	}
+	/* When scolling down */
+	header.affix {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 2000;
+		@include box-shadow(0 5px 2px rgba(0,0,0,.25));
+		p.navbar-tagline {
+			display: none;
+		}
+		#menu {
+			margin-top: 0;
+			ul.navbar-nav {
+				padding-left: 65px;
+			}
+			.navbar-header {
+				.navbar-brand {
+					top: -4px;
+					img {
+						margin-left: 0;
+						width: 30px;
+					}
+				}
+			}
+		}
+	}
+
 }
 
 form.search-full-width {

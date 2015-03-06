@@ -1,6 +1,6 @@
 <div id="header" ng-controller="CurrentMakerScienceProfileCtrl">
 
-    <header>
+    <header id="fixed-nav" data-spy="affix">
         <nav id="menu" class="navbar" role="navigation">
             <div class="container">
                 <div class="container-fluid">
@@ -69,3 +69,15 @@
     </div><!-- .crumbs -->
 
 </div><!-- #header -->
+
+<!-- DEBUG #FIXME -->
+<script type="text/javascript">
+$('#fixed-nav').affix({
+  offset: {
+    top: 125,
+    bottom: function () {
+      return (this.bottom = $('.footer').outerHeight(true))
+    }
+  }
+})
+</script>
