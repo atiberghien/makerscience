@@ -247,34 +247,21 @@
                     </div>
                     <div class="col-md-6">
                         <div class="bloc bloc-about">
-                            <h3>A propos<br /> des créateurs de la fiche</h3>
-                            <gravatar-image data-gravatar-email="resourcesheet.parent.team[0].members[0].user.email"
+                            <h3>A propos<br /> du créateur de la fiche</h3>
+                            <gravatar-image data-gravatar-email="resourcesheet.by.profile_email"
                                             data-gravatar-size="120"
                                             data-gravatar-rating="pg"
                                             data-gravatar-default="mm"
                                             data-gravatar-secure="true"
                                             data-gravatar-css-class="profile img-circle">
                             </gravatar-image>
-                            <p class="author">{{resourcesheet.parent.team[0].members[0].user.first_name}} {{resourcesheet.parent.team[0].members[0].user.last_name}}<em>{{profile.activity}}</em></p>
+                            <p class="author">{{resourcesheet.by.full_name}}</p>
                         </div>
                     </div>
                 </div><!-- .row -->
 
-                <section class="linked linked-resource" >
-                    <carousel class="carousel-no-indicators carousel-text-links">
-                        <slide class="left-aligned">
-                            <h3><a href="">Expériences associées</a></h3>
-                            <h4><a href="">Le bac à sable à réalité augmentée:</a></h4>
-                            <h5><a href="">Tournée nationale 2014</a></h5>
-                            <img src="./img/bacasable.jpg" alt="Image background" />
-                        </slide>
-                        <slide class="left-aligned">
-                            <h3><a href="">Fiche ressources-projets réutilisables!</a></h3>
-                            <h4><a href="">bkfjei oifjeoiw jfe:</a></h4>
-                            <h5><a href="">fwoi jfiwj  foiwj firwj  fiwjr</a></h5>
-                            <img src="./img/bacasable.jpg" alt="Image background" />
-                        </slide>
-                    </carousel>
+                <section class="linked linked-resource" ng-init="linkResources=true" ng-show="linkResources && (linkedResources.length || editable)">
+                    <ng-include src="'views/catalog/block/linked_resources.html'"></ng-include>
                 </section>
 
             </div><!-- #content -->
@@ -282,8 +269,7 @@
         </div><!-- .col-md-8 -->
 
         <div class="col-md-4">
-
-            <div id="sidebar" onload="parentColor='resource';cummunityObjectTypeName='project';commentedObjectTypeName='makerscienceresource'">
+            <div id="sidebar" ng-init="parentColor='resource';cummunityObjectTypeName='project';commentedObjectTypeName='makerscienceresource'">
                 <ng-include src="'views/catalog/block/community.html'"></ng-include>
                 <ng-include src="'views/catalog/block/comments.html'"></ng-include>
                 <ng-include src="'views/catalog/block/popularity.html'"></ng-include>
@@ -298,14 +284,11 @@
 
         <div class="col-md-12">
 
+            <h2 class="boxed boxed-resource"><span class="glyphicon glyphicon-tasks"></span> Expériences Similaires</h2>
+
             <ul class="boxes boxes-medium boxes-spaced">
                 <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
-                <li class="box box-solo box-green">
-                    <div>
-                        <a href="">Expériences Similaires <span class="glyphicon glyphicon-chevron-right"></span></a>
-                    </div>
-                </li
-                ><li class="box" ng-repeat="resource in similars">
+                <li class="box" ng-repeat="resource in similars">
                     <a ui-sref="resource.detail({ slug: resource.parent.slug })">
                         <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="./img/icons/project/project-orange.png" alt="Orange project" /></h3>
                         <h4>{{resource.parent.baseline}}</h4>

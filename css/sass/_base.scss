@@ -85,6 +85,9 @@ h2.boxed {
 	&.boxed-project {
 		background-color: $color-blue;
 	}
+	&.button-resource {
+	        background-color: $color-resource;
+    	}
 }
 h2.default, h2.projects, h2.resources, h2.members, h2.tags, h2.forum {
 	padding: 0.75em;

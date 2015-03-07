@@ -40,7 +40,6 @@ module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResourc
         resourceIndex = $scope.linkedResources.indexOf(resource)
         $scope.linkedResources.pop(resourceIndex)
 
-
     $scope.addLinkedResource = (newLinkedResource) ->
         resource = newLinkedResource.originalObject.fullObject
         if newLinkedResource && $scope.linkedResources.indexOf(resource) < 0
@@ -95,16 +94,6 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         delete $scope.needs[index]
 )
 
-module.controller("MakerScienceProjectSheetGetters", ($scope, MakerScienceProject) ->
-
-    $scope.getProjectByID = (id) ->
-        MakerScienceProject.one(id).get().then((makerScienceProjectResult) ->
-            $scope.project = makerScienceProjectResult
-        )
-    $scope.getProjectByURI = (uri) ->
-        id = getObjectIdFromURI(uri)
-        return $scope.getProjectByID(id)
-)
 module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
@@ -149,6 +138,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
 
 module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, TaggedItem) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
+    $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.tags = []
 
@@ -159,6 +149,9 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 duration : $scope.projectsheet.duration
                 cost : $scope.projectsheet.cost
                 parent : resourcesheetResult.project
+                linked_resources : $scope.linkedResources.map((resource) ->
+                        return resource.resource_uri
+                    )
 
             MakerScienceResource.post(makerscienceResourceData).then((makerscienceResourceResult)->
                 angular.forEach($scope.tags, (tag)->
@@ -172,6 +165,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
+    $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.preparedTags = []
 
@@ -180,6 +174,8 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
+
+        $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
             $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
@@ -192,6 +188,13 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
                     $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
             )
         )
+
+        $scope.updateLinkedResources = ->
+            MakerScienceResource.one($scope.projectsheet.id).patch(
+                linked_resources : $scope.linkedResources.map((resource) ->
+                    return resource.resource_uri
+                )
+            )
     )
 
     $scope.updateMakerScienceResourceSheet = (resourceName, resourceId, fieldName, data) ->

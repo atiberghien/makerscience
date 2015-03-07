@@ -219,32 +219,8 @@
                     </tab>
                 </tabset>
 
-                <section class="linked linked-project" ng-init="linkResources=True" ng-show="linkResources">
-                    <div class="edit-buttons" ng-hide="!editable" ng-show="editable">
-                        <button ng-click="linkResources=!linkResources" ><span class="glyphicon glyphicon-pencil"></span></button>
-                        <div ng-show="linkResources">
-                            <angucomplete-alt id="linked-idea"
-                                            placeholder="Nom de l'expérience"
-                                            pause="100"
-                                            selected-object="newLinkedResource"
-                                            local-data="allAvailableResources"
-                                            search-fields="title"
-                                            title-field="title"
-                                            text-no-results="Aucune expérience trouvée"
-                                            minlength="3"/>
-                        </div>
-                        <div ng-show="linkResources">
-                            <button class="button" ng-click="addLinkedResource(newLinkedResource);updateLinkedResources()">Lier à l'éxpérience</button>
-                        </div>
-                    </div>
-                    <carousel class="carousel-no-indicators carousel-text-links" >
-                        <slide class="left-aligned" ng-repeat="resource in linkedResources">
-                            <h3><a href="">Expériences associées</a></h3>
-                            <h4><a href="">{{resource.parent.title}}</a></h4>
-                            <h5><a href="">{{resource.parent.baseline}}</a></h5>
-                            <img src="./img/bacasable.jpg" alt="Image background" />
-                        </slide>
-                    </carousel>
+                <section class="linked linked-project" ng-init="linkResources=true" ng-show="linkResources && (linkedResources.length || editable)">
+                    <ng-include src="'views/catalog/block/linked_resources.html'"></ng-include>
                 </section>
 
             </div><!-- #content -->

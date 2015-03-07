@@ -147,6 +147,39 @@
                         </div>
                     </fieldset>
 
+                    <fieldset class="linked-idea">
+                        <h4>Expériences associées</h4>
+                        <p>Voulez-vous associer votre expérience à d'autres expériences ?</p>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <angucomplete-alt id="linked-idea"
+                                                placeholder="Nom de l'expérience"
+                                                pause="100"
+                                                selected-object="newLinkedResource"
+                                                local-data="allAvailableResources"
+                                                search-fields="title"
+                                                title-field="title"
+                                                text-no-results="Aucune expérience trouvée"
+                                                minlength="3"/>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'éxpérience</button>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li ng-repeat="resource in linkedResources">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <label>{{resource.parent.title}}</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-danger" ng-click="delLinkedResource(resource)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                     </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+
                     <p class="right">
                         <button class="button cancel">Annuler</button>
                         <button class="button" ng-click="saveMakerscienceResource()" >Enregistrer</button>
