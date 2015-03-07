@@ -646,8 +646,6 @@ ui-view> div.container {
 			border-left: 1px solid $color-boxes-title-border;
 			vertical-align: middle;
 		}
-		img.background {
-		}
 		div.description {
 			position: absolute;
 			bottom: 0;
@@ -706,6 +704,9 @@ ui-view> div.container {
 				span {
 					font-size: 0.9em;
 					font-weight: lighter;
+					&.count {
+						font-size: 1em;
+					}
 				}
 				&:hover {
 					text-decoration: none;

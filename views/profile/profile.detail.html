@@ -166,7 +166,7 @@
 
             <div class="boxes boxes-small">
                 <div class="box box-solo box-blue">
-                    <div><a href="">Mes projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div><a href="">Mes projets <span class="count">(4)</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                 </div>
                 <div class="box" ng-repeat="project in member_projects">
                     <ng-include src="'views/catalog/block/project_thumb.html'" onload="project=project"></ng-include>
@@ -175,7 +175,7 @@
 
             <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
                 <div class="box box-solo box-red">
-                    <div><a href="">Les projets que je suis <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div><a href="">Les projets que je suis <span class="count">(20)</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                 </div>
                 <div class="box">
                     <!-- <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include> -->
@@ -184,7 +184,7 @@
 
             <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
                 <div class="box box-solo box-green">
-                    <div><a href="">Mes expériences <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div><a href="">Mes expériences <span class="count">(14)</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                 </div>
                 <div class="box" ng-repeat="resource in member_resources">
                     <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
@@ -193,7 +193,7 @@
 
             <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
                 <div class="box box-solo box-purple">
-                    <div><a href="">Les expériences qui m'intéressent <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div><a href="">Les expériences qui m'intéressent <span class="count">(8)</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                 </div>
                 <div class="box">
                     <!-- <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include> -->
