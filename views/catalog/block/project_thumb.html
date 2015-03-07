@@ -6,9 +6,9 @@
 </a>
 <div class="description">
     <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
-    <h5>Par
-        <a ui-sref="profile.detail({id:project.parent.team[0].members[0].id})">
-            {{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}
+    <h5 ng-if="project.by">Par
+        <a ui-sref="profile.detail({id:project.by.profile_id})">
+            {{project.by.full_name}}
         </a>
     </h5>
 </div>
