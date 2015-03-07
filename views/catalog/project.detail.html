@@ -46,7 +46,7 @@
                     <div class="col-md-4">
 
                         <div class="side-header">
-                            <ng-include onload="objectTypeName='makerscienceproject'" src="'views/catalog/block/tags_widget.html'"></ng-include>
+                            <ng-include onload="taggedObjectTypeName='makerscienceproject'" src="'views/catalog/block/tags_widget.html'"></ng-include>
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="editWIP=false">
@@ -252,10 +252,10 @@
         </div><!-- .col-md-8 -->
 
         <div class="col-md-4">
-            <div id="sidebar">
-                <ng-include onload="parentColor='project'" src="'views/catalog/block/community.html'" onload="objectTypeName='project'"></ng-include>
-                <ng-include onload="parentColor='project'" src="'views/catalog/block/comments.html'" onload="objectTypeName='makerscienceproject'"></ng-include>
-                <ng-include onload="parentColor='project'" src="'views/catalog/block/popularity.html'"></ng-include>
+            <div id="sidebar" ng-init="parentColor='project';cummunityObjectTypeName='project';commentedObjectTypeName='makerscienceproject'">
+                <ng-include src="'views/catalog/block/community.html'"></ng-include>
+                <ng-include src="'views/catalog/block/comments.html'"></ng-include>
+                <ng-include src="'views/catalog/block/popularity.html'"></ng-include>
 
             </div><!-- #sidebar -->
 
