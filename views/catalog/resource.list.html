@@ -13,18 +13,21 @@
             <div class="row">
                 <div class="col-md-9">
                     <tabset class="nav-tabs-resource">
-                        <tab heading="Nouveautés">
+                        <tab heading="Les plus récents">
                             <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
                                 <div class="box" ng-repeat="resource in resources">
                                     <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                                 </div>
                             </div>
                         </tab>
-                        <tab heading="Les mieux notés">
-                            Les mieux notés
+                        <tab heading="Les plus populaires">
+                            Les plus populaires ... coming soon
                         </tab>
-                        <tab heading="Les plus vus">
-                            Les plus vus
+                        <tab heading="Sélection thématique">
+                            Sélection thématique
+                        </tab>
+                        <tab heading="Au hasard">
+                            Au hasard ... coming soon
                         </tab>
                     </tabset>
 
