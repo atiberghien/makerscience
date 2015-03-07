@@ -12,6 +12,10 @@
                         <a class="navbar-brand" ui-sref="home"><img src="./img/logo.png" alt="Logo MakerScience" /></a>
                     </div>
                     <p class="navbar-tagline">Plateforme collaborative pour<br />la médiation des sciences, des techniques et des innovations</p>
+                    <p class="register-login" ng-show="!authVars.isAuthenticated">
+                        <button class="button" ng-click="showLoginPanel=true">S'inscrire</button>
+                        <button class="button" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
+                    </p>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">

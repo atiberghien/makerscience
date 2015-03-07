@@ -27,6 +27,22 @@ header {
 		.nav.navbar-nav {
 			padding-left: 170px; /* space for the logo */
 		}
+		.register-login {
+			float: right;
+			margin-top: -70px;
+			button {
+				display: inline-block;
+				margin-right: $grid-gutter-width / 2;
+				padding: 0.75em 1em;
+				font-size: 1.25em;
+				font-weight: bold;
+				text-transform: uppercase;
+				background: $color-blue url('../img/bg/shape-top-bg.png') center center no-repeat;
+				&:hover {
+					background-color: $color-pink;
+				}
+			}
+		}
 		ul.navbar-nav:first-child a {
 			margin: 1em 0.75em 0;
 			padding: 0.25em 0 0 0;
