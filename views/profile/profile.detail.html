@@ -43,30 +43,6 @@
                 <div class="col-md-8">
                     <div class="side-header" ng-class="{ 'editing' : editable }">
                         <a ui-sref="profile.dashboard({id : profile.id})">Voir mon dashboard</a>
-                        <div class="relative">
-                            <h5>Intérêts</h5>
-                            <div class="editable">
-                                <div class="edit-buttons" ng-show="editable" ng-init="addInterest=false">
-                                    <button ng-click="addInterest = ! addInterest"><span class="glyphicon glyphicon-pencil"></span></button>
-                                </div>
-
-                                <div ng-show="addInterest==true" ng-controller="TagAutoCompleteCtrl">
-                                    <tags-input ng-model="$parent.preparedInterestTags"
-                                                placeholder="> Mot-clé"
-                                                on-tag-added="$parent.addTagToProfile('in', $tag)"
-                                                on-tag-removed="$parent.removeTagFromProfile($tag)">
-                                                <auto-complete source="loadTags($query)"></auto-complete>
-                                    </tags-input>
-                                </div>
-
-                                <div ng-show="addInterest==false">
-                                    <ul class="tags tags-project">
-                                        <li ng-repeat="tag in preparedInterestTags"><a href="">{{tag.text}}</a></li>
-                                    </ul>
-                                </div>
-                            </div><!-- .editable -->
-                        </div><!-- .relative -->
-
 
                         <div class="relative bio">
                             <h5 class="bio">Présentation</h5>
@@ -106,6 +82,30 @@
                             </div>
                         </div><!-- .relative -->
 
+                        <div class="relative">
+                            <h5>Intérêts</h5>
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable" ng-init="addInterest=false">
+                                    <button ng-click="addInterest = ! addInterest"><span class="glyphicon glyphicon-pencil"></span></button>
+                                </div>
+
+                                <div ng-show="addInterest==true" ng-controller="TagAutoCompleteCtrl">
+                                    <tags-input ng-model="$parent.preparedInterestTags"
+                                                placeholder="> Mot-clé"
+                                                on-tag-added="$parent.addTagToProfile('in', $tag)"
+                                                on-tag-removed="$parent.removeTagFromProfile($tag)">
+                                                <auto-complete source="loadTags($query)"></auto-complete>
+                                    </tags-input>
+                                </div>
+
+                                <div ng-show="addInterest==false">
+                                    <ul class="tags tags-project">
+                                        <li ng-repeat="tag in preparedInterestTags"><a href="">{{tag.text}}</a></li>
+                                    </ul>
+                                </div>
+                            </div><!-- .editable -->
+                        </div><!-- .relative -->
+
                         <div class="row">
 
                             <div class="col-md-6" >
@@ -130,10 +130,12 @@
                                         <button> <span class="glyphicon glyphicon-pencil"></span></button>
                                     </div>
                                     <div ng-show="!socialEdit" >
-                                        <a ng-show="profile.facebook" href="{{profile.facebook}}" target="_blank" class="share-facebook">FB</a>
-                                        <a ng-show="profile.twitter" href="{{profile.twitter}}" target="_blank" class="share-twitter">Tw</a>
-                                        <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin">Lk</a>
+                                        <a ng-show="profile.facebook" href="{{profile.facebook}}" target="_blank" class="share-facebook"><img src="./img/icons/social/facebook-small.png" alt="Facebook" /></a>
+                                        <a ng-show="profile.twitter" href="{{profile.twitter}}" target="_blank" class="share-twitter"><img src="./img/icons/social/twitter-small.png" alt="Twitter" /></a>
+                                        <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin"><img src="./img/icons/social/google-small.png" alt="Google" /></a>
                                         <a ng-show="profile.contact_email" href="{{profile.contact_email}}" target="_blank" class="share-email">@</a>
+                                        <span class="glyphicon glyphicon-globe"></span>
+                                        <label><a href="http://www.pixmin.org">http://www.pixmin.org</a></label>
                                     </div>
                                     <div ng-show="socialEdit" >
                                         <input type="text" ng-model="profile.facebook" placeholder="Profil Facebook"/>
