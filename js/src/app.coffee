@@ -8,7 +8,7 @@ angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
-                                'geocoder-service', 'ncy-angular-breadcrumb'])
+                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->

@@ -8,7 +8,10 @@
     <div class="col-md-12">
 
         <ul class="tags tags-listing" ng-controller="TagListCtrl">
-            <li ng-repeat="tag in tags"><a ui-sref="tag({slug:tag.slug})">{{tag.name}}</a><span class="weight">x {{tag.weight}}</span></li>
+            <li ng-repeat="tag in tags">
+                <a ng-if="tag.name.length > 10" tooltip="{{tag.name}}" ui-sref="tag({slug:tag.slug})">{{tag.name| characters:10}}</a>
+                <a ng-if="tag.name.length <= 10" ui-sref="tag({slug:tag.slug})">{{tag.name}}</a>
+                <span class="weight">x {{tag.weight}}</span></li>
         </ul>
 
     </div><!-- .col -->
