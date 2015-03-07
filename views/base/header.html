@@ -48,9 +48,15 @@
 
             <!-- When logged in -->
             <div class="authenticated" ng-if="authVars.isAuthenticated">
-                <a ui-sref="profile.detail">
-                    <img src="./img/users/user-default.png" alt="Photo of {{authVars.user.first_name}} {{authVars.user.last_name}}" />
-                    {{authVars.user.first_name}} <strong>{{authVars.user.last_name}}</strong>
+                <a ui-sref="profile.detail({id:currentMakerScienceProfile.id})">
+                    <gravatar-image data-gravatar-email="currentMakerScienceProfile.parent.user.email"
+                        data-gravatar-size="30"
+                        data-gravatar-rating="pg"
+                        data-gravatar-default="/img/users/user-default.png"
+                        data-gravatar-secure="true"
+                        data-gravatar-css-class="img-circle">
+                    </gravatar-image>
+                    {{currentMakerScienceProfile.parent.user.first_name}} <strong>{{currentMakerScienceProfile.parent.user.last_name}}</strong>
                 </a>
                 <ul class="toolbar">
                     <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
