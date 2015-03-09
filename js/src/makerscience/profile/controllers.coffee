@@ -18,17 +18,26 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
 
         $scope.member_projects = []
         $scope.member_resources = []
+        $scope.fan_projects = []
+        $scope.fan_resources = []
 
-        linkedProjects = ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).$object
-        angular.forEach(linkedProjects, (linkedProject) ->
-            MakerScienceProject.one().get({parent__id : linkedProjects.object_id}).then((makerscienceProjectResults) ->
-                if makerscienceProjectResults.objects.length == 1
-                    $scope.member_projects.push(makerscienceProjectResults.objects[0])
-                else
-                    MakerScienceResource.one().get({parent__id : linkedProjects.object_id}).then((makerscienceResourceResults) ->
-                        if makerscienceResourceResults.objects.length == 1
-                            $scope.member_resources.push(makerscienceResourceResults.objects[0])
-                    )
+        ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).then((linkedProjectResults)->
+            angular.forEach(linkedProjectResults, (linkedProject) ->
+                MakerScienceProject.one().get({parent__id : linkedProject.object_id}).then((makerscienceProjectResults) ->
+                    if makerscienceProjectResults.objects.length == 1
+                        if linkedProject.level == 0
+                            $scope.member_projects.push(makerscienceProjectResults.objects[0])
+                        else if linkedProject.level == 2
+                            $scope.fan_projects.push(makerscienceProjectResults.objects[0])
+                    else
+                        MakerScienceResource.one().get({parent__id : linkedProject.object_id}).then((makerscienceResourceResults) ->
+                            if makerscienceResourceResults.objects.length == 1
+                                if linkedProject.level == 0
+                                    $scope.member_resources.push(makerscienceResourceResults.objects[0])
+                                else if linkedProject.level == 2
+                                    $scope.fan_resources.push(makerscienceResourceResults.objects[0])
+                        )
+                )
             )
         )
 
@@ -52,7 +61,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
                 when 'PostalAddress' then PostalAddress.one(resourceId).patch(putData)
 
         $scope.updateSocialNetworks = (profile) ->
-            console.log(profile)
             $scope.updateMakerScienceProfile('MakerScienceProfile', profile.id, 'facebook', profile.facebook)
             $scope.updateMakerScienceProfile('MakerScienceProfile', profile.id, 'twitter', profile.twitter)
             $scope.updateMakerScienceProfile('MakerScienceProfile', profile.id, 'linkedin', profile.linkedin)
