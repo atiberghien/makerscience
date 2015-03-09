@@ -1,17 +1,16 @@
 #header {
-/*	position: fixed;*/
-/*	top: 0;*/
-/*	left: 0;*/
-/*	right: 0;*/
-/*	z-index: 1000;*/
-/*	background-color: $color-bg;*/
-/*	@include box-shadow(0 10px 2px rgba(0,0,0,.25));*/
 
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	 
 	header {
 		margin-bottom: $grid-gutter-width;
 		background-color: $color-header-bg;
 		@include transition(all 0.5s ease-in-out);
 	}
+
 	/* When scolling down */
 	header.affix {
 		position: fixed;
