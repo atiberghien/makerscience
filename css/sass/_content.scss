@@ -71,9 +71,16 @@ div.toolbar {
 	}
 }
 
-ui-view> div.container {
-	margin-top: 200px; /* give space for the fixed header */
-}
+/* Make space for the fixed header */
+// ui-view> div.container {
+// 	margin-top: 200px;
+// }
+// ui-view > #intro {
+// 	margin-top: 200px + $grid-gutter-width / 2;
+// }
+// ui-view > #intro + div.container {
+// 	margin-top: 200px;
+// }
 
 #content, #sidebar {
 	margin-top: 3em;
