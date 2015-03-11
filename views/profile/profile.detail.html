@@ -4,9 +4,7 @@
 <link rel='stylesheet' href='css/textAngular.css'>
 
 <ul id="sidenav" class="project">
-    <!-- Really remove this? #154
     <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
-    -->
     <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
     <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
 </ul><!-- #nav -->
@@ -134,14 +132,15 @@
                                         <a ng-show="profile.twitter" href="{{profile.twitter}}" target="_blank" class="share-twitter"><img src="./img/icons/social/twitter-small.png" alt="Twitter" /></a>
                                         <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin"><img src="./img/icons/social/google-small.png" alt="Google" /></a>
                                         <a ng-show="profile.contact_email" href="{{profile.contact_email}}" target="_blank" class="share-email">@</a>
-                                        <span class="glyphicon glyphicon-globe"></span>
-                                        <label><a href="http://www.pixmin.org">http://www.pixmin.org</a></label>
+                                        <span ng-show="profile.contact_email" class="glyphicon glyphicon-globe"></span>
+                                        <label><a ng-show="profile.contact_email" href="{{profile.website}}" target="_blank" >{{profile.website}}</a></label>
                                     </div>
                                     <div ng-show="socialEdit" >
                                         <input type="text" ng-model="profile.facebook" placeholder="Profil Facebook"/>
                                         <input type="text" ng-model="profile.twitter" placeholder="Profil Twitter"/>
                                         <input type="text" ng-model="profile.linkedin" placeholder="Profil LinkedIn"/>
                                         <input type="text" ng-model="profile.contact_email" placeholder="Courriel de contact"/>
+                                        <input type="text" ng-model="profile.website" placeholder="Site web"/>
                                         <span class="editable-buttons">
                                             <button class="btn btn-primary" ng-click="updateSocialNetworks(profile);socialEdit=False" >Enregistrer</button>
                                         </span>
@@ -170,38 +169,38 @@
 
             <div class="boxes boxes-small">
                 <div class="box box-solo box-blue">
-                    <div><a href="">Mes projets <span class="count">(4)</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div><a href="">Mes projets <span class="count">({{member_projects.length}})</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                 </div>
                 <div class="box" ng-repeat="project in member_projects">
                     <ng-include src="'views/catalog/block/project_thumb.html'" onload="project=project"></ng-include>
                 </div><!-- .box -->
             </div><!-- .boxes -->
 
-            <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+            <div class="boxes boxes-small">
                 <div class="box box-solo box-red">
-                    <div><a href="">Les projets que je suis <span class="count">(20)</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div><a href="">Les projets que je suis <span class="count">({{fan_projects.length}})</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                 </div>
-                <div class="box">
-                    <!-- <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include> -->
-                </div><!-- .box -->
+                <div class="box" ng-repeat="project in fan_projects">
+                    <ng-include src="'views/catalog/block/project_thumb.html'" onload="project=project"></ng-include>
+                </div>
             </div><!-- .boxes -->
 
-            <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+            <div class="boxes boxes-small">
                 <div class="box box-solo box-green">
-                    <div><a href="">Mes expériences <span class="count">(14)</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div><a href="">Mes expériences <span class="count">({{member_resources.length}})</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                 </div>
                 <div class="box" ng-repeat="resource in member_resources">
                     <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                 </div><!-- .box -->
             </div><!-- .boxes -->
 
-            <div class="boxes boxes-small" ng-controller="MakerScienceProjectListCtrl">
+            <div class="boxes boxes-small">
                 <div class="box box-solo box-purple">
-                    <div><a href="">Les expériences qui m'intéressent <span class="count">(8)</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    <div><a href="">Les expériences qui m'intéressent <span class="count">({{fan_resources.length}})</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
                 </div>
-                <div class="box">
-                    <!-- <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include> -->
-                </div><!-- .box -->
+                <div class="box" ng-repeat="resource in fan_resources">
+                    <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                </div>
             </div><!-- .boxes -->
 
         </div><!-- .content-member -->

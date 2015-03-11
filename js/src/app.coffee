@@ -157,7 +157,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     parent : 'home'
         )
         .state('forum',
-                url: '/forum/',
+                url: '/discussions/',
                 templateUrl: 'views/base/forum.html'
                 ncyBreadcrumb:
                     label: 'Forum'

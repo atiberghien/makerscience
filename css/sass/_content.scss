@@ -260,7 +260,6 @@ div.toolbar {
 	.nav-tabs-slide {
 		.tab-content {
 			position: relative;
-			height: 300px;
 			button {
 				position: absolute;
 				top: 0;
@@ -298,9 +297,7 @@ div.toolbar {
 		}
 		img {
 			display: block;
-			/* Trying with fixed dimensions */
 			width: 683px;
-			height: 300px;
 		}
 	}
 /* End of Alban's hand made tabs slides */
