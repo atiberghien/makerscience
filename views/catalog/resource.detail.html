@@ -159,8 +159,8 @@
                         <tab-heading>
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
-                        <div ng-if="resourcesheet.base_projectsheet.bucket.files.length" ng-repeat="img in resourcesheet.base_projectsheet.bucket.files" ng-show="$index==currentImg">
-                            <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}width=693x300" alt="Slide">
+                        <div ng-if="resourcesheet.base_resourcesheet.bucket.files.length" ng-repeat="img in resourcesheet.base_resourcesheet.bucket.files" ng-show="$index==currentImg">
+                            <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?width=693x300" alt="Slide">
                         </div>
                         <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_resourcesheet.bucket.files.length)">Préc.</button>
                         <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_resourcesheet.bucket.files.length">Suiv.</button>
