@@ -20,7 +20,7 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
         $scope.$on(objectTypeName+'Ready', (event, args) ->
             $scope.addMember = (profile, level, detail, isValidated)->
                 ObjectProfileLink.one().customPOST(
-                    profile:profile,
+                    profile_id: profile.id,
                     level: level,
                     detail : detail,
                     isValidated:isValidated
