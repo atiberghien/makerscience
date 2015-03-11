@@ -159,12 +159,12 @@
                         <tab-heading>
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
-                        <div ng-if="resourcesheet.base_projectsheet.bucket.files.length" ng-repeat="img in resourcesheet.base_projectsheet.bucket.files" ng-show="$index==currentImg">
+                        <div ng-if="resourcesheet.base_resourcesheet.bucket.files.length" ng-repeat="img in resourcesheet.base_resourcesheet.bucket.files" ng-show="$index==currentImg">
                             <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}" alt="Slide">
                         </div>
-                        <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
-                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button>
-                        <div ng-if="!resourcesheet.base_projectsheet.bucket.files.length">
+                        <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_resourcesheet.bucket.files.length)">Préc.</button>
+                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_resourcesheet.bucket.files.length">Suiv.</button>
+                        <div ng-if="!resourcesheet.base_resourcesheet.bucket.files.length">
                             <img src="img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
@@ -172,14 +172,14 @@
                         <tab-heading>
                             <span class="glyphicon glyphicon-facetime-video"></span>
                         </tab-heading>
-                        <div ng-if="resourcesheet.base_projectsheet.videos" ng-repeat="(url, comment) in resourcesheet.base_projectsheet.videos" ng-show="$index==currentImg">
+                        <div ng-if="resourcesheet.base_resourcesheet.videos" ng-repeat="(url, comment) in resourcesheet.base_resourcesheet.videos" ng-show="$index==currentImg">
                             <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
                                 <a href="{{url}}">Watch</a>
                             </embed-video>
                         </div>
-                        <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.videos.length)">Préc.</button>
-                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.videos.length">Suiv.</button>
-                        <div ng-if="!resourcesheet.base_projectsheet.videos">
+                        <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_resourcesheet.videos.length)">Préc.</button>
+                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_resourcesheet.videos.length">Suiv.</button>
+                        <div ng-if="!resourcesheet.base_resourcesheet.videos">
                             <img src="img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
