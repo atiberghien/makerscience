@@ -293,11 +293,17 @@ div.toolbar {
 				div.animate-hide.ng-hide {
 					opacity: 0;
 				}
+				&> div {
+					background-color: black;
+					img {
+						// Slideshow size: 683 x 342
+						display: block;
+						max-width: 683px;
+						height: 342px;
+						margin: 0 auto; /* center the image */
+					}
+				}
 			}
-		}
-		img {
-			display: block;
-			width: 683px;
 		}
 	}
 /* End of Alban's hand made tabs slides */
