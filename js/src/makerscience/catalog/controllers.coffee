@@ -185,7 +185,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
         TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
                 if similar.type == 'makerscienceresource'
-                    $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
+                    $scope.similars.push(MakerScienceResource.one(similar.id).get().$object)
             )
         )
 

@@ -43,7 +43,8 @@
     "angucomplete-alt": "~0.0.37",
     "geocoder-service": "~0.0.2",
     "angular-breadcrumb": "~0.3.3",
-    "angular-truncate": "*"
+    "angular-truncate": "*",
+    "bootstrap":""
   },
   "resolutions": {
     "angular": "1.2.28"
