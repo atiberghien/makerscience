@@ -38,7 +38,7 @@
                         <img ng-if="!resourcesheet.base_resourcesheet.cover" src="img/bacasable.jpg" alt="Resource Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
-                                <button ng-click="openGallery(resourcesheet.resourcesheet)"><span class="glyphicon glyphicon-camera"></span></button>
+                                <button ng-click="openGallery(resourcesheet.base_resourcesheet)"><span class="glyphicon glyphicon-camera"></span></button>
                             </div>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                     </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
                         <tab-heading>
-                            <span ng-click="openGallery(resourcesheet.base_projectsheet)" class="glyphicon glyphicon-pencil"></span>
+                            <span ng-click="openGallery(resourcesheet.base_resourcesheet)" class="glyphicon glyphicon-pencil"></span>
                         </tab-heading>
                     </tab>
                 </tabset>
