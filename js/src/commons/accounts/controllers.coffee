@@ -16,26 +16,26 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
     $scope.init = (objectTypeName) ->
 
         $scope.$on(objectTypeName+'Ready', (event, args) ->
+            $scope.refreshCommunity = (objectTypeName, objectId) ->
+                $scope.community = ObjectProfileLink.one().customGETLIST(objectTypeName+'/'+objectId).$object
+
+            $scope.addMember = (profile, level, detail, isValidated)->
+                ObjectProfileLink.one().customPOST(
+                    profile:profile,
+                    level: level,
+                    detail : detail,
+                    isValidated:isValidated
+                , $scope.objectTypeName+'/'+$scope.object.id).then((objectProfileLinkResult) ->
+                    $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
+                )
+
+            $scope.removeMember = (member) ->
+                ObjectProfileLink.one(member.id).remove().then(()->
+                    $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
+                )
+
             $scope.objectTypeName = objectTypeName
             $scope.object = args[objectTypeName]
-            $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
-        )
-
-    $scope.refreshCommunity = (objectTypeName, objectId) ->
-        $scope.community = ObjectProfileLink.one().customGETLIST(objectTypeName+'/'+objectId).$object
-
-    $scope.addMember = (profile, level, detail, isValidated)->
-        ObjectProfileLink.one().customPOST(
-            profile:profile,
-            level: level,
-            detail : detail,
-            isValidated:isValidated
-        , $scope.objectTypeName+'/'+$scope.object.id).then((objectProfileLinkResult) ->
-            $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
-        )
-
-    $scope.removeMember = (member) ->
-        ObjectProfileLink.one(member.id).remove().then(()->
             $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
         )
 )
