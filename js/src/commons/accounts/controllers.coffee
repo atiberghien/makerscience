@@ -11,14 +11,13 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
     """
 
     $scope.profiles = Profile.getList().$object
-    $scope.candidate = null
+    $scope.teamCandidate = null
+    $scope.resourceCandidate = null
+    $scope.community = []
 
     $scope.init = (objectTypeName) ->
 
         $scope.$on(objectTypeName+'Ready', (event, args) ->
-            $scope.refreshCommunity = (objectTypeName, objectId) ->
-                $scope.community = ObjectProfileLink.one().customGETLIST(objectTypeName+'/'+objectId).$object
-
             $scope.addMember = (profile, level, detail, isValidated)->
                 ObjectProfileLink.one().customPOST(
                     profile:profile,
@@ -26,16 +25,17 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
                     detail : detail,
                     isValidated:isValidated
                 , $scope.objectTypeName+'/'+$scope.object.id).then((objectProfileLinkResult) ->
-                    $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
+                    $scope.community.push(objectProfileLinkResult)
                 )
 
             $scope.removeMember = (member) ->
                 ObjectProfileLink.one(member.id).remove().then(()->
-                    $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
+                    memberIndex = $scope.community.indexOf(member)
+                    $scope.community.splice(memberIndex, 1)
                 )
 
             $scope.objectTypeName = objectTypeName
             $scope.object = args[objectTypeName]
-            $scope.refreshCommunity($scope.objectTypeName, $scope.object.id)
+            $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
         )
 )
