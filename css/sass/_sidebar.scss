@@ -124,37 +124,29 @@
 		div.comment {
 			position: relative;
 			margin-bottom: 1.5em;
-			padding: 2em;
-			border-top: 1px solid $color-sidebar-comments-border;
-			span.date {
-				position: absolute;
-				top: 1em;
-				right: 4em;
+			div.comment-gravatar,
+			div.comment-content,
+			div.comment-date {
+				display: inline-block;
+				vertical-align: top;
+			}
+			div.comment-gravatar {
+				width: 15%;
+				margin-top: 1%;
+				margin-left: 3%;
+			}
+			div.comment-content {
+				width: 65%;
+				padding: 0.5em 0.75em;
+				background-color: $color-light-cream;
+				p.comment-author {
+					margin-top: 0.25em;
+					margin-bottom: 0.5em;
+					font-size: 1.05em;
+				}
+			}
+			div.comment-date {
 				color: $color-grey;
-			}
-			div.author {
-				margin-bottom: 0.5em;
-				font-weight: bold;
-				img {
-					display: inline-block;
-				}
-				p {
-					display: inline-block;
-					margin-top: 0.75em;
-					margin-left: 1em;
-					line-height: 1.25em;
-					vertical-align: top;
-				}
-				em {
-					display: block;
-					font-style: normal;
-					font-weight: normal;
-					font-size: 0.8em;
-				}
-			}
-			> p {
-				text-align: justify;
-				font-size: 1.1em;
 			}
 		}
 		/* Top paragraph under the heading */
@@ -168,12 +160,14 @@
 		}
 		/* Voir plus link at the bottom */
 		> p:last-child {
-			padding: 1em 0 2em;
+			padding: 1.5em 0;
 			text-align: center;
+			background-color: #fff;
 			a {
 				font-weight: bold;
-				color: $color-sidebar-comments;
-				text-decoration: underline;
+				color: $color-blue;
+				text-decoration: none;
+				text-transform: uppercase;
 			}
 		}
 

@@ -359,14 +359,18 @@ div.editable-controls {
 	}
 
 	div.comment {
-		position: relative;
+		div.comment-content {
+			position: relative;
+		}
 		div.btn-group {
 			position: absolute;
-			top: 0.5em;
+			top: 0;
 			right: 0;
 			button {
+				padding-right: 0.5em;
+				padding-left: 0.5em;
 				color: $color-dark-grey;
-				background-color: $color-admin-dropdown-bg;
+				background-color: $color-medium-grey;
 				@include border-radius(0);
 			}
 			/* Open dropdown menu on the left, instead of right */
@@ -374,9 +378,6 @@ div.editable-controls {
 				left: auto;
 				right: 0;
 			}
-		}
-		div.author p {
-			margin-top: 0.25em;
 		}
 	}
 
