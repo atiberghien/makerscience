@@ -166,19 +166,28 @@
 		}
 		/* Voir plus link at the bottom */
 		> p:last-child {
-			padding: 1.5em 0;
-			text-align: center;
-			background-color: #fff;
 			a {
+				display: block;
+				padding: 1.5em 0;
+				text-align: center;
 				font-weight: bold;
+				background-color: #fff;
 				text-decoration: none;
 				text-transform: uppercase;
 			}
 			&.project a {
 				color: $color-blue;
+				&:hover {
+					color: #fff;
+					background-color: $color-blue;
+				}
 			}
 			&.resource a {
 				color: $color-green;
+				&:hover {
+					color: #fff;
+					background-color: $color-green;
+				}
 			}
 		}
 
