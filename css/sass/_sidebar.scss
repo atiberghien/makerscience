@@ -62,6 +62,18 @@
 					background-color: $color-sidebar-submenu-bg;
 			}
 		}
+		div.add-member {
+			padding: $grid-gutter-width / 2;
+			input, button.btn {
+				width : 100%;
+				margin-bottom: 0.5em;
+			}
+			input {
+				margin: 0.5em 0;
+				padding: 0.5em;
+				color : $color-text;
+			}
+		}
 		div.member {
 			position: relative;
 			margin: 0 5em;
@@ -112,18 +124,16 @@
 		div.comment {
 			position: relative;
 			margin-bottom: 1.5em;
-			padding: 1em 2em;
-			border-bottom: 1px solid $color-sidebar-comments-border;
-			&:last-child {
-				border: none;
-			}
+			padding: 2em;
+			border-top: 1px solid $color-sidebar-comments-border;
 			span.date {
 				position: absolute;
-				top: 0;
-				right: 2em;
-                left: 7.5em;
+				top: 1em;
+				right: 4em;
+				color: $color-grey;
 			}
 			div.author {
+				margin-bottom: 0.5em;
 				font-weight: bold;
 				img {
 					display: inline-block;
@@ -144,11 +154,13 @@
 			}
 			> p {
 				text-align: justify;
+				font-size: 1.1em;
 			}
 		}
 		/* Top paragraph under the heading */
 		h3 + p {
 			margin: 0 $grid-gutter-width $grid-gutter-width / 2;
+			padding-bottom: $grid-gutter-width;
 			font-family: "LatoLight";
 			font-size: 1.25em;
 			line-height: 1.75em;
@@ -285,17 +297,17 @@
 			}
 		}
 	}
-	
+
 	&.sidebar-profiles {
 		.panel-body ul a:hover {
 				background-color: $color-profile;
 		}
 	}
-	
+
 	&.sidebar-projects {
 		.panel-body ul a:hover {
 				background-color: $color-project;
 		}
 	}
-	
+
 }
