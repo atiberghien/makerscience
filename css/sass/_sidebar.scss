@@ -141,6 +141,8 @@
 				width: 65%;
 				padding: 0.5em 0.75em;
 				background-color: $color-light-cream;
+				@include border-right-radius(5px);
+				@include border-bottom-radius(5px);
 				p.comment-author {
 					margin-top: 0.25em;
 					margin-bottom: 0.5em;
@@ -148,6 +150,8 @@
 				}
 			}
 			div.comment-date {
+				margin-top: 1%;
+				margin-left: 2%;
 				color: $color-grey;
 			}
 		}
