@@ -25,17 +25,19 @@
 
 		ul.submenu, ul.nav-tabs {
 			clear: both;
+			display: table;
+			width: 100%;
 			padding: 2em 0;
 			border-bottom: none;
 			li {
-				display: inline-block;
+				float: none;
+				display: table-cell;
 				border-right: 1px solid $color-sidebar-submenu-border;
 				background-color: transparent;
 				&:last-child {
 					border: none;
 				}
 				&> a {
-					display: inline-block;
 					margin: 0;
 					padding: 1em 0.75em;
 					font-size: 0.8em;
@@ -191,7 +193,7 @@
 					margin-top: 0.5em;
 					vertical-align: top;
 					strong {
-						font-size: 1.1em;						
+						font-size: 1.1em;
 					}
 				}
 			}
