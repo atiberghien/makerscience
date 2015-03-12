@@ -31,8 +31,8 @@
                 <div ng-show="teamCandidate">
                     Rôle de {{teamCandidate.originalObject.user.first_name}} {{teamCandidate.originalObject.user.last_name}} dans le projet :
                     <input type="text" name="role" ng-model="role" placeholder="Saisissez son rôle ..." />
-                    <button type="button" class="btn btn-default" ng-click="addMember(teamCandidate.originalObject, 0, role, true); addTeamMember=false; teamCandidate=null">Ajouter</button>
-                    <button type="button" class="btn btn-primary" ng-click="addTeamMember=false; teamCandidate=null">Annuler</button>
+                    <button type="button" class="btn btn-primary" ng-click="addMember(teamCandidate.originalObject, 0, role, true); addTeamMember=false; teamCandidate=null">Ajouter</button>
+                    <button type="button" class="btn btn-default" ng-click="addTeamMember=false; teamCandidate=null">Annuler</button>
                 </div>
             </div><!-- .add-member -->
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:0}">
