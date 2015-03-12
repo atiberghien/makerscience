@@ -17,7 +17,7 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index: 2000;
+		z-index: 1000;
 		@include box-shadow(0 5px 2px rgba(0,0,0,.25));
 		p.navbar-tagline {
 			display: none;
