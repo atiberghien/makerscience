@@ -1,13 +1,4 @@
 <style>
-    .community input {
-        color : black;
-        width : 100%
-    }
-
-    .community #addTeamMember {
-        width : 100%;
-    }
-
     .community ul.nav-tabs {
         padding : 0 !important;
     }
@@ -23,25 +14,27 @@
             <tab-heading>
                 <span>{{(community | filter: {level:0}).length }}</span>L'équipe projet
             </tab-heading>
-            <button id="addTeamMember" type="button" class="btn btn-default" ng-click="addTeamMember=true" ng-show="editable && !teamCandidate">Ajouter un membre à l'équipe</button>
-            <div ng-show="addTeamMember && !teamCandidate">
-                <angucomplete-alt id="team-member"
-                                placeholder="Nom du membre ..."
-                                pause="100"
-                                selected-object="teamCandidate"
-                                local-data="profiles"
-                                search-fields="user.first_name,user.last_name"
-                                text-no-results="Aucun membre trouvé"
-                                template-url="views/catalog/block/community_profile_autocomplete.html"
-                                minlength="3"/>
+            <div class="add-member">
+                <button id="addTeamMember" type="button" class="btn btn-default" ng-click="addTeamMember=true" ng-show="editable && !teamCandidate">Ajouter un membre à l'équipe</button>
+                <div ng-show="addTeamMember && !teamCandidate">
+                    <angucomplete-alt id="team-member"
+                                    placeholder="Nom du membre ..."
+                                    pause="100"
+                                    selected-object="teamCandidate"
+                                    local-data="profiles"
+                                    search-fields="user.first_name,user.last_name"
+                                    text-no-results="Aucun membre trouvé"
+                                    template-url="views/catalog/block/community_profile_autocomplete.html"
+                                    minlength="3"/>
 
-            </div>
-            <div ng-show="teamCandidate">
-                Rôle de {{teamCandidate.originalObject.user.first_name}} {{teamCandidate.originalObject.user.last_name}} dans le projet :
-                <input type="text" name="role" ng-model="role" placeholder="Saisissez son rôle ..." />
-                <button type="button" class="btn btn-default" ng-click="addMember(teamCandidate.originalObject, 0, role, true); addTeamMember=false; teamCandidate=null">Ajouter</button>
-                <button type="button" class="btn btn-primary" ng-click="addTeamMember=false; teamCandidate=null">Annuler</button>
-            </div>
+                </div>
+                <div ng-show="teamCandidate">
+                    Rôle de {{teamCandidate.originalObject.user.first_name}} {{teamCandidate.originalObject.user.last_name}} dans le projet :
+                    <input type="text" name="role" ng-model="role" placeholder="Saisissez son rôle ..." />
+                    <button type="button" class="btn btn-default" ng-click="addMember(teamCandidate.originalObject, 0, role, true); addTeamMember=false; teamCandidate=null">Ajouter</button>
+                    <button type="button" class="btn btn-primary" ng-click="addTeamMember=false; teamCandidate=null">Annuler</button>
+                </div>
+            </div><!-- .add-member -->
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:0}">
                 <button class="remove" ng-click="removeMember(member)" ng-show="editable"><span class="glyphicon glyphicon-remove" ></span></button>
                 <ng-include src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
