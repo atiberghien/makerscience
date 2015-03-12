@@ -33,7 +33,6 @@
                                 <h4>Nom de l'expérience</h4>
                                 <input type="text"
                                        name="resource-name"
-                                       placeholder=">"
                                        ng-model="projectsheet.project.title"/>
                            </fieldset>
 
@@ -41,8 +40,7 @@
                                 <h4>Résumez l'expérience en une courte phrase</h4>
                                 <input type="text"
                                            name="resource-baseline"
-                                           placeholder=">"
-                                          ng-model="projectsheet.project.baseline"/>
+                                           ng-model="projectsheet.project.baseline"/>
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
@@ -184,7 +182,9 @@
                         <button class="button cancel">Annuler</button>
                         <button class="button" ng-click="saveMakerscienceResource()" >Enregistrer</button>
                     </p>
-
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
+                    </div>
                 </form>
 
             </div><!-- #content -->
