@@ -41,13 +41,13 @@
                     <div class="author">
                         <img ng-if="!$root.authVars.user.email" src="./img/users/user-default.png" alt="User Unknown" />
                         <gravatar-image ng-if="$root.authVars.user.email" data-gravatar-email="$root.authVars.user.email"
-                            data-gravatar-size="85"
+                            data-gravatar-size="50"
                             data-gravatar-rating="pg"
                             data-gravatar-default="mm"
                             data-gravatar-secure="true"
                             data-gravatar-css-class="img-circle">
                         </gravatar-image>
-                        <p>{{$root.authVars.user.first_name}} {{$root.authVars.user.last_name}}</p>
+                        <p><strong>{{$root.authVars.user.first_name}} {{$root.authVars.user.last_name}}</strong><br />Job?</p>
                     </div>
                 </div><!-- .comment -->
 
@@ -55,11 +55,11 @@
                     <fieldset>
                         <!-- <input type="text" ng-model="newcommentForm.text" name="comment" placeholder="Ajouter un commentaire" required/> -->
                         <textarea name="comment" ng-model="newcommentForm.text" form="commentform" placeholder="Rédiger votre commentaire..."></textarea>
-                        <button class="button button-resource" type="submit" ng-click="postComment()" name="send">Poster</button>
+                        <button class="button button-{{parentColor}}" type="submit" ng-click="postComment()" name="send">Poster</button>
                     </fieldset>
                 </form>
             </section>
-        <p><a href="">Voir tous les commentaires</a></p>
+        <p class="{{parentColor}}"><a href="">Voir tous les commentaires</a></p>
 
     </section><!-- .comments -->
 

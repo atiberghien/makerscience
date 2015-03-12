@@ -165,15 +165,35 @@
 			background-color: #fff;
 			a {
 				font-weight: bold;
-				color: $color-blue;
 				text-decoration: none;
 				text-transform: uppercase;
+			}
+			&.project a {
+				color: $color-blue;
+			}
+			&.resource a {
+				color: $color-green;
 			}
 		}
 
 		&.comments-add {
 			.comment {
 				border-bottom: none;
+			}
+			.author {
+				img {
+					display: inline-block;
+					margin-left: $grid-gutter-width;
+					margin-right: $grid-gutter-width / 2;
+				}
+				p {
+					display: inline-block;
+					margin-top: 0.5em;
+					vertical-align: top;
+					strong {
+						font-size: 1.1em;						
+					}
+				}
 			}
 			fieldset {
 				padding: 0 2em;
