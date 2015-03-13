@@ -4,7 +4,7 @@ module.run(['$anchorScroll', ($anchorScroll) ->
   $anchorScroll.yOffset = 50
 ])
 
-module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leafletData, leafletEvents, geocoderService, gravatarImageService, MakerScienceProfile, MakerScienceProject) ->
+module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leafletData, leafletEvents, geocoderService, gravatarImageService, MakerScienceProfile, MakerScienceProject, ObjectProfileLink) ->
 
     $scope.gotoAnchor = (x) ->
         newHash = 'anchor' + x
@@ -70,11 +70,12 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
             $scope.spottedProfile = profileResult
             $scope.spottedProfile.projects = []
 
-            linkedProjects = ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).$object
-            angular.forEach(linkedProjects, (linkedProject) ->
-                MakerScienceProject.one().get({parent__id : linkedProjects.object_id}).then((makerscienceProjectResults) ->
-                    if makerscienceProjectResults.objects.length == 1
-                        $scope.spottedProfile.projects.push(makerscienceProjectResults.objects[0])
+            ObjectProfileLink.getList({content_type:'project', profile__id : $scope.spottedProfile.parent.id}).then((linkedProjectResults)->
+                angular.forEach(linkedProjectResults, (linkedProject) ->
+                    MakerScienceProject.one().get({parent__id : linkedProject.object_id}).then((makerscienceProjectResults) ->
+                        if makerscienceProjectResults.objects.length == 1
+                            $scope.spottedProfile.projects.push(makerscienceProjectResults.objects[0])
+                    )
                 )
             )
             $scope.showMemberInfo = true
