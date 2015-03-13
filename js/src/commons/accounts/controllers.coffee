@@ -13,6 +13,7 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
     $scope.profiles = Profile.getList().$object
     $scope.teamCandidate = null
     $scope.resourceCandidate = null
+    $scope.currentUserCandidate = false
     $scope.community = []
 
     $scope.init = (objectTypeName) ->
