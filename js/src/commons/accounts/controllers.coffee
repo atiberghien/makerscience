@@ -20,6 +20,7 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
 
         $scope.$on(objectTypeName+'Ready', (event, args) ->
             $scope.addMember = (profile, level, detail, isValidated)->
+                # Check if selected profile is not already added with given level
                 ObjectProfileLink.one().customPOST(
                     profile_id: profile.id,
                     level: level,
@@ -30,10 +31,22 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
                 )
 
             $scope.removeMember = (member) ->
+                # attention confusion possible : member ici correspond à une instance de 
+                # ObjectProfileLink. L'id du profil concerné e.g se trouve à member.profile.id
                 ObjectProfileLink.one(member.id).remove().then(()->
                     memberIndex = $scope.community.indexOf(member)
                     $scope.community.splice(memberIndex, 1)
                 )
+
+            $scope.validateMember = ($event, member) ->
+                validated = $event.target.checked
+                console.log(" Validating ?? !", validated)
+                ObjectProfileLink.one(member.id).patch({isValidated : validated}).then(
+                    memberIndex = $scope.community.indexOf(member)
+                    member = $scope.community[memberIndex]
+                    member.isValidated = validated
+                    )
+
 
             $scope.objectTypeName = objectTypeName
             $scope.object = args[objectTypeName]
