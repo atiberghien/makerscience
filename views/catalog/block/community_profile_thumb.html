@@ -6,4 +6,15 @@
     data-gravatar-css-class="img-circle">
 </gravatar-image>
 <p>{{member.profile.user.first_name}} {{member.profile.user.last_name}}</p>
-<p>{{member.detail}}</p>
+<div>
+    <div class="edit-buttons" ng-show="editable">
+        <button ng-click="DetailBtnForm.$show()" ng-hide="DetailBtnForm.$visible">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+    </div>
+    <p editable-text="member.detail"
+        e-form="DetailBtnForm"
+        onbeforesave="updateMemberDetail($data, member)"
+        ng-bind-html="member.detail">{{member.detail}}</p>
+</div>
+

@@ -46,7 +46,13 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
                     member = $scope.community[memberIndex]
                     member.isValidated = validated
                     )
-
+            
+            $scope.updateMemberDetail = (detail, member) ->
+                ObjectProfileLink.one(member.id).patch({detail : detail}).then(
+                    memberIndex = $scope.community.indexOf(member)
+                    member = $scope.community[memberIndex]
+                    member.detail = detail
+                    )
 
             $scope.objectTypeName = objectTypeName
             $scope.object = args[objectTypeName]

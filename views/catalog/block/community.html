@@ -48,13 +48,13 @@
                 </div>
             </div><!-- .add-member -->
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:0}">
+                <ng-include ng-if="member.isValidated || editable" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
                     <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
                     <!-- FIXME : inline style, otherwise hidden by remove button -->
                     <input type="checkbox" ng-checked="member.isValidated" ng-click="validateMember($event, member)" id="validate-checkbox-{{member.id}}" style="margin-left: 22px;">
-                    <label for="validate-checkbox-{{member.id}}">Cocher pour valider ce membre</label>
+                    <label for="validate-checkbox-{{member.id}}">Valider ce membre</label>
                 </div>
-                <ng-include ng-if="member.isValidated || editable" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-if="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
                     Votre ajout à ce projet est en attente de validation
                 </div>
@@ -80,13 +80,13 @@
                 <button type="button" class="btn btn-primary" ng-click="teamCandidate=null">Annuler</button>
             </div>
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:1}">
+                <ng-include ng-if="member.isValidated || editable" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
                     <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
                 <!-- FIXME : inline style, otherwise hidden by remove button -->
                     <input type="checkbox" ng-checked="member.isValidated" ng-click="validateMember($event, member)" id="validate-checkbox-{{member.id}}" style="margin-left: 22px;">
-                    <label for="validate-checkbox-{{member.id}}">Cocher pour valider ce membre</label>
+                    <label for="validate-checkbox-{{member.id}}">Valider ce membre</label>
                 </div>
-                <ng-include ng-if="member.isValidated || editable" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-if="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
                     Votre ajout à ce projet est en attente de validation
                 </div>
