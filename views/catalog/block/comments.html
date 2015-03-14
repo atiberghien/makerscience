@@ -6,7 +6,7 @@
         </ul>
         <h3>Commentaires</h3>
         <p>Partagez vos questions, vos avis, vos pistes d'améliorations</p>
-        <div ng-show="!commenting">
+        <div>
             <div class="comment" ng-repeat="comment in comments" ng-class="{'flagged' : comment.flags[0]}">
                 <div class="comment-gravatar">
                     <gravatar-image ng-if="comment.user.email" data-gravatar-email="comment.user.email"

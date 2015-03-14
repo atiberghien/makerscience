@@ -357,6 +357,30 @@ div.editable-controls {
 			}
 		}
 	}
+	div.member-details {
+		form {
+			margin: 0.5em 0 0.5em 1em;
+			input {
+				display: block;
+				width: 100%;
+			}
+			.editable-controls {
+				display: block;
+			}
+		}
+		.editable-buttons {
+			display: block;
+			button {
+				display: inline-block;
+				width: auto;
+				margin-top: 0.25em;
+				margin-left: 0;
+				&:last-child {
+					float: right;
+				}
+			}
+		}
+	}
 
 	div.comment {
 		div.comment-content {

@@ -6,13 +6,25 @@
 <section class="community community-{{parentColor}}" ng-controller="CommunityCtrl" ng-init="init(cummunityObjectTypeName)">
     <ul class="actions">
         <li><a href="" ng-click="addMember(currentMakerScienceProfile.parent, 2, '', true)"><span class="glyphicon glyphicon-thumbs-up"></span>J'aime</a></li>
-        <li><a href="" ng-click="resourceCandidate = currentMakerScienceProfile.parent"><span class="glyphicon glyphicon-user"></span>Contribuer</a></li>
+        <li><a href="" ng-click="currentUserCandidate=!currentUserCandidate"><span class="glyphicon glyphicon-user"></span>Contribuer</a></li>
+        <!-- <li><a href="" ng-click="resourceCandidate = currentMakerScienceProfile.parent"><span class="glyphicon glyphicon-user"></span>Contribuer</a></li> -->
     </ul>
     <h3>La communauté</h3>
-    <tabset>
+    <!-- Formulaire pour permettre a l'usager connecté de s'ajouter comme membre équipe ou ressource -->
+    <div class="add-member" ng-show="currentUserCandidate">
+        <button type="button" ng-show="!teamCandidate && !resourceCandidate" class="btn btn-primary" ng-click="teamCandidate=currentMakerScienceProfile.parent">Vous êtes membre de l'équipe</button>
+        <button type="button" ng-show="!teamCandidate && !resourceCandidate" class="btn btn-primary" ng-click="resourceCandidate=currentMakerScienceProfile.parent">Vous voulez aider ce projet</button>
+        <input type="text" ng-show="teamCandidate || resourceCandidate" name="role" ng-model="role" placeholder="Saisissez votre rôle ..." />
+        <button type="button" ng-show="teamCandidate" class="btn btn-primary" ng-click="addMember(teamCandidate, 0, role, false); currentUserCandidate=false; teamCandidate=null;">S'ajouter comme membre d'équipe</button>
+        <button type="button" ng-show="resourceCandidate" class="btn btn-primary" ng-click="addMember(resourceCandidate, 1, role, false); currentUserCandidate=false; resourceCandidate=null;">S'ajouter comme membre resource</button>
+        <button type="button" class="btn btn-default" ng-click="currentUserCandidate=false; teamCandidate=null; resourceCandidate=null">Annuler</button>
+
+    </div>
+    <tabset ng-show="!currentUserCandidate">
+        <!-- Membres de l'équipe -->
         <tab ng-init="addTeamMember=false">
             <tab-heading>
-                <span>{{(community | filter: {level:0}).length }}</span>L'équipe projet
+                <span>{{(community | filter: {level:0, isValidated: true}).length }}</span>L'équipe projet
             </tab-heading>
             <div class="add-member">
                 <button id="addTeamMember" type="button" class="btn btn-default" ng-click="addTeamMember=true" ng-show="editable && !teamCandidate">Ajouter un membre à l'équipe</button>
@@ -36,10 +48,21 @@
                 </div>
             </div><!-- .add-member -->
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:0}">
-                <button class="remove" ng-click="removeMember(member)" ng-show="editable"><span class="glyphicon glyphicon-remove" ></span></button>
-                <ng-include src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <ng-include ng-if="member.isValidated || editable" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <div ng-show="editable">
+                    <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
+                    <input type="checkbox" ng-checked="member.isValidated" ng-click="validateMember($event, member)" id="validate-checkbox-{{member.id}}">
+                    <label for="validate-checkbox-{{member.id}}">Valider ce membre</label>
+                </div>
+                <div ng-if="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
+                    Votre ajout à ce projet est en attente de validation
+                </div>
+                <div ng-if="!editable && member.isValidated == false && !(member.profile.id == currentMakerScienceProfile.parent.id)">
+                    Membre en attente de validation
+                </div>
             </div><!-- .member -->
         </tab>
+        <!-- Membres resources  -->
         <tab>
             <tab-heading>
                 <span>{{(community | filter: {level:1, isValidated: true}).length }}</span>
@@ -56,10 +79,18 @@
                 <button type="button" class="btn btn-primary" ng-click="teamCandidate=null">Annuler</button>
             </div>
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:1}">
-                <button class="remove" ng-click="removeMember(member)" ng-show="editable"><span class="glyphicon glyphicon-remove" ></span></button>
-                <ng-include ng-if="member.isValidated" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
-                <div ng-if="member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
+                <ng-include ng-if="member.isValidated || editable" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <div ng-show="editable">
+                    <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
+                <!-- FIXME : inline style, otherwise hidden by remove button -->
+                    <input type="checkbox" ng-checked="member.isValidated" ng-click="validateMember($event, member)" id="validate-checkbox-{{member.id}}" style="margin-left: 22px;">
+                    <label for="validate-checkbox-{{member.id}}">Valider ce membre</label>
+                </div>
+                <div ng-if="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
                     Votre ajout à ce projet est en attente de validation
+                </div>
+                <div ng-if="!editable && member.isValidated == false && !(member.profile.id == currentMakerScienceProfile.parent.id)">
+                    Membre en attente de validation
                 </div>
             </div><!-- .member -->
         </tab>
