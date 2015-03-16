@@ -62,8 +62,14 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     needsIndex = 0
 
 
-    $scope.saveMakerscienceProject = () ->
+    $scope.saveMakerscienceProject = (formIsValid) ->
+        if !formIsValid
+            console.log(" Form invalid !")
+            return false
+        else
+            console.log("submitting form")
         $scope.saveProject().then((projectsheetResult) ->
+            console.log(" Just saved project : Result from savingProject : ", projectsheetResult)
             makerscienceProjectData =
                 parent : projectsheetResult.project
                 linked_resources : $scope.linkedResources.map((resource) ->
@@ -71,6 +77,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
 
             MakerScienceProject.post(makerscienceProjectData).then((makerscienceProjectResult)->
+                console.log(" Posting MakerScienceProject, result from savingProject : ", projectsheetResult)
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id, {})
                 )

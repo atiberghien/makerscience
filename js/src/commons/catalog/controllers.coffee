@@ -62,7 +62,8 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
             $scope.projectsheet.template = template.resource_uri
         )
 
-    $scope.saveProject = ->
+    $scope.saveProject = ()->
+        console.log("saving project ..")
         if $scope.projectsheet.project.begin_date is undefined
             $scope.projectsheet.project.begin_date = new Date()
 

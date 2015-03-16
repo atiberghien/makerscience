@@ -25,22 +25,24 @@
 
                 <h3>Nouveau projet</h3>
 
-                <form ng-controller="MakerScienceProjectSheetCreateCtrl" ng-init="init('projet-makerscience')">
+                <form name="newProjectForm" novalidate ng-controller="MakerScienceProjectSheetCreateCtrl" ng-init="init('projet-makerscience'); submitted=false" ng-submit="saveMakerscienceProject(newProjectForm.$valid)" ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }">
                     <div class="row">
                         <div class="col-md-8">
 
                             <fieldset class="fake-placeholder">
                                 <h4>Nom du projet</h4>
                                 <input type="text"
-                                       name="project-name"
-                                       ng-model="projectsheet.project.title"/>
+                                       name="projectName"
+                                       ng-model="projectsheet.project.title" required/>
+                                <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Nom du projet requis</p>
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
                                 <h4>Résumez votre projet en une courte phrase</h4>
                                 <input type="text"
-                                           name="project-baseline"
-                                           ng-model="projectsheet.project.baseline"/>
+                                           name="projectBaseline"
+                                           ng-model="projectsheet.project.baseline" required/>
+                                <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Courte description du projet requise</p>
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
@@ -59,10 +61,10 @@
 
                             <fieldset class="addPhotosVideos">
                                 <label ng-click="openGallery()">Ajouter des médias</label>
-                                <button class="addPhotos" ng-click="openGallery()">
+                                <button type="button" class="addPhotos" ng-click="openGallery()">
                                     <span class="glyphicon glyphicon-camera"></span>
                                 </button>
-                                <button class="addVideos" ng-click="openGallery()">
+                                <button  type="button" class="addVideos" ng-click="openGallery()">
                                     <span class="glyphicon glyphicon-facetime-video"></span>
                                 </button>
                             </fieldset>
@@ -176,8 +178,9 @@
                     </fieldset>
 
                     <p class="right">
-                        <button class="button cancel">Annuler</button>
-                        <button class="button" ng-click="saveMakerscienceProject()" >Enregistrer</button>
+                        <button class="button cancel" ng-click="goHome()">Annuler</button>
+                        <button type="submit" class="button" ng-click="submitted=true">Enregistrer</button>
+                        <!-- <input type="submit" class="button" ng-click="saveMakerscienceProject()" value="Enregistrer"></input> -->
                     </p>
                     <div class="progress" style="">
                         <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
