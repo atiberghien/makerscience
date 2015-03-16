@@ -20,7 +20,9 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
 
         $scope.$on(objectTypeName+'Ready', (event, args) ->
             $scope.addMember = (profile, level, detail, isValidated)->
-                # Check if selected profile is not already added with given level
+                if $scope.isAlreadyMember(profile, level)
+                    console.log(" --- ! -- already Member with this level --- ! ---")
+                    return true
                 ObjectProfileLink.one().customPOST(
                     profile_id: profile.id,
                     level: level,
@@ -29,6 +31,16 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
                 , $scope.objectTypeName+'/'+$scope.object.id).then((objectProfileLinkResult) ->
                     $scope.community.push(objectProfileLinkResult)
                 )
+
+            $scope.isAlreadyMember = (profile, level)->
+                # Check if selected profile is not already added with given level
+                for member in $scope.community
+                    if member.profile.resource_uri == profile.resource_uri
+                        if member.level == level
+                            return true
+                return false
+                
+            
 
             $scope.removeMember = (member) ->
                 # attention confusion possible : member ici correspond à une instance de 
