@@ -62,8 +62,14 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     needsIndex = 0
 
 
-    $scope.saveMakerscienceProject = () ->
+    $scope.saveMakerscienceProject = (formIsValid) ->
+        if !formIsValid
+            console.log(" Form invalid !")
+            return false
+        else
+            console.log("submitting form")
         $scope.saveProject().then((projectsheetResult) ->
+            console.log(" Just saved project : Result from savingProject : ", projectsheetResult)
             makerscienceProjectData =
                 parent : projectsheetResult.project
                 linked_resources : $scope.linkedResources.map((resource) ->
@@ -71,14 +77,19 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
 
             MakerScienceProject.post(makerscienceProjectData).then((makerscienceProjectResult)->
+                console.log(" Posting MakerScienceProject, result from savingProject : ", projectsheetResult)
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id, {})
                 )
-                $scope.savePhotos(projectsheetResult.id, projectsheetResult.bucket.id)
+                
                 $scope.saveVideos(projectsheetResult.id)
-
-                $scope.uploader.onCompleteAll = () ->
-                    $state.go("project.detail", {slug : projectsheetResult.project.slug})
+                # if no photos to upload, directly go to new project sheet
+                if $scope.uploader.queue.length <= 0
+                    $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+                else 
+                    $scope.savePhotos(projectsheetResult.id, projectsheetResult.bucket.id)
+                    $scope.uploader.onCompleteAll = () ->
+                        $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
             )
         )
 
@@ -142,8 +153,15 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
     $scope.tags = []
 
-    $scope.saveMakerscienceResource = () ->
+    $scope.saveMakerscienceResource = (formIsValid) ->
+        if !formIsValid
+            console.log(" Form invalid !")
+            return false
+        else
+            console.log("submitting form")
+
         $scope.saveProject().then((resourcesheetResult) ->
+            console.log(" Just saved project for resoure sheet, result: ", resourcesheetResult)
             makerscienceResourceData =
                 level : $scope.projectsheet.level
                 duration : $scope.projectsheet.duration
@@ -154,10 +172,18 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
 
             MakerScienceResource.post(makerscienceResourceData).then((makerscienceResourceResult)->
+                console.log(" Posting MakerScienceResource, result  : ", makerscienceResourceResult)
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id, {})
                 )
-                # $state.go("resource.detail", {slug : $scope.projectsheet.project.slug})
+                $scope.saveVideos(resourcesheetResult.id)
+                # if no photos to upload, directly go to new project sheet
+                if $scope.uploader.queue.length <= 0
+                    $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
+                else 
+                    $scope.savePhotos(resourcesheetResult.id, resourcesheetResult.bucket.id)
+                    $scope.uploader.onCompleteAll = () ->
+                        $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
             )
         )
 )
