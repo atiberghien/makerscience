@@ -160,7 +160,7 @@
                                                 minlength="3"/>
                             </div>
                             <div class="col-md-2">
-                                <button class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'éxpérience</button>
+                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'éxpérience</button>
                             </div>
                         </div>
                         <ul class="list-group">
@@ -170,7 +170,7 @@
                                         <label>{{resource.parent.title}}</label>
                                     </div>
                                     <div class="col-md-2">
-                                        <button class="btn btn-danger" ng-click="delLinkedResource(resource)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                        <button type="button" class="btn btn-danger" ng-click="delLinkedResource(resource)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
                                      </div>
                                 </div>
                             </li>
@@ -178,9 +178,8 @@
                     </fieldset>
 
                     <p class="right">
-                        <button class="button cancel" ng-click="goHome()">Annuler</button>
+                        <button type="button" class="button cancel" ui-sref="project.list">Annuler</button>
                         <button type="submit" class="button" ng-click="submitted=true">Enregistrer</button>
-                        <!-- <input type="submit" class="button" ng-click="saveMakerscienceProject()" value="Enregistrer"></input> -->
                     </p>
                     <div class="progress" style="">
                         <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
