@@ -26,8 +26,8 @@
             <tab-heading>
                 <span>{{(community | filter: {level:0, isValidated: true}).length }}</span>L'équipe projet
             </tab-heading>
-            <div class="add-member">
-                <button id="addTeamMember" type="button" class="btn btn-default" ng-click="addTeamMember=true" ng-show="editable && !teamCandidate">Ajouter un membre à l'équipe</button>
+            <div class="add-member" ng-show="editable">
+                <button id="addTeamMember" type="button" class="btn btn-default" ng-click="addTeamMember=true" ng-show="!teamCandidate">Ajouter un membre à l'équipe</button>
                 <div ng-show="addTeamMember && !teamCandidate">
                     <angucomplete-alt id="team-member"
                                     placeholder="Nom du membre ..."
@@ -37,7 +37,7 @@
                                     search-fields="user.first_name,user.last_name"
                                     text-no-results="Aucun membre trouvé"
                                     template-url="views/catalog/block/community_profile_autocomplete.html"
-                                    minlength="3"/>
+                                    minlength="2"/>
 
                 </div>
                 <div ng-show="teamCandidate">
@@ -63,7 +63,7 @@
             </div><!-- .member -->
         </tab>
         <!-- Membres resources  -->
-        <tab>
+        <tab ng-init="addResourceMember=false" ng-click="addResourceMember=false">
             <tab-heading>
                 <span>{{(community | filter: {level:1, isValidated: true}).length }}</span>
                 <ng-pluralize count="0"
@@ -71,13 +71,28 @@
                                  'one': 'Personne ressource',
                                  'other': 'Personnes ressources'}">
                  </ng-pluralize>
-
             </tab-heading>
-            <div ng-show="resourceCandidate">
-                <input type="text" name="role" ng-model="role" placeholder="Quelle serait votre contribution ?" />
-                <button type="button" class="btn btn-default" ng-click="addMember(teamCandidate, 1, role, false); resourceCandidate=null">Ajouter</button>
-                <button type="button" class="btn btn-primary" ng-click="teamCandidate=null">Annuler</button>
-            </div>
+            <div class="add-member" ng-show="editable">
+                <button id="addResourceMember" type="button" class="btn btn-default" ng-click="addResourceMember=true" ng-show="!resourceCandidate">Ajouter un membre ressource</button>
+                <div ng-show="addResourceMember && !resourceCandidate">
+                    <angucomplete-alt id="resource-member"
+                                    placeholder="Nom du membre ..."
+                                    pause="100"
+                                    selected-object="resourceCandidate"
+                                    local-data="profiles"
+                                    search-fields="user.first_name,user.last_name"
+                                    text-no-results="Aucun membre trouvé"
+                                    template-url="views/catalog/block/community_profile_autocomplete.html"
+                                    minlength="2"/>
+                </div>
+                <div ng-show="resourceCandidate">
+                    Rôle de {{resourceCandidate.originalObject.user.first_name}} {{resourceCandidate.originalObject.user.last_name}} dans le projet :
+                    <input type="text" name="role" ng-model="role" placeholder="Saisissez son rôle ..." />
+                    <button type="button" class="btn btn-default" ng-click="addMember(resourceCandidate.originalObject, 1, role, true); resourceCandidate=null">Ajouter</button>
+                    <button type="button" class="btn btn-primary" ng-click="resourceCandidate=null">Annuler</button>
+                </div>
+            </div><!-- .add-member -->
+            
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:1}">
                 <ng-include ng-if="member.isValidated || editable" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
