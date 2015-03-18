@@ -36,7 +36,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
 
 module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, PostalAddress,
                                              ProjectSheetTemplate, ProjectSheetItem,
-                                             @$http, FileUploader, $modal) ->
+                                             @$http, FileUploader, $modal, ObjectProfileLink) ->
 
     $scope.uploader = new FileUploader(
         url: config.bucket_uri
@@ -74,6 +74,15 @@ module.controller("ProjectSheetCreateCtrl", ($scope, ProjectSheet, Project, Post
                 q_a.projectsheet = projectsheetResult.resource_uri
                 ProjectSheetItem.post(q_a)
             )
+            # add connected user as team member of project with detail "porteur"
+            ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 0,
+                    detail : "Créateur/Créatrice",
+                    isValidated:true
+                , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
+                    console.log("added current user as team member", objectProfileLinkResult)
+                )
             return projectsheetResult
         )
 
