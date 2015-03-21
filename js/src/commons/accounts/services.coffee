@@ -1,7 +1,10 @@
 module = angular.module("commons.accounts.services", ['restangular'])
 
 
-# Services
+module.factory('User', (Restangular) ->
+    return Restangular.service('account/user')
+)
+
 module.factory('Profile', (Restangular) ->
     return Restangular.service('account/profile')
 )

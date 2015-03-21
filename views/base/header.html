@@ -13,7 +13,7 @@
                     </div>
                     <p class="navbar-tagline">Plateforme collaborative pour<br />la médiation des sciences, des techniques et des innovations</p>
                     <p class="register-login" ng-show="!authVars.isAuthenticated">
-                        <button class="button" ng-click="showLoginPanel=true">S'inscrire</button>
+                        <button class="button" ng-click="openSignupPopup()">S'inscrire</button>
                         <button class="button" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
                     </p>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -46,7 +46,7 @@
         <div class="container">
 
             <!-- When logging in -->
-            <div class="authenticated" ng-show="showLoginPanel">
+            <div class="authenticated" ng-show="showLoginPanel && currentMakerScienceProfile == null">
                 <ng-include src="'/views/base/login.html'"></ng-include>
             </div>
 
@@ -63,9 +63,7 @@
                     {{currentMakerScienceProfile.parent.user.first_name}} <strong>{{currentMakerScienceProfile.parent.user.last_name}}</strong>
                 </a>
                 <ul class="toolbar">
-                    <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
+                    <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-share-alt"></span>Se déconnecter</a></li>
                 </ul><!-- #sidenav -->
             </div>
 

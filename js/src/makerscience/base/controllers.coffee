@@ -1,21 +1,34 @@
-module = angular.module("makerscience.base.controllers", ['makerscience.catalog.controllers', 'makerscience.profile.controllers'])
+module = angular.module("makerscience.base.controllers", ['makerscience.catalog.controllers', 'makerscience.profile.controllers', 'commons.accounts.controllers'])
 
-module.controller('CurrentMakerScienceProfileCtrl', ($scope, $rootScope, MakerScienceProfile) ->
+module.controller('CurrentMakerScienceProfileCtrl', ($scope, $rootScope, $modal, MakerScienceProfile) ->
     $rootScope.$watch('authVars.user', (newValue, oldValue) ->
         if newValue != oldValue
             MakerScienceProfile.one().get({parent__user__id : $rootScope.authVars.user.id}).then((profileResult)->
                 $rootScope.currentMakerScienceProfile = profileResult.objects[0]
             )
     )
+
+    $rootScope.openSignupPopup = ->
+        modalInstance = $modal.open(
+            templateUrl: 'views/base/signupModal.html',
+            controller: 'SignupPopupCtrl'
+    )
 )
 
-module.controller('LoginModalCtrl', ($scope, $modal) ->
-    $scope.$watch('authVars.loginrequired', (newValue, oldValue) ->
-        if oldValue == false && newValue == true
-            modalInstance = $modal.open({
-                templateUrl: 'loginModalContent.html',
-            })
-    )
+module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state, User) ->
+    $scope.register = ->
+        $scope.user.email = $scope.user.username
+        User.post($scope.user).then((userResult) ->
+            $rootScope.authVars.username = $scope.user.username
+            $rootScope.authVars.password = $scope.user.password
+            $rootScope.loginService.submit()
+            $rootScope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
+                if newValue != oldValue
+                    $modalInstance.close()
+                    $state.go("profile.detail", {id : $rootScope.currentMakerScienceProfile.id})
+
+            )
+        )
 )
 
 module.controller('HomepageFeaturedListCtrl', ($scope, MakerScienceProject, MakerScienceResource) ->
