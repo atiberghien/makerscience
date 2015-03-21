@@ -1,0 +1,35 @@
+ul.activity {
+    margin-bottom: $grid-gutter-width;
+    li {
+        padding: $grid-gutter-width / 2;
+        padding-left: 75px;
+        border-bottom: 1px solid $color-medium-grey;
+        &.activity-pink,
+        &.activity-green,
+        &.activity-blue {
+            background-repeat: no-repeat;
+            background-position: 2% 50%;
+        }
+        &.activity-pink {
+            background-image: url('../img/icons/community-small.png')
+        }
+        &.activity-green {
+            background-image: url('../img/icons/resource-small.png')
+        }
+        &.activity-blue {
+            background-image: url('../img/icons/project-small.png')
+        }
+        a {
+            color: $color-grey;
+            font-weight: bold;
+            &:hover {
+                color: $color-pink;
+            }
+        }
+    }
+    span {
+        display: block;
+        font-size: 0.9em;
+        color: $color-grey;
+    }
+}
