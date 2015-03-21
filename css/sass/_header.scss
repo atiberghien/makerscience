@@ -357,11 +357,12 @@ div.crumbs {
 		div.intro {
 			margin: 0;
 			border: none;
-			background-color: rgba(0,0,0,0.5);
+			background-color: rgba(255, 255, 255, 0.85);
 			div.side-header {
 				background-color: #fff;
 			}
 			h1, h2 {
+				color: $color-text;
 				background-color: transparent;
 			}
 			h1 {
@@ -394,7 +395,6 @@ div.crumbs {
 			line-height: 1.5em;
 		}
 		p.updated, p.location {
-			color: #fff;
 			text-align: center;
 		}
 		div.location {
@@ -407,6 +407,7 @@ div.crumbs {
 				padding: $grid-gutter-width / 2;
 				font-size: 2em;
 				font-weight: bold;
+				color: #fff;
 				background-color: black;
 				img {
 					vertical-align: middle;
