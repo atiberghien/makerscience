@@ -41,6 +41,18 @@
 
 }
 
+.dropdown.dropdown-logged-in {
+	button {
+		position: absolute;
+		top: -$grid-gutter-width;
+		right: 0;
+	}
+	.dropdown-menu {
+		right: 0;
+		left: auto;
+	}
+}
+
 form.search-full-width {
 	position: relative;
 	margin: 0 $grid-gutter-width / 2;

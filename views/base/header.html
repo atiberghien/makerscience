@@ -32,6 +32,18 @@
                             <button class="connect" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</button>
                         </form>
                         -->
+
+                        <div class="dropdown dropdown-logged-in" ng-if="authVars.isAuthenticated">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                                {{currentMakerScienceProfile.parent.user.first_name}}
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                                <li role="presentation"><a ng-click="logout()" role="menuitem" tabindex="-1" href="#">Se déconnecter</a></li>
+                            </ul>
+                        </div>
+
                         <!-- Showing when loggin in and when logged in -->
                         <form method="post" class="navbar-right" role="search">
                             <ng-include src="'/views/base/search.html'"></ng-include>
@@ -48,23 +60,6 @@
             <!-- When logging in -->
             <div class="authenticated" ng-show="showLoginPanel && currentMakerScienceProfile == null">
                 <ng-include src="'/views/base/login.html'"></ng-include>
-            </div>
-
-            <!-- When logged in -->
-            <div class="authenticated" ng-if="authVars.isAuthenticated">
-                <a ui-sref="profile.detail({id:currentMakerScienceProfile.id})">
-                    <gravatar-image data-gravatar-email="currentMakerScienceProfile.parent.user.email"
-                        data-gravatar-size="30"
-                        data-gravatar-rating="pg"
-                        data-gravatar-default="/img/users/user-default.png"
-                        data-gravatar-secure="true"
-                        data-gravatar-css-class="img-circle">
-                    </gravatar-image>
-                    {{currentMakerScienceProfile.parent.user.first_name}} <strong>{{currentMakerScienceProfile.parent.user.last_name}}</strong>
-                </a>
-                <ul class="toolbar">
-                    <li><a href="" ng-click="logout()"><span class="glyphicon glyphicon-share-alt"></span>Se déconnecter</a></li>
-                </ul><!-- #sidenav -->
             </div>
 
         </div><!-- .container -->
