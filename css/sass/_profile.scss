@@ -7,6 +7,13 @@ div.activity, div.contribution {
         font-size: 1.7em;
     }
 }
+div.contribution {
+    // #FIXME
+    img {
+        width: 75px;
+        height: 75px;
+    }
+}
 
 .content-member h2 {
     &.projects,
