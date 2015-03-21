@@ -1,9 +1,29 @@
-ul.activity {
+div.activity, div.contribution {
     margin-bottom: $grid-gutter-width;
+    padding: $grid-gutter-width / 2;
+    background-color: white;
+    h2 {
+        margin-bottom: $grid-gutter-width / 2;
+        font-size: 1.7em;
+    }
+}
+
+.content-member h2 {
+    &.projects,
+    &.resources,
+    &.members {
+        margin-bottom: $grid-gutter-width / 2;
+    }
+}
+
+ul.activity {
     li {
         padding: $grid-gutter-width / 2;
         padding-left: 75px;
         border-bottom: 1px solid $color-medium-grey;
+        &:last-child {
+            border-bottom: none;
+        }
         &.activity-pink,
         &.activity-green,
         &.activity-blue {
