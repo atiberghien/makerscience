@@ -149,6 +149,9 @@ footer {
 				font-family: LatoBlack;
 				text-transform: uppercase;
 				border: none;
+				&:hover {
+					background-color: $color-blue;
+				}
 			}
 		}
 	}
