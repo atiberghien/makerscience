@@ -42,13 +42,10 @@
             <div class="col-md-5" ng-init="showLoginPanel=false">
                 <div class="home-join">
                     <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
-                    <div ng-show="!showLoginPanel">
+                    <div ng-show="!showLoginPanel" class="welcome">
                         <div class="join">
-                            <h2>Rejoindre la communauté MakerScience!</h2>
-                            <p class="buttons" ng-show="!authVars.isAuthenticated">
-                                <a class="button" ng-click="showLoginPanel=true">S'inscrire</a>
-                                <a class="button" ng-init="showLoginPanel=false" ng-click="showLoginPanel=true">Se connecter</a>
-                            </p>
+                            <h2 ng-hide="authVars.isAuthenticated">Rejoindre la communauté MakerScience!</h2>
+                            <h2 ng-show="authVars.isAuthenticated">Bienvenue {{currentMakerScienceProfile.parent.user.first_name}}</h2>
                         </div><!-- .join -->
                     </div>
                     <div ng-show="showLoginPanel" >
