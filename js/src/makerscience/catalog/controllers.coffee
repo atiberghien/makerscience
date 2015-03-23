@@ -48,7 +48,7 @@ module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResourc
             $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource, TaggedItem) ->
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
@@ -77,7 +77,20 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
 
             MakerScienceProject.post(makerscienceProjectData).then((makerscienceProjectResult)->
-                console.log(" Posting MakerScienceProject, result from savingProject : ", projectsheetResult)
+                console.log(" Posting MakerScienceProject, result from savingProject : ", makerscienceProjectResult)
+                # add connected user as team member of project with detail "porteur"
+                ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 0,
+                    detail : "Créateur/Créatrice",
+                    isValidated:true
+                , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
+                    console.log("added current user as team member", objectProfileLinkResult.profile)
+                    MakerScienceProject.one(makerscienceProjectResult.id).customPOST({"profile_id":objectProfileLinkResult.profile.id}, 'assign').then((result)->
+                        console.log(" succesfully assigned edit rights ? : ", result)
+                        )
+                )
+                
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id, {})
                 )
@@ -105,16 +118,21 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         delete $scope.needs[index]
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink) ->
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.preparedTags = []
+    $scope.currentUserHasEditRights = false
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
-
+        
+        MakerScienceProject.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
+            console.log(" Has current user edit rights ?", result.has_perm)
+            $scope.currentUserHasEditRights = result.has_perm
+            )
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
 
@@ -131,6 +149,16 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
                     $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
             )
         )
+
+        $scope.$on('newTeamMember', (event, user_id)->
+                """
+                Give edit rights to newly added or validated team member (see commons.accounts.controllers)
+                """
+                console.log(" giving edit rights to user id = ", user_id)
+                MakerScienceProject.one($scope.projectsheet.id).customPOST({"user_id":user_id}, 'assign').then((result)->
+                    console.log(" succesfully assigned edit rights ? : ", result)
+                    )
+            )
 
         $scope.updateLinkedResources = ->
             MakerScienceProject.one($scope.projectsheet.id).patch(
@@ -194,9 +222,15 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.preparedTags = []
+    $scope.currentUserHasEditRights = false
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
+
+        MakerScienceResource.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
+            console.log(" Has current user edit rights ?", result.has_perm)
+            $scope.currentUserHasEditRights = result.has_perm
+            )
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
@@ -213,6 +247,16 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
                 if similar.type == 'makerscienceresource'
                     $scope.similars.push(MakerScienceResource.one(similar.id).get().$object)
             )
+        )
+
+        $scope.$on('newTeamMember', (event, user_id)->
+            """
+            Give edit rights to newly added or validated team member (see commons.accounts.controllers)
+            """
+            console.log(" giving edit rights to user id = ", user_id)
+            MakerScienceResource.one($scope.projectsheet.id).customPOST({"user_id":user_id}, 'assign').then((result)->
+                console.log(" succesfully assigned edit rights ? : ", result)
+                )
         )
 
         $scope.updateLinkedResources = ->
