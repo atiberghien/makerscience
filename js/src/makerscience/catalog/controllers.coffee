@@ -86,7 +86,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     isValidated:true
                 , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
                     console.log("added current user as team member", objectProfileLinkResult.profile)
-                    MakerScienceProject.one(makerscienceProjectResult.id).customPOST({"profile_id":objectProfileLinkResult.profile.id}, 'assign').then((result)->
+                    MakerScienceProject.one(makerscienceProjectResult.id).customPOST({"user_id":objectProfileLinkResult.profile.user.id}, 'assign').then((result)->
                         console.log(" succesfully assigned edit rights ? : ", result)
                         )
                 )
