@@ -96,9 +96,15 @@
 			margin: $grid-gutter-width 1em;
 		}
 	}
+	div.welcome {
+		width: 100%;
+	}
 	h2 {
 		margin-top: 1em;
 		margin-bottom: 2em;
+		font-size: 1.4em;
+		font-weight: bold;
+		text-transform: uppercase;
 		line-height: 2em;
 	}
 	ul {

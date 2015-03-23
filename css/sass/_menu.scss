@@ -3,6 +3,7 @@ header {
 		margin: 115px 0 0 0;
 		font-size: 0.95em;
 		background-color: $color-very-dark-blue;
+		background-color: $color-blue;
 		&.navbar {
 			@include border-radius(0);
 		}
@@ -51,7 +52,7 @@ header {
 			border-bottom: 4px solid transparent;
 			&.selected, &:hover {
 				background-color: transparent;
-				border-color: $color-blue;
+				border-color: #fff;
 			}
 		}
 
@@ -106,6 +107,7 @@ header {
 		button {
 			padding: 0.5em 1em;
 			background-color: $color-blue !important;
+			background-color: $color-dark-blue !important;
 			border: none;
 			&:hover {
 				background-color: $color-green !important;

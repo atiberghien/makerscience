@@ -7,7 +7,7 @@
     <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
     <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
     <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
-</ul><!-- #nav -->
+</ul><!-- #sidenav -->
 
 <div id="intro" class="intro-profile">
     <div class="container">
@@ -16,7 +16,7 @@
 
                 <div class="col-md-4">
                     <gravatar-image data-gravatar-email="profile.parent.user.email"
-                                    data-gravatar-size="200"
+                                    data-gravatar-size="125"
                                     data-gravatar-rating="pg"
                                     data-gravatar-default="mm"
                                     data-gravatar-secure="true"
@@ -36,6 +36,27 @@
                             ng-bind-html="profile.activity">{{ profile.activity }}
                         </h2>
                     </div>
+
+                    <p class="updated">Mise à jour <span am-time-ago="profile.modified"></span></p>
+
+                    <div class="location">
+                        <div class="relative">
+                            <div class="edit-buttons edit-buttons-location" ng-show="editable">
+                                <button ng-click="LocationBtnForm.$show()" ng-hide="LocationBtnForm.$visible">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                            </div>
+                            <p class="location">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                <label editable-text="profile.location.address_locality"
+                                    e-form="LocationBtnForm"
+                                    onbeforesave="updateMakerScienceProfile('PostalAddress', profile.location.id , 'address_locality', $data)"
+                                    ng-bind-html="profile.location.address_locality">{{ profile.location.address_locality }}
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="col-md-8">
@@ -104,56 +125,30 @@
                             </div><!-- .editable -->
                         </div><!-- .relative -->
 
-                        <div class="row">
-
-                            <div class="col-md-6" >
-                                <div class="edit-buttons edit-buttons-location" ng-show="editable">
-                                    <button ng-click="LocationBtnForm.$show()" ng-hide="LocationBtnForm.$visible">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </div>
-                                <p class="location">
-                                    <img src="./img/location.png" alt="Location" />
-                                    <label editable-text="profile.location.address_locality"
-                                        e-form="LocationBtnForm"
-                                        onbeforesave="updateMakerScienceProfile('PostalAddress', profile.location.id , 'address_locality', $data)"
-                                        ng-bind-html="profile.location.address_locality">{{ profile.location.address_locality }}
-                                    </label>
-                                </p>
+                        <div class="relative">
+                            <div class="edit-buttons" ng-click="socialEdit=!socialEdit" ng-show="editable" ng-init="socialEdit=False">
+                                <button> <span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="relative">
-                                    <div class="edit-buttons" ng-click="socialEdit=!socialEdit" ng-show="editable" ng-init="socialEdit=False">
-                                        <button> <span class="glyphicon glyphicon-pencil"></span></button>
-                                    </div>
-                                    <div ng-show="!socialEdit" >
-                                        <a ng-show="profile.facebook" href="{{profile.facebook}}" target="_blank" class="share-facebook"><img src="./img/icons/social/facebook-small.png" alt="Facebook" /></a>
-                                        <a ng-show="profile.twitter" href="{{profile.twitter}}" target="_blank" class="share-twitter"><img src="./img/icons/social/twitter-small.png" alt="Twitter" /></a>
-                                        <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin"><img src="./img/icons/social/google-small.png" alt="Google" /></a>
-                                        <a ng-show="profile.contact_email" href="{{profile.contact_email}}" target="_blank" class="share-email">@</a>
-                                        <span ng-show="profile.contact_email" class="glyphicon glyphicon-globe"></span>
-                                        <label><a ng-show="profile.contact_email" href="{{profile.website}}" target="_blank" >{{profile.website}}</a></label>
-                                    </div>
-                                    <div ng-show="socialEdit" >
-                                        <input type="text" ng-model="profile.facebook" placeholder="Profil Facebook"/>
-                                        <input type="text" ng-model="profile.twitter" placeholder="Profil Twitter"/>
-                                        <input type="text" ng-model="profile.linkedin" placeholder="Profil LinkedIn"/>
-                                        <input type="text" ng-model="profile.contact_email" placeholder="Courriel de contact"/>
-                                        <input type="text" ng-model="profile.website" placeholder="Site web"/>
-                                        <span class="editable-buttons">
-                                            <button class="btn btn-primary" ng-click="updateSocialNetworks(profile);socialEdit=False" >Enregistrer</button>
-                                        </span>
-                                    </div>
-                                </div><!-- .relative -->
+                            <div ng-show="!socialEdit" >
+                                <a ng-show="profile.facebook" href="{{profile.facebook}}" target="_blank" class="share-facebook"><img src="./img/icons/social/facebook-small.png" alt="Facebook" /></a>
+                                <a ng-show="profile.twitter" href="{{profile.twitter}}" target="_blank" class="share-twitter"><img src="./img/icons/social/twitter-small.png" alt="Twitter" /></a>
+                                <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin"><img src="./img/icons/social/google-small.png" alt="Google" /></a>
+                                <a ng-show="profile.contact_email" href="{{profile.contact_email}}" target="_blank" class="share-email"><span class="glyphicon glyphicon-envelope"></span></a>
+                                <span ng-show="profile.contact_email" class="glyphicon glyphicon-globe"></span>
+                                <label><a ng-show="profile.contact_email" href="{{profile.website}}" target="_blank" >{{profile.website}}</a></label>
                             </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p class="right">Mise à jour <span am-time-ago="profile.modified"></span></p>
+                            <div ng-show="socialEdit" >
+                                <input type="text" ng-model="profile.facebook" placeholder="Profil Facebook"/>
+                                <input type="text" ng-model="profile.twitter" placeholder="Profil Twitter"/>
+                                <input type="text" ng-model="profile.linkedin" placeholder="Profil LinkedIn"/>
+                                <input type="text" ng-model="profile.contact_email" placeholder="Courriel de contact"/>
+                                <input type="text" ng-model="profile.website" placeholder="Site web"/>
+                                <span class="editable-buttons">
+                                    <button class="btn btn-primary" ng-click="updateSocialNetworks(profile);socialEdit=False" >Enregistrer</button>
+                                </span>
                             </div>
-                        </div>
+                        </div><!-- .relative -->
+
                     </div><!-- .side-header -->
                 </div><!-- .col-md-4 -->
             </div><!-- .row -->
@@ -167,41 +162,89 @@
 
         <div id="content" class="content-member">
 
-            <div class="boxes boxes-small">
-                <div class="box box-solo box-blue">
-                    <div><a href="">Mes projets <span class="count">({{member_projects.length}})</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                </div>
-                <div class="box" ng-repeat="project in member_projects">
-                    <ng-include src="'views/catalog/block/project_thumb.html'" onload="project=project"></ng-include>
-                </div><!-- .box -->
-            </div><!-- .boxes -->
-
-            <div class="boxes boxes-small">
-                <div class="box box-solo box-red">
-                    <div><a href="">Les projets que je suis <span class="count">({{fan_projects.length}})</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                </div>
-                <div class="box" ng-repeat="project in fan_projects">
-                    <ng-include src="'views/catalog/block/project_thumb.html'" onload="project=project"></ng-include>
-                </div>
-            </div><!-- .boxes -->
-
-            <div class="boxes boxes-small">
-                <div class="box box-solo box-green">
-                    <div><a href="">Mes expériences <span class="count">({{member_resources.length}})</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                </div>
-                <div class="box" ng-repeat="resource in member_resources">
-                    <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
-                </div><!-- .box -->
-            </div><!-- .boxes -->
-
-            <div class="boxes boxes-small">
-                <div class="box box-solo box-purple">
-                    <div><a href="">Les expériences qui m'intéressent <span class="count">({{fan_resources.length}})</span> <span class="glyphicon glyphicon-chevron-right"></span></a></div>
-                </div>
-                <div class="box" ng-repeat="resource in fan_resources">
-                    <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
-                </div>
-            </div><!-- .boxes -->
+            <tabset class="nav-tabs-profile">
+                <tab heading="Activités">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="activity">
+                                <h2>Activités</h2>
+                                <ul class="activity">
+                                    <li class="activity-pink"><a href="">Mathieu</a> est maintenant en contact avec <a href="">Sarah</a><span>Il y a 20 mn</li>
+                                    <li class="activity-pink"><a href="">William</a> a créé le projet  <a href="">Livetweet</a><span>Il y a 20 mn</li>
+                                    <li class="activity-pink"><a href="">Lucie</a> s'est abonnée au projet  <a href="">Fêtes des sciences</a><span>Il y a 20 mn</li>
+                                    <li class="activity-blue"><a href="">Damien</a> a commenté le projet  <a href="">Fêtes des sciences</a><span>Il y a 20 mn</li>
+                                    <li class="activity-pink"><a href="">Fabien</a> a créé l'exprérience  <a href="">J'ai testé: Ecrire un scénario pour un jeu transmédia</a><span>Il y a 20 mn</li>
+                                    <li class="activity-pink"><a href="">Lorenzo</a> s'est abonné à <a href="">J'ai testé: Ecrire un scénario pour un jeu transmédia</a><span>Il y a 20 mn</li>
+                                    <li class="activity-green"><a href="">Audrey</a> a commenté l'expérience <a href="">J'ai testé: Ecrire un scénario pour un jeu transmédia</a><span>Il y a 20 mn</li>
+                                    <li class="activity-pink"><a href="">Alban</a> a créé la discussion <a href="">Quels leviers et méthodes utiliseriez-vous pour promouvoir une conférence avec 500 euros de budget?</a><span>Il y a 20 mn</li>
+                                    <li class="activity-pink"><a href="">VIolaine</a> s'est abonnée à la discussion <a href="">Quels leviers et méthodes utiliseriez-vous pour promouvoir une conférence avec 500 euros de budget?</a><span>Il y a 20 mn</li>
+                                    <li class="activity-pink"><a href="">Gaëtan</a> a répondu à la discussion <a href="">Quels leviers et méthodes utiliseriez-vous pour promouvoir une conférence avec 500 euros de budget?</a><span>Il y a 20 mn</li>
+                                </ul>
+                            </div>
+                        </div><!-- .col-md-7 -->
+                        <div class="col-md-5">
+                            <div class="contribution">
+                                <h2>Contribution</h2>
+                                <img src="/img/needs/needs-financing.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-hardware.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-financing.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-hardware.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-hardware.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-financing.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-hardware.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-financing.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-hardware.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-financing.png" alt="FIXEME" />
+                                <img src="/img/needs/needs-hardware.png" alt="FIXEME" />
+                            </div>
+                        </div><!-- .col-md-5 -->
+                    </div><!-- .row -->
+                </tab>
+                <tab heading="Projets (10)">
+                    <h2 class="projects">Mes projets</h2>
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init(12)">
+                        <div class="box" ng-repeat="project in projects">
+                            <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                        </div>
+                    </div>
+                    <h2 class="projects">Ces projets qui m'intéressent</h2>
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init(12)">
+                        <div class="box" ng-repeat="project in projects">
+                            <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Expériences (23)">
+                    <h2 class="resources">Mes Expériences</h2>
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
+                        <div class="box" ng-repeat="resource in resources">
+                            <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                        </div>
+                    </div>
+                    <h2 class="resources">Ces expériences qui m'intéressent</h2>
+                    <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
+                        <div class="box" ng-repeat="resource in resources">
+                            <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Discussions (45)">
+                </tab>
+                <tab heading="Contacts (34)">
+                    <h2 class="members">Mes contacts</h2>
+                    <div class="boxes boxes-profiles" ng-controller="MakerScienceProfileListCtrl"  ng-init="init()">
+                        <div class="box" ng-repeat="profile in profiles">
+                            <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
+                        </div>
+                    </div>
+                    <h2 class="members">Contacts similaires</h2>
+                    <div class="boxes boxes-profiles" ng-controller="MakerScienceProfileListCtrl"  ng-init="init()">
+                        <div class="box" ng-repeat="profile in profiles">
+                            <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
 
         </div><!-- .content-member -->
 
