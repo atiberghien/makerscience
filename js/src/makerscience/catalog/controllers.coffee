@@ -125,6 +125,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
     $scope.preparedTags = []
     $scope.currentUserHasEditRights = false
+    $scope.editable = false
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
@@ -133,6 +134,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
             MakerScienceProject.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
                 console.log(" Has current user edit rights ?", result.has_perm)
                 $scope.currentUserHasEditRights = result.has_perm
+                $scope.editable = result.has_perm
                 )
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
@@ -239,6 +241,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
     $scope.preparedTags = []
     $scope.currentUserHasEditRights = false
+    $scope.editable = false
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
@@ -246,6 +249,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
             MakerScienceResource.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
                 console.log(" Has current user edit rights ?", result.has_perm)
                 $scope.currentUserHasEditRights = result.has_perm
+                $scope.editable = result.has_perm
                 )
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
