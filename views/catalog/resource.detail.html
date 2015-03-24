@@ -6,7 +6,7 @@
 <div>
 
     <ul id="sidenav" class="resource">
-        <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
+        <li ng-show="currentUserHasEditRights"><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
         <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
         <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
     </ul><!-- #nav -->

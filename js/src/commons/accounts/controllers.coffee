@@ -1,6 +1,6 @@
 module = angular.module("commons.accounts.controllers", ['commons.accounts.services', 'makerscience.catalog.services'])
 
-module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, MakerScienceProject, MakerScienceResource) ->
+module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink) ->
     """
     Controller pour la manipulation des data d'une communauté liée à un objet partagé (project, fiche resource, etc.    )
     La sémantique des niveaux d'implication est à préciser en fonction de la resource.

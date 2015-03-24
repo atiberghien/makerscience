@@ -129,10 +129,11 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
         
-        MakerScienceProject.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
-            console.log(" Has current user edit rights ?", result.has_perm)
-            $scope.currentUserHasEditRights = result.has_perm
-            )
+        if $rootScope.authVars.user
+            MakerScienceProject.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
+                console.log(" Has current user edit rights ?", result.has_perm)
+                $scope.currentUserHasEditRights = result.has_perm
+                )
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
 
@@ -201,6 +202,21 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
             MakerScienceResource.post(makerscienceResourceData).then((makerscienceResourceResult)->
                 console.log(" Posting MakerScienceResource, result  : ", makerscienceResourceResult)
+                # add connected user as team member of project with detail "porteur"
+                ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 0,
+                    detail : "Créateur/Créatrice",
+                    isValidated:true
+                    , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
+                        console.log("added current user as team member", objectProfileLinkResult.profile)
+                        MakerScienceResource.one(makerscienceResourceResult.id).customPOST(
+                            {"user_id":objectProfileLinkResult.profile.user.id}
+                            , 'assign').then((result)->
+                                console.log(" succesfully assigned edit rights ? : ", result)
+                        )
+                    )   
+
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id, {})
                 )
@@ -216,7 +232,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment) ->
+module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
@@ -226,11 +242,11 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
-
-        MakerScienceResource.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
-            console.log(" Has current user edit rights ?", result.has_perm)
-            $scope.currentUserHasEditRights = result.has_perm
-            )
+        if $rootScope.authVars.user
+            MakerScienceResource.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
+                console.log(" Has current user edit rights ?", result.has_perm)
+                $scope.currentUserHasEditRights = result.has_perm
+                )
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
