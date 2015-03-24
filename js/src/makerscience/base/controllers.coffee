@@ -31,6 +31,22 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
         )
 )
 
+module.directive('username', ($q, $timeout, User) ->
+    require: 'ngModel'
+    link: (scope, elm, attrs, ctrl) ->
+        User.getList().then((userResults) ->
+            usernames = userResults.map((user) ->
+                return user.username
+            )
+            ctrl.$parsers.unshift((viewValue) ->
+                if usernames.indexOf(viewValue) == -1
+                    ctrl.$setValidity('username', true);
+                else
+                    ctrl.$setValidity('username', false);
+            )
+        )
+)
+
 module.controller('HomepageFeaturedListCtrl', ($scope, MakerScienceProject, MakerScienceResource) ->
     $scope.projects = MakerScienceProject.getList({limit:2, feature:true}).$object
     $scope.resources = MakerScienceResource.getList({limit:2, feature:true}).$object

@@ -31,7 +31,7 @@
                     <p style="word-wrap: break-word;">{{comment.comment}}</p>
                 </div>
                 <div class="comment-date">
-                    <span class="date">{{comment.submit_date | date:"dd/MM/yyyy - h:m"}}</span>
+                    <span class="date" am-time-ago="comment.submit_date"></span>
                 </div>
             </div><!-- .comment -->
         </div>
