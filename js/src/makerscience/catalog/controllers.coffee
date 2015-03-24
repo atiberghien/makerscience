@@ -1,4 +1,4 @@
-module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers', "commons.accounts.controllers"])
+module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services'])
 
 module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) ->
     $scope.limit = 12
@@ -105,7 +105,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         delete $scope.needs[index]
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink) ->
+module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
@@ -116,6 +116,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
+        DataSharing.sharedObject =  $scope.projectsheet.parent
         $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
@@ -200,6 +201,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
+        $scope.sharedObject = {project : $scope.projectsheet.parent, makerscienceresource : $scope.projectsheet}
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
