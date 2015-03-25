@@ -4,15 +4,10 @@
 <link rel='stylesheet' href='js/vendor/angucomplete-alt/angucomplete-alt.css'>
 <div class="admin">
 
-<div id="intro" class="intro-resource-create">
-
-        <h1>Le numérique et l'innovation</h1>
-        <h2>Au coeur de tous <em>les projets</em></h2>
-        <button>A vous de jouer!</button>
-
+    <div id="intro" class="intro-resource-create">
+        <h1>Créez une page</h1>
+        <h2>partageant une expérience</h2>
     </div><!-- #intro -->
-
-    <ng-include src="'views/catalog/block/popular_tags.html'" ng-init="type='resource'"></ng-include>
 
     <div class="row container">
 
@@ -21,7 +16,9 @@
             <div id="content" class="new-resource">
 
                 <h2>Créer une expérience</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Ce formulaire vous permet de décrire en détails une expérience que vous avez eu afin que d'autres puissent les tester à leur tour. Tous les champs ne sont pas obligatoires et peuvent être modifiés par la suite si vous n'avez pas beaucoup de temps.<br />
+                <p>Mais plus vous détaillerez, plus vous aiderez d'autres membres à reproduire votre initiative et la disséminer au plus grand nombre.</p>
+                <p>Pour toute question ou besoin d'accompagnement dans la création de cette page, n'hésitez pas à contacter l'équipe de Makerscience ! ;-)</p>
 
                 <h3>Nouvelle expérience</h3>
 
@@ -76,28 +73,6 @@
                                 <button type="button" class="addVideos" ng-click="openGallery()">
                                     <span class="glyphicon glyphicon-facetime-video"></span>
                                 </button>
-                            </fieldset>
-                            <fieldset class="levels" ng-controller="ResourceLevelCtrl" ng-init="$parent.projectsheet.level=1">
-                                <p>Niveau</p>
-                                <label class="level1 {{selectedClasses[1]}}"
-                                    ng-click="updateLevelChoice(level);$parent.projectsheet.level=level">
-                                    <input id="level3" type="radio" ng-model="level" value="1" />
-                                    Facile
-                                </label>
-                                <label class="level1 {{selectedClasses[2]}}"
-                                        ng-click="updateLevelChoice(level);$parent.projectsheet.level=level">
-                                    <input id="level3" type="radio" ng-model="level" value="2" />
-                                    Moyen
-                                </label>
-                                <label class="level1 {{selectedClasses[3]}}"
-                                    ng-click="updateLevelChoice(level);$parent.projectsheet.level=level">
-                                    <input id="level3" type="radio" ng-model="level" value="3" />
-                                    Difficile
-                                </label>
-                            </fieldset>
-                            <fieldset class="compact">
-                                <input type="text" ng-model="projectsheet.duration" name="duration" placeholder="Durée" />
-                                <input type="text" ng-model="projectsheet.cost" name="cost" placeholder="Coût" />
                             </fieldset>
                         </div>
 
@@ -157,10 +132,10 @@
                     </fieldset> -->
                     <!-- Experiences associées  -->
                     <fieldset class="linked-idea">
-                        <h4>Expériences associées</h4>
-                        <p>Voulez-vous associer votre expérience à d'autres expériences ?</p>
+                        <h4>Projets associés</h4>
+                        <p>Voulez-vous associer cette expérience à des pages de projets ?</p>
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-9">
                                 <angucomplete-alt id="linked-idea"
                                                 placeholder="Nom de l'expérience"
                                                 pause="100"
@@ -171,8 +146,8 @@
                                                 text-no-results="Aucune expérience trouvée"
                                                 minlength="3"/>
                             </div>
-                            <div class="col-md-2">
-                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'éxpérience</button>
+                            <div class="col-md-3">
+                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier à l'éxpérience</button>
                             </div>
                         </div>
                         <ul class="list-group">
@@ -191,7 +166,8 @@
 
                     <p class="right">
                         <button type="button" class="button cancel" ui-sref="resource.list">Annuler</button>
-                        <button type="submit" class="button" ng-click="submitted=true">Enregistrer</button>
+                        <button type"button" class="button">Enregistrer en brouillon</button>
+                        <button type="button" class="button" ng-click="submitted=true">Publier</button>
                     </p>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>

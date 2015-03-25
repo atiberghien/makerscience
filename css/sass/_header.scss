@@ -292,7 +292,9 @@ div.crumbs {
 	}
 	&.intro-resource-create {
 		background-color: $color-intro-resource-bg;
-		background-image: url('../img/bg/header-resource-bg.png');
+		//background-image: url('../img/bg/header-resource-bg.png');
+		// Changed at Audrey's request #215
+		background-image: url('/img/bg/header-project-create.gif');
 	}
 	&.intro-profiles,
 	&.intro-project-create,
