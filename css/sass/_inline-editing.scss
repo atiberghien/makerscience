@@ -406,3 +406,8 @@ div.editable-controls {
 	}
 
 }
+
+/* Restore lists in editing */
+.ta-editor ul {
+	list-style-type: disc;
+}
