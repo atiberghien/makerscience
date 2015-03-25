@@ -68,7 +68,11 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
 
         $scope.objectTypeName = objectTypeName
         console.log(" Shared Object ? ", DataSharing.sharedObject)
-        $scope.$watch(()->
+        $scope.object = DataSharing.sharedObject[$scope.objectTypeName]
+        if $scope.object
+            $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
+        $scope.$watch(
+            ()->
                 return DataSharing.sharedObject
             ,(newVal, oldVal) ->
                 console.log(" Updating Shared Object : new ="+newVal+" old = "+oldVal)
@@ -76,8 +80,5 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                     $scope.object = newVal[$scope.objectTypeName]
                     $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
         )
-        $scope.object = DataSharing.sharedObject[$scope.objectTypeName]
-        if $scope.object
-            $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
         #)
 )

@@ -115,11 +115,13 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
+        # FIXME : these 2 signals should be removed, since we now use DataSharing service
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
-        console.log("before setting datasharing", DataSharing.sharedObject)
-        DataSharing.sharedObject =  {project: $scope.projectsheet.parent}
-        console.log("AFTER setting datasharing", DataSharing.sharedObject)
         $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
+        
+        console.log("before setting datasharing", DataSharing.sharedObject)
+        DataSharing.sharedObject =  {project: $scope.projectsheet.parent, makerscienceproject : $scope.projectsheet}
+        console.log("AFTER setting datasharing", DataSharing.sharedObject)
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
@@ -191,7 +193,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment) ->
+module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
@@ -201,9 +203,13 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
 
+        # FIXME : remove 2 signals below, > now using service + $watch to share and sync data
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
-        $scope.sharedObject = {project : $scope.projectsheet.parent, makerscienceresource : $scope.projectsheet}
+        
+        console.log("before setting datasharing", DataSharing.sharedObject)
+        DataSharing.sharedObject =  {project : $scope.projectsheet.parent, makerscienceresource : $scope.projectsheet}
+        console.log("AFTER setting datasharing", DataSharing.sharedObject)
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
