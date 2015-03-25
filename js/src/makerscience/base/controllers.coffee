@@ -39,3 +39,23 @@ module.controller("MakerScienceObjectGetter", ($scope, MakerScienceProject, Make
                 $scope.profile = makerScienceProfileResult
             )
 )
+
+
+module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceProject, MakerScienceResource, MakerScienceProfile) ->
+
+    $scope.searchResult = []
+    $scope.search_form =
+        query : ''
+
+    if $stateParams.query
+        $scope.search_form.query =  $stateParams.query
+        
+    $scope.refreshSearch = ()->
+        $scope.searchResult = []
+        query = $scope.search_form.query
+        $scope.searchResult.push(MakerScienceProfile.one().getList().$object)
+        $scope.searchResult.push(MakerScienceProject.one().getList().$object)
+        $scope.searchResult.push(MakerScienceResource.one().getList().$object)
+
+    $scope.refreshSearch()
+)

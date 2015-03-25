@@ -1,2 +1,2 @@
-		<input type="text" name="search" placeholder="Rechercher" />
-		<button type="button"><span class="glyphicon glyphicon-search"></span></button>
+		<input type="text" name="search" ng-model="queryText"  placeholder="Rechercher" />
+		<button type="button" ui-sref="search({query:queryText})" ><span class="glyphicon glyphicon-search"></span></button>
