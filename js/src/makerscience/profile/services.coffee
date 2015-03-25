@@ -1,4 +1,4 @@
-module = angular.module("makerscience.profile.services", [])
+module = angular.module("makerscience.profile.services", ['commons.accounts.services'])
 
 # Restangular-based Services
 module.factory('MakerScienceProfile', (Restangular) ->
@@ -13,8 +13,7 @@ module.factory('MakerScienceProfileTaggedItem', (Restangular) ->
 #module.controller('CurrentMakerScienceProfileCtrl', 
 class CurrentMakerScienceProfileService 
     constructor : ($rootScope, $modal, MakerScienceProfile) ->
-        $rootScope.openSignupPopup = this.openSignupPopup
-        
+
         $rootScope.$watch('authVars.user', (newValue, oldValue) ->
             if newValue != oldValue
                 MakerScienceProfile.one().get({parent__user__id : $rootScope.authVars.user.id}).then((profileResult)->
@@ -22,11 +21,11 @@ class CurrentMakerScienceProfileService
                 )
         )
 
-    openSignupPopup : ()->
-        modalInstance = $modal.open(
-            templateUrl: 'views/base/signupModal.html',
-            controller: 'SignupPopupCtrl'
-        )
+        $rootScope.openSignupPopup = ()->
+            modalInstance = $modal.open(
+                templateUrl: 'views/base/signupModal.html',
+                controller: 'SignupPopupCtrl'
+            )
 
 
 module.factory('CurrentMakerScienceProfileService', ($rootScope, $modal, MakerScienceProfile) ->

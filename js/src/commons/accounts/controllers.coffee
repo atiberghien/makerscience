@@ -67,17 +67,16 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                 )
 
         $scope.objectTypeName = objectTypeName
-        #$scope.object = args[objectTypeName]
         console.log(" Shared Object ? ", DataSharing.sharedObject)
-        # assign it right away ( if parent ctrler has already rendered, we get it NOW)
-        $scope.object = DataSharing.sharedObject
-        # AND watch changes (if parent ctrl has not yet rendered, we WILL get it)
-        $scope.$watch('DataSharing.sharedObject', (newVal, oldVal, scope) ->
-            if newVal
-                console.log(" Updating Shared Object ", newVal)
-                $scope.object = newVal
-                $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
+        $scope.$watch(()->
+                return DataSharing.sharedObject
+            ,(newVal, oldVal) ->
+                console.log(" Updating Shared Object : new ="+newVal+" old = "+oldVal)
+                if newVal != oldVal
+                    $scope.object = newVal[$scope.objectTypeName]
+                    $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
         )
+        $scope.object = DataSharing.sharedObject[$scope.objectTypeName]
         if $scope.object
             $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
         #)

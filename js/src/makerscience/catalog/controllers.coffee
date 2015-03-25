@@ -116,7 +116,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
         $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
-        DataSharing.sharedObject =  $scope.projectsheet.parent
+        console.log("before setting datasharing", DataSharing.sharedObject)
+        DataSharing.sharedObject =  {project: $scope.projectsheet.parent}
+        console.log("AFTER setting datasharing", DataSharing.sharedObject)
         $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
