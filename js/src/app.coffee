@@ -180,17 +180,17 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
 
 ])
-.run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams) ->
+.run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams, CurrentMakerScienceProfileService) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
 
     amMoment.changeLocale('fr');
-
     $rootScope.loginService = loginService
     $rootScope.config = config
     $rootScope.$state = $state
     $rootScope.$stateParams = $stateParams
+    $rootScope.CurrentMakerScienceProfileService = CurrentMakerScienceProfileService
 
     $rootScope.Math = window.Math
 )
