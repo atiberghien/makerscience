@@ -5,14 +5,9 @@
 <div class="admin">
 
     <div id="intro" class="intro-project-create">
-
-        <h1>Le numérique et l'innovation</h1>
-        <h2>Au coeur de tous <em>les projets</em></h2>
-        <button>A vous de jouer!</button>
-
+        <h1>Créez une page</h1>
+        <h2>pour votre projet</h2>
     </div><!-- #intro -->
-
-    <ng-include src="'views/catalog/block/popular_tags.html'" ng-init="type='project'"></ng-include>
 
     <div class="row container">
 
@@ -21,7 +16,9 @@
             <div id="content" class="new-project">
 
                 <h2>Créer un projet</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p>Ce formulaire vous permet de décrire en détails votre projet. Tous les champs ne sont pas obligatoires et peuvent être modifiés par la suite si vous n'avez pas beaucoup de temps.<p>
+                <p>Mais plus vous détaillerez, plus vous donnerez envie aux membres de s'investir dans votre projet et le relayer.</p>
+                <p>Pour toute question ou besoin d'accompagnement dans la création de cette page, n'hésitez pas à contacter l'équipe de Makerscience ! ;-)</p>
 
                 <h3>Nouveau projet</h3>
 
@@ -179,7 +176,8 @@
 
                     <p class="right">
                         <button type="button" class="button cancel" ui-sref="project.list">Annuler</button>
-                        <button type="submit" class="button" ng-click="submitted=true">Enregistrer</button>
+                        <button type="button" class="button">Enregistrer en brouillon</button>
+                        <button type="button" class="button" ng-click="submitted=true">Publier</button>
                     </p>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>

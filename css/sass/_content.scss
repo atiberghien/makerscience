@@ -171,7 +171,7 @@ div.toolbar {
 				border-color: $color-light-grey;
 			}
 			&.active a {
-				color: $color-content-tab-active;
+				//color: $color-content-tab-active;
 			}
 		}
 	}
@@ -193,6 +193,7 @@ div.toolbar {
 			@include transition(all .2s ease-in-out);
 		}
 	}
+	.nav-tabs-default ul.nav-tabs,
 	.nav-tabs-project ul.nav-tabs {
 		&> li.active a, &>li a:hover {
 			color: #fff;
@@ -720,6 +721,7 @@ div.toolbar {
 				}
 				&:hover {
 					text-decoration: none;
+					background-color: rgba(255, 255, 255,  0.25);
 				}
 			}
 		}
