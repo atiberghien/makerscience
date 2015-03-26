@@ -12,7 +12,7 @@
                         <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
                         <div class="boxes boxes-small boxes-small-home members">
                             <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                            <div class="box" ng-repeat="profile in searchResult[0] | limitTo:9 ">
+                            <div class="box" ng-repeat="profile in searchResult[0] | filter:search_form.query | limitTo:13 ">
                                 <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
                             </div
                             ><div class="box box-solo box-pink">
@@ -24,7 +24,7 @@
                         <h2 class="projects"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
                         <div class="boxes boxes-small boxes-small-home boxes-projects">
                             <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                            <div class="box" ng-repeat="project in searchResult[1] | limitTo:9" >
+                            <div class="box" ng-repeat="project in searchResult[1] | filter:search_form.query | limitTo:13" >
                                 <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include> -->
                             </div
                             ><div class="box box-solo box-blue">
@@ -36,7 +36,7 @@
                         <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Expériences partagées</h2>
                         <div class="boxes boxes-small boxes-small-home boxes-resources">
                             <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                            <div class="box" ng-repeat="resource in searchResult[2] | limitTo:9">
+                            <div class="box" ng-repeat="resource in searchResult[2] | filter:search_form.query | limitTo:13">
                                 <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                             </div
                             ><div class="box box-solo box-green">
