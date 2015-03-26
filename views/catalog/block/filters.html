@@ -1,33 +1,42 @@
-<div class="sidebar-filters sidebar-projects">
+<link href="js/vendor/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
+<link rel='stylesheet' href='css/textAngular.css'>
+
+<div class="sidebar-filters sidebar-projects" ng-controller="FilterCtrl" ng-init="load()">
 
     <h3>Filtres de recherche</h3>
 
     <h4>Thématique</h4>
-    <div class="input-group">
-        <input type="text" class="form-control" placeholder="Rechercher...">
-        <span class="input-group-btn">
+    <div class="" style="width:100%; padding-bottom:10px;">
+        <div class="" ng-controller="TagAutoCompleteCtrl">
+            <tags-input ng-model="searchTags"
+                        placeholder="> Mot-clé"
+                        on-tag-added="addTag(objectTypeName, taggedObject.id, $tag)"
+                        on-tag-removed="removeTag($tag)">
+                        <auto-complete source="loadTags($query)"></auto-complete>
+            </tags-input>
+        </div>
+
+        <!-- <input type="text" class="form-control" placeholder="Rechercher..."> -->
+        <!-- <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
-        </span>
+        </span> -->
     </div><!-- /input-group -->
     <ul class="tags tags-project">
-        <li><a href="">many</a></li>
-        <li><a href="">very long</a></li>
-        <li><a href="">things</a></li>
-        <li><a href="">could</a></li>
-        <li><a href="">foo</a></li>
-        <li><a href="">many</a></li>
-        <li><a href="">very long</a></li>
-        <li><a href="">things</a></li>
-        <li><a href="">could</a></li>
+        <li ng-repeat="tag in suggestedTags | limitTo:16">
+            <a href="" ng-click="addToSearchTags(tag)">{{tag.name}}</a>
+        </li>
+        
     </ul>
-
+<!--
     <h4>Publics ciblés</h4>
     <div class="input-group">
         <input type="text" class="form-control" placeholder="Rechercher...">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
         </span>
-    </div><!-- /input-group -->
+    </div> /input-group
     <ul class="tags tags-project">
         <li><a href="">foo</a></li>
         <li><a href="">bar</a></li>
@@ -39,14 +48,14 @@
         <li><a href="">very long</a></li>
         <li><a href="">things</a></li>
     </ul>
-
-    <h4>Format</h4>
+-->
+    <!-- <h4>Format</h4>
     <div class="input-group">
         <input type="text" class="form-control" placeholder="Rechercher...">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
         </span>
-    </div><!-- /input-group -->
+    </div></input-group 
     <ul class="tags tags-project">
         <li><a href="">foo</a></li>
         <li><a href="">bar</a></li>
@@ -57,15 +66,15 @@
         <li><a href="">many</a></li>
         <li><a href="">very long</a></li>
         <li><a href="">things</a></li>
-    </ul>
+    </ul> -->
 
-    <h4>Besoins</h4>
+    <!-- <h4>Besoins</h4>
     <div class="input-group">
         <input type="text" class="form-control" placeholder="Rechercher...">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
         </span>
-    </div><!-- /input-group -->
+    </div><!/input-group 
     <ul class="tags tags-project">
         <li><a href="">foo</a></li>
         <li><a href="">bar</a></li>
@@ -77,8 +86,8 @@
         <li><a href="">very long</a></li>
         <li><a href="">things</a></li>
     </ul>
-
-    <h4>Localisation</h4>
+ -->
+    <!-- <h4>Localisation</h4>
     <div class="panel-group" id="filterLocation" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="collapseCountry">
@@ -108,11 +117,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <h4>Moteur de recherche</h4>
     <div class="input-group">
-        <input type="text" class="form-control" placeholder="Rechercher...">
+        <input type="text" ng-model="text_filtering" class="form-control" placeholder="Rechercher...">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
         </span>
@@ -127,12 +136,12 @@ div.sidebar-preview {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: gray;
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);
+    /*background-color: gray;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);£
+    */
     opacity: 0.5;
 }
 </style>
 <div class="sidebar-filters">
-    <div class="sidebar-preview">
-    </div>
+    
 </div><!-- .sidebar-filters -->

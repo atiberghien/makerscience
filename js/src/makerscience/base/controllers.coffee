@@ -1,4 +1,6 @@
-module = angular.module("makerscience.base.controllers", ['makerscience.catalog.controllers', 'makerscience.profile.controllers', 'commons.accounts.controllers'])
+module = angular.module("makerscience.base.controllers", 
+    ['makerscience.catalog.controllers', 'makerscience.profile.controllers', 'commons.accounts.controllers',
+    'commons.graffiti.services'])
 
 
 module.directive('username', ($q, $timeout, User) ->
@@ -58,4 +60,23 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
         $scope.searchResult.push(MakerScienceResource.one().getList().$object)
 
     $scope.refreshSearch()
+)
+
+module.controller("FilterCtrl", ($scope, $stateParams, MakerScienceProject, MakerScienceResource, MakerScienceProfile, Tag) ->
+    $scope.suggestedTags = []
+    $scope.searchTags = []
+
+    $scope.refreshSuggestedTags = ()->
+        $scope.suggestedTags = Tag.getList().$object
+        return true
+
+    $scope.load = ()->
+        $scope.refreshSuggestedTags()
+
+    $scope.addToSearchTags = (aTag)->
+        simpleTag = 
+            text : aTag.name 
+        if $scope.searchTags.indexOf(simpleTag) == -1
+            $scope.searchTags.push(simpleTag)
+
 )
