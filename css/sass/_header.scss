@@ -292,7 +292,9 @@ div.crumbs {
 	}
 	&.intro-resource-create {
 		background-color: $color-intro-resource-bg;
-		background-image: url('../img/bg/header-resource-bg.png');
+		//background-image: url('../img/bg/header-resource-bg.png');
+		// Changed at Audrey's request #215
+		background-image: url('/img/bg/header-project-create.gif');
 	}
 	&.intro-profiles,
 	&.intro-project-create,
@@ -303,7 +305,6 @@ div.crumbs {
 	&.intro-resource-create {
 		text-align: center;
 		h1, h2 {
-			font-size: 3em;
 			line-height: 1em;
 			text-transform: uppercase;
 		}

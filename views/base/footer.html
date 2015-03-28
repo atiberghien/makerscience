@@ -5,12 +5,12 @@
 				<form method="post" action="">
 					<img src="./img/footer/newsletter.png" alt="Newsletter" />
 					<h2>Inscrivez-vous à<br />la newsletter</h2>
-					<input type="email" /><button type="submit">OK</button>
+					<input type="email" placeholder="Votre email" /><button type="submit">OK</button>
 				</form>
 				<h3>Suivez MakerScience sur</h3>
 				<ul class="social">
-					<li><a href=""><img src="./img/footer/social-twitter.png" alt="Twitter" /></a></li>
-					<li><a href=""><img src="./img/footer/social-facebook.png" alt="Facebook" /></a></li>
+					<li><a href="https://twitter.com/makersciencefr"><img src="./img/footer/social-twitter.png" alt="Twitter" /></a></li>
+					<li><a href="https://www.facebook.com/makerscience"><img src="./img/footer/social-facebook.png" alt="Facebook" /></a></li>
 					<li><a href=""><img src="./img/footer/social-linkedin.png" alt="LinkedIn" /></a></li>
 					<li><a href=""><img src="./img/footer/social-youtube.png" alt="YouTube" /></a></li>
 				</ul>
@@ -19,7 +19,7 @@
 	</div><!-- .blue -->
     <div class="row container">
     	<div class="col-md-5 financed">
-	    	<h2>MakerScience est financé par:</h2>
+	    	<h2>La création de Makerscience a été financée par:</h2>
 	    	<ul>
 	    		<li class="logo-investissements-avenir"><a href=""></a></li>
 	    		<li class="logo-inmediats"><a href=""></a></li>
@@ -27,13 +27,14 @@
 	    </div><!-- .col -->
 	    <div class="col-md-7 about">
 	    	<h3>A propos de MakerScience</h3>
-	    	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+	    	<p>Makerscience vise à créer un espace d’échange et de soutien aux projets de médiation culturelle des sciences, des techniques et des innovations : expositions, sites web, ateliers, dispositifs, jeux…<br />
+Au sein de la communauté, une même volonté : rendre accessibles les sciences et techniques à tous les publics, et plus particulièrement aux jeunes, susciter des vocations et permettre à tous citoyens de comprendre les enjeux scientifiques et technologiques.</p>
 	    </div><!-- .col -->
     </div><!-- .row -->
     <div class="cream">
 		<div class="row container">
 			<div class="col-md-5">
-				<p>Makerscience est une initiative lancée par le Groupe Science Animation Midi-Pyrénées,  avec  le soutien de nombreux partenaires et personnes engagés dans le partage des sciences, des techniques et des innovations.</p>
+				<p>Makerscience est une initiative du Groupe Science Animation Midi-Pyrénées, conçu pour et avec de nombreuses structures et personnes engagées sur toute la France dans la culture scientifique et technique. Mais surtout : Makerscience vit grâce à une communauté de membres qui partagent leurs expériences et s’entraident.</p>
 		    	<button>Contacter l'équipe</button>
 			</div><!-- .col -->
 			<div class="col-md-7 sitemap">
@@ -42,25 +43,25 @@
 					<div class="col-md-4">
 						<h4>En savoir plus</h4>
 						<ul>
-							<li><a href="">L'initiative</a></li>
-							<li><a href="">Comment ça marche</a></li>
-							<li><a href="">Les animateurs</a></li>
+							<li><a ui-sref="about">L'initiative</a></li>
+							<li><a ui-sref="about">Comment ça marche</a></li>
+							<li><a ui-sref="about">Les animateurs</a></li>
 						</ul>
 					</div><!-- .col -->
 					<div class="col-md-4">
 						<h4>S'impliquer</h4>
 						<ul>
-							<li><a href="">Les projets</a></li>
-							<li><a href="">La cartographie</a></li>
-							<li><a href="">Présenter un projet</a></li>
+							<li><a ui-sref="profile.list">Les projets</a></li>
+							<li><a ui-sref="map">La cartographie</a></li>
+							<li><a ui-sref="project.new">Présenter un projet</a></li>
 						</ul>
 					</div><!-- .col -->
 					<div class="col-md-4">
 						<h4>Echanger</h4>
 						<ul>
-							<li><a href="">Les membres</a></li>
-							<li><a href="">Les expériences partagées</a></li>
-							<li><a href="">Les discussions</a></li>
+							<li><a ui-sref="profile.list">Les membres</a></li>
+							<li><a ui-sref="resource.list">Les expériences partagées</a></li>
+							<li><a ui-sref="forum">Les discussions</a></li>
 						</ul>
 					</div><!-- .col -->
 				</div><!-- .row -->
@@ -73,4 +74,3 @@
 		</div><!-- .col -->
     </div><!-- .row -->
 </footer>
-

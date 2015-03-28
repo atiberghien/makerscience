@@ -8,6 +8,9 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
     - 0 -> Membre de l'équipe projet
     - 1 -> personne ressource
     - 2 -> fan/follower
+
+    NB. les objets "profile" manipulé ici sont les profils génériques du dataserver (et non les MakerScienceProfile)
+        dispo à api/v0/accounts/profile (cf service "Profile")
     """
 
     $scope.profiles = Profile.getList().$object
@@ -39,11 +42,11 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                     if member.level == level
                         return true
             return false
-            
-        
+
+
 
         $scope.removeMember = (member) ->
-            # attention confusion possible : member ici correspond à une instance de 
+            # attention confusion possible : member ici correspond à une instance de
             # ObjectProfileLink. L'id du profil concerné e.g se trouve à member.profile.id
             ObjectProfileLink.one(member.id).remove().then(()->
                 memberIndex = $scope.community.indexOf(member)
@@ -58,7 +61,7 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                 member = $scope.community[memberIndex]
                 member.isValidated = validated
                 )
-        
+
         $scope.updateMemberDetail = (detail, member) ->
             ObjectProfileLink.one(member.id).patch({detail : detail}).then(
                 memberIndex = $scope.community.indexOf(member)

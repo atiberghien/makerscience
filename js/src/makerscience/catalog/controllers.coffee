@@ -48,7 +48,7 @@ module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResourc
             $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource, TaggedItem) ->
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
@@ -77,16 +77,29 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
 
             MakerScienceProject.post(makerscienceProjectData).then((makerscienceProjectResult)->
-                console.log(" Posting MakerScienceProject, result from savingProject : ", projectsheetResult)
+                console.log(" Posting MakerScienceProject, result from savingProject : ", makerscienceProjectResult)
+                # add connected user as team member of project with detail "porteur"
+                ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 0,
+                    detail : "Créateur/Créatrice",
+                    isValidated:true
+                , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
+                    console.log("added current user as team member", objectProfileLinkResult.profile)
+                    MakerScienceProject.one(makerscienceProjectResult.id).customPOST({"user_id":objectProfileLinkResult.profile.user.id}, 'assign').then((result)->
+                        console.log(" succesfully assigned edit rights ? : ", result)
+                        )
+                )
+
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id, {})
                 )
-                
+
                 $scope.saveVideos(projectsheetResult.id)
                 # if no photos to upload, directly go to new project sheet
                 if $scope.uploader.queue.length <= 0
                     $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
-                else 
+                else
                     $scope.savePhotos(projectsheetResult.id, projectsheetResult.bucket.id)
                     $scope.uploader.onCompleteAll = () ->
                         $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
@@ -111,14 +124,16 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.preparedTags = []
+    $scope.currentUserHasEditRights = false
+    $scope.editable = false
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
         # FIXME : these 2 signals should be removed, since we now use DataSharing service
-        $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
-        $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
-        
+        # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
+        # $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
+
         console.log("before setting datasharing", DataSharing.sharedObject)
         DataSharing.sharedObject =  {project: $scope.projectsheet.parent, makerscienceproject : $scope.projectsheet}
         console.log("AFTER setting datasharing", DataSharing.sharedObject)
@@ -136,6 +151,16 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
                     $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
             )
         )
+
+        $scope.$on('newTeamMember', (event, user_id)->
+                """
+                Give edit rights to newly added or validated team member (see commons.accounts.controllers)
+                """
+                console.log(" giving edit rights to user id = ", user_id)
+                MakerScienceProject.one($scope.projectsheet.id).customPOST({"user_id":user_id}, 'assign').then((result)->
+                    console.log(" succesfully assigned edit rights ? : ", result)
+                    )
+            )
 
         $scope.updateLinkedResources = ->
             MakerScienceProject.one($scope.projectsheet.id).patch(
@@ -178,6 +203,21 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
             MakerScienceResource.post(makerscienceResourceData).then((makerscienceResourceResult)->
                 console.log(" Posting MakerScienceResource, result  : ", makerscienceResourceResult)
+                # add connected user as team member of project with detail "porteur"
+                ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 0,
+                    detail : "Créateur/Créatrice",
+                    isValidated:true
+                    , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
+                        console.log("added current user as team member", objectProfileLinkResult.profile)
+                        MakerScienceResource.one(makerscienceResourceResult.id).customPOST(
+                            {"user_id":objectProfileLinkResult.profile.user.id}
+                            , 'assign').then((result)->
+                                console.log(" succesfully assigned edit rights ? : ", result)
+                        )
+                    )
+
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id, {})
                 )
@@ -185,7 +225,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 # if no photos to upload, directly go to new project sheet
                 if $scope.uploader.queue.length <= 0
                     $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
-                else 
+                else
                     $scope.savePhotos(resourcesheetResult.id, resourcesheetResult.bucket.id)
                     $scope.uploader.onCompleteAll = () ->
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
@@ -199,14 +239,16 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.preparedTags = []
+    $scope.currentUserHasEditRights = false
+    $scope.editable = false
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
 
         # FIXME : remove 2 signals below, > now using service + $watch to share and sync data
-        $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
-        $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
-        
+        # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
+        # $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
+
         console.log("before setting datasharing", DataSharing.sharedObject)
         DataSharing.sharedObject =  {project : $scope.projectsheet.parent, makerscienceresource : $scope.projectsheet}
         console.log("AFTER setting datasharing", DataSharing.sharedObject)
@@ -223,6 +265,16 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
                 if similar.type == 'makerscienceresource'
                     $scope.similars.push(MakerScienceResource.one(similar.id).get().$object)
             )
+        )
+
+        $scope.$on('newTeamMember', (event, user_id)->
+            """
+            Give edit rights to newly added or validated team member (see commons.accounts.controllers)
+            """
+            console.log(" giving edit rights to user id = ", user_id)
+            MakerScienceResource.one($scope.projectsheet.id).customPOST({"user_id":user_id}, 'assign').then((result)->
+                console.log(" succesfully assigned edit rights ? : ", result)
+                )
         )
 
         $scope.updateLinkedResources = ->
