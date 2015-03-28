@@ -1,19 +1,33 @@
-module = angular.module("commons.ucomment.controllers", ['commons.ucomment.services'])
+module = angular.module("commons.ucomment.controllers", ['commons.ucomment.services', 'makerscience.base.services'])
 
-module.controller("CommentCtrl", ($scope, $rootScope, Comment) ->
+module.controller("CommentCtrl", ($scope, $rootScope, Comment, DataSharing) ->
     """
-    controlling comments attached to a resource. Requires that parent scope has:
-    - $scope.comments
+    controlling comments attached to a resource. 
     """
 
     $scope.newcommentForm =
         text: ""
 
     $scope.init = (objectTypeName) ->
-        $scope.$on(objectTypeName+'Ready', (event, args) ->
-            $scope.objectTypeName = objectTypeName
-            $scope.object = args[objectTypeName]
+        # $scope.$on(objectTypeName+'Ready', (event, args) ->
+        #     $scope.objectTypeName = objectTypeName
+        #     $scope.object = args[objectTypeName]
+        #     $scope.refreshComments($scope.objectTypeName, $scope.object.id)
+        # )
+
+        $scope.objectTypeName = objectTypeName
+        console.log(" Shared Object ? ", DataSharing.sharedObject)
+        $scope.object = DataSharing.sharedObject[$scope.objectTypeName]
+        if $scope.object
             $scope.refreshComments($scope.objectTypeName, $scope.object.id)
+        $scope.$watch(
+            ()->
+                return DataSharing.sharedObject
+            ,(newVal, oldVal) ->
+                console.log(" Updating Shared Object : new ="+newVal+" old = "+oldVal)
+                if newVal != oldVal
+                    $scope.object = newVal[$scope.objectTypeName]
+                    $scope.refreshComments($scope.objectTypeName, $scope.object.id)
         )
 
     $scope.refreshComments = (objectTypeName, objectId) ->

@@ -3,7 +3,7 @@ angular.module('commons.accounts', ['commons.accounts.services', 'commons.accoun
 angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
 angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
-angular.module('makerscience.base', ['makerscience.base.controllers'])
+angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
@@ -180,17 +180,17 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
 
 ])
-.run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams) ->
+.run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams, CurrentMakerScienceProfileService) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
 
     amMoment.changeLocale('fr');
-
     $rootScope.loginService = loginService
     $rootScope.config = config
     $rootScope.$state = $state
     $rootScope.$stateParams = $stateParams
+    $rootScope.CurrentMakerScienceProfileService = CurrentMakerScienceProfileService
 
     $rootScope.Math = window.Math
 )
