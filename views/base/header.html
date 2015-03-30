@@ -33,15 +33,15 @@
                         </form>
                         -->
 
-                        <div class="dropdown dropdown-logged-in" ng-if="authVars.isAuthenticated">
+                        <div class="dropdown dropdown-logged-in" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null">
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                                 {{currentMakerScienceProfile.parent.user.first_name}}
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mon Profil</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="profile.detail({id:currentMakerScienceProfile.id})">Mon Profil</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Activités récentes</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Mes paramètres</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="profile.dashboard({id:currentMakerScienceProfile.id})">Mes paramètres</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Aide</a></li>
                                 <li role="presentation"><a ng-click="logout()" role="menuitem" tabindex="-1" href="#">Me déconnecter</a></li>
                             </ul>
