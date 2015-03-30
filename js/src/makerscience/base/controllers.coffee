@@ -12,8 +12,8 @@ module.controller('CurrentMakerScienceProfileCtrl', ($scope, $rootScope, $modal,
         modalInstance = $modal.open(
             templateUrl: 'views/base/signupModal.html',
             controller: 'SignupPopupCtrl'
+        )
     )
-)
 
 module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state, User) ->
     $scope.register = ->
