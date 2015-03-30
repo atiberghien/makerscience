@@ -39,3 +39,7 @@ module.controller("MakerScienceObjectGetter", ($scope, MakerScienceProject, Make
                 $scope.profile = makerScienceProfileResult
             )
 )
+
+module.controller("StaticContentCtrl", ($scope, StaticContent) ->
+    $scope.static = StaticContent.one(1).get().$object
+)
