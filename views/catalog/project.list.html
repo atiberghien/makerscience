@@ -5,7 +5,7 @@
 
 <div class="row container">
 
-    <div id="content" class="listing">
+    <div id="content" class="listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init(12)">
 
         <div class="col-md-12">
 
@@ -14,8 +14,8 @@
 
                     <tabset class="nav-tabs-listing">
                         <tab heading="Les plus récents">
-                            <div class="boxes boxes-listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init(12)">
-                                <div class="box" ng-repeat="project in projects">
+                            <div class="boxes boxes-listing" >
+                                <div class="box" ng-repeat="project in projects.list">
                                     <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
                                 </div><!-- .box -->
                             </div><!-- .boxes -->
@@ -35,7 +35,7 @@
 
                 </div>
                 <div class="col-md-3">
-                    <ng-include src="'views/catalog/block/filters.html'"></ng-include>
+                    <ng-include onload="objectType='makerscienceproject'" src="'views/catalog/block/filters.html'"></ng-include>
                 </div>
 
         </div><!-- .col-md-12 -->

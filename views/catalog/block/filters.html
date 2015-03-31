@@ -12,16 +12,11 @@
         <div class="" ng-controller="TagAutoCompleteCtrl">
             <tags-input ng-model="searchTags"
                         placeholder="> Mot-clé"
-                        on-tag-added="addTag(objectTypeName, taggedObject.id, $tag)"
-                        on-tag-removed="removeTag($tag)">
+                        on-tag-added="refreshFilter()"
+                        on-tag-removed="refreshFilter()">
                         <auto-complete source="loadTags($query)"></auto-complete>
             </tags-input>
         </div>
-
-        <!-- <input type="text" class="form-control" placeholder="Rechercher..."> -->
-        <!-- <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
-        </span> -->
     </div><!-- /input-group -->
     <ul class="tags tags-project">
         <li ng-repeat="tag in suggestedTags | limitTo:16">
@@ -121,7 +116,7 @@
 
     <h4>Moteur de recherche</h4>
     <div class="input-group">
-        <input type="text" ng-model="text_filtering" class="form-control" placeholder="Rechercher...">
+        <input type="text" ng-model="search_form.query" class="form-control" placeholder="Rechercher...">
         <span class="input-group-btn">
             <button class="btn btn-default" type="button">Go!</button>
         </span>

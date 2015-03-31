@@ -10,7 +10,7 @@ module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) -
         if featured
             params['featured'] = featured
         params['limit'] = $scope.limit
-        $scope.projects = MakerScienceProject.getList(params).$object
+        $scope.projects.list = MakerScienceProject.getList(params).$object
 )
 
 module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource) ->

@@ -45,7 +45,7 @@ module.controller("MakerScienceObjectGetter", ($scope, MakerScienceProject, Make
 
 module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceProject, MakerScienceResource, MakerScienceProfile) ->
 
-    $scope.searchResult = []
+    $scope.searchResult = {}
     $scope.search_form =
         query : ''
 
@@ -53,11 +53,11 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
         $scope.search_form.query =  $stateParams.query
         
     $scope.refreshSearch = ()->
-        $scope.searchResult = []
+        $scope.searchResult = {}
         query = $scope.search_form.query
-        $scope.searchResult.push(MakerScienceProfile.one().getList().$object)
-        $scope.searchResult.push(MakerScienceProject.one().getList().$object)
-        $scope.searchResult.push(MakerScienceResource.one().getList().$object)
+        $scope.searchResult['members'] = MakerScienceProfile.one().getList().$object
+        $scope.searchResult['projects'] = MakerScienceProject.one().customGETLIST('search', {q:query}).$object
+        $scope.searchResult['resources'] = MakerScienceResource.one().getList().$object 
 
     $scope.refreshSearch()
 )
@@ -65,6 +65,10 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
 module.controller("FilterCtrl", ($scope, $stateParams, MakerScienceProject, MakerScienceResource, MakerScienceProfile, Tag) ->
     $scope.suggestedTags = []
     $scope.searchTags = []
+    console.log(" INit Filter Ctrl , state param ? ", $stateParams)
+    $scope.objectType = 'project'
+    $scope.search_form=
+        query:''
 
     $scope.refreshSuggestedTags = ()->
         $scope.suggestedTags = Tag.getList().$object
@@ -78,5 +82,15 @@ module.controller("FilterCtrl", ($scope, $stateParams, MakerScienceProject, Make
             text : aTag.name 
         if $scope.searchTags.indexOf(simpleTag) == -1
             $scope.searchTags.push(simpleTag)
+
+    $scope.refreshFilter = ()->
+        console.log("refreshing .. ", $scope.searchTags)
+        tags_list = []
+        for tag in $scope.searchTags
+            tags_list.push(tag.text)
+        switch $scope.objectType
+            when 'project'
+                console.log("refreshing projects", $scope.projects.list)
+                $scope.projects.list = MakerScienceProject.one().customGETLIST('search', {q:$scope.search_form.query, facet:tags_list}).$object
 
 )
