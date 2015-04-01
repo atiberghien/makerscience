@@ -57,11 +57,11 @@
         </nav><!-- #menu -->
     </header>
 
-    <div class="action-bar" ng-show="authVars.isAuthenticated || showLoginPanel" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
+    <div class="action-bar" ng-show="authVars.isAuthenticated || showLoginPanel || authVars.loginrequired" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel || authVars.loginrequired}">
         <div class="container">
 
             <!-- When logging in -->
-            <div class="authenticated" ng-show="showLoginPanel && currentMakerScienceProfile == null">
+            <div class="authenticated" ng-show="showLoginPanel && currentMakerScienceProfile == null || authVars.loginrequired">
                 <ng-include src="'/views/base/login.html'"></ng-include>
             </div>
 
