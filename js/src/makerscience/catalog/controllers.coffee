@@ -1,16 +1,38 @@
 module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services'])
 
-module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) ->
+module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject, FilterService) ->
     $scope.limit = 12
+    $scope.params = {}
 
+    $scope.refreshList = ()->
+        console.log("refreshing Project list !")
+        $scope.params['limit'] = $scope.limit
+        $scope.params['q'] = FilterService.filterParams.query
+        $scope.params['facet'] = FilterService.filterParams.tags
+        #$scope.projects = MakerScienceProject.getList(params).$object
+        $scope.projects = MakerScienceProject.one().customGETLIST('search', $scope.params).$object
+    
     $scope.init = (limit, featured) ->
-        params = {}
         if limit
              $scope.limit = limit
         if featured
-            params['featured'] = featured
-        params['limit'] = $scope.limit
-        $scope.projects.list = MakerScienceProject.getList(params).$object
+            $scope.params['featured'] = featured
+        $scope.refreshList()
+   
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.tags
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.query
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
 )
 
 module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource) ->

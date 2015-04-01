@@ -1,5 +1,5 @@
 module = angular.module("makerscience.base.controllers", 
-    ['makerscience.catalog.controllers', 'makerscience.profile.controllers', 'commons.accounts.controllers',
+    ['makerscience.base.services', 'makerscience.catalog.controllers', 'makerscience.profile.controllers', 'commons.accounts.controllers',
     'commons.graffiti.services'])
 
 
@@ -69,35 +69,41 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
 )
 
 
-module.controller("FilterCtrl", ($scope, $stateParams, MakerScienceProject, MakerScienceResource, MakerScienceProfile, Tag) ->
+module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
     
-    $scope.suggestedTags = []
-    $scope.searchTags = []
     console.log(" INit Filter Ctrl , state param ? ", $stateParams)
     $scope.objectType = 'project'
-    $scope.search_form=
-        query:''
+    $scope.suggestedTags = Tag.getList().$object
+    $scope.tags_filter = []
+    $scope.query_filter = ''
 
-    $scope.refreshSuggestedTags = ()->
-        $scope.suggestedTags = Tag.getList().$object
-        return true
+    $scope.load = (objectType)->
+        console.log("loading filter on ", objectType)
+        $scope.objectType = objectType
 
-    $scope.load = ()->
-        $scope.refreshSuggestedTags()
-
-    $scope.addToSearchTags = (aTag)->
-        simpleTag = 
-            text : aTag.name 
-        if $scope.searchTags.indexOf(simpleTag) == -1
-            $scope.searchTags.push(simpleTag)
 
     $scope.refreshFilter = ()->
-        console.log("refreshing .. ", $scope.searchTags)
+        """
+        Update FilterService data
+        """
+        console.log("refreshing filter (ctrler).. ", FilterService.filterParams)
         tags_list = []
-        for tag in $scope.searchTags
+        for tag in $scope.tags_filter
             tags_list.push(tag.text)
-        switch $scope.objectType
-            when 'project'
-                console.log("refreshing projects", $scope.projects.list)
-                $scope.projects.list = MakerScienceProject.one().customGETLIST('search', {q:$scope.search_form.query, facet:tags_list}).$object
+        FilterService.filterParams.tags = tags_list
+        FilterService.filterParams.query = $scope.query_filter
+        console.log("AFTER refreshing filter (ctrler).. ", FilterService.filterParams)
+
+        # switch $scope.objectType
+        #     when 'project'
+        #         console.log("refreshing projects", $scope.projects)
+        #         $scope.projects = MakerScienceProject.one().customGETLIST('search', {q:$scope.search_form.query, facet:tags_list}).$object
+   
+
+    $scope.addToTagsFilter = (aTag)->
+        simpleTag = 
+            text : aTag.name 
+        if $scope.tags_filter.indexOf(simpleTag) == -1
+            $scope.tags_filter.push(simpleTag)
+        $scope.refreshFilter()        
 )

@@ -3,14 +3,14 @@
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
 <link rel='stylesheet' href='css/textAngular.css'>
 
-<div class="sidebar-filters sidebar-projects" ng-controller="FilterCtrl" ng-init="load()">
+<div class="sidebar-filters sidebar-projects" ng-controller="FilterCtrl" ng-init="load(objectType)">
 
     <h3>Filtres de recherche</h3>
 
     <h4>Thématique</h4>
     <div class="" style="width:100%; padding-bottom:10px;">
         <div class="" ng-controller="TagAutoCompleteCtrl">
-            <tags-input ng-model="searchTags"
+            <tags-input ng-model="tags_filter"
                         placeholder="> Mot-clé"
                         on-tag-added="refreshFilter()"
                         on-tag-removed="refreshFilter()">
@@ -20,7 +20,7 @@
     </div><!-- /input-group -->
     <ul class="tags tags-project">
         <li ng-repeat="tag in suggestedTags | limitTo:16">
-            <a href="" ng-click="addToSearchTags(tag)">{{tag.name}}</a>
+            <a href="" ng-click="addToTagsFilter(tag)">{{tag.name}}</a>
         </li>
         
     </ul>
@@ -116,9 +116,9 @@
 
     <h4>Moteur de recherche</h4>
     <div class="input-group">
-        <input type="text" ng-model="search_form.query" class="form-control" placeholder="Rechercher...">
+        <input type="text" ng-model="query_filter" class="form-control" placeholder="Rechercher...">
         <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
+            <button class="btn btn-default" type="button" ng-click="refreshFilter()">Go!</button>
         </span>
     </div><!-- /input-group -->
 
