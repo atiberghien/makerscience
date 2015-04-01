@@ -10,8 +10,8 @@ module.factory('MakerScienceProfileTaggedItem', (Restangular) ->
 )
 
 # Specific services
-#module.controller('CurrentMakerScienceProfileCtrl', 
-class CurrentMakerScienceProfileService 
+#module.controller('CurrentMakerScienceProfileCtrl',
+class CurrentMakerScienceProfileService
     constructor : ($rootScope, $modal, MakerScienceProfile) ->
 
         $rootScope.$watch('authVars.user', (newValue, oldValue) ->
@@ -31,7 +31,7 @@ class CurrentMakerScienceProfileService
 module.factory('CurrentMakerScienceProfileService', ($rootScope, $modal, MakerScienceProfile) ->
     return new CurrentMakerScienceProfileService($rootScope, $modal, MakerScienceProfile)
 )
-  
+
 
 module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state, User) ->
     """
@@ -46,10 +46,8 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
             $rootScope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
                 if newValue != oldValue
                     $modalInstance.close()
-                    $state.go("profile.detail", {id : $rootScope.currentMakerScienceProfile.id})
+                    $state.go("profile.detail", {slug : $rootScope.currentMakerScienceProfile.slug})
 
             )
         )
 )
-
-

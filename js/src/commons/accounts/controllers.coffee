@@ -43,7 +43,7 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
             return false
 
         $scope.removeMember = (member) ->
-            # attention confusion possible : member ici correspond à une instance de 
+            # attention confusion possible : member ici correspond à une instance de
             # ObjectProfileLink. L'id du profil concerné e.g se trouve à member.profile.id
             ObjectProfileLink.one(member.id).remove().then(()->
                 memberIndex = $scope.community.indexOf(member)
@@ -58,7 +58,7 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                 member = $scope.community[memberIndex]
                 member.isValidated = validated
                 )
-        
+
         $scope.updateMemberDetail = (detail, member) ->
             ObjectProfileLink.one(member.id).patch({detail : detail}).then(
                 memberIndex = $scope.community.indexOf(member)

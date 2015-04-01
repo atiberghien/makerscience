@@ -127,7 +127,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     label: 'Communauté'
         )
         .state('profile.detail',
-                url: ':id',
+                url: ':slug',
                 templateUrl: 'views/profile/profile.detail.html'
                 controller : 'MakerScienceProfileCtrl'
                 ncyBreadcrumb:
@@ -135,7 +135,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     parent : 'profile.list'
         )
         .state('profile.dashboard',
-                url: ':id/dashboard',
+                url: ':slug/dashboard',
                 templateUrl: 'views/profile/profile.dashboard.html'
                 controller : 'MakerScienceProfileCtrl'
                 ncyBreadcrumb:

@@ -19,9 +19,15 @@ module.directive('username', ($q, $timeout, User) ->
         )
 )
 
+
 module.controller('HomepageFeaturedListCtrl', ($scope, MakerScienceProject, MakerScienceResource) ->
     $scope.projects = MakerScienceProject.getList({limit:2, feature:true}).$object
     $scope.resources = MakerScienceResource.getList({limit:2, feature:true}).$object
+)
+
+
+module.controller("StaticContentCtrl", ($scope, StaticContent) ->
+    $scope.static = StaticContent.one(1).get().$object
 )
 
 
@@ -62,7 +68,9 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
     $scope.refreshSearch()
 )
 
+
 module.controller("FilterCtrl", ($scope, $stateParams, MakerScienceProject, MakerScienceResource, MakerScienceProfile, Tag) ->
+    
     $scope.suggestedTags = []
     $scope.searchTags = []
     console.log(" INit Filter Ctrl , state param ? ", $stateParams)
@@ -92,5 +100,4 @@ module.controller("FilterCtrl", ($scope, $stateParams, MakerScienceProject, Make
             when 'project'
                 console.log("refreshing projects", $scope.projects.list)
                 $scope.projects.list = MakerScienceProject.one().customGETLIST('search', {q:$scope.search_form.query, facet:tags_list}).$object
-
 )

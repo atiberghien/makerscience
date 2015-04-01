@@ -24,7 +24,8 @@
                         <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
                             <h3>{{project.parent.title}}</h3>
-                            <h4>Par <strong><a ui-sref="profile.detail({id:project.parent.team[0].members[0].id})">{{project.parent.team[0].members[0].user.first_name}} {{project.parent.team[0].members[0].user.last_name}}</a></strong></h4>
+                            <h4>Par <strong><a ui-sref="profile.detail({slug:project.by.profile_slug})">
+                                {{project.by.full_name}}</a></strong></h4>
                         </div>
                     </slide>
                     <slide ng-repeat="resource in resources">
@@ -33,8 +34,8 @@
                         <img ng-if="!resource.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
                             <h3>{{resource.parent.title}}</h3>
-                            <h4>Par <strong><a ui-sref="profile.detail({id:resource.parent.team[0].members[0].id})">
-                                {{resource.parent.team[0].members[0].user.first_name}} {{resource.parent.team[0].members[0].user.last_name}}</a></strong></h4>
+                            <h4>Par <strong><a ui-sref="profile.detail({slug:resource.by.profile_slug})">
+                                {{resource.by.full_name}}</a></strong></h4>
                         </div>
                     </slide>
                 </carousel>

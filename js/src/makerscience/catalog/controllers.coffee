@@ -90,16 +90,16 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         console.log(" succesfully assigned edit rights ? : ", result)
                         )
                 )
-                
+
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id, {})
                 )
-                
+
                 $scope.saveVideos(projectsheetResult.id)
                 # if no photos to upload, directly go to new project sheet
                 if $scope.uploader.queue.length <= 0
                     $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
-                else 
+                else
                     $scope.savePhotos(projectsheetResult.id, projectsheetResult.bucket.id)
                     $scope.uploader.onCompleteAll = () ->
                         $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
@@ -130,18 +130,18 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
-        
+
         if $rootScope.authVars.user
             MakerScienceProject.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
                 console.log(" Has current user edit rights ?", result.has_perm)
                 $scope.currentUserHasEditRights = result.has_perm
                 $scope.editable = result.has_perm
-                )
 
+        )
         # FIXME : these 2 signals should be removed, since we now use DataSharing service
-        $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
-        $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
-        
+        # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
+        # $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
+
         console.log("before setting datasharing", DataSharing.sharedObject)
         DataSharing.sharedObject =  {project: $scope.projectsheet.parent, makerscienceproject : $scope.projectsheet}
         console.log("AFTER setting datasharing", DataSharing.sharedObject)
@@ -185,7 +185,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
             when 'MakerScienceProject' then MakerScienceProject.one(resourceId).patch(putData)
 )
 
-module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, TaggedItem) ->
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, TaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
@@ -217,14 +217,14 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     level: 0,
                     detail : "Créateur/Créatrice",
                     isValidated:true
-                    , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
+                    , 'project/'+getObjectIdFromURI(resourcesheetResult.project)).then((objectProfileLinkResult) ->
                         console.log("added current user as team member", objectProfileLinkResult.profile)
                         MakerScienceResource.one(makerscienceResourceResult.id).customPOST(
                             {"user_id":objectProfileLinkResult.profile.user.id}
                             , 'assign').then((result)->
                                 console.log(" succesfully assigned edit rights ? : ", result)
                         )
-                    )   
+                    )
 
                 angular.forEach($scope.tags, (tag)->
                     TaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id, {})
@@ -233,7 +233,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 # if no photos to upload, directly go to new project sheet
                 if $scope.uploader.queue.length <= 0
                     $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
-                else 
+                else
                     $scope.savePhotos(resourcesheetResult.id, resourcesheetResult.bucket.id)
                     $scope.uploader.onCompleteAll = () ->
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
@@ -252,17 +252,17 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
+
         if $rootScope.authVars.user
             MakerScienceResource.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
                 console.log(" Has current user edit rights ?", result.has_perm)
                 $scope.currentUserHasEditRights = result.has_perm
                 $scope.editable = result.has_perm
-                )
-
+        )
         # FIXME : remove 2 signals below, > now using service + $watch to share and sync data
-        $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
-        $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
-        
+        # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
+        # $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
+
         console.log("before setting datasharing", DataSharing.sharedObject)
         DataSharing.sharedObject =  {project : $scope.projectsheet.parent, makerscienceresource : $scope.projectsheet}
         console.log("AFTER setting datasharing", DataSharing.sharedObject)

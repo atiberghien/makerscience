@@ -10,7 +10,7 @@ module.controller("MakerScienceProfileListCtrl", ($scope, MakerScienceProfile) -
 
 module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile, MakerScienceProject, MakerScienceResource, MakerScienceProfileTaggedItem, ObjectProfileLink, PostalAddress) ->
 
-    MakerScienceProfile.one($stateParams.id).get().then((makerscienceProfileResult) ->
+    MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
 
         $scope.preparedInterestTags = []

@@ -7,7 +7,7 @@
 <div class="description">
     <h4><a ui-sref="project.detail({ slug: project.parent.slug })">{{project.parent.title}}</a></h4>
     <h5 ng-if="project.by">Par
-        <a ui-sref="profile.detail({id:project.by.profile_id})">
+        <a ui-sref="profile.detail({slug:project.by.profile_slug})">
             {{project.by.full_name}}
         </a>
     </h5>
