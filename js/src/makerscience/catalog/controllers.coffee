@@ -118,7 +118,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         delete $scope.needs[index]
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink, DataSharing) ->
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
@@ -130,6 +130,12 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
+        if $rootScope.authVars.user
+            MakerScienceProject.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
+                console.log(" Has current user edit rights ?", result.has_perm)
+                $scope.currentUserHasEditRights = result.has_perm
+                $scope.editable = result.has_perm
+        )
         # FIXME : these 2 signals should be removed, since we now use DataSharing service
         # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         # $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
@@ -177,7 +183,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($scope, $stateParams, $contro
             when 'MakerScienceProject' then MakerScienceProject.one(resourceId).patch(putData)
 )
 
-module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, TaggedItem) ->
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, TaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
@@ -209,7 +215,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     level: 0,
                     detail : "Créateur/Créatrice",
                     isValidated:true
-                    , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
+                    , 'project/'+getObjectIdFromURI(resourcesheetResult.project)).then((objectProfileLinkResult) ->
                         console.log("added current user as team member", objectProfileLinkResult.profile)
                         MakerScienceResource.one(makerscienceResourceResult.id).customPOST(
                             {"user_id":objectProfileLinkResult.profile.user.id}
@@ -233,7 +239,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment, DataSharing) ->
+module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
@@ -245,6 +251,12 @@ module.controller("MakerScienceResourceSheetCtrl", ($scope, $stateParams, $contr
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
 
+        if $rootScope.authVars.user
+            MakerScienceResource.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
+                console.log(" Has current user edit rights ?", result.has_perm)
+                $scope.currentUserHasEditRights = result.has_perm
+                $scope.editable = result.has_perm
+        )
         # FIXME : remove 2 signals below, > now using service + $watch to share and sync data
         # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         # $scope.$broadcast('makerscienceresourceReady', {makerscienceresource : $scope.projectsheet})
