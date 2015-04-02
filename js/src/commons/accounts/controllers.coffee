@@ -21,7 +21,6 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
 
     $scope.init = (objectTypeName) ->
 
-        #$scope.$on(objectTypeName+'Ready', (event, args) ->
         $scope.addMember = (profile, level, detail, isValidated)->
             if $scope.isAlreadyMember(profile, level)
                 console.log(" --- ! -- already Member with this level --- ! ---")
@@ -42,8 +41,6 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                     if member.level == level
                         return true
             return false
-
-
 
         $scope.removeMember = (member) ->
             # attention confusion possible : member ici correspond à une instance de
@@ -83,5 +80,4 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                     $scope.object = newVal[$scope.objectTypeName]
                     $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
         )
-        #)
 )

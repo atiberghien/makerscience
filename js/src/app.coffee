@@ -178,6 +178,14 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     label: '{{tag.slug}}'
                     parent : 'tags'
         )
+        .state('search',
+                url: '/search/:query',
+                templateUrl: 'views/base/search_result.html'
+                controller : 'MakerScienceSearchCtrl'
+                ncyBreadcrumb:
+                    label: 'Recherche'
+                    parent : 'home'
+        )
 
 ])
 .run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams, CurrentMakerScienceProfileService) ->

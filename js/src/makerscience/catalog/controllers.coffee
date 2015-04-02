@@ -1,25 +1,70 @@
 module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services'])
 
-module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject) ->
+module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject, FilterService) ->
     $scope.limit = 12
+    $scope.params = {}
 
+    $scope.refreshList = ()->
+        console.log("refreshing Project list !")
+        $scope.params['limit'] = $scope.limit
+        $scope.params['q'] = FilterService.filterParams.query
+        $scope.params['facet'] = FilterService.filterParams.tags
+        #$scope.projects = MakerScienceProject.getList(params).$object
+        $scope.projects = MakerScienceProject.one().customGETLIST('search', $scope.params).$object
+    
     $scope.init = (limit, featured) ->
-        params = {}
         if limit
              $scope.limit = limit
         if featured
-            params['featured'] = featured
-        params['limit'] = $scope.limit
-        $scope.projects = MakerScienceProject.getList(params).$object
+            $scope.params['featured'] = featured
+        $scope.refreshList()
+   
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.tags
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.query
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
 )
 
-module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource) ->
+module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource, FilterService) ->
     $scope.limit = 1000
+    $scope.params = {}
+
+    $scope.refreshList = ()->
+        console.log("refreshing Resource list !")
+        $scope.params['limit'] = $scope.limit
+        $scope.params['q'] = FilterService.filterParams.query
+        $scope.params['facet'] = FilterService.filterParams.tags
+        $scope.resources = MakerScienceResource.one().customGETLIST('search', $scope.params).$object
 
     $scope.init = (limit, featured) ->
         if limit
             $scope.limit = limit
-        $scope.resources = MakerScienceResource.getList({limit:$scope.limit}).$object
+        $scope.refreshList()
+
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.tags
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.query
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
 )
 
 module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResource) ->
@@ -118,6 +163,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         delete $scope.needs[index]
 )
 
+
 module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
@@ -135,6 +181,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 console.log(" Has current user edit rights ?", result.has_perm)
                 $scope.currentUserHasEditRights = result.has_perm
                 $scope.editable = result.has_perm
+
         )
         # FIXME : these 2 signals should be removed, since we now use DataSharing service
         # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
