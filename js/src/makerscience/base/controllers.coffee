@@ -61,7 +61,7 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
     $scope.refreshSearch = ()->
         $scope.searchResult = {}
         query = $scope.search_form.query
-        $scope.searchResult['members'] = MakerScienceProfile.one().getList().$object
+        $scope.searchResult['members'] = MakerScienceProfile.one().customGETLIST('search', {q:query}).$object
         $scope.searchResult['projects'] = MakerScienceProject.one().customGETLIST('search', {q:query}).$object
         $scope.searchResult['resources'] = MakerScienceResource.one().customGETLIST('search', {q:query}).$object 
 
@@ -81,7 +81,6 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
         console.log("loading filter on ", objectType)
         $scope.objectType = objectType
 
-
     $scope.refreshFilter = ()->
         """
         Update FilterService data
@@ -93,12 +92,6 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
         FilterService.filterParams.tags = tags_list
         FilterService.filterParams.query = $scope.query_filter
         console.log("AFTER refreshing filter (ctrler).. ", FilterService.filterParams)
-
-        # switch $scope.objectType
-        #     when 'project'
-        #         console.log("refreshing projects", $scope.projects)
-        #         $scope.projects = MakerScienceProject.one().customGETLIST('search', {q:$scope.search_form.query, facet:tags_list}).$object
-   
 
     $scope.addToTagsFilter = (aTag)->
         simpleTag = 

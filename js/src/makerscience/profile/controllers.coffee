@@ -1,11 +1,36 @@
-module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'commons.accounts.services'])
+module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'makerscience.base.services', 'commons.accounts.services'])
 
-module.controller("MakerScienceProfileListCtrl", ($scope, MakerScienceProfile) ->
+module.controller("MakerScienceProfileListCtrl", ($scope, MakerScienceProfile, FilterService) ->
+    $scope.limit = 10
+    $scope.params = {}
+
+    $scope.refreshList = ()->
+        console.log("refreshing Resource list !")
+        $scope.params['limit'] = $scope.limit
+        $scope.params['q'] = FilterService.filterParams.query
+        $scope.params['facet'] = FilterService.filterParams.tags
+        $scope.profiles = MakerScienceProfile.one().customGETLIST('search', $scope.params).$object
+
     $scope.init = (limit) ->
-        params = {}
         if limit
-            params['limit'] = limit
-        $scope.profiles = MakerScienceProfile.getList(params).$object
+            $scope.limit = limit
+        $scope.refreshList()
+
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.tags
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.query
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
+
 )
 
 module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile, MakerScienceProject, MakerScienceResource, MakerScienceProfileTaggedItem, ObjectProfileLink, PostalAddress) ->

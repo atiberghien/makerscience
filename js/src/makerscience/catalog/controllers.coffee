@@ -35,13 +35,36 @@ module.controller("MakerScienceProjectListCtrl", ($scope, MakerScienceProject, F
         )
 )
 
-module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource) ->
+module.controller("MakerScienceResourceListCtrl", ($scope, MakerScienceResource, FilterService) ->
     $scope.limit = 1000
+    $scope.params = {}
+
+    $scope.refreshList = ()->
+        console.log("refreshing Resource list !")
+        $scope.params['limit'] = $scope.limit
+        $scope.params['q'] = FilterService.filterParams.query
+        $scope.params['facet'] = FilterService.filterParams.tags
+        $scope.resources = MakerScienceResource.one().customGETLIST('search', $scope.params).$object
 
     $scope.init = (limit, featured) ->
         if limit
             $scope.limit = limit
-        $scope.resources = MakerScienceResource.getList({limit:$scope.limit}).$object
+        $scope.refreshList()
+
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.tags
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
+    $scope.$watch(
+            ()->
+                return FilterService.filterParams.query
+            ,(newVal, oldVal) ->
+                if newVal != oldVal
+                    $scope.refreshList()
+        )
 )
 
 module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResource) ->
