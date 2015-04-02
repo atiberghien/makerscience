@@ -39,9 +39,9 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="profile.detail({id:currentMakerScienceProfile.id})">Mon Profil</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="profile.detail({slug:currentMakerScienceProfile.slug})">Mon Profil</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Activités récentes</a></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="profile.dashboard({id:currentMakerScienceProfile.id})">Mes paramètres</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="profile.dashboard({slug:currentMakerScienceProfile.slug})">Mes paramètres</a></li>
                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Aide</a></li>
                                 <li role="presentation"><a ng-click="logout()" role="menuitem" tabindex="-1" href="#">Me déconnecter</a></li>
                             </ul>
@@ -57,11 +57,11 @@
         </nav><!-- #menu -->
     </header>
 
-    <div class="action-bar" ng-show="authVars.isAuthenticated || showLoginPanel" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel}">
+    <div class="action-bar" ng-show="authVars.isAuthenticated || showLoginPanel || authVars.loginrequired" ng-class="{'authenticated': authVars.isAuthenticated || showLoginPanel || authVars.loginrequired}">
         <div class="container">
 
             <!-- When logging in -->
-            <div class="authenticated" ng-show="showLoginPanel && currentMakerScienceProfile == null">
+            <div class="authenticated" ng-show="showLoginPanel && currentMakerScienceProfile == null || authVars.loginrequired">
                 <ng-include src="'/views/base/login.html'"></ng-include>
             </div>
 

@@ -49,7 +49,9 @@
     </div>
 
     <div class="col-md-3">
-        <div class="sidebar-filters sidebar-profiles">
+        <ng-include onload="objectType='makerscienceprofile'" src="'views/catalog/block/filters.html'"></ng-include>
+
+        <!-- <div class="sidebar-filters sidebar-profiles">
 
             <h3>Filtres de recherche</h3>
 
@@ -59,7 +61,7 @@
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Go!</button>
                 </span>
-            </div><!-- /input-group -->
+            </div>
             <ul class="tags tags-profile">
                 <li><a href="">many</a></li>
                 <li><a href="">very long</a></li>
@@ -78,7 +80,7 @@
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Go!</button>
                 </span>
-            </div><!-- /input-group -->
+            </div>
             <ul class="tags tags-profile">
                 <li><a href="">foo</a></li>
                 <li><a href="">bar</a></li>
@@ -129,13 +131,14 @@
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Go!</button>
                 </span>
-            </div><!-- /input-group -->
+            </div>
 
-        </div><!-- .sidebar-profiles -->
+        </div>
 
         <div class="sidebar-filters">
             <div class="preview"></div>
-        </div><!-- .sidebar-filters -->
+        </div>
+     -->
     </div>
 
 </div><!-- .row .container -->
