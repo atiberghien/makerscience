@@ -42,22 +42,19 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
              $scope.limit = limit
         if featured
             $scope.params['featured'] = featured
+        # Refresh FilterService params
+        FilterService.filterParams.query = ''
+        FilterService.filterParams.tags = []
         $scope.refreshListGeneric()
-   
-    $scope.$watch(
-            ()->
-                return FilterService.filterParams.tags
-            ,(newVal, oldVal) ->
-                if newVal != oldVal
-                    $scope.refreshListGeneric()
-        )
-    $scope.$watch(
-            ()->
-                return FilterService.filterParams.query
-            ,(newVal, oldVal) ->
-                if newVal != oldVal
-                    $scope.refreshListGeneric()
-        )
+    
+        for param of FilterService.filterParams
+            $scope.$watch(
+                ()->
+                    return FilterService.filterParams[param]
+                ,(newVal, oldVal) ->
+                    if newVal != oldVal
+                        $scope.refreshListGeneric()
+            )
 )
 
 module.controller('HomepageFeaturedListCtrl', ($scope, MakerScienceProject, MakerScienceResource) ->
