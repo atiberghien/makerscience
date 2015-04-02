@@ -478,12 +478,11 @@ fieldset.phases {
 }
 
 form.login {
-	position: relative;
-	margin-top: 1em;
-	button.close-login {
-		position: absolute;
-		top: -30px;
-		right: -15px;
+	padding: $grid-gutter-width;
+	text-align: center;
+	background: $color-pink url("../img/bg/shape-top-bg.png") no-repeat scroll center -100px;
+	h3, p {
+		color: #fff;
 	}
 	h3 {
 		font-size: 1.1em;
@@ -520,6 +519,7 @@ form.login {
 		}
 	}
 	p.or {
+		margin: $grid-gutter-width 0;
 		text-transform: uppercase;
 	}
 	fieldset {
@@ -530,7 +530,6 @@ form.login {
 		margin-bottom: 1em;
 		padding: 0.5em 0.75em;
 		font-size: 0.9em;
-		background-color: #a13535;
 		border: none;
 	}
 	button[type=submit] {
@@ -539,6 +538,10 @@ form.login {
 		color: $color-pink;
 		background-color: #fff;
 		border: none;
+		&:hover {
+			color: #fff;
+			background-color: $color-blue;
+		}
 	}
 }
 
