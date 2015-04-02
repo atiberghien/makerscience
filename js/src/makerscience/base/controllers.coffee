@@ -63,7 +63,7 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
         query = $scope.search_form.query
         $scope.searchResult['members'] = MakerScienceProfile.one().getList().$object
         $scope.searchResult['projects'] = MakerScienceProject.one().customGETLIST('search', {q:query}).$object
-        $scope.searchResult['resources'] = MakerScienceResource.one().getList().$object 
+        $scope.searchResult['resources'] = MakerScienceResource.one().customGETLIST('search', {q:query}).$object 
 
     $scope.refreshSearch()
 )
