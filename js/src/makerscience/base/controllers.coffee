@@ -19,6 +19,43 @@ module.directive('username', ($q, $timeout, User) ->
         )
 )
 
+module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
+    """
+    Abstract controller that initialize some list filtering parameters and
+    watch for changes in filterParams from FilterService
+    Controllers using it need to implement a refreshList() method calling adequate [Object]Service
+    """
+    $scope.limit = 12
+    $scope.params = {}
+
+    $scope.getParams = ()->
+        $scope.params['limit'] = $scope.limit
+        $scope.params['q'] = FilterService.filterParams.query
+        $scope.params['facet'] = FilterService.filterParams.tags
+
+    $scope.refreshListGeneric = ()->
+        $scope.getParams()
+        $scope.refreshList()
+
+    $scope.init = (limit, featured) ->
+        if limit
+             $scope.limit = limit
+        if featured
+            $scope.params['featured'] = featured
+        # Refresh FilterService params
+        FilterService.filterParams.query = ''
+        FilterService.filterParams.tags = []
+        $scope.refreshListGeneric()
+    
+        for param of FilterService.filterParams
+            $scope.$watch(
+                ()->
+                    return FilterService.filterParams[param]
+                ,(newVal, oldVal) ->
+                    if newVal != oldVal
+                        $scope.refreshListGeneric()
+            )
+)
 
 module.controller('HomepageFeaturedListCtrl', ($scope, MakerScienceProject, MakerScienceResource) ->
     $scope.projects = MakerScienceProject.getList({limit:2, feature:true}).$object
