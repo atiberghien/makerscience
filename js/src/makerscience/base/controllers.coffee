@@ -109,14 +109,14 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
 module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
     
     console.log(" INit Filter Ctrl , state param ? ", $stateParams)
-    $scope.objectType = 'project'
-    $scope.suggestedTags = Tag.getList().$object
+    $scope.suggestedTags = []
     $scope.tags_filter = []
     $scope.query_filter = ''
 
     $scope.load = (objectType)->
         console.log("loading filter on ", objectType)
         $scope.objectType = objectType
+        $scope.suggestedTags = Tag.getList({content_type:objectType}).$object
 
     $scope.refreshFilter = ()->
         """
