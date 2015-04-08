@@ -1,15 +1,26 @@
-module = angular.module("commons.catalog.controllers", ['commons.catalog.services'])
+module = angular.module("commons.catalog.controllers", ['commons.catalog.services', 'commons.base.controllers'])
 
-module.controller("ProjectListCtrl", ($scope, Project) ->
+module.controller("ProjectListCtrl", ($scope, $controller, Project) ->
+    angular.extend(this, $controller('AbstractListCtrl', {$scope: $scope}))
+
     $scope.projects = Project.getList().$object
+    
+    $scope.refreshList = ()->
+        #$scope.projects = Project.one().customGETLIST('search', $scope.params).$object
+        $scope.projects = Project.getList().$object
 )
+
 
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet,
                                         Project, ProjectSheetItem, Bucket,
                                         @$http, FileUploader, $modal) ->
 
     $scope.init = ->
-        return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
+        Project.one().get({'slug' : $stateParams.slug}).then((projectResult)->
+            $scope.project = projectResult.objects[0]
+        )
+        ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
+            $scope.projectsheet = projectsheetResult.objects[0]
             return projectsheetResult.objects[0]
         )
 

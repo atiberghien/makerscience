@@ -1,3 +1,4 @@
+angular.module('commons.base', ['commons.base.controllers', 'commons.base.services'])
 angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
 angular.module('commons.accounts', ['commons.accounts.services', 'commons.accounts.controllers'])
 angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
@@ -5,7 +6,8 @@ angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'mak
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
-angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
+angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'commons.base', 
+                                'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
                                 'geocoder-service', 'ncy-angular-breadcrumb', 'truncate'])
@@ -80,38 +82,10 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('project.detail',
                 url: ':slug',
                 templateUrl: 'views/catalog/project.detail.html',
-                controller : 'MakerScienceProjectSheetCtrl'
+                controller : 'ProjectSheetCtrl'
                 ncyBreadcrumb:
-                    label: '{{projectsheet.parent.title}}'
+                    label: '{{project.title}}'
                     parent : 'project.list'
-        )
-        .state('resource',
-                url : '/r/',
-                abstract : true,
-                templateUrl : 'views/catalog/resource.html'
-                ncyBreadcrumb:
-                    parent: 'home'
-        )
-        .state('resource.list',
-                url: 'list',
-                templateUrl: 'views/catalog/resource.list.html'
-                ncyBreadcrumb:
-                    label: 'Expériences'
-        )
-        .state('resource.new',
-                url: 'new',
-                templateUrl: 'views/catalog/resource.new.html'
-                ncyBreadcrumb:
-                    label: 'Nouvelle expérience'
-                    parent : 'resource.list'
-        )
-        .state('resource.detail',
-                url: ':slug',
-                templateUrl: 'views/catalog/resource.detail.html'
-                controller: 'MakerScienceResourceSheetCtrl'
-                ncyBreadcrumb:
-                    label: '{{projectsheet.parent.title}}'
-                    parent : 'resource.list'
         )
         .state('profile',
                 url : '/u/',

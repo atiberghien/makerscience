@@ -3,10 +3,10 @@ module = angular.module("commons.catalog.services", ['restangular'])
 
 # Services
 module.factory('Project', (Restangular) ->
-    return Restangular.service('project')
+    return Restangular.service('project/project')
 )
 module.factory('ProjectSheet', (Restangular) ->
-    return Restangular.service('projectsheet')
+    return Restangular.service('project/sheet/projectsheet')
 )
 module.factory('PostalAddress', (Restangular) ->
     return Restangular.service('scout/postaladdress')
