@@ -1,0 +1,196 @@
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.min.css">
+<link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
+<link rel='stylesheet' href='css/textAngular.css'>
+<link rel='stylesheet' href='js/vendor/angucomplete-alt/angucomplete-alt.css'>
+<div class="admin">
+
+    <div id="intro" class="intro-project-create">
+        <h1>Créez une page</h1>
+        <h2>pour votre projet</h2>
+    </div><!-- #intro -->
+
+    <div class="row container">
+
+        <div class="col-md-12">
+
+            <div id="content" class="new-project">
+
+                <h2>Créer un projet</h2>
+                <p>Ce formulaire vous permet de décrire en détails votre projet. Tous les champs ne sont pas obligatoires et peuvent être modifiés par la suite si vous n'avez pas beaucoup de temps.<p>
+                <p>Mais plus vous détaillerez, plus vous donnerez envie aux membres de s'investir dans votre projet et le relayer.</p>
+                <p>Pour toute question ou besoin d'accompagnement dans la création de cette page, n'hésitez pas à contacter l'équipe de Makerscience ! ;-)</p>
+
+                <h3>Nouveau projet</h3>
+
+                <form name="newProjectForm" novalidate ng-controller="MakerScienceProjectSheetCreateCtrl" ng-init="init('projet-makerscience'); submitted=false" ng-submit="saveMakerscienceProject(newProjectForm.$valid)" ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }">
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            <fieldset class="fake-placeholder">
+                                <h4>Nom du projet</h4>
+                                <input type="text"
+                                       name="projectName"
+                                       ng-model="projectsheet.project.title" required/>
+                                <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Nom du projet requis</p>
+                           </fieldset>
+
+                            <fieldset class="fake-placeholder">
+                                <h4>Résumez votre projet en une courte phrase</h4>
+                                <input type="text"
+                                           name="projectBaseline"
+                                           ng-model="projectsheet.project.baseline" required/>
+                                <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Courte description du projet requise</p>
+                           </fieldset>
+
+                            <fieldset class="fake-placeholder">
+                                <div ng-controller="TagAutoCompleteCtrl">
+                                    <h4>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h4>
+                                    <tags-input ng-model="tags"
+                                                placeholder="> Mot-clé">
+                                      <auto-complete source="loadTags($query)"></auto-complete>
+                                    </tags-input>
+                                </div>
+                            </fieldset>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <fieldset class="addPhotosVideos">
+                                <label ng-click="openGallery()">Ajouter des médias</label>
+                                <button type="button" class="addPhotos" ng-click="openGallery()">
+                                    <span class="glyphicon glyphicon-camera"></span>
+                                </button>
+                                <button  type="button" class="addVideos" ng-click="openGallery()">
+                                    <span class="glyphicon glyphicon-facetime-video"></span>
+                                </button>
+                            </fieldset>
+                            <fieldset class="phases" ng-controller="ProjectProgressCtrl" ng-init="init('makerscience')">
+                                <p>État d'avancement</p>
+                                <label class="phase{{progress.order+1}} {{selectedClasses[progress.id]}}"
+                                       ng-repeat="progress in progressRange"
+                                       ng-click="updateProgressChoice(progress);$parent.projectsheet.project.progress=progress.resource_uri"
+                                       tooltip="{{progress.description}}">
+                                    {{progress.label}}
+                                </label>
+                            </fieldset>
+
+
+                        </div>
+
+                    </div><!-- .row -->
+
+                    <fieldset class="new-project">
+                        <h4>Résumez votre projet en quelques lignes</h4>
+                        <text-angular name="project-about"
+                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                                      ng-model="projectsheet.project.description"
+                                      e-rows="4">
+                        </text-angular>
+                    </fieldset>
+
+                    <fieldset class="new-project" ng-repeat="item in QAItems">
+                        <h4>{{item.questionLabel}}</h4>
+                        <text-angular ng-model="item.answer"
+                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                                      name="question_{{$index}}"
+                                      e-rows="4">
+                        </text-angular>
+                    </fieldset>
+
+                    <!-- #91 hidden at Alban's request 13/03/2015
+                    <fieldset class="needs needs-select">
+                        <h4>Vos besoins</h4>
+                        <p>Vous avez besoin d'idées fraîches pour votre projet? Précisez ici vos besoins du moment ...</p>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="btn-group" dropdown is-open="status.isopen">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">{{newNeed.type}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-repeat="needType in needTypes"><a ng-click="newNeed.type=needType">{{needType}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <text-angular name="project-need"
+                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                                              e-placeholder="Descrivez votre besoin"
+                                              ng-model="newNeed.description"
+                                              e-rows="3">
+                                </text-angular>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li ng-repeat="(index, need) in needs">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>{{need.type}}</label>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <span ng-bind-html="need.description"></span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn btn-danger" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+                    -->
+
+                    <fieldset class="linked-idea">
+                        <h4>Expériences associées</h4>
+                        <p>Voulez-vous associer votre projet à des expériences ?</p>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <angucomplete-alt id="linked-idea"
+                                                placeholder="Nom de l'expérience"
+                                                pause="100"
+                                                selected-object="newLinkedResource"
+                                                local-data="allAvailableResources"
+                                                search-fields="title"
+                                                title-field="title"
+                                                text-no-results="Aucune expérience trouvée"
+                                                minlength="3"/>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'éxpérience</button>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li ng-repeat="resource in linkedResources">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <label>{{resource.parent.title}}</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger" ng-click="delLinkedResource(resource)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                     </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                    <p class="right">
+                        <button type="button" class="button cancel" ui-sref="project.list">Annuler</button>
+                        <!-- FIXME : set up ctrler to allow 'save as draft'  -->
+                        <!-- <button type="button" class="button">Enregistrer en brouillon</button>
+                        <button type="button" class="button" ng-click="submitted=true">Publier</button>
+                         -->
+                        <button type="submit" class="button" ng-click="submitted=true">Enregistrer</button>
+                    </p>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
+                    </div>
+                </form>
+
+            </div><!-- #content -->
+
+        </div><!-- .row -->
+
+    </div><!-- .row .container -->
+
+</div><!-- .container-fluid -->

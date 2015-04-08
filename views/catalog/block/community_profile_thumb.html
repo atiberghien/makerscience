@@ -1,0 +1,19 @@
+<gravatar-image data-gravatar-email="member.profile.user.email"
+    data-gravatar-size="52"
+    data-gravatar-rating="pg"
+    data-gravatar-default="/img/users/user-default.png"
+    data-gravatar-secure="true"
+    data-gravatar-css-class="img-circle">
+</gravatar-image>
+<div class="member-details relative">
+    <p>{{member.profile.user.first_name}} {{member.profile.user.last_name}}</p>
+    <div class="edit-buttons" ng-show="editable">
+        <button ng-click="DetailBtnForm.$show()" ng-hide="DetailBtnForm.$visible">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+    </div>
+    <p editable-text="member.detail"
+        e-form="DetailBtnForm"
+        onbeforesave="updateMemberDetail($data, member)"
+        ng-bind-html="member.detail">{{member.detail}}</p>
+</div>

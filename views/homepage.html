@@ -1,0 +1,255 @@
+<div class="container">
+
+    <div class="home-slide">
+        <div class="row">
+            <div class="col-md-7" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3, true)">
+                <carousel class="carousel-no-indicators" ng-controller="HomepageFeaturedListCtrl" interval="4000">
+                    <!-- Presentation -->
+                    <slide>
+                        <div class="caption">
+                            <div>
+                                <h1>Makerscience : site collaboratif pour tous ceux qui s’emploient à mettre la science, la technique et l'innovation à portée de tous</h1>
+                                <p>Faciliter la réalisation de projets</p>
+                                <p>Favoriser les échanges et rencontres</p>
+                                <p>Valoriser toutes les personnes investies</p>
+                            </div>
+                        </div>
+                        <a ui-sref="forum">
+                            <img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        </a>
+                    </slide>
+                    <slide ng-repeat="project in projects">
+                        <h3 class="category"><span>Projet</span></h3>
+                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
+                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3>{{project.parent.title}}</h3>
+                            <h4>Par <strong><a ui-sref="profile.detail({slug:project.by.profile_slug})">
+                                {{project.by.full_name}}</a></strong></h4>
+                        </div>
+                    </slide>
+                    <slide ng-repeat="resource in resources">
+                        <h3 class="category"><span>Expérience</span></h3>
+                        <img ng-if="resource.base_projectsheet.cover" ng-src="{{config.media_uri}}{{resource.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
+                        <img ng-if="!resource.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3>{{resource.parent.title}}</h3>
+                            <h4>Par <strong><a ui-sref="profile.detail({slug:resource.by.profile_slug})">
+                                {{resource.by.full_name}}</a></strong></h4>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+            <div class="col-md-5" ng-init="showLoginPanel=false">
+                <div class="home-join">
+                    <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
+                    <div ng-show="!showLoginPanel" class="welcome">
+                        <div class="join">
+                            <h2 ng-hide="authVars.isAuthenticated">Rejoindre la communauté MakerScience!</h2>
+                            <h2 ng-show="authVars.isAuthenticated">Bienvenue {{currentMakerScienceProfile.parent.user.first_name}}</h2>
+                        </div><!-- .join -->
+                    </div>
+                    <div ng-show="showLoginPanel" >
+                       <p class="right">
+                           <button class="close-login" ng-click="showLoginPanel=false"><img src="./img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
+                       </p>
+                       <ng-include src="'./views/base/login.html'"></ng-include>
+                    </div>
+                </div><!-- .home-join -->
+            </div>
+        </div><!-- .row -->
+    </div><!-- .home-slide -->
+
+    <div class="home-links">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row community">
+                    <div class="col-md-4">
+                        <img src="./img/icons/community.png" alt="Echangez et rencontrez" />
+                        <h3>Echangez et rencontrez</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <ul>
+                            <li><a ng-click="showLoginPanel=true">Participez à la communauté</a></li>
+                            <li><a ui-sref="profile.list">Trouvez des contacts</a></li>
+                            <li><a ui-sref="forum">Discutez avec les membres</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+            <div class="col-md-4">
+                <div class="row projects">
+                    <div class="col-md-4">
+                        <img src="./img/icons/project.png" alt="Stimulez des idées et des projets" />
+                        <h3>Stimulez des idées et des projets</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <ul>
+                            <li><a ui-sref="project.list">Parcourez les projets</a></li>
+                            <li><a ui-sref="project.new">Ajoutez votre projet</a></li>
+                            <li><a ui-sref="map">Localisez des porteurs</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+            <div class="col-md-4">
+                <div class="row resources">
+                    <div class="col-md-4">
+                        <img src="./img/icons/resource.png" alt="Trouvez des méthodes, des outils, des réponses" />
+                        <h3>Trouvez des méthodes, des outils, des réponses</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <ul>
+                            <li><a ui-sref="resource.list">Parcourez les expériences partagées</a></li>
+                            <li><a ui-sref="resource.new">Partagez votre expérience</a></li>
+                            <li><a ui-sref="forum">Posez vos questions</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+        </div><!-- row -->
+    </div><!-- .home-links -->
+
+    <div class="home-fullwidth">
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
+                <div class="boxes boxes-small boxes-small-home members" ng-controller="MakerScienceProfileListCtrl" ng-init="init(3)">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="profile in profiles">
+                        <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
+                    </div
+                    ><div class="box box-solo box-pink">
+                        <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
+            <div class="col-md-4">
+                <h2 class="projects"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+                <div class="boxes boxes-small boxes-small-home boxes-projects" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3)">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="project in projects" >
+                        <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include> -->
+                    </div
+                    ><div class="box box-solo box-blue">
+                        <div><a ui-sref="project.list">Voir tous les <br />projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
+            <div class="col-md-4">
+                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Expériences partagées</h2>
+                <div class="boxes boxes-small boxes-small-home boxes-resources" ng-controller="MakerScienceResourceListCtrl" ng-init="init(3)">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="resource in resources">
+                        <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                    </div
+                    ><div class="box box-solo box-green">
+                        <div><a ui-sref="resource.list">Voir toutes les expériences <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
+        </div><!-- .row -->
+    </div><!-- .home-fullwidth -->
+
+    <div class="row home-tags">
+        <div class="col-md-12">
+            <div class="home-tags" ng-controller="TagListCtrl">
+                <h2>Tags / Mots clés</h2>
+                <ul class="tags">
+                    <li ng-repeat="tag in tags | limitTo : 25 "><a ui-sref="tag({slug:tag.slug})">{{tag.name}}</a></li>
+                    <li><a ng-show="tags.length > 25" ui-sref="tags" tooltip="Cherchez d’autres tags">Cherchez d’autres tags</a></li>
+                </ul>
+            </div><!-- .home-tags -->
+        </div>
+    </div><!-- .row -->
+
+    <div class="row row-home">
+        <div class="col-md-7">
+
+            <div class="home-forum">
+                <div class="preview"></div>
+                <h2 class="forum">Discussions <a ui-sref="forum">Voir toutes les discussions</a></h2>
+                <section>
+                    <header>
+                        <ul class="members">
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li class="count"><a href="">+30</a></li>
+                        </ul><!-- .members -->
+                        <img class="member" src="./img/users/user-default.png" alt="User's avatar" />
+                        <h3>Stéphanie <strong>Martines</strong></h3>
+                        <h4>Mise à jour: <strong>1H</strong></h4>
+                    </header>
+                    <p class="question"><span>?</span>Quels leviers et méthodes utiliseriez-vous pour promouvoir une conférence avec &euro;500 de budget?</p>
+                    <p class="comments-count"><span class="glyphicon glyphicon-comment"></span> 120</p>
+                    <ul class="tags">
+                        <li><a href="">marketing</a></li>
+                        <li><a href="">conference</a></li>
+                        <li><a href="">autre</a></li>
+                        <li class="more"><a href="">+04</a></li>
+                    </ul><!-- .tags -->
+                </section>
+                <section>
+                    <header>
+                        <ul class="members">
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li class="count"><a href="">+30</a></li>
+                        </ul><!-- .members -->
+                        <img class="member" src="./img/users/user-default.png" alt="User's avatar" />
+                        <h3>Stéphanie <strong>Martines</strong></h3>
+                        <h4>Mise à jour: <strong>1H</strong></h4>
+                    </header>
+                    <p class="question"><span>?</span>Quels leviers et méthodes utiliseriez-vous pour promouvoir une conférence avec &euro;500 de budget?</p>
+                    <p class="comments-count"><span class="glyphicon glyphicon-comment"></span> 120</p>
+                    <ul class="tags">
+                        <li><a href="">marketing</a></li>
+                        <li><a href="">conference</a></li>
+                        <li><a href="">autre</a></li>
+                        <li class="more"><a href="">+04</a></li>
+                    </ul><!-- .tags -->
+                </section>
+                <section>
+                    <header>
+                        <ul class="members">
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li><a href=""><img src="./img/users/user-default.png" alt="User's avatar" /></a></li>
+                            <li class="count"><a href="">+30</a></li>
+                        </ul><!-- .members -->
+                        <img class="member" src="./img/users/user-default.png" alt="User's avatar" />
+                        <h3>Stéphanie <strong>Martines</strong></h3>
+                        <h4>Mise à jour: <strong>1H</strong></h4>
+                    </header>
+                    <p class="question"><span>?</span>Quels leviers et méthodes utiliseriez-vous pour promouvoir une conférence avec &euro;500 de budget?</p>
+                    <p class="comments-count"><span class="glyphicon glyphicon-comment"></span> 120</p>
+                    <ul class="tags">
+                        <li><a href="">marketing</a></li>
+                        <li><a href="">conference</a></li>
+                        <li><a href="">autre</a></li>
+                        <li class="more"><a href="">+04</a></li>
+                    </ul><!-- .tags -->
+                </section>
+            </div><!-- .home-forum -->
+
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="home-twitter">
+                <a class="twitter-timeline"
+                href="https://twitter.com/atiberghien"
+                data-widget-id="527467059685257216"></a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div><!-- .home-tweeter -->
+
+        </div>
+
+    </div><!-- .row -->
+
+</div><!-- .container -->

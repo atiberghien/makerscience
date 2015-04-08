@@ -1,0 +1,13 @@
+<div class="tags">
+    <div class="editable">
+        <div class="edit-buttons" ng-show="editable">
+            <button ng-click="openTagPopup(true, projectsheet, taggedObjectTypeName)"><span class="glyphicon glyphicon-pencil"></span></button>
+        </div>
+        <div>
+            <ul class="tags tags-project">
+                <li ng-repeat="tag in preparedTags | limitTo:10"><a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a></li>
+                <li><a ng-show="preparedTags.length > 10" href="" tooltip="Voir tous les tags" ng-click="openTagPopup(false)">...</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

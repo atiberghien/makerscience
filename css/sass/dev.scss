@@ -35,28 +35,35 @@ ul.colors {
 	margin: 0;
 	padding: 0;
 	li {
-		display: block;
-		margin: 0 0 1em;
-		padding: 2em;
+		width: 45%;
+		display: inline-block;
+		margin: 0 1em 1em 0;
+		padding: 4em 1em;
 		color: #fff;
 		white-space: pre-line;
 		text-align: center;
-		&.orange {
-			background-color: $color-orange;
-			&:after {
-				content: "$color-orange\a#{$color-orange}";
-			}
-		}
 		&.blue {
 			background-color: $color-blue;
 			&:after {
 				content: "$color-blue\a#{$color-blue}";
 			}
 		}
+		&.chocolate {
+			background-color: $color-chocolate;
+			&:after {
+				content: "$color-chocolate\a#{$color-chocolate}";
+			}
+		}
 		&.dark-grey {
 			background-color: $color-dark-grey;
 			&:after {
 				content: "$color-dark-grey\a#{$color-dark-grey}";
+			}
+		}
+		&.green {
+			background-color: $color-green;
+			&:after {
+				content: "$color-green\a#{$color-green}";
 			}
 		}
 		&.light-grey {
@@ -66,16 +73,22 @@ ul.colors {
 				content: "$color-light-grey\a#{$color-light-grey}";
 			}
 		}
+		&.orange {
+			background-color: $color-orange;
+			&:after {
+				content: "$color-orange\a#{$color-orange}";
+			}
+		}
 		&.purple {
 			background-color: $color-purple;
 			&:after {
 				content: "$color-purple\a#{$color-purple}";
 			}
 		}
-		&.green {
-			background-color: $color-green;
+		&.red {
+			background-color: $color-red;
 			&:after {
-				content: "$color-green\a#{$color-green}";
+				content: "$color-red\a#{$color-red}";
 			}
 		}
 	}

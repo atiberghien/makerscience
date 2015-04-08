@@ -1,0 +1,15 @@
+<h3>{{resource.parent.begin_date|date : format : shortdate}}
+    <img ng-src="{{ config.media_uri }}{{ resource.parent.progress.icon }}" alt="{{resource.parent.progress.label}}">
+</h3>
+<a ui-sref="resource.detail({ slug: resource.parent.slug })">
+    <img class="background" src="./img/bacasable.jpg" alt="Image background" />
+</a>
+<div class="description">
+    <h4><a ui-sref="resource.detail({ slug: resource.parent.slug })">{{resource.parent.title}}</a></h4>
+    <h5 ng-if="project.by">Par
+        <a ui-sref="profile.detail({slug:resource.by.profile_slug})">
+            {{resource.by.full_name}}
+        </a>
+    </h5>
+</div>
+<p class="baseline"><a ui-sref="resource.detail({ slug: resource.parent.slug })">{{resource.parent.baseline}}</a></p>
