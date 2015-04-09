@@ -1,20 +1,21 @@
-Imagination.social HTML FrontEnd
+Project platform HTML FrontEnd
 ===========
 
 A Projet front-end companion for the Data Server. 
 
-Usage
+Installation
 =====
 
    sudo aptitude install ruby-compass ruby-fssm coffeescript
 
-   git clone hhttps://github.com/UnissonCo/imagination.social.git
+   git clone https://github.com/UnissonCo/projects-front-end.git
    
-   cd js
+   cd js/src
     
-   nano config.js
+   nano config.coffee
 
-    config :
+#### If using data.patapouf.org as a dataserver, use this configuration (default configuration) : 
+   
         bucket_uri: 'http://data.patapouf.org/bucket/upload/',
         loginBaseUrl: 'http://data.patapouf.org/api/v0',
         oauthBaseUrl: 'http://data.patapouf.org',
@@ -23,7 +24,8 @@ Usage
 
    ./coffee_watch.sh
    
-   cd ..
+   cd .. 
+   
    cd ..
    
    cd css
