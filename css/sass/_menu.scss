@@ -1,9 +1,9 @@
 header {
 	#menu {
-		margin: 115px 0 0 0;
+		// margin: 115px 0 0 0;
 		font-size: 0.95em;
-		background-color: $color-very-dark-blue;
-		background-color: $color-blue;
+		// background-color: $color-very-dark-blue;
+		background-color: black;
 		&.navbar {
 			@include border-radius(0);
 		}
@@ -11,7 +11,7 @@ header {
 			position: relative; /* to place the logo / brand within */
 			.navbar-brand {
 				position: absolute;
-				top: -120px;
+				top: -8px;
 				left: $grid-gutter-width;
 				img {
 					margin-left: -15px;
@@ -30,12 +30,14 @@ header {
 		}
 		.register-login {
 			float: right;
-			margin-top: -70px;
+			margin-top: 10px;
+            margin-left: 10px;
+
 			button {
 				display: inline-block;
 				margin-right: $grid-gutter-width / 2;
-				padding: 0.75em 1em;
-				font-size: 1.25em;
+				padding: 0.5em 0.5em;
+				font-size: 0.9em;
 				font-weight: bold;
 				text-transform: uppercase;
 				background: $color-blue url('../img/bg/shape-top-bg.png') center center no-repeat;
@@ -102,8 +104,10 @@ header {
 
 	}
 	form {
-		display: inline;
+		// display: inline;
 		padding: 0.75em 0;
+        float:left;
+        margin-left: 50px;
 		button {
 			padding: 0.5em 1em;
 			background-color: $color-blue !important;

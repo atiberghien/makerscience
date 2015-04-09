@@ -8,7 +8,7 @@
 	header {
 		margin-bottom: $grid-gutter-width;
 		background-color: $color-header-bg;
-		@include transition(all 0.5s ease-in-out);
+		// @include transition(all 0.5s ease-in-out);
 	}
 
 	/* When scolling down */
@@ -25,14 +25,14 @@
 		#menu {
 			margin-top: 0;
 			ul.navbar-nav {
-				padding-left: 65px;
+				// padding-left: 65px;
 			}
 			.navbar-header {
 				.navbar-brand {
-					top: -4px;
+					// top: -4px;
 					img {
-						margin-left: 0;
-						width: 30px;
+						// margin-left: 0;
+						// width: 30px;
 					}
 				}
 			}
@@ -44,7 +44,8 @@
 .dropdown.dropdown-logged-in {
 	button {
 		position: absolute;
-		top: -$grid-gutter-width;
+		// top: -$grid-gutter-width;
+        top:8px;
 		right: 0;
 	}
 	.dropdown-menu {
