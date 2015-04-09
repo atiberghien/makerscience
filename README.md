@@ -25,10 +25,15 @@ Usage
    
    cd ..
    cd ..
+   
    cd css
    
    compass w
    
    cd ..
    
+   npm install
+   
+   node_modules/.bin/bower install
+
    python -m SimpleHTTPServer 8080
