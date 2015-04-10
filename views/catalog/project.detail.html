@@ -126,7 +126,7 @@
 
                         </section>
                         <!--  FIXME : questions answers / templates -->
-                        <section ng-repeat="item in projectsheet.items">
+                        <section ng-repeat="item in projectsheet.question_answers">
                             <h3>{{item.question.text}}</h3>
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
@@ -135,7 +135,7 @@
                                  e-form="AnswerBtnForm"
                                  e-rows="4"
                                  e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                 onbeforesave="updateProjectSheet('ProjectSheetItem', item.id , 'answer', $data)"
+                                 onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
                                  ng-bind-html="item.answer">
                             </p>
                         </section>

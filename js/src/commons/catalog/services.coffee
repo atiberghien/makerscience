@@ -13,11 +13,11 @@ module.factory('PostalAddress', (Restangular) ->
 )
 
 module.factory('ProjectSheetTemplate', (Restangular) ->
-    return Restangular.service('projectsheettemplate')
+    return Restangular.service('project/sheet/template')
 )
 
-module.factory('ProjectSheetItem', (Restangular) ->
-    return Restangular.service('projectsheetsuggesteditem')
+module.factory('ProjectSheetQuestionAnswer', (Restangular) ->
+    return Restangular.service('project/sheet/question_answer')
 )
 
 module.factory('ProjectProgress', (Restangular) ->
