@@ -17,9 +17,10 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index: 1000;
+		z-index: 1001;
 		@include box-shadow(0 5px 2px rgba(0,0,0,.25));
-		p.navbar-tagline {
+		p.navbar-tagline,
+		.dropdown.dropdown-logged-in {
 			display: none;
 		}
 		#menu {
@@ -42,10 +43,17 @@
 }
 
 .dropdown.dropdown-logged-in {
-	button {
+	button,
+	&.open > .btn-default.dropdown-toggle {
 		position: absolute;
 		top: -$grid-gutter-width;
 		right: 0;
+		padding: 0;
+		background-color: transparent;
+		border: none;
+		img {
+			vertical-align: middle;
+		}
 	}
 	.dropdown-menu {
 		right: 0;

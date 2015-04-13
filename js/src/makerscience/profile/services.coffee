@@ -27,13 +27,6 @@ class CurrentMakerScienceProfileService
                 controller: 'SignupPopupCtrl'
             )
 
-        $rootScope.openSigninPopup = ()->
-            modalInstance = $modal.open(
-                templateUrl: 'views/base/signinModal.html',
-                controller: 'SigninPopupCtrl'
-            )
-
-
 module.factory('CurrentMakerScienceProfileService', ($rootScope, $modal, MakerScienceProfile) ->
     return new CurrentMakerScienceProfileService($rootScope, $modal, MakerScienceProfile)
 )
@@ -56,10 +49,4 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
 
             )
         )
-)
-
-module.controller('SigninPopupCtrl', ($scope, $rootScope, $modalInstance, $state, User) ->
-    """
-    Controller bound to openSigninPopup method of CurrentMakerScienceProfile service
-    """
 )

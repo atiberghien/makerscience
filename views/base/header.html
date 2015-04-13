@@ -14,7 +14,7 @@
                     <p class="navbar-tagline">Plateforme collaborative pour<br />la médiation des sciences, des techniques et des innovations</p>
                     <p class="register-login" ng-show="!authVars.isAuthenticated">
                         <button class="button" ng-click="openSignupPopup()">S'inscrire</button>
-                        <button class="button" ng-click="openSigninPopup()">Se connecter</button>
+                        <button class="button" data-toggle="modal" data-target="#signinModal">Se connecter</button>
                     </p>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -35,8 +35,14 @@
 
                         <div class="dropdown dropdown-logged-in" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null">
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                                {{currentMakerScienceProfile.parent.user.first_name}}
-                                <span class="caret"></span>
+                                <gravatar-image data-gravatar-email="currentMakerScienceProfile.parent.user.email"
+                                    data-gravatar-size="40"
+                                    data-gravatar-rating="pg"
+                                    data-gravatar-default="mm"
+                                    data-gravatar-secure="true"
+                                    data-gravatar-css-class="profile img-circle">
+                                </gravatar-image>
+                                <span class="glyphicon glyphicon-menu-hamburger"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                 <li role="presentation"><a role="menuitem" tabindex="-1" ui-sref="profile.detail({slug:currentMakerScienceProfile.slug})">Mon Profil</a></li>
