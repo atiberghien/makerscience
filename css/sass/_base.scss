@@ -65,6 +65,9 @@ button.button {
 	color: #fff;
 	background-color: $color-blue;
 	border: none;
+	&:hover {
+		background-color: $color-dark-blue;
+	}
 	&.button-resource {
 		background-color: $color-resource;
 	}

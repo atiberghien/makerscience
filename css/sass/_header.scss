@@ -434,7 +434,7 @@ div.crumbs {
 					vertical-align: middle;
 				}
 			}
-			}
+		}
 		ul.skills {
 			margin-bottom: 3em;
 		}
@@ -443,6 +443,30 @@ div.crumbs {
 		padding: $grid-gutter-width 0;
 		button {
 			margin-bottom: $grid-gutter-width;
+		}
+	}
+	&.intro-dashboard {
+		background: $color-chocolate url('../img/bg/header-listing-profiles.jpg') center center no-repeat;
+		background-size: cover;
+		.intro {
+			margin: 0;
+			border: none;
+		}
+		.user {
+			padding: $grid-gutter-width;
+			text-align: center;
+			background-color: rgba(255, 255, 255, 0.5);
+			img {
+			}
+		}
+		h4 {
+			margin-top: $grid-gutter-width / 2;
+			margin-bottom: 0.5em;
+			font-size: 1.75em;
+			font-family: "LatoBold";
+			color: $color-text;
+			background-color: transparent;
+			text-transform: uppercase;
 		}
 	}
 }

@@ -3,39 +3,27 @@
 <link rel="stylesheet" href="js/vendor/ng-tags-input/ng-tags-input.bootstrap.min.css">
 <link rel='stylesheet' href='css/textAngular.css'>
 
-<ul id="sidenav" class="project">
-    <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
-    <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
-    <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
-</ul><!-- #nav -->
-
-<div id="intro" class="intro-profile">
+<div id="intro" class="intro-dashboard">
     <div class="container">
         <div class="intro">
             <div class="row">
 
-                <div class="col-md-12">
-                    <gravatar-image data-gravatar-email="profile.parent.user.email"
-                                    data-gravatar-size="200"
-                                    data-gravatar-rating="pg"
-                                    data-gravatar-default="mm"
-                                    data-gravatar-secure="true"
-                                    data-gravatar-css-class="profile img-circle">
-                    </gravatar-image>
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="user">
 
-                    <h1>{{profile.full_name}}</h1>
-                    <div class="relative">
-                        <div class="edit-buttons" ng-show="editable">
-                            <button ng-click="ActivityBtnForm.$show()" ng-hide="ActivityBtnForm.$visible">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </button>
-                        </div>
-                        <h2 editable-text="profile.activity"
-                            e-form="ActivityBtnForm"
-                            onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.id , 'activity', $data)"
-                            ng-bind-html="profile.activity">{{ profile.activity }}
-                        </h2>
+                        <gravatar-image data-gravatar-email="profile.parent.user.email"
+                                        data-gravatar-size="100"
+                                        data-gravatar-rating="pg"
+                                        data-gravatar-default="mm"
+                                        data-gravatar-secure="true"
+                                        data-gravatar-css-class="profile img-circle">
+                        </gravatar-image>
+
+                        <h4>{{profile.full_name}}</h4>
+                        <p><span class="glyphicon glyphicon-lock"></span> Espace privé</p>
+
                     </div>
+
                 </div>
             </div><!-- .row -->
         </div><!-- .intro -->
@@ -46,9 +34,69 @@
 
     <div class="col-md-12">
 
-        <div id="content" class="content-member">
+        <div id="content" class="content-dashboard">
 
-            DASHBOARD
+            <tabset class="nav-tabs-project">
+                <tab heading="Mes notifications">
+                </tab>
+                <tab heading="Activités de mon réseau">
+                </tab>
+                <tab heading="Mes paramètres">
+
+                    <h2>Mon compte</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <label for="name">Nom / Prénom</label>
+                            <input type="text" name="fullname" id="name" />
+
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" />
+
+                            <label for="password">Votre mot de passe</label>
+                            <input type="password" name="password" id="password" />
+
+                            <label for="passwordconfirmation">Confirmation de votre mot de passe</label>
+                            <input type="password" name="passwordconfirmation" id="passwordconfirmation" />
+
+                            <label for="town">Votre ville</label>
+                            <input type="text"  name="town" id="town" />
+
+                            <label for="description">Description (max 200 mots)</label>
+                            <textarea name="description" id="description" rows="5"></textarea>
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <fieldset>
+
+                                <h3>Liens réseaux sociaux et sites web</h3>
+                                <button class="add-link"><span class="glyphicon glyphicon-plus"></span></button>
+
+                                <input type="text" name="link1" value="http://www.google.com" />
+                                <input type="text" name="link2" value="http://www.something.com" />
+                                <input type="text" name="link3" value="http://www.foobar.com" />
+
+                            </fieldset>
+
+                            <h3 class="confidentiality">Confidentialité</h3>
+                            <ul class="confidentiality">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Mauris vel semper nisi, ullamcorper condimentum metus.</li>
+                                <li>Ut sagittis fermentum tellus in consectetur.</li>
+                            </ul>
+
+                            <button class="button delete-account">Supprimer mon compte</button>
+
+                        </div>
+                    </div>
+                    <p class="save">
+                        <button class="button">Enregistrer</button>
+                    </p>
+
+                </tab>
+            </tabset>
+
         </div><!-- .content-member -->
 
     </div><!-- .col-md-12 -->
