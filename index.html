@@ -23,7 +23,7 @@
     <ng-include src="'views/base/footer.html'"></ng-include>
 
     <!-- Signin modal -->
-    <ng-include src="'/views/base/signinModal.html'"></ng-include>
+    <ng-include src="'/views/base/signinModal.html'" ng-show="$root.authVars.loginrequired"></ng-include>
 
 </div><!-- .container-fluid -->
 
