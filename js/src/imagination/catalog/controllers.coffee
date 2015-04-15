@@ -10,7 +10,7 @@ module = angular.module("imagination.catalog.controllers", ['commons.graffiti.co
 # )
 
 
-module.controller("ImaginationProjectSheetCreateCtrl", ($scope, $state, $controller, Project, TaggedItem, Profile, ObjectProfileLink) ->
+module.controller("ImaginationProjectSheetCreateCtrl", ($scope, $state, $controller, Project, ProjectSheet, TaggedItem, Profile, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
 
     $scope.tags = []
@@ -26,7 +26,6 @@ module.controller("ImaginationProjectSheetCreateCtrl", ($scope, $state, $control
             console.log(" Just saved project : Result from savingProject : ", projectsheetResult)
             
             # Here we assign tags to projects 
-            project_id =  
             angular.forEach($scope.tags, (tag)->
                 TaggedItem.one().customPOST({tag : tag.text}, "project/"+projectsheetResult.project.id, {})
             )
@@ -40,10 +39,10 @@ module.controller("ImaginationProjectSheetCreateCtrl", ($scope, $state, $control
                 $scope.uploader.onCompleteAll = () ->
                     $state.go("project.detail", {slug : projectsheetResult.project.slug})
             
+            # add connected user as team member of project with detail "porteur"
             # FIXME : 
             # a) check currentProfile get populated (see commons.accounts.services)
             # b) implement permissions !
-            # add connected user as team member of project with detail "porteur"
             # ObjectProfileLink.one().customPOST(
             #         profile_id: $scope.currentProfile.id,
             #         level: 0,
@@ -60,7 +59,7 @@ module.controller("ImaginationProjectSheetCreateCtrl", ($scope, $state, $control
 )
 
 
-module.controller("ImaginationProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, Project, TaggedItem, ObjectProfileLink, DataSharing) ->
+module.controller("ImaginationProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, Project, ProjectSheet, TaggedItem, ObjectProfileLink, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
 
@@ -82,7 +81,7 @@ module.controller("ImaginationProjectSheetCtrl", ($rootScope, $scope, $statePara
         
         DataSharing.sharedObject = {project: $scope.projectsheet.project}
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
-            $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+            $scope.preparedTags.push({text : taggedItem.name, taggedItemId : taggedItem.id})
         )
 
         # FIXME : would not cost much to get similar projects 
@@ -111,5 +110,6 @@ module.controller("ImaginationProjectSheetCtrl", ($rootScope, $scope, $statePara
         putData[fieldName] = data
         switch resourceName
             when 'Project' then Project.one(resourceId).patch(putData)
+            when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
 )
 

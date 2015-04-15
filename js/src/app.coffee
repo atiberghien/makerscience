@@ -84,7 +84,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('project.detail',
                 url: ':slug',
                 templateUrl: 'views/catalog/project.detail.html',
-                controller : 'ProjectSheetCtrl'
+                controller : 'ImaginationProjectSheetCtrl'
                 ncyBreadcrumb:
                     label: '{{project.title}}'
                     parent : 'project.list'
