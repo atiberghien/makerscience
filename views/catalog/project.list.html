@@ -1,7 +1,7 @@
 
 <div class="row container">
 
-    <div id="content" class="listing" ng-controller="ProjectListCtrl"  ng-init="init(12)">
+    <div id="content" class="listing" ng-controller="ProjectSheetListCtrl"  ng-init="init(12)">
 
         <div class="col-md-12">
 
@@ -10,9 +10,9 @@
 
                     <tabset class="nav-tabs-listing">
                         <tab heading="Les plus récents">
-                            <div class="boxes boxes-listing" >
-                                <div class="box" ng-repeat="project in projects">
-                                    <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                            <div class="boxes boxes-small boxes-projects" >
+                                <div class="box" ng-repeat="projectsheet in projectsheets">
+                                    <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=projectsheet.project"></ng-include>
                                 </div><!-- .box -->
                             </div><!-- .boxes -->
                         </tab>
