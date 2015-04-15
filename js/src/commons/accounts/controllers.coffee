@@ -1,4 +1,4 @@
-module = angular.module("commons.accounts.controllers", ['commons.accounts.services', 'makerscience.base.services'])
+module = angular.module("commons.accounts.controllers", ['commons.accounts.services', 'commons.base.services'])
 
 module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataSharing) ->
     """

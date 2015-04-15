@@ -9,21 +9,23 @@
                 <div class="col-md-9">
 
                     <tabset class="nav-tabs-listing">
-                        <tab heading="Les plus récents">
+                        <tab heading="Apperçu">
                             <div class="boxes boxes-small boxes-projects" >
                                 <div class="box" ng-repeat="projectsheet in projectsheets">
                                     <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=projectsheet.project"></ng-include>
                                 </div><!-- .box -->
                             </div><!-- .boxes -->
                         </tab>
-                        <tab heading="Les plus populaires">
-                            Les plus populaires ... coming soon
+                        <tab heading="Détaillés">
+                            ... coming soon
+                            <div class="boxes boxes-small boxes-projects" >
+                                <div class="box" ng-repeat="projectsheet in projectsheets">
+                                    <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=projectsheet.project"></ng-include>
+                                </div><!-- .box -->
+                            </div><!-- .boxes -->
                         </tab>
-                        <tab heading="Sélection thématique">
-                            Sélection thématique
-                        </tab>
-                        <tab heading="Au hasard">
-                            Au hasard ... coming soon
+                        <tab heading="Carte">
+                            ... coming soon
                         </tab>
                     </tabset>
 

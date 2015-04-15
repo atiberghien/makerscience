@@ -6,7 +6,7 @@ js/src/config.coffee
 /css/.sass-cache/
 /js/*.js
 /js/commons/
-/js/makerscience/
+/js/imagination/
 /js/vendor/
 .sass-cache/
 doc.html

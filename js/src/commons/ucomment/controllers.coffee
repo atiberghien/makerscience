@@ -1,4 +1,4 @@
-module = angular.module("commons.ucomment.controllers", ['commons.ucomment.services', 'makerscience.base.services'])
+module = angular.module("commons.ucomment.controllers", ['commons.ucomment.services', 'commons.base.services'])
 
 module.controller("CommentCtrl", ($scope, $rootScope, Comment, DataSharing) ->
     """

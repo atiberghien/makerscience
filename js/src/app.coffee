@@ -3,13 +3,8 @@ angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catal
 angular.module('commons.accounts', ['commons.accounts.services', 'commons.accounts.controllers'])
 angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
 angular.module('imagination.catalog', ['imagination.catalog.controllers'])
-angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
-angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
-angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
-angular.module('makerscience.map', ['makerscience.map.controllers'])
-angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'commons.base', 
+angular.module('imagination', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'commons.base', 
                                 'imagination.catalog',
-                                'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
                                 'geocoder-service', 'ncy-angular-breadcrumb', 'truncate'])
@@ -53,7 +48,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', ($locationProvider, $stateProvider, $urlRouterProvider) ->
 
         $locationProvider.html5Mode(config.useHtml5Mode)
-        $urlRouterProvider.otherwise("/")
+        $urlRouterProvider.otherwise("/p/list")
 
         $stateProvider.state('home',
                 url: '/',
@@ -105,7 +100,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('profile.detail',
                 url: ':slug',
                 templateUrl: 'views/profile/profile.detail.html'
-                controller : 'MakerScienceProfileCtrl'
+                controller : 'ProfileCtrl'
                 ncyBreadcrumb:
                     label: '{{profile.full_name}}'
                     parent : 'profile.list'
@@ -113,7 +108,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('profile.dashboard',
                 url: ':slug/dashboard',
                 templateUrl: 'views/profile/profile.dashboard.html'
-                controller : 'MakerScienceProfileCtrl'
+                controller : 'ProfileCtrl'
                 ncyBreadcrumb:
                     label: '{{profile.full_name}}'
                     parent : 'profile.detail'
@@ -154,14 +149,14 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     label: '{{tag.slug}}'
                     parent : 'tags'
         )
-        .state('search',
-                url: '/search/:query',
-                templateUrl: 'views/base/search_result.html'
-                controller : 'MakerScienceSearchCtrl'
-                ncyBreadcrumb:
-                    label: 'Recherche'
-                    parent : 'home'
-        )
+        # .state('search',
+        #         url: '/search/:query',
+        #         templateUrl: 'views/base/search_result.html'
+        #         controller : 'SearchCtrl'
+        #         ncyBreadcrumb:
+        #             label: 'Recherche'
+        #             parent : 'home'
+        # )
 
 ])
 .run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams, CurrentProfileService) ->
