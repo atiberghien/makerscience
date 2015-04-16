@@ -12,7 +12,7 @@
                         <tab heading="Apperçu">
                             <div class="boxes boxes-small boxes-projects" >
                                 <div class="box" ng-repeat="projectsheet in projectsheets">
-                                    <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=projectsheet.project"></ng-include>
+                                    <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=projectsheet.project; cover=projectsheet.cover"></ng-include>
                                 </div><!-- .box -->
                             </div><!-- .boxes -->
                         </tab>

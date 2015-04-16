@@ -67,7 +67,7 @@ module.controller("ImaginationProjectSheetCtrl", ($rootScope, $scope, $statePara
     $scope.currentUserHasEditRights = false
     $scope.editable = false
 
-    ProjectSheet.one().get({'slug' : $stateParams.slug}).then((ProjectSheetResult) ->
+    ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((ProjectSheetResult) ->
         $scope.projectsheet = ProjectSheetResult.objects[0]
         console.log(" project sheet ", $scope.projectsheet)
 
