@@ -1,12 +1,7 @@
-<gravatar-image data-gravatar-email="member.profile.user.email"
-    data-gravatar-size="52"
-    data-gravatar-rating="pg"
-    data-gravatar-default="/img/users/user-default.png"
-    data-gravatar-secure="true"
-    data-gravatar-css-class="img-circle">
-</gravatar-image>
+
+<img avatar-src="member.profile.user" avatar-size="36" alt="{{ user.username }}" />
 <div class="member-details relative">
-    <p>{{member.profile.user.first_name}} {{member.profile.user.last_name}}</p>
+    <p>{{member.profile.user.first_name || member.profile.username }}</p>
     <div class="edit-buttons" ng-show="editable">
         <button ng-click="DetailBtnForm.$show()" ng-hide="DetailBtnForm.$visible">
             <span class="glyphicon glyphicon-pencil"></span>

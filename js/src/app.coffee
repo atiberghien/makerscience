@@ -1,6 +1,6 @@
 angular.module('commons.base', ['commons.base.controllers', 'commons.base.services'])
 angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
-angular.module('commons.accounts', ['commons.accounts.services', 'commons.accounts.controllers'])
+angular.module('commons.accounts', ['commons.accounts.services', 'commons.accounts.controllers', 'commons.account.directives'])
 angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
 angular.module('imagination.catalog', ['imagination.catalog.controllers'])
 angular.module('imagination', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'commons.base', 

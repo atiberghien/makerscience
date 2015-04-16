@@ -67,8 +67,9 @@ module.controller("ImaginationProjectSheetCtrl", ($rootScope, $scope, $statePara
     $scope.currentUserHasEditRights = false
     $scope.editable = false
 
-    Project.one().get({'slug' : $stateParams.slug}).then((ProjectResult) ->
-        $scope.projectsheet = ProjectResult.objects[0]
+    ProjectSheet.one().get({'slug' : $stateParams.slug}).then((ProjectSheetResult) ->
+        $scope.projectsheet = ProjectSheetResult.objects[0]
+        console.log(" project sheet ", $scope.projectsheet)
 
         # FIXME : permissions ?
         # if $rootScope.authVars.user

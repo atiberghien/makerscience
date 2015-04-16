@@ -14,9 +14,11 @@ module.factory('ObjectProfileLink', (Restangular) ->
 )
 
 class CurrentProfileService
-    constructor : ($rootScope, $modal, $modalInstance, Profile) ->
+    constructor : ($rootScope, $modal, Profile) ->
         console.log( " Init CurrentProfileService ")
-        #$rootScope.currentProfile = Profile.one().get({'user__username':newValue}).$object 
+        if $rootScope.authVars.isAuthenticated 
+            $rootScope.currentProfile = Profile.one().get({'user__username':$rootScope.authVars.username}).$object 
+            console.log(" Current profile ", $rootScope.currentProfile)
 
         $rootScope.openSignupPopup = ()->
             modalInstance = $modal.open(
@@ -32,9 +34,7 @@ class CurrentProfileService
             )
 
         $rootScope.$watch('authVars.username', (newValue, oldValue) ->
-            console.log(" new_isername ? ", newValue)
-            console.log(" new_isername ? ", oldValue)
-            if newValue != oldValue
+            if (newValue != oldValue) && (newValue != '')
                 $rootScope.currentProfile = Profile.one().get({'user__username':newValue}).$object         
         )
 
