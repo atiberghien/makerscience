@@ -1,10 +1,34 @@
 module = angular.module("commons.catalog.controllers", ['commons.catalog.services', 'commons.base.controllers'])
 
-module.controller("ProjectSheetListCtrl", ($scope, $controller, ProjectSheet) ->
+module.controller("ProjectSheetListCtrl", ($scope, $controller, ProjectSheet, BareRestangular) ->
     angular.extend(this, $controller('AbstractListCtrl', {$scope: $scope}))
     
+    $scope.seeMore = false
+
     $scope.refreshList = ()->
-        $scope.projectsheets = ProjectSheet.one().customGETLIST('search', $scope.params).$object
+        ProjectSheet.one().customGETLIST('search', $scope.params).then((result)->
+                console.log(" Refreshed ! ", result)
+                $scope.projectsheets = result
+                if result.metadata.next
+                   $scope.seeMore = true
+                   $scope.nextURL = result.metadata.next
+                else
+                    $scope.seeMore = false
+                   
+            )
+
+    $scope.loadMore = ()->
+        BareRestangular.all($scope.nextURL).getList().then((result)->
+                console.log("loading more !", result)
+                for item in result
+                    $scope.projectsheets.push(item)
+                if result.metadata.next
+                   $scope.seeMore = true
+                   $scope.nextURL = result.metadata.next
+                else
+                    $scope.seeMore = false
+            )
+        
 )
 
 

@@ -31,3 +31,10 @@ module.factory('BucketFile', (Restangular) ->
 module.factory('Bucket', (Restangular) ->
     return Restangular.service('bucket/bucket')
 )
+
+# Restangular service without api/v0
+module.factory('BareRestangular', (Restangular) ->
+    return Restangular.withConfig((RestangularConfigurer) ->
+        RestangularConfigurer.setBaseUrl(config.dataserver_url)
+    )
+)
