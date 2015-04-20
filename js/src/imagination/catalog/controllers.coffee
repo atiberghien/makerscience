@@ -81,7 +81,7 @@ module.controller("ImaginationProjectSheetCtrl", ($rootScope, $scope, $statePara
         # )
         
         DataSharing.sharedObject = {project: $scope.projectsheet.project}
-        angular.forEach($scope.projectsheet.tags, (taggedItem) ->
+        angular.forEach($scope.projectsheet.project.tags, (taggedItem) ->
             $scope.preparedTags.push({text : taggedItem.name, taggedItemId : taggedItem.id})
         )
 
