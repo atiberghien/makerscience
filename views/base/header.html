@@ -30,7 +30,7 @@
                         -->
                         <p class="register-login" ng-show="!authVars.isAuthenticated">
                             <button class="button" ng-click="openSignupPopup()">S'inscrire</button>
-                            <button class="button" ng-click="openSigninPopup()">Se connecter</button>
+                            <button class="button" ng-click="forceLogin()">Se connecter</button>
                         </p>
                         <div class="dropdown dropdown-logged-in" ng-show="authVars.isAuthenticated">
                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
