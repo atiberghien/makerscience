@@ -26,7 +26,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
         putData[fieldName] = data
         switch resourceName
             when 'Project' then Project.one(resourceId).patch(putData)
-            when 'ProjectSheetQuestionAnswer' then ProjectSheetItem.one(resourceId).patch(putData)
+            when 'ProjectSheetQuestionAnswer' then ProjectSheetQuestionAnswer.one(resourceId).patch(putData)
             when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
 
     $scope.openGallery = (projectsheet) ->
