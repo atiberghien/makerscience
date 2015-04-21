@@ -293,6 +293,9 @@
 					a {
 						color: #fff !important;
 						background-color: $color-pink !important;
+						&:hover {
+							opacity: 0.8; /* Members need a special treatment because they can be grey or pink */
+						}
 					}
 				}
 			}
