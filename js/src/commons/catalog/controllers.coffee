@@ -147,8 +147,11 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
 
 
 
-module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params, FileUploader, ProjectSheet, BucketFile) ->
+module.controller('GalleryInstanceCtrl', ($scope, $rootScope, $modalInstance, @$http, params, FileUploader, ProjectSheet, BucketFile) ->
     console.log('Init GalleryInstanceCtrl', params)
+    # First check user is authenticated since upload triggers 403 and not gracefully intercepted 401 errors 
+    if !$rootScope.authVars.isAuthenticated
+        $rootScope.forceLogin()
     if params.projectsheet
         $scope.uploader = new FileUploader(
             url: config.bucket_uri

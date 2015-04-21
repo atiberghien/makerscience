@@ -35,7 +35,7 @@ angular.module('imagination', ['commons.catalog', 'commons.accounts', 'commons.u
 # Google auth config
 .config(['TokenProvider', '$locationProvider', (TokenProvider, $locationProvider) ->
     TokenProvider.extendConfig(
-        clientId: '255067193649-gsukme1nnpu55pfd7q3b589lhmih3qg1.apps.googleusercontent.com',
+        clientId: config.oauthCliendId,
         redirectUri: config.oauthBaseUrl+'/oauth2callback.html',
         scopes: ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
     )
