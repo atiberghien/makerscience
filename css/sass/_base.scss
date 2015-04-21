@@ -197,6 +197,7 @@ ul.tags {
 }
 
 button, a {
+	position: relative;
 	@include transition(all 0.2s ease);
 	&.large {
 		display: block;
@@ -225,6 +226,10 @@ button, a {
 		&:hover {
 			text-decoration: none;
 		}
+	}
+	img.smiley {
+		position: absolute;
+		top: -10px;
 	}
 }
 
