@@ -47,7 +47,21 @@
                         <!-- FIXME : update tags and progress -->
                         <div class="side-header">
                             <ng-include onload="taggedObjectTypeName='project'" src="'views/catalog/block/tags_widget.html'"></ng-include>
-
+                            <!-- Web site -->
+                            <div class="editable">
+                                <p>Site Web</p>
+                                <div class="edit-buttons" ng-show="editable">
+                                    <button ng-click="WebSiteBtnForm.$show()" ng-hide="WebSiteBtnForm.$visible">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </div>
+                                <a editable-text="project.website"
+                                    e-form="WebSiteBtnForm"
+                                    onbeforesave="updateProjectSheet('Project', project.id , 'website', $data)"
+                                    ng-bind-html="project.website" 
+                                    ng-href="{{ project.website }}">
+                                </a>
+                            </div>
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="editWIP=false">
                                     <button ng-click="editWIP = ! editWIP"><span class="glyphicon glyphicon-pencil"></span></button>
