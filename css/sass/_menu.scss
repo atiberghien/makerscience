@@ -46,7 +46,9 @@ header {
 		}
 		ul.navbar-nav:first-child a {
 			margin: 1em 0.75em 0;
+			margin: 1em 0.5em 0;
 			padding: 0.25em 0 0 0;
+			padding: 0.25em 0.25em 1em;
 			color: $color-menu-a;
 			text-transform: uppercase;
 			border-bottom: 4px solid transparent;
