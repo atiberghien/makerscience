@@ -11,7 +11,7 @@ module.controller("ProjectSheetListCtrl", ($scope, $controller, ProjectSheet, Ba
                 $scope.projectsheets = result
                 if result.metadata.next
                    $scope.seeMore = true
-                   $scope.nextURL = result.metadata.next
+                   $scope.nextURL = result.metadata.next.slice(1) #to remove first begin slash
                 else
                     $scope.seeMore = false
                    
@@ -24,7 +24,7 @@ module.controller("ProjectSheetListCtrl", ($scope, $controller, ProjectSheet, Ba
                     $scope.projectsheets.push(item)
                 if result.metadata.next
                    $scope.seeMore = true
-                   $scope.nextURL = result.metadata.next
+                   $scope.nextURL = result.metadata.next.slice(1) #to remove first begin slash
                 else
                     $scope.seeMore = false
             )
