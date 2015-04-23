@@ -1,15 +1,10 @@
-/css/*.css
-css/screen.css
+*.css
 js/src/config.coffee
-/css/bootstrap.css
-/.project
-/css/.sass-cache/
 /js/*.js
 /js/commons/
 /js/makerscience/
 /js/vendor/
-.sass-cache/
-doc.html
-# OSX CRAP
 .DS_Store
 /node_modules/
+/bower_components/
+/.sass-cache/
