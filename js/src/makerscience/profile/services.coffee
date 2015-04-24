@@ -33,6 +33,13 @@ class CurrentMakerScienceProfileService
                 controller: 'SigninPopupCtrl',
             )
 
+        $rootScope.$watch('authVars.loginrequired', (newValue, oldValue) ->
+            console.log('loginRequired', newValue, oldValue)
+            if newValue == true
+                $rootScope.openSigninPopup()
+
+        )
+
 module.factory('CurrentMakerScienceProfileService', ($rootScope, $modal, MakerScienceProfile) ->
     return new CurrentMakerScienceProfileService($rootScope, $modal, MakerScienceProfile)
 )
