@@ -45,8 +45,8 @@ header {
 			}
 		}
 		ul.navbar-nav:first-child a {
-			margin: 1em 0.75em 0;
-			padding: 0.25em 0 0 0;
+			margin: 0.9em 0.5em 0;
+			padding: 0.25em 0.25em 0.7em;
 			color: $color-menu-a;
 			text-transform: uppercase;
 			border-bottom: 4px solid transparent;
@@ -103,7 +103,7 @@ header {
 	}
 	form {
 		display: inline;
-		padding: 0.75em 0;
+		padding: 0.6em 0;
 		button {
 			padding: 0.5em 1em;
 			background-color: $color-blue !important;
