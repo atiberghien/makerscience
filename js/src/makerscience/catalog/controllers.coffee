@@ -1,18 +1,18 @@
-module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services', 
+module = angular.module("makerscience.catalog.controllers", ['makerscience.catalog.services',
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
 module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProject) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
-    
+
     $scope.refreshList = ()->
         $scope.projects = MakerScienceProject.one().customGETLIST('search', $scope.params).$object
-    
+
 )
 
 module.controller("MakerScienceResourceListCtrl", ($scope, $controller, MakerScienceResource) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
-    
+
     $scope.refreshList = ()->
         $scope.resources = MakerScienceResource.one().customGETLIST('search', $scope.params).$object
 )
@@ -127,6 +127,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.projectsheet = makerScienceProjectResult.objects[0]
 
         if $rootScope.authVars.user
+            console.log("Check if", $rootScope.authVars.user.id, "has right.")
             MakerScienceProject.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
                 console.log(" Has current user edit rights ?", result.has_perm)
                 $scope.currentUserHasEditRights = result.has_perm
@@ -137,9 +138,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
         # $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
 
-        console.log("before setting datasharing", DataSharing.sharedObject)
+        console.log("Before setting datasharing", DataSharing.sharedObject)
         DataSharing.sharedObject =  {project: $scope.projectsheet.parent, makerscienceproject : $scope.projectsheet}
-        console.log("AFTER setting datasharing", DataSharing.sharedObject)
+        console.log("After setting datasharing", DataSharing.sharedObject)
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
@@ -159,7 +160,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 """
                 Give edit rights to newly added or validated team member (see commons.accounts.controllers)
                 """
-                console.log(" giving edit rights to user id = ", user_id)
+                console.log("Giving edit rights to user id = ", user_id)
                 MakerScienceProject.one($scope.projectsheet.id).customPOST({"user_id":user_id}, 'assign').then((result)->
                     console.log(" succesfully assigned edit rights ? : ", result)
                     )
@@ -194,7 +195,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
             console.log("submitting form")
 
         $scope.saveProject().then((resourcesheetResult) ->
-            console.log(" Just saved project for resoure sheet, result: ", resourcesheetResult)
+            console.log("Just saved project for resoure sheet, result: ", resourcesheetResult)
             makerscienceResourceData =
                 level : $scope.projectsheet.level
                 duration : $scope.projectsheet.duration
@@ -205,7 +206,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
 
             MakerScienceResource.post(makerscienceResourceData).then((makerscienceResourceResult)->
-                console.log(" Posting MakerScienceResource, result  : ", makerscienceResourceResult)
+                console.log("Posting MakerScienceResource, result  : ", makerscienceResourceResult)
                 # add connected user as team member of project with detail "porteur"
                 ObjectProfileLink.one().customPOST(
                     profile_id: $scope.currentMakerScienceProfile.parent.id,
@@ -217,7 +218,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                         MakerScienceResource.one(makerscienceResourceResult.id).customPOST(
                             {"user_id":objectProfileLinkResult.profile.user.id}
                             , 'assign').then((result)->
-                                console.log(" succesfully assigned edit rights ? : ", result)
+                                console.log("Succesfully assigned edit rights ? : ", result)
                         )
                     )
 
