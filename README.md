@@ -18,3 +18,10 @@ Then :
 * install grunt dependencies (packages.json): `npm install`
 * install application dependencies (bower.json) : `bower install`
 * build the project and run HTTP test server : `grunt`
+
+## Contributors
+
+* Alban Tiberghien (dev front/back)
+* Gaëtan Priour (web integrator)
+* Freddy Limpens (dev front/back)
+* Violaine Alvarez (web design)
