@@ -3,21 +3,21 @@ module = angular.module("commons.catalog.services", ['restangular'])
 
 # Services
 module.factory('Project', (Restangular) ->
-    return Restangular.service('project')
+    return Restangular.service('project/project')
 )
 module.factory('ProjectSheet', (Restangular) ->
-    return Restangular.service('projectsheet')
+    return Restangular.service('project/sheet/projectsheet')
 )
 module.factory('PostalAddress', (Restangular) ->
     return Restangular.service('scout/postaladdress')
 )
 
 module.factory('ProjectSheetTemplate', (Restangular) ->
-    return Restangular.service('projectsheettemplate')
+    return Restangular.service('project/sheet/template')
 )
 
-module.factory('ProjectSheetItem', (Restangular) ->
-    return Restangular.service('projectsheetsuggesteditem')
+module.factory('ProjectSheetQuestionAnswer', (Restangular) ->
+    return Restangular.service('project/sheet/question_answer')
 )
 
 module.factory('ProjectProgress', (Restangular) ->

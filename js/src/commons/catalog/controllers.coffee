@@ -5,7 +5,7 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
 )
 
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet,
-                                        Project, ProjectSheetItem, Bucket,
+                                        Project, ProjectSheetQuestionAnswer, Bucket,
                                         @$http, FileUploader, $modal) ->
 
     $scope.init = ->
@@ -18,7 +18,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
         putData[fieldName] = data
         switch resourceName
             when 'Project' then Project.one(resourceId).patch(putData)
-            when 'ProjectSheetItem' then ProjectSheetItem.one(resourceId).patch(putData)
+            when 'ProjectSheetQuestionAnswer' then ProjectSheetQuestionAnswer.one(resourceId).patch(putData)
             when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
 
     $scope.openGallery = (projectsheet) ->
@@ -35,7 +35,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
 )
 
 module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, Project, PostalAddress,
-                                             ProjectSheetTemplate, ProjectSheetItem,
+                                             ProjectSheetTemplate, ProjectSheetQuestionAnswer,
                                              @$http, FileUploader, $modal, ObjectProfileLink) ->
 
     $scope.uploader = new FileUploader(
@@ -72,7 +72,7 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
         ProjectSheet.post($scope.projectsheet).then((projectsheetResult) ->
             angular.forEach($scope.QAItems, (q_a) ->
                 q_a.projectsheet = projectsheetResult.resource_uri
-                ProjectSheetItem.post(q_a)
+                ProjectSheetQuestionAnswer.post(q_a)
             )
             return projectsheetResult
         )
