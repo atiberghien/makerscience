@@ -29,11 +29,11 @@
                 <div class="row">
 
                     <div class="col-md-8" >
-                        <img ng-if="resourcesheet.base_resourcesheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_resourcesheet.cover.thumbnail_url+'?width=711'}}" alt="Resource Image" />
-                        <img ng-if="!resourcesheet.base_resourcesheet.cover" src="img/bacasable.jpg" alt="Resource Image" />
+                        <img ng-if="resourcesheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Resource Image" />
+                        <img ng-if="!resourcesheet.base_projectsheet.cover" src="img/bacasable.jpg" alt="Resource Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
-                                <button ng-click="openGallery(resourcesheet.base_resourcesheet)"><span class="glyphicon glyphicon-camera"></span></button>
+                                <button ng-click="openGallery(resourcesheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                             ng-bind-html="resourcesheet.parent.description">
                         </p>
                         </section>
-                        <section ng-repeat="item in resourcesheet.base_resourcesheet.items">
+                        <section ng-repeat="item in resourcesheet.base_projectsheet.question_answers">
                             <h3>{{item.question.text}}</h3>
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
@@ -154,12 +154,12 @@
                         <tab-heading>
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
-                        <div ng-if="resourcesheet.base_resourcesheet.bucket.files.length" ng-repeat="img in resourcesheet.base_resourcesheet.bucket.files" ng-show="$index==currentImg">
+                        <div ng-if="resourcesheet.base_projectsheet.bucket.files.length" ng-repeat="img in resourcesheet.base_projectsheet.bucket.files" ng-show="$index==currentImg">
                             <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?width=693x300" alt="Slide">
                         </div>
-                        <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_resourcesheet.bucket.files.length)">Préc.</button>
-                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_resourcesheet.bucket.files.length">Suiv.</button>
-                        <div ng-if="!resourcesheet.base_resourcesheet.bucket.files.length">
+                        <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
+                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button>
+                        <div ng-if="!resourcesheet.base_projectsheet.bucket.files.length">
                             <img src="img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
@@ -167,20 +167,20 @@
                         <tab-heading>
                             <span class="glyphicon glyphicon-facetime-video"></span>
                         </tab-heading>
-                        <div ng-if="resourcesheet.base_resourcesheet.videos" ng-repeat="(url, comment) in resourcesheet.base_resourcesheet.videos" ng-show="$index==currentImg">
+                        <div ng-if="resourcesheet.base_projectsheet.videos" ng-repeat="(url, comment) in resourcesheet.base_projectsheet.videos" ng-show="$index==currentImg">
                             <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
                                 <a href="{{url}}">Watch</a>
                             </embed-video>
                         </div>
-                        <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_resourcesheet.videos.length)">Préc.</button>
-                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_resourcesheet.videos.length">Suiv.</button>
-                        <div ng-if="!resourcesheet.base_resourcesheet.videos">
+                        <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.videos.length)">Préc.</button>
+                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.videos.length">Suiv.</button>
+                        <div ng-if="!resourcesheet.base_projectsheet.videos">
                             <img src="img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
                         <tab-heading>
-                            <span ng-click="openGallery(resourcesheet.base_resourcesheet)" class="glyphicon glyphicon-pencil"></span>
+                            <span ng-click="openGallery(resourcesheet.base_projectsheet)" class="glyphicon glyphicon-pencil"></span>
                         </tab-heading>
                     </tab>
                 </tabset>

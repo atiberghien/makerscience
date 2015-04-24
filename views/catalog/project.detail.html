@@ -120,7 +120,7 @@
                             </p>
 
                         </section>
-                        <section ng-repeat="item in projectsheet.base_projectsheet.items">
+                        <section ng-repeat="item in projectsheet.base_projectsheet.question_answers">
                             <h3>{{item.question.text}}</h3>
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
