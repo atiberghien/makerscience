@@ -1,0 +1,29 @@
+{
+  "name": "Makerscience",
+  "version": "0.1.0",
+  "description": "Science project oriented collaborative platform",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atiberghien/makerscience.git"
+  },
+  "author": "Alban Tiberghien",
+  "license": "AGPL v3",
+  "bugs": {
+    "url": "https://github.com/atiberghien/makerscience/issues"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-concurrent": "^1.0.0",
+    "grunt-contrib-coffee": "^0.11.1",
+    "grunt-contrib-compass": "^1.0.1",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-connect": "^0.9.0",
+    "grunt-contrib-uglify": "^0.7.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-wiredep": "^2.0.0"
+  }
+}
