@@ -2,11 +2,12 @@
     <img ng-src="{{ config.media_uri }}{{ resource.parent.progress.icon }}" alt="{{resource.parent.progress.label}}">
 </h3>
 <a ui-sref="resource.detail({ slug: resource.parent.slug })">
-    <img class="background" src="./img/bacasable.jpg" alt="Image background" />
+    <img class="background" ng-if="resource.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resource.base_projectsheet.cover.thumbnail_url+'?width=158'}}" alt="resource Image" />
+    <img class="background" ng-if="!resource.base_projectsheet.cover" src="img/bacasable.jpg" alt="resource Image" />
 </a>
 <div class="description">
     <h4><a ui-sref="resource.detail({ slug: resource.parent.slug })">{{resource.parent.title}}</a></h4>
-    <h5 ng-if="project.by">Par
+    <h5 ng-if="resource.by">Par
         <a ui-sref="profile.detail({slug:resource.by.profile_slug})">
             {{resource.by.full_name}}
         </a>
