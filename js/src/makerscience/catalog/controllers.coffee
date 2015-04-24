@@ -79,7 +79,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     level: 0,
                     detail : "Créateur/Créatrice",
                     isValidated:true
-                , 'project/'+getObjectIdFromURI(projectsheetResult.project)).then((objectProfileLinkResult) ->
+                , 'project/'+makerscienceProjectResult.parent.id).then((objectProfileLinkResult) ->
                     console.log("added current user as team member", objectProfileLinkResult.profile)
                     MakerScienceProject.one(makerscienceProjectResult.id).customPOST({"user_id":objectProfileLinkResult.profile.user.id}, 'assign').then((result)->
                         console.log(" succesfully assigned edit rights ? : ", result)
@@ -212,7 +212,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     level: 0,
                     detail : "Créateur/Créatrice",
                     isValidated:true
-                    , 'project/'+getObjectIdFromURI(resourcesheetResult.project)).then((objectProfileLinkResult) ->
+                    , 'project/'+makerscienceResourceResult.parent.id).then((objectProfileLinkResult) ->
                         console.log("added current user as team member", objectProfileLinkResult.profile)
                         MakerScienceResource.one(makerscienceResourceResult.id).customPOST(
                             {"user_id":objectProfileLinkResult.profile.user.id}
