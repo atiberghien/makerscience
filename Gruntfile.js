@@ -92,7 +92,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-concurrent');
 
-    grunt.registerTask('default', ['compass:dev', 'coffee', 'concurrent:run']);
+    grunt.registerTask('default', ['compass:dev', 'wiredep', 'coffee', 'concurrent:run']);
 };
 //
 // "exportsOverride" : {
