@@ -1,9 +1,9 @@
-module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 
+module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services',
         'makerscience.base.services', 'commons.accounts.services', 'makerscience.base.controllers'])
 
 module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfile) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
-    
+
     $scope.refreshList = ()->
         $scope.profiles = MakerScienceProfile.one().customGETLIST('search', $scope.params).$object
 )
@@ -54,16 +54,14 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
             MakerScienceProfileTaggedItem.one(tag.taggedItemId).remove()
 
         $scope.updateMakerScienceProfile = (resourceName, resourceId, fieldName, data) ->
+            # in case of MakerScienceProfile, resourceId must be the profile slug
             putData = {}
             putData[fieldName] = data
             switch resourceName
                 when 'MakerScienceProfile' then MakerScienceProfile.one(resourceId).patch(putData)
                 when 'PostalAddress' then PostalAddress.one(resourceId).patch(putData)
 
-        $scope.updateSocialNetworks = (profile) ->
-            $scope.updateMakerScienceProfile('MakerScienceProfile', profile.id, 'facebook', profile.facebook)
-            $scope.updateMakerScienceProfile('MakerScienceProfile', profile.id, 'twitter', profile.twitter)
-            $scope.updateMakerScienceProfile('MakerScienceProfile', profile.id, 'linkedin', profile.linkedin)
-            $scope.updateMakerScienceProfile('MakerScienceProfile', profile.id, 'contact_email', profile.contact_email)
+        $scope.updateSocialNetworks = (profileSlug, socials) ->
+            MakerScienceProfile.one(profileSlug).patch(socials)
     )
 )
