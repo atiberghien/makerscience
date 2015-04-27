@@ -82,7 +82,27 @@ module.exports = function(grunt) {
             options: {
                 logConcurrentOutput: true
             }
-        }
+        },
+        copy: {
+            dist: {
+                files: [
+                  {expand: true, src: ['*.html'], dest: 'dist/'},
+                  {expand: true, src: ['bower_components/**'], dest: 'dist/'},
+                  {expand: true, src: ['css/*.css'], dest: 'dist/'},
+                  {expand: true, src: ['img/**'], dest: 'dist/'},
+                  {expand: true, src: ['fonts/**'], dest: 'dist/'},
+                  {expand: true, src: ['views/**'], dest: 'dist/'},
+                  {expand: true, src: ['js/**/*.js'], dest: 'dist/'},
+                  {expand: true, cwd: "js/", src: ['config_stating.js'], dest: 'dist/js/', rename: function(dest, src) {
+                      return dest + src.replace('_stating','');
+                  }},
+                ],
+          },
+        },
+        clean: {
+          dist: ["dist/"],
+          config: ["dist/js/config_stating.js"]
+        },
     });
 
     grunt.loadNpmTasks('grunt-wiredep');
@@ -91,8 +111,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-concurrent');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.registerTask('default', ['compass:dev', 'wiredep', 'coffee', 'concurrent:run']);
+    grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'clean:config']);
 };
 //
 // "exportsOverride" : {

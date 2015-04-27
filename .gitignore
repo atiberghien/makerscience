@@ -8,3 +8,4 @@ js/src/config.coffee
 /node_modules/
 /bower_components/
 /.sass-cache/
+/dist/
