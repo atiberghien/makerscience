@@ -4,7 +4,7 @@
     <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
 </ul>#sidenav -->
 
-<div id="intro" class="intro-profile">
+<div id="intro" class="intro-profile"  ng-init="editable = currentMakerScienceProfile === profile.slug">
     <div class="container">
         <div class="intro">
             <div class="row">
@@ -27,7 +27,7 @@
                         </div>
                         <h2 editable-text="profile.activity"
                             e-form="ActivityBtnForm"
-                            onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.id , 'activity', $data)"
+                            onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'activity', $data)"
                             ng-bind-html="profile.activity">{{ profile.activity }}
                         </h2>
                     </div>
@@ -56,7 +56,7 @@
 
                 <div class="col-md-8">
                     <div class="side-header" ng-class="{ 'editing' : editable }">
-                        <a ui-sref="profile.dashboard({id : profile.id})">Voir mon dashboard</a>
+                        <a ui-sref="profile.dashboard({slug : profile.slug})">Voir mon dashboard</a>
 
                         <div class="relative bio">
                             <h5 class="bio">Présentation</h5>
@@ -67,7 +67,7 @@
                                  e-form="BioBtnForm"
                                  e-rows="4"
                                  e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                 onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.id , 'bio', $data)"
+                                 onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'bio', $data)"
                                  ng-bind-html="profile.bio">
                             </p>
                         </div><!-- .relative -->
@@ -130,16 +130,16 @@
                                 <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin"><img src="./img/icons/social/google-small.png" alt="Google" /></a>
                                 <a ng-show="profile.contact_email" href="{{profile.contact_email}}" target="_blank" class="share-email"><span class="glyphicon glyphicon-envelope"></span></a>
                                 <span ng-show="profile.contact_email" class="glyphicon glyphicon-globe"></span>
-                                <label><a ng-show="profile.contact_email" href="{{profile.website}}" target="_blank" >{{profile.website}}</a></label>
+                                <label><a ng-show="profile.website" href="{{profile.website}}" target="_blank" >{{profile.website}}</a></label>
                             </div>
                             <div ng-show="socialEdit" >
-                                <input type="text" ng-model="profile.facebook" placeholder="Profil Facebook"/>
-                                <input type="text" ng-model="profile.twitter" placeholder="Profil Twitter"/>
-                                <input type="text" ng-model="profile.linkedin" placeholder="Profil LinkedIn"/>
-                                <input type="text" ng-model="profile.contact_email" placeholder="Courriel de contact"/>
-                                <input type="text" ng-model="profile.website" placeholder="Site web"/>
+                                <input type="text" ng-model="socials.facebook" placeholder="Profil Facebook"/>
+                                <input type="text" ng-model="socials.twitter" placeholder="Profil Twitter"/>
+                                <input type="text" ng-model="socials.linkedin" placeholder="Profil LinkedIn"/>
+                                <input type="text" ng-model="socials.contact_email" placeholder="Courriel de contact"/>
+                                <input type="text" ng-model="socials.website" placeholder="Site web"/>
                                 <span class="editable-buttons">
-                                    <button class="btn btn-primary" ng-click="updateSocialNetworks(profile);socialEdit=False" >Enregistrer</button>
+                                    <button class="btn btn-primary" ng-click="updateSocialNetworks(profile.slug, socials);socialEdit=False" >Enregistrer</button>
                                 </span>
                             </div>
                         </div><!-- .relative -->
