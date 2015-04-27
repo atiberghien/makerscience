@@ -44,6 +44,7 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
                     shadowAnchor: [22, 22]
 
                 $scope.markers[profile.id]=
+                    slug : profile.slug
                     group: "center"
                     groupOption :
                         showCoverageOnHover : false
@@ -63,10 +64,10 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
         )
     )
     $scope.$on('leafletDirectiveMarker.click', (event, args) ->
-        marker = $scope.markers[args.markerName]
+        marker = $scope.markers[args.modelName]
         marker.icon = marker.icon_hover
 
-        MakerScienceProfile.one(args.markerName).get().then((profileResult)->
+        MakerScienceProfile.one(marker.slug).get().then((profileResult)->
             $scope.spottedProfile = profileResult
             $scope.spottedProfile.projects = []
 
