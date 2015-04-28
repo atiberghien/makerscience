@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         wiredep: {
             task: {
                 directory: 'bower_components',
-                src: ['js_import.html', 'css_import.html'],
+                src: ['js_imports.html', 'css_imports.html'],
                 options : {
                     exclude: [
                         '/bootstrap-css-only/',

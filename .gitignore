@@ -9,3 +9,5 @@ js/src/config.coffee
 /bower_components/
 /.sass-cache/
 /dist/
+/css_imports.css
+/js_imports.css
