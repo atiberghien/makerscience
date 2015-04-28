@@ -30,6 +30,13 @@ module.exports = function(grunt) {
                         },
                         "leaflet.markercluster" : {
                             'main' : ['dist/leaflet.markercluster.js', "dist/MarkerCluster.css",  "dist/MarkerCluster.Default.css"]
+                        },
+                        "bootstrap-sass" : {
+                            'main' : ['assets/javascripts/bootstrap.js',
+                                      'assets/javascripts/bootstrap/affix.js',
+                                      'assets/javascripts/bootstrap/modal.js',
+                                      'assets/javascripts/bootstrap/dropdown.js',
+                                      'assets/javascripts/bootstrap/collapse.js']
                         }
                       }
                 }
@@ -42,7 +49,7 @@ module.exports = function(grunt) {
                     cssDir: 'css',
                     importPath : [
                         "bower_components/bootstrap-sass/assets/stylesheets",
-                        "./bower_components/font-awesome"
+                        "bower_components/font-awesome"
                     ],
                 }
             },
