@@ -48,6 +48,7 @@
 				background-image: none;
 			}
 			div.caption {
+				z-index: 999;
 				position: absolute;
 				display: table;
 				height: $home-slide-height;
