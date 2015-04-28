@@ -3,6 +3,11 @@ body {
 	overflow-x: hidden;
 	width: 100%;
 }
+
+div.map-search {
+	background-color: #fff;
+}
+
 /* Contains both the map and the sidebar */
 .map {
 	position: relative;

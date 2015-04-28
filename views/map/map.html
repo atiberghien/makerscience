@@ -3,10 +3,16 @@
     <h2>vous êtes peut-être tout près d'un beau projet...</h2>
 </div><!-- #intro -->
 
-<form class="form-inline mapsearch">
-    <input type="text" name="search" class="form-control" placeholder="Recherche..." />
-    <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-</form>
+<div class="map-search">
+    <div class="container row">
+        <div class="col-md-12">
+            <form class="form-inline mapsearch">
+                <input type="text" name="search" class="form-control" placeholder="Recherche..." />
+                <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="map" ng-controller="MakerScienceMapCtrl">
     <div class="member-info member-info-hidden" ng-class="showMemberInfo ? 'member-info-visible' : 'member-info-hidden'">
