@@ -85,7 +85,7 @@
                         <h4>{{item.questionLabel}}</h4>
                         <div ng-if="item.choices.length > 0" class="choices">
                             <label  ng-repeat="choice in item.choices">
-                                <input type="checkbox" checklist-model="item.selected_choices" checklist-value="choice.id"> {{ choice.text }}
+                                <input type="checkbox" checklist-model="item.selected_choices_id" checklist-value="choice.id"> {{ choice.text }}
                             </label>
                             <h5> Vous pouvez ajouter un commentaire </h5>
                         </div>

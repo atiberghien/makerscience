@@ -145,6 +145,12 @@
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
+                            <div ng-if="item.question.choices.length > 0" class="choices">
+                                <label  ng-repeat="choice in item.question.choices">
+                                    <input type="checkbox" checklist-model="item.selected_choices_id" checklist-value="choice.id"> {{ choice.text }}
+                                </label>
+                                <h5> Commentaire :</h5>
+                            </div>
                             <p editable-text-angular="item.answer"
                                  e-form="AnswerBtnForm"
                                  e-rows="4"
