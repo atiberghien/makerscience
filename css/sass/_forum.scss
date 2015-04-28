@@ -43,8 +43,7 @@ button.button-forum {
 div.forum-create {
     padding-bottom: $grid-gutter-width;
     background-color: #fff;
-    h2.forum-title {
-        display: inline-block;
+    button.create-topic {
         margin: $grid-gutter-width * 1.25 0;
         padding: 1.1em 2em;
         font-size: 1.4em;
@@ -52,7 +51,50 @@ div.forum-create {
         background: $color-forum url('/img/bg/forum-title.png') 0 %50 no-repeat;
         background-size: cover;
         text-transform: uppercase;
+        border: none;
         font-weight: bold;
+    }
+    form.new-topic {
+        padding-bottom: $grid-gutter-width;
+        input[type="text"] {
+            margin-bottom: $grid-gutter-width / 2;
+            padding: $grid-gutter-width / 2;
+            border: none;
+            background-color: $color-bg;
+            @include placeholder($color-text);
+        }
+        div.ta-text {
+            height: auto;
+            margin: $grid-gutter-width / 2 0;
+            padding: 0;
+            border: none;
+            background-color: $color-bg;
+            div.ta-bind {
+                height: 10em;
+                padding: $grid-gutter-width / 2;
+            }
+        }
+        button[type="submit"],
+        button[type="reset"] {
+            padding: $grid-gutter-width / 2 $grid-gutter-width;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        button[type="submit"] {
+            color: #fff;
+            background-color: $color-forum;
+            &:hover {
+                background-color: $color-blue;
+            }
+        }
+        button[type="reset"] {
+            color: $color-forum;
+            background-color: #fff;
+            &:hover {
+                color: #fff;
+                background-color: $color-forum;
+            }
+        }
     }
     ul.nav-tabs {
         border-bottom: none;

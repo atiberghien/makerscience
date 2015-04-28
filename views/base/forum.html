@@ -17,7 +17,29 @@
     <div class="row container">
         <div class="col-md-12">
 
-            <h2 class="forum-title">Créez votre sujet ici</h2>
+            <button class="create-topic" ng-click="isCollapsed = !isCollapsed">Créez votre sujet ici</button>
+            <form method="post" action="" collapse="isCollapsed" class="new-topic">
+                <input type="text" name="topic" placeholder="Quel est votre sujet?" class="full-width" />
+                <text-angular name="post-topic"
+                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                              ng-model="projectsheet.project.description"
+                              e-rows="8"
+                              placeholder="Saisissez votre réponse ici.">
+                </text-angular>
+                <div ng-controller="TagAutoCompleteCtrl">
+                    <h4>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h4>
+                    <tags-input ng-model="tags"
+                                placeholder="> Mot-clé">
+                      <auto-complete source="loadTags($query)"></auto-complete>
+                    </tags-input>
+                </div>
+
+                <fieldset class="right">
+                    <button type="submit" class="button">Créer</button>
+                    <button type="reset" class="button">Annuler</button>
+                </fieldset>
+            </form>
+
             <tabset>
                 <tab>
                     <tab-heading><span class="glyphicon glyphicon-comment"></span> Messages</tab-heading>
