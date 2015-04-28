@@ -1,4 +1,4 @@
-*.css
+/css/*.css
 js/src/config.coffee
 /js/*.js
 /js/commons/
