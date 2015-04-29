@@ -290,6 +290,10 @@ div.crumbs {
 		background-color: $color-intro-project-bg;
 		background-image: url('/img/bg/header-project-create.gif');
 	}
+	&.intro-project-list {
+		background-color: $color-intro-project-bg;
+		background-image: url('/img/bg/header-listing-projects.jpg');
+	}
 	&.intro-resource {
 		background-color: $color-intro-resource-bg;
 		background-image: url('/img/bg/header-resource-bg.gif');
@@ -306,14 +310,20 @@ div.crumbs {
 		// Changed at Audrey's request #215
 		background-image: url('/img/bg/header-project-create.gif');
 	}
+	&.intro-forum {
+		background-image: url('/img/bg/header-forum.jpg');
+	}
 	&.intro-about,
 	&.intro-profiles,
 	&.intro-project-create,
-	&.intro-resource-create {
+	&.intro-project-list,
+	&.intro-resource-create,
+	&.intro-forum {
 		padding: $grid-gutter-width * 2 0;
 	}
 	&.intro-about,
 	&.intro-project-create,
+	&.intro-project-list,
 	&.intro-resource-create {
 		text-align: center;
 		h1, h2 {
