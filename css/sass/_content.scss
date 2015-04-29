@@ -755,6 +755,15 @@ div.toolbar {
 			border-left: 1px solid $color-boxes-title-border;
 			vertical-align: middle;
 		}
+		h3 + a {
+			display: block;
+			height: 100%;
+			width: 100%;
+			img {
+				height: 100%;
+				width: 100%;
+			}
+		}
 		div.description {
 			position: absolute;
 			bottom: 0;
