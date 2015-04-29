@@ -114,7 +114,7 @@
         <div class="row">
             <div class="col-md-4">
                 <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
-                <div class="boxes boxes-small boxes-small-home members" ng-controller="MakerScienceProfileListCtrl" ng-init="init(3)">
+                <div class="boxes boxes-small boxes-small-home boxes-profiles" ng-controller="MakerScienceProfileListCtrl" ng-init="init(3)">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
                     <div class="box" ng-repeat="profile in profiles">
                         <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
