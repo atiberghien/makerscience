@@ -142,14 +142,18 @@
                         <!--  FIXME : questions answers / templates -->
                         <section ng-repeat="item in projectsheet.question_answers">
                             <h3>{{item.question.text}}</h3>
-                            <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
-                                <button><span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
                             <div ng-if="item.question.choices.length > 0" class="choices">
-                                <label  ng-repeat="choice in item.question.choices">
-                                    <input type="checkbox" checklist-model="item.selected_choices_id" checklist-value="choice.id"> {{ choice.text }}
-                                </label>
+                                <form name="choiceForm" >
+                                    <label ng-repeat="choice in item.question.choices">
+                                        <input type="checkbox" checklist-model="item.selected_choices_id" checklist-value="choice.id" ng-disabled="!editable"> {{ choice.text }}
+                                    </label>
+                                    <button type="button" class="btn btn-primary" ng-show="choiceForm.$dirty"
+                                        ng-click="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'selected_choices_id', item.selected_choices_id); choiceForm.$setPristine();">Valider les choix</button>
+                                </form>
                                 <h5> Commentaire :</h5>
+                            </div>
+                            <div class="edit-buttons edit-question" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
+                                <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
                             <p editable-text-angular="item.answer"
                                  e-form="AnswerBtnForm"
