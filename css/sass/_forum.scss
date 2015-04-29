@@ -64,10 +64,15 @@ div.forum-create {
             padding: 0;
             border: none;
             background-color: $color-bg;
+            box-shadow: none;
             div.ta-bind {
-                height: 10em;
+                height: 8em;
                 padding: $grid-gutter-width / 2;
             }
+        }
+        .ta-scroll-window > .ta-bind,
+        .ta-scroll-window.form-control {
+            min-height: 14em;
         }
         button[type="submit"],
         button[type="reset"] {
@@ -88,6 +93,36 @@ div.forum-create {
             &:hover {
                 color: #fff;
                 background-color: $color-forum;
+            }
+        }
+        fieldset.forum-keywords {
+            padding: $grid-gutter-width / 2;
+            background-color: $color-bg;
+            div.tags {
+                border: none;
+                background-color: transparent;
+                box-shadow: none;
+                input {
+                    @include placeholder($color-blue);
+                }
+            }
+        }
+        fieldset.forum-linked {
+            display: inline-block;
+            margin: $grid-gutter-width 0;
+            background-color: $color-bg;
+            button {
+                padding: 0;
+                padding-left: $grid-gutter-width / 2;
+                border: none;
+                span {
+                    margin-left: 1em;
+                    padding: $grid-gutter-width / 2;
+                    font-size: 2em;
+                    color: #fff;
+                    background-color: $color-forum;
+                    vertical-align: middle;
+                }
             }
         }
     }

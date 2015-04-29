@@ -27,13 +27,20 @@
                               e-rows="8"
                               placeholder="Saisissez votre réponse ici.">
                 </text-angular>
-                <div ng-controller="TagAutoCompleteCtrl">
-                    <h4>Quels sont les mots-clés associés à votre projet ? (thématiques, type de projet, outils...)</h4>
-                    <tags-input ng-model="tags"
-                                placeholder="> Mot-clé">
-                      <auto-complete source="loadTags($query)"></auto-complete>
-                    </tags-input>
-                </div>
+
+                <fieldset class="forum-keywords">
+                    <div ng-controller="TagAutoCompleteCtrl">
+                        <h4>Quels sont les mots-clés associés à votre projet ?</h4>
+                        <tags-input ng-model="tags"
+                                    placeholder="> Mot-clé">
+                          <auto-complete source="loadTags($query)"></auto-complete>
+                        </tags-input>
+                    </div>
+                </fieldset>
+
+                <fieldset class="forum-linked">
+                    <button>Ajouter projets ou expériences associés <span class="glyphicon glyphicon-link"></span></button>
+                </fieldset>
 
                 <fieldset class="right">
                     <button type="submit" class="button">Créer</button>
