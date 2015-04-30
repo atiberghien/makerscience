@@ -158,10 +158,17 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
         .state('forum',
                 url: '/discussions/',
-                templateUrl: 'views/base/forum.html'
+                templateUrl: 'views/forum/forum.html'
                 ncyBreadcrumb:
-                    label: 'Forum'
+                    label: 'Discussions'
                     parent : 'home'
+        )
+        .state('thread',
+                url: '/discussions/thread',
+                templateUrl: 'views/forum/thread.display.html'
+                ncyBreadcrumb:
+                    label: 'Discussion'
+                    parent : 'forum'
         )
         .state('tags',
                 url: '/tags/',
