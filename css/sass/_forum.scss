@@ -254,6 +254,9 @@ section.forum-topic,
             font-weight: bold;
             @include border-radius(50%);
         }
+        a {
+            color: $color-text;
+        }
     }
     p.comments-count {
         float: right;
@@ -280,9 +283,9 @@ div.forum-sidebar {
     }
     div.forum-sidebar-dark {
         margin-bottom: $grid-gutter-width;
-        padding: $grid-gutter-width / 2 $grid-gutter-width;
         background: $color-forum url('/img/bg/forum-sidebar.png') 175px 30px no-repeat;
         h3 {
+            padding: $grid-gutter-width / 2 $grid-gutter-width;
             color: #fff;
         }
     }
@@ -317,6 +320,9 @@ div.forum-sidebar {
                 font-size: 1.1em;
                 line-height: 1.7em;
                 font-weight: bold;
+                a {
+                    color: $color-text;
+                }
             }
         }
         p.more {
@@ -338,6 +344,134 @@ div.forum-sidebar {
                 margin: 0;
                 padding-left: $grid-gutter-width * 1.5;
                 background: transparent url('/img/icons/search.png') $grid-gutter-width / 2 50% no-repeat;
+            }
+        }
+    }
+    ul.forum-top-users {
+        a {
+            display: block;
+            padding: $grid-gutter-width / 2 $grid-gutter-width;
+            font-size: 1.25em;
+            color: #fff;
+            border-bottom: 1px solid $color-medium-grey;
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.25);
+                text-decoration: none;
+            }
+        }
+        li:last-child a {
+            border-bottom: none;
+        }
+        img {
+            margin-right: $grid-gutter-width / 2;
+            vertical-align: middle;
+        }
+    }
+}
+
+div.forum-thread {
+    padding: $grid-gutter-width 0;
+    background-color: #fff;
+    h2 {
+        position: relative;
+        margin-bottom: 0.75em;
+        padding-left: 2em;
+        font-size: 1.75em;
+        line-height: 1.25em;
+        font-weight: bold;
+        span {
+            position: absolute;
+            top: 1px;
+            left: 0;
+            padding: 0 0.4em;
+            color: #fff;
+            background-color: $color-forum;
+            @include border-radius(50%);
+        }
+    }
+    ul.thread-stats {
+        float: right;
+        li {
+            display: inline-block;
+            margin-left: 1.25em;
+            span {
+                display: block;
+                width: 2em;
+                margin: 0 auto 0.25em;
+                padding: 0 0.25em;
+                font-size: 1.5em;
+                line-height: 2em;
+                color: #fff;
+                background-color: $color-forum;
+                text-align: center;
+                @include border-radius(50%);
+            }
+        }
+    }
+    .thread-author {
+        margin-top: $grid-gutter-width / 2;
+        margin-bottom: $grid-gutter-width;
+        font-size: 1.25em;
+        img {
+            display: inline-block;
+            margin-right: 0.5em;
+            vertical-align: middle;
+        }
+        p {
+            display: inline-block;
+            vertical-align: middle;
+            span {
+                display: block;
+                margin-top: 0.1em;
+                font-size: 0.8em;
+                color: $color-strong-grey;
+            }
+        }
+    }
+    .thread-content {
+        margin-bottom: $grid-gutter-width;
+        font-size: 1.25em;
+        line-height: 1.5em;
+        p {
+            margin-bottom: 1em;
+            color: $color-strong-grey;
+        }
+    }
+    .thread-actions {
+        font-size: 1.25em;
+        ul {
+            text-align: right;
+            li {
+                display: inline-block;
+                margin-left: $grid-gutter-width;
+                a {
+                    color: $color-forum;
+                    span {
+                        margin-bottom: 0.2em; /* re-align vertically the glyphs */
+                        font-size: 1.75em;
+                        vertical-align: middle;
+                        &:hover {
+                            color: $color-dark-blue;
+                        }
+                    }
+                }
+                &:first-child {
+                    float: left;
+                    margin-left: 0;
+                    font-size: 0.8em;
+                    a {
+                        color: $color-strong-grey;
+                        font-weight: bold;
+                        span {
+                            margin-right: 0.25em;
+                            padding: 0.5em;
+                            font-size: 1.25em;
+                            color: #fff;
+                            background-color: $color-forum;
+                            @include border-radius(50%);
+                        }
+                    }
+                }
             }
         }
     }
