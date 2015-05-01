@@ -213,6 +213,8 @@ button, a {
 		&.large-orange, &.large-red, &.large-purple, &.large-pink {
 			color: #fff;
 			border: none;
+			background-repeat: no-repeat;
+			background-image: url('/img/bg/box.png');
 		}
 		&.large-orange {
 			background-color: $color-orange;

@@ -371,10 +371,27 @@ div.forum-sidebar {
     }
     div.thread-linked-projects,
     div.thread-linked-resources {
+        margin-bottom: $grid-gutter-width;
+        background-color: #fff;
         h3 {
             margin-bottom: 5px;
-            padding: $grid-gutter-width / 2 $grid-gutter-width;
+            padding: $grid-gutter-width / 2;
             color: #fff;
+        }
+        .boxes {
+            margin: 0 5px;
+        }
+        .box {
+            width: 100%;
+            margin-bottom: $grid-gutter-width / 2;
+        }
+        p.scroll-buttons {
+            padding-bottom: 0.75em;
+            padding-right: 1em;
+            text-align: right;
+            a {
+                margin: 0 0.5em;
+            }
         }
     }
     div.thread-linked-projects h3 {
@@ -559,4 +576,11 @@ div.forum-answer {
         font-weight: bold;
         text-transform: uppercase;
     }
+    form {
+        padding-bottom: $grid-gutter-width / 2;
+    }
+}
+
+div.forum-answer + button {
+    font-size: 1.25em;
 }
