@@ -553,7 +553,14 @@ div.toolbar {
 				padding-bottom: 3em;
 			}
 			a.carousel-control {
-				color: $color-needs;
+				color: #fff;
+				background-image: none;
+				&.right {
+					right: -2em;
+				}
+				&.left {
+					left: -2em;
+				}
 			}
 			.text-center {
 				text-align: left;
