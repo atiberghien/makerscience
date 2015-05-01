@@ -377,9 +377,9 @@ div.toolbar {
 				outline: none; /* remove outline on Chrome */
 				&:first-child {
 					left: 0;
-				}
-				&:last-child {
-					right: 0;
+					& + button {
+						right: 0;
+					}
 				}
 				&:hover {
 					background-color: rgba(0,0,0, 0.1);
