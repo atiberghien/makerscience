@@ -49,83 +49,6 @@ div.forum-create {
         border: none;
         font-weight: bold;
     }
-    form.new-topic {
-        padding-bottom: $grid-gutter-width;
-        input[type="text"] {
-            margin-bottom: $grid-gutter-width / 2;
-            padding: $grid-gutter-width / 2;
-            border: none;
-            background-color: $color-bg;
-            @include placeholder($color-text);
-        }
-        div.ta-text {
-            height: auto;
-            margin: $grid-gutter-width / 2 0;
-            padding: 0;
-            border: none;
-            background-color: $color-bg;
-            box-shadow: none;
-            div.ta-bind {
-                height: 8em;
-                padding: $grid-gutter-width / 2;
-            }
-        }
-        .ta-scroll-window > .ta-bind,
-        .ta-scroll-window.form-control {
-            min-height: 14em;
-        }
-        button[type="submit"],
-        button[type="reset"] {
-            padding: $grid-gutter-width / 2 $grid-gutter-width;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        button[type="submit"] {
-            color: #fff;
-            background-color: $color-forum;
-            &:hover {
-                background-color: $color-blue;
-            }
-        }
-        button[type="reset"] {
-            color: $color-forum;
-            background-color: #fff;
-            &:hover {
-                color: #fff;
-                background-color: $color-forum;
-            }
-        }
-        fieldset.forum-keywords {
-            padding: $grid-gutter-width / 2;
-            background-color: $color-bg;
-            div.tags {
-                border: none;
-                background-color: transparent;
-                box-shadow: none;
-                input {
-                    @include placeholder($color-blue);
-                }
-            }
-        }
-        fieldset.forum-linked {
-            display: inline-block;
-            margin: $grid-gutter-width 0;
-            background-color: $color-bg;
-            button {
-                padding: 0;
-                padding-left: $grid-gutter-width / 2;
-                border: none;
-                span {
-                    margin-left: 1em;
-                    padding: $grid-gutter-width / 2;
-                    font-size: 2em;
-                    color: #fff;
-                    background-color: $color-forum;
-                    vertical-align: middle;
-                }
-            }
-        }
-    }
     ul.nav-tabs {
         border-bottom: none;
         li a {
@@ -170,6 +93,85 @@ div.forum-create {
         background-color: $color-bg;
         border: none;
         @include placeholder($color-text);
+    }
+}
+
+form.new-topic,
+form.forum-answer {
+    padding-bottom: $grid-gutter-width;
+    input[type="text"] {
+        margin-bottom: $grid-gutter-width / 2;
+        padding: $grid-gutter-width / 2;
+        border: none;
+        background-color: $color-bg;
+        @include placeholder($color-text);
+    }
+    div.ta-text {
+        height: auto;
+        margin: $grid-gutter-width / 2 0;
+        padding: 0;
+        border: none;
+        background-color: $color-bg;
+        box-shadow: none;
+        div.ta-bind {
+            height: 8em;
+            padding: $grid-gutter-width / 2;
+        }
+    }
+    .ta-scroll-window > .ta-bind,
+    .ta-scroll-window.form-control {
+        min-height: 14em;
+    }
+    button[type="submit"],
+    button[type="reset"] {
+        padding: $grid-gutter-width / 2 $grid-gutter-width;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    button[type="submit"] {
+        color: #fff;
+        background-color: $color-forum;
+        &:hover {
+            background-color: $color-blue;
+        }
+    }
+    button[type="reset"] {
+        color: $color-forum;
+        background-color: #fff;
+        &:hover {
+            color: #fff;
+            background-color: $color-forum;
+        }
+    }
+    fieldset.forum-keywords {
+        padding: $grid-gutter-width / 2;
+        background-color: $color-bg;
+        div.tags {
+            border: none;
+            background-color: transparent;
+            box-shadow: none;
+            input {
+                @include placeholder($color-blue);
+            }
+        }
+    }
+    fieldset.forum-linked {
+        display: inline-block;
+        margin: $grid-gutter-width 0;
+        background-color: $color-bg;
+        button {
+            padding: 0;
+            padding-left: $grid-gutter-width / 2;
+            border: none;
+            span {
+                margin-left: 1em;
+                padding: $grid-gutter-width / 2;
+                font-size: 2em;
+                color: #fff;
+                background-color: $color-forum;
+                vertical-align: middle;
+            }
+        }
     }
 }
 
@@ -283,7 +285,7 @@ div.forum-sidebar {
     }
     div.forum-sidebar-dark {
         margin-bottom: $grid-gutter-width;
-        background: $color-forum url('/img/bg/forum-sidebar.png') 175px 30px no-repeat;
+        background: $color-forum url('../img/bg/shape-right-bg.png') 175px -110px no-repeat;
         h3 {
             padding: $grid-gutter-width / 2 $grid-gutter-width;
             color: #fff;
@@ -367,9 +369,24 @@ div.forum-sidebar {
             vertical-align: middle;
         }
     }
+    div.thread-linked-projects,
+    div.thread-linked-resources {
+        h3 {
+            margin-bottom: 5px;
+            padding: $grid-gutter-width / 2 $grid-gutter-width;
+            color: #fff;
+        }
+    }
+    div.thread-linked-projects h3 {
+        background-color: $color-project;
+    }
+    div.thread-linked-resources h3 {
+        background-color: $color-resource;
+    }
 }
 
-div.forum-thread {
+div.forum-thread,
+div.thread-answers {
     padding: $grid-gutter-width 0;
     background-color: #fff;
     h2 {
@@ -455,9 +472,10 @@ div.forum-thread {
                         }
                     }
                 }
-                &:first-child {
+                &.left {
                     float: left;
                     margin-left: 0;
+                    margin-top: 0.5em; /* to align and match the padding on the large button */
                     font-size: 0.8em;
                     a {
                         color: $color-strong-grey;
@@ -474,5 +492,71 @@ div.forum-thread {
                 }
             }
         }
+    }
+}
+div.thread-answers {
+    background-color: transparent;
+    div.thread-answer {
+        margin-bottom: $grid-gutter-width;
+        padding: $grid-gutter-width / 2;
+        background-color: #fff;
+        ul.answer-report {
+            float: right;
+            margin-top: $grid-gutter-width / 2;
+            margin-right: $grid-gutter-width / 2;
+            a {
+                color: $color-forum;
+                font-size: 1.25em;
+            }
+        }
+        .thread-actions {
+            font-size: 1em;
+            li.left {
+                margin-left: 10px;
+                font-size: 1.25em;
+            }
+            a {
+                color: $color-strong-grey;
+            }
+            button {
+                padding: 0.5em $grid-gutter-width / 2;
+            }
+        }
+        span.answer-count {
+            margin-right: 0.25em;
+            padding: 0.25em 0.5em;
+            color: #fff;
+            background-color: $color-forum;
+            @include border-radius(50%);
+        }
+    }
+    div.answer-child {
+        position: relative;
+        margin-top: -$grid-gutter-width / 2 - 5px;
+        background-color: $color-light-blue;
+        font-size: 0.9em;
+        div.thread-author {
+            margin-bottom: $grid-gutter-width / 2;
+        }
+        img.thread {
+            position: absolute;
+            top: -23px;
+            left: $grid-gutter-width / 2 + 26px; /* add half the image's width */
+        }
+    }
+}
+
+div.forum-answer {
+    margin-bottom: $grid-gutter-width;
+    padding: $grid-gutter-width / 2;
+    padding-bottom: 0;
+    background-color: #fff;
+    h2 {
+        margin-bottom: $grid-gutter-width / 2;
+        color: $color-forum;
+        font-size: 1.5em;
+        line-height: 2em;
+        font-weight: bold;
+        text-transform: uppercase;
     }
 }

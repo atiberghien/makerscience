@@ -1,4 +1,5 @@
-#sidebar {
+#sidebar,
+div.forum-sidebar {
 	font-size: 0.9em;
 
 	section {
@@ -21,6 +22,9 @@
 		}
 		&.community-resource {
 			background: $color-resource url('../img/bg/shape-right-bg.png') 175px -110px no-repeat;
+		}
+		&.community-forum {
+			background: $color-forum url('../img/bg/shape-right-bg.png') 175px -110px no-repeat;
 		}
 
 		ul.submenu, ul.nav-tabs {

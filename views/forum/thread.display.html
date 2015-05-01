@@ -37,7 +37,7 @@
             </div>
             <div class="thread-actions">
                 <ul>
-                    <li><a href=""><span class="glyphicon glyphicon-link"></span> Voir les 12 liens</a></li>
+                    <li class="left"><a href=""><span class="glyphicon glyphicon-link"></span> Voir les 12 liens</a></li>
                     <li><a href="">Signaler un abus</a></li>
                     <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
                     <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
@@ -50,10 +50,87 @@
 
 <div class="forum-content">
     <div class="row container">
-        <div class="col-md-12">
-            <div id="content" class="content-forum">
-                content
+        <div class="col-md-8">
+            <div id="content" class="thread-answers">
+                <ng-include src="'views/forum/block/answer.parent.html'"></ng-include>
+                <ng-include src="'views/forum/block/answer.child.html'"></ng-include>
+                <ng-include src="'views/forum/block/answer.child.html'"></ng-include>
+                <ng-include src="'views/forum/block/answer.parent.html'"></ng-include>
             </div><!-- #content -->
+        </div>
+        <div class="col-md-4">
+            <div class="forum-sidebar" ng-init="parentColor='forum';cummunityObjectTypeName='project';commentedObjectTypeName='makerscienceproject'">
+                <ng-include src="'views/catalog/block/community.html'"></ng-include>
+                <div class="forum-sidebar-light">
+                    <h3>Discussions similaires</h3>
+                    <div class="post">
+                        <div class="post-author">
+                            <img src="/img/users/user-mathieu.png" alt="Post author" />
+                            <div class="post-details">
+                                <p class="post-author-name">Eric <strong>Luigi</strong></p>
+                                <ul class="tags">
+                                    <li><a href="">Marketing</a></li>
+                                    <li><a href="">Conference</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="post-topic"><a href="">Animation avec des enfants, comment s'y prendre pour garder leur attention?</a></p>
+                    </div><!-- .post -->
+                    <div class="post">
+                        <div class="post-author">
+                            <img src="/img/users/user-mathieu.png" alt="Post author" />
+                            <div class="post-details">
+                                <p class="post-author-name">Eric <strong>Luigi</strong></p>
+                                <ul class="tags">
+                                    <li><a href="">Marketing</a></li>
+                                    <li><a href="">Conference</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="post-topic"><a href="">Animation avec des enfants, comment s'y prendre pour garder leur attention?</a></p>
+                    </div><!-- .post -->
+                </div><!-- .forum-sidebar-light -->
+                <div class="thread-linked-projects">
+                    <h3>Projets associés</h3>
+                    <span class="fixme">#FIXME Alban / Need real projects to style</span>
+                    <div class="boxes boxes-sidebar">
+                        <div class="box">
+                            <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                        </div>
+                    </div>
+                </div>
+                <div class="thread-linked-resources">
+                    <h3>Experiences associées</h3>
+                    <span class="fixme">#FIXME Alban / Need real resources to style</span>
+                    <div class="boxes boxes-sidebar">
+                        <div class="box">
+                            <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- #sidebar -->
         </div>
     </div>
 </div><!-- .forum-content -->
+
+<div class="row container">
+    <div class="col-md-12">
+        <div class="forum-answer">
+            <h2>Espace réponse</h2>
+            <form method="post" action="" class="forum-answer">
+                <text-angular name="post-topic"
+                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                              ng-model="projectsheet.project.description"
+                              e-rows="8"
+                              placeholder="Saisissez votre réponse ici.">
+                </text-angular>
+                <fieldset class="right">
+                    <button type="submit" class="button">Envoyer</button>
+                    <button type="reset" class="button">Annuler</button>
+                </fieldset>
+            </form>
+        </div>
+        <button class="button button-forum full-width">Charger les autres réponses</button>
+        <a ui-sref="project.new" class="large large-purple">Créer votre sujet ici <img src="/img/smiley-large.png" class="smiley" alt="Smiley" /></a>
+    </div>
+</div>

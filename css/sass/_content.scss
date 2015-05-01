@@ -245,6 +245,10 @@ div.toolbar {
 	&.content-forum {
 		margin-top: $grid-gutter-width;
 	}
+	&.thread-answers {
+		margin-top: $grid-gutter-width;
+		padding: 0;
+	}
 	ul.nav-tabs {
 		margin-bottom: $grid-gutter-width;
 		border: none;
