@@ -21,6 +21,7 @@
             <button class="create-topic" ng-click="isCollapsed = !isCollapsed">Créez votre sujet ici</button>
             <form method="post" action="" collapse="isCollapsed" class="new-topic">
                 <input type="text" name="topic" placeholder="Quel est votre sujet?" class="full-width" />
+                <span class="fixme">#FIXME Placeholder not displayed</span>
                 <text-angular name="post-topic"
                               ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                               ng-model="projectsheet.project.description"
@@ -29,6 +30,7 @@
                 </text-angular>
 
                 <fieldset class="forum-keywords">
+                    <span class="fixme">#FIXME Need to style keywords</span>
                     <div ng-controller="TagAutoCompleteCtrl">
                         <h4>Quels sont les mots-clés associés à votre projet ?</h4>
                         <tags-input ng-model="tags"
