@@ -10,7 +10,6 @@ module.factory('MakerScienceProfileTaggedItem', (Restangular) ->
 )
 
 # Specific services
-#module.controller('CurrentMakerScienceProfileCtrl',
 class CurrentMakerScienceProfileService
     constructor : ($rootScope, $modal, MakerScienceProfile) ->
 
