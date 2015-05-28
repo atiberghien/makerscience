@@ -166,12 +166,12 @@
     <div class="row row-home">
         <div class="col-md-7">
 
-            <div class="home-forum">
+            <div class="home-forum" ng-controller="QuestionListCtrl" ng-init="init({order_by:'-updated_on'})">
                 <!-- <div class="preview"></div> -->
                 <h2 class="forum">Discussions <a ui-sref="forum">Voir toutes les discussions</a></h2>
-                <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                <ng-include src="'views/forum/block/thread.html'"></ng-include>
+                <div ng-repeat="question in questions| limitTo:3">
+                    <ng-include src="'views/forum/block/thread.html'" onload="question=question"></ng-include>
+                </div>
             </div><!-- .home-forum -->
 
         </div>
