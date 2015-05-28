@@ -40,6 +40,10 @@
 			}
 		}
 	}
+	/* Without the border the block isn't filling the space and the page "jumps" when scrolling down */
+	.affix-cheat {
+		border: 1px solid transparent;
+	}
 
 }
 
