@@ -18,12 +18,28 @@
     </div>
     <div class="thread-actions">
         <ul>
-            <li class="left"><span class="answer-count">02</span> Réponses</li>
+            <li class="left"><span class="answer-count"><span ng-if="answer.answers_count > 0 && answer.answers_count <= 9">0</span>{{answer.answers_count}}</span> Réponses</li>
             <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
             <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
             <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
             <li><button class="button button-forum">Répondre</button></li>
     </div>
 </div>
-<ng-include src="'views/forum/block/answer.child.html'"></ng-include>
-<ng-include src="'views/forum/block/answer.child.html'"></ng-include>
+<div ng-controller="PostCtrl" ng-init="getAnswers(answer.id)">
+    <div class="thread-answer answer-child" ng-repeat="answer in answers">
+        <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
+        <div class="thread-author" ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(answer.author.id)">
+            <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
+                data-gravatar-size="52"
+                data-gravatar-rating="pg"
+                data-gravatar-default="mm"
+                data-gravatar-secure="true"
+                data-gravatar-css-class="member img-circle">
+            </gravatar-image>
+            <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong></p>
+        </div>
+        <div class="thread-content">
+            <p>{{answer.text}}</p>
+        </div>
+    </div>
+</div>
