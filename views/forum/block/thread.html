@@ -1,6 +1,6 @@
 <section class="forum-topic">
     <header>
-        <ul class="members" ng-controller="QuestionCtrl" ng-init="getContributors(question.id)">
+        <ul class="members" ng-controller="PostCtrl" ng-init="getContributors(question.id)">
             <li ng-repeat="contributor in contributors|limitTo : 4">
                 <div ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(contributor.id)">
                     <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
@@ -31,5 +31,6 @@
     <ul class="tags" >
         <li ng-repeat="tag in question.tags|limitTo : 4"><a href="">{{tag.tag.name}}</a></li>
         <li class="more" ng-if="question.tags.length > 4"><a href="">+{{question.tags.length-4}}</a></li>
+
     </ul><!-- .tags -->
 </section>
