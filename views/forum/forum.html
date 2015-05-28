@@ -16,15 +16,13 @@
 
 <div class="forum-create">
     <div class="row container">
-        <div class="col-md-12">
-
-            <button class="create-topic" ng-click="isCollapsed = !isCollapsed">Créez votre sujet ici</button>
-            <form method="post" action="" collapse="isCollapsed" class="new-topic">
-                <input type="text" name="topic" placeholder="Quel est votre sujet?" class="full-width" />
-                <span class="fixme">#FIXME Placeholder not displayed</span>
-                <text-angular name="post-topic"
+        <div class="col-md-12" ng-Controller="PostCtrl" ng-init="showCreateButton = true">
+            <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
+            <form method="post" action="" collapse="showCreateButton" class="new-topic">
+                <input type="text" name="title" ng-model="newPost.title" placeholder="Quel est votre sujet?" class="full-width" />
+                <text-angular name="text"
                               ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                              ng-model="projectsheet.project.description"
+                              ng-model="newPost.text"
                               e-rows="8"
                               placeholder="Saisissez votre réponse ici.">
                 </text-angular>
@@ -32,24 +30,24 @@
                 <fieldset class="forum-keywords">
                     <div ng-controller="TagAutoCompleteCtrl">
                         <h4>Quels sont les mots-clés associés à votre projet ?</h4>
-                        <tags-input ng-model="tags"
+                        <tags-input ng-model="newPost.tags"
                                     placeholder="> Mot-clé">
                           <auto-complete source="loadTags($query)"></auto-complete>
                         </tags-input>
                     </div>
                 </fieldset>
 
-                <fieldset class="forum-linked">
+                <!-- <fieldset class="forum-linked">
                     <button>Ajouter projets ou expériences associés <span class="glyphicon glyphicon-link"></span></button>
-                </fieldset>
+                </fieldset> -->
 
                 <fieldset class="right">
-                    <button type="submit" class="button">Créer</button>
+                    <button type="submit" class="button" ng-click="save(newPost, currentMakerScienceProfile.parent)">Créer</button>
                     <button type="reset" class="button">Annuler</button>
                 </fieldset>
             </form>
 
-            <tabset>
+            <!-- <tabset>
                 <tab>
                     <tab-heading><span class="glyphicon glyphicon-comment"></span> Messages</tab-heading>
                     <form method="post" action="">
@@ -86,7 +84,7 @@
                         <textarea class="full-width" placeholder="Rédigez votre évènement..."></textarea>
                     </form>
                 </tab>
-            </tabset>
+            </tabset> -->
 
         </div>
     </div><!-- .container -->
