@@ -12,7 +12,7 @@
                     </gravatar-image>
                 </div>
             </li>
-            <li class="count" ng-if="contributors.length > 4"><a href="">+{{contributors.length - 4}}</a></li>
+            <li class="count" ng-if="contributors.length > 0"><a href="">+{{contributors.length}}</a></li>
         </ul><!-- .members -->
         <div ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(question.author.id)">
             <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
