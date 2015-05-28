@@ -39,7 +39,7 @@
                     <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong> <span>Mise en ligne <span am-time-ago="question.posted_on"></span></span></p>
                 </div>
                 <div class="thread-content">
-                    <p>{{question.text}}</p>
+                    <p ng-bind-html="question.text"></p>
                 </div>
                 <div class="thread-actions">
                     <ul>

@@ -14,7 +14,7 @@
         <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong> <span><span am-time-ago="answer.posted_on"></span></span></p>
     </div>
     <div class="thread-content">
-        <p>{{answer.text}}</p>
+        <p ng-bind-html="answer.text"></p>
     </div>
     <div class="thread-actions">
         <ul>
@@ -39,7 +39,7 @@
             <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong></p>
         </div>
         <div class="thread-content">
-            <p>{{answer.text}}</p>
+            <p ng-bind-html="answer.text"></p>
         </div>
     </div>
 </div>
