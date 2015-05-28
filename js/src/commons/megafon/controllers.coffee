@@ -6,7 +6,7 @@ module.controller("QuestionListCtrl", ($scope, Post) ->
     )
 )
 
-module.controller("QuestionCtrl", ($scope, $stateParams, Post) ->
+module.controller("PostCtrl", ($scope, $stateParams, Post) ->
 
     $scope.init = ->
         Post.one().get({'slug' : $stateParams.slug}).then((postResult) ->
