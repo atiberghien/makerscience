@@ -12,7 +12,6 @@
                     </gravatar-image>
                 </div>
             </li>
-            <li ng-if="contributors.length == 0"><a href="">TODO Gaetan : Pas de contributeur</a></li>
             <li class="count" ng-if="contributors.length > 4"><a href="">+{{contributors.length - 4}}</a></li>
         </ul><!-- .members -->
         <div ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(question.author.id)">
