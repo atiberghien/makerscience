@@ -273,9 +273,15 @@ section.forum-topic,
         float: right;
         margin: 0.25em 0 0.75em;
         font-size: 1.15em;
+        &.no-tag {
+            margin-top: -2.25em;
+        }
         span {
             font-size: 1.25em;
             vertical-align: middle;
+            &.glyphicon {
+                color: $color-forum;
+            }
         }
     }
     ul.tags {
