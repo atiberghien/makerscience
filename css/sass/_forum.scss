@@ -190,6 +190,7 @@ div.forum-content {
 
 section.forum-topic,
 #content section.forum-topic {
+    overflow: hidden;
     position: relative;
     padding-bottom: 0.25em;
     background-color: #fff;
@@ -262,16 +263,20 @@ section.forum-topic,
     }
     p.comments-count {
         float: right;
+        margin: 0.25em 0 0.75em;
         font-size: 1.15em;
         span {
             font-size: 1.25em;
             vertical-align: middle;
         }
     }
-    ul.tags li.more a {
-        color: #fff;
-        background-color: $color-blue;
-        @include border-radius(50%);
+    ul.tags {
+        margin-bottom: 0.5em;
+        li.more a {
+            color: #fff;
+            background-color: $color-blue;
+            @include border-radius(50%);
+        }
     }
 }
 

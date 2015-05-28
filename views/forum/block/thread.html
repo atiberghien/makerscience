@@ -30,8 +30,6 @@
     <p class="comments-count"><span class="glyphicon glyphicon-comment"></span> {{question.answers_count}}</p>
     <ul class="tags" >
         <li ng-repeat="tag in question.tags|limitTo : 4"><a href="">{{tag.tag.name}}</a></li>
-        <li ng-if="question.tags.length == 0"><a href="">TODO Gaetan : Pas de tags</a></li>
         <li class="more" ng-if="question.tags.length > 4"><a href="">+{{question.tags.length-4}}</a></li>
-
     </ul><!-- .tags -->
 </section>
