@@ -185,7 +185,7 @@ form.forum-answer {
 
 div.forum-content {
     input[type="search"] {
-        width: 66%;
+        width: 100%;
         margin-bottom: $grid-gutter-width / 2;
         padding: 1em;
         border: none;
@@ -392,13 +392,14 @@ div.forum-sidebar {
             color: #fff;
         }
         .boxes {
-            margin: 0 5px;
+            margin: 0;
         }
         .box {
             width: 100%;
-            margin-bottom: $grid-gutter-width / 2;
+            margin-bottom: 5px;
         }
         p.scroll-buttons {
+            margin-top: $grid-gutter-width / 2;
             padding-bottom: 0.75em;
             padding-right: 1em;
             text-align: right;
