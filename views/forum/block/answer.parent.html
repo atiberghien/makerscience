@@ -11,7 +11,7 @@
             data-gravatar-secure="true"
             data-gravatar-css-class="member img-circle">
         </gravatar-image>
-        <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong> <span><span am-time-ago="answer.posted_on"></span></span></p>
+        <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
     </div>
     <div class="thread-content">
         <p ng-bind-html="answer.text"></p>
@@ -27,6 +27,7 @@
 </div>
 
 <ng-include src="'views/forum/block/thread.reply.html'"></ng-include>
+
 <div ng-controller="PostCtrl" ng-init="getAnswers(answer.id)">
     <div class="thread-answer answer-child" ng-repeat="answer in answers">
         <img src="/img/forum/thread.png" alt="Decoration" class="thread" />

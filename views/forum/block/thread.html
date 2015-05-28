@@ -24,7 +24,7 @@
             </gravatar-image>
             <h3>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong></h3>
         </div>
-        <h4>Mise à jour: <strong><span am-time-ago="question.posted_on"></span></strong></h4>
+        <h4>Mise à jour: <strong><span am-time-ago="question.updated_on"></span></strong></h4>
     </header>
     <p class="question"><span>?</span><a ui-sref="question({slug : question.slug})">{{question.title}}</a></p>
     <p class="comments-count" ng-class="{'no-tag': question.tags.length == 0}"><span class="glyphicon glyphicon-comment"></span> {{question.answers_count}}</p>
