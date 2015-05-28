@@ -50,6 +50,7 @@
                         <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
                         <li><button class="button button-forum">Répondre</button></li>
                 </div>
+                <ng-include src="'views/forum/block/thread.reply.html'"></ng-include>
             </div>
         </div>
     </div><!-- .forum-thread -->
@@ -60,6 +61,7 @@
                 <div id="content" class="thread-answers">
                     <div ng-repeat="answer in answers">
                         <ng-include src="'views/forum/block/answer.parent.html'"></ng-include>
+                        <ng-include src="'views/forum/block/thread.reply.html'"></ng-include>
                     </div>
                 </div><!-- #content -->
             </div>
@@ -127,21 +129,6 @@
 
     <div class="row container">
         <div class="col-md-12">
-            <div class="forum-answer">
-                <h2>Espace réponse</h2>
-                <form method="post" action="" class="forum-answer">
-                    <text-angular name="post-topic"
-                                  ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                  ng-model="projectsheet.project.description"
-                                  e-rows="8"
-                                  placeholder="Saisissez votre réponse ici.">
-                    </text-angular>
-                    <fieldset class="right">
-                        <button type="submit" class="button">Envoyer</button>
-                        <button type="reset" class="button">Annuler</button>
-                    </fieldset>
-                </form>
-            </div>
             <button class="button button-forum full-width">Charger les autres réponses</button>
             <a ui-sref="project.new" class="large large-purple">Créer votre sujet ici <img src="/img/smiley-large.png" class="smiley" alt="Smiley" /></a>
         </div>
