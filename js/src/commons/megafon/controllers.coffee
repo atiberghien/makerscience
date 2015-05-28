@@ -1,9 +1,11 @@
 module = angular.module("commons.megafon.controllers", ['commons.megafon.services'])
 
 module.controller("QuestionListCtrl", ($scope, Post) ->
-    Post.one().customGET('questions').then((questionResults) ->
-        $scope.questions = questionResults.objects
-    )
+
+    $scope.init = (orderBy) ->
+        Post.one().customGET('questions', orderBy).then((questionResults) ->
+            $scope.questions = questionResults.objects
+        )
 )
 
 module.controller("PostCtrl", ($scope, $stateParams, Post) ->
