@@ -25,6 +25,8 @@
             <li><button class="button button-forum">Répondre</button></li>
     </div>
 </div>
+
+<ng-include src="'views/forum/block/thread.reply.html'"></ng-include>
 <div ng-controller="PostCtrl" ng-init="getAnswers(answer.id)">
     <div class="thread-answer answer-child" ng-repeat="answer in answers">
         <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
