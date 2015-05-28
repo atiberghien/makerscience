@@ -98,12 +98,8 @@
                     </div><!-- .forum-sidebar-light -->
                     <div class="thread-linked-projects">
                         <h3>Projets associés</h3>
-                        <span class="fixme">#FIXME Alban / Need real projects to style</span>
-                        <div class="boxes boxes-sidebar">
-                            <div class="box">
-                                <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-                            </div>
-                            <div class="box">
+                        <div class="boxes boxes-sidebar" ng-controller="MakerScienceProjectListCtrl" ng-init="init(2)">
+                            <div class="box" ng-repeat="project in projects">
                                 <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
                             </div>
                         </div>
@@ -114,12 +110,8 @@
                     </div>
                     <div class="thread-linked-resources">
                         <h3>Experiences associées</h3>
-                        <span class="fixme">#FIXME Alban / Need real resources to style</span>
-                        <div class="boxes boxes-sidebar">
-                            <div class="box">
-                                <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
-                            </div>
-                            <div class="box">
+                        <div class="boxes boxes-sidebar" ng-controller="MakerScienceResourceListCtrl" ng-init="init(2)">
+                            <div class="box" ng-repeat="resource in resources">
                                 <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                             </div>
                         </div>
