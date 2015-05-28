@@ -150,8 +150,16 @@ form.forum-answer {
             border: none;
             background-color: transparent;
             box-shadow: none;
-            input {
+            li.tag-item {
+                background-color: $color-blue;
+                @include border-radius(0);
+            }
+            input.input {
+                padding: 0;
                 @include placeholder($color-blue);
+            }
+            ul.tag-list {
+                margin-right: $grid-gutter-width;
             }
         }
     }
