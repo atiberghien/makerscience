@@ -469,10 +469,13 @@ div.thread-answers {
             display: inline-block;
             vertical-align: middle;
             span {
-                display: block;
                 margin-top: 0.1em;
                 font-size: 0.8em;
                 color: $color-strong-grey;
+            }
+            /* Only target the first span, ignore its child */
+            & > span {
+                display: block;
             }
         }
     }
