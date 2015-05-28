@@ -46,7 +46,7 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
         FilterService.filterParams.query = ''
         FilterService.filterParams.tags = []
         $scope.refreshListGeneric()
-    
+
         for param of FilterService.filterParams
             $scope.$watch(
                 ()->
@@ -83,6 +83,11 @@ module.controller("MakerScienceObjectGetter", ($scope, MakerScienceProject, Make
             MakerScienceProfile.one(objectId).get().then((makerScienceProfileResult) ->
                 $scope.profile = makerScienceProfileResult
             )
+
+    $scope.getMakerscienceProfileFromGenericProfile = (genericProfileId) ->
+        MakerScienceProfile.one().get({'parent__id' : genericProfileId}).then((makerScienceProfileResult) ->
+            $scope.makerscienceProfile = makerScienceProfileResult.objects[0]
+        )
 )
 
 

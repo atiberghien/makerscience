@@ -14,138 +14,144 @@
     </div><!-- .container -->
 </div><!-- .forum-search -->
 
-<div class="forum-thread">
+<div ng-controller="QuestionCtrl" ng-init="init()">
+
+    <div class="forum-thread">
+        <div class="row container">
+            <div class="col-md-12">
+                <ul class="thread-stats">
+                    <li><span class="glyphicon glyphicon-eye-open"></span> 130 vues</li>
+                    <li><span class="glyphicon glyphicon-comment"></span> {{question.answers_count}} réponses</li>
+                    <li><span class="glyphicon glyphicon-thumbs-up"></span> 1120 J'aime</li>
+                </ul>
+                <h2><span>?</span> {{question.title}}</h2>
+                <ul class="tags">
+                    <li ng-repeat="tag in question.tags"><a href="">{{tag.tag.name}}</a></li>
+                </ul>
+                <div class="thread-author" ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(question.author.id)">
+                    <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
+                        data-gravatar-size="52"
+                        data-gravatar-rating="pg"
+                        data-gravatar-default="mm"
+                        data-gravatar-secure="true"
+                        data-gravatar-css-class="member img-circle">
+                    </gravatar-image>
+                    <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong> <span>Mise en ligne <span am-time-ago="question.posted_on"></span></span></p>
+                </div>
+                <div class="thread-content">
+                    <p>{{question.text}}</p>
+                </div>
+                <!-- <div class="thread-actions">
+                    <ul>
+                        <li class="left"><a href=""><span class="glyphicon glyphicon-link"></span> Voir les 12 liens</a></li>
+                        <li><a href="">Signaler un abus</a></li>
+                        <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
+                        <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
+                        <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
+                        <li><button class="button button-forum">Répondre</button></li>
+                </div> -->
+            </div>
+        </div>
+    </div><!-- .forum-thread -->
+
+    <div class="forum-content">
+        <div class="row container">
+            <div class="col-md-8" >
+                <div id="content" class="thread-answers">
+                    <div ng-repeat="answer in answers">
+                        <ng-include src="'views/forum/block/answer.parent.html'"></ng-include>
+                    </div>
+                </div><!-- #content -->
+            </div>
+            <div class="col-md-4">
+                <div class="forum-sidebar" ng-init="parentColor='forum';cummunityObjectTypeName='project';commentedObjectTypeName='makerscienceproject'">
+                    <span class="fixme">#FIXME Need to decide how to use different versions of this block (top right buttons and tabs)</span>
+                    <ng-include src="'views/catalog/block/community.html'"></ng-include>
+                    <div class="forum-sidebar-light">
+                        <h3>Discussions similaires</h3>
+                        <div class="post">
+                            <div class="post-author">
+                                <img src="/img/users/user-mathieu.png" alt="Post author" />
+                                <div class="post-details">
+                                    <p class="post-author-name">Eric <strong>Luigi</strong></p>
+                                    <ul class="tags">
+                                        <li><a href="">Marketing</a></li>
+                                        <li><a href="">Conference</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="post-topic"><a href="">Animation avec des enfants, comment s'y prendre pour garder leur attention?</a></p>
+                        </div><!-- .post -->
+                        <div class="post">
+                            <div class="post-author">
+                                <img src="/img/users/user-mathieu.png" alt="Post author" />
+                                <div class="post-details">
+                                    <p class="post-author-name">Eric <strong>Luigi</strong></p>
+                                    <ul class="tags">
+                                        <li><a href="">Marketing</a></li>
+                                        <li><a href="">Conference</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="post-topic"><a href="">Animation avec des enfants, comment s'y prendre pour garder leur attention?</a></p>
+                        </div><!-- .post -->
+                    </div><!-- .forum-sidebar-light -->
+                    <div class="thread-linked-projects">
+                        <h3>Projets associés</h3>
+                        <span class="fixme">#FIXME Alban / Need real projects to style</span>
+                        <div class="boxes boxes-sidebar">
+                            <div class="box">
+                                <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                            </div>
+                            <div class="box">
+                                <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                            </div>
+                        </div>
+                        <p class="scroll-buttons">
+                            <a href=""><img ng-click="gotoAnchor(3)" src="/img/icons/scroll-down-blue.png" alt="Scroll Down" /></a>
+                            <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll-up-blue.png" alt="Scroll Up" /></a>
+                        </p>
+                    </div>
+                    <div class="thread-linked-resources">
+                        <h3>Experiences associées</h3>
+                        <span class="fixme">#FIXME Alban / Need real resources to style</span>
+                        <div class="boxes boxes-sidebar">
+                            <div class="box">
+                                <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                            </div>
+                            <div class="box">
+                                <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                            </div>
+                        </div>
+                        <p class="scroll-buttons">
+                            <a href=""><img ng-click="gotoAnchor(3)" src="/img/icons/scroll-down-green.png" alt="Scroll Down" /></a>
+                            <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll-up-green.png" alt="Scroll Up" /></a>
+                        </p>
+                    </div>
+                </div><!-- #sidebar -->
+            </div>
+        </div>
+    </div><!-- .forum-content -->
+
     <div class="row container">
         <div class="col-md-12">
-            <ul class="thread-stats">
-                <li><span class="glyphicon glyphicon-eye-open"></span> 130 vues</li>
-                <li><span class="glyphicon glyphicon-comment"></span> 84 réponses</li>
-                <li><span class="glyphicon glyphicon-thumbs-up"></span> 1120 J'aime</li>
-            </ul>
-            <h2><span>?</span> Quels leviers et méthodes utiliseriez-vous pour promouvoir une conférence avec 500&euro; de budget?</h2>
-            <ul class="tags">
-                <li><a href="">Marketing</a></li>
-                <li><a href="">Conference</a></li>
-            </ul>
-            <div class="thread-author">
-                <img src="/img/users/user-mathieu.png" alt="Stéphanie Martines" />
-                <p>Stéphanie <strong>Martines</strong> <span>Mise en ligne 11/02/15</span></p>
+            <div class="forum-answer">
+                <h2>Espace réponse</h2>
+                <form method="post" action="" class="forum-answer">
+                    <text-angular name="post-topic"
+                                  ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                                  ng-model="projectsheet.project.description"
+                                  e-rows="8"
+                                  placeholder="Saisissez votre réponse ici.">
+                    </text-angular>
+                    <fieldset class="right">
+                        <button type="submit" class="button">Envoyer</button>
+                        <button type="reset" class="button">Annuler</button>
+                    </fieldset>
+                </form>
             </div>
-            <div class="thread-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-            <div class="thread-actions">
-                <ul>
-                    <li class="left"><a href=""><span class="glyphicon glyphicon-link"></span> Voir les 12 liens</a></li>
-                    <li><a href="">Signaler un abus</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
-                    <li><button class="button button-forum">Répondre</button></li>
-            </div>
+            <button class="button button-forum full-width">Charger les autres réponses</button>
+            <a ui-sref="project.new" class="large large-purple">Créer votre sujet ici <img src="/img/smiley-large.png" class="smiley" alt="Smiley" /></a>
         </div>
-    </div>
-</div><!-- .forum-thread -->
-
-<div class="forum-content">
-    <div class="row container">
-        <div class="col-md-8">
-            <div id="content" class="thread-answers">
-                <ng-include src="'views/forum/block/answer.parent.html'"></ng-include>
-                <ng-include src="'views/forum/block/answer.child.html'"></ng-include>
-                <ng-include src="'views/forum/block/answer.child.html'"></ng-include>
-                <ng-include src="'views/forum/block/answer.parent.html'"></ng-include>
-            </div><!-- #content -->
-        </div>
-        <div class="col-md-4">
-            <div class="forum-sidebar" ng-init="parentColor='forum';cummunityObjectTypeName='project';commentedObjectTypeName='makerscienceproject'">
-                <span class="fixme">#FIXME Need to decide how to use different versions of this block (top right buttons and tabs)</span>
-                <ng-include src="'views/catalog/block/community.html'"></ng-include>
-                <div class="forum-sidebar-light">
-                    <h3>Discussions similaires</h3>
-                    <div class="post">
-                        <div class="post-author">
-                            <img src="/img/users/user-mathieu.png" alt="Post author" />
-                            <div class="post-details">
-                                <p class="post-author-name">Eric <strong>Luigi</strong></p>
-                                <ul class="tags">
-                                    <li><a href="">Marketing</a></li>
-                                    <li><a href="">Conference</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="post-topic"><a href="">Animation avec des enfants, comment s'y prendre pour garder leur attention?</a></p>
-                    </div><!-- .post -->
-                    <div class="post">
-                        <div class="post-author">
-                            <img src="/img/users/user-mathieu.png" alt="Post author" />
-                            <div class="post-details">
-                                <p class="post-author-name">Eric <strong>Luigi</strong></p>
-                                <ul class="tags">
-                                    <li><a href="">Marketing</a></li>
-                                    <li><a href="">Conference</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="post-topic"><a href="">Animation avec des enfants, comment s'y prendre pour garder leur attention?</a></p>
-                    </div><!-- .post -->
-                </div><!-- .forum-sidebar-light -->
-                <div class="thread-linked-projects">
-                    <h3>Projets associés</h3>
-                    <span class="fixme">#FIXME Alban / Need real projects to style</span>
-                    <div class="boxes boxes-sidebar">
-                        <div class="box">
-                            <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-                        </div>
-                        <div class="box">
-                            <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-                        </div>
-                    </div>
-                    <p class="scroll-buttons">
-                        <a href=""><img ng-click="gotoAnchor(3)" src="/img/icons/scroll-down-blue.png" alt="Scroll Down" /></a>
-                        <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll-up-blue.png" alt="Scroll Up" /></a>
-                    </p>
-                </div>
-                <div class="thread-linked-resources">
-                    <h3>Experiences associées</h3>
-                    <span class="fixme">#FIXME Alban / Need real resources to style</span>
-                    <div class="boxes boxes-sidebar">
-                        <div class="box">
-                            <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
-                        </div>
-                        <div class="box">
-                            <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
-                        </div>
-                    </div>
-                    <p class="scroll-buttons">
-                        <a href=""><img ng-click="gotoAnchor(3)" src="/img/icons/scroll-down-green.png" alt="Scroll Down" /></a>
-                        <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll-up-green.png" alt="Scroll Up" /></a>
-                    </p>
-                </div>
-            </div><!-- #sidebar -->
-        </div>
-    </div>
-</div><!-- .forum-content -->
-
-<div class="row container">
-    <div class="col-md-12">
-        <div class="forum-answer">
-            <h2>Espace réponse</h2>
-            <form method="post" action="" class="forum-answer">
-                <text-angular name="post-topic"
-                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                              ng-model="projectsheet.project.description"
-                              e-rows="8"
-                              placeholder="Saisissez votre réponse ici.">
-                </text-angular>
-                <fieldset class="right">
-                    <button type="submit" class="button">Envoyer</button>
-                    <button type="reset" class="button">Annuler</button>
-                </fieldset>
-            </form>
-        </div>
-        <button class="button button-forum full-width">Charger les autres réponses</button>
-        <a ui-sref="project.new" class="large large-purple">Créer votre sujet ici <img src="/img/smiley-large.png" class="smiley" alt="Smiley" /></a>
     </div>
 </div>

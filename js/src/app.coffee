@@ -1,11 +1,13 @@
 angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
 angular.module('commons.accounts', ['commons.accounts.services', 'commons.accounts.controllers'])
 angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
+angular.module('commons.megafon', ['commons.megafon.controllers', 'commons.megafon.services'])
 angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
-angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', 'makerscience.base','makerscience.map',
+angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile',
+                                'makerscience.base','makerscience.map', 'commons.megafon',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
                                 'geocoder-service', 'ncy-angular-breadcrumb', 'truncate'])
@@ -163,11 +165,11 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     label: 'Discussions'
                     parent : 'home'
         )
-        .state('thread',
-                url: '/discussions/thread',
+        .state('question',
+                url: '/discussions/:slug',
                 templateUrl: 'views/forum/thread.display.html'
                 ncyBreadcrumb:
-                    label: 'Discussion'
+                    label: '{{question.title}}'
                     parent : 'forum'
         )
         .state('tags',

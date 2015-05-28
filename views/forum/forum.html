@@ -96,16 +96,15 @@
 <div class="forum-content">
     <div class="row container">
         <div class="col-md-8">
-            <div id="content" class="content-forum">
+            <div id="content" class="content-forum" ng-controller="QuestionListCtrl">
                 <tabset class="nav-tabs-forum">
                     <tab heading="Récent">
                         <form method="post" action="">
                             <input type="search" name="search-by-tags" placeholder="Rechercher par tags..." />
                         </form>
-                        <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                        <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                        <ng-include src="'views/forum/block/thread.html'"></ng-include>
-
+                        <div ng-repeat="question in questions">
+                            <ng-include src="'views/forum/block/thread.html'" onload="question=question"></ng-include>
+                        </div>
                         <button class="button button-forum full-width">Charger les autres réponses</button>
                     </tab>
                     <tab heading="Top">
