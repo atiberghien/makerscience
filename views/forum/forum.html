@@ -30,7 +30,7 @@
                 <fieldset class="forum-keywords">
                     <div ng-controller="TagAutoCompleteCtrl">
                         <h4>Quels sont les mots-clés associés à votre projet ?</h4>
-                        <tags-input ng-model="newPost.tags"
+                        <tags-input ng-model="questionTags"
                                     placeholder="> Mot-clé">
                           <auto-complete source="loadTags($query)"></auto-complete>
                         </tags-input>
@@ -42,7 +42,7 @@
                 </fieldset> -->
 
                 <fieldset class="right">
-                    <button type="submit" class="button" ng-click="save(newPost, currentMakerScienceProfile.parent)">Créer</button>
+                    <button type="submit" class="button" ng-click="save(newPost, null, currentMakerScienceProfile.parent)">Créer</button>
                     <button type="reset" class="button">Annuler</button>
                 </fieldset>
             </form>

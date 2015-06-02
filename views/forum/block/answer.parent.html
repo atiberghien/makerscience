@@ -1,4 +1,4 @@
-<div class="thread-answer">
+<div class="thread-answer" ng-init="showSubAnswerForm[answer.id]=false">
     <!-- <ul class="answer-report">
         <li><a href="">Signaler un abus</a></li>
     </ul> -->
@@ -22,11 +22,25 @@
             <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
             <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
             <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
-            <li><button class="button button-forum">Répondre</button></li>
+            <li><button class="button button-forum" ng-click="showSubAnswerForm[answer.id] = ! showSubAnswerForm[answer.id]">Répondre</button></li>
     </div>
 </div>
 
-<ng-include src="'views/forum/block/thread.reply.html'"></ng-include>
+<div class="forum-answer" ng-show="showSubAnswerForm[answer.id]">
+    <h2>Espace réponse</h2>
+    <form method="post" action="" class="forum-answer" >
+        <text-angular name="subanswer{{answer.id}}.text"
+                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                      ng-model="subanswer.text"
+                      e-rows="8"
+                      placeholder="Saisissez votre réponse ici.">
+        </text-angular>
+        <fieldset class="right">
+            <button type="submit" class="button" ng-click="save(subanswer, answer, currentMakerScienceProfile.parent);showSubAnswerForm[answer.id]=false">Envoyer</button>
+            <button type="reset" class="button">Annuler</button>
+        </fieldset>
+    </form>
+</div>
 
 <div ng-controller="PostCtrl" ng-init="getAnswers(answer.id)">
     <div class="thread-answer answer-child" ng-repeat="answer in answers">

@@ -14,7 +14,7 @@
     </div><!-- .container -->
 </div><!-- .forum-search -->
 
-<div ng-controller="PostCtrl" ng-init="init()">
+<div ng-controller="PostCtrl" ng-init="init(); showAnswerForm=false">
 
     <div class="forum-thread">
         <div class="row container">
@@ -48,7 +48,7 @@
                         <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
                         <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
                         <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
-                        <li><button class="button button-forum">Répondre</button></li>
+                        <li><button class="button button-forum" ng-click="showAnswerForm=!showAnswerForm">Répondre</button></li>
                 </div>
             </div>
         </div>
@@ -58,14 +58,29 @@
         <div class="row container">
             <div class="col-md-8" >
                 <div id="content" class="thread-answers">
-                    <ng-include src="'views/forum/block/thread.reply.html'"></ng-include>
+                    <div class="forum-answer" ng-show="showAnswerForm" >
+                        <h2>Espace réponse</h2>
+                        <form method="post" action="" class="forum-answer">
+                            <text-angular name="answer.text"
+                                          ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                                          ng-model="answer.text"
+                                          e-rows="8"
+                                          placeholder="Saisissez votre réponse ici.">
+                            </text-angular>
+                            <fieldset class="right">
+                                <button type="submit" class="button" ng-click="save(answer, question, currentMakerScienceProfile.parent);showAnswerForm=false">Envoyer</button>
+                                <button type="reset" class="button">Annuler</button>
+                            </fieldset>
+                        </form>
+                    </div>
                     <div ng-repeat="answer in answers">
                         <ng-include src="'views/forum/block/answer.parent.html'"></ng-include>
                     </div>
+
                 </div><!-- #content -->
             </div>
             <div class="col-md-4">
-                <div class="forum-sidebar" ng-init="parentColor='forum';cummunityObjectTypeName='project';commentedObjectTypeName='makerscienceproject'">
+                <div class="forum-sidebar" ng-init="parentColor='forum'">
                     <ng-include src="'views/forum/block/community.html'"></ng-include>
                     <div class="forum-sidebar-light">
                         <h3>Discussions similaires</h3>
