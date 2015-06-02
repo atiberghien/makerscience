@@ -68,6 +68,9 @@ div.forum-sidebar {
 					background-color: $color-sidebar-submenu-bg;
 			}
 		}
+		ul.nav-tabs {
+			padding: 0;
+		}
 		div.add-member {
 			padding: $grid-gutter-width / 2;
 			input, button.btn {

@@ -1,8 +1,3 @@
-<style>
-    .community ul.nav-tabs {
-        padding : 0 !important;
-    }
-</style>
 <section class="community community-{{parentColor}}" ng-controller="CommunityCtrl" ng-init="init(cummunityObjectTypeName)">
     <ul class="actions">
         <li><a href="" ng-click="addMember(currentMakerScienceProfile.parent, 2, '', true)"><span class="glyphicon glyphicon-thumbs-up"></span>J'aime</a></li>
@@ -92,7 +87,7 @@
                     <button type="button" class="btn btn-primary" ng-click="resourceCandidate=null">Annuler</button>
                 </div>
             </div><!-- .add-member -->
-            
+
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:1}">
                 <ng-include ng-if="member.isValidated || editable" src="'views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
