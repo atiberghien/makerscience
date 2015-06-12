@@ -1,9 +1,9 @@
-<section class="forum-topic">
+<section class="forum-topic" ng-controller="PostCtrl" ng-init="initFromID(post.id)">
     <header>
-        <ul class="members" ng-controller="PostCtrl" ng-init="getContributors(question.id)">
+        <ul class="members">
             <li ng-repeat="contributor in contributors|limitTo : 4">
-                <div ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(contributor.id)">
-                    <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
+                <div>
+                    <gravatar-image data-gravatar-email="contributor.user.email"
                         data-gravatar-size="28"
                         data-gravatar-rating="pg"
                         data-gravatar-default="mm"
@@ -14,25 +14,22 @@
             </li>
             <li class="count" ng-if="contributors.length > 0"><a href="">+{{contributors.length}}</a></li>
         </ul><!-- .members -->
-        <div ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(question.author.id)">
-            <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
+        <div>
+            <gravatar-image data-gravatar-email="author.user.email"
                 data-gravatar-size="52"
                 data-gravatar-rating="pg"
                 data-gravatar-default="mm"
                 data-gravatar-secure="true"
                 data-gravatar-css-class="member img-circle">
             </gravatar-image>
-            <h3>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong></h3>
+            <h3>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong></h3>
         </div>
-        <h4>Mise à jour: <strong><span am-time-ago="question.updated_on"></span></strong></h4>
+        <h4>Mise à jour: <strong><span am-time-ago="post.updated_on"></span></strong></h4>
     </header>
-    <p class="question"><span>?</span><a ui-sref="question({slug : question.slug})">{{question.title}}</a></p>
-    <p class="comments-count" ng-class="{'no-tag': question.tags.length == 0}"><span class="glyphicon glyphicon-comment"></span> {{question.answers_count}}</p>
+    <p class="question"><span>?</span><a ui-sref="question({slug : post.slug})">{{post.title}}</a></p>
+    <p class="comments-count" ng-class="{'no-tag': post.tags.length == 0}"><span class="glyphicon glyphicon-comment"></span> {{post.answers_count}}</p>
     <ul class="tags" >
-        <li ng-repeat="tag in question.tags|limitTo : 4"><a href="">{{tag.tag.name}}</a></li>
-        <!--
-        <li ng-if="question.tags.length == 0"><a href="">TODO Gaetan : Pas de tags</a></li>
-        -->
-        <li class="more" ng-if="question.tags.length > 4"><a href="">+{{question.tags.length-4}}</a></li>
+        <li ng-repeat="tag in post.tags|limitTo : 4"><a ui-sref="tag({slug:tag.tag.slug})">{{tag.tag.name}}</a></li>
+        <li class="more" ng-if="post.tags.length > 4"><a href="">+{{post.tags.length-4}}</a></li>
     </ul><!-- .tags -->
 </section>

@@ -68,21 +68,29 @@ module.controller("StaticContentCtrl", ($scope, StaticContent) ->
 )
 
 
-module.controller("MakerScienceObjectGetter", ($scope, MakerScienceProject, MakerScienceResource, MakerScienceProfile) ->
-
+module.controller("MakerScienceObjectGetter", ($scope, $q, MakerScienceProject, MakerScienceResource, MakerScienceProfile, Post) ->
     $scope.getObject = (objectTypeName, objectId) ->
-        if objectTypeName == 'makerscienceproject'
-            MakerScienceProject.one(objectId).get().then((makerScienceProjectResult) ->
-                $scope.project = makerScienceProjectResult
-            )
-        if objectTypeName == 'makerscienceresource'
-            MakerScienceResource.one(objectId).get().then((makerScienceResourceResult) ->
-                $scope.resource = makerScienceResourceResult
-            )
-        if objectTypeName == 'makerscienceprofile'
-            MakerScienceProfile.one(objectId).get().then((makerScienceProfileResult) ->
-                $scope.profile = makerScienceProfileResult
-            )
+        deferred = $q.defer();
+        promise = deferred.promise;
+        promise.then(->
+            if objectTypeName == 'makerscienceproject'
+                MakerScienceProject.one(objectId).get().then((makerScienceProjectResult) ->
+                    $scope.project = makerScienceProjectResult
+                )
+            if objectTypeName == 'makerscienceresource'
+                MakerScienceResource.one(objectId).get().then((makerScienceResourceResult) ->
+                    $scope.resource = makerScienceResourceResult
+                )
+            if objectTypeName == 'makerscienceprofile'
+                MakerScienceProfile.one(objectId).get().then((makerScienceProfileResult) ->
+                    $scope.profile = makerScienceProfileResult
+                )
+            # if objectTypeName == 'post'
+            #     Post.one(objectId).get().then((postResult) ->
+            #         $scope.post = postResult
+            #     )
+        )
+        deferred.resolve();
 
     $scope.getMakerscienceProfileFromGenericProfile = (genericProfileId) ->
         MakerScienceProfile.one().get({'parent__id' : genericProfileId}).then((makerScienceProfileResult) ->
@@ -113,7 +121,7 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
 
 module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
 
-    console.log(" INit Filter Ctrl , state param ? ", $stateParams)
+    console.log("Init Filter Ctrl , state param ? ", $stateParams)
     $scope.suggestedTags = []
     $scope.tags_filter = []
     $scope.query_filter = ''

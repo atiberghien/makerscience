@@ -16,7 +16,7 @@
 
 <div class="forum-create">
     <div class="row container">
-        <div class="col-md-12" ng-Controller="PostCtrl" ng-init="showCreateButton = true">
+        <div class="col-md-12" ng-Controller="PostCreateCtrl" ng-init="showCreateButton = true">
             <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
             <form method="post" action="" collapse="showCreateButton" class="new-topic">
                 <input type="text" name="title" ng-model="newPost.title" placeholder="Quel est votre sujet?" class="full-width" />
@@ -42,7 +42,7 @@
                 </fieldset> -->
 
                 <fieldset class="right">
-                    <button type="submit" class="button" ng-click="save(newPost, null, currentMakerScienceProfile.parent)">Créer</button>
+                    <button type="submit" class="button" ng-click="showCreateButton = save(newPost, null, currentMakerScienceProfile.parent)">Créer</button>
                     <button type="reset" class="button">Annuler</button>
                 </fieldset>
             </form>
@@ -93,22 +93,25 @@
 <div class="forum-content">
     <div class="row container">
         <div class="col-md-8">
-            <div id="content" class="content-forum" >
+            <div id="content" class="content-forum" ng-controller="ThreadListCtrl">
                 <tabset class="nav-tabs-forum">
-                    <tab heading="Récent" ng-controller="QuestionListCtrl" ng-init="init({order_by : '-updated_on'})">
+                    <tab heading="Récent" select="init({order_by : '-updated_on'})">
                         <form method="post" action="">
                             <input type="search" name="search-by-tags" placeholder="Rechercher par tags..." />
                         </form>
-                        <div ng-repeat="question in questions">
-                            <ng-include src="'views/forum/block/thread.html'" onload="question=question"></ng-include>
+                        <div ng-repeat="post in threads">
+                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
                         </div>
-                        <button class="button button-forum full-width">Charger les autres réponses</button>
+                        <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
                     </tab>
-                    <tab heading="Top" ng-controller="QuestionListCtrl" ng-init="init({order_by : '-answers_count'})">
-                        <div ng-repeat="question in questions">
-                            <ng-include src="'views/forum/block/thread.html'" onload="question=question"></ng-include>
+                    <tab heading="Top" select="init({order_by : '-answers_count'})">
+                        <form method="post" action="">
+                            <input type="search" name="search-by-tags" placeholder="Rechercher par tags..." />
+                        </form>
+                        <div ng-repeat="post in threads">
+                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
                         </div>
-                        <button class="button button-forum full-width">Charger les autres réponses</button>
+                        <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
                     </tab>
                     <!-- <tab heading="Catégories">
                     </tab> -->
@@ -117,39 +120,32 @@
         </div>
         <div class="col-md-4">
             <div class="forum-sidebar">
-
-                <div class="forum-sidebar-dark">
+                <div class="forum-sidebar-dark" ng-controller="ThreadListCtrl" ng-init="getBestContributors()">
                     <h3>Les 5 utilisateurs<br />les plus actifs</h3>
-                    <ul class="forum-top-users">
-                        <li><a href=""><img src="/img/users/user-mathieu.png" alt="Mathieu Corain" /> Mathieu <strong>Corain</strong></a></li>
-                        <li><a href=""><img src="/img/users/user-mathieu.png" alt="Mathieu Corain" /> Mathieu <strong>Corain</strong></a></li>
-                        <li><a href=""><img src="/img/users/user-mathieu.png" alt="Mathieu Corain" /> Mathieu <strong>Corain</strong></a></li>
-                        <li><a href=""><img src="/img/users/user-mathieu.png" alt="Mathieu Corain" /> Mathieu <strong>Corain</strong></a></li>
-                        <li><a href=""><img src="/img/users/user-mathieu.png" alt="Mathieu Corain" /> Mathieu <strong>Corain</strong></a></li>
+                    <ul class="forum-top-users" >
+                        <li ng-repeat="contributor in bestContributors">
+                            <div>
+                                <a>
+                                    <gravatar-image data-gravatar-email="contributor.user.email"
+                                        data-gravatar-size="52"
+                                        data-gravatar-rating="pg"
+                                        data-gravatar-default="mm"
+                                        data-gravatar-secure="true"
+                                        data-gravatar-css-class="member img-circle">
+                                    </gravatar-image>
+                                    {{contributor.user.first_name}} <strong>{{contributor.user.last_name}}</strong>
+                                </a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="forum-sidebar-light" ng-controller="QuestionListCtrl" ng-init="init({answers_count: 0, order_by : '-updated_on'})">
+                <div class="forum-sidebar-light" ng-controller="ThreadListCtrl" ng-init="init({answers_count: 0, order_by : '-updated_on'})">
                     <h3>Les derniers posts sans réponses</h3>
-                    <div class="post" ng-repeat="question in questions| limitTo : 2">
-                        <div class="post-author" ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(question.author.id)">
-                            <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
-                                data-gravatar-size="52"
-                                data-gravatar-rating="pg"
-                                data-gravatar-default="mm"
-                                data-gravatar-secure="true"
-                                data-gravatar-css-class="member img-circle">
-                            </gravatar-image>
-                            <div class="post-details">
-                                <p class="post-author-name">{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong></p>
-                                <ul class="tags">
-                                    <li ng-repeat="tag in question.tags"><a href="">{{tag.tag.name}}</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p class="post-topic"><a href="">{{question.title}}</a></p>
+                    <div class="post" ng-repeat="post in threads| limitTo : 2">
+                        <ng-include src="'views/forum/block/small_thread_thumb.html'" ></ng-include>
                     </div><!-- .post -->
-                    <p class="more"><a href="">Tout afficher</a><p>
+                    <!-- <p class="more"><a href="">Tout afficher</a><p> -->
                 </div><!-- .forum-sidebar-light -->
 
                 <div class="forum-sidebar-light"  ng-controller="TagListCtrl">

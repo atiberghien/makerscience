@@ -20,7 +20,6 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
     $scope.community = []
 
     $scope.init = (objectTypeName) ->
-
         $scope.addMember = (profile, level, detail, isValidated)->
             if $scope.isAlreadyMember(profile, level)
                 console.log(" --- ! -- already Member with this level --- ! ---")
@@ -75,7 +74,7 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
             ()->
                 return DataSharing.sharedObject
             ,(newVal, oldVal) ->
-                console.log(" Updating Shared Object : new ="+newVal+" old = "+oldVal)
+                console.log(" Updating Shared Object : new =", newVal, " old = ", oldVal)
                 if newVal != oldVal
                     $scope.object = newVal[$scope.objectTypeName]
                     $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object

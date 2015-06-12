@@ -1,62 +1,69 @@
-<div class="thread-answer" ng-init="showSubAnswerForm[answer.id]=false">
-    <!-- <ul class="answer-report">
-        <li><a href="">Signaler un abus</a></li>
-    </ul> -->
-
-    <div class="thread-author" ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(answer.author.id)">
-        <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
-            data-gravatar-size="52"
-            data-gravatar-rating="pg"
-            data-gravatar-default="mm"
-            data-gravatar-secure="true"
-            data-gravatar-css-class="member img-circle">
-        </gravatar-image>
-        <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
-    </div>
-    <div class="thread-content">
-        <p ng-bind-html="answer.text"></p>
-    </div>
-    <div class="thread-actions">
-        <ul>
-            <li class="left"><span class="answer-count"><span ng-if="answer.answers_count > 0 && answer.answers_count <= 9">0</span>{{answer.answers_count}}</span> Réponses</li>
-            <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
-            <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
-            <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
-            <li><button class="button button-forum" ng-click="showSubAnswerForm[answer.id] = ! showSubAnswerForm[answer.id]">Répondre</button></li>
-    </div>
-</div>
-
-<div class="forum-answer" ng-show="showSubAnswerForm[answer.id]">
-    <h2>Espace réponse</h2>
-    <form method="post" action="" class="forum-answer" >
-        <text-angular name="subanswer{{answer.id}}.text"
-                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                      ng-model="subanswer.text"
-                      e-rows="8"
-                      placeholder="Saisissez votre réponse ici.">
-        </text-angular>
-        <fieldset class="right">
-            <button type="submit" class="button" ng-click="save(subanswer, answer, currentMakerScienceProfile.parent);showSubAnswerForm[answer.id]=false">Envoyer</button>
-            <button type="reset" class="button">Annuler</button>
-        </fieldset>
-    </form>
-</div>
-
-<div ng-controller="PostCtrl" ng-init="getAnswers(answer.id)">
-    <div class="thread-answer answer-child" ng-repeat="answer in answers">
-        <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
-        <div class="thread-author" ng-controller="MakerScienceObjectGetter" ng-init="getMakerscienceProfileFromGenericProfile(answer.author.id)">
-            <gravatar-image data-gravatar-email="makerscienceProfile.parent.user.email"
+<div ng-init="showSubAnswerForm[answer.id]=false">
+    <div class="thread-answer" ng-controller="PostCtrl" ng-init="initFromID(answer.id);">
+        <!-- <ul class="answer-report">
+            <li><a href="">Signaler un abus</a></li>
+        </ul> -->
+        <div class="thread-author">
+            <gravatar-image data-gravatar-email="author.user.email"
                 data-gravatar-size="52"
                 data-gravatar-rating="pg"
                 data-gravatar-default="mm"
                 data-gravatar-secure="true"
                 data-gravatar-css-class="member img-circle">
             </gravatar-image>
-            <p>{{makerscienceProfile.parent.user.first_name}} <strong>{{makerscienceProfile.parent.user.last_name}}</strong></p>
+            <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
         </div>
         <div class="thread-content">
             <p ng-bind-html="answer.text"></p>
+        </div>
+        <div class="thread-actions">
+            <ul>
+                <li class="left"><span class="answer-count">
+                    <span ng-if="answer.answers_count > 0 && answer.answers_count <= 9">0</span>
+                    {{answer.answers_count}}</span>
+                    <ng-pluralize count="answer.answers_count"
+                                when="{'0': 'Réponse',
+                                'one': 'Réponse',
+                                'other': 'Réponses'}">
+                    </ng-pluralize>
+                </li>
+                <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
+                <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
+                <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
+                <li><button class="button button-forum" ng-click="showSubAnswerForm[answer.id] = ! showSubAnswerForm[answer.id]">Répondre</button></li>
+        </div>
+    </div>
+    <div class="forum-answer" ng-controller="PostCreateCtrl"  ng-show="showSubAnswerForm[answer.id]">
+        <h2>Espace réponse</h2>
+        <form method="post" action="" class="forum-answer" >
+            <text-angular name="subanswer{{answer.id}}.text"
+                          ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                          ng-model="subanswer.text"
+                          e-rows="8"
+                          placeholder="Saisissez votre réponse ici.">
+            </text-angular>
+            <fieldset class="right">
+                <button type="submit" class="button" ng-click="save(subanswer, answer, currentMakerScienceProfile.parent);showSubAnswerForm[answer.id]=false">Envoyer</button>
+                <button type="reset" class="button">Annuler</button>
+            </fieldset>
+        </form>
+    </div>
+    <div ng-controller="PostCtrl" ng-init="initFromID(answer.id)">
+        <div class="thread-answer answer-child" ng-repeat="subanswer in subanswers">
+            <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
+            <div class="thread-author">
+                <gravatar-image data-gravatar-email="author.user.email"
+                    data-gravatar-size="52"
+                    data-gravatar-rating="pg"
+                    data-gravatar-default="mm"
+                    data-gravatar-secure="true"
+                    data-gravatar-css-class="member img-circle">
+                </gravatar-image>
+                <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong></p>
+            </div>
+            <div class="thread-content">
+                <p ng-bind-html="subanswer.text"></p>
+            </div>
         </div>
     </div>
 </div>

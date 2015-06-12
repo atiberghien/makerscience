@@ -1,0 +1,16 @@
+<div class="post-author" ng-controller="PostCtrl" ng-init="initFromID(post.id)">
+    <gravatar-image data-gravatar-email="author.user.email"
+        data-gravatar-size="52"
+        data-gravatar-rating="pg"
+        data-gravatar-default="mm"
+        data-gravatar-secure="true"
+        data-gravatar-css-class="member img-circle">
+    </gravatar-image>
+    <div class="post-details">
+        <p class="post-author-name">{{author.user.first_name}} <strong>{{author.user.last_name}}</strong></p>
+        <ul class="tags">
+            <li ng-repeat="tag in post.tags"><a href="">{{tag.tag.name}}</a></li>
+        </ul>
+    </div>
+</div>
+<p class="post-topic"><a ui-sref="question({slug : post.slug})">{{post.title}}</a></p>
