@@ -76,6 +76,7 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
             {'slug' : $stateParams.slug}
         else
             {'slug' : postSlug}
+
         Post.one().get({'slug' : $stateParams.slug}).then((postResult) ->
             $scope.basePost =  postResult.objects[0]
             $scope.getAuthor($scope.basePost.id)
@@ -100,9 +101,12 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
 
     $scope.getContributors = (questionID) ->
         $scope.contributors = []
+        contributorsIdx = []
         ObjectProfileLink.one().customGET('post/'+questionID, {level:31}).then((objectProfileLinkResults) ->
             angular.forEach(objectProfileLinkResults.objects, (objectProfileLink) ->
-                $scope.contributors.push(objectProfileLink.profile)
+                if contributorsIdx.indexOf(objectProfileLink.profile.id) == -1
+                    contributorsIdx.push(objectProfileLink.profile.id)
+                    $scope.contributors.push(objectProfileLink.profile)
             )
         )
 
