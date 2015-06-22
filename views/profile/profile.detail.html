@@ -223,7 +223,7 @@
                         </div>
                     </div>
                 </tab>
-                <tab heading="Discussions ({{post_count}})">
+                <tab heading="Discussions ({{authored_post.length + contributed_post.length + liked_post.length + followed_post.length}})">
                     <h2 class="members">Mes discussions</h2>
                     <div ng-repeat="linked_post in authored_post">
                         <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(linked_post.id)">
