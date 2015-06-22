@@ -6,14 +6,14 @@
     <tabset>
         <tab>
             <tab-heading>
-                <span>{{(community | filter: {level:31}).length}}</span>
-                <ng-pluralize count="(community | filter: {level:31}).length"
+                <span>{{(community | filter: {level:31}|unique:'profile_id').length}}</span>
+                <ng-pluralize count="(community | filter: {level:31}|unique:'profile_id').length"
                             when="{'0': 'Contributeur',
                             'one': 'Contributeur',
                             'other': 'Contributeurs'}">
                 </ng-pluralize>
             </tab-heading>
-            <div class="member" ng-repeat="member in community | filter: {level:31}">
+            <div class="member" ng-repeat="member in community | filter: {level:31}|unique:'profile_id'">
                 <gravatar-image data-gravatar-email="member.profile.user.email"
                     data-gravatar-size="52"
                     data-gravatar-rating="pg"
@@ -28,14 +28,14 @@
         </tab>
         <tab>
             <tab-heading>
-                <span>{{(community | filter: {level:32}).length}}</span>
-                <ng-pluralize count="(community | filter: {level:32}).length"
+                <span>{{(community | filter: {level:32} |unique:'profile_id' ).length}}</span>
+                <ng-pluralize count="(community | filter: {level:32} |unique:'profile_id').length"
                             when="{'0': 'Abonné',
                             'one': 'Abonné',
                             'other': 'Abonnés'}">
                 </ng-pluralize>
             </tab-heading>
-            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:32}">
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:32}|unique:'profile_id' ">
                 <gravatar-image data-gravatar-email="member.profile.user.email"
                     data-gravatar-size="52"
                     data-gravatar-rating="pg"
