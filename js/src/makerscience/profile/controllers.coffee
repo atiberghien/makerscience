@@ -23,7 +23,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
         $scope.fan_projects = []
         $scope.fan_resources = []
 
-        $scope.post_count = 0
         $scope.authored_post = []
         $scope.contributed_post = []
         $scope.liked_post = []
