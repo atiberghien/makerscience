@@ -3,13 +3,6 @@ module = angular.module("commons.megafon.controllers", ['commons.megafon.service
 module.controller("ThreadListCtrl", ($scope, $q, Post, ObjectProfileLink, DataSharing) ->
     $scope.ordering = {'order_by' : '-updated_on'}
 
-    $scope.init = (orderBy) ->
-        if orderBy
-            $scope.ordering = orderBy
-        Post.one().customGET('questions', $scope.ordering).then((postResults) ->
-            $scope.threads = postResults.objects
-        )
-
     $scope.$watch(
         ()->
             return DataSharing.sharedObject
@@ -83,7 +76,6 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
             {'slug' : $stateParams.slug}
         else
             {'slug' : postSlug}
-            
         Post.one().get({'slug' : $stateParams.slug}).then((postResult) ->
             $scope.basePost =  postResult.objects[0]
             $scope.getAuthor($scope.basePost.id)
