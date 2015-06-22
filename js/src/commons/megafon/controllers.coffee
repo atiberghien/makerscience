@@ -71,20 +71,19 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
 
     $scope.initFromID = (questionID) ->
         Post.one(questionID).get().then((postResult) ->
-            $scope.post =  postResult
-            $scope.getAuthor($scope.post.id)
-            $scope.getContributors($scope.post.id)
-            if $scope.post.answers_count > 0
-                $scope.getAnswers($scope.post.id)
+            $scope.basePost =  postResult
+            $scope.getAuthor($scope.basePost.id)
+            $scope.getContributors($scope.basePost.id)
+            if $scope.basePost.answers_count > 0
+                $scope.getAnswers($scope.basePost.id)
         )
 
     $scope.initFromSlug =  ->
         Post.one().get({'slug' : $stateParams.slug}).then((postResult) ->
-            $scope.post =  postResult.objects[0]
-            $scope.getAuthor($scope.post.id)
-            $scope.getAnswers($scope.post.id)
-            $scope.getSimilars($scope.post.id)
-            DataSharing.sharedObject = {'post' : $scope.post}
+            $scope.basePost =  postResult.objects[0]
+            $scope.getAuthor($scope.basePost.id)
+            $scope.getAnswers($scope.basePost.id)
+            $scope.getSimilars($scope.basePost.id)
         )
 
     $scope.$watch(
@@ -92,7 +91,7 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
             return DataSharing.sharedObject
         ,(newVal, oldVal) ->
             if DataSharing.sharedObject.hasOwnProperty('newAnswer')
-                $scope.getAnswers($scope.post.id)
+                $scope.getAnswers($scope.basePost.id)
                 delete DataSharing.sharedObject["newAnswer"]
     )
 
@@ -111,7 +110,7 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
         )
 
     $scope.getAnswers = (questionID) ->
-        if $scope.post.parent
+        if $scope.basePost.parent
             $scope.subanswers = Post.one().customGETLIST(questionID + '/answers').$object
         else
             $scope.answers = Post.one().customGETLIST(questionID + '/answers').$object

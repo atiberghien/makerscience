@@ -169,8 +169,9 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('question',
                 url: '/discussions/:slug',
                 templateUrl: 'views/forum/thread.display.html'
+                controller : 'MakerSciencePostCtrl'
                 ncyBreadcrumb:
-                    label: '{{question.title}}'
+                    label: '{{post.title}}'
                     parent : 'forum'
         )
         .state('tags',

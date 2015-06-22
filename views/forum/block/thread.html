@@ -1,4 +1,4 @@
-<section class="forum-topic" ng-controller="PostCtrl" ng-init="initFromID(post.id)">
+<section class="forum-topic" ng-controller="PostCtrl" ng-init="initFromID(post.parent.id)">
     <header>
         <ul class="members">
             <li ng-repeat="contributor in contributors|limitTo : 4">
@@ -24,15 +24,21 @@
             </gravatar-image>
             <h3>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong></h3>
         </div>
-        <h4>Mise à jour: <strong><span am-time-ago="post.updated_on"></span></strong></h4>
+        <h4>Mise à jour: <strong><span am-time-ago="post.parent.updated_on"></span></strong></h4>
     </header>
     <p class="question">
-        <span class="glyphicon glyphicon-question-sign"></span>
-        <a ui-sref="question({slug : post.slug})">{{post.title}}</a>
+        <span ng-if="post.post_type == 'message'" class="glyphicon glyphicon-comment"></span>
+        <span ng-if="post.post_type == 'question'" class="glyphicon glyphicon-question-sign"></span>
+        <span ng-if="post.post_type == 'idea'" class="glyphicon glyphicon-flash"></span>
+        <span ng-if="post.post_type == 'need'" class="glyphicon glyphicon-hand-up"></span>
+        <span ng-if="post.post_type == 'resource'" class="glyphicon glyphicon-book"></span>
+        <span ng-if="post.post_type == 'event'" class="glyphicon glyphicon-calendar"></span>
+
+        <a ui-sref="question({slug : post.parent.slug})">{{post.parent.title}}</a>
     </p>
-    <p class="comments-count" ng-class="{'no-tag': post.tags.length == 0}"><span class="glyphicon glyphicon-comment"></span> {{post.answers_count}}</p>
+    <p class="comments-count" ng-class="{'no-tag': post.parent.tags.length == 0}"><span class="glyphicon glyphicon-comment"></span> {{post.parent.answers_count}}</p>
     <ul class="tags" >
-        <li ng-repeat="tag in post.tags|limitTo : 4"><a ui-sref="tag({slug:tag.tag.slug})">{{tag.tag.name}}</a></li>
-        <li class="more" ng-if="post.tags.length > 4"><a href="">+{{post.tags.length-4}}</a></li>
+        <li ng-repeat="tag in post.parent.tags|limitTo : 4"><a ui-sref="tag({slug:tag.tag.slug})">{{tag.tag.name}}</a></li>
+        <li class="more" ng-if="post.parent.tags.length > 4"><a href="">+{{post.parent.tags.length-4}}</a></li>
     </ul><!-- .tags -->
 </section>

@@ -1,4 +1,4 @@
-<div ng-controller="PostCtrl" ng-init="initFromSlug()">
+<div>
     <div id="intro" class="intro-forum">
         <h1>Forum</h1>
         <h2>MakerScience</h2>
@@ -23,8 +23,8 @@
                     <ul class="thread-stats">
                         <li><span class="glyphicon glyphicon-eye-open"></span> 130 vues</li>
                         <li>
-                            <span class="glyphicon glyphicon-comment"></span> {{post.answers_count}}
-                            <ng-pluralize count="post.answers_count"
+                            <span class="glyphicon glyphicon-comment"></span> {{post.parent.answers_count}}
+                            <ng-pluralize count="post.parent.answers_count"
                                         when="{'0': 'Réponse',
                                         'one': 'Réponse',
                                         'other': 'Réponses'}">
@@ -32,9 +32,17 @@
                         </li>
                         <li><span class="glyphicon glyphicon-thumbs-up"></span> 1120 J'aime</li>
                     </ul>
-                    <h2><span>?</span> {{post.title}}</h2>
+                    <h2>
+                        <span ng-if="post.post_type == 'message'" class="glyphicon glyphicon-comment"></span>
+                        <span ng-if="post.post_type == 'question'" class="glyphicon glyphicon-question-sign"></span>
+                        <span ng-if="post.post_type == 'idea'" class="glyphicon glyphicon-flash"></span>
+                        <span ng-if="post.post_type == 'need'" class="glyphicon glyphicon-hand-up"></span>
+                        <span ng-if="post.post_type == 'resource'" class="glyphicon glyphicon-book"></span>
+                        <span ng-if="post.post_type == 'event'" class="glyphicon glyphicon-calendar"></span>
+                        {{post.parent.title}}
+                    </h2>
                     <ul class="tags">
-                        <li ng-repeat="tag in post.tags"><a href="">{{tag.tag.name}}</a></li>
+                        <li ng-repeat="tag in post.parent.tags"><a href="">{{tag.tag.name}}</a></li>
                     </ul>
                     <div class="thread-author" >
                         <gravatar-image data-gravatar-email="author.user.email"
@@ -45,7 +53,7 @@
                             data-gravatar-css-class="member img-circle">
                         </gravatar-image>
                         <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong>
-                        <span>Mise en ligne <span am-time-ago="post.updated_on"></span></span></p>
+                        <span>Mise en ligne <span am-time-ago="post.parent.updated_on"></span></span></p>
                     </div>
                     <div class="thread-content">
                         <p ng-bind-html="post.text"></p>
@@ -77,7 +85,7 @@
                                               placeholder="Saisissez votre réponse ici.">
                                 </text-angular>
                                 <fieldset class="right">
-                                    <button type="submit" class="button" ng-click="savePost(answer, post, currentMakerScienceProfile.parent);showAnswerForm=false">Envoyer</button>
+                                    <button type="submit" class="button" ng-click="savePost(answer, post.parent, currentMakerScienceProfile.parent);showAnswerForm=false">Envoyer</button>
                                     <button type="reset" class="button">Annuler</button>
                                 </fieldset>
                             </form>
@@ -97,10 +105,10 @@
                                 <ng-include src="'views/forum/block/small_thread_thumb.html'"></ng-include>
                             </div>
                         </div>
-                        <div class="thread-linked-projects">
+                        <div class="thread-linked-projects" ng-if="post.linked_projects">
                             <h3>Projets associés</h3>
-                            <div class="boxes boxes-sidebar" ng-controller="MakerScienceProjectListCtrl" ng-init="init(2)">
-                                <div class="box" ng-repeat="project in projects">
+                            <div class="boxes boxes-sidebar">
+                                <div class="box" ng-repeat="project in post.linked_projects">
                                     <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
                                 </div>
                             </div>
@@ -109,10 +117,10 @@
                                 <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll-up-blue.png" alt="Scroll Up" /></a>
                             </p>
                         </div>
-                        <div class="thread-linked-resources">
+                        <div class="thread-linked-resources" ng-if="post.linked_resources">
                             <h3>Experiences associées</h3>
-                            <div class="boxes boxes-sidebar" ng-controller="MakerScienceResourceListCtrl" ng-init="init(2)">
-                                <div class="box" ng-repeat="resource in resources">
+                            <div class="boxes boxes-sidebar">
+                                <div class="box" ng-repeat="resource in post.linked_resources">
                                     <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                                 </div>
                             </div>
@@ -120,7 +128,7 @@
                                 <a href=""><img ng-click="gotoAnchor(3)" src="/img/icons/scroll-down-green.png" alt="Scroll Down" /></a>
                                 <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll-up-green.png" alt="Scroll Up" /></a>
                             </p>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
