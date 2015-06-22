@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         wiredep: {
             task: {
                 directory: 'bower_components',
-                src: ['js_imports.html', 'css_imports.html'],
+                src: ['index.html'],
                 options : {
                     exclude: [
                         '/bootstrap-css-only/',
@@ -36,7 +36,10 @@ module.exports = function(grunt) {
                                       'assets/javascripts/bootstrap/modal.js',
                                       'assets/javascripts/bootstrap/dropdown.js',
                                       'assets/javascripts/bootstrap/collapse.js']
-                        }
+                        },
+                        "angular-ui-utils" : {
+                            'main' : ["unique.js",]
+                        },
                       }
                 }
             }

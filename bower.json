@@ -44,8 +44,9 @@
     "geocoder-service": "~0.0.5",
     "angular-breadcrumb": "~0.3.3",
     "angular-truncate": "*",
-    "bootstrap-sass": "~3.3.4"
-    },
+    "bootstrap-sass": "~3.3.4",
+    "angular-ui-utils": "unique-0.2.3"
+  },
   "resolutions": {
     "angular": "1.2.28",
     "angular-xeditable": "0.1.7"
