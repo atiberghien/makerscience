@@ -6,7 +6,8 @@ angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'mak
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
-angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile',
+angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services'])
+angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"

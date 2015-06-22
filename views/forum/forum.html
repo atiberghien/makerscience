@@ -16,10 +16,37 @@
 
 <div class="forum-create">
     <div class="row container">
-        <div class="col-md-12" ng-Controller="PostCreateCtrl" ng-init="showCreateButton = true">
+        <div class="col-md-12" ng-Controller="MakerSciencePostCreateCtrl" ng-init="showCreateButton = true">
             <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
             <form method="post" action="" collapse="showCreateButton" class="new-topic">
-                <input type="text" name="title" ng-model="newPost.title" placeholder="Quel est votre sujet?" class="full-width" />
+                <tabset>
+                    <tab select="newPost.type='message'">
+                        <tab-heading><span class="glyphicon glyphicon-comment"></span> Message</tab-heading>
+                        <input type="text" name="title" ng-model="newPost.title" placeholder="Passez votre message..." class="full-width" />
+                    </tab>
+                    <tab select="newPost.type='question'">
+                        <tab-heading><span class="glyphicon glyphicon-question-sign"></span> Question</tab-heading>
+                        <input type="text" name="title" ng-model="newPost.title" placeholder="Posez votre question..." class="full-width" />
+                    </tab>
+                    <tab select="newPost.type='idea'">
+                        <tab-heading><span class="glyphicon glyphicon-flash"></span> Idée</tab-heading>
+                        <input type="text" name="title" ng-model="newPost.title" placeholder="Partagez votre idée..." class="full-width" />
+                    </tab>
+                    <tab select="newPost.type='need'">
+                        <tab-heading><span class="glyphicon glyphicon-hand-up"></span> Besoin</tab-heading>
+                        <input type="text" name="title" ng-model="newPost.title" placeholder="Exprimez votre besoin..." class="full-width" />
+                    </tab>
+                    <tab select="newPost.type='resource'">
+                        <tab-heading><span class="glyphicon glyphicon-book"></span> Ressources</tab-heading>
+                        <input type="text" name="title" ng-model="newPost.title" placeholder="Proposez votre ressource..." class="full-width" />
+                    </tab>
+                    <tab select="newPost.type='event'">
+                        <tab-heading><span class="glyphicon glyphicon-calendar"></span> Evènements</tab-heading>
+                        <input type="text" name="title" ng-model="newPost.title" placeholder="Publiez votre évènement..." class="full-width" />
+                    </tab>
+                </tabset>
+
+                <!-- <input type="text" name="title" ng-model="newPost.title" placeholder="Quel est votre sujet?" class="full-width" /> -->
                 <text-angular name="text"
                               ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                               ng-model="newPost.text"
@@ -42,49 +69,12 @@
                 </fieldset> -->
 
                 <fieldset class="right">
-                    <button type="submit" class="button" ng-click="showCreateButton = save(newPost, null, currentMakerScienceProfile.parent)">Créer</button>
+                    <button type="submit" class="button" ng-click="showCreateButton = saveMakersciencePost(newPost, null, currentMakerScienceProfile.parent)">Créer</button>
                     <button type="reset" class="button">Annuler</button>
                 </fieldset>
             </form>
 
-            <!-- <tabset>
-                <tab>
-                    <tab-heading><span class="glyphicon glyphicon-comment"></span> Messages</tab-heading>
-                    <form method="post" action="">
-                        <textarea class="full-width" placeholder="Rédigez votre message..."></textarea>
-                    </form>
-                </tab>
-                <tab>
-                    <tab-heading><span class="glyphicon glyphicon-question-sign"></span> Question</tab-heading>
-                    <form method="post" action="">
-                        <textarea class="full-width" placeholder="Rédigez votre question..."></textarea>
-                    </form>
-                </tab>
-                <tab>
-                    <tab-heading><span class="glyphicon glyphicon-flash"></span> Idée</tab-heading>
-                    <form method="post" action="">
-                        <textarea class="full-width" placeholder="Rédigez votre idée..."></textarea>
-                    </form>
-                </tab>
-                <tab>
-                    <tab-heading><span class="glyphicon glyphicon-hand-up"></span> Besoin</tab-heading>
-                    <form method="post" action="">
-                        <textarea class="full-width" placeholder="Rédigez votre besoin..."></textarea>
-                    </form>
-                </tab>
-                <tab>
-                    <tab-heading><span class="glyphicon glyphicon-book"></span> Ressources</tab-heading>
-                    <form method="post" action="">
-                        <textarea class="full-width" placeholder="Rédigez votre ressource..."></textarea>
-                    </form>
-                </tab>
-                <tab>
-                    <tab-heading><span class="glyphicon glyphicon-calendar"></span> Evènements</tab-heading>
-                    <form method="post" action="">
-                        <textarea class="full-width" placeholder="Rédigez votre évènement..."></textarea>
-                    </form>
-                </tab>
-            </tabset> -->
+
 
         </div>
     </div><!-- .container -->

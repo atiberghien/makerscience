@@ -36,7 +36,7 @@ module.controller("ThreadListCtrl", ($scope, $q, Post, ObjectProfileLink, DataSh
 module.controller("PostCreateCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectProfileLink, DataSharing) ->
     $scope.questionTags = []
 
-    $scope.save = (newPost, parent, authorProfile) ->
+    $scope.savePost = (newPost, parent, authorProfile) ->
         if parent
             newPost["parent"] = parent.resource_uri
 
@@ -63,7 +63,8 @@ module.controller("PostCreateCtrl", ($scope, $stateParams, Post, TaggedItem, Obj
                 DataSharing.sharedObject = {'newAnswer' : postResult}
             else
                 DataSharing.sharedObject = {'newThread' : postResult}
-            return false #for hide form
+
+            return postResult.resource_uri
         )
 )
 module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectProfileLink, DataSharing) ->
