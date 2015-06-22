@@ -19,7 +19,7 @@
 
         <div class="forum-thread">
             <div class="row container">
-                <div class="col-md-12">
+                <div class="col-md-12" ng-controller="CommunityCtrl" ng-init="init('post')">
                     <ul class="thread-stats">
                         <li><span class="glyphicon glyphicon-eye-open"></span> 130 vues</li>
                         <li>
@@ -30,7 +30,7 @@
                                         'other': 'Réponses'}">
                             </ng-pluralize>
                         </li>
-                        <li><span class="glyphicon glyphicon-thumbs-up"></span> 1120 J'aime</li>
+                        <li><span class="glyphicon glyphicon-thumbs-up"></span> {{(community | filter: {level:33, isValidated: true}).length }} J'aime</li>
                     </ul>
                     <h2>
                         <span ng-if="post.post_type == 'message'" class="glyphicon glyphicon-comment"></span>
@@ -62,9 +62,16 @@
                         <ul>
                             <!-- <li class="left"><a href=""><span class="glyphicon glyphicon-link"></span> Voir les 12 liens</a></li>
                             <li><a href="">Signaler un abus</a></li> -->
-                            <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
+                            <!-- <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li> -->
                             <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
-                            <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li>
+
+
+                            <li>
+                                <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 33)" ng-click="addMember(currentMakerScienceProfile.parent, 33, '', true)"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                <a href="" ng-if="isAlreadyMember(currentMakerScienceProfile.parent, 33)" ng-click="deleteMember(currentMakerScienceProfile.parent, 33)" style="background-color:black"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                            </li>
+
+
                             <li><button class="button button-forum" ng-click="showAnswerForm=!showAnswerForm">Répondre</button></li>
                     </div>
                 </div>
