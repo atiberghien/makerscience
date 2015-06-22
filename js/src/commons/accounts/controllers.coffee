@@ -49,6 +49,13 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                 $scope.community.splice(memberIndex, 1)
             )
 
+        $scope.deleteMember = (profile, level) ->
+            ObjectProfileLink.one().customGET($scope.objectTypeName+'/'+$scope.object.id, {profile_id:profile.id, level:level}).then((objectProfileLinkResults)->
+                angular.forEach(objectProfileLinkResults.objects, (link) ->
+                    $scope.removeMember(link)
+                )
+            )
+
         $scope.validateMember = ($event, member) ->
             validated = $event.target.checked
             console.log(" Validating ?? !", validated)
