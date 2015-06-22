@@ -223,7 +223,31 @@
                         </div>
                     </div>
                 </tab>
-                <tab heading="Discussions (45)">
+                <tab heading="Discussions ({{post_count}})">
+                    <h2 class="members">Mes discussions</h2>
+                    <div ng-repeat="linked_post in authored_post">
+                        <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(linked_post.id)">
+                            <ng-include ng-if="post.id" src="'views/forum/block/thread.html'"></ng-include>
+                        </div>
+                    </div>
+                    <h2 class="members">Les discussions auxquelles j'ai contribué</h2>
+                    <div ng-repeat="linked_post in contributed_post">
+                        <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(linked_post.id)">
+                            <ng-include ng-if="post.id" src="'views/forum/block/thread.html'"></ng-include>
+                        </div>
+                    </div>
+                    <h2 class="members">Les discussions que j'aime</h2>
+                    <div ng-repeat="linked_post in liked_post">
+                        <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(linked_post.id)">
+                            <ng-include ng-if="post.id" src="'views/forum/block/thread.html'"></ng-include>
+                        </div>
+                    </div>
+                    <h2 class="members">Les discussions que je suis</h2>
+                    <div ng-repeat="linked_post in followed_post">
+                        <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(linked_post.id)">
+                            <ng-include ng-if="post.id" src="'views/forum/block/thread.html'"></ng-include>
+                        </div>
+                    </div>
                 </tab>
                 <tab heading="Contacts (34)">
                     <h2 class="members">Mes contacts</h2>

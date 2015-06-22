@@ -8,7 +8,8 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
         $scope.profiles = MakerScienceProfile.one().customGETLIST('search', $scope.params).$object
 )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile, MakerScienceProject, MakerScienceResource, MakerScienceProfileTaggedItem, ObjectProfileLink, PostalAddress) ->
+module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
+                                            MakerScienceProfileTaggedItem, Post, MakerSciencePost, ObjectProfileLink, PostalAddress) ->
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
@@ -18,25 +19,57 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
 
         $scope.member_projects = []
         $scope.member_resources = []
+
         $scope.fan_projects = []
         $scope.fan_resources = []
+
+        $scope.post_count = 0
+        $scope.authored_post = []
+        $scope.contributed_post = []
+        $scope.liked_post = []
+        $scope.followed_post = []
 
         ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).then((linkedProjectResults)->
             angular.forEach(linkedProjectResults, (linkedProject) ->
                 MakerScienceProject.one().get({parent__id : linkedProject.object_id}).then((makerscienceProjectResults) ->
-                    if makerscienceProjectResults.objects.length == 1
+                    if makerscienceProjectResults.objects.length == 1 #FIXME Why this test ??? in case of MKS project and commons project mismatch
                         if linkedProject.level == 0
                             $scope.member_projects.push(makerscienceProjectResults.objects[0])
                         else if linkedProject.level == 2
                             $scope.fan_projects.push(makerscienceProjectResults.objects[0])
                     else
                         MakerScienceResource.one().get({parent__id : linkedProject.object_id}).then((makerscienceResourceResults) ->
-                            if makerscienceResourceResults.objects.length == 1
+                            if makerscienceResourceResults.objects.length == 1#FIXME Why this test
                                 if linkedProject.level == 0
                                     $scope.member_resources.push(makerscienceResourceResults.objects[0])
                                 else if linkedProject.level == 2
                                     $scope.fan_resources.push(makerscienceResourceResults.objects[0])
                         )
+                )
+            )
+        )
+
+        ObjectProfileLink.getList({content_type:'post', profile__id : $scope.profile.parent.id}).then((linkedPostResults)->
+            angular.forEach(linkedPostResults, (linkedPost) ->
+                MakerSciencePost.one().get({parent__id : linkedPost.object_id}).then((makersciencePostResults) ->
+                    if makersciencePostResults.objects.length == 1
+                        post = makersciencePostResults.objects[0]
+                        if linkedPost.level == 30 && $scope.authored_post.indexOf(post) == -1
+                            $scope.authored_post.push(post)
+                        else if linkedPost.level == 32 && $scope.liked_post.indexOf(post) == -1
+                            $scope.liked_post.push(post)
+                        else if linkedPost.level == 33 && $scope.followed_post.indexOf(post) == -1
+                            $scope.followed_post.push(post)
+                    else
+                        #anwers and subanswers have no related MakerSciencePost object
+                        if linkedPost.level == 31
+                            Post.one(linkedPost.object_id).customGET("root").then((root) ->
+                                MakerSciencePost.one().get({parent__id : root.id}).then((makersciencePostResults) ->
+                                    post = makersciencePostResults.objects[0]
+                                    if $scope.contributed_post.indexOf(post) == -1
+                                        $scope.contributed_post.push(post)
+                                )
+                            )
                 )
             )
         )
