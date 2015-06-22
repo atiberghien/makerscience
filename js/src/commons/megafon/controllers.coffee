@@ -69,6 +69,7 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
             $scope.getContributors($scope.basePost.id)
             if $scope.basePost.answers_count > 0
                 $scope.getAnswers($scope.basePost.id)
+            DataSharing.sharedObject["post"] = $scope.basePost
         )
 
     $scope.initFromSlug = (postSlug) ->
@@ -82,6 +83,7 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
             $scope.getAuthor($scope.basePost.id)
             $scope.getAnswers($scope.basePost.id)
             $scope.getSimilars($scope.basePost.id)
+            DataSharing.sharedObject["post"] = $scope.basePost
         )
 
     $scope.$watch(
