@@ -55,9 +55,9 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
                         post = makersciencePostResults.objects[0]
                         if linkedPost.level == 30 && $scope.authored_post.indexOf(post) == -1
                             $scope.authored_post.push(post)
-                        else if linkedPost.level == 32 && $scope.liked_post.indexOf(post) == -1
+                        else if linkedPost.level == 33 && $scope.liked_post.indexOf(post) == -1
                             $scope.liked_post.push(post)
-                        else if linkedPost.level == 33 && $scope.followed_post.indexOf(post) == -1
+                        else if linkedPost.level == 32 && $scope.followed_post.indexOf(post) == -1
                             $scope.followed_post.push(post)
                     else
                         #anwers and subanswers have no related MakerSciencePost object
