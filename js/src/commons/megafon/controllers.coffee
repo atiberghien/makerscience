@@ -78,7 +78,12 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
                 $scope.getAnswers($scope.basePost.id)
         )
 
-    $scope.initFromSlug =  ->
+    $scope.initFromSlug = (postSlug) ->
+        if postSlug is undefined
+            {'slug' : $stateParams.slug}
+        else
+            {'slug' : postSlug}
+            
         Post.one().get({'slug' : $stateParams.slug}).then((postResult) ->
             $scope.basePost =  postResult.objects[0]
             $scope.getAuthor($scope.basePost.id)

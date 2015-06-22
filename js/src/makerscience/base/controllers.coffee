@@ -37,11 +37,14 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
         $scope.getParams()
         $scope.refreshList()
 
-    $scope.init = (limit, featured) ->
-        if limit
-             $scope.limit = limit
-        if featured
-            $scope.params['featured'] = featured
+    $scope.init = (params) ->
+        if params
+            if params.hasOwnProperty('limit')
+                 $scope.limit = params["limit"]
+            if params.hasOwnProperty('featured')
+                $scope.params['featured'] = params["features"]
+            $scope.params = params
+
         # Refresh FilterService params
         FilterService.filterParams.query = ''
         FilterService.filterParams.tags = []
