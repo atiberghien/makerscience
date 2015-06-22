@@ -155,10 +155,10 @@
                     </ul>
                 </div>
 
-                <div class="forum-sidebar-light" ng-controller="ThreadListCtrl" ng-init="init({answers_count: 0, order_by : '-updated_on'})">
+                <div class="forum-sidebar-light" ng-controller="MakerSciencePostListCtrl" ng-init="init({answers_count: 0})">
                     <h3>Les derniers posts sans réponses</h3>
                     <div class="post" ng-repeat="post in threads| limitTo : 2">
-                        <ng-include src="'views/forum/block/small_thread_thumb.html'" ></ng-include>
+                        <ng-include src="'views/forum/block/small_thread_thumb.html'" ng-init="post=post.parent"></ng-include>
                     </div><!-- .post -->
                     <!-- <p class="more"><a href="">Tout afficher</a><p> -->
                 </div><!-- .forum-sidebar-light -->
