@@ -75,9 +75,17 @@ module.controller("MakerSciencePostCtrl", ($scope, $stateParams, $controller, Ma
 
     MakerSciencePost.one().get({parent__slug: $stateParams.slug}).then((makerSciencePostResult)->
         $scope.post = makerSciencePostResult.objects[0]
-        $scope.initFromID($scope.post.parent.id)
+        $scope.initFromSlug($scope.post.parent.slug)
         DataSharing.sharedObject = {'post' : $scope.post.parent}
     )
+)
 
+module.controller("MakerSciencePostEmbedCtrl", ($scope, $controller, MakerSciencePost) ->
+    angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
+    $scope.init = (postID) ->
+        MakerSciencePost.one(postID).get().then((makerSciencePostResult)->
+            $scope.post = makerSciencePostResult
+            $scope.initFromID($scope.post.parent.id)
+    )
 )

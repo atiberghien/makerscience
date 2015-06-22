@@ -142,8 +142,11 @@
                     </tab>
                     <tab heading="Discussions">
                         <section>
-                            <h3>Discussions</h3>
-                            <p>Ced do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <div ng-repeat="postID in projectsheet.linked_post">
+                                <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(postID)">
+                                    <ng-include ng-if="post.id" src="'views/forum/block/thread.html'"></ng-include>
+                                </div>
+                            </div>
                         </section>
                     </tab>
                 </tabset>
