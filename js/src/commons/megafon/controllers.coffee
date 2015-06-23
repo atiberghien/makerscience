@@ -3,15 +3,6 @@ module = angular.module("commons.megafon.controllers", ['commons.megafon.service
 module.controller("ThreadListCtrl", ($scope, $q, Post, ObjectProfileLink, DataSharing) ->
     $scope.ordering = {'order_by' : '-updated_on'}
 
-    $scope.$watch(
-        ()->
-            return DataSharing.sharedObject
-        ,(newVal, oldVal) ->
-            if DataSharing.sharedObject.hasOwnProperty('newThread')
-                $scope.init()
-                delete DataSharing.sharedObject["newThread"]
-    )
-
     $scope.bestContributors = [];
     $scope.getBestContributors =  ->
         deferred = $q.defer();

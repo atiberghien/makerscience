@@ -9,6 +9,16 @@ module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerScience
     $scope.refreshList = ()->
         $scope.threads = MakerSciencePost.one().customGETLIST('search', $scope.params).$object
 
+
+    $scope.$watch(
+        ()->
+            return DataSharing.sharedObject
+        ,(newVal, oldVal) ->
+            if DataSharing.sharedObject.hasOwnProperty('newThread')
+                $scope.refreshList()
+                delete DataSharing.sharedObject["newThread"]
+    )
+
 )
 
 module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerSciencePost, MakerScienceProject, MakerScienceResource) ->
