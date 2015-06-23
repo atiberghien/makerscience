@@ -5,7 +5,7 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
 )
 
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet,
-                                        Project, ProjectSheetQuestionAnswer, Bucket,
+                                        Project, ProjectSheetQuestionAnswer, Bucket, Place
                                         @$http, FileUploader, $modal) ->
 
     $scope.init = ->
@@ -20,6 +20,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
             when 'Project' then Project.one(resourceId).patch(putData)
             when 'ProjectSheetQuestionAnswer' then ProjectSheetQuestionAnswer.one(resourceId).patch(putData)
             when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
+            when 'Place' then Place.one(resourceId).patch(putData)
 
     $scope.openGallery = (projectsheet) ->
         modalInstance = $modal.open(

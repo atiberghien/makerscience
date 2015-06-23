@@ -70,6 +70,19 @@
 
                                 </fieldset>
                             </div>
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable">
+                                    <button ng-click="LocationBtnForm.$show()" ng-hide="LocationBtnForm.$visible">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </div>
+                                <p editable-bsdate="projectsheet.parent.location.address.address_locality"
+                                    e-form="LocationBtnForm"
+                                    onbeforesave="updateProjectSheet('Place', projectsheet.parent.location.id , 'address', {'address_locality' : $data})">
+                                    <span class="glyphicon glyphicon-map-marker"></span>
+                                    {{projectsheet.parent.location.address.address_locality || "Localisation non renseignée"}}
+                                </p>
+                            </div>
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
@@ -80,6 +93,7 @@
                                 <p editable-bsdate="projectsheet.parent.website"
                                     e-form="WebsiteBtnForm"
                                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'website', $data)">
+                                    <span class="glyphicon glyphicon-globe"></span>
                                     <a href="{{projectsheet.parent.website}}" target="_blank">{{projectsheet.parent.website}}</a>
                                 </p>
                             </div>

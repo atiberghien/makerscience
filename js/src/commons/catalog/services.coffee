@@ -8,8 +8,8 @@ module.factory('Project', (Restangular) ->
 module.factory('ProjectSheet', (Restangular) ->
     return Restangular.service('project/sheet/projectsheet')
 )
-module.factory('PostalAddress', (Restangular) ->
-    return Restangular.service('scout/postaladdress')
+module.factory('Place', (Restangular) ->
+    return Restangular.service('scout/place')
 )
 
 module.factory('ProjectSheetTemplate', (Restangular) ->

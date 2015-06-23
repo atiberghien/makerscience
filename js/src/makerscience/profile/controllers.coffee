@@ -9,7 +9,7 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
 )
 
 module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
-                                            MakerScienceProfileTaggedItem, Post, MakerSciencePost, ObjectProfileLink, PostalAddress) ->
+                                            MakerScienceProfileTaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
@@ -91,7 +91,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
             putData[fieldName] = data
             switch resourceName
                 when 'MakerScienceProfile' then MakerScienceProfile.one(resourceId).patch(putData)
-                when 'PostalAddress' then PostalAddress.one(resourceId).patch(putData)
+                when 'Place' then Place.one(resourceId).patch(putData)
 
         $scope.updateSocialNetworks = (profileSlug, socials) ->
             MakerScienceProfile.one(profileSlug).patch(socials)
