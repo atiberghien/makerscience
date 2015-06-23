@@ -1,6 +1,6 @@
 module = angular.module("commons.megafon.controllers", ['commons.megafon.services'])
 
-module.controller("ThreadListCtrl", ($scope, $q, Post, ObjectProfileLink, DataSharing) ->
+module.controller("ThreadListCtrl", ($scope, $q, Post, ObjectProfileLink) ->
     $scope.ordering = {'order_by' : '-updated_on'}
 
     $scope.bestContributors = [];

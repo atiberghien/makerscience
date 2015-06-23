@@ -3,7 +3,7 @@ module = angular.module("makerscience.forum.controllers", ["commons.megafon.cont
 
 
 
-module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerSciencePost) ->
+module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerSciencePost, DataSharing) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.refreshList = ()->
