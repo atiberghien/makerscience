@@ -45,8 +45,6 @@ module.controller("PostCreateCtrl", ($scope, $stateParams, Post, TaggedItem, Obj
                 , 'post/'+parent.id)
 
                 DataSharing.sharedObject = {'newAnswer' : postResult}
-            else
-                DataSharing.sharedObject = {'newThread' : postResult}
 
             return postResult.resource_uri
         )

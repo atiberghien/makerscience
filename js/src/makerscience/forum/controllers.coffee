@@ -21,7 +21,7 @@ module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerScience
 
 )
 
-module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerSciencePost, MakerScienceProject, MakerScienceResource) ->
+module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerSciencePost, MakerScienceProject, MakerScienceResource, DataSharing) ->
     angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
 
     $scope.allAvailableItems = []
@@ -74,6 +74,7 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerScien
             )
 
             MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
+                DataSharing.sharedObject = {'newThread' : newMakerSciencePostResult}
                 return false
             )
         )
