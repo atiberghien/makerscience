@@ -6,7 +6,8 @@
         <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
     </ul> -->
 
-    <div id="intro" class="intro-project" >
+    <!-- FIXME : Gaetan : review the intro box style -->
+    <div id="intro" class="intro-project" style="height: 700px !important;">
 
         <div class="container">
 
@@ -26,7 +27,8 @@
                 </h2>
                 <h3><span>Fiche Projet</span></h3>
 
-                <div class="row">
+                <!-- FIXME : Gaetan : review the intro box style -->
+                <div class="row" style="overflow: initial !important;">
 
                     <div class="col-md-8" >
                         <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?width=700'}}" alt="Project Image" />
@@ -81,9 +83,9 @@
                                     e-datepicker-popup="dd/MM/yyyy">Fin de projet: {{projectsheet.parent.end_date|date:"dd/MM/yyyy" || "N/C" }}
                                 </p>
                             </div>
-                            <div class="editable">
-                                <p>Mise à jour <span am-time-ago="projectsheet.modified"></span></p>
-                            </div>
+
+                            <p>Crée le <span am-time-ago="projectsheet.parent.created_on"></span></p>
+                            <p>Modifiée le <span am-time-ago="projectsheet.modified"></span></p>
 
                         </div><!-- .side-header -->
 

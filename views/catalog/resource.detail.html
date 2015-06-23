@@ -6,7 +6,8 @@
         <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
     </ul> -->
 
-    <div id="intro" class="intro-resource">
+    <!-- FIXME : Gaetan : review the intro box style -->
+    <div id="intro" class="intro-resource" style="height: 700px !important;">
 
         <div class="container">
 
@@ -26,7 +27,8 @@
                 </h2>
                 <h3><span>Expérience partagée</span></h3>
 
-                <div class="row">
+                <!-- FIXME : Gaetan : review the intro box style -->
+                <div class="row" style="overflow: initial !important;">
 
                     <div class="col-md-8" >
                         <img ng-if="resourcesheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Resource Image" />
@@ -86,7 +88,8 @@
                                 </li>
                             </ul><!-- .details -->
 
-                            <p>Mise à jour <span am-time-ago="resourcesheet.modified"></span></p>
+                            <p>Crée le <span am-time-ago="resourcesheet.parent.created_on"></span></p>
+                            <p>Modifiée le <span am-time-ago="resourcesheet.modified"></span></p>
 
                         </div><!-- .side-header -->
 
