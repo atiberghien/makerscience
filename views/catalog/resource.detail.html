@@ -46,8 +46,22 @@
 
                             <ng-include src="'views/catalog/block/resource_tags_widget.html'"></ng-include>
 
-                            <ul class="details">
-                                <li class="level-{{ resourcesheet.level }}">
+                            <!-- FIXME : Gaetan : HAVE TO USE THIS UGLY TRICK TO VIEW THE LI -->
+                            <ul class="details" style="list-style:inherit">
+                                <li class="duration" >
+                                    <div class="edit-buttons" ng-show="editable">
+                                        <button ng-click="DurationBtnForm.$show()" ng-hide="DurationBtnForm.$visible">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                    </div>
+
+                                    <span editable-text="resourcesheet.duration"
+                                            e-form="DurationBtnForm"
+                                            onbeforesave="updateMakerScienceResourceSheet('MakerScienceResource', resourcesheet.id , 'duration', $data)">
+                                            {{ resourcesheet.duration }}
+                                    </span>
+                                </li>
+                                <!-- <li class="level-{{ resourcesheet.level }}">
                                     <div class="edit-buttons" ng-show="editable">
                                         <button ng-click="LevelBtnForm.$show()" ng-hide="LevelBtnForm.$visible">
                                             <span class="glyphicon glyphicon-pencil"></span>
@@ -59,19 +73,6 @@
                                                  onbeforesave="updateResourceSheet(resourcesheet.id , 'level', $data)"
                                                  ng-bind-html="resourcesheet.level">{{ resourcesheet.level }}
                                             </span>
-                                </li>
-                                <li class="duration">
-                                    <div class="edit-buttons" ng-show="editable">
-                                        <button ng-click="DurationBtnForm.$show()" ng-hide="DurationBtnForm.$visible">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                    </div>
-
-                                    <span editable-text="resourcesheet.duration"
-                                            e-form="DurationBtnForm"
-                                            onbeforesave="updateResourceSheet(resourcesheet.id , 'duration', $data)"
-                                            ng-bind-html="resourcesheet.duration">{{ resourcesheet.duration }}
-                                    </span>
                                 </li>
                                 <li class="cost">
                                     <div class="edit-buttons" ng-show="editable">
@@ -85,8 +86,21 @@
                                         onbeforesave="updateResourceSheet(resourcesheet.id , 'cost', $data)"
                                         ng-bind-html="resourcesheet.cost">{{ resourcesheet.cost }}
                                     </span> euros
-                                </li>
+                                </li> -->
                             </ul><!-- .details -->
+
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable">
+                                    <button ng-click="WebsiteBtnForm.$show()" ng-hide="WebsiteBtnForm.$visible">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </div>
+                                <p editable-bsdate="resourcesheet.parent.website"
+                                    e-form="WebsiteBtnForm"
+                                    onbeforesave="updateProjectSheet('Project', resourcesheet.parent.id , 'website', $data)">
+                                    <a href="{{resourcesheet.parent.website}}" target="_blank">{{resourcesheet.parent.website}}</a>
+                                </p>
+                            </div>
 
                             <p>Crée le <span am-time-ago="resourcesheet.parent.created_on"></span></p>
                             <p>Modifiée le <span am-time-ago="resourcesheet.modified"></span></p>

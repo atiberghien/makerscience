@@ -73,6 +73,19 @@
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
+                                    <button ng-click="WebsiteBtnForm.$show()" ng-hide="WebsiteBtnForm.$visible">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </div>
+                                <p editable-bsdate="projectsheet.parent.website"
+                                    e-form="WebsiteBtnForm"
+                                    onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'website', $data)">
+                                    <a href="{{projectsheet.parent.website}}" target="_blank">{{projectsheet.parent.website}}</a>
+                                </p>
+                            </div>
+
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable">
                                     <button ng-click="EndDateBtnForm.$show()" ng-hide="EndDateBtnForm.$visible">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </button>
