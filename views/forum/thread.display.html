@@ -15,25 +15,19 @@
         </div><!-- .container -->
     </div><!-- .forum-search -->
 
-    <div ng-controller="CommunityCtrl" ng-init="init('post'); showAnswerForm=false">
+    <div ng-init="showAnswerForm=false">
 
         <div class="forum-thread">
             <div class="row container">
                 <div class="col-md-12">
                     <ul class="thread-stats">
-                        <li><span class="glyphicon glyphicon-eye-open"></span> {{post.pageviews_counter}} vue
-                            <ng-pluralize count="post.pageviews_counter"
-                                        when="{'0': Vue',
-                                        'one': 'Vue',
-                                        'other': 'Vues'}">
+                        <li><span class="glyphicon glyphicon-eye-open"></span> {{post.pageviews_counter}}
+                            <ng-pluralize count="post.pageviews_counter" when="{'0': 'Vue', 'one': 'Vue', 'other': 'Vues'}">
                             </ng-pluralize>
                         </li>
                         <li>
                             <span class="glyphicon glyphicon-comment"></span> {{post.parent.answers_count}}
-                            <ng-pluralize count="post.parent.answers_count"
-                                        when="{'0': 'Réponse',
-                                        'one': 'Réponse',
-                                        'other': 'Réponses'}">
+                            <ng-pluralize count="post.parent.answers_count" when="{'0': 'Réponse', 'one': 'Réponse', 'other': 'Réponses'}">
                             </ng-pluralize>
                         </li>
                         <li><span class="glyphicon glyphicon-thumbs-up"></span> {{(community | filter: {level:33, isValidated: true}).length }} J'aime</li>
@@ -103,11 +97,9 @@
                                 </fieldset>
                             </form>
                         </div>
-                        <div ng-repeat="answer in answers">
-                            <ng-include src="'views/forum/block/answer.parent.html'"></ng-include>
-                        </div>
+                        <ng-include src="'views/forum/block/answer.parent.html'" ng-repeat="answer in answers"></ng-include>
 
-                    </div><!-- #content -->
+                    </div>
                 </div>
                  <div class="col-md-4">
                     <div class="forum-sidebar">

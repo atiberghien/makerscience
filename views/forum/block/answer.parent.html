@@ -49,7 +49,7 @@
         </form>
     </div>
     <div ng-controller="PostCtrl" ng-init="initFromID(answer.id)">
-        <div class="thread-answer answer-child" ng-repeat="subanswer in subanswers">
+        <div class="thread-answer answer-child" ng-repeat="subanswer in answers">
             <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
             <div class="thread-author">
                 <gravatar-image data-gravatar-email="author.user.email"

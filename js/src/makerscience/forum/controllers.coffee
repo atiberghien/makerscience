@@ -3,21 +3,13 @@ module = angular.module("makerscience.forum.controllers", ["commons.megafon.cont
 
 
 
-module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerSciencePost, DataSharing) ->
+module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerSciencePost) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.refreshList = ()->
         $scope.threads = MakerSciencePost.one().customGETLIST('search', $scope.params).$object
 
-
-    $scope.$watch(
-        ()->
-            return DataSharing.sharedObject
-        ,(newVal, oldVal) ->
-            if DataSharing.sharedObject.hasOwnProperty('newThread')
-                $scope.refreshList()
-                delete DataSharing.sharedObject["newThread"]
-    )
+    $scope.$emit('post:new', $scope.refreshList);
 
 )
 
@@ -58,9 +50,6 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerScien
             $scope.newLinkedItem = null
             $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
 
-
-    $scope.testLinked = () ->
-
     $scope.saveMakersciencePost = (newPost, parent, authorProfile) ->
         $scope.savePost(newPost, parent, authorProfile).then((newPostURI)->
             makerSciencePost =
@@ -74,7 +63,6 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerScien
             )
 
             MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
-                DataSharing.sharedObject = {'newThread' : newMakerSciencePostResult}
                 return false
             )
         )
@@ -83,11 +71,13 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerScien
 
 module.controller("MakerSciencePostCtrl", ($scope, $stateParams, $controller, MakerSciencePost, DataSharing) ->
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
+    angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
 
     MakerSciencePost.one().get({parent__slug: $stateParams.slug}).then((makerSciencePostResult)->
         $scope.post = makerSciencePostResult.objects[0]
-        $scope.initFromSlug($scope.post.parent.slug)
-        DataSharing.sharedObject = {'post' : $scope.post.parent}
+        $scope.initFromID($scope.post.parent.id)
+        DataSharing.sharedObject['post'] = $scope.post.parent
+        $scope.init('post')
     )
 )
 

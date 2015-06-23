@@ -25,8 +25,6 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
     watch for changes in filterParams from FilterService
     Controllers using it need to implement a refreshList() method calling adequate [Object]Service
     """
-    $scope.limit = 12
-    $scope.params = {}
 
     $scope.getParams = ()->
         $scope.params['limit'] = $scope.limit
@@ -38,6 +36,9 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
         $scope.refreshList()
 
     $scope.init = (params) ->
+        $scope.limit = 12
+        $scope.params = {}
+        
         if params
             if params.hasOwnProperty('limit')
                  $scope.limit = params["limit"]

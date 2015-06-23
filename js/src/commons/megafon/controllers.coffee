@@ -4,6 +4,7 @@ module.controller("ThreadListCtrl", ($scope, $q, Post, ObjectProfileLink) ->
     $scope.ordering = {'order_by' : '-updated_on'}
 
     $scope.bestContributors = [];
+
     $scope.getBestContributors =  ->
         deferred = $q.defer();
         promise = deferred.promise;
@@ -44,7 +45,7 @@ module.controller("PostCreateCtrl", ($scope, $stateParams, Post, TaggedItem, Obj
                     isValidated:true
                 , 'post/'+parent.id)
 
-                DataSharing.sharedObject = {'newAnswer' : postResult}
+            $scope.$emit('post:new', postResult);
 
             return postResult.resource_uri
         )
@@ -54,69 +55,39 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
     $scope.initFromID = (questionID) ->
         Post.one(questionID).get().then((postResult) ->
             $scope.basePost =  postResult
-            $scope.getAuthor($scope.basePost.id)
-            $scope.getContributors($scope.basePost.id)
-            if $scope.basePost.answers_count > 0
-                $scope.getAnswers($scope.basePost.id)
-            DataSharing.sharedObject["post"] = $scope.basePost
-        )
 
-    $scope.initFromSlug = (postSlug) ->
-        if postSlug is undefined
-            {'slug' : $stateParams.slug}
-        else
-            {'slug' : postSlug}
-
-        Post.one().get({'slug' : $stateParams.slug}).then((postResult) ->
-            $scope.basePost =  postResult.objects[0]
-            $scope.getAuthor($scope.basePost.id)
-            $scope.getAnswers($scope.basePost.id)
-            $scope.getSimilars($scope.basePost.id)
-            DataSharing.sharedObject["post"] = $scope.basePost
-        )
-
-    $scope.$watch(
-        ()->
-            return DataSharing.sharedObject
-        ,(newVal, oldVal) ->
-            if DataSharing.sharedObject.hasOwnProperty('newAnswer')
-                $scope.getAnswers($scope.basePost.id)
-                delete DataSharing.sharedObject["newAnswer"]
-    )
-
-
-    $scope.getAuthor = (questionID) ->
-        ObjectProfileLink.one().customGET('post/'+questionID, {level:30}).then((objectProfileLinkResults) ->
-            $scope.author = objectProfileLinkResults.objects[0].profile
-        )
-
-    $scope.getContributors = (questionID) ->
-        $scope.contributors = []
-        contributorsIdx = []
-        ObjectProfileLink.one().customGET('post/'+questionID, {level:31}).then((objectProfileLinkResults) ->
-            angular.forEach(objectProfileLinkResults.objects, (objectProfileLink) ->
-                if contributorsIdx.indexOf(objectProfileLink.profile.id) == -1
-                    contributorsIdx.push(objectProfileLink.profile.id)
-                    $scope.contributors.push(objectProfileLink.profile)
+            ##Author
+            ObjectProfileLink.one().customGET('post/'+questionID, {level:30}).then((objectProfileLinkResults) ->
+                $scope.author = objectProfileLinkResults.objects[0].profile
             )
-        )
 
-    $scope.getAnswers = (questionID) ->
-        if $scope.basePost.parent
-            $scope.subanswers = Post.one().customGETLIST(questionID + '/answers').$object
-        else
-            $scope.answers = Post.one().customGETLIST(questionID + '/answers').$object
-
-
-    $scope.getSimilars = (questionID) ->
-        $scope.similars = []
-        TaggedItem.one().customGET("post/"+questionID+"/similars").then((similarResults) ->
-            angular.forEach(similarResults, (similar) ->
-                if similar.type == 'post'
-                    Post.one(similar.id).get().then((postResult)->
-                        $scope.similars.push(postResult)
-                    )
-
+            ##contributors
+            $scope.contributors = []
+            contributorsIdx = []
+            ObjectProfileLink.one().customGET('post/'+questionID, {level:31}).then((objectProfileLinkResults) ->
+                angular.forEach(objectProfileLinkResults.objects, (objectProfileLink) ->
+                    if contributorsIdx.indexOf(objectProfileLink.profile.id) == -1
+                        contributorsIdx.push(objectProfileLink.profile.id)
+                        $scope.contributors.push(objectProfileLink.profile)
+                )
             )
+
+            $scope.similars = []
+            TaggedItem.one().customGET("post/"+questionID+"/similars").then((similarResults) ->
+                angular.forEach(similarResults, (similar) ->
+                    if similar.type == 'post'
+                        Post.one(similar.id).get().then((postResult)->
+                            $scope.similars.push(postResult)
+                        )
+                )
+            )
+
+            $scope.refreshAnswers = () ->
+                $scope.answers = Post.one().customGETLIST($scope.basePost.id + '/answers').$object
+
+            $scope.refreshAnswers()
+
+            $scope.$on('post:new', $scope.refreshAnswers)
         )
+
 )
