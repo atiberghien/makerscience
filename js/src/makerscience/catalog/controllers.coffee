@@ -257,7 +257,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 )
 
 module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller,
-                                                    MakerScienceResource, MakerScienceProjectTaggedItem, TaggedItem,
+                                                    MakerScienceResource, MakerScienceResourceTaggedItem, TaggedItem,
                                                     Comment, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
@@ -295,7 +295,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
                 when "th" then $scope.preparedThemeTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
                 when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
-                when "nd" then $scope.preparedNeedsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "rs" then $scope.preparedResourceTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
         )
 
         $scope.addTagToResourceSheet = (tag_type, tag) ->
