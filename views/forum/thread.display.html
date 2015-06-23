@@ -15,13 +15,19 @@
         </div><!-- .container -->
     </div><!-- .forum-search -->
 
-    <div ng-init="showAnswerForm=false">
+    <div ng-controller="CommunityCtrl" ng-init="init('post'); showAnswerForm=false">
 
         <div class="forum-thread">
             <div class="row container">
-                <div class="col-md-12" ng-controller="CommunityCtrl" ng-init="init('post')">
+                <div class="col-md-12">
                     <ul class="thread-stats">
-                        <li><span class="glyphicon glyphicon-eye-open"></span> 130 vues</li>
+                        <li><span class="glyphicon glyphicon-eye-open"></span> {{post.pageviews_counter}} vue
+                            <ng-pluralize count="post.pageviews_counter"
+                                        when="{'0': Vue',
+                                        'one': 'Vue',
+                                        'other': 'Vues'}">
+                            </ng-pluralize>
+                        </li>
                         <li>
                             <span class="glyphicon glyphicon-comment"></span> {{post.parent.answers_count}}
                             <ng-pluralize count="post.parent.answers_count"
