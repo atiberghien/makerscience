@@ -114,12 +114,20 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 )
 
 
-module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, Comment, ObjectProfileLink, DataSharing) ->
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller,
+                                                    MakerScienceProject, MakerScienceResource,
+                                                    MakerScienceProjectTaggedItem, TaggedItem,
+                                                    Comment, ObjectProfileLink, DataSharing) ->
+
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
-    $scope.preparedTags = []
+    $scope.preparedThemeTags = []
+    $scope.preparedFormatsTags = []
+    $scope.preparedTargetTags = []
+    $scope.preparedNeedsTags = []
+
     $scope.currentUserHasEditRights = false
     $scope.editable = false
 
@@ -144,10 +152,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
-        angular.forEach($scope.projectsheet.tags, (taggedItem) ->
-            $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
-        )
-
         $scope.similars = []
         TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
@@ -155,6 +159,21 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                     $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
             )
         )
+
+        angular.forEach($scope.projectsheet.tags, (taggedItem) ->
+            switch taggedItem.tag_type
+                when "th" then $scope.preparedThemeTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "nd" then $scope.preparedNeedsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+        )
+
+        $scope.addTagToProjectSheet = (tag_type, tag) ->
+            MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+$scope.projectsheet.id+"/"+tag_type, {})
+
+        $scope.removeTagFromProjectSheet = (tag) ->
+            MakerScienceProjectTaggedItem.one(tag.taggedItemId).remove()
+
 
         $scope.$on('newTeamMember', (event, user_id)->
                 """
@@ -237,12 +256,18 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, MakerScienceResource, TaggedItem, Comment, DataSharing) ->
+module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller,
+                                                    MakerScienceResource, MakerScienceProjectTaggedItem, TaggedItem,
+                                                    Comment, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
-    $scope.preparedTags = []
+    $scope.preparedThemeTags = []
+    $scope.preparedFormatsTags = []
+    $scope.preparedTargetTags = []
+    $scope.preparedResourceTags = []
+
     $scope.currentUserHasEditRights = false
     $scope.editable = false
 
@@ -266,8 +291,18 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
-            $scope.preparedTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+            switch taggedItem.tag_type
+                when "th" then $scope.preparedThemeTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "nd" then $scope.preparedNeedsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
         )
+
+        $scope.addTagToResourceSheet = (tag_type, tag) ->
+            MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+$scope.projectsheet.id+"/"+tag_type, {})
+
+        $scope.removeTagFromResourceSheet = (tag) ->
+            MakerScienceResourceTaggedItem.one(tag.taggedItemId).remove()
 
         $scope.similars = []
         TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/similars").then((similarResults) ->

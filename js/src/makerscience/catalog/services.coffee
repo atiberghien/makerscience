@@ -9,3 +9,11 @@ module.factory('MakerScienceProject', (Restangular) ->
 module.factory('MakerScienceResource', (Restangular) ->
     return Restangular.service('makerscience/resource')
 )
+
+module.factory('MakerScienceProjectTaggedItem', (Restangular) ->
+    return Restangular.service('makerscience/projecttaggeditem')
+)
+
+module.factory('MakerScienceResourceTaggedItem', (Restangular) ->
+    return Restangular.service('makerscience/resourcetaggeditem')
+)
