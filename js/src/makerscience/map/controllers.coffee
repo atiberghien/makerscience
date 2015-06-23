@@ -4,7 +4,8 @@ module.run(['$anchorScroll', ($anchorScroll) ->
   $anchorScroll.yOffset = 50
 ])
 
-module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leafletData, leafletEvents, geocoderService, gravatarImageService, MakerScienceProfile, MakerScienceProject, ObjectProfileLink) ->
+module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $controller, leafletData, leafletEvents, geocoderService, gravatarImageService, MakerScienceProfile, MakerScienceProject, ObjectProfileLink) ->
+    angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.gotoAnchor = (x) ->
         newHash = 'anchor' + x
@@ -32,9 +33,9 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, leaf
         markers : {}
     )
 
-    MakerScienceProfile.getList({location__isnull : false}).then((profileResults) ->
+    MakerScienceProfile.one().customGETLIST('search', $scope.params).then((profileResults) ->
         angular.forEach(profileResults, (profile) ->
-            geocoderService.getLatLong(profile.location.address_locality).then((latlng)->
+            geocoderService.getLatLong(profile.location.address.address_locality).then((latlng)->
                 icon =
                     iconUrl: gravatarImageService.getImageSrc(profile.parent.user.email, 30, null, 'mm')
                     shadowUrl: 'img/users/user-shadow.png'

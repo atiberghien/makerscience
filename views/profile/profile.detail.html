@@ -4,7 +4,7 @@
     <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
 </ul>#sidenav -->
 
-<div id="intro" class="intro-profile"  ng-init="editable = currentMakerScienceProfile === profile.slug">
+<div id="intro" class="intro-profile"  ng-init="editable = currentMakerScienceProfile === profile">
     <div class="container">
         <div class="intro">
             <div class="row">
@@ -36,18 +36,16 @@
 
                     <div class="location">
                         <div class="relative">
-                            <div class="edit-buttons edit-buttons-location" ng-show="editable">
+                            <div class="edit-buttons" ng-show="editable">
                                 <button ng-click="LocationBtnForm.$show()" ng-hide="LocationBtnForm.$visible">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
                             </div>
-                            <p class="location">
+                            <p editable-bsdate="profile.location.address.address_locality"
+                                e-form="LocationBtnForm"
+                                onbeforesave="updateMakerScienceProfile('Place', profile.location.id , 'address', {'address_locality' : $data})">
                                 <span class="glyphicon glyphicon-map-marker"></span>
-                                <label editable-text="profile.location.address_locality"
-                                    e-form="LocationBtnForm"
-                                    onbeforesave="updateMakerScienceProfile('PostalAddress', profile.location.id , 'address_locality', $data)"
-                                    ng-bind-html="profile.location.address_locality">{{ profile.location.address_locality }}
-                                </label>
+                                {{profile.location.address.address_locality || "Localisation non renseignée"}}
                             </p>
                         </div>
                     </div>
