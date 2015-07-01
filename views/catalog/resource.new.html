@@ -19,7 +19,7 @@
                 <h3>Nouvelle expérience</h3>
 
                 <form name="newResourceForm" novalidate ng-controller="MakerScienceResourceSheetCreateCtrl"
-                    ng-init="init('projet-makerscience'); submitted=false" ng-submit="saveMakerscienceResource(newResourceForm.$valid)"
+                    ng-init="init('experience-makerscience'); submitted=false" ng-submit="saveMakerscienceResource(newResourceForm.$valid)"
                     ng-class="{ 'has-error' : newResourceForm.$invalid && submitted }">
                     <div class="row">
                         <div class="col-md-8">
@@ -47,15 +47,35 @@
                                     Court résumé de l'expérience requis</p>
                            </fieldset>
 
-                            <fieldset class="fake-placeholder">
-                                <div ng-controller="TagAutoCompleteCtrl">
-                                    <h4>Quels sont les mots-clés associés à votre expérience ? (thématiques, type de projet, outils...)</h4>
-                                    <tags-input ng-model="tags"
-                                                placeholder="> Mot-clé">
-                                      <auto-complete source="loadTags($query)"></auto-complete>
-                                    </tags-input>
-                                </div>
-                            </fieldset>
+                           <fieldset class="fake-placeholder">
+                               <div ng-controller="TagAutoCompleteCtrl">
+                                   <h4>Ajoutez des tags précisant aux mieux les thématiques abordées par votre projet (biologie, sport, art, histoire...)</h4>
+                                   <tags-input ng-model="themesTags"
+                                               placeholder="> Mot-clé">
+                                     <auto-complete source="loadTags($query)"></auto-complete>
+                                   </tags-input>
+                               </div>
+                           </fieldset>
+
+                           <fieldset class="fake-placeholder">
+                               <div ng-controller="TagAutoCompleteCtrl">
+                                   <h4>Ajoutez des tags précisant aux mieux les publics visés (jeunes, seniors, enfants, 3-6 ans...)</h4>
+                                   <tags-input ng-model="targetsTags"
+                                               placeholder="> Mot-clé">
+                                     <auto-complete source="loadTags($query)"></auto-complete>
+                                   </tags-input>
+                               </div>
+                           </fieldset>
+
+                           <fieldset class="fake-placeholder">
+                               <div ng-controller="TagAutoCompleteCtrl">
+                                   <h4>Ajoutez des tags précisant aux mieux les formats déployés à travers votre projet (exposition, jeu, atelier, plateforme web...)</h4>
+                                   <tags-input ng-model="formatsTags"
+                                               placeholder="> Mot-clé">
+                                     <auto-complete source="loadTags($query)"></auto-complete>
+                                   </tags-input>
+                               </div>
+                           </fieldset>
 
                         </div>
 
@@ -69,6 +89,12 @@
                                 <button type="button" class="addVideos" ng-click="openGallery()">
                                     <span class="glyphicon glyphicon-facetime-video"></span>
                                 </button>
+                            </fieldset>
+
+                            <fieldset class="fake-placeholder">
+                                <h4><span class="glyphicon glyphicon-time"></span> Durée de mise en oeuvre : </h4>
+                                <input type="text" ng-model="projectsheet.duration" />
+                                </select>
                             </fieldset>
                         </div>
 

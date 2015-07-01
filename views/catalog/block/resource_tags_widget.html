@@ -1,17 +1,3 @@
-<!-- <div class="tags">
-    <div class="editable">
-        <div class="edit-buttons" ng-show="editable">
-            <button ng-click="openTagPopup(true, projectsheet, taggedObjectTypeName)"><span class="glyphicon glyphicon-pencil"></span></button>
-        </div>
-        <div>
-            <ul class="tags tags-project">
-                <li ng-repeat="tag in preparedTags | limitTo:10"><a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a></li>
-                <li><a ng-show="preparedTags.length > 10" href="" tooltip="Voir tous les tags" ng-click="openTagPopup(false)">...</a></li>
-            </ul>
-        </div>
-    </div>
-</div> -->
-
 <div class="tags">
     <h5 class="skills">Thématique</h5>
     <div class="editable">
@@ -79,30 +65,6 @@
         <div ng-show="addFormats==false">
             <ul class="tags tags-project">
                 <li ng-repeat="tag in preparedFormatsTags"><a href="">{{tag.text}}</a></li>
-            </ul>
-        </div>
-    </div><!-- .editable -->
-</div><!-- .relative -->
-
-<div class="tags">
-    <h5>Ressources nécessaires</h5>
-    <div class="editable">
-        <div class="edit-buttons" ng-show="editable" ng-init="addResource=false">
-            <button ng-click="addResource = ! addResource"><span class="glyphicon glyphicon-pencil"></span></button>
-        </div>
-
-        <div ng-show="addResource==true" ng-controller="TagAutoCompleteCtrl">
-            <tags-input ng-model="$parent.preparedResourceTags"
-                        placeholder="> Mot-clé"
-                        on-tag-added="$parent.addTagToResourceSheet('rs', $tag)"
-                        on-tag-removed="$parent.removeTagFromResourceSheet($tag)">
-                        <auto-complete source="loadTags($query)"></auto-complete>
-            </tags-input>
-        </div>
-
-        <div ng-show="addResource==false">
-            <ul class="tags tags-project">
-                <li ng-repeat="tag in preparedResourceTags"><a href="">{{tag.text}}</a></li>
             </ul>
         </div>
     </div><!-- .editable -->

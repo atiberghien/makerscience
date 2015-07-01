@@ -46,48 +46,20 @@
 
                             <ng-include src="'views/catalog/block/resource_tags_widget.html'"></ng-include>
 
-                            <!-- FIXME : Gaetan : HAVE TO USE THIS UGLY TRICK TO VIEW THE LI -->
-                            <ul class="details" style="list-style:inherit">
-                                <li class="duration" >
-                                    <div class="edit-buttons" ng-show="editable">
-                                        <button ng-click="DurationBtnForm.$show()" ng-hide="DurationBtnForm.$visible">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                    </div>
-
-                                    <span editable-text="resourcesheet.duration"
-                                            e-form="DurationBtnForm"
-                                            onbeforesave="updateMakerScienceResourceSheet('MakerScienceResource', resourcesheet.id , 'duration', $data)">
-                                            {{ resourcesheet.duration }}
-                                    </span>
-                                </li>
-                                <!-- <li class="level-{{ resourcesheet.level }}">
-                                    <div class="edit-buttons" ng-show="editable">
-                                        <button ng-click="LevelBtnForm.$show()" ng-hide="LevelBtnForm.$visible">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                    </div>
-
-                                    Niveau <span editable-text="resourcesheet.level"
-                                                 e-form="LevelBtnForm"
-                                                 onbeforesave="updateResourceSheet(resourcesheet.id , 'level', $data)"
-                                                 ng-bind-html="resourcesheet.level">{{ resourcesheet.level }}
-                                            </span>
-                                </li>
-                                <li class="cost">
-                                    <div class="edit-buttons" ng-show="editable">
-                                        <button ng-click="CostBtnForm.$show()" ng-hide="CostBtnForm.$visible">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                    </div>
-
-                                    <span editable-text="resourcesheet.cost"
-                                        e-form="CostBtnForm"
-                                        onbeforesave="updateResourceSheet(resourcesheet.id , 'cost', $data)"
-                                        ng-bind-html="resourcesheet.cost">{{ resourcesheet.cost }}
-                                    </span> euros
-                                </li> -->
-                            </ul><!-- .details -->
+                            <div class="editable">
+                                <div class="edit-buttons" ng-show="editable">
+                                    <button ng-click="DurationBtnForm.$show()" ng-hide="DurationBtnForm.$visible">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    </button>
+                                </div>
+                                <p editable-text="resourcesheet.duration"
+                                    e-form="DurationBtnForm"
+                                    onbeforesave="updateMakerScienceResourceSheet('MakerScienceResource', resourcesheet.id , 'duration', $data)">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                    <span ng-if="resourcesheet.duration">Durée de mise en oeuvre : {{projectsheet.duration}}</span>
+                                    <span ng-if="!resourcesheet.duration">Durée de mise en oeuvre non renseignée</span>
+                                </p>
+                            </div>
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
@@ -95,15 +67,19 @@
                                         <span class="glyphicon glyphicon-pencil"></span>
                                     </button>
                                 </div>
-                                <p editable-bsdate="resourcesheet.parent.website"
+                                <p editable-text="resourcesheet.parent.website"
                                     e-form="WebsiteBtnForm"
                                     onbeforesave="updateProjectSheet('Project', resourcesheet.parent.id , 'website', $data)">
-                                    <a href="{{resourcesheet.parent.website}}" target="_blank">{{resourcesheet.parent.website}}</a>
+                                    <span class="glyphicon glyphicon-globe"></span>
+                                    <a ng-if="resourcesheet.parent.website" href="{{resourcesheet.parent.website}}" target="_blank">{{resourcesheet.parent.website}}</a>
+                                    <span ng-if="!resourcesheet.parent.website">Site web non renseignée</span>
                                 </p>
                             </div>
 
-                            <p>Crée le <span am-time-ago="resourcesheet.parent.created_on"></span></p>
-                            <p>Modifiée le <span am-time-ago="resourcesheet.modified"></span></p>
+                            <p>
+                                <span>Crée le <span am-time-ago="resourcesheet.parent.created_on"></span><span> /
+                                <span>Modifiée le <span am-time-ago="resourcesheet.modified"></span><span>
+                            </p>
 
                         </div><!-- .side-header -->
 

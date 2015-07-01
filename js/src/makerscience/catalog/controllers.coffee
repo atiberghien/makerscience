@@ -224,11 +224,13 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
             when 'MakerScienceProject' then MakerScienceProject.one(resourceId).patch(putData)
 )
 
-module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, TaggedItem, ObjectProfileLink) ->
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, MakerScienceResource, MakerScienceResourceTaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
-    $scope.tags = []
+    $scope.themesTags = []
+    $scope.targetsTags = []
+    $scope.formatsTags = []
 
     $scope.saveMakerscienceResource = (formIsValid) ->
         if !formIsValid
@@ -240,9 +242,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         $scope.saveProject().then((resourcesheetResult) ->
             console.log("Just saved project for resoure sheet, result: ", resourcesheetResult)
             makerscienceResourceData =
-                level : $scope.projectsheet.level
                 duration : $scope.projectsheet.duration
-                cost : $scope.projectsheet.cost
                 parent : resourcesheetResult.project.resource_uri
                 linked_resources : $scope.linkedResources.map((resource) ->
                         return resource.resource_uri
@@ -265,9 +265,18 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                         )
                     )
 
-                angular.forEach($scope.tags, (tag)->
-                    TaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id, {})
+                angular.forEach($scope.themesTags, (tag)->
+                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/th", {})
                 )
+
+                angular.forEach($scope.formatsTags, (tag)->
+                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/fm", {})
+                )
+
+                angular.forEach($scope.targetsTags, (tag)->
+                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/tg", {})
+                )
+
                 $scope.saveVideos(resourcesheetResult.id)
                 # if no photos to upload, directly go to new project sheet
                 if $scope.uploader.queue.length <= 0
@@ -290,7 +299,6 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
     $scope.preparedThemeTags = []
     $scope.preparedFormatsTags = []
     $scope.preparedTargetTags = []
-    $scope.preparedResourceTags = []
 
     $scope.currentUserHasEditRights = false
     $scope.editable = false
@@ -319,7 +327,6 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
                 when "th" then $scope.preparedThemeTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
                 when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
-                when "rs" then $scope.preparedResourceTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
         )
 
         $scope.addTagToResourceSheet = (tag_type, tag) ->
