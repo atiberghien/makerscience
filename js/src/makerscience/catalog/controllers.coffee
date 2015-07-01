@@ -43,11 +43,14 @@ module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResourc
             $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, MakerScienceProject, MakerScienceResource, TaggedItem, ObjectProfileLink) ->
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, ProjectProgress,
+                                                        MakerScienceProject, MakerScienceResource, MakerScienceProjectTaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
-    $scope.tags = []
+    $scope.themesTags = []
+    $scope.targetsTags = []
+    $scope.formatsTags = []
 
     $scope.needTypes = ["Nouvelles idées", "Compétences", "Matériel", "Financement", "Conseils", "Avis"]
     $scope.newNeed =
@@ -56,6 +59,9 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     $scope.needs = {}
     needsIndex = 0
 
+    ProjectProgress.getList({'range__slug' : 'makerscience'}).then((progressRangeResult) ->
+        $scope.progressRange = [{ value : progress.resource_uri, text : progress.label } for progress in $filter('orderBy')(progressRangeResult, 'order')][0]
+    )
 
     $scope.saveMakerscienceProject = (formIsValid) ->
         if !formIsValid
@@ -63,10 +69,13 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
             return false
         else
             console.log("submitting form")
+
+
         $scope.saveProject().then((projectsheetResult) ->
+
             console.log(" Just saved project : Result from savingProject : ", projectsheetResult)
             makerscienceProjectData =
-                parent : projectsheetResult.project
+                parent : projectsheetResult.project.resource_uri
                 linked_resources : $scope.linkedResources.map((resource) ->
                         return resource.resource_uri
                     )
@@ -85,9 +94,16 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         console.log(" succesfully assigned edit rights ? : ", result)
                         )
                 )
+                angular.forEach($scope.themesTags, (tag)->
+                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/th", {})
+                )
 
-                angular.forEach($scope.tags, (tag)->
-                    TaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id, {})
+                angular.forEach($scope.formatsTags, (tag)->
+                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/fm", {})
+                )
+
+                angular.forEach($scope.targetsTags, (tag)->
+                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/tg", {})
                 )
 
                 $scope.saveVideos(projectsheetResult.id)
@@ -114,9 +130,9 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 )
 
 
-module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller,
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,
                                                     MakerScienceProject, MakerScienceResource,
-                                                    MakerScienceProjectTaggedItem, TaggedItem,
+                                                    MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
@@ -126,10 +142,10 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
     $scope.preparedThemeTags = []
     $scope.preparedFormatsTags = []
     $scope.preparedTargetTags = []
-    $scope.preparedNeedsTags = []
 
     $scope.currentUserHasEditRights = false
     $scope.editable = false
+
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
@@ -165,7 +181,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 when "th" then $scope.preparedThemeTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
                 when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
-                when "nd" then $scope.preparedNeedsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
         )
 
         $scope.addTagToProjectSheet = (tag_type, tag) ->
@@ -191,6 +206,15 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                     return resource.resource_uri
                 )
             )
+
+        ProjectProgress.getList({'range__slug' : 'makerscience'}).then((progressRangeResult) ->
+            $scope.progressRange = [{ value : progress.resource_uri, text : progress.label } for progress in $filter('orderBy')(progressRangeResult, 'order')][0]
+
+            $scope.showProjectProgress = () ->
+                selected = $filter('filter')($scope.progressRange, {value: $scope.projectsheet.parent.progress.resource_uri});
+                return if $scope.projectsheet.parent.progress.label && selected.length then selected[0].text else 'non renseigné';
+        )
+
     )
 
     $scope.updateMakerScienceProjectSheet = (resourceName, resourceId, fieldName, data) ->
@@ -219,7 +243,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 level : $scope.projectsheet.level
                 duration : $scope.projectsheet.duration
                 cost : $scope.projectsheet.cost
-                parent : resourcesheetResult.project
+                parent : resourcesheetResult.project.resource_uri
                 linked_resources : $scope.linkedResources.map((resource) ->
                         return resource.resource_uri
                     )

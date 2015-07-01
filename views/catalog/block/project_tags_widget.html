@@ -1,20 +1,6 @@
-<!-- <div class="tags">
-    <div class="editable">
-        <div class="edit-buttons" ng-show="editable">
-            <button ng-click="openTagPopup(true, projectsheet, taggedObjectTypeName)"><span class="glyphicon glyphicon-pencil"></span></button>
-        </div>
-        <div>
-            <ul class="tags tags-project">
-                <li ng-repeat="tag in preparedTags | limitTo:10"><a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a></li>
-                <li><a ng-show="preparedTags.length > 10" href="" tooltip="Voir tous les tags" ng-click="openTagPopup(false)">...</a></li>
-            </ul>
-        </div>
-    </div>
-</div> -->
-
 <div class="tags">
-    <h5 class="skills">Thématique</h5>
     <div class="editable">
+        <h5>Thématiques</h5>
         <div class="edit-buttons" ng-show="editable" ng-init="addTheme=false">
             <button ng-click="addTheme = ! addTheme"><span class="glyphicon glyphicon-pencil"></span></button>
         </div>
@@ -37,8 +23,8 @@
 </div><!-- .relative -->
 
 <div class="tags">
-    <h5>Cibles visées</h5>
     <div class="editable">
+        <h5>Cibles visées</h5>
         <div class="edit-buttons" ng-show="editable" ng-init="addTarget=false">
             <button ng-click="addTarget = ! addTarget"><span class="glyphicon glyphicon-pencil"></span></button>
         </div>
@@ -61,8 +47,8 @@
 </div><!-- .relative -->
 
 <div class="tags">
-    <h5>Formats</h5>
     <div class="editable">
+        <h5>Formats</h5>
         <div class="edit-buttons" ng-show="editable" ng-init="addFormats=false">
             <button ng-click="addFormats = ! addFormats"><span class="glyphicon glyphicon-pencil"></span></button>
         </div>
@@ -79,30 +65,6 @@
         <div ng-show="addFormats==false">
             <ul class="tags tags-project">
                 <li ng-repeat="tag in preparedFormatsTags"><a href="">{{tag.text}}</a></li>
-            </ul>
-        </div>
-    </div><!-- .editable -->
-</div><!-- .relative -->
-
-<div class="tags">
-    <h5>Besoins</h5>
-    <div class="editable">
-        <div class="edit-buttons" ng-show="editable" ng-init="addNeeds=false">
-            <button ng-click="addNeeds = ! addNeeds"><span class="glyphicon glyphicon-pencil"></span></button>
-        </div>
-
-        <div ng-show="addNeeds==true" ng-controller="TagAutoCompleteCtrl">
-            <tags-input ng-model="$parent.preparedNeedsTags"
-                        placeholder="> Mot-clé"
-                        on-tag-added="$parent.addTagToProjectSheet('nd', $tag)"
-                        on-tag-removed="$parent.removeTagFromProjectSheet($tag)">
-                        <auto-complete source="loadTags($query)"></auto-complete>
-            </tags-input>
-        </div>
-
-        <div ng-show="addNeeds==false">
-            <ul class="tags tags-project">
-                <li ng-repeat="tag in preparedNeedsTags"><a href="">{{tag.text}}</a></li>
             </ul>
         </div>
     </div><!-- .editable -->

@@ -4,7 +4,7 @@ module.controller("ProjectListCtrl", ($scope, Project) ->
     $scope.projects = Project.getList().$object
 )
 
-module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet,
+module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet
                                         Project, ProjectSheetQuestionAnswer, Bucket, Place
                                         @$http, FileUploader, $modal) ->
 
@@ -35,7 +35,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
         )
 )
 
-module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, Project, PostalAddress,
+module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, Project,
                                              ProjectSheetTemplate, ProjectSheetQuestionAnswer,
                                              @$http, FileUploader, $modal, ObjectProfileLink) ->
 
@@ -135,23 +135,6 @@ module.controller("PopularityCtrl", ($scope, $state) ->
             $scope.popularityItems[key].objectPopularityScore += value
         )
         $scope.votePopularity = false
-)
-
-module.controller("ProjectProgressCtrl", ($scope, Project, ProjectProgress) ->
-    $scope.progressRange = []
-    $scope.selectedClasses = {}
-
-    $scope.updateProgressChoice = (progressChoice) ->
-        $scope.selectedClasses = {}
-        $scope.selectedClasses[progressChoice.id] = "selected"
-
-    $scope.init = (projectID, projectProgressRangeSlug) ->
-
-        ProjectProgress.getList({'range__slug' : projectProgressRangeSlug}).then((progressRangeResult) ->
-            $scope.progressRange = progressRangeResult
-            $scope.updateProgressChoice($scope.progressRange[0])
-        )
-
 )
 
 module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params, FileUploader, ProjectSheet, BucketFile) ->
