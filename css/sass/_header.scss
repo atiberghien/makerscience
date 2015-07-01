@@ -419,11 +419,11 @@ div.crumbs {
 			margin: 2em auto;
 		}
 		h5 {
-			margin-bottom: 0.5em;
+			margin-bottom: 0.2em;
 			font-size: 1.2em;
 			font-weight: bold;
 			&.bio {
-				margin-top: 2em;
+				#margin-top: 2em;
 			}
 			&.skills {
 				margin-top: 2em;
@@ -455,6 +455,11 @@ div.crumbs {
 		}
 		ul.skills {
 			margin-bottom: 3em;
+		}
+		div.socials {
+			span.glyphicon {
+				font-size : 30px
+			}
 		}
 	}
 	&.intro-tags {

@@ -15,7 +15,7 @@
                         </gravatar-image>
 
                         <h4>{{profile.full_name}}</h4>
-                        <p><span class="glyphicon glyphicon-lock"></span> Espace privé</p>
+                        <p><span class="glyphicon glyphicon-lock"></span> Espace personel</p>
 
                     </div>
 
@@ -42,29 +42,34 @@
                     <div class="row">
                         <div class="col-md-6">
 
-                            <label for="name">Nom / Prénom</label>
-                            <input type="text" name="fullname" id="name" />
+                            <label for="name">Nom</label>
+                            <input type="text" name="fullname" id="name" ng-model="profileToUpdate.parent.user.last_name" value="{{profileToUpdate.parent.user.last_name}}"/>
+
+                            <label for="name">Prénom</label>
+                            <input type="text" name="fullname" id="name" ng-model="profileToUpdate.parent.user.first_name" value="{{profileToUpdate.parent.user.first_name}}"/>
 
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" />
+                            <input type="email" name="email" id="email" ng-model="profileToUpdate.parent.user.email" value="{{profileToUpdate.parent.user.email}}"/>
 
-                            <label for="password">Votre mot de passe</label>
-                            <input type="password" name="password" id="password" />
-
-                            <label for="passwordconfirmation">Confirmation de votre mot de passe</label>
-                            <input type="password" name="passwordconfirmation" id="passwordconfirmation" />
-
-                            <label for="town">Votre ville</label>
-                            <input type="text"  name="town" id="town" />
-
-                            <label for="description">Description (max 200 mots)</label>
-                            <textarea name="description" id="description" rows="5"></textarea>
-
+                            <button class="button delete-account" ng-click="fullUpdateMakerScienceProfile(profileToUpdate)">Enregistrer</button>
                         </div>
                         <div class="col-md-6">
-
                             <fieldset>
+                                <p>La suppression du compte est irréversible</p>
+                                <button class="button delete-account" ng-click="deleteProfile(profile.slug)">Supprimer mon compte</button>
+                            </fieldset>
+                            <fieldset>
+                                <h3>Changement de mot de passe</h3>
+                                <label for="password">Votre mot de passe</label>
+                                <input type="password" name="password" id="password" />
 
+                                <label for="passwordconfirmation">Confirmation de votre mot de passe</label>
+                                <input type="password" name="passwordconfirmation" id="passwordconfirmation" />
+
+                                <button class="button delete-account" >Enregistrer le nouveau mot de passe</button>
+                            </fieldset>
+
+                            <!-- <fieldset>
                                 <h3>Liens réseaux sociaux et sites web</h3>
                                 <button class="add-link"><span class="glyphicon glyphicon-plus"></span></button>
 
@@ -72,7 +77,7 @@
                                 <input type="text" name="link2" value="http://www.something.com" />
                                 <input type="text" name="link3" value="http://www.foobar.com" />
 
-                            </fieldset>
+                            </fieldset> -->
 
                             <h3 class="confidentiality">Confidentialité</h3>
                             <ul class="confidentiality">
@@ -80,15 +85,8 @@
                                 <li>Mauris vel semper nisi, ullamcorper condimentum metus.</li>
                                 <li>Ut sagittis fermentum tellus in consectetur.</li>
                             </ul>
-
-                            <button class="button delete-account">Supprimer mon compte</button>
-
                         </div>
                     </div>
-                    <p class="save">
-                        <button class="button">Enregistrer</button>
-                    </p>
-
                 </tab>
             </tabset>
 

@@ -8,11 +8,13 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
         $scope.profiles = MakerScienceProfile.one().customGETLIST('search', $scope.params).$object
 )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
+module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$state, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
                                             MakerScienceProfileTaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
+
+        $scope.profileToUpdate = angular.copy($scope.profile)
 
         $scope.preparedInterestTags = []
         $scope.preparedSkillTags = []
@@ -27,6 +29,13 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
         $scope.contributed_post = []
         $scope.liked_post = []
         $scope.followed_post = []
+
+        $scope.socials =
+            facebook : $scope.profile.facebook
+            linkedin : $scope.profile.linkedin
+            twitter : $scope.profile.twitter
+            contact_email : $scope.profile.contact_email
+            website : $scope.profile.website
 
         ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).then((linkedProjectResults)->
             angular.forEach(linkedProjectResults, (linkedProject) ->
@@ -93,7 +102,21 @@ module.controller("MakerScienceProfileCtrl", ($scope, $stateParams, MakerScience
                 when 'MakerScienceProfile' then MakerScienceProfile.one(resourceId).patch(putData)
                 when 'Place' then Place.one(resourceId).patch(putData)
 
-        $scope.updateSocialNetworks = (profileSlug, socials) ->
-            MakerScienceProfile.one(profileSlug).patch(socials)
+        $scope.updateSocialNetworks = (profileSlug) ->
+            angular.forEach($scope.socials, (value, key) ->
+                if value != null || value != ""
+                    $scope.profile[key] = value
+            )
+            MakerScienceProfile.one(profileSlug).patch($scope.socials)
+
+        $scope.fullUpdateMakerScienceProfile = (makerscienceProfile) ->
+            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.last_name', makerscienceProfile.parent.user.last_name)
+            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.first_name', makerscienceProfile.parent.user.first_name)
+            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.email', makerscienceProfile.parent.user.email)
+
+        $scope.deleteProfile = (makerscienceProfileSlug) ->
+            MakerScienceProfile.one(makerscienceProfileSlug).remove()
+            $rootScope.loginService.logout()
+            $state.go("home", {})
     )
 )
