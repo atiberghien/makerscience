@@ -142,7 +142,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 templateUrl: 'views/profile/profile.dashboard.html'
                 controller : 'MakerScienceProfileCtrl'
                 ncyBreadcrumb:
-                    label: '{{profile.full_name}}'
+                    label: 'Espace personnel'
                     parent : 'profile.detail'
         )
         .state('map',
@@ -204,7 +204,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
 
-    amMoment.changeLocale('fr');
+    amMoment.changeLocale('fr')
     $rootScope.loginService = loginService
     $rootScope.config = config
     $rootScope.$state = $state
