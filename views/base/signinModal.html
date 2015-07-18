@@ -1,9 +1,13 @@
-<form method="post" action="" class="login">
+<form method="post" action="" class="login" ng-controller='LoginCtrl'>
     <h3>Inscrivez-vous via les réseaux sociaux</h3>
     <ul>
         <!-- <li><button class="connect-with-facebook"></button></li>
         <li><button class="connect-with-twitter"></button></li> -->
-        <li><button class="connect-with-google" ng-click="authenticateGoogle()"></button></li>
+        <!-- <li><button class="connect-with-google" ng-click="authenticateGoogle()"></button></li> -->
+
+        <li><button class="connect-with-facebook" ng-click="authenticate('facebook')"></button></li>
+        <li><button class="connect-with-twitter" ng-click="authenticate('twitter')"></button></li>
+        <li><button class="connect-with-google" ng-click="authenticate('google')"></button></li>
     </ul>
     <p class="or">Ou</p>
     <fieldset>

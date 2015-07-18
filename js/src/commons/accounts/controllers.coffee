@@ -87,3 +87,15 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                     $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
         )
 )
+
+module.controller('LoginCtrl', ($scope, $rootScope, $cookies, $http, $auth) ->
+
+    $scope.authenticate = (provider) ->
+        $auth.authenticate(provider).then((response) ->
+            if response.data.success
+                $cookies.username = response.data.username
+                $cookies.key = response.data.token
+                $http.defaults.headers.common['Authorization'] = "ApiKey #{response.data.username}:#{response.data.token}"
+                $rootScope.$broadcast('event:auth-loginConfirmed')
+        )
+)

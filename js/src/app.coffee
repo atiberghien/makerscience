@@ -10,8 +10,8 @@ angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makersc
 angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
-                                'ngSanitize', 'ngTagsInput', 'angularMoment', 'angular-unisson-auth', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
-                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique'])
+                                'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
+                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -36,14 +36,27 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 return newResponse
         )
 )
-# Google auth config
-.config(['TokenProvider', '$locationProvider', (TokenProvider, $locationProvider) ->
-    TokenProvider.extendConfig(
-        clientId: '255067193649-gsukme1nnpu55pfd7q3b589lhmih3qg1.apps.googleusercontent.com',
-        redirectUri: config.oauthBaseUrl+'/oauth2callback.html',
-        scopes: ["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
-    )
-])
+
+.config(($authProvider, loginServiceProvider) ->
+    $authProvider.httpInterceptor = false;
+    
+    $authProvider.facebook({
+        url: config.loginBaseUrl + '/account/user/login/facebook',
+        clientId: '724284684343376',
+        scope: ['email', 'public_profile']
+    })
+
+    $authProvider.google({
+        url: config.loginBaseUrl + '/account/user/login/google',
+        clientId: '255067193649-5s7fan8nsch2cqft32fka9n36jcd37qg.apps.googleusercontent.com',
+    })
+
+    $authProvider.twitter({
+        url: config.loginBaseUrl + '/account/user/login/twitter',
+    })
+
+
+)
 # Unisson auth config
 .config((loginServiceProvider) ->
     loginServiceProvider.setBaseUrl(config.loginBaseUrl)
@@ -199,17 +212,17 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
 
 ])
-.run(($rootScope, editableOptions, editableThemes, amMoment, loginService, $state, $stateParams, CurrentMakerScienceProfileService) ->
+.run(($rootScope, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
 
     amMoment.changeLocale('fr')
+    $rootScope.CurrentMakerScienceProfileService = CurrentMakerScienceProfileService
     $rootScope.loginService = loginService
     $rootScope.config = config
     $rootScope.$state = $state
     $rootScope.$stateParams = $stateParams
-    $rootScope.CurrentMakerScienceProfileService = CurrentMakerScienceProfileService
 
     $rootScope.Math = window.Math
 )
