@@ -39,7 +39,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
 .config(($authProvider, loginServiceProvider) ->
     $authProvider.httpInterceptor = false;
-    
+
     $authProvider.facebook({
         url: config.loginBaseUrl + '/account/user/login/facebook',
         clientId: '724284684343376',
@@ -52,7 +52,9 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     })
 
     $authProvider.twitter({
-        url: config.loginBaseUrl + '/account/user/login/twitter',
+        url : config.loginBaseUrl + '/api/v0/account/user/login/twitter',
+        clientId: 'RXz5fy5X4M1LewAeNliME2gbM',
+        redirectUri : config.loginBaseUrl + '/api/v0/account/user/login/twitter',
     })
 
 
