@@ -52,9 +52,9 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     })
 
     $authProvider.twitter({
-        url : config.loginBaseUrl + '/api/v0/account/user/login/twitter',
+        url : config.loginBaseUrl + '/account/user/login/twitter',
         clientId: 'RXz5fy5X4M1LewAeNliME2gbM',
-        redirectUri : config.loginBaseUrl + '/api/v0/account/user/login/twitter',
+        redirectUri : config.loginBaseUrl + '/account/user/login/twitter',
     })
 
 
