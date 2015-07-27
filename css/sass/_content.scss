@@ -1040,6 +1040,7 @@ div.toolbar {
 			}
 			button.add-member {
 				display: none;
+				z-index : 100;
 			}
 			&:hover {
 				button.add-member {
