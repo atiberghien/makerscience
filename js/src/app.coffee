@@ -149,7 +149,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 templateUrl: 'views/profile/profile.detail.html'
                 controller : 'MakerScienceProfileCtrl'
                 ncyBreadcrumb:
-                    label: '{{profile.full_name}}'
+                    label: '{{profile.parent.user.first_name}} {{profile.parent.user.last_name}}'
                     parent : 'profile.list'
         )
         .state('profile.dashboard',
