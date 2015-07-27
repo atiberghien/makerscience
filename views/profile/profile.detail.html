@@ -1,9 +1,3 @@
-<!-- <ul id="sidenav" class="project">
-    <li><a ng-click="editable = ! editable" ng-init="editable=false" ng-class="{selected: editable}"><span class="glyphicon glyphicon-pencil"></span>Editer</a></li>
-    <li><a href=""><span class="glyphicon glyphicon-share-alt"></span>Partager</a></li>
-    <li><a href=""><span class="glyphicon glyphicon-envelope"></span>Contact</a></li>
-</ul>#sidenav -->
-
 <div id="intro" class="intro-profile"  ng-init="editable = currentMakerScienceProfile === profile">
     <div class="container">
         <div class="intro">
@@ -31,9 +25,12 @@
                             ng-bind-html="profile.activity">{{ profile.activity }}
                         </h2>
                     </div>
-                    <div class="relative">
+                    <div class="relative" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
                         <ul>
-                            <li><a>Ajouter à mes contacts</a></li>
+                            <li>
+                                <a ng-show="!isFriend" ng-click="addFriend(profile.id)">Ajouter à mes contacts</a>
+                                <a ng-show="isFriend" ng-click="removeFriend(profile.id)">Retirer de mes contacts</a>
+                            </li>
                             <li><a>Contacter</a></li>
                         </ul>
                     </div>
@@ -258,16 +255,16 @@
                         </div>
                     </div>
                 </tab>
-                <tab heading="Contacts (34)">
+                <tab heading="Contacts ({{friends.length}})">
                     <h2 class="members">Mes contacts</h2>
-                    <div class="boxes boxes-profiles" ng-controller="MakerScienceProfileListCtrl"  ng-init="init()">
-                        <div class="box" ng-repeat="profile in profiles">
+                    <div class="boxes boxes-profiles">
+                        <div class="box" ng-repeat="profile in friends">
                             <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
                         </div>
                     </div>
                     <h2 class="members">Contacts similaires</h2>
-                    <div class="boxes boxes-profiles" ng-controller="MakerScienceProfileListCtrl"  ng-init="init()">
-                        <div class="box" ng-repeat="profile in profiles">
+                    <div class="boxes boxes-profiles>
+                        <div class="box" ng-repeat="profile in similars">
                             <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
                         </div>
                     </div>

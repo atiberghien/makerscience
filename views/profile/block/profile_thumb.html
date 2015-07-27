@@ -1,4 +1,7 @@
-<button class="add-member"><span class="glyphicon glyphicon-plus"></span></button>
+<span ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
+    <button  ng-show="!isFriend" ng-click="addFriend(profile.id)" class="add-member"><span class="glyphicon glyphicon-plus"></span></button>
+    <button  ng-show="isFriend" ng-click="removeFriend(profile.id)" class="add-member"><span class="glyphicon glyphicon-minus"></span></button>
+</span>
 <a ui-sref="profile.detail({slug:profile.slug})">
     <!-- gravatar size:
         85 - homepage

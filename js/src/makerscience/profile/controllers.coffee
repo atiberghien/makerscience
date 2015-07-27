@@ -9,10 +9,13 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
 )
 
 module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$state, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
-                                            MakerScienceProfileTaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
+                                            MakerScienceProfileTaggedItem, TaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
+
+        $rootScope.$broadcast('profile-loaded', $scope.profile)
+        $rootScope.$emit('profile-loaded', $scope.profile)
 
         $scope.profileToUpdate = angular.copy($scope.profile)
 
@@ -30,12 +33,16 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$
         $scope.liked_post = []
         $scope.followed_post = []
 
+        $scope.friends = []
+
         $scope.socials =
             facebook : $scope.profile.facebook
             linkedin : $scope.profile.linkedin
             twitter : $scope.profile.twitter
             contact_email : $scope.profile.contact_email
             website : $scope.profile.website
+
+        $scope.similars = []
 
         ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).then((linkedProjectResults)->
             angular.forEach(linkedProjectResults, (linkedProject) ->
@@ -82,6 +89,24 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$
             )
         )
 
+        ObjectProfileLink.getList({content_type:'makerscienceprofile', profile__id : $scope.profile.parent.id, level : 40}).then((linkedFriendResults)->
+            angular.forEach(linkedFriendResults, (linkedFriend) ->
+                MakerScienceProfile.one().get({id : linkedFriend.object_id}).then((profileResults) ->
+                    console.log(profileResults)
+                    if profileResults.objects.length == 1
+                        $scope.friends.push(profileResults.objects[0])
+                )
+            )
+        )
+
+
+        TaggedItem.one().customGET("makerscienceprofile/"+$scope.profile.id+"/similars").then((similarResults) ->
+            angular.forEach(similarResults, (similar) ->
+                if similar.type == 'makerscienceprofile'
+                    $scope.similars.push(MakerScienceProfile.one(similar.id).get().$object)
+            )
+        )
+
         angular.forEach($scope.profile.tags, (taggedItem) ->
             switch taggedItem.tag_type
                 when "in" then $scope.preparedInterestTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
@@ -118,5 +143,35 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$
             MakerScienceProfile.one(makerscienceProfileSlug).remove()
             $rootScope.loginService.logout()
             $state.go("home", {})
+    )
+)
+
+module.controller("FriendshipCtrl", ($scope, $rootScope, ObjectProfileLink) ->
+
+    $scope.addFriend = (friendProfileID) ->
+        ObjectProfileLink.one().customPOST(
+            profile_id: $scope.currentMakerScienceProfile.parent.id,
+            level: 40,
+            detail : "Ami",
+            isValidated:true
+            , 'makerscienceprofile/'+friendProfileID)
+        $scope.isFriend = true
+
+    $scope.removeFriend = (friendProfileID) ->
+        $scope.checkFriend(friendProfileID).then((currentLink) ->
+            ObjectProfileLink.one(currentLink.id).remove()
+            $scope.isFriend = false
+        )
+
+    $scope.checkFriend = (friendProfileID) ->
+        if $scope.currentMakerScienceProfile
+            ObjectProfileLink.one().customGET('makerscienceprofile/'+friendProfileID, {profile__id: $scope.currentMakerScienceProfile.parent.id, level:40}).then((objectProfileLinkResults) ->
+                if objectProfileLinkResults.objects.length == 1
+                    $scope.isFriend = true
+                    return objectProfileLinkResults.objects[0]
+            )
+
+    $rootScope.$on('profile-loaded', (event, profile) ->
+        $scope.checkFriend(profile.id)
     )
 )
