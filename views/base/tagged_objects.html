@@ -2,7 +2,7 @@
     <h1>Tous les objets taggés avec</h1>
     <h2>« {{tag.name}} »</h2>
     <p class="center">
-        <button class="button" tooltip="Recevoir des notifications dès qu’un nouveau contenu est posté avec ce tag">S'abonner</button>
+        <button class="button" ng-click="followTag(currentMakerScienceProfile.parent.id)" tooltip="Recevoir des notifications dès qu’un nouveau contenu est posté avec ce tag">S'abonner</button>
     </p>
 </div><!-- #intro -->
 
@@ -14,8 +14,8 @@
 
                 <h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
                 <div class="boxes boxes-medium">
-                    <div class="box" ng-repeat="item in projectItems = (taggedItems| filter:{object_type_name:'makerscienceproject'})">
-                        <div ng-init="getObject(item.object_type_name, item.object_id)">
+                    <div class="box" ng-repeat="item in projectItems = (taggedItems| filter:{content_type:'makerscienceproject'})">
+                        <div ng-init="getObject(item.content_type, item.object_id)">
                             <ng-include src="'views/catalog/block/project_thumb.html'"></ng-include>
                         </div>
                     </div>
@@ -28,8 +28,8 @@
 
                 <h2 class="resources clear"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
                 <div class="boxes boxes-medium">
-                    <div class="box" ng-repeat="item in resourceItems = (taggedItems| filter:{object_type_name:'makerscienceresource'})">
-                        <div ng-init="getObject(item.object_type_name, item.object_id)">
+                    <div class="box" ng-repeat="item in resourceItems = (taggedItems| filter:{content_type:'makerscienceresource'})">
+                        <div ng-init="getObject(item.content_type, item.object_id)">
                             <ng-include src="'views/catalog/block/resource_thumb.html'"></ng-include>
                         </div>
                     </div>
@@ -42,8 +42,8 @@
 
                 <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Profils</h2>
                 <div class="boxes boxes-medium">
-                    <div class="box" ng-repeat="item in profileItems = (taggedItems| filter:{object_type_name:'makerscienceprofile'})">
-                        <div ng-init="getObject(item.object_type_name, item.object_id)">
+                    <div class="box" ng-repeat="item in profileItems = (taggedItems| filter:{content_type:'makerscienceprofile'})">
+                        <div ng-init="getObject(item.content_type, item.object_id)">
                             <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
                         </div>
                     </div>
@@ -56,8 +56,8 @@
 
                 <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Discussions</h2>
                 <div class="boxes boxes-medium">
-                    <!-- <div class="box" ng-repeat="item in postItems = (taggedItems| filter:{object_type_name:'post'})">
-                        <div ng-init="getObject(item.object_type_name, item.object_id)">
+                    <!-- <div class="box" ng-repeat="item in postItems = (taggedItems| filter:{content_type:'post'})">
+                        <div ng-init="getObject(item.content_type, item.object_id)">
                             <ng-include src="'views/forum/block/thread.html'"></ng-include>
                         </div>
                     </div> -->

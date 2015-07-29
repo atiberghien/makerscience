@@ -95,15 +95,36 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         )
                 )
                 angular.forEach($scope.themesTags, (tag)->
-                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/th", {})
+                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/th", {}).then((taggedItemResult) ->
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItemResult.id)
+                    )
                 )
 
                 angular.forEach($scope.formatsTags, (tag)->
-                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/fm", {})
+                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/fm", {}).then((taggedItemResult) ->
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItemResult.id)
+                    )
                 )
 
                 angular.forEach($scope.targetsTags, (tag)->
-                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/tg", {})
+                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/tg", {}).then((taggedItemResult) ->
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItemResult.id)
+                    )
                 )
 
                 $scope.saveVideos(projectsheetResult.id)
@@ -184,7 +205,14 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         )
 
         $scope.addTagToProjectSheet = (tag_type, tag) ->
-            MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+$scope.projectsheet.id+"/"+tag_type, {})
+            MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+$scope.projectsheet.id+"/"+tag_type, {}).then((taggedItemResult) ->
+                ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 50,
+                    detail : '',
+                    isValidated:true
+                , 'taggeditem/'+taggedItemResult.id)
+            )
 
         $scope.removeTagFromProjectSheet = (tag) ->
             MakerScienceProjectTaggedItem.one(tag.taggedItemId).remove()
@@ -266,15 +294,36 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
 
                 angular.forEach($scope.themesTags, (tag)->
-                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/th", {})
+                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/th", {}).then((taggedItemResult) ->
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItemResult.id)
+                    )
                 )
 
                 angular.forEach($scope.formatsTags, (tag)->
-                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/fm", {})
+                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/fm", {}).then((taggedItemResult) ->
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItemResult.id)
+                    )
                 )
 
                 angular.forEach($scope.targetsTags, (tag)->
-                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/tg", {})
+                    MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/tg", {}).then((taggedItemResult) ->
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItemResult.id)
+                    )
                 )
 
                 $scope.saveVideos(resourcesheetResult.id)
@@ -291,7 +340,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
 module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller,
                                                     MakerScienceResource, MakerScienceResourceTaggedItem, TaggedItem,
-                                                    Comment, DataSharing) ->
+                                                    Comment, ObjectProfileLink, DataSharing) ->
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
@@ -330,7 +379,14 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         )
 
         $scope.addTagToResourceSheet = (tag_type, tag) ->
-            MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+$scope.projectsheet.id+"/"+tag_type, {})
+            MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+$scope.projectsheet.id+"/"+tag_type, {}).then((taggedItemResult) ->
+                ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 50,
+                    detail : '',
+                    isValidated:true
+                , 'taggeditem/'+taggedItemResult.id)
+            )
 
         $scope.removeTagFromResourceSheet = (tag) ->
             MakerScienceResourceTaggedItem.one(tag.taggedItemId).remove()

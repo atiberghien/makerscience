@@ -13,7 +13,7 @@ module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerScience
 
 )
 
-module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerSciencePost, MakerScienceProject, MakerScienceResource, DataSharing) ->
+module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, TaggedItem, ObjectProfileLink, MakerSciencePost, MakerScienceProject, MakerScienceResource, DataSharing) ->
     angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
 
     $scope.allAvailableItems = []
@@ -57,6 +57,19 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, MakerScien
                 post_type : newPost.type
                 linked_projects : []
                 linked_resources : []
+
+            angular.forEach($scope.questionTags, (tag)->
+                TaggedItem.one().get({content_type : 'post', object_id : newPost.id, tag__slug : tag.text}).then((taggedItemResults) ->
+                    if taggedItemResults.objects.length == 1
+                        taggedItem = taggedItemResults.objects[0]
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItem.id)
+                )
+            )
 
             angular.forEach($scope.linkedItems, (item) ->
                 makerSciencePost["linked_"+item.type+"s"].push(item.fullObject.resource_uri)

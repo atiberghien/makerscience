@@ -47,11 +47,22 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
 
         $scope.similars = []
 
+        $scope.favoriteTags = {}
+        $scope.followedTags = []
+
         ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults) ->
             $scope.activities = objectProfileLinkResults
             angular.forEach($scope.activities, (activity) ->
                 $scope.getObject(activity.content_type, activity.object_id).then((obj) ->
-                    activity.content_object = obj
+                    if activity.content_type == 'taggeditem'
+                        if obj.tag.slug of $scope.favoriteTags
+                            $scope.favoriteTags[obj.tag.slug]++
+                        else
+                            $scope.favoriteTags[obj.tag.slug] = 1
+                    else if activity.content_type == 'tag'
+                        $scope.followedTags.push(obj)
+                    else
+                        activity.content_object = obj
                 )
             )
         )
@@ -125,7 +136,14 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         )
 
         $scope.addTagToProfile = (tag_type, tag) ->
-            MakerScienceProfileTaggedItem.one().customPOST({tag : tag.text}, "makerscienceprofile/"+$scope.profile.id+"/"+tag_type, {})
+            MakerScienceProfileTaggedItem.one().customPOST({tag : tag.text}, "makerscienceprofile/"+$scope.profile.id+"/"+tag_type, {}).then((taggedItemResult) ->
+                ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 50,
+                    detail : '',
+                    isValidated:true
+                , 'taggeditem/'+taggedItemResult.id)
+            )
 
         $scope.removeTagFromProfile = (tag) ->
             MakerScienceProfileTaggedItem.one(tag.taggedItemId).remove()

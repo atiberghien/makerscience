@@ -38,7 +38,7 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
     $scope.init = (params) ->
         $scope.limit = 12
         $scope.params = {}
-        
+
         if params
             if params.hasOwnProperty('limit')
                  $scope.limit = params["limit"]
@@ -72,7 +72,7 @@ module.controller("StaticContentCtrl", ($scope, StaticContent) ->
 )
 
 
-module.controller("MakerScienceObjectGetter", ($scope, $q, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
+module.controller("MakerScienceObjectGetter", ($scope, $q, Tag, TaggedItem, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
     $scope.getObject = (objectTypeName, objectId) ->
             if objectTypeName == 'project'
                 return MakerScienceProject.one().get({parent__id : objectId}).then((makerScienceProjectResults) ->
@@ -107,6 +107,16 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, MakerScienceProject, 
                     if makerSciencePostResults.objects.length == 1
                         $scope.post = makerSciencePostResults.objects[0]
                         return $scope.post
+                )
+            if objectTypeName == 'taggeditem'
+                return TaggedItem.one(objectId).get().then((taggedItemResult) ->
+                    $scope.taggeditem = taggedItemResult
+                    return $scope.taggeditem
+                )
+            if objectTypeName == 'tag'
+                return Tag.one(objectId).get().then((tagResult) ->
+                    $scope.tag = tagResult
+                    return $scope.tag
                 )
             console.log("Unable to fetch", objectTypeName, objectId)
             return null

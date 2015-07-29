@@ -20,7 +20,7 @@ module.controller("TagAutoCompleteCtrl", ($scope, $q, Tag) ->
         return deferred.promise
 )
 
-module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, Tag, TaggedItem) ->
+module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, Tag, TaggedItem, ObjectProfileLink) ->
 
     $scope.taggedItems = []
     $scope.tag = null
@@ -31,6 +31,14 @@ module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, Tag, TaggedIt
             if $scope.tag && $scope.tag.weight > 0
                 $scope.taggedItems = TaggedItem.getList({'tag__slug' : $stateParams.slug}).$object
         )
+
+        $scope.followTag = (profileID) ->
+            ObjectProfileLink.one().customPOST(
+                profile_id: profileID,
+                level: 51,
+                detail : '',
+                isValidated:true
+            , 'tag/'+$scope.tag.id)
 
 
     $scope.addTag = (objectTypeName, resourceId, tag) ->
@@ -55,6 +63,7 @@ module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, Tag, TaggedIt
                         removeTag : $scope.removeTag
                         }
         )
+
 )
 
 module.controller('TagPopupCtrl', ($scope, $modalInstance, params) ->
