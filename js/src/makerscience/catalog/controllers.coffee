@@ -253,7 +253,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 # add connected user as team member of project with detail "porteur"
                 ObjectProfileLink.one().customPOST(
                     profile_id: $scope.currentMakerScienceProfile.parent.id,
-                    level: 0,
+                    level: 10,
                     detail : "Créateur/Créatrice",
                     isValidated:true
                     , 'project/'+makerscienceResourceResult.parent.id).then((objectProfileLinkResult) ->

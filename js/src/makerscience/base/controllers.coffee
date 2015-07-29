@@ -72,29 +72,45 @@ module.controller("StaticContentCtrl", ($scope, StaticContent) ->
 )
 
 
-module.controller("MakerScienceObjectGetter", ($scope, $q, MakerScienceProject, MakerScienceResource, MakerScienceProfile, Post) ->
+module.controller("MakerScienceObjectGetter", ($scope, $q, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
     $scope.getObject = (objectTypeName, objectId) ->
-        deferred = $q.defer();
-        promise = deferred.promise;
-        promise.then(->
+            if objectTypeName == 'project'
+                return MakerScienceProject.one().get({parent__id : objectId}).then((makerScienceProjectResults) ->
+                    if makerScienceProjectResults.objects.length == 1
+                        $scope.project = makerScienceProjectResults.objects[0]
+                        return $scope.project
+                    else
+                        return MakerScienceResource.one().get({parent__id : objectId}).then((makerScienceResourceResults) ->
+                            if makerScienceResourceResults.objects.length == 1
+                                $scope.resource = makerScienceResourceResults.objects[0]
+                                return $scope.resource
+                        )
+                )
             if objectTypeName == 'makerscienceproject'
-                MakerScienceProject.one(objectId).get().then((makerScienceProjectResult) ->
+                return MakerScienceProject.one(objectId).get().then((makerScienceProjectResult) ->
                     $scope.project = makerScienceProjectResult
+                    return $scope.project
                 )
             if objectTypeName == 'makerscienceresource'
-                MakerScienceResource.one(objectId).get().then((makerScienceResourceResult) ->
+                return MakerScienceResource.one(objectId).get().then((makerScienceResourceResult) ->
                     $scope.resource = makerScienceResourceResult
+                    return $scope.resource
                 )
             if objectTypeName == 'makerscienceprofile'
-                MakerScienceProfile.one(objectId).get().then((makerScienceProfileResult) ->
-                    $scope.profile = makerScienceProfileResult
+                return MakerScienceProfile.one().get({id : objectId}).then((profileResults) ->
+                    if profileResults.objects.length == 1
+                        $scope.profile = profileResults.objects[0]
+                        return $scope.profile
                 )
-            # if objectTypeName == 'post'
-            #     Post.one(objectId).get().then((postResult) ->
-            #         $scope.post = postResult
-            #     )
-        )
-        deferred.resolve();
+            if objectTypeName == 'post'
+                return MakerSciencePost.one().get({parent__id: objectId}).then((makerSciencePostResults) ->
+                    if makerSciencePostResults.objects.length == 1
+                        $scope.post = makerSciencePostResults.objects[0]
+                        return $scope.post
+                )
+            console.log("Unable to fetch", objectTypeName, objectId)
+            return null
+
 
     $scope.getMakerscienceProfileFromGenericProfile = (genericProfileId) ->
         MakerScienceProfile.one().get({'parent__id' : genericProfileId}).then((makerScienceProfileResult) ->

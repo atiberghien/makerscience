@@ -1,5 +1,5 @@
-module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services',
-        'makerscience.base.services', 'commons.accounts.services', 'makerscience.base.controllers'])
+module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'makerscience.base.services',
+                                                             'commons.accounts.services', 'makerscience.base.controllers'])
 
 module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfile) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
@@ -8,8 +8,11 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
         $scope.profiles = MakerScienceProfile.one().customGETLIST('search', $scope.params).$object
 )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$state, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
+
+module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
                                             MakerScienceProfileTaggedItem, TaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
+
+    angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
@@ -44,6 +47,15 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$
 
         $scope.similars = []
 
+        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults) ->
+            $scope.activities = objectProfileLinkResults
+            angular.forEach($scope.activities, (activity) ->
+                $scope.getObject(activity.content_type, activity.object_id).then((obj) ->
+                    activity.content_object = obj
+                )
+            )
+        )
+
         ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).then((linkedProjectResults)->
             angular.forEach(linkedProjectResults, (linkedProject) ->
                 MakerScienceProject.one().get({parent__id : linkedProject.object_id}).then((makerscienceProjectResults) ->
@@ -55,9 +67,9 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$
                     else
                         MakerScienceResource.one().get({parent__id : linkedProject.object_id}).then((makerscienceResourceResults) ->
                             if makerscienceResourceResults.objects.length == 1#FIXME Why this test
-                                if linkedProject.level == 0
+                                if linkedProject.level == 10
                                     $scope.member_resources.push(makerscienceResourceResults.objects[0])
-                                else if linkedProject.level == 2
+                                else if linkedProject.level == 12
                                     $scope.fan_resources.push(makerscienceResourceResults.objects[0])
                         )
                 )
@@ -98,7 +110,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $stateParams,$
                 )
             )
         )
-
 
         TaggedItem.one().customGET("makerscienceprofile/"+$scope.profile.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
