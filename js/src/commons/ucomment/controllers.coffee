@@ -1,8 +1,8 @@
 module = angular.module("commons.ucomment.controllers", ['commons.ucomment.services', 'makerscience.base.services'])
 
-module.controller("CommentCtrl", ($scope, $rootScope, Comment, DataSharing) ->
+module.controller("CommentCtrl", ($scope, $rootScope, Comment, Profile, ObjectProfileLink, DataSharing) ->
     """
-    controlling comments attached to a resource. 
+    controlling comments attached to a resource.
     """
 
     $scope.newcommentForm =
@@ -56,11 +56,24 @@ module.controller("CommentCtrl", ($scope, $rootScope, Comment, DataSharing) ->
             )
 
 
-    $scope.postComment = ()->
+    $scope.postComment = (commentType)->
         Comment.one().customPOST({comment_text:$scope.newcommentForm.text}, $scope.objectTypeName+'/'+$scope.object.id).then((newcomment)->
-                $scope.comments.push(newcomment)
-                $scope.newcommentForm.text = ''
-                $scope.commenting = false
-                )
+            $scope.comments.push(newcomment)
+            $scope.newcommentForm.text = ''
+            $scope.commenting = false
+
+            Profile.one().get({user__id : newcomment.user.id}).then((profileResults) ->
+                if profileResults.objects.length == 1
+                    profile = profileResults.objects[0]
+                    ObjectProfileLink.one().customPOST(
+                        profile_id: profile.id,
+                        level: commentType,
+                        detail : '',
+                        isValidated:true
+                    , $scope.objectTypeName+'/'+$scope.object.id).then((commentLinkResult) ->
+                        console.log(commentLinkResult)
+                    )
+            )
+        )
 
 )
