@@ -1,0 +1,118 @@
+<div class="sidebar-filters sidebar-projects" >
+    <h3>Filtres de recherche</h3>
+
+    <div ng-controller="FilterCtrl">
+        <h4>Thématique</h4>
+        <div class="" style="width:100%; padding-bottom:10px;">
+            <div class="" ng-controller="TagAutoCompleteCtrl">
+                <tags-input ng-model="tags_filter"
+                            placeholder="> Mot-clé"
+                            on-tag-added="refreshFilter()"
+                            on-tag-removed="refreshFilter()">
+                            <auto-complete source="availableThemeTags"></auto-complete>
+                </tags-input>
+            </div>
+        </div><!-- /input-group -->
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in availableThemeTags | limitTo:16">
+                <a href="" ng-click="addToTagsFilter(tag)">{{tag.name}}</a>
+            </li>
+
+        </ul>
+    </div>
+    <div ng-controller="FilterCtrl">
+        <h4>Publics ciblés</h4>
+        <div class="" style="width:100%; padding-bottom:10px;">
+            <div class="" ng-controller="TagAutoCompleteCtrl">
+                <tags-input ng-model="tags_filter"
+                            placeholder="> Mot-clé"
+                            on-tag-added="refreshFilter()"
+                            on-tag-removed="refreshFilter()">
+                            <auto-complete source="availableTargetTags"></auto-complete>
+                </tags-input>
+            </div>
+        </div><!-- /input-group -->
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in availableTargetTags | limitTo:16">
+                <a href="" ng-click="addToTagsFilter(tag)">{{tag.name}}</a>
+            </li>
+
+        </ul>
+    </div>
+    <div ng-controller="FilterCtrl">
+        <h4>Format</h4>
+        <div class="" style="width:100%; padding-bottom:10px;">
+            <div class="" ng-controller="TagAutoCompleteCtrl">
+                <tags-input ng-model="tags_filter"
+                            placeholder="> Mot-clé"
+                            on-tag-added="refreshFilter()"
+                            on-tag-removed="refreshFilter()">
+                            <auto-complete source="availableFormatsTags"></auto-complete>
+                </tags-input>
+            </div>
+        </div><!-- /input-group -->
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in availableFormatsTags | limitTo:16">
+                <a href="" ng-click="addToTagsFilter(tag)">{{tag.name}}</a>
+            </li>
+
+        </ul>
+    </div>
+    <!-- <h4>Localisation</h4>
+    <div class="panel-group" id="filterLocation" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="collapseCountry">
+                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#filterLocation" href="#collapseCountry" aria-expanded="true" aria-controls="collapseCountry">Pays <span class="caret"></span></a></h4>
+            </div>
+            <div id="collapseCountry" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="collapseCountry">
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="">Country 1</a></li>
+                        <li><a href="">Country 2</a></li>
+                        <li><a href="">Country 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="collapseRegion">
+                <h4 class="panel-title"><a class="collapsed" data-toggle="collapse" data-parent="#filterLocation" href="#collapseRegion" aria-expanded="false" aria-controls="collapseRegion">Région	<span class="caret"></span></a></h4>
+            </div>
+            <div id="collapseRegion" class="panel-collapse collapse" role="tabpanel" aria-labelledby="collapseRegion">
+                <div class="panel-body">
+                    <ul>
+                        <li><a href="">Region 1</a></li>
+                        <li><a href="">Region 2</a></li>
+                        <li><a href="">Region 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <h4>Moteur de recherche</h4>
+    <div class="input-group">
+        <input type="text" ng-model="query_filter" class="form-control" placeholder="Rechercher...">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="refreshFilter()">Go!</button>
+        </span>
+    </div><!-- /input-group -->
+
+</div><!-- .sidebar-projects -->
+<style>
+div.sidebar-preview {
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /*background-color: gray;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.5) 35px, rgba(255,255,255,.5) 70px);£
+    */
+    opacity: 0.5;
+}
+</style>
+<div class="sidebar-filters">
+
+</div><!-- .sidebar-filters -->

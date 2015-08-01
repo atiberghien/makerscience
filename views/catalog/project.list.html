@@ -8,17 +8,26 @@
     <div id="content" class="listing" ng-controller="MakerScienceProjectListCtrl"  ng-init="init(12)">
 
         <div class="col-md-12">
-
             <div class="row">
                 <div class="col-md-9">
-
                     <tabset class="nav-tabs-listing">
                         <tab heading="Les plus récents">
-                            <div class="boxes boxes-listing" >
+                            <div class="boxes boxes-listing">
                                 <div class="box" ng-repeat="project in projects">
                                     <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
-                                </div><!-- .box -->
-                            </div><!-- .boxes -->
+                                </div>
+                            </div>
+                            <pagination total-items="totalItems"
+                                        items-per-page='limit'
+                                        ng-model="currentPage"
+                                        max-size="10"
+                                        class="pagination-sm"
+                                        rotate="false"
+                                        num-pages="numPages"
+                                        ng-change="pageChanged(currentPage)"
+                                        previous-text="<<"
+                                        next-text=">>">
+                            </pagination>
                         </tab>
                         <tab heading="Les plus populaires">
                             Les plus populaires ... coming soon
@@ -30,14 +39,12 @@
                             Au hasard ... coming soon
                         </tab>
                     </tabset>
-
                     <a ui-sref="project.new" class="large large-red">Créer un projet <img src="/img/smiley.png" class="smiley" alt="Smiley" /></a>
-
                 </div>
                 <div class="col-md-3">
-                    <ng-include src="'views/catalog/block/filters.html'" ng-init="objectType='makerscienceproject'" ></ng-include>
+                    <ng-include src="'views/catalog/block/filters_project.html'" ng-init="objectType='makerscienceproject'" ></ng-include>
                 </div>
-
+            </div>
         </div><!-- .col-md-12 -->
 
     </div><!-- #content -->

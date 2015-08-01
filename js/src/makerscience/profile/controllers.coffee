@@ -1,11 +1,27 @@
 module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'makerscience.base.services',
                                                              'commons.accounts.services', 'makerscience.base.controllers'])
 
-module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfile) ->
+module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfile, MakerScienceProfileTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
+    $scope.availableInterestTags = []
+    $scope.availableSkillTags = []
+
+    MakerScienceProfileTaggedItem.getList().then((taggedItemResults) ->
+        angular.forEach(taggedItemResults, (taggedItem) ->
+            switch taggedItem.tag_type
+                when 'sk' then $scope.availableSkillTags.push(taggedItem.tag)
+                when 'in' then $scope.availableInterestTags.push(taggedItem.tag)
+        )
+    )
+
     $scope.refreshList = ()->
-        $scope.profiles = MakerScienceProfile.one().customGETLIST('search', $scope.params).$object
+        MakerScienceProfile.one().customGETLIST('search', $scope.params).then((makerScienceProfileResults) ->
+            meta = makerScienceProfileResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.profiles =  makerScienceProfileResults
+        )
 )
 
 

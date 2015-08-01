@@ -3,11 +3,25 @@ module = angular.module("makerscience.forum.controllers", ["commons.megafon.cont
 
 
 
-module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerSciencePost) ->
+module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerSciencePost, TaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
+    $scope.getAvailablePostTags = () ->
+        availablePostTags = []
+        TaggedItem.getList({content_type : 'post'}).then((taggedItemResults) ->
+            angular.forEach(taggedItemResults, (taggedItem) ->
+                availablePostTags.push(taggedItem.tag.slug)
+            )
+        )
+        return availablePostTags
+
     $scope.refreshList = ()->
-        $scope.threads = MakerSciencePost.one().customGETLIST('search', $scope.params).$object
+        MakerSciencePost.one().customGETLIST('search', $scope.params).then((makerSciencePostResults) ->
+            meta = makerSciencePostResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.threads =  makerSciencePostResults
+        )
 
     $scope.$emit('post:new', $scope.refreshList);
 

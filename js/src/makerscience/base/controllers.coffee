@@ -25,28 +25,24 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
     watch for changes in filterParams from FilterService
     Controllers using it need to implement a refreshList() method calling adequate [Object]Service
     """
+    $scope.currentPage = 1
+    $scope.params = {}
 
     $scope.getParams = ()->
-        $scope.params['limit'] = $scope.limit
+        # $scope.params['limit'] = $scope.limit
         $scope.params['q'] = FilterService.filterParams.query
         $scope.params['facet'] = FilterService.filterParams.tags
 
-    $scope.refreshListGeneric = ()->
-        $scope.getParams()
+    $scope.pageChanged = (newPage) ->
+        $scope.params["offset"] = (newPage - 1) * $scope.limit
         $scope.refreshList()
 
+    $scope.refreshListGeneric = ()->
+        $scope.getParams()
+        console.log("refreshListGeneric", $scope.params)
+        $scope.refreshList() #Must be defined in the subclass
+
     $scope.init = (params) ->
-        $scope.limit = 12
-        $scope.params = {}
-
-        if params
-            if params.hasOwnProperty('limit')
-                 $scope.limit = params["limit"]
-            if params.hasOwnProperty('featured')
-                $scope.params['featured'] = params["features"]
-            $scope.params = params
-
-        # Refresh FilterService params
         FilterService.filterParams.query = ''
         FilterService.filterParams.tags = []
         $scope.refreshListGeneric()
@@ -152,14 +148,8 @@ module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceP
 module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
 
     console.log("Init Filter Ctrl , state param ? ", $stateParams)
-    $scope.suggestedTags = []
     $scope.tags_filter = []
     $scope.query_filter = ''
-
-    $scope.load = (objectType)->
-        console.log("loading filter on ", objectType)
-        $scope.objectType = objectType
-        $scope.suggestedTags = Tag.getList({content_type:objectType}).$object
 
     $scope.refreshFilter = ()->
         """

@@ -112,24 +112,51 @@
 <div class="forum-content">
     <div class="row container">
         <div class="col-md-8">
-            <div id="content" class="content-forum" ng-controller="MakerSciencePostListCtrl">
+            <div id="content" class="content-forum" >
                 <tabset class="nav-tabs-forum">
-                    <tab heading="Récent" select="init({order_by : 'updated_on'})">
-                        <input type="search" name="search-by-tags" placeholder="Rechercher par tags..." />
-                        <div ng-repeat="post in threads">
-                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
+                    <tab heading="Récent" ng-controller="MakerSciencePostListCtrl" ng-init="init()">
+                        <div ng-controller="FilterCtrl">
+                            <div class="" ng-controller="TagAutoCompleteCtrl">
+                                <tags-input ng-model="tags_filter"
+                                            placeholder="> Mot-clé"
+                                            on-tag-added="refreshFilter()"
+                                            on-tag-removed="refreshFilter()">
+                                            <auto-complete source="getAvailablePostTags()"></auto-complete>
+                                </tags-input>
+                            </div>
+                            <div ng-repeat="post in threads">
+                                <ng-include src="'views/forum/block/thread.html'"></ng-include>
+                            </div>
+                            <pagination total-items="totalItems"
+                                        items-per-page='limit'
+                                        ng-model="currentPage"
+                                        max-size="10"
+                                        class="pagination-sm"
+                                        rotate="false"
+                                        num-pages="numPages"
+                                        ng-change="pageChanged(currentPage)"
+                                        previous-text="<<"
+                                        next-text=">>">
+                            </pagination>
                         </div>
                         <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
                     </tab>
-                    <tab heading="Top" select="init({order_by : 'answers_count'})">
-                        <input type="search" name="search-by-tags" placeholder="Rechercher par tags..." />
-                        <div ng-repeat="post in threads">
-                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
+                    <tab heading="Top" ng-controller="MakerSciencePostListCtrl" ng-init="init()">
+                        <div ng-controller="FilterCtrl">>
+                            <div class="" ng-controller="TagAutoCompleteCtrl">
+                                <tags-input ng-model="tags_filter"
+                                            placeholder="> Mot-clé"
+                                            on-tag-added="refreshFilter()"
+                                            on-tag-removed="refreshFilter()">
+                                            <auto-complete source="getAvailablePostTags()"></auto-complete>
+                                </tags-input>
+                            </div>
+                            <div ng-repeat="post in threads">
+                                <ng-include src="'views/forum/block/thread.html'"></ng-include>
+                            </div>
                         </div>
                         <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
-                    </tab>
-                    <!-- <tab heading="Catégories">
-                    </tab> -->
+                    </tab
                 </tabset>
             </div><!-- #content -->
         </div>

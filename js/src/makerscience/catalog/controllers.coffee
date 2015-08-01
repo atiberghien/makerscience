@@ -2,19 +2,55 @@ module = angular.module("makerscience.catalog.controllers", ['makerscience.catal
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
-module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProject) ->
+module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProject, MakerScienceProjectTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
+    $scope.availableThemeTags = []
+    $scope.availableFormatsTags = []
+    $scope.availableTargetTags = []
+
+    MakerScienceProjectTaggedItem.getList().then((taggedItemResults) ->
+        angular.forEach(taggedItemResults, (taggedItem) ->
+            switch taggedItem.tag_type
+                when 'th' then $scope.availableThemeTags.push(taggedItem.tag)
+                when 'fm' then $scope.availableFormatsTags.push(taggedItem.tag)
+                when 'tg' then $scope.availableTargetTags.push(taggedItem.tag)
+        )
+    )
+
     $scope.refreshList = ()->
-        $scope.projects = MakerScienceProject.one().customGETLIST('search', $scope.params).$object
+        MakerScienceProject.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
+            meta = makerScienceProjectResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.projects =  makerScienceProjectResults
+        )
 
 )
 
-module.controller("MakerScienceResourceListCtrl", ($scope, $controller, MakerScienceResource) ->
+module.controller("MakerScienceResourceListCtrl", ($scope, $controller, MakerScienceResource, MakerScienceResourceTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
+    $scope.availableThemeTags = []
+    $scope.availableFormatsTags = []
+    $scope.availableTargetTags = []
+
+    MakerScienceResourceTaggedItem.getList().then((taggedItemResults) ->
+        angular.forEach(taggedItemResults, (taggedItem) ->
+            switch taggedItem.tag_type
+                when 'th' then $scope.availableThemeTags.push(taggedItem.tag)
+                when 'fm' then $scope.availableFormatsTags.push(taggedItem.tag)
+                when 'tg' then $scope.availableTargetTags.push(taggedItem.tag)
+        )
+    )
+
     $scope.refreshList = ()->
-        $scope.resources = MakerScienceResource.one().customGETLIST('search', $scope.params).$object
+        MakerScienceResource.one().customGETLIST('search', $scope.params).then((makerScienceResourceResults) ->
+            meta = makerScienceResourceResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.resources =  makerScienceResourceResults
+        )
 )
 
 module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResource) ->

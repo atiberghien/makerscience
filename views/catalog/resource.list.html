@@ -5,18 +5,29 @@
 
 <div class="row container">
 
-    <div id="content" class="listing resource">
+    <div id="content" class="listing resource"  ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
 
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-9">
                     <tabset class="nav-tabs-resource">
                         <tab heading="Les plus récents">
-                            <div class="boxes boxes-listing" ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
+                            <div class="boxes boxes-listing">
                                 <div class="box" ng-repeat="resource in resources">
                                     <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                                 </div>
                             </div>
+                            <pagination total-items="totalItems"
+                                        items-per-page='limit'
+                                        ng-model="currentPage"
+                                        max-size="10"
+                                        class="pagination-sm"
+                                        rotate="false"
+                                        num-pages="numPages"
+                                        ng-change="pageChanged(currentPage)"
+                                        previous-text="<<"
+                                        next-text=">>">
+                            </pagination>
                         </tab>
                         <tab heading="Les plus populaires">
                             Les plus populaires ... coming soon
@@ -28,14 +39,12 @@
                             Au hasard ... coming soon
                         </tab>
                     </tabset>
-
                     <a ui-sref="resource.new" class="large large-purple">Partager une expérience <img src="/img/smiley.png" class="smiley" alt="Smiley" /></a>
                 </div>
                 <div class="col-md-3">
-                    <ng-include src="'views/catalog/block/filters.html'" ng-init="objectType='makerscienceresource'" ></ng-include>
+                    <ng-include src="'views/catalog/block/filters_resource.html'" ng-init="objectType='makerscienceresource'" ></ng-include>
                 </div>
             </div>
-
         </div><!-- .col-md-12 -->
 
     </div><!-- #content -->

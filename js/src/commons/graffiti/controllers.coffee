@@ -5,12 +5,14 @@ module.controller("TagListCtrl", ($scope, Tag) ->
 )
 
 module.controller("TagAutoCompleteCtrl", ($scope, $q, Tag) ->
-    tags = Tag.getList()
 
-    $scope.loadTags = (query) ->
+    $scope.loadTags = (query, tags) ->
+        console.log("TAGS : ", tags)
         deferred = $q.defer()
+        if tags == null or tags == undefined
+            tags = Tag.getList().$object
         availableTags = []
-        angular.forEach(tags.$object, (tag) ->
+        angular.forEach(tags, (tag) ->
             if tag.name.indexOf(query) > -1
                 tmpTag =
                     'text' : tag.name
