@@ -7,7 +7,7 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
     $scope.availableInterestTags = []
     $scope.availableSkillTags = []
 
-    MakerScienceProfileTaggedItem.getList().then((taggedItemResults) ->
+    MakerScienceProfileTaggedItem.getList({distinct : 'True'}).then((taggedItemResults) ->
         angular.forEach(taggedItemResults, (taggedItem) ->
             switch taggedItem.tag_type
                 when 'sk' then $scope.availableSkillTags.push(taggedItem.tag)

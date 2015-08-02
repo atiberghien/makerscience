@@ -9,7 +9,7 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
     $scope.availableFormatsTags = []
     $scope.availableTargetTags = []
 
-    MakerScienceProjectTaggedItem.getList().then((taggedItemResults) ->
+    MakerScienceProjectTaggedItem.getList({distinct : 'True'}).then((taggedItemResults) ->
         angular.forEach(taggedItemResults, (taggedItem) ->
             switch taggedItem.tag_type
                 when 'th' then $scope.availableThemeTags.push(taggedItem.tag)
@@ -35,7 +35,7 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, MakerSci
     $scope.availableFormatsTags = []
     $scope.availableTargetTags = []
 
-    MakerScienceResourceTaggedItem.getList().then((taggedItemResults) ->
+    MakerScienceResourceTaggedItem.getList({distinct : 'True'}).then((taggedItemResults) ->
         angular.forEach(taggedItemResults, (taggedItem) ->
             switch taggedItem.tag_type
                 when 'th' then $scope.availableThemeTags.push(taggedItem.tag)
