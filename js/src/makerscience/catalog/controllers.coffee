@@ -459,13 +459,3 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         switch resourceName
             when 'MakerScienceResource' then MakerScienceResource.one(resourceId).patch(putData)
 )
-
-
-module.controller("ResourceLevelCtrl", ($scope) ->
-    $scope.level = 1
-    $scope.selectedClasses = {"1" : "selected"}
-
-    $scope.updateLevelChoice = (progressChoice) ->
-        $scope.selectedClasses = {}
-        $scope.selectedClasses[progressChoice] = "selected"
-)
