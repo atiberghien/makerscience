@@ -4,22 +4,19 @@ module.controller("TagListCtrl", ($scope, Tag) ->
     $scope.tags = Tag.getList().$object
 )
 
-module.controller("TagAutoCompleteCtrl", ($scope, $q, Tag) ->
+module.controller("TagAutoCompleteCtrl", ($scope, Tag) ->
 
-    $scope.loadTags = (query, tags) ->
-        console.log("TAGS : ", tags)
-        deferred = $q.defer()
-        if tags == null or tags == undefined
-            tags = Tag.getList().$object
-        availableTags = []
-        angular.forEach(tags, (tag) ->
-            if tag.name.indexOf(query) > -1
-                tmpTag =
-                    'text' : tag.name
-                availableTags.push(tmpTag)
+    $scope.loadTags = (query) ->
+        return Tag.getList().then((tagResults) ->
+            availableTags = []
+            angular.forEach(tagResults, (tag) ->
+                if tag.name.indexOf(query) > -1
+                    tmpTag =
+                        'text' : tag.name
+                    availableTags.push(tmpTag)
+            )
+            return availableTags
         )
-        deferred.resolve(availableTags)
-        return deferred.promise
 )
 
 module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, Tag, TaggedItem, ObjectProfileLink) ->

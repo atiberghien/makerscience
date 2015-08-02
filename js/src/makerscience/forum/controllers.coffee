@@ -6,14 +6,12 @@ module = angular.module("makerscience.forum.controllers", ["commons.megafon.cont
 module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerSciencePost, TaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
-    $scope.getAvailablePostTags = () ->
-        availablePostTags = []
-        TaggedItem.getList({content_type : 'post'}).then((taggedItemResults) ->
-            angular.forEach(taggedItemResults, (taggedItem) ->
-                availablePostTags.push(taggedItem.tag.slug)
-            )
+    $scope.availablePostTags = []
+    TaggedItem.getList({content_type : 'post'}).then((taggedItemResults) ->
+        angular.forEach(taggedItemResults, (taggedItem) ->
+            $scope.availablePostTags.push(taggedItem.tag.slug)
         )
-        return availablePostTags
+    )
 
     $scope.refreshList = ()->
         MakerSciencePost.one().customGETLIST('search', $scope.params).then((makerSciencePostResults) ->

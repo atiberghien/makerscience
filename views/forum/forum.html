@@ -121,24 +121,24 @@
                                             placeholder="> Mot-clé"
                                             on-tag-added="refreshFilter()"
                                             on-tag-removed="refreshFilter()">
-                                            <auto-complete source="getAvailablePostTags()"></auto-complete>
+                                            <auto-complete source="loadTags($query)"></auto-complete>
                                 </tags-input>
                             </div>
-                            <div ng-repeat="post in threads">
-                                <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                            </div>
-                            <pagination total-items="totalItems"
-                                        items-per-page='limit'
-                                        ng-model="currentPage"
-                                        max-size="10"
-                                        class="pagination-sm"
-                                        rotate="false"
-                                        num-pages="numPages"
-                                        ng-change="pageChanged(currentPage)"
-                                        previous-text="<<"
-                                        next-text=">>">
-                            </pagination>
                         </div>
+                        <div ng-repeat="post in threads">
+                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
+                        </div>
+                        <pagination total-items="totalItems"
+                                    items-per-page='limit'
+                                    ng-model="currentPage"
+                                    max-size="10"
+                                    class="pagination-sm"
+                                    rotate="false"
+                                    num-pages="numPages"
+                                    ng-change="pageChanged(currentPage)"
+                                    previous-text="<<"
+                                    next-text=">>">
+                        </pagination>
                         <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
                     </tab>
                     <tab heading="Top" ng-controller="MakerSciencePostListCtrl" ng-init="init()">
