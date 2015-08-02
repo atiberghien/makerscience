@@ -116,14 +116,7 @@
                 <tabset class="nav-tabs-forum">
                     <tab heading="Récent" ng-controller="MakerSciencePostListCtrl" ng-init="init()">
                         <div ng-controller="FilterCtrl">
-                            <div class="" ng-controller="TagAutoCompleteCtrl">
-                                <tags-input ng-model="tags_filter"
-                                            placeholder="> Mot-clé"
-                                            on-tag-added="refreshFilter()"
-                                            on-tag-removed="refreshFilter()">
-                                            <auto-complete source="loadTags($query)"></auto-complete>
-                                </tags-input>
-                            </div>
+                            <ng-include src="'views/base/tag_input.html'"></ng-include>
                         </div>
                         <div ng-repeat="post in threads">
                             <ng-include src="'views/forum/block/thread.html'"></ng-include>
@@ -142,18 +135,11 @@
                         <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
                     </tab>
                     <tab heading="Top" ng-controller="MakerSciencePostListCtrl" ng-init="init()">
-                        <div ng-controller="FilterCtrl">>
-                            <div class="" ng-controller="TagAutoCompleteCtrl">
-                                <tags-input ng-model="tags_filter"
-                                            placeholder="> Mot-clé"
-                                            on-tag-added="refreshFilter()"
-                                            on-tag-removed="refreshFilter()">
-                                            <auto-complete source="getAvailablePostTags()"></auto-complete>
-                                </tags-input>
-                            </div>
-                            <div ng-repeat="post in threads">
-                                <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                            </div>
+                        <div ng-controller="FilterCtrl">
+                            <ng-include src="'views/base/tag_input.html'"></ng-include>
+                        </div>
+                        <div ng-repeat="post in threads">
+                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
                         </div>
                         <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
                     </tab

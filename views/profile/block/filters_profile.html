@@ -4,14 +4,7 @@
     <div ng-controller="FilterCtrl">
         <h4>Intérêts</h4>
         <div class="" style="width:100%; padding-bottom:10px;">
-            <div class="" ng-controller="TagAutoCompleteCtrl">
-                <tags-input ng-model="tags_filter"
-                            placeholder="> Mot-clé"
-                            on-tag-added="refreshFilter()"
-                            on-tag-removed="refreshFilter()">
-                            <auto-complete source="availableInterestTags"></auto-complete>
-                </tags-input>
-            </div>
+            <ng-include src="'views/base/tag_input.html'"></ng-include>
         </div><!-- /input-group -->
         <ul class="tags tags-project">
             <li ng-repeat="tag in availableInterestTags | limitTo:16">
@@ -23,14 +16,7 @@
     <div ng-controller="FilterCtrl">
         <h4>Compétences</h4>
         <div class="" style="width:100%; padding-bottom:10px;">
-            <div class="" ng-controller="TagAutoCompleteCtrl">
-                <tags-input ng-model="tags_filter"
-                            placeholder="> Mot-clé"
-                            on-tag-added="refreshFilter()"
-                            on-tag-removed="refreshFilter()">
-                            <auto-complete source="availableSkillTags"></auto-complete>
-                </tags-input>
-            </div>
+            <ng-include src="'views/base/tag_input.html'"></ng-include>
         </div><!-- /input-group -->
         <ul class="tags tags-project">
             <li ng-repeat="tag in availableSkillTags | limitTo:16">

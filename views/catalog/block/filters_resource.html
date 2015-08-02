@@ -4,14 +4,7 @@
     <div ng-controller="FilterCtrl">
         <h4>Thématique</h4>
         <div class="" style="width:100%; padding-bottom:10px;">
-            <div class="" ng-controller="TagAutoCompleteCtrl">
-                <tags-input ng-model="tags_filter"
-                            placeholder="> Mot-clé"
-                            on-tag-added="refreshFilter()"
-                            on-tag-removed="refreshFilter()">
-                            <auto-complete source="availableThemeTags"></auto-complete>
-                </tags-input>
-            </div>
+            <ng-include src="'views/base/tag_input.html'"></ng-include>
         </div><!-- /input-group -->
         <ul class="tags tags-project">
             <li ng-repeat="tag in availableThemeTags | limitTo:16">
@@ -20,18 +13,10 @@
 
         </ul>
     </div>
-    </div>
     <div ng-controller="FilterCtrl">
         <h4>Publics ciblés</h4>
         <div class="" style="width:100%; padding-bottom:10px;">
-            <div class="" ng-controller="TagAutoCompleteCtrl">
-                <tags-input ng-model="tags_filter"
-                            placeholder="> Mot-clé"
-                            on-tag-added="refreshFilter()"
-                            on-tag-removed="refreshFilter()">
-                            <auto-complete source="availableTargetTags"></auto-complete>
-                </tags-input>
-            </div>
+            <ng-include src="'views/base/tag_input.html'"></ng-include>
         </div><!-- /input-group -->
         <ul class="tags tags-project">
             <li ng-repeat="tag in availableTargetTags | limitTo:16">
@@ -43,14 +28,7 @@
     <div ng-controller="FilterCtrl">
         <h4>Format</h4>
         <div class="" style="width:100%; padding-bottom:10px;">
-            <div class="" ng-controller="TagAutoCompleteCtrl">
-                <tags-input ng-model="tags_filter"
-                            placeholder="> Mot-clé"
-                            on-tag-added="refreshFilter()"
-                            on-tag-removed="refreshFilter()">
-                            <auto-complete source="availableFormatsTags"></auto-complete>
-                </tags-input>
-            </div>
+            <ng-include src="'views/base/tag_input.html'"></ng-include>
         </div><!-- /input-group -->
         <ul class="tags tags-project">
             <li ng-repeat="tag in availableFormatsTags | limitTo:16">
