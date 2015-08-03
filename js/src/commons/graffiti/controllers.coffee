@@ -19,26 +19,7 @@ module.controller("TagAutoCompleteCtrl", ($scope, Tag) ->
         )
 )
 
-module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, Tag, TaggedItem, ObjectProfileLink) ->
-
-    $scope.taggedItems = []
-    $scope.tag = null
-
-    if $stateParams.slug
-        Tag.one().get({slug:$stateParams.slug}).then((tagResult) ->
-            $scope.tag = tagResult.objects[0]
-            if $scope.tag && $scope.tag.weight > 0
-                $scope.taggedItems = TaggedItem.getList({'tag__slug' : $stateParams.slug}).$object
-        )
-
-        $scope.followTag = (profileID) ->
-            ObjectProfileLink.one().customPOST(
-                profile_id: profileID,
-                level: 51,
-                detail : '',
-                isValidated:true
-            , 'tag/'+$scope.tag.id)
-
+module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, TaggedItem) ->
 
     $scope.addTag = (objectTypeName, resourceId, tag) ->
         TaggedItem.one().customPOST({tag : tag.text}, objectTypeName+"/"+resourceId, {})

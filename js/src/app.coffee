@@ -197,15 +197,15 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     parent : 'home'
         )
         .state('tag',
-                url: '/tag/:slug',
+                url: '/tag/:tag',
                 templateUrl: 'views/base/tagged_objects.html'
-                controller : 'TaggedItemCtrl'
+                controller : 'MakerScienceSearchCtrl'
                 ncyBreadcrumb:
                     label: '{{tag.slug}}'
                     parent : 'tags'
         )
         .state('search',
-                url: '/search/:query',
+                url: '/search/:q',
                 templateUrl: 'views/base/search_result.html'
                 controller : 'MakerScienceSearchCtrl'
                 ncyBreadcrumb:

@@ -39,7 +39,6 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
 
     $scope.refreshListGeneric = ()->
         $scope.getParams()
-        console.log("refreshListGeneric", $scope.params)
         $scope.refreshList() #Must be defined in the subclass
 
     $scope.init = (params) ->
@@ -125,23 +124,60 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Tag, TaggedItem, Make
 )
 
 
-module.controller("MakerScienceSearchCtrl", ($scope, $stateParams, MakerScienceProject, MakerScienceResource, MakerScienceProfile) ->
+module.controller("MakerScienceSearchCtrl", ($scope, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
 
-    $scope.searchResult = {}
-    $scope.search_form =
-        query : ''
 
-    if $stateParams.query
-        $scope.search_form.query =  $stateParams.query
+    if $stateParams.hasOwnProperty('q')
+        $scope.query = $stateParams.q
+        $scope.runSearch({q : $stateParams.q})
+    if $stateParams.hasOwnProperty('tag')
+        Tag.one().get({slug : $stateParams.tag}).then((tagResults) ->
+            if tagResults.objects.length == 1
+                $scope.tag = tagResults.objects[0]
+                $scope.runSearch({facet : $stateParams.tag})
 
-    $scope.refreshSearch = ()->
-        $scope.searchResult = {}
-        query = $scope.search_form.query
-        $scope.searchResult['members'] = MakerScienceProfile.one().customGETLIST('search', {q:query}).$object
-        $scope.searchResult['projects'] = MakerScienceProject.one().customGETLIST('search', {q:query}).$object
-        $scope.searchResult['resources'] = MakerScienceResource.one().customGETLIST('search', {q:query}).$object
+                $scope.followTag = (profileID) ->
+                    ObjectProfileLink.one().customPOST(
+                        profile_id: profileID,
+                        level: 51,
+                        detail : '',
+                        isValidated:true
+                    , 'tag/'+$scope.tag.id)
+        )
 
-    $scope.refreshSearch()
+    $scope.runSearch = (params) ->
+        $scope.associatedTags = []
+
+        findRelatedTag = (taggedItemResults) ->
+            angular.forEach(taggedItemResults.objects, (taggedItem) ->
+                if $scope.associatedTags.indexOf(taggedItem.tag.slug) == -1
+                    $scope.associatedTags.push(taggedItem.tag.slug)
+            )
+
+        MakerScienceProfile.one().customGETLIST('search', params).then((makerScienceProfileResults) ->
+            angular.forEach(makerScienceProfileResults, (profile) ->
+                TaggedItem.one().customGET("makerscienceprofile/" + profile.id).then(findRelatedTag)
+            )
+            $scope.profiles = makerScienceProfileResults
+        )
+        MakerScienceProject.one().customGETLIST('search', params).then((makerScienceProjectResults) ->
+            angular.forEach(makerScienceProjectResults, (project) ->
+                TaggedItem.one().customGET("makerscienceproject/" + project.id).then(findRelatedTag)
+            )
+            $scope.projects = makerScienceProjectResults
+        )
+        MakerScienceResource.one().customGETLIST('search', params).then((makerScienceResourceResults) ->
+            angular.forEach(makerScienceResourceResults, (resource) ->
+                TaggedItem.one().customGET("makerscienceresource/" + resource.id).then(findRelatedTag)
+            )
+            $scope.resources = makerScienceResourceResults
+        )
+        MakerSciencePost.one().customGETLIST('search', params).then((makerSciencePostResults) ->
+            angular.forEach(makerSciencePostResults, (post) ->
+                TaggedItem.one().customGET("makersciencepost/" + post.id).then(findRelatedTag)
+            )
+            $scope.discussions = makerSciencePostResults
+        )
 )
 
 

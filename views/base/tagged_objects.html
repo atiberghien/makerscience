@@ -9,83 +9,16 @@
 <div class="row container">
     <div id="content" class="tags">
         <div class="col-md-12">
+            <ng-include src="'views/base/multiple_object_listing.html'"></ng-include>
 
-            <div ng-controller="MakerScienceObjectGetter">
+            <h2 class="tags"><span class="glyphicon glyphicon-tag"></span> Tags associés</h2>
+            <ul class="tags tags-related">
+                <li ng-repeat="tag in associatedTags"><a ui-sref="tag({tag:tag})">{{tag}}</a></li>
+            </ul><!-- .tags-related -->
 
-                <h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
-                <div class="boxes boxes-medium">
-                    <div class="box" ng-repeat="item in projectItems = (taggedItems| filter:{content_type:'makerscienceproject'})">
-                        <div ng-init="getObject(item.content_type, item.object_id)">
-                            <ng-include src="'views/catalog/block/project_thumb.html'"></ng-include>
-                        </div>
-                    </div>
-                    <div class="box box-solo box-blue">
-                        <div>
-                            <a ui-sref="project.list">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
-                        </div>
-                    </div>
-                </div><!-- .boxes -->
-
-                <h2 class="resources clear"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
-                <div class="boxes boxes-medium">
-                    <div class="box" ng-repeat="item in resourceItems = (taggedItems| filter:{content_type:'makerscienceresource'})">
-                        <div ng-init="getObject(item.content_type, item.object_id)">
-                            <ng-include src="'views/catalog/block/resource_thumb.html'"></ng-include>
-                        </div>
-                    </div>
-                    <div class="box box-solo box-green">
-                        <div>
-                            <a ui-sref="resource.list">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
-                        </div>
-                    </div>
-                </div><!-- .boxes -->
-
-                <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Profils</h2>
-                <div class="boxes boxes-medium">
-                    <div class="box" ng-repeat="item in profileItems = (taggedItems| filter:{content_type:'makerscienceprofile'})">
-                        <div ng-init="getObject(item.content_type, item.object_id)">
-                            <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
-                        </div>
-                    </div>
-                    <div class="box box-solo box-pink">
-                        <div>
-                            <a ui-sref="profile.list">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
-                        </div>
-                    </div>
-                </div><!-- .boxes -->
-
-                <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Discussions</h2>
-                <div class="boxes boxes-medium">
-                    <!-- <div class="box" ng-repeat="item in postItems = (taggedItems| filter:{content_type:'post'})">
-                        <div ng-init="getObject(item.content_type, item.object_id)">
-                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                        </div>
-                    </div> -->
-                    <div class="box box-solo box-pink">
-                        <div>
-                            <a ui-sref="profile.list">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="tags"><span class="glyphicon glyphicon-tag"></span> Tags associés</h2>
-                <ul class="tags tags-related">
-                    <li><a href="">foo</a></li>
-                    <li><a href="">bar</a></li>
-                    <li><a href="">something</a></li>
-                    <li><a href="">long-one-goes-here</a></li>
-                    <li><a href="">and</a></li>
-                    <li><a href="">a</a></li>
-                    <li><a href="">very</a></li>
-                    <li><a href="">short</a></li>
-                    <li><a href="">one</a></li>
-                </ul><!-- .tags-related -->
-
-                <h2 class="default"><span class="glyphicon glyphicon-search"></span> Recherchez un autre tag</h2>
-                <input type="text" name="search-tag" placeholder="Recherchez un autre tag" />
-                <button class="button" type="submit">Rechercher</button>
-
-            </div><!-- ng-controller -->
+            <h2 class="default"><span class="glyphicon glyphicon-search"></span> Recherchez un autre tag</h2>
+            <input type="text" ng-model="newSearchTag" placeholder="Recherchez un autre tag" />
+            <button class="button" type="submit" ui-sref="tag({tag:newSearchTag})">Rechercher</button>
         </div><!-- .col-md-12 -->
     </div><!-- #content -->
 </div><!-- .containter -->
