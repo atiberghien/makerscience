@@ -13,12 +13,12 @@
 
             <h2 class="tags"><span class="glyphicon glyphicon-tag"></span> Tags associés</h2>
             <ul class="tags tags-related">
-                <li ng-repeat="tag in associatedTags"><a ui-sref="tag({tag:tag})">{{tag}}</a></li>
+                <li ng-repeat="tag in associatedTags"><a ui-sref="tag({slug:tag})">{{tag}}</a></li>
             </ul><!-- .tags-related -->
 
             <h2 class="default"><span class="glyphicon glyphicon-search"></span> Recherchez un autre tag</h2>
             <input type="text" ng-model="newSearchTag" placeholder="Recherchez un autre tag" />
-            <button class="button" type="submit" ui-sref="tag({tag:newSearchTag})">Rechercher</button>
+            <button class="button" type="submit" ui-sref="tag({slug:newSearchTag})">Rechercher</button>
         </div><!-- .col-md-12 -->
     </div><!-- #content -->
 </div><!-- .containter -->

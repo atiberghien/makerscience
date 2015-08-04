@@ -126,25 +126,6 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Tag, TaggedItem, Make
 
 module.controller("MakerScienceSearchCtrl", ($scope, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
 
-
-    if $stateParams.hasOwnProperty('q')
-        $scope.query = $stateParams.q
-        $scope.runSearch({q : $stateParams.q})
-    if $stateParams.hasOwnProperty('tag')
-        Tag.one().get({slug : $stateParams.tag}).then((tagResults) ->
-            if tagResults.objects.length == 1
-                $scope.tag = tagResults.objects[0]
-                $scope.runSearch({facet : $stateParams.tag})
-
-                $scope.followTag = (profileID) ->
-                    ObjectProfileLink.one().customPOST(
-                        profile_id: profileID,
-                        level: 51,
-                        detail : '',
-                        isValidated:true
-                    , 'tag/'+$scope.tag.id)
-        )
-
     $scope.runSearch = (params) ->
         $scope.associatedTags = []
 
@@ -178,6 +159,27 @@ module.controller("MakerScienceSearchCtrl", ($scope, $parse, $stateParams, Tag, 
             )
             $scope.discussions = makerSciencePostResults
         )
+
+    if $stateParams.hasOwnProperty('q')
+        $scope.query = $stateParams.q
+        $scope.runSearch({q : $stateParams.q})
+    if $stateParams.hasOwnProperty('slug')
+        Tag.one().get({slug : $stateParams.slug}).then((tagResults) ->
+            if tagResults.objects.length == 1
+                $scope.tag = tagResults.objects[0]
+                $scope.runSearch({facet : $stateParams.slug})
+
+                $scope.followTag = (profileID) ->
+                    ObjectProfileLink.one().customPOST(
+                        profile_id: profileID,
+                        level: 51,
+                        detail : '',
+                        isValidated:true
+                    , 'tag/'+$scope.tag.id
+                    )
+        )
+
+
 )
 
 
