@@ -72,46 +72,38 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Tag, TaggedItem, Make
             if objectTypeName == 'project'
                 return MakerScienceProject.one().get({parent__id : objectId}).then((makerScienceProjectResults) ->
                     if makerScienceProjectResults.objects.length == 1
-                        $scope.project = makerScienceProjectResults.objects[0]
-                        return $scope.project
+                        return makerScienceProjectResults.objects[0]
                     else
                         return MakerScienceResource.one().get({parent__id : objectId}).then((makerScienceResourceResults) ->
                             if makerScienceResourceResults.objects.length == 1
-                                $scope.resource = makerScienceResourceResults.objects[0]
-                                return $scope.resource
+                                return makerScienceResourceResults.objects[0]
                         )
                 )
             if objectTypeName == 'makerscienceproject'
                 return MakerScienceProject.one(objectId).get().then((makerScienceProjectResult) ->
-                    $scope.project = makerScienceProjectResult
-                    return $scope.project
+                    return makerScienceProjectResult
                 )
             if objectTypeName == 'makerscienceresource'
                 return MakerScienceResource.one(objectId).get().then((makerScienceResourceResult) ->
-                    $scope.resource = makerScienceResourceResult
-                    return $scope.resource
+                    return makerScienceResourceResult
                 )
             if objectTypeName == 'makerscienceprofile'
                 return MakerScienceProfile.one().get({id : objectId}).then((profileResults) ->
                     if profileResults.objects.length == 1
-                        $scope.profile = profileResults.objects[0]
-                        return $scope.profile
+                        return profileResults.objects[0]
                 )
             if objectTypeName == 'post'
                 return MakerSciencePost.one().get({parent__id: objectId}).then((makerSciencePostResults) ->
                     if makerSciencePostResults.objects.length == 1
-                        $scope.post = makerSciencePostResults.objects[0]
-                        return $scope.post
+                        return makerSciencePostResults.objects[0]
                 )
             if objectTypeName == 'taggeditem'
                 return TaggedItem.one(objectId).get().then((taggedItemResult) ->
-                    $scope.taggeditem = taggedItemResult
-                    return $scope.taggeditem
+                    return taggedItemResult
                 )
             if objectTypeName == 'tag'
                 return Tag.one(objectId).get().then((tagResult) ->
-                    $scope.tag = tagResult
-                    return $scope.tag
+                    return tagResult
                 )
             console.log("Unable to fetch", objectTypeName, objectId)
             return null
