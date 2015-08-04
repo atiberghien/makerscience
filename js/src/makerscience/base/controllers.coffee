@@ -107,16 +107,12 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Tag, TaggedItem, Make
                 )
             console.log("Unable to fetch", objectTypeName, objectId)
             return null
-
-
-    $scope.getMakerscienceProfileFromGenericProfile = (genericProfileId) ->
-        MakerScienceProfile.one().get({'parent__id' : genericProfileId}).then((makerScienceProfileResult) ->
-            $scope.makerscienceProfile = makerScienceProfileResult.objects[0]
-        )
 )
 
 
-module.controller("MakerScienceSearchCtrl", ($scope, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
+module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
+
+    angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
 
     $scope.runSearch = (params) ->
         $scope.associatedTags = []
@@ -151,6 +147,25 @@ module.controller("MakerScienceSearchCtrl", ($scope, $parse, $stateParams, Tag, 
             )
             $scope.discussions = makerSciencePostResults
         )
+
+        TaggedItem.getList({tag__slug : params["facet"]}).then((taggedItemResults) ->
+            $scope.taggerProfiles = []
+            angular.forEach(taggedItemResults, (taggedItem) ->
+                ObjectProfileLink.one().customGET('taggeditem/'+taggedItem.id).then((objectProfileLinkResults) ->
+                    if objectProfileLinkResults.objects.length > 0
+                        genericProfileId = objectProfileLinkResults.objects[0].profile.id
+                        MakerScienceProfile.one().get({'parent__id' : genericProfileId}).then((makerScienceProfileResults) ->
+                            if makerScienceProfileResults.objects.length > 0
+                                tagger = makerScienceProfileResults.objects[0]
+                                tagger.taggingDate = objectProfileLinkResults.objects[0].created_on
+                                $scope.taggerProfiles.push(tagger)
+                        )
+
+                )
+            )
+
+        )
+
 
     if $stateParams.hasOwnProperty('q')
         $scope.query = $stateParams.q
