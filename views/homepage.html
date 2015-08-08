@@ -15,13 +15,13 @@
                             </div>
                         </div>
                         <a ui-sref="forum">
-                            <img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                            <img src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         </a>
                     </slide>
                     <slide ng-repeat="project in projects | filter:featured | limitTo : 2">
                         <h3 class="category"><span>Projet</span></h3>
                         <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
-                        <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <img ng-if="!project.base_projectsheet.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
                             <h3><a ui-sref="project.detail({slug:project.parent.slug})">{{project.parent.title}}</a></h3>
                             <h4>Par <strong><a ui-sref="profile.detail({slug:project.by.profile_slug})">
@@ -31,7 +31,7 @@
                     <slide ng-repeat="resource in featuredResources | filter:featured | limitTo : 2">
                         <h3 class="category"><span>Expérience</span></h3>
                         <img ng-if="resource.base_projectsheet.cover" ng-src="{{config.media_uri}}{{resource.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
-                        <img ng-if="!resource.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <img ng-if="!resource.base_projectsheet.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
                             <h3><a ui-sref="resource.detail({slug:resource.parent.slug})">{{resource.parent.title}}</a></h3>
                             <h4>Par <strong><a ui-sref="profile.detail({slug:resource.by.profile_slug})">
@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-5" ng-init="showLoginPanel=false">
                 <div class="home-join">
-                    <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="./img/smiley.png" alt="Smiley" /></a></p>
+                    <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="/img/smiley.png" alt="Smiley" /></a></p>
                     <div ng-show="!showLoginPanel" class="welcome">
                         <div class="join">
                             <h2 ng-hide="authVars.isAuthenticated">Rejoindre la communauté MakerScience!</h2>
@@ -51,7 +51,7 @@
                     </div>
                     <div ng-show="showLoginPanel" >
                        <p class="right">
-                           <button class="close-login" ng-click="showLoginPanel=false"><img src="./img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
+                           <button class="close-login" ng-click="showLoginPanel=false"><img src="/img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
                        </p>
                        <!-- <ng-include src="'./views/base/login.html'"></ng-include> -->
                     </div>
@@ -65,7 +65,7 @@
             <div class="col-md-4">
                 <div class="row community">
                     <div class="col-md-4">
-                        <img src="./img/icons/community.png" alt="Echangez et rencontrez" />
+                        <img src="/img/icons/community.png" alt="Echangez et rencontrez" />
                         <h3>Echangez et rencontrez</h3>
                     </div>
                     <div class="col-md-8">
@@ -80,7 +80,7 @@
             <div class="col-md-4">
                 <div class="row projects">
                     <div class="col-md-4">
-                        <img src="./img/icons/project.png" alt="Stimulez des idées et des projets" />
+                        <img src="/img/icons/project.png" alt="Stimulez des idées et des projets" />
                         <h3>Stimulez des idées et des projets</h3>
                     </div>
                     <div class="col-md-8">
@@ -95,7 +95,7 @@
             <div class="col-md-4">
                 <div class="row resources">
                     <div class="col-md-4">
-                        <img src="./img/icons/resource.png" alt="Trouvez des méthodes, des outils, des réponses" />
+                        <img src="/img/icons/resource.png" alt="Trouvez des méthodes, des outils, des réponses" />
                         <h3>Trouvez des méthodes, des outils, des réponses</h3>
                     </div>
                     <div class="col-md-8">

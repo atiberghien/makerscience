@@ -10,7 +10,7 @@
         <section class="comments comments-add" ng-show="commenting">
             <div class="comment">
                 <div class="author">
-                    <img ng-if="!$root.authVars.user.email" src="./img/users/user-default.png" alt="User Unknown" />
+                    <img ng-if="!$root.authVars.user.email" src="/img/users/user-default.png" alt="User Unknown" />
                     <gravatar-image ng-if="$root.authVars.user.email" data-gravatar-email="$root.authVars.user.email"
                         data-gravatar-size="50"
                         data-gravatar-rating="pg"
