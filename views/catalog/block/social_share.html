@@ -1,11 +1,12 @@
 <div id="socialshare" sticky offset="260" style="top:56%; left: 18%; position:fixed; font-size:3em">
+
     <ul>
         <li style="background-color: white; border-radius: 11px;margin-bottom: 8px;padding: 5px 0 3px;text-align: center; width: 40px;">
             <a href=""
                 socialshare
                 socialshare-provider="facebook"
                 socialshare-text="{{projectsheet.parent.title}}"
-                socialshare-url="http://makerscience.nonetype.net/#/p/test-projet">
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}">
                 <i class="fa fa-facebook"></i>
             </a>
         </li>
@@ -14,7 +15,7 @@
                 socialshare
                 socialshare-provider="twitter"
                 socialshare-text="{{projectsheet.parent.title}}"
-                socialshare-url="{{location.url()}}">
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -23,9 +24,18 @@
                 socialshare
                 socialshare-provider="google+"
                 socialshare-text="{{projectsheet.parent.title}}"
-                socialshare-url="{{location.url()}}">
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}">
                 <i class="fa fa-google-plus"></i>
             </a>
+        </li>
+        <li>
+            <a facebook class="facebookShare" data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-shares='shares'>{{ shares }}</a>
+        </li>
+        <li>
+            <a twitter  data-lang="en" data-count='horizontal' data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-via='@makerscience' data-size="medium" data-text='{{projectsheet.parent.title}}' ></a>
+        </li>
+        <li>
+            <div gplus class="g-plus" data-size="tall" data-annotation="bubble" data-href='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-action='share'></div>
         </li>
     </ul>
 </div>

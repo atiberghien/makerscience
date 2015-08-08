@@ -49,7 +49,8 @@
     "angular-http-auth": "~1.2.2",
     "satellizer": "master",
     "angularjs-socialshare": "~0.1.10",
-    "ngSticky": "~1.7.9"
+    "ngSticky": "~1.7.9",
+    "angular-socialshare": "~1.4.1"
   },
   "resolutions": {
     "angular": "~1.2.28",

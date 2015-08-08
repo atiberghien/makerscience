@@ -47,6 +47,9 @@ module.exports = function(grunt) {
                         },
                         "moment" : {
                             'main' : ['moment.js', 'locale/fr.js']
+                        },
+                        "angular-socialshare" : {
+                            'main' : ['angular-socialshare.min.js']
                         }
                       }
                 }

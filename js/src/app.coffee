@@ -13,7 +13,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
-                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies', '720kb.socialshare', 'sticky'])
+                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies', '720kb.socialshare', 'sticky','djds4rce.angular-socialshare'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -217,7 +217,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
 
 ])
-.run(($rootScope, $location, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService) ->
+.run(($rootScope, $location, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $FB) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
@@ -232,6 +232,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     $rootScope.Math = window.Math
 
     $rootScope.location = $location
+
+    $FB.init('724284684343376')
 )
 
 angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->
