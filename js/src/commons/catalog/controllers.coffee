@@ -24,7 +24,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
 
     $scope.openGallery = (projectsheet) ->
         modalInstance = $modal.open(
-            templateUrl: 'views/catalog/block/gallery.html'
+            templateUrl: '/views/catalog/block/gallery.html'
             controller: 'GalleryInstanceCtrl'
             size: 'lg'
             resolve:
@@ -97,7 +97,7 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
 
     $scope.openGallery = ->
         modalInstance = $modal.open(
-            templateUrl: 'views/catalog/block/gallery.html'
+            templateUrl: '/views/catalog/block/gallery.html'
             controller: 'GalleryInstanceCtrl'
             size: 'lg'
             resolve:

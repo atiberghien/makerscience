@@ -68,38 +68,38 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 # URI config
 .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', ($locationProvider, $stateProvider, $urlRouterProvider) ->
 
-        $locationProvider.html5Mode(config.useHtml5Mode)
+        $locationProvider.html5Mode(true).hashPrefix('!')
         $urlRouterProvider.otherwise("/")
 
         $stateProvider.state('home',
                 url: '/',
-                templateUrl: 'views/homepage.html',
+                templateUrl: '/views/homepage.html',
                 ncyBreadcrumb:
                     label: 'Accueil'
         )
         .state('project',
                 url: '/p/'
                 abstract: true,
-                templateUrl : 'views/catalog/project.html'
+                templateUrl : '/views/catalog/project.html'
                 ncyBreadcrumb:
                     parent: 'home'
         )
         .state('project.list',
                 url: 'list',
-                templateUrl: 'views/catalog/project.list.html',
+                templateUrl: '/views/catalog/project.list.html',
                 ncyBreadcrumb:
                     label: 'Projets'
         )
         .state('project.new',
                 url: 'new',
-                templateUrl: 'views/catalog/project.new.html',
+                templateUrl: '/views/catalog/project.new.html',
                 ncyBreadcrumb:
                     label: 'Nouveau projet'
                     parent : 'project.list'
         )
         .state('project.detail',
                 url: ':slug',
-                templateUrl: 'views/catalog/project.detail.html',
+                templateUrl: '/views/catalog/project.detail.html',
                 controller : 'MakerScienceProjectSheetCtrl'
                 ncyBreadcrumb:
                     label: '{{projectsheet.parent.title}}'
@@ -108,26 +108,26 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('resource',
                 url : '/r/',
                 abstract : true,
-                templateUrl : 'views/catalog/resource.html'
+                templateUrl : '/views/catalog/resource.html'
                 ncyBreadcrumb:
                     parent: 'home'
         )
         .state('resource.list',
                 url: 'list',
-                templateUrl: 'views/catalog/resource.list.html'
+                templateUrl: '/views/catalog/resource.list.html'
                 ncyBreadcrumb:
                     label: 'Expériences'
         )
         .state('resource.new',
                 url: 'new',
-                templateUrl: 'views/catalog/resource.new.html'
+                templateUrl: '/views/catalog/resource.new.html'
                 ncyBreadcrumb:
                     label: 'Nouvelle expérience'
                     parent : 'resource.list'
         )
         .state('resource.detail',
                 url: ':slug',
-                templateUrl: 'views/catalog/resource.detail.html'
+                templateUrl: '/views/catalog/resource.detail.html'
                 controller: 'MakerScienceResourceSheetCtrl'
                 ncyBreadcrumb:
                     label: '{{projectsheet.parent.title}}'
@@ -136,19 +136,19 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('profile',
                 url : '/u/',
                 abstract : true,
-                templateUrl : 'views/profile/profile.html'
+                templateUrl : '/views/profile/profile.html'
                 ncyBreadcrumb:
                     parent: 'home'
         )
         .state('profile.list',
                 url: 'list',
-                templateUrl: 'views/profile/profile.list.html'
+                templateUrl: '/views/profile/profile.list.html'
                 ncyBreadcrumb:
                     label: 'Communauté'
         )
         .state('profile.detail',
                 url: ':slug',
-                templateUrl: 'views/profile/profile.detail.html'
+                templateUrl: '/views/profile/profile.detail.html'
                 controller : 'MakerScienceProfileCtrl'
                 ncyBreadcrumb:
                     label: '{{profile.parent.user.first_name}} {{profile.parent.user.last_name}}'
@@ -156,7 +156,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
         .state('profile.dashboard',
                 url: ':slug/dashboard',
-                templateUrl: 'views/profile/profile.dashboard.html'
+                templateUrl: '/views/profile/profile.dashboard.html'
                 controller : 'MakerScienceProfileCtrl'
                 ncyBreadcrumb:
                     label: 'Espace personnel'
@@ -164,21 +164,21 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
         .state('map',
                 url: '/map/',
-                templateUrl: 'views/map/map.html'
+                templateUrl: '/views/map/map.html'
                 ncyBreadcrumb:
                     label: 'Carte de la communauté'
                     parent : 'profile.list'
         )
         .state('about',
                 url: '/about/',
-                templateUrl: 'views/base/about.html'
+                templateUrl: '/views/base/about.html'
                 ncyBreadcrumb:
                     label: 'A propos'
                     parent : 'home'
         )
         .state('forum',
                 url: '/discussions/',
-                templateUrl: 'views/forum/forum.html'
+                templateUrl: '/views/forum/forum.html'
                 controller : 'MakerScienceForumCtrl'
                 ncyBreadcrumb:
                     label: 'Discussions'
@@ -186,7 +186,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
         .state('question',
                 url: '/discussions/:slug',
-                templateUrl: 'views/forum/thread.display.html'
+                templateUrl: '/views/forum/thread.display.html'
                 controller : 'MakerSciencePostCtrl'
                 ncyBreadcrumb:
                     label: '{{post.title}}'
@@ -194,14 +194,14 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
         .state('tags',
                 url: '/tags/',
-                templateUrl: 'views/base/tag_listing.html'
+                templateUrl: '/views/base/tag_listing.html'
                 ncyBreadcrumb:
                     label: 'Tags'
                     parent : 'home'
         )
         .state('tag',
                 url: '/tag/:slug',
-                templateUrl: 'views/base/tagged_objects.html'
+                templateUrl: '/views/base/tagged_objects.html'
                 controller : 'MakerScienceSearchCtrl'
                 ncyBreadcrumb:
                     label: '{{tag.slug}}'
@@ -209,7 +209,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
         .state('search',
                 url: '/search/:q',
-                templateUrl: 'views/base/search_result.html'
+                templateUrl: '/views/base/search_result.html'
                 controller : 'MakerScienceSearchCtrl'
                 ncyBreadcrumb:
                     label: 'Recherche'

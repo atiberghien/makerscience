@@ -32,7 +32,7 @@
 
                     <div class="col-md-8" >
                         <img ng-if="resourcesheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Resource Image" />
-                        <img ng-if="!resourcesheet.base_projectsheet.cover" src="img/bacasable.jpg" alt="Resource Image" />
+                        <img ng-if="!resourcesheet.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Resource Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
                                 <button ng-click="openGallery(resourcesheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
@@ -44,7 +44,7 @@
 
                         <div class="side-header">
 
-                            <ng-include src="'views/catalog/block/resource_tags_widget.html'"></ng-include>
+                            <ng-include src="'/views/catalog/block/resource_tags_widget.html'"></ng-include>
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
@@ -132,7 +132,7 @@
                         <section>
                             <div ng-repeat="postID in resourcesheet.linked_post">
                                 <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(postID)">
-                                    <ng-include ng-if="post.id" src="'views/forum/block/thread.html'"></ng-include>
+                                    <ng-include ng-if="post.id" src="'/views/forum/block/thread.html'"></ng-include>
                                 </div>
                             </div>
                         </section>
@@ -150,7 +150,7 @@
                         <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
                         <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button>
                         <div ng-if="!resourcesheet.base_projectsheet.bucket.files.length">
-                            <img src="img/slides/slide_one.png" alt="Slide One">
+                            <img src="/img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
                     <tab ng-init="currentVid=0">
@@ -165,7 +165,7 @@
                         <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.videos.length)">Préc.</button>
                         <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.videos.length">Suiv.</button>
                         <div ng-if="!resourcesheet.base_projectsheet.videos">
-                            <img src="img/slides/slide_one.png" alt="Slide One">
+                            <img src="/img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
@@ -222,7 +222,7 @@
                 </tabset> -->
 
                 <section class="linked linked-resource" ng-init="linkResources=true" ng-show="linkResources && (linkedResources.length || editable)">
-                    <ng-include src="'views/catalog/block/linked_resources.html'"></ng-include>
+                    <ng-include src="'/views/catalog/block/linked_resources.html'"></ng-include>
                 </section>
 
             </div><!-- #content -->
@@ -231,9 +231,9 @@
 
         <div class="col-md-4">
             <div id="sidebar" ng-init="objectTypeName='makerscienceresource';commentType=13;parentColor='resource'">
-                <ng-include src="'views/catalog/block/community_resource.html'"></ng-include>
-                <ng-include src="'views/catalog/block/comments.html'"></ng-include>
-                <ng-include src="'views/catalog/block/popularity.html'"></ng-include>
+                <ng-include src="'/views/catalog/block/community_resource.html'"></ng-include>
+                <ng-include src="'/views/catalog/block/comments.html'"></ng-include>
+                <ng-include src="'/views/catalog/block/popularity.html'"></ng-include>
 
             </div><!-- #sidebar -->
 

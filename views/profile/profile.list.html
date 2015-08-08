@@ -18,7 +18,7 @@
             </tabset>
             <div class="boxes boxes-profiles">
                 <div class="box" ng-repeat="profile in profiles">
-                    <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
+                    <ng-include src="'/views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
                 </div><!-- .box -->
             </div><!-- .boxes -->
             <pagination total-items="totalItems"
@@ -39,7 +39,7 @@
     </div>
 
     <div class="col-md-3">
-        <ng-include src="'views/profile/block/filters_profile.html'"></ng-include>
+        <ng-include src="'/views/profile/block/filters_profile.html'"></ng-include>
     </div>
 
 </div><!-- .row .container -->

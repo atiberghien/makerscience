@@ -1,4 +1,4 @@
-<div id="intro" class="intro-project-create" style="background-image: url('./img/bg/header-listing-resources.jpg')">
+<div id="intro" class="intro-project-create" style="background-image: url('/img/bg/header-listing-resources.jpg')">
     <h1>Inspirez-vous des expériences</h1>
     <h2>partagées par la communauté</h2>
 </div>
@@ -20,7 +20,7 @@
                     </tabset>
                     <div class="boxes boxes-listing">
                         <div class="box" ng-repeat="resource in resources">
-                            <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                            <ng-include src="'/views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                         </div>
                     </div>
                     <pagination total-items="totalItems"
@@ -37,7 +37,7 @@
                     <a ui-sref="resource.new" class="large large-purple">Partager une expérience <img src="/img/smiley.png" class="smiley" alt="Smiley" /></a>
                 </div>
                 <div class="col-md-3">
-                    <ng-include src="'views/catalog/block/filters_resource.html'" ng-init="objectType='makerscienceresource'" ></ng-include>
+                    <ng-include src="'/views/catalog/block/filters_resource.html'" ng-init="objectType='makerscienceresource'" ></ng-include>
                 </div>
             </div>
         </div><!-- .col-md-12 -->

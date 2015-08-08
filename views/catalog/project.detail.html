@@ -11,7 +11,7 @@
         <div class="container">
 
             <div class="intro edit">
-                <ng-include src="'views/catalog/block/social_share.html'"></ng-include>
+                <ng-include src="'/views/catalog/block/social_share.html'"></ng-include>
 
                 <div class="edit-buttons" ng-show="editable">
                     <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-md-8" >
                         <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?width=700'}}" alt="Project Image" />
-                        <img ng-if="!projectsheet.base_projectsheet.cover" src="img/bacasable.jpg" alt="Project Image" />
+                        <img ng-if="!projectsheet.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Project Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
                                 <button ng-click="openGallery(projectsheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
@@ -42,7 +42,7 @@
                     <div class="col-md-4">
 
                         <div class="side-header">
-                            <ng-include src="'views/catalog/block/project_tags_widget.html'"></ng-include>
+                            <ng-include src="'/views/catalog/block/project_tags_widget.html'"></ng-include>
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
@@ -170,7 +170,7 @@
                         <section>
                             <div ng-repeat="postID in projectsheet.linked_post">
                                 <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(postID)">
-                                    <ng-include ng-if="post.id" src="'views/forum/block/thread.html'"></ng-include>
+                                    <ng-include ng-if="post.id" src="'/views/forum/block/thread.html'"></ng-include>
                                 </div>
                             </div>
                         </section>
@@ -218,7 +218,7 @@
                         <button ng-click="currentImg = Math.abs((currentImg - 1) % projectsheet.base_projectsheet.bucket.files.length)"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
                         <button ng-click="currentImg = (currentImg + 1) % projectsheet.base_projectsheet.bucket.files.length"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
                         <div ng-if="!projectsheet.base_projectsheet.bucket.files.length">
-                            <img src="img/slides/slide_one.png" alt="Slide One">
+                            <img src="/img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
                     <tab ng-init="currentVid=0">
@@ -233,7 +233,7 @@
                         <button ng-click="currentImg = Math.abs((currentImg - 1) % projectsheet.base_projectsheet.videos.length)"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
                         <button ng-click="currentImg = (currentImg + 1) % projectsheet.base_projectsheet.videos.length"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
                         <div ng-if="!projectsheet.base_projectsheet.videos">
-                            <img src="img/slides/slide_one.png" alt="Slide One">
+                            <img src="/img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
@@ -244,7 +244,7 @@
                 </tabset>
 
                 <section class="linked linked-project" ng-init="linkResources=true" ng-show="linkResources && (linkedResources.length || editable)">
-                    <ng-include src="'views/catalog/block/linked_resources.html'"></ng-include>
+                    <ng-include src="'/views/catalog/block/linked_resources.html'"></ng-include>
                 </section>
 
             </div><!-- #content -->
@@ -253,9 +253,9 @@
 
         <div class="col-md-4">
             <div id="sidebar" ng-init="parentColor='project';cummunityObjectTypeName='project';objectTypeName='makerscienceproject';commentType=3">
-                <ng-include src="'views/catalog/block/community_project.html'"></ng-include>
-                <ng-include src="'views/catalog/block/comments.html'"></ng-include>
-                <ng-include src="'views/catalog/block/popularity.html'"></ng-include>
+                <ng-include src="'/views/catalog/block/community_project.html'"></ng-include>
+                <ng-include src="'/views/catalog/block/comments.html'"></ng-include>
+                <ng-include src="'/views/catalog/block/popularity.html'"></ng-include>
 
             </div><!-- #sidebar -->
 

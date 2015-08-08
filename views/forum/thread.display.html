@@ -103,24 +103,24 @@
                                 </fieldset>
                             </form>
                         </div>
-                        <ng-include src="'views/forum/block/answer.parent.html'" ng-repeat="answer in post.parent.answers | orderBy : posted_on"></ng-include>
+                        <ng-include src="'/views/forum/block/answer.parent.html'" ng-repeat="answer in post.parent.answers | orderBy : posted_on"></ng-include>
 
                     </div>
                 </div>
                  <div class="col-md-4">
                     <div class="forum-sidebar">
-                        <ng-include src="'views/forum/block/community.html'"></ng-include>
+                        <ng-include src="'/views/forum/block/community.html'"></ng-include>
                         <div ng-if="similars.length > 0" class="forum-sidebar-light">
                             <h3>Discussions similaires</h3>
                             <div class="post" ng-repeat="post in similars">
-                                <ng-include src="'views/forum/block/small_thread_thumb.html'"></ng-include>
+                                <ng-include src="'/views/forum/block/small_thread_thumb.html'"></ng-include>
                             </div>
                         </div>
                         <div class="thread-linked-projects" ng-if="post.linked_projects">
                             <h3>Projets associés</h3>
                             <div class="boxes boxes-sidebar">
                                 <div class="box" ng-repeat="project in post.linked_projects">
-                                    <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
+                                    <ng-include src="'/views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
                                 </div>
                             </div>
                             <p class="scroll-buttons">
@@ -132,7 +132,7 @@
                             <h3>Experiences associées</h3>
                             <div class="boxes boxes-sidebar">
                                 <div class="box" ng-repeat="resource in post.linked_resources">
-                                    <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                                    <ng-include src="'/views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                                 </div>
                             </div>
                             <p class="scroll-buttons">

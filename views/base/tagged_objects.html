@@ -12,7 +12,7 @@
             <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Les profils comportant ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="profile in profiles">
-                    <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
+                    <ng-include src="'/views/profile/block/profile_thumb.html'"></ng-include>
                 </div>
                 <div class="box box-solo box-pink">
                     <div>
@@ -24,7 +24,7 @@
             <h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Les projets comportant ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="project in projects">
-                    <ng-include src="'views/catalog/block/project_thumb.html'"></ng-include>
+                    <ng-include src="'/views/catalog/block/project_thumb.html'"></ng-include>
                 </div>
                 <div class="box box-solo box-blue">
                     <div>
@@ -36,7 +36,7 @@
             <h2 class="resources clear"><span class="glyphicon glyphicon-book"></span> Les expériences comportant ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="resource in resources">
-                    <ng-include src="'views/catalog/block/resource_thumb.html'"></ng-include>
+                    <ng-include src="'/views/catalog/block/resource_thumb.html'"></ng-include>
                 </div>
                 <div class="box box-solo box-green">
                     <div>
@@ -48,7 +48,7 @@
             <h2 class="discussions clear"><span class="glyphicon glyphicon-user"></span> Les discussions comportant ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="post in discussions">
-                    <ng-include src="'views/forum/block/thread.html'"></ng-include>
+                    <ng-include src="'/views/forum/block/thread.html'"></ng-include>
                 </div>
                 <div class="box box-solo box-pink">
                     <div>
@@ -60,7 +60,7 @@
             <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Ils ont utilisé ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="profile in taggerProfiles| orderBy:'-taggingDate' | unique:'id'">
-                    <ng-include src="'views/profile/block/profile_thumb.html'"></ng-include>
+                    <ng-include src="'/views/profile/block/profile_thumb.html'"></ng-include>
                 </div>
                 <div class="box box-solo box-pink">
                     <div>

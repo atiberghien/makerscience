@@ -1,6 +1,11 @@
 module.exports = function(grunt) {
     var path = require('path');
+    var rewrite = require( "connect-modrewrite" );
 
+    var appConfig = {
+        app: require('./bower.json').appPath || 'app',
+        dist: 'dist'
+    };
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         wiredep: {
@@ -40,6 +45,9 @@ module.exports = function(grunt) {
                         "angular-ui-utils" : {
                             'main' : ["unique.js",]
                         },
+                        "moment" : {
+                            'main' : ['moment.js', 'locale/fr.js']
+                        }
                       }
                 }
             }
@@ -79,11 +87,18 @@ module.exports = function(grunt) {
         connect: {
             server: {
                 options: {
-                    hostname: '0.0.0.0',
+                    hostname: '127.0.0.1',
                     port: 8001,
                     keepalive: true,
-                    debug:true
-                }
+                    debug:true,
+                    middleware: function ( connect, options, middlewares ) {
+                        var rules = [
+                            "!\\.html|\\.js|\\.css|\\.svg|\\.jp(e?)g|\\.png|\\.gif$ /index.html"
+                        ];
+                        middlewares.unshift( rewrite( rules ) );
+                        return middlewares;
+                    }
+                },
             }
         },
         concurrent: {

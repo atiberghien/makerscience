@@ -4,7 +4,7 @@
     <div ng-controller="FilterCtrl">
         <h4>Intérêts</h4>
         <div class="" style="width:100%; padding-bottom:10px;">
-            <ng-include src="'views/base/tag_input.html'"></ng-include>
+            <ng-include src="'/views/base/tag_input.html'"></ng-include>
         </div><!-- /input-group -->
         <ul class="tags tags-project">
             <li ng-repeat="tag in availableInterestTags | limitTo:16">
@@ -16,7 +16,7 @@
     <div ng-controller="FilterCtrl">
         <h4>Compétences</h4>
         <div class="" style="width:100%; padding-bottom:10px;">
-            <ng-include src="'views/base/tag_input.html'"></ng-include>
+            <ng-include src="'/views/base/tag_input.html'"></ng-include>
         </div><!-- /input-group -->
         <ul class="tags tags-project">
             <li ng-repeat="tag in availableSkillTags | limitTo:16">

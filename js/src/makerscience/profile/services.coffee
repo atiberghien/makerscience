@@ -22,13 +22,13 @@ class CurrentMakerScienceProfileService
 
         $rootScope.openSignupPopup = ()->
             modalInstance = $modal.open(
-                templateUrl: 'views/base/signupModal.html',
+                templateUrl: '/views/base/signupModal.html',
                 controller: 'SignupPopupCtrl'
             )
 
         $rootScope.openSigninPopup = () ->
             modalInstance = $modal.open(
-                templateUrl: 'views/base/signinModal.html',
+                templateUrl: '/views/base/signinModal.html',
                 controller: 'SigninPopupCtrl',
             )
 
