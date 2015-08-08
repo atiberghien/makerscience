@@ -67,7 +67,7 @@ module.controller("StaticContentCtrl", ($scope, StaticContent) ->
 )
 
 
-module.controller("MakerScienceObjectGetter", ($scope, $q, Tag, TaggedItem, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
+module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
     $scope.getObject = (objectTypeName, objectId) ->
             if objectTypeName == 'project'
                 return MakerScienceProject.one().get({parent__id : objectId}).then((makerScienceProjectResults) ->
@@ -105,6 +105,9 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Tag, TaggedItem, Make
                 return Tag.one(objectId).get().then((tagResult) ->
                     return tagResult
                 )
+            if objectTypeName == 'vote'
+                return Vote.one(objectId).get()
+
             console.log("Unable to fetch", objectTypeName, objectId)
             return null
 )
