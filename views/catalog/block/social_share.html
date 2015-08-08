@@ -28,13 +28,13 @@
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-        <li>
-            <a facebook class="facebookShare" data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-shares='shares'>{{ shares }}</a>
+        <li style="width: 80px;">
+            <a facebook class="facebookShare" data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-picture="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg" data-shares='shares'>{{ shares }}</a>
         </li>
-        <li>
-            <a twitter  data-lang="en" data-count='horizontal' data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-via='@makerscience' data-size="medium" data-text='{{projectsheet.parent.title}}' ></a>
+        <li style="width: 80px;">
+            <a twitter  data-lang="en" data-count='horizontal' data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-via='makerscience' data-size="medium" data-text='{{projectsheet.parent.title}}' ></a>
         </li>
-        <li>
+        <li style="width: 80px;">
             <div gplus class="g-plus" data-size="tall" data-annotation="bubble" data-href='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-action='share'></div>
         </li>
     </ul>
