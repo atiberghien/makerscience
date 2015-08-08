@@ -2,18 +2,30 @@ module = angular.module("makerscience.forum.controllers", ["commons.megafon.cont
                                                            'makerscience.base.services','makerscience.base.controllers'])
 
 
-
-module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerSciencePost, TaggedItem) ->
+module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
+                                                MakerSciencePost, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
+                                                DataSharing, ObjectProfileLink, TaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
+    angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
 
-    $scope.availablePostTags = []
-    TaggedItem.getList({content_type : 'post'}).then((taggedItemResults) ->
-        angular.forEach(taggedItemResults, (taggedItem) ->
-            $scope.availablePostTags.push(taggedItem.tag.slug)
+    $scope.bestContributors = []
+    ObjectProfileLink.one().customGET('post/best', {level:[30,31,32]}).then((profileResults) ->
+        angular.forEach(profileResults.objects, (profile) ->
+            MakerScienceProfile.one().get({parent__id : profile.id}).then((makerScienceProfileResults) ->
+                $scope.bestContributors.push(makerScienceProfileResults.objects[0])
+            )
         )
     )
 
-    $scope.refreshList = ()->
+    $scope.fetchRecentPosts = () ->
+        $scope.params['ordering'] = '-updated_on'
+        $scope.refreshList()
+
+    $scope.fetchTopPosts = () ->
+        $scope.params['ordering'] = '-answers_count'
+        $scope.refreshList()
+
+    $scope.refreshList = () ->
         MakerSciencePost.one().customGETLIST('search', $scope.params).then((makerSciencePostResults) ->
             meta = makerSciencePostResults.metadata
             $scope.totalItems = meta.total_count
@@ -21,12 +33,7 @@ module.controller("MakerSciencePostListCtrl", ($scope, $controller, MakerScience
             $scope.threads =  makerSciencePostResults
         )
 
-    $scope.$emit('post:new', $scope.refreshList);
-
-)
-
-module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, TaggedItem, ObjectProfileLink, MakerSciencePost, MakerScienceProject, MakerScienceResource, DataSharing) ->
-    angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
+    $scope.fetchRecentPosts()
 
     $scope.allAvailableItems = []
     $scope.linkedItems= []

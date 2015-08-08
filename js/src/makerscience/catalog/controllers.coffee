@@ -2,8 +2,37 @@ module = angular.module("makerscience.catalog.controllers", ['makerscience.catal
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
-module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProject, MakerScienceProjectTaggedItem) ->
+module.controller("MakerScienceProjectListCtrl", ($scope, $controller, $filter, MakerScienceProject, MakerScienceProjectTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
+
+    $scope.fetchRecentProjects = () ->
+        $scope.params['ordering'] = '-created_on'
+        $scope.refreshList()
+
+    $scope.fetchTopProjects = () ->
+        $scope.params['ordering'] = '-total_score'
+        $scope.refreshList()
+
+    $scope.fetchRandomProjects = () ->
+        $scope.params['ordering'] = ''
+        $scope.refreshList().then(->
+            nbElmt = $scope.projects.length
+            while nbElmt
+                rand = Math.floor(Math.random() * nbElmt--)
+                tmp = $scope.projects[nbElmt]
+                $scope.projects[nbElmt] = $scope.projects[rand]
+                $scope.projects[rand] = tmp
+        )
+
+    $scope.refreshList = ()->
+        return MakerScienceProject.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
+            meta = makerScienceProjectResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.projects =  makerScienceProjectResults
+        )
+
+    $scope.fetchRecentProjects()
 
     $scope.availableThemeTags = []
     $scope.availableFormatsTags = []
@@ -18,18 +47,38 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
         )
     )
 
-    $scope.refreshList = ()->
-        MakerScienceProject.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
-            meta = makerScienceProjectResults.metadata
-            $scope.totalItems = meta.total_count
-            $scope.limit = meta.limit
-            $scope.projects =  makerScienceProjectResults
-        )
-
 )
 
-module.controller("MakerScienceResourceListCtrl", ($scope, $controller, MakerScienceResource, MakerScienceResourceTaggedItem) ->
+module.controller("MakerScienceResourceListCtrl", ($scope, $controller, $filter, MakerScienceResource, MakerScienceResourceTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
+
+
+    $scope.fetchRecentResources = () ->
+        $scope.params['ordering'] = '-created_on'
+        $scope.refreshList()
+
+    $scope.fetchTopResources = () ->
+        $scope.params['ordering'] = '-total_score'
+        $scope.refreshList()
+
+    $scope.fetchRandomResources = () ->
+        $scope.params['ordering'] = ''
+        $scope.refreshList().then(->
+            nbElmt = $scope.resources.length
+            while nbElmt
+                rand = Math.floor(Math.random() * nbElmt--)
+                tmp = $scope.resources[nbElmt]
+                $scope.resources[nbElmt] = $scope.resources[rand]
+                $scope.resources[rand] = tmp
+        )
+
+    $scope.refreshList = ()->
+        MakerScienceResource.one().customGETLIST('search', $scope.params).then((makerScienceResourceResults) ->
+            meta = makerScienceResourceResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.resources =  makerScienceResourceResults
+        )
 
     $scope.availableThemeTags = []
     $scope.availableFormatsTags = []
@@ -44,13 +93,6 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, MakerSci
         )
     )
 
-    $scope.refreshList = ()->
-        MakerScienceResource.one().customGETLIST('search', $scope.params).then((makerScienceResourceResults) ->
-            meta = makerScienceResourceResults.metadata
-            $scope.totalItems = meta.total_count
-            $scope.limit = meta.limit
-            $scope.resources =  makerScienceResourceResults
-        )
 )
 
 module.controller('MakerScienceLinkedResourceCtrl', ($scope, MakerScienceResource) ->

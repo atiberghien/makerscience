@@ -4,6 +4,33 @@ module = angular.module("makerscience.profile.controllers", ['makerscience.profi
 module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfile, MakerScienceProfileTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
+    $scope.fetchRecentProfiles = () ->
+        $scope.params['ordering'] = '-date_joined'
+        $scope.refreshList()
+
+    $scope.fetchTopProfiles = () ->
+        $scope.params['ordering'] = '-activity_score'
+        $scope.refreshList()
+
+    $scope.fetchRandomProfiles = () ->
+        $scope.params['ordering'] = ''
+        $scope.refreshList().then(->
+            nbElmt = $scope.profiles.length
+            while nbElmt
+                rand = Math.floor(Math.random() * nbElmt--)
+                tmp = $scope.profiles[nbElmt]
+                $scope.profiles[nbElmt] = $scope.profiles[rand]
+                $scope.profiles[rand] = tmp
+        )
+
+    $scope.refreshList = ()->
+        MakerScienceProfile.one().customGETLIST('search', $scope.params).then((makerScienceProfileResults) ->
+            meta = makerScienceProfileResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.profiles =  makerScienceProfileResults
+        )
+
     $scope.availableInterestTags = []
     $scope.availableSkillTags = []
 
@@ -14,14 +41,6 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
                 when 'in' then $scope.availableInterestTags.push(taggedItem.tag)
         )
     )
-
-    $scope.refreshList = ()->
-        MakerScienceProfile.one().customGETLIST('search', $scope.params).then((makerScienceProfileResults) ->
-            meta = makerScienceProfileResults.metadata
-            $scope.totalItems = meta.total_count
-            $scope.limit = meta.limit
-            $scope.profiles =  makerScienceProfileResults
-        )
 )
 
 
@@ -75,6 +94,12 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                             $scope.favoriteTags[obj.tag.slug]++
                         else
                             $scope.favoriteTags[obj.tag.slug] = 1
+                    else if activity.content_type == 'vote'
+                        $scope.getObject(obj.content_type, obj.object_id).then((votedObj) ->
+                            activity.content_object = obj
+                            activity.content_object.votedObj = votedObj
+                            console.log(activity.content_object.votedObj.parent.title)
+                        )
                     else if activity.content_type == 'tag'
                         $scope.followedTags.push(obj)
                     else

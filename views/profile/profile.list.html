@@ -12,40 +12,26 @@
         <div id="content" >
 
             <tabset class="nav-tabs-profile">
-                <tab heading="Nouveaux membres">
-                    <div class="boxes boxes-profiles">
-                        <div class="box" ng-repeat="profile in profiles">
-                            <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
-                    <pagination total-items="totalItems"
-                                items-per-page='limit'
-                                ng-model="currentPage"
-                                max-size="10"
-                                class="pagination-sm"
-                                rotate="false"
-                                num-pages="numPages"
-                                ng-change="pageChanged(currentPage)"
-                                previous-text="<<"
-                                next-text=">>">
-                    </pagination>
-                </tab>
-                <tab heading="Les plus actifs">
-                    <div class="boxes boxes-profiles" >
-                        <div class="box" ng-repeat="profile in profiles">
-                            <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
-                </tab>
-                <tab heading="Aléatoire">
-                    <div class="boxes boxes-profiles">
-                        <div class="box" ng-repeat="profile in profiles">
-                            <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
-                        </div><!-- .box -->
-                    </div><!-- .boxes -->
-                </tab>
+                <tab heading="Nouveaux membres" select="fetchRecentProfiles()"></tab>
+                <tab heading="Les plus actifs" select="fetchTopProfiles()"></tab>
+                <tab heading="Aléatoire" select="fetchRandomProfiles()"></tab>
             </tabset>
-
+            <div class="boxes boxes-profiles">
+                <div class="box" ng-repeat="profile in profiles">
+                    <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
+                </div><!-- .box -->
+            </div><!-- .boxes -->
+            <pagination total-items="totalItems"
+                        items-per-page='limit'
+                        ng-model="currentPage"
+                        max-size="10"
+                        class="pagination-sm"
+                        rotate="false"
+                        num-pages="numPages"
+                        ng-change="pageChanged(currentPage)"
+                        previous-text="<<"
+                        next-text=">>">
+            </pagination>
             <a class="large large-pink" ui-sref="map">Cartographie de la communauté</a>
 
         </div><!-- #content -->

@@ -10,35 +10,30 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-9">
-                    <tabset class="nav-tabs-resource">
-                        <tab heading="Les plus récents">
-                            <div class="boxes boxes-listing">
-                                <div class="box" ng-repeat="resource in resources">
-                                    <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
-                                </div>
-                            </div>
-                            <pagination total-items="totalItems"
-                                        items-per-page='limit'
-                                        ng-model="currentPage"
-                                        max-size="10"
-                                        class="pagination-sm"
-                                        rotate="false"
-                                        num-pages="numPages"
-                                        ng-change="pageChanged(currentPage)"
-                                        previous-text="<<"
-                                        next-text=">>">
-                            </pagination>
+                    <tabset class="nav-tabs-listing">
+                        <tab heading="Les plus récents" select="fetchRecentResources()"></tab>
+                        <tab heading="Les plus populaires" select="fetchTopResources()"></tab>
+                        <tab heading="Sélection thématique" >
+                            En cours
                         </tab>
-                        <tab heading="Les plus populaires">
-                            Les plus populaires ... coming soon
-                        </tab>
-                        <tab heading="Sélection thématique">
-                            Sélection thématique
-                        </tab>
-                        <tab heading="Au hasard">
-                            Au hasard ... coming soon
-                        </tab>
+                        <tab heading="Au hasard" select="fetchRandomResources()"></tab>
                     </tabset>
+                    <div class="boxes boxes-listing">
+                        <div class="box" ng-repeat="resource in resources">
+                            <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                        </div>
+                    </div>
+                    <pagination total-items="totalItems"
+                                items-per-page='limit'
+                                ng-model="currentPage"
+                                max-size="10"
+                                class="pagination-sm"
+                                rotate="false"
+                                num-pages="numPages"
+                                ng-change="pageChanged(currentPage)"
+                                previous-text="<<"
+                                next-text=">>">
+                    </pagination>
                     <a ui-sref="resource.new" class="large large-purple">Partager une expérience <img src="/img/smiley.png" class="smiley" alt="Smiley" /></a>
                 </div>
                 <div class="col-md-3">
