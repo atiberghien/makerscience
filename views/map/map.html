@@ -6,10 +6,10 @@
 <div class="map-search">
     <div class="container row">
         <div class="col-md-12">
-            <form class="form-inline mapsearch">
+            <!-- <form class="form-inline mapsearch">
                 <input type="text" name="search" class="form-control" placeholder="Recherche..." />
                 <button class="btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-            </form>
+            </form> -->
         </div>
     </div>
 </div>
@@ -30,7 +30,7 @@
                 <p>{{spottedProfile.activity}}</p>
             </div><!-- .member -->
             <div class="content">
-                <h5>Il participe à ces projets</h5>
+                <h5>Participe à ces projets</h5>
                 <div class="boxes boxes-small" >
                     <div id="anchor{{$index}}" class="box" ng-repeat="project in spottedProfile.projects">
                         <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include>
