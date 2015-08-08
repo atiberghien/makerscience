@@ -52,7 +52,7 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
         angular.forEach(resourceResults, (resource) ->
             $scope.allAvailableItems.push(
                 fullObject: resource
-                title : "[Ressource] " + resource.parent.title
+                title : "[Expérence] " + resource.parent.title
                 type : 'resource'
             )
         )
@@ -70,9 +70,9 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
             $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
 
     $scope.saveMakersciencePost = (newPost, parent, authorProfile) ->
-        $scope.savePost(newPost, parent, authorProfile).then((newPostURI)->
+        $scope.savePost(newPost, parent, authorProfile).then((newPost)->
             makerSciencePost =
-                parent : newPostURI,
+                parent : newPost.resource_uri,
                 post_type : newPost.type
                 linked_projects : []
                 linked_resources : []
@@ -94,7 +94,9 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
                 makerSciencePost["linked_"+item.type+"s"].push(item.fullObject.resource_uri)
             )
 
-            MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
+
+            return MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
+                $scope.refreshList()
                 return false
             )
         )
@@ -103,6 +105,7 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
 
 module.controller("MakerSciencePostCtrl", ($scope, $stateParams, $controller, MakerSciencePost, DataSharing) ->
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
+    angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
     angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
 
     MakerSciencePost.one().get({parent__slug: $stateParams.slug}).then((makerSciencePostResult)->
@@ -111,6 +114,12 @@ module.controller("MakerSciencePostCtrl", ($scope, $stateParams, $controller, Ma
         DataSharing.sharedObject['post'] = $scope.post.parent
         $scope.init('post')
     )
+
+    $scope.saveMakersciencePostAnswer = (newAnswer, parent, authorProfile) ->
+        $scope.savePost(newAnswer, parent, authorProfile).then((newAnwer)->
+            parent.answers_count++
+            parent.answers.push(newAnwer)
+        )
 )
 
 module.controller("MakerSciencePostEmbedCtrl", ($scope, $controller, MakerSciencePost) ->

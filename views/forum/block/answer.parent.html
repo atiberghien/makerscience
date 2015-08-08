@@ -1,5 +1,5 @@
 <div ng-init="showSubAnswerForm[answer.id]=false">
-    <div class="thread-answer" ng-controller="PostCtrl" ng-init="initFromID(answer.id);">
+    <div class="thread-answer">
         <!-- <ul class="answer-report">
             <li><a href="">Signaler un abus</a></li>
         </ul> -->
@@ -27,13 +27,23 @@
                                 'other': 'Réponses'}">
                     </ng-pluralize>
                 </li>
-                <!-- <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li>
-                <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
-                <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span></a></li> -->
+                <!-- <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li> -->
+                <!-- <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li> -->
+                <li>
+                    <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 34)"
+                               ng-click="addMember(currentMakerScienceProfile.parent, 34, '', true)">
+                               <span class="glyphicon glyphicon-thumbs-up"></span>
+                    </a>
+                    <a href="" ng-if="isAlreadyMember(currentMakerScienceProfile.parent, 34)"
+                               ng-click="deleteMember(currentMakerScienceProfile.parent, 34)">
+                               <span class="glyphicon glyphicon-thumbs-down"></span>
+                    </a>
+                    {{(community | filter: {level:34, isValidated: true}).length }} J'aime
+                </li>
                 <li><button class="button button-forum" ng-click="showSubAnswerForm[answer.id] = ! showSubAnswerForm[answer.id]">Répondre</button></li>
         </div>
     </div>
-    <div class="forum-answer" ng-controller="PostCreateCtrl"  ng-show="showSubAnswerForm[answer.id]">
+    <div class="forum-answer" ng-show="showSubAnswerForm[answer.id]">
         <h2>Espace réponse</h2>
         <form method="post" action="" class="forum-answer" >
             <text-angular name="subanswer{{answer.id}}.text"
@@ -43,13 +53,13 @@
                           placeholder="Saisissez votre réponse ici.">
             </text-angular>
             <fieldset class="right">
-                <button type="submit" class="button" ng-click="savePost(subanswer, answer, currentMakerScienceProfile.parent);showSubAnswerForm[answer.id]=false">Envoyer</button>
+                <button type="submit" class="button" ng-click="saveMakersciencePostAnswer(subanswer, answer, currentMakerScienceProfile.parent);showSubAnswerForm[answer.id]=false">Envoyer</button>
                 <button type="reset" class="button">Annuler</button>
             </fieldset>
         </form>
     </div>
-    <div ng-controller="PostCtrl" ng-init="initFromID(answer.id)">
-        <div class="thread-answer answer-child" ng-repeat="subanswer in answers">
+    <div>
+        <div class="thread-answer answer-child" ng-repeat="subanswer in answer.answers| orderBy : posted_on">
             <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
             <div class="thread-author">
                 <gravatar-image data-gravatar-email="author.user.email"

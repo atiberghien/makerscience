@@ -67,8 +67,14 @@
 
 
                             <li>
-                                <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 33)" ng-click="addMember(currentMakerScienceProfile.parent, 33, '', true)"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                                <a href="" ng-if="isAlreadyMember(currentMakerScienceProfile.parent, 33)" ng-click="deleteMember(currentMakerScienceProfile.parent, 33)" style="background-color:black"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                                <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 33)"
+                                           ng-click="addMember(currentMakerScienceProfile.parent, 33, '', true)">
+                                           <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </a>
+                                <a href="" ng-if="isAlreadyMember(currentMakerScienceProfile.parent, 33)"
+                                           ng-click="deleteMember(currentMakerScienceProfile.parent, 33)">
+                                           <span class="glyphicon glyphicon-thumbs-down"></span>
+                                </a>
                             </li>
 
 
@@ -82,7 +88,7 @@
             <div class="row container">
                 <div class="col-md-8" >
                     <div id="content" class="thread-answers">
-                        <div class="forum-answer" ng-controller="PostCreateCtrl" ng-show="showAnswerForm" >
+                        <div class="forum-answer" ng-show="showAnswerForm" >
                             <h2>Espace réponse</h2>
                             <form method="post" action="" class="forum-answer">
                                 <text-angular name="answer.text"
@@ -92,12 +98,12 @@
                                               placeholder="Saisissez votre réponse ici.">
                                 </text-angular>
                                 <fieldset class="right">
-                                    <button type="submit" class="button" ng-click="savePost(answer, post.parent, currentMakerScienceProfile.parent);showAnswerForm=false">Envoyer</button>
-                                    <button type="reset" class="button">Annuler</button>
+                                    <button type="submit" class="button" ng-click="saveMakersciencePostAnswer(answer, post.parent, currentMakerScienceProfile.parent);showAnswerForm=false">Envoyer</button>
+                                    <button type="reset" class="button" ng-click="showAnswerForm=false">Annuler</button>
                                 </fieldset>
                             </form>
                         </div>
-                        <ng-include src="'views/forum/block/answer.parent.html'" ng-repeat="answer in answers"></ng-include>
+                        <ng-include src="'views/forum/block/answer.parent.html'" ng-repeat="answer in post.parent.answers | orderBy : posted_on"></ng-include>
 
                     </div>
                 </div>

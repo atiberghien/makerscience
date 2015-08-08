@@ -16,7 +16,7 @@
 
 <div class="forum-create">
     <div class="row container">
-        <div class="col-md-12" ng-Controller="MakerSciencePostCreateCtrl" ng-init="showCreateButton = true">
+        <div class="col-md-12" ng-init="init();showCreateButton = true">
             <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
             <form method="post" action="" collapse="showCreateButton" class="new-topic">
                 <tabset>
@@ -111,89 +111,69 @@
 
 <div class="forum-content">
     <div class="row container">
-        <div class="col-md-8">
+        <div class="col-md-8" >
             <div id="content" class="content-forum" >
                 <tabset class="nav-tabs-forum">
-                    <tab heading="Récent" ng-controller="MakerSciencePostListCtrl" ng-init="init()">
-                        <div ng-controller="FilterCtrl">
-                            <ng-include src="'views/base/tag_input.html'"></ng-include>
-                        </div>
-                        <div ng-repeat="post in threads">
-                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                        </div>
-                        <pagination total-items="totalItems"
-                                    items-per-page='limit'
-                                    ng-model="currentPage"
-                                    max-size="10"
-                                    class="pagination-sm"
-                                    rotate="false"
-                                    num-pages="numPages"
-                                    ng-change="pageChanged(currentPage)"
-                                    previous-text="<<"
-                                    next-text=">>">
-                        </pagination>
-                        <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
-                    </tab>
-                    <tab heading="Top" ng-controller="MakerSciencePostListCtrl" ng-init="init()">
-                        <div ng-controller="FilterCtrl">
-                            <ng-include src="'views/base/tag_input.html'"></ng-include>
-                        </div>
-                        <div ng-repeat="post in threads">
-                            <ng-include src="'views/forum/block/thread.html'"></ng-include>
-                        </div>
-                        <pagination total-items="totalItems"
-                                    items-per-page='limit'
-                                    ng-model="currentPage"
-                                    max-size="10"
-                                    class="pagination-sm"
-                                    rotate="false"
-                                    num-pages="numPages"
-                                    ng-change="pageChanged(currentPage)"
-                                    previous-text="<<"
-                                    next-text=">>">
-                        </pagination>
-                        <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
-                    </tab
+                    <tab heading="Récent" select="fetchRecentPosts()"></tab>
+                    <tab heading="Top" select="fetchTopPosts()"></tab>
                 </tabset>
+                <div ng-controller="FilterCtrl">
+                    <ng-include src="'views/base/tag_input.html'"></ng-include>
+                </div>
+                <div ng-repeat="post in threads">
+                    <ng-include src="'views/forum/block/thread.html'"></ng-include>
+                </div>
+                <pagination total-items="totalItems"
+                            items-per-page='limit'
+                            ng-model="currentPage"
+                            max-size="10"
+                            class="pagination-sm"
+                            rotate="false"
+                            num-pages="numPages"
+                            ng-change="pageChanged(currentPage)"
+                            previous-text="<<"
+                            next-text=">>">
+                </pagination>
             </div><!-- #content -->
         </div>
         <div class="col-md-4">
             <div class="forum-sidebar">
-                <div class="forum-sidebar-dark" ng-controller="ThreadListCtrl" ng-init="getBestContributors()">
-                    <h3>Les 5 utilisateurs<br />les plus actifs</h3>
+                <div class="forum-sidebar-dark">
+                    <h3>Les membres les plus actifs</h3>
                     <ul class="forum-top-users" >
                         <li ng-repeat="contributor in bestContributors">
                             <div>
-                                <a>
-                                    <gravatar-image data-gravatar-email="contributor.user.email"
+                                <a ui-sref="profile.detail({slug:contributor.slug})">
+                                    <gravatar-image data-gravatar-email="contributor.parent.user.email"
                                         data-gravatar-size="52"
                                         data-gravatar-rating="pg"
                                         data-gravatar-default="mm"
                                         data-gravatar-secure="true"
                                         data-gravatar-css-class="member img-circle">
                                     </gravatar-image>
-                                    {{contributor.user.first_name}} <strong>{{contributor.user.last_name}}</strong>
+                                    {{contributor.parent.user.first_name}} <strong>{{contributor.parent.user.last_name}}</strong>
                                 </a>
                             </div>
                         </li>
                     </ul>
                 </div>
 
-                <div class="forum-sidebar-light" ng-controller="MakerSciencePostListCtrl" ng-init="init({answers_count: 0})">
+                <div class="forum-sidebar-light">
                     <h3>Les derniers posts sans réponses</h3>
-                    <div class="post" ng-repeat="post in threads| limitTo : 2">
+                    <div class="post" ng-repeat="post in threads | orderBy : '-parent.posted_on' | filter : hasNoAnswer | limitTo : 2">
                         <ng-include src="'views/forum/block/small_thread_thumb.html'" ng-init="post=post.parent"></ng-include>
                     </div><!-- .post -->
                     <!-- <p class="more"><a href="">Tout afficher</a><p> -->
                 </div><!-- .forum-sidebar-light -->
 
-                <div class="forum-sidebar-light"  ng-controller="TagListCtrl">
+                <div class="forum-sidebar-light" >
                     <h3>Suggestion de tags</h3>
-                    <ul class="tags tags-padding">
-                        <li ng-repeat="tag in tags">
+                    <ul class="tags tags-padding" ng-controller="TagListCtrl">
+                        <li ng-repeat="tag in tags | orderBy : '-weight' | limitTo : 25 ">
                             <a ng-if="tag.name.length > 10" tooltip="{{tag.name}}" ui-sref="tag({slug:tag.slug})">{{tag.name| characters:10}}</a>
                             <a ng-if="tag.name.length <= 10" ui-sref="tag({slug:tag.slug})">{{tag.name}}</a>
                         </li>
+                        <li><a ng-show="tags.length > 25" ui-sref="tags" tooltip="Cherchez d’autres tags">Cherchez d’autres tags</a></li>
                     </ul>
                 </div>
 

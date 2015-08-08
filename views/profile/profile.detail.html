@@ -213,6 +213,9 @@
                                         <span ng-if="activity.level == 33">
                                             {{profile.parent.user.first_name}} aime la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
                                         </span>
+                                        <span ng-if="activity.level == 34">
+                                            {{profile.parent.user.first_name}} aime une réponse de la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
+                                        </span>
                                         <span ng-if="activity.level == 40">
                                             {{profile.parent.user.first_name}} est maintenant en contact avec <a ui-sref="profile.detail({slug:activity.content_object.slug})">{{activity.content_object.full_name}}</a>
                                         </span>
