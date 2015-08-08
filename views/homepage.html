@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" ng-controller="HomepageCtrl">
 
     <div class="home-slide">
         <div class="row">
-            <div class="col-md-7" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3, true)">
-                <carousel class="carousel-no-indicators" ng-controller="HomepageFeaturedListCtrl" interval="4000">
+            <div class="col-md-7">
+                <carousel class="carousel-no-indicators"  interval="4000">
                     <!-- Presentation -->
                     <slide>
                         <div class="caption">
@@ -18,22 +18,22 @@
                             <img src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         </a>
                     </slide>
-                    <slide ng-repeat="project in projects">
+                    <slide ng-repeat="project in projects | filter:featured | limitTo : 2">
                         <h3 class="category"><span>Projet</span></h3>
                         <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
                         <img ng-if="!project.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
-                            <h3>{{project.parent.title}}</h3>
+                            <h3><a ui-sref="project.detail({slug:project.parent.slug})">{{project.parent.title}}</a></h3>
                             <h4>Par <strong><a ui-sref="profile.detail({slug:project.by.profile_slug})">
                                 {{project.by.full_name}}</a></strong></h4>
                         </div>
                     </slide>
-                    <slide ng-repeat="resource in resources">
+                    <slide ng-repeat="resource in featuredResources | filter:featured | limitTo : 2">
                         <h3 class="category"><span>Expérience</span></h3>
                         <img ng-if="resource.base_projectsheet.cover" ng-src="{{config.media_uri}}{{resource.base_projectsheet.cover.thumbnail_url}}?height=393" alt="Loading slide one..." />
                         <img ng-if="!resource.base_projectsheet.cover" src="./img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
-                            <h3>{{resource.parent.title}}</h3>
+                            <h3><a ui-sref="resource.detail({slug:resource.parent.slug})">{{resource.parent.title}}</a></h3>
                             <h4>Par <strong><a ui-sref="profile.detail({slug:resource.by.profile_slug})">
                                 {{resource.by.full_name}}</a></strong></h4>
                         </div>
@@ -114,9 +114,9 @@
         <div class="row">
             <div class="col-md-4">
                 <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
-                <div class="boxes boxes-small boxes-small-home boxes-profiles" ng-controller="MakerScienceProfileListCtrl" ng-init="init(3)">
+                <div class="boxes boxes-small boxes-small-home boxes-profiles">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                    <div class="box" ng-repeat="profile in profiles  | limitTo : 3">
+                    <div class="box" ng-repeat="profile in profiles | orderBy : '-parent.user.date_joined' | limitTo : 3">
                         <ng-include src="'views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
                     </div
                     ><div class="box box-solo box-pink">
@@ -126,9 +126,9 @@
             </div><!-- .col-md-4 -->
             <div class="col-md-4">
                 <h2 class="projects"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
-                <div class="boxes boxes-small boxes-small-home boxes-projects" ng-controller="MakerScienceProjectListCtrl" ng-init="init(3)">
+                <div class="boxes boxes-small boxes-small-home boxes-projects">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                    <div class="box" ng-repeat="project in projects | limitTo : 3" >
+                    <div class="box" ng-repeat="project in projects | orderBy : '-parent.created_on'| limitTo : 3" >
                         <ng-include src="'views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include> -->
                     </div
                     ><div class="box box-solo box-blue">
@@ -138,9 +138,9 @@
             </div><!-- .col-md-4 -->
             <div class="col-md-4">
                 <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Expériences partagées</h2>
-                <div class="boxes boxes-small boxes-small-home boxes-resources" ng-controller="MakerScienceResourceListCtrl" ng-init="init(3)">
+                <div class="boxes boxes-small boxes-small-home boxes-resources">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
-                    <div class="box" ng-repeat="resource in resources  | limitTo : 3">
+                    <div class="box" ng-repeat="resource in resources| orderBy : '-parent.created_on'| limitTo : 3">
                         <ng-include src="'views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
                     </div
                     ><div class="box box-solo box-green">
@@ -153,10 +153,10 @@
 
     <div class="row home-tags">
         <div class="col-md-12">
-            <div class="home-tags" ng-controller="TagListCtrl">
+            <div class="home-tags">
                 <h2>Tags / Mots clés</h2>
-                <ul class="tags">
-                    <li ng-repeat="tag in tags | limitTo : 25 "><a ui-sref="tag({slug:tag.slug})">{{tag.name}}</a></li>
+                <ul class="tags" ng-controller="TagListCtrl">
+                    <li ng-repeat="tag in tags | orderBy : '-weight' | limitTo : 25 "><a ui-sref="tag({slug:tag.slug})">{{tag.name}}</a></li>
                     <li><a ng-show="tags.length > 25" ui-sref="tags" tooltip="Cherchez d’autres tags">Cherchez d’autres tags</a></li>
                 </ul>
             </div><!-- .home-tags -->
@@ -166,10 +166,10 @@
     <div class="row row-home">
         <div class="col-md-7">
 
-            <div class="home-forum" ng-controller="MakerSciencePostListCtrl" ng-init="init({order_by:'-updated_on'})">
+            <div class="home-forum">
                 <!-- <div class="preview"></div> -->
                 <h2 class="forum">Discussions <a ui-sref="forum">Voir toutes les discussions</a></h2>
-                <div ng-repeat="post in threads| limitTo:3">
+                <div ng-repeat="post in threads| orderBy : '-parent.posted_on'|| limitTo:3">
                     <ng-include src="'views/forum/block/thread.html'"></ng-include>
                 </div>
             </div><!-- .home-forum -->
