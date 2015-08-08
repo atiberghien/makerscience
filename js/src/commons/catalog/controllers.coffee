@@ -111,32 +111,6 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
         )
 )
 
-module.controller("PopularityCtrl", ($scope, $state) ->
-    $scope.votePopularity = false
-    $scope.previousUserRatings = {}
-    $scope.userRatings = {}
-
-    $scope.popularityItems =
-        'Inspirant' :
-            'maxPopularityScore' : 100
-            'objectPopularityScore' : 70
-        'Réconfortant' :
-            'maxPopularityScore' : 100
-            'objectPopularityScore' : 50
-        'Utile' :
-            'maxPopularityScore' : 100
-            'objectPopularityScore' : 15
-
-    $scope.saveUserRating = () ->
-        angular.forEach($scope.userRatings, (value, key) ->
-            if $scope.previousUserRatings[key]
-                $scope.popularityItems[key].objectPopularityScore -=  $scope.previousUserRatings[key]
-            $scope.previousUserRatings[key] = value
-            $scope.popularityItems[key].objectPopularityScore += value
-        )
-        $scope.votePopularity = false
-)
-
 module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params, FileUploader, ProjectSheet, BucketFile) ->
 
     if params.projectsheet
