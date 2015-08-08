@@ -2,16 +2,18 @@ angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catal
 angular.module('commons.accounts', ['commons.accounts.services', 'commons.accounts.controllers'])
 angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
 angular.module('commons.megafon', ['commons.megafon.controllers', 'commons.megafon.services'])
+angular.module('commons.starlet', ['commons.starlet.controllers', 'commons.starlet.services'])
 angular.module('makerscience.catalog', ['makerscience.catalog.controllers', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services'])
+
 angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
-                                'makerscience.base','makerscience.map', 'commons.megafon',
+                                'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
-                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies'])
+                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies', '720kb.socialshare', 'sticky'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -177,6 +179,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('forum',
                 url: '/discussions/',
                 templateUrl: 'views/forum/forum.html'
+                controller : 'MakerScienceForumCtrl'
                 ncyBreadcrumb:
                     label: 'Discussions'
                     parent : 'home'
@@ -214,7 +217,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
 
 ])
-.run(($rootScope, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService) ->
+.run(($rootScope, $location, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
@@ -227,6 +230,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     $rootScope.$stateParams = $stateParams
 
     $rootScope.Math = window.Math
+
+    $rootScope.location = $location
 )
 
 angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->
