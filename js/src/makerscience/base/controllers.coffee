@@ -56,9 +56,20 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
             )
 )
 
-module.controller('HomepageFeaturedListCtrl', ($scope, MakerScienceProject, MakerScienceResource) ->
-    $scope.projects = MakerScienceProject.getList({limit:2, feature:true}).$object
-    $scope.resources = MakerScienceResource.getList({limit:2, feature:true}).$object
+module.controller('HomepageCtrl', ($scope, $filter, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
+
+    MakerScienceProject.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceProjectResults) ->
+        $scope.projects =  makerScienceProjectResults
+    )
+    MakerScienceResource.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceResourceResults) ->
+        $scope.resources =  makerScienceResourceResults
+    )
+    MakerScienceProfile.one().customGETLIST('search', {ordering: '-date_joined', limit : 3}).then((makerScienceProfileResults) ->
+        $scope.profiles =  makerScienceProfileResults
+    )
+    MakerSciencePost.one().customGETLIST('search', {ordering: '-created_on', limit : 5}).then((makerSciencePostResults) ->
+        $scope.threads =  makerSciencePostResults
+    )
 )
 
 
