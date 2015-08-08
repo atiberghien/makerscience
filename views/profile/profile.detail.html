@@ -183,6 +183,9 @@
                                         <span ng-if="activity.level == 3">
                                             {{profile.parent.user.first_name}} a commenté le projet <a ui-sref="project.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
                                         </span>
+                                        <span ng-if="activity.level == 4">
+                                            {{profile.parent.user.first_name}} a noté le critère «{{activity.content_object.vote_type_label}}» du projet <a ui-sref="project.detail({slug:activity.content_object.votedObj.parent.slug})">{{activity.content_object.votedObj.parent.title}}</a>
+                                        </span>
                                         <span ng-if="activity.level == 10">
                                             {{profile.parent.user.first_name}} a créé l'expérience <a ui-sref="resource.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
                                         </span>
@@ -194,6 +197,9 @@
                                         </span>
                                         <span ng-if="activity.level == 13">
                                             {{profile.parent.user.first_name}} a commenté l'expérience <a ui-sref="resource.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
+                                        </span>
+                                        <span ng-if="activity.level == 14">
+                                            {{profile.parent.user.first_name}} a noté le critère «» de l'expérience <a ui-sref="resource.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
                                         </span>
                                         <span ng-if="activity.level == 30">
                                             {{profile.parent.user.first_name}} a créé la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>

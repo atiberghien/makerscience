@@ -195,6 +195,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
+    $controller('VoteCtrl', {$scope: $scope})
 
     $scope.preparedThemeTags = []
     $scope.preparedFormatsTags = []
@@ -215,9 +216,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 $scope.editable = result.has_perm
 
         )
-        # FIXME : these 2 signals should be removed, since we now use DataSharing service
-        # $scope.$broadcast('projectReady', {project : $scope.projectsheet.parent})
-        # $scope.$broadcast('makerscienceprojectReady', {makerscienceproject : $scope.projectsheet})
 
         console.log("Before setting datasharing", DataSharing.sharedObject)
         DataSharing.sharedObject =  {project: $scope.projectsheet.parent, makerscienceproject : $scope.projectsheet}
@@ -239,20 +237,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
         )
-
-        $scope.addTagToProjectSheet = (tag_type, tag) ->
-            MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+$scope.projectsheet.id+"/"+tag_type, {}).then((taggedItemResult) ->
-                ObjectProfileLink.one().customPOST(
-                    profile_id: $scope.currentMakerScienceProfile.parent.id,
-                    level: 50,
-                    detail : '',
-                    isValidated:true
-                , 'taggeditem/'+taggedItemResult.id)
-            )
-
-        $scope.removeTagFromProjectSheet = (tag) ->
-            MakerScienceProjectTaggedItem.one(tag.taggedItemId).remove()
-
 
         $scope.$on('newTeamMember', (event, user_id)->
                 """
@@ -279,6 +263,30 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 return if $scope.projectsheet.parent.progress.label && selected.length then selected[0].text else 'non renseigné';
         )
 
+        $scope.removeTagFromProjectSheet = (tag) ->
+            MakerScienceProjectTaggedItem.one(tag.taggedItemId).remove()
+
+        ## ONLY DEFINE AND/OR CALL THESE METHODS IF AND ONLY IF $scope.currentMakerScienceProfile IS AVAILABLE
+        $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
+            if newValue != null && newValue != undefined
+                $scope.addTagToProjectSheet = (tag_type, tag) ->
+                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+$scope.projectsheet.id+"/"+tag_type, {}).then((taggedItemResult) ->
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItemResult.id)
+                    )
+
+                $scope.saveMakerScienceProjectVote = (voteType, score) ->
+                    # profileID, objectTypeName, objectID, voteType, score, objectProfileLinkType
+                    $scope.saveVote($scope.currentMakerScienceProfile.parent.id, 'makerscienceproject', $scope.projectsheet.id, voteType, score, 4)
+
+                $scope.loadVotes($scope.currentMakerScienceProfile.parent.id, 'makerscienceproject', $scope.projectsheet.id)
+            else
+                $scope.loadVotes(null, 'makerscienceproject', $scope.projectsheet.id)
+        )
     )
 
     $scope.updateMakerScienceProjectSheet = (resourceName, resourceId, fieldName, data) ->

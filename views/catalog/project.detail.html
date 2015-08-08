@@ -11,23 +11,24 @@
         <div class="container">
 
             <div class="intro edit">
+                <ng-include src="'views/catalog/block/social_share.html'"></ng-include>
 
                 <div class="edit-buttons" ng-show="editable">
                     <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                 </div>
-
                 <h1>{{projectsheet.parent.title}}</h1>
+
                 <h2 editable-text="projectsheet.parent.baseline"
                     e-form="BaselineBtnForm"
                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'baseline', $data)"
                     ng-bind-html="projectsheet.parent.baseline">{{ projectsheet.parent.baseline }}
                 </h2>
+
                 <h3><span>Fiche Projet</span></h3>
 
                 <div class="row">
-
                     <div class="col-md-8" >
                         <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?width=700'}}" alt="Project Image" />
                         <img ng-if="!projectsheet.base_projectsheet.cover" src="img/bacasable.jpg" alt="Project Image" />
@@ -251,7 +252,7 @@
         </div><!-- .col-md-8 -->
 
         <div class="col-md-4">
-            <div id="sidebar" ng-init="parentColor='project';cummunityObjectTypeName='project';commentedObjectTypeName='makerscienceproject';commentType=3">
+            <div id="sidebar" ng-init="parentColor='project';cummunityObjectTypeName='project';objectTypeName='makerscienceproject';commentType=3">
                 <ng-include src="'views/catalog/block/community_project.html'"></ng-include>
                 <ng-include src="'views/catalog/block/comments.html'"></ng-include>
                 <ng-include src="'views/catalog/block/popularity.html'"></ng-include>
@@ -266,7 +267,7 @@
 
         <div class="col-md-12">
 
-            <h2 class="boxed boxed-project"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+            <h2 class="boxed boxed-project"><span class="glyphicon glyphicon-tasks"></span> Projets similaires</h2>
 
             <ul class="boxes boxes-medium boxes-spaced">
                 <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
