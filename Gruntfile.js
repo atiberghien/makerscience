@@ -93,7 +93,7 @@ module.exports = function(grunt) {
                     debug:true,
                     middleware: function ( connect, options, middlewares ) {
                         var rules = [
-                            "!\\.html|\\.js|\\.css|\\.svg|\\.jp(e?)g|\\.png|\\.gif$ /index.html"
+                            "!\\.html|\\.js|\\.css|\\.svg|\\.jp(e?)g|\\.png|\\.gif|\\.ttf|\\.otf|\\.eot|\\.woff|\\.woff2$ /index.html"
                         ];
                         middlewares.unshift( rewrite( rules ) );
                         return middlewares;
