@@ -6,16 +6,23 @@
                 socialshare
                 socialshare-provider="facebook"
                 socialshare-text="{{projectsheet.parent.title}}"
-                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}">
+                socialshare-caption = "{{projectsheet.parent.baseline}}"
+                socialshare-type="feed"
+                socialshare-via="724284684343376"
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg"
+                socialshare-redirect-uri="{{config.oauthBaseUrl}}/closePopup.html">
                 <i class="fa fa-facebook"></i>
             </a>
+
         </li>
         <li style="background-color: white; border-radius: 11px;margin-bottom: 8px;padding: 5px 0 3px;text-align: center; width: 40px;">
             <a href=""
                 socialshare
                 socialshare-provider="twitter"
-                socialshare-text="{{projectsheet.parent.title}}"
-                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}">
+                socialshare-text="{{projectsheet.parent.title}} sur @makerscience"
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
@@ -23,19 +30,20 @@
             <a href=""
                 socialshare
                 socialshare-provider="google+"
-                socialshare-text="{{projectsheet.parent.title}}"
-                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}">
+                socialshare-text="{{projectsheet.parent.title}} : {{projectsheet.parent.baseline}}"
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-        <li style="width: 80px;">
-            <a facebook class="facebookShare" data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-picture="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg" data-shares='shares'>{{ shares }}</a>
+        <!-- <li style="width: 80px;">
+            <a facebook class="facebookShare" data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}'  data-shares='shares'>{{ shares }}</a>
         </li>
         <li style="width: 80px;">
-            <a twitter  data-lang="en" data-count='horizontal' data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-via='makerscience' data-size="medium" data-text='{{projectsheet.parent.title}}' ></a>
+            <a twitter  data-lang="fr" data-count='horizontal' data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-via='makerscience' data-size="medium" data-text='{{projectsheet.parent.title}}' ></a>
         </li>
         <li style="width: 80px;">
             <div gplus class="g-plus" data-size="tall" data-annotation="bubble" data-href='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-action='share'></div>
-        </li>
+        </li> -->
     </ul>
 </div>
