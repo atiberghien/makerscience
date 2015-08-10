@@ -18,41 +18,57 @@
     <div class="row container">
         <div class="col-md-12" ng-init="init();showCreateButton = true">
             <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
-            <form method="post" action="" collapse="showCreateButton" class="new-topic">
+            <form method="post" action="" collapse="showCreateButton" class="new-topic" ng-init="newPost.type='message'; initMention('iframeQuestionTextArea')" ng-controller="MentionCtrl">
                 <tabset>
                     <tab select="newPost.type='message'">
-                        <tab-heading><span class="glyphicon glyphicon-comment"></span> Message</tab-heading>
-                        <input type="text" name="title" ng-model="newPost.title" placeholder="Passez votre message..." class="full-width" />
+                        <tab-heading ><span class="glyphicon glyphicon-comment"></span> Message</tab-heading>
                     </tab>
                     <tab select="newPost.type='question'">
                         <tab-heading><span class="glyphicon glyphicon-question-sign"></span> Question</tab-heading>
-                        <input type="text" name="title" ng-model="newPost.title" placeholder="Posez votre question..." class="full-width" />
                     </tab>
                     <tab select="newPost.type='idea'">
                         <tab-heading><span class="glyphicon glyphicon-flash"></span> Idée</tab-heading>
-                        <input type="text" name="title" ng-model="newPost.title" placeholder="Partagez votre idée..." class="full-width" />
                     </tab>
                     <tab select="newPost.type='need'">
                         <tab-heading><span class="glyphicon glyphicon-hand-up"></span> Besoin</tab-heading>
-                        <input type="text" name="title" ng-model="newPost.title" placeholder="Exprimez votre besoin..." class="full-width" />
                     </tab>
                     <tab select="newPost.type='resource'">
                         <tab-heading><span class="glyphicon glyphicon-book"></span> Ressources</tab-heading>
-                        <input type="text" name="title" ng-model="newPost.title" placeholder="Proposez votre ressource..." class="full-width" />
                     </tab>
                     <tab select="newPost.type='event'">
                         <tab-heading><span class="glyphicon glyphicon-calendar"></span> Evènements</tab-heading>
-                        <input type="text" name="title" ng-model="newPost.title" placeholder="Publiez votre évènement..." class="full-width" />
                     </tab>
                 </tabset>
+                <input type="text" name="title" ng-model="newPost.title" placeholder="Titre de la discussion ..." class="full-width" />
 
-                <!-- <input type="text" name="title" ng-model="newPost.title" placeholder="Quel est votre sujet?" class="full-width" /> -->
-                <text-angular name="text"
-                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                              ng-model="newPost.text"
-                              e-rows="8"
-                              placeholder="Saisissez votre réponse ici.">
-                </text-angular>
+                <textarea  ui-tinymce="tinyMceOptions" mentio
+                    mentio-iframe-element="iframeQuestionTextArea"
+                    mentio-trigger-char="'@'"
+                    mentio-items="people"
+                    mentio-template-url="/people-mentions.tpl"
+                    mentio-typed-term="mentionTerms"
+                    mentio-search="searchPeople(term)"
+                    mentio-select="getPeopleTextRaw(item)"
+                    mentio-id="'questionTextArea'"
+                    ng-model="newPost.text"
+                    ng-trim="false"
+                    placeholder="Saisissez votre réponse ici."
+                    rows="8">
+                </textarea>
+
+                <script type="text/ng-template" id="/people-mentions.tpl">
+                    <ul class="list-group user-search">
+                        <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
+                        <gravatar-image data-gravatar-email="person.parent.user.email"
+                            data-gravatar-size="52"
+                            data-gravatar-rating="pg"
+                            data-gravatar-default="mm"
+                            data-gravatar-secure="true"
+                            data-gravatar-css-class="member img-circle">
+                        </gravatar-image>
+                        {{person.full_name}}
+                    </ul>
+                </script>
 
                 <fieldset class="forum-keywords">
                     <div ng-controller="TagAutoCompleteCtrl">

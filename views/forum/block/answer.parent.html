@@ -14,7 +14,7 @@
             <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
         </div>
         <div class="thread-content">
-            <p ng-bind-html="answer.text"></p>
+            <p ng-bind-html="trustAsHtml(answer.text)"></p>
         </div>
         <div class="thread-actions">
             <ul>
@@ -45,16 +45,39 @@
     </div>
     <div class="forum-answer" ng-show="showSubAnswerForm[answer.id]">
         <h2>Espace réponse</h2>
-        <form method="post" action="" class="forum-answer" >
-            <text-angular name="subanswer{{answer.id}}.text"
-                          ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                          ng-model="subanswer.text"
-                          e-rows="8"
-                          placeholder="Saisissez votre réponse ici.">
-            </text-angular>
+        <form method="post" action="" class="forum-answer" ng-controller="MentionCtrl" ng-init="initMention('iframeSubAnswerTextArea')">
+            <textarea  ui-tinymce="tinyMceOptions" mentio
+                mentio-iframe-element="iframeSubAnswerTextArea"
+                mentio-trigger-char="'@'"
+                mentio-items="people"
+                mentio-template-url="/subAnswer-mentions.tpl"
+                mentio-typed-term="mentionTerms"
+                mentio-search="searchPeople(term)"
+                mentio-select="getPeopleTextRaw(item)"
+                mentio-id="'subAnswerTextArea'"
+                ng-model="subanswer.text"
+                ng-trim="false"
+                placeholder="Saisissez votre réponse ici."
+                rows="8">
+            </textarea>
+
+            <script type="text/ng-template" id="/subAnswer-mentions.tpl">
+                <ul class="list-group user-search">
+                    <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
+                    <gravatar-image data-gravatar-email="person.parent.user.email"
+                        data-gravatar-size="52"
+                        data-gravatar-rating="pg"
+                        data-gravatar-default="mm"
+                        data-gravatar-secure="true"
+                        data-gravatar-css-class="member img-circle">
+                    </gravatar-image>
+                    {{person.full_name}}
+                </ul>
+            </script>
+
             <fieldset class="right">
                 <button type="submit" class="button" ng-click="saveMakersciencePostAnswer(subanswer, answer, currentMakerScienceProfile.parent);showSubAnswerForm[answer.id]=false">Envoyer</button>
-                <button type="reset" class="button">Annuler</button>
+                <button type="reset" ng-click="showSubAnswerForm[answer.id]=false" class="button">Annuler</button>
             </fieldset>
         </form>
     </div>
@@ -72,7 +95,7 @@
                 <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong></p>
             </div>
             <div class="thread-content">
-                <p ng-bind-html="subanswer.text"></p>
+                <p ng-bind-html="trustAsHtml(subanswer.text)"></p>
             </div>
         </div>
     </div>

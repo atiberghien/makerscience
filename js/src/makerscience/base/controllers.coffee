@@ -103,6 +103,10 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
                     if profileResults.objects.length == 1
                         return profileResults.objects[0]
                 )
+            if objectTypeName == 'makersciencepost'
+                return MakerSciencePost.one(objectId).get().then((makerSciencePostResult) ->
+                    return makerSciencePostResult
+                )
             if objectTypeName == 'post'
                 return MakerSciencePost.one().get({parent__id: objectId}).then((makerSciencePostResults) ->
                     if makerSciencePostResults.objects.length == 1

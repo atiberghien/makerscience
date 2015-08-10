@@ -13,7 +13,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularjs-gravatardirective', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
-                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies', '720kb.socialshare', 'sticky','djds4rce.angular-socialshare'])
+                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies', '720kb.socialshare',
+                                'sticky', 'mentio', 'ui.tinymce'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -217,7 +218,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
 
 ])
-.run(($rootScope, $location, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $FB) ->
+.run(($rootScope, $location, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $sce) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
@@ -233,7 +234,19 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
     $rootScope.location = $location
 
-    $FB.init('724284684343376')
+    $rootScope.tinyMceOptions = {
+        plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking"],
+        toolbar1: "italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist |outdent indent blockquote | link unlink anchor",
+        menubar: false,
+        statusbar: false,
+        toolbar_items_size: 'small',
+        language_url: "/js/tinymce_fr_FR.js",
+        language: "fr_FR",
+    }
+
+    $rootScope.trustAsHtml = (string) ->
+        return $sce.trustAsHtml(string)
+
 )
 
 angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->

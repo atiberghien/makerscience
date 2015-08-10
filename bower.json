@@ -50,7 +50,8 @@
     "satellizer": "master",
     "angularjs-socialshare": "~0.1.10",
     "ngSticky": "~1.7.9",
-    "angular-socialshare": "~1.4.1"
+    "ment.io": "~0.9.23",
+    "angular-ui-tinymce": "~0.0.9"
   },
   "resolutions": {
     "angular": "~1.2.28",

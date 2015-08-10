@@ -94,16 +94,18 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                             $scope.favoriteTags[obj.tag.slug]++
                         else
                             $scope.favoriteTags[obj.tag.slug] = 1
-                    else if activity.content_type == 'vote'
-                        $scope.getObject(obj.content_type, obj.object_id).then((votedObj) ->
-                            activity.content_object = obj
-                            activity.content_object.votedObj = votedObj
-                            console.log(activity.content_object.votedObj.parent.title)
-                        )
                     else if activity.content_type == 'tag'
                         $scope.followedTags.push(obj)
                     else
                         activity.content_object = obj
+                        if activity.content_type == 'vote'
+                            $scope.getObject(obj.content_type, obj.object_id).then((votedObj) ->
+                                activity.content_object.votedObj = votedObj
+                            )
+                        if activity.level == 41
+                            MakerScienceProfile.one(activity.detail).get().then((profileResult)->
+                                activity.mentionnedProfile = profileResult
+                            )
                 )
             )
         )
@@ -156,7 +158,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         ObjectProfileLink.getList({content_type:'makerscienceprofile', profile__id : $scope.profile.parent.id, level : 40}).then((linkedFriendResults)->
             angular.forEach(linkedFriendResults, (linkedFriend) ->
                 MakerScienceProfile.one().get({id : linkedFriend.object_id}).then((profileResults) ->
-                    console.log(profileResults)
                     if profileResults.objects.length == 1
                         $scope.friends.push(profileResults.objects[0])
                 )

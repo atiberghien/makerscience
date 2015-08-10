@@ -53,10 +53,10 @@
                             data-gravatar-css-class="member img-circle">
                         </gravatar-image>
                         <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong>
-                        <span>Mise en ligne <span am-time-ago="post.parent.updated_on"></span></span></p>
+                        <span>Mis à jour le <span am-time-ago="post.parent.updated_on"></span></span></p>
                     </div>
                     <div class="thread-content">
-                        <p ng-bind-html="post.parent.text"></p>
+                        <p ng-bind-html="trustAsHtml(post.parent.text)"></p>
                     </div>
                     <div class="thread-actions">
                         <ul>
@@ -78,7 +78,7 @@
                             </li>
 
 
-                            <li><button class="button button-forum" ng-click="showAnswerForm=!showAnswerForm">Répondre</button></li>
+                            <li><button class="button button-forum" ng-click="showAnswerForm=true">Répondre</button></li>
                     </div>
                 </div>
             </div>
@@ -90,16 +90,39 @@
                     <div id="content" class="thread-answers">
                         <div class="forum-answer" ng-show="showAnswerForm" >
                             <h2>Espace réponse</h2>
-                            <form method="post" action="" class="forum-answer">
-                                <text-angular name="answer.text"
-                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                              ng-model="answer.text"
-                                              e-rows="8"
-                                              placeholder="Saisissez votre réponse ici.">
-                                </text-angular>
+                            <form method="post" action="" class="forum-answer" ng-controller="MentionCtrl" ng-init="initMention('iframeAnswerTextArea')">
+                                <textarea  ui-tinymce="tinyMceOptions" mentio
+                                    mentio-iframe-element="iframeAnswerTextArea"
+                                    mentio-trigger-char="'@'"
+                                    mentio-items="people"
+                                    mentio-template-url="/answer-mentions.tpl"
+                                    mentio-typed-term="mentionTerms"
+                                    mentio-search="searchPeople(term)"
+                                    mentio-select="getPeopleTextRaw(item)"
+                                    mentio-id="'answerTextArea'"
+                                    ng-model="answer.text"
+                                    ng-trim="false"
+                                    placeholder="Saisissez votre réponse ici."
+                                    rows="8">
+                                </textarea>
+
+                                <script type="text/ng-template" id="/answer-mentions.tpl">
+                                    <ul class="list-group user-search">
+                                        <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
+                                        <gravatar-image data-gravatar-email="person.parent.user.email"
+                                            data-gravatar-size="52"
+                                            data-gravatar-rating="pg"
+                                            data-gravatar-default="mm"
+                                            data-gravatar-secure="true"
+                                            data-gravatar-css-class="member img-circle">
+                                        </gravatar-image>
+                                        {{person.full_name}}
+                                    </ul>
+                                </script>
+
                                 <fieldset class="right">
-                                    <button type="submit" class="button" ng-click="saveMakersciencePostAnswer(answer, post.parent, currentMakerScienceProfile.parent);showAnswerForm=false">Envoyer</button>
-                                    <button type="reset" class="button" ng-click="showAnswerForm=false">Annuler</button>
+                                    <button type="submit" class="button" ng-click="$parent.showAnswerForm=false;saveMakersciencePostAnswer(answer, post.parent, currentMakerScienceProfile.parent)">Envoyer</button>
+                                    <button type="reset" class="button" ng-click="$parent.showAnswerForm=false">Annuler</button>
                                 </fieldset>
                             </form>
                         </div>

@@ -2,6 +2,24 @@ module = angular.module("makerscience.forum.controllers", ["commons.megafon.cont
                                                            'makerscience.base.services','makerscience.base.controllers'])
 
 
+module.controller("MentionCtrl", ($scope, MakerScienceProfile) ->
+    $scope.people = []
+
+    $scope.initMention = (iframeElement) ->
+        $scope.tinyMceOptions["init_instance_callback"] = (editor) ->
+            $scope[iframeElement] = editor.iframeElement
+
+    $scope.searchPeople = (mentionTerm) ->
+        if mentionTerm.length > 2
+            MakerScienceProfile.one().customGETLIST('search', {q : '*'+mentionTerm+'*'}).then((makerScienceProfileResults) ->
+                $scope.people = makerScienceProfileResults
+            )
+
+    $scope.getPeopleTextRaw = (mentionnedProfile) ->
+        return "@" + mentionnedProfile.slug
+)
+
+
 module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
                                                 MakerSciencePost, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
                                                 DataSharing, ObjectProfileLink, TaggedItem) ->
@@ -73,7 +91,7 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
         $scope.savePost(newPost, parent, authorProfile).then((newPost)->
             makerSciencePost =
                 parent : newPost.resource_uri,
-                post_type : newPost.type
+                post_type : newPost.type || 'message'
                 linked_projects : []
                 linked_resources : []
 
@@ -94,8 +112,20 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
                 makerSciencePost["linked_"+item.type+"s"].push(item.fullObject.resource_uri)
             )
 
-
             return MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
+                mentions = newMakerSciencePostResult.parent.text.match(/\B@[a-z0-9_-]+/gi)
+                angular.forEach(mentions, (mention) ->
+                    profileSlug = mention.substr(1)
+                    MakerScienceProfile.one().get({slug:profileSlug}).then((makerScienceProfileResults) ->
+                        if makerScienceProfileResults.objects.length == 1
+                            ObjectProfileLink.one().customPOST(
+                                profile_id: $scope.currentMakerScienceProfile.parent.id,
+                                level: 41,
+                                detail : profileSlug,
+                                isValidated:true
+                            , 'makersciencepost/'+newMakerSciencePostResult.id)
+                    )
+                )
                 $scope.refreshList()
                 return false
             )
@@ -103,22 +133,59 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
 )
 
 
-module.controller("MakerSciencePostCtrl", ($scope, $stateParams, $controller, MakerSciencePost, DataSharing) ->
+module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $controller, MakerSciencePost, MakerScienceProfile, ObjectProfileLink, DataSharing) ->
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
     angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
 
+    resolveMentions = (post) ->
+        mentions = post.text.match(/\B@[a-z0-9_-]+/gi)
+        angular.forEach(mentions, (mention) ->
+            profileSlug = mention.substr(1)
+            MakerScienceProfile.one().get({slug:profileSlug}).then((makerScienceProfileResults) ->
+                if makerScienceProfileResults.objects.length == 1
+                    profile = makerScienceProfileResults.objects[0]
+                    profileRoute = $state.href("profile.detail", { slug: profile.slug})
+                    profileAnchor = "<a href='"+profileRoute+"'>"+profile.full_name+"</a>"
+                else
+                    profileAnchor = mention
+                 post.text =  post.text.replace(mention, profileAnchor)
+            )
+            angular.forEach(post.answers, (answer) ->
+                return resolveMentions(answer)
+
+            )
+        )
+        return true
+
     MakerSciencePost.one().get({parent__slug: $stateParams.slug}).then((makerSciencePostResult)->
         $scope.post = makerSciencePostResult.objects[0]
+
+        resolveMentions($scope.post.parent)
+
         $scope.initFromID($scope.post.parent.id)
-        DataSharing.sharedObject['post'] = $scope.post.parent
-        $scope.init('post')
+        DataSharing.sharedObject['post'] = $scope.post.parent #for community block
+        $scope.init('post')#for community block
     )
 
     $scope.saveMakersciencePostAnswer = (newAnswer, parent, authorProfile) ->
-        $scope.savePost(newAnswer, parent, authorProfile).then((newAnwer)->
+        $scope.savePost(newAnswer, parent, authorProfile).then((newAnswer)->
+            mentions = newAnswer.text.match(/\B@[a-z0-9_-]+/gi)
+            angular.forEach(mentions, (mention) ->
+                profileSlug = mention.substr(1)
+                MakerScienceProfile.one().get({slug:profileSlug}).then((makerScienceProfileResults) ->
+                    if makerScienceProfileResults.objects.length == 1
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 41,
+                            detail : profileSlug,
+                            isValidated:true
+                        , 'post/'+newAnswer.id)
+                )
+            )
+            resolveMentions(newAnswer)
             parent.answers_count++
-            parent.answers.push(newAnwer)
+            parent.answers.push(newAnswer)
         )
 )
 

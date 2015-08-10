@@ -50,6 +50,12 @@ module.exports = function(grunt) {
                         },
                         "angular-socialshare" : {
                             'main' : ['angular-socialshare.min.js']
+                        },
+                        "angular-ui-tinymce" : {
+                            'main' : ["src/tinymce.js"],
+                            "dependencies": {
+                                'tinymce-dist' : 'tinymce.min.js'
+                            }
                         }
                       }
                 }
