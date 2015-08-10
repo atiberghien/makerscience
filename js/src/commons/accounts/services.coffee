@@ -56,12 +56,8 @@ class LoginService
                         @$http.defaults.headers.common['Authorization'] = "ApiKey #{@$cookies.username}:#{@$cookies.key}"
                         @authService.loginConfirmed()
 
-
-                # @$rootScope.accessToken = @Token.get()
-
                 # Add methods to scope
                 @$rootScope.submit = this.submit
-                @$rootScope.authenticateGoogle = this.authenticateGoogle
                 @$rootScope.forceLogin = this.forceLogin
                 @$rootScope.logout = this.logout
 

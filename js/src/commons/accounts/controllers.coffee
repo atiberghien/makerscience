@@ -88,7 +88,7 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
         )
 )
 
-module.controller('LoginCtrl', ($scope, $rootScope, $cookies, $http, $auth) ->
+module.controller('LoginCtrl', ($scope, $rootScope, $state, $stateParams, $cookies, $http, $auth) ->
 
     $scope.authenticate = (provider) ->
         $auth.authenticate(provider).then((response) ->
@@ -97,5 +97,6 @@ module.controller('LoginCtrl', ($scope, $rootScope, $cookies, $http, $auth) ->
                 $cookies.key = response.data.token
                 $http.defaults.headers.common['Authorization'] = "ApiKey #{response.data.username}:#{response.data.token}"
                 $rootScope.$broadcast('event:auth-loginConfirmed')
+                $state.go($state.current.name, $stateParams)
         )
 )
