@@ -273,21 +273,56 @@ ul.pagination {
 	}
 	a {
 		margin: 0 0.1em;
-		font-size: 1.5em;
-		color: $color-orange;
+		font-size: 1.25em;
+		color: $color-profile;
 		background-color: transparent;
 		font-weight: bold;
-		border: 2px solid $color-orange;
+		border: 2px solid $color-profile;
 	}
 	li.active a {
 		color: #fff;
-		background-color: $color-orange;
-		border-color: $color-orange;
+		background-color: $color-profile;
+		border-color: $color-profile;
+	}
+	li.disabled a {
+		color: $color-medium-grey;
+		border-color: $color-medium-grey;
 	}
 	a:hover {
 		color: #fff;
-		background-color: $color-orange;
-		border-color: $color-orange;
+		background-color: $color-profile;
+		border-color: $color-profile;
+	}
+	&.pagination-projects {
+		a {
+			border-color: $color-project;
+		}
+		li.active a {
+			background-color: $color-project;
+			border-color: $color-project;
+		}
+	}
+	&.pagination-profiles {
+		a {
+			border-color: $color-profile;
+		}
+		li.active a {
+			background-color: $color-profile;
+			border-color: $color-profile;
+		}
+	}
+	&.pagination-resources {
+		a {
+			border-color: $color-resource;
+		}
+		li.active a {
+			background-color: $color-resource;
+			border-color: $color-resource;
+		}
+	}
+	/* Overwrite bootstrap's style */
+	&.pagination-sm li a {
+		padding: 0.2em 0.6em 0.1em;
 	}
 }
 
