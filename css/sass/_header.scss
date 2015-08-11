@@ -505,6 +505,7 @@ div.crumbs {
 		min-height: $home-slide-height;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */
 		padding: 2em;
+		padding-bottom: 0;
 		color: $color-intro;
 		background-color: $color-intro-project-bg;
 		p.location img {
