@@ -1,6 +1,6 @@
-module = angular.module("makerscience.base.controllers",
-    ['makerscience.base.services', 'makerscience.catalog.controllers', 'makerscience.profile.controllers', 'commons.accounts.controllers',
-    'commons.graffiti.services'])
+module = angular.module("makerscience.base.controllers", ['makerscience.base.services', 'makerscience.profile.controllers',
+                                                          'makerscience.catalog.controllers.project', 'makerscience.catalog.controllers.resource',
+                                                          'commons.accounts.controllers', 'commons.graffiti.services'])
 
 
 module.directive('username', ($q, $timeout, User) ->
