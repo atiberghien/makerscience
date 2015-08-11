@@ -21,13 +21,14 @@ module.controller("TagAutoCompleteCtrl", ($scope, Tag) ->
 
 module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, TaggedItem) ->
 
-    $scope.addTag = (objectTypeName, resourceId, tag) ->
-        TaggedItem.one().customPOST({tag : tag.text}, objectTypeName+"/"+resourceId, {})
+    # $scope.addTag = (objectTypeName, resourceId, tag) ->
+    #     TaggedItem.one().customPOST({tag : tag.text}, objectTypeName+"/"+resourceId, {})
+    #
+    # $scope.removeTag = (tag) ->
+    #     TaggedItem.one(tag.taggedItemId).remove()
 
-    $scope.removeTag = (tag) ->
-        TaggedItem.one(tag.taggedItemId).remove()
-
-    $scope.openTagPopup =  (editTag, taggedObject, taggedObjectTypeName)->
+    $scope.openTagPopup =  (preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)->
+        console.log("openTagPopup", preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)
         modalInstance = $modal.open(
             templateUrl: '/views/catalog/block/modal_tags.html'
             controller: 'TagPopupCtrl'
@@ -35,12 +36,11 @@ module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, TaggedItem) -
             resolve :
                 params : ->
                     return {
-                        preparedTags : $scope.preparedTags
-                        editTag : editTag
-                        objectTypeName : taggedObjectTypeName
-                        taggedObject : taggedObject
-                        addTag : $scope.addTag
-                        removeTag : $scope.removeTag
+                        preparedTags : preparedTags
+                        tagType : tagType
+                        editableTag : editableTag
+                        addTag : addTagCallback
+                        removeTag : removeTagCallback
                         }
         )
 
@@ -48,12 +48,13 @@ module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, TaggedItem) -
 
 module.controller('TagPopupCtrl', ($scope, $modalInstance, params) ->
     $scope.preparedTags = params.preparedTags
-    $scope.editTag = params.editTag
-    if $scope.editTag
-        $scope.objectTypeName = params.objectTypeName
-        $scope.taggedObject = params.taggedObject
+    $scope.editableTag = params.editableTag
+    if $scope.editableTag
+        $scope.tagType = params.tagType
         $scope.addTag = params.addTag
         $scope.removeTag = params.removeTag
+
+    console.log("TagPopupCtrl", $scope.preparedTags, $scope.tagType, $scope.editableTag, $scope.addTag, $scope.removeTag)
 
     $scope.ok = ->
         $modalInstance.close()

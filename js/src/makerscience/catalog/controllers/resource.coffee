@@ -178,9 +178,9 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
         angular.forEach($scope.projectsheet.tags, (taggedItem) ->
             switch taggedItem.tag_type
-                when "th" then $scope.preparedThemeTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
-                when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
-                when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "th" then $scope.preparedThemeTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug, taggedItemId : taggedItem.id})
+                when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
+                when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
 
         $scope.$on('newTeamMember', (event, user_id)->
