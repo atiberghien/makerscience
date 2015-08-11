@@ -1,6 +1,15 @@
 <div id="intro" class="intro-profile"  ng-init="editable = currentMakerScienceProfile === profile">
     <div class="container">
         <div class="intro">
+            <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
+                <ul>
+                    <li>
+                        <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Ajouter à mes contacts"><span class="glyphicon glyphicon-user"></span></a>
+                        <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Retirer de mes contacts"><span class="glyphicon glyphicon-user"></span></a>
+                    </li>
+                    <li><a title="Contacter"><span class="lyphicon glyphicon-envelope"></span></a></li>
+                </ul>
+            </div>
             <div class="row">
 
                 <div class="col-md-4">
@@ -18,15 +27,6 @@
                             onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'activity', $data)"
                             ng-bind-html="profile.activity">{{ profile.activity }}
                         </h2>
-                    </div>
-                    <div class="relative" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
-                        <ul>
-                            <li>
-                                <a ng-show="!isFriend" ng-click="addFriend(profile.id)">Ajouter à mes contacts</a>
-                                <a ng-show="isFriend" ng-click="removeFriend(profile.id)">Retirer de mes contacts</a>
-                            </li>
-                            <li><a>Contacter</a></li>
-                        </ul>
                     </div>
 
                 </div>
