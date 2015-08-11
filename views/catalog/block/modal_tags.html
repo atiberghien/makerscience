@@ -2,17 +2,17 @@
     <h3 class="modal-title">Tous les tags</h3>
 </div>
 <div class="modal-body modal-gallery">
-    <div ng-show="editTag==true" ng-controller="TagAutoCompleteCtrl">
+    <div ng-show="editableTag==true" ng-controller="TagAutoCompleteCtrl">
         <tags-input ng-model="preparedTags"
                     placeholder="> Mot-clé"
-                    on-tag-added="addTag(objectTypeName, taggedObject.id, $tag)"
-                    on-tag-removed="removeTag($tag)">
+                    on-tag-added="$parent.addTag(tagType, $tag)"
+                    on-tag-removed="$parent.removeTag($tag)">
                     <auto-complete source="loadTags($query)"></auto-complete>
         </tags-input>
     </div>
-    <div ng-show="editTag==false">
+    <div ng-show="editableTag==false">
         <ul class="tags tags-project">
-            <li ng-repeat="tag in preparedTags"><a href="">{{tag.text}}</a></li>
+            <li ng-repeat="tag in preparedTags"><a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a></li>
         </ul>
     </div>
 </div>
