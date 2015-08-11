@@ -77,6 +77,7 @@ div.dropdown-logged-in {
 				padding: 0;
 			}
 			ul.dropdown-notifications {
+				z-index: 10000; /* go over editing buttons */
 				min-width: 200px;
 				li.list-group-item {
 					display: block;
