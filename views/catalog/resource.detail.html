@@ -17,17 +17,17 @@
                         <span class="glyphicon glyphicon-pencil"></span>
                     </button>
                 </div>
-
                 <h1>{{resourcesheet.parent.title}}</h1>
+
                 <h2 editable-text="resourcesheet.parent.baseline"
                     e-form="BaselineBtnForm"
                     onbeforesave="updateProjectSheet('Project', resourcesheet.parent.id , 'baseline', $data)"
                     ng-bind-html="resourcesheet.parent.baseline">{{ resourcesheet.parent.baseline }}
                 </h2>
+
                 <h3><span>Expérience partagée</span></h3>
 
                 <div class="row">
-
                     <div class="col-md-8" >
                         <img ng-if="resourcesheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Resource Image" />
                         <img ng-if="!resourcesheet.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Resource Image" />
@@ -41,7 +41,6 @@
                     <div class="col-md-4">
 
                         <div class="side-header">
-
                             <ng-include src="'/views/catalog/block/resource_tags_widget.html'"></ng-include>
 
                             <div class="editable">

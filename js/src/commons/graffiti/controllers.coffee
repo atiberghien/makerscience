@@ -28,7 +28,6 @@ module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, TaggedItem) -
     #     TaggedItem.one(tag.taggedItemId).remove()
 
     $scope.openTagPopup =  (preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)->
-        console.log("openTagPopup", preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)
         modalInstance = $modal.open(
             templateUrl: '/views/catalog/block/modal_tags.html'
             controller: 'TagPopupCtrl'
@@ -53,8 +52,6 @@ module.controller('TagPopupCtrl', ($scope, $modalInstance, params) ->
         $scope.tagType = params.tagType
         $scope.addTag = params.addTag
         $scope.removeTag = params.removeTag
-
-    console.log("TagPopupCtrl", $scope.preparedTags, $scope.tagType, $scope.editableTag, $scope.addTag, $scope.removeTag)
 
     $scope.ok = ->
         $modalInstance.close()

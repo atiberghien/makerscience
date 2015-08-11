@@ -48,6 +48,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                                             MakerScienceProfileTaggedItem, TaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
+    angular.extend(this, $controller('TaggedItemCtrl', {$scope: $scope}))
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
@@ -85,7 +86,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         $scope.favoriteTags = {}
         $scope.followedTags = []
 
-        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults) ->
+        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id, limit: 10}).then((objectProfileLinkResults) ->
             $scope.activities = objectProfileLinkResults
             angular.forEach($scope.activities, (activity) ->
                 $scope.getObject(activity.content_type, activity.object_id).then((obj) ->
@@ -173,8 +174,8 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
 
         angular.forEach($scope.profile.tags, (taggedItem) ->
             switch taggedItem.tag_type
-                when "in" then $scope.preparedInterestTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
-                when "sk" then $scope.preparedSkillTags.push({text : taggedItem.tag.name, taggedItemId : taggedItem.id})
+                when "in" then $scope.preparedInterestTags.push({text : taggedItem.tag.name, slug: taggedItem.tag.slug, taggedItemId : taggedItem.id})
+                when "sk" then $scope.preparedSkillTags.push({text : taggedItem.tag.name, slug: taggedItem.tag.slug, taggedItemId : taggedItem.id})
         )
 
         $scope.addTagToProfile = (tag_type, tag) ->

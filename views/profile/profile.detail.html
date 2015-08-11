@@ -51,7 +51,8 @@
                             <h5 class="skills">Compétences</h5>
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="addSkill=false">
-                                    <button ng-click="addSkill = ! addSkill"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button ng-show="preparedSkillTags.length <= 16" ng-click="addSkill = !addSkill"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button ng-show="preparedSkillTags.length > 16" ng-click="openTagPopup(preparedSkillTags, 'sk', editable, addTagToProfile, removeTagFromProfile)"><span class="glyphicon glyphicon-pencil"></span></button>
                                 </div>
 
                                 <div ng-show="addSkill==true" ng-controller="TagAutoCompleteCtrl">
@@ -65,7 +66,11 @@
 
                                 <div ng-show="addSkill==false">
                                     <ul class="tags skills">
-                                        <li ng-repeat="tag in preparedSkillTags"><a href="">{{tag.text}}</a></li>
+                                        <li ng-repeat="tag in preparedSkillTags | limitTo : 16">
+                                            <a ng-if="tag.text.length > 10" tooltip="{{tag.text}}" ui-sref="tag({slug:tag.slug})">{{tag.text| characters: 10}}</a>
+                                            <a ng-if="tag.text.length <= 10" ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
+                                        </li>
+                                        <li><a ng-show="preparedSkillTags.length > 16" tooltip="Tous les tags" ng-click="openTagPopup(preparedSkillTags, 'sk', editable, addTagToProfile, removeTagFromProfile)">+</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -75,7 +80,8 @@
                             <h5>Intérêts</h5>
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="addInterest=false">
-                                    <button ng-click="addInterest = ! addInterest"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button ng-show="preparedInterestTags.length <= 16" ng-click="addInterest = !addInterest"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button ng-show="preparedInterestTags.length > 16" ng-click="openTagPopup(preparedInterestTags, 'in', editable, addTagToProfile, removeTagFromProfile)"><span class="glyphicon glyphicon-pencil"></span></button>
                                 </div>
 
                                 <div ng-show="addInterest==true" ng-controller="TagAutoCompleteCtrl">
@@ -89,7 +95,11 @@
 
                                 <div ng-show="addInterest==false">
                                     <ul class="tags tags-project">
-                                        <li ng-repeat="tag in preparedInterestTags"><a href="">{{tag.text}}</a></li>
+                                        <li ng-repeat="tag in preparedInterestTags | limitTo : 16">
+                                            <a ng-if="tag.text.length > 10" tooltip="{{tag.text}}" ui-sref="tag({slug:tag.slug})">{{tag.text| characters: 10}}</a>
+                                            <a ng-if="tag.text.length <= 10" ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
+                                        </li>
+                                        <li><a ng-show="preparedInterestTags.length > 16" tooltip="Tous les tags" ng-click="openTagPopup(preparedInterestTags, 'in', editable, addTagToProfile, removeTagFromProfile)">+</a></li>
                                     </ul>
                                 </div>
                             </div><!-- .editable -->
