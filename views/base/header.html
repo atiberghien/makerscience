@@ -36,13 +36,7 @@
 
                             <div class="dropdown dropdown-logged-in" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                                    <gravatar-image data-gravatar-email="currentMakerScienceProfile.parent.user.email"
-                                        data-gravatar-size="40"
-                                        data-gravatar-rating="pg"
-                                        data-gravatar-default="mm"
-                                        data-gravatar-secure="true"
-                                        data-gravatar-css-class="profile img-circle">
-                                    </gravatar-image>
+                                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar40"></ng-include>
                                     <span class="glyphicon glyphicon-menu-hamburger"></span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">

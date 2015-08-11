@@ -4,13 +4,7 @@
             <li><a href="">Signaler un abus</a></li>
         </ul> -->
         <div class="thread-author">
-            <gravatar-image data-gravatar-email="author.user.email"
-                data-gravatar-size="52"
-                data-gravatar-rating="pg"
-                data-gravatar-default="mm"
-                data-gravatar-secure="true"
-                data-gravatar-css-class="member img-circle">
-            </gravatar-image>
+            <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
             <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
         </div>
         <div class="thread-content">
@@ -64,13 +58,7 @@
             <script type="text/ng-template" id="/subAnswer-mentions.tpl">
                 <ul class="list-group user-search">
                     <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
-                    <gravatar-image data-gravatar-email="person.parent.user.email"
-                        data-gravatar-size="52"
-                        data-gravatar-rating="pg"
-                        data-gravatar-default="mm"
-                        data-gravatar-secure="true"
-                        data-gravatar-css-class="member img-circle">
-                    </gravatar-image>
+                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
                     {{person.full_name}}
                 </ul>
             </script>
@@ -85,13 +73,7 @@
         <div class="thread-answer answer-child" ng-repeat="subanswer in answer.answers| orderBy : posted_on">
             <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
             <div class="thread-author">
-                <gravatar-image data-gravatar-email="author.user.email"
-                    data-gravatar-size="52"
-                    data-gravatar-rating="pg"
-                    data-gravatar-default="mm"
-                    data-gravatar-secure="true"
-                    data-gravatar-css-class="member img-circle">
-                </gravatar-image>
+                <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
                 <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong></p>
             </div>
             <div class="thread-content">

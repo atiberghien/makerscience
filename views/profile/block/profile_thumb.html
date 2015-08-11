@@ -3,17 +3,7 @@
     <button  ng-show="isFriend" ng-click="removeFriend(profile.id)" class="add-member"><span class="glyphicon glyphicon-minus"></span></button>
 </span>
 <a ui-sref="profile.detail({slug:profile.slug})">
-    <!-- gravatar size:
-        85 - homepage
-        140 - profile listing
-    -->
-    <gravatar-image data-gravatar-email="profile.parent.user.email"
-        data-gravatar-size="85"
-        data-gravatar-rating="pg"
-        data-gravatar-default="mm"
-        data-gravatar-secure="true"
-        data-gravatar-css-class="img-circle">
-    </gravatar-image>
+    <ng-include src="'/views/profile/block/avatar.html'" class="avatar75"></ng-include>
     <h3>{{profile.parent.user.first_name}} <strong>{{profile.parent.user.last_name}}</strong></h3>
     <h4>{{profile.activity}}</h4>
     <h5><span class="glyphicon glyphicon-map-marker"></span> {{profile.location.address.address_locality}}</h5>

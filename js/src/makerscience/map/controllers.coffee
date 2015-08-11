@@ -4,7 +4,7 @@ module.run(['$anchorScroll', ($anchorScroll) ->
   $anchorScroll.yOffset = 50
 ])
 
-module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $controller, leafletData, leafletEvents, geocoderService, gravatarImageService, MakerScienceProfile, MakerScienceProject, ObjectProfileLink) ->
+module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $controller, leafletData, leafletEvents, geocoderService, MakerScienceProfile, MakerScienceProject, ObjectProfileLink) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.gotoAnchor = (x) ->
@@ -37,8 +37,8 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
         angular.forEach(profileResults, (profile) ->
             geocoderService.getLatLong(profile.location.address.address_locality).then((latlng)->
                 icon =
-                    iconUrl: gravatarImageService.getImageSrc(profile.parent.user.email, 30, null, 'mm')
-                    shadowUrl: 'img/users/user-shadow.png'
+                    iconUrl: '/img/avatar.png'
+                    shadowUrl: '/img/users/user-shadow.png'
                     iconSize: [30, 30]
                     shadowSize:   [44, 44]
                     iconAnchor:   [15, 15]
@@ -55,7 +55,7 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
                     icon: icon
                     icon_standard : icon
                     icon_hover:
-                        iconUrl: gravatarImageService.getImageSrc(profile.parent.user.email, 52, null, 'mm')
+                        iconUrl: '/img/avatar.png'
                         shadowUrl: 'img/users/user-shadow.png'
                         iconSize: [52, 51]
                         shadowSize:   [67, 67]

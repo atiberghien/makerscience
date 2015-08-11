@@ -59,13 +59,7 @@
                 <script type="text/ng-template" id="/people-mentions.tpl">
                     <ul class="list-group user-search">
                         <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
-                        <gravatar-image data-gravatar-email="person.parent.user.email"
-                            data-gravatar-size="52"
-                            data-gravatar-rating="pg"
-                            data-gravatar-default="mm"
-                            data-gravatar-secure="true"
-                            data-gravatar-css-class="member img-circle">
-                        </gravatar-image>
+                        <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
                         {{person.full_name}}
                     </ul>
                 </script>
@@ -160,13 +154,7 @@
                         <li ng-repeat="contributor in bestContributors">
                             <div>
                                 <a ui-sref="profile.detail({slug:contributor.slug})">
-                                    <gravatar-image data-gravatar-email="contributor.parent.user.email"
-                                        data-gravatar-size="52"
-                                        data-gravatar-rating="pg"
-                                        data-gravatar-default="mm"
-                                        data-gravatar-secure="true"
-                                        data-gravatar-css-class="member img-circle">
-                                    </gravatar-image>
+                                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
                                     {{contributor.parent.user.first_name}} <strong>{{contributor.parent.user.last_name}}</strong>
                                 </a>
                             </div>

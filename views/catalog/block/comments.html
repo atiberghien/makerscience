@@ -11,13 +11,7 @@
             <div class="comment">
                 <div class="author">
                     <img ng-if="!$root.authVars.user.email" src="/img/users/user-default.png" alt="User Unknown" />
-                    <gravatar-image ng-if="$root.authVars.user.email" data-gravatar-email="$root.authVars.user.email"
-                        data-gravatar-size="50"
-                        data-gravatar-rating="pg"
-                        data-gravatar-default="mm"
-                        data-gravatar-secure="true"
-                        data-gravatar-css-class="img-circle">
-                    </gravatar-image>
+                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
                     <p><strong>{{$root.authVars.user.first_name}} {{$root.authVars.user.last_name}}</strong><br /></p>
                 </div>
             </div><!-- .comment -->
@@ -33,13 +27,7 @@
         <div>
             <div class="comment" ng-repeat="comment in comments| orderBy:'-submit_date' | limitTo :  5" ng-class="{'flagged' : comment.flags[0]}">
                 <div class="comment-gravatar">
-                    <gravatar-image ng-if="comment.user.email" data-gravatar-email="comment.user.email"
-                        data-gravatar-size="40"
-                        data-gravatar-rating="pg"
-                        data-gravatar-default="mm"
-                        data-gravatar-secure="true"
-                        data-gravatar-css-class="img-circle">
-                    </gravatar-image>
+                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
                 </div>
                 <div class="comment-content">
                     <div class="btn-group" dropdown is-open="isopen" ng-if="$root.authVars.isAuthenticated">

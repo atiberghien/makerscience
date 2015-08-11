@@ -117,7 +117,7 @@
                 <div class="boxes boxes-small boxes-small-home boxes-profiles">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
                     <div class="box" ng-repeat="profile in profiles | orderBy : '-parent.user.date_joined' | limitTo : 3">
-                        <ng-include src="'/views/profile/block/profile_thumb.html'" ng-init="profile=profile"></ng-include>
+                        <ng-include src="'/views/profile/block/profile_thumb.html'"></ng-include>
                     </div
                     ><div class="box box-solo box-pink">
                         <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
@@ -129,7 +129,7 @@
                 <div class="boxes boxes-small boxes-small-home boxes-projects">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
                     <div class="box" ng-repeat="project in projects | orderBy : '-parent.created_on'| limitTo : 3" >
-                        <ng-include src="'/views/catalog/block/project_thumb.html'" ng-init="project=project"></ng-include> -->
+                        <ng-include src="'/views/catalog/block/project_thumb.html'"></ng-include> -->
                     </div
                     ><div class="box box-solo box-blue">
                         <div><a ui-sref="project.list">Voir tous les <br />projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
@@ -141,7 +141,7 @@
                 <div class="boxes boxes-small boxes-small-home boxes-resources">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
                     <div class="box" ng-repeat="resource in resources| orderBy : '-parent.created_on'| limitTo : 3">
-                        <ng-include src="'/views/catalog/block/resource_thumb.html'" ng-init="resource=resource"></ng-include>
+                        <ng-include src="'/views/catalog/block/resource_thumb.html'"></ng-include>
                     </div
                     ><div class="box box-solo box-green">
                         <div><a ui-sref="resource.list">Voir toutes les expériences <span class="glyphicon glyphicon-chevron-right"></span></a></div>

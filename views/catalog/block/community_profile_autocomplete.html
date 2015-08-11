@@ -20,13 +20,7 @@
             ng-click="selectResult(result)"
             ng-mouseenter="hoverRow($index)"
             ng-class="{'angucomplete-selected-row': $index == currentIndex}">
-            <gravatar-image data-gravatar-email="result.originalObject.user.email"
-                data-gravatar-size="30"
-                data-gravatar-rating="pg"
-                data-gravatar-default="/img/users/user-default.png"
-                data-gravatar-secure="true"
-                data-gravatar-css-class="img-circle">
-            </gravatar-image>
+            <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
             <p>{{result.originalObject.user.first_name}} {{result.originalObject.user.last_name}}</p>
         </div>
     </div>

@@ -5,15 +5,7 @@
 
                 <div class="col-md-4 col-md-offset-4">
                     <div class="user">
-
-                        <gravatar-image data-gravatar-email="profile.parent.user.email"
-                                        data-gravatar-size="100"
-                                        data-gravatar-rating="pg"
-                                        data-gravatar-default="mm"
-                                        data-gravatar-secure="true"
-                                        data-gravatar-css-class="profile img-circle">
-                        </gravatar-image>
-
+                        <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
                         <h4>{{profile.full_name}}</h4>
                         <p><span class="glyphicon glyphicon-lock"></span> Espace personel</p>
 
