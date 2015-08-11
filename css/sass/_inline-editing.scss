@@ -88,7 +88,7 @@
 			padding: 0.5em;
 		}
 		div.editable {
-			min-height: 40px; /* Fix issue when there are no tags by giving it a minimum height */
+			min-height: 3em; /* Fix issue when there are no tags by giving it a minimum height */
 		}
 		div.edit-buttons {
 			right: -20px;
