@@ -326,6 +326,16 @@ ul.pagination {
 	}
 }
 
+#socialshare {
+	position: fixed;
+	top: 14em;
+	left: 50%;
+	font-size: 3em;
+	ul {
+		margin-left: - $page-width / 2 - 50px;
+	}
+}
+
 /*
 	Add a layer to show work in progress or future features
 	!!! Parent must have position: relative
