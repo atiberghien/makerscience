@@ -2,7 +2,7 @@
     <img ng-src="{{ config.media_uri }}{{ project.parent.progress.icon }}" alt="{{project.parent.progress.label}}">
 </h3>
 <a ui-sref="project.detail({ slug: project.parent.slug })">
-    <img class="background" ng-if="project.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ project.base_projectsheet.cover.thumbnail_url+'?width=158'}}" alt="Project Image" />
+    <img class="background" ng-if="project.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ project.base_projectsheet.cover.thumbnail_url+'?dim=200x200&border=true'}}" alt="Project Image" />
     <img class="background" ng-if="!project.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Project Image" />
 </a>
 <div class="description">

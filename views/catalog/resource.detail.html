@@ -29,7 +29,7 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-if="resourcesheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.thumbnail_url+'?width=711'}}" alt="Resource Image" />
+                        <img ng-if="resourcesheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'}}" alt="Resource Image" />
                         <img ng-if="!resourcesheet.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Resource Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
@@ -142,7 +142,7 @@
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
                         <div ng-if="resourcesheet.base_projectsheet.bucket.files.length" ng-repeat="img in resourcesheet.base_projectsheet.bucket.files" ng-show="$index==currentImg">
-                            <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?width=693x300" alt="Slide">
+                            <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?dim=680x340&border=true" alt="Slide">
                         </div>
                         <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
                         <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button>
@@ -171,52 +171,6 @@
                         </tab-heading>
                     </tab>
                 </tabset>
-
-                <!-- <div class="row">
-                    <div class="col-md-6">
-                        <div class="bloc bloc-methodology">
-                            <h3>Methodologie</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="bloc bloc-warning">
-                            <h3>Attention avant de se lancer</h3>
-                            <ul>
-                                <li>Bepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.la bla bla</li>
-                                <li>Aon proident, sunt in culpa qui officiai</li>
-                                <li>Mnt occaecat cupidatat non proident, sunt in culpau</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <tabset class="nav-tabs-seance">
-                    <tab>
-                        <tab-heading>Séances 1 et 2</tab-heading>
-                        <section>
-                            <h3>Séances 1 et 2</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </section>
-                        <section>
-                            <h3>Questionnement</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </section>
-                    </tab>
-                    <tab>
-                        <tab-heading>Séances 3 et 4</tab-heading>
-                        <section>
-                            <h3>Séances 3 et 4</h3>
-                            <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </section>
-                    </tab>
-                    <tab>
-                        <tab-heading>Séances 5 et 6</tab-heading>
-                        <section>
-                            <h3>Séances 5 et 6</h3>
-                            <p>Ced do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        </section>
-                    </tab>
-                </tabset> -->
 
                 <section class="linked linked-resource" ng-init="linkResources=true" ng-show="linkResources && (linkedResources.length || editable)">
                     <ng-include src="'/views/catalog/block/linked_resources.html'"></ng-include>

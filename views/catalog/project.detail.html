@@ -29,7 +29,7 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?width=700'}}" alt="Project Image" />
+                        <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'}}" alt="Project Image" />
                         <img ng-if="!projectsheet.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Project Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
@@ -209,7 +209,7 @@
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
                         <div ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files" ng-show="$index==currentImg">
-                            <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?width=683x300" alt="Slide">
+                            <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?dim=680x340&border=true" alt="Slide">
                         </div>
                         <button ng-click="currentImg = Math.abs((currentImg - 1) % projectsheet.base_projectsheet.bucket.files.length)"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
                         <button ng-click="currentImg = (currentImg + 1) % projectsheet.base_projectsheet.bucket.files.length"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>

@@ -21,5 +21,7 @@
         <h4><a ui-sref="resource.detail({slug:resource.parent.slug})">{{resource.parent.title}}</a></h4>
         <h5><a ui-sref="resource.detail({slug:resource.parent.slug})">{{resource.parent.baseline}}</a></h5>
         <img src="/img/bacasable.jpg" alt="Image background" />
+        <img ng-if="resource.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resource.base_projectsheet.cover.thumbnail_url+'?dim=680x270&border=true'}}" alt="Resource Image" />
+        <img ng-if="!resource.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Resource Image" />
     </slide>
 </carousel>
