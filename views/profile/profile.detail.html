@@ -1,15 +1,6 @@
 <div id="intro" class="intro-profile"  ng-init="editable = currentMakerScienceProfile === profile">
     <div class="container">
         <div class="intro">
-            <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
-                <ul>
-                    <li>
-                        <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Ajouter à mes contacts"><span class="glyphicon glyphicon-user"></span></a>
-                        <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Retirer de mes contacts"><span class="glyphicon glyphicon-user"></span></a>
-                    </li>
-                    <li><a title="Contacter"><span class="lyphicon glyphicon-envelope"></span></a></li>
-                </ul>
-            </div>
             <div class="row">
 
                 <div class="col-md-4">
@@ -27,6 +18,35 @@
                             onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'activity', $data)"
                             ng-bind-html="profile.activity">{{ profile.activity }}
                         </h2>
+                    </div>
+                    <div class="relative">
+                        <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
+                            <ul>
+                                <li>
+                                    <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Ajouter à mes contacts"><span class="glyphicon glyphicon-user"></span></a>
+                                    <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Retirer de mes contacts"><span class="glyphicon glyphicon-user"></span></a>
+                                </li>
+                                <li><a title="Contacter"><span class="lyphicon glyphicon-envelope"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <p style="text-align:center">Créé <span am-time-ago="profile.parent.user.date_joined"></span> / Mis à jour <span am-time-ago="profile.modified"></span></p>
+                    </div>
+                    <div class="location editable">
+                        <div class="edit-buttons" ng-show="editable">
+                            <button ng-click="LocationBtnForm.$show()" ng-hide="LocationBtnForm.$visible">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                        </div>
+                        <p editable-text="profile.location.address.address_locality"
+                            e-form="LocationBtnForm"
+                            onbeforesave="updateMakerScienceProfile('Place', profile.location.id , 'address', {'address_locality' : $data})"
+                            class="location">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                            <span ng-if="profile.location.address.address_locality">{{profile.location.address.address_locality}}</span>
+                            <span ng-if="!profile.location.address.address_locality">Localisation non renseignée</span>
+                        </p>
                     </div>
 
                 </div>
@@ -105,7 +125,7 @@
                             </div><!-- .editable -->
                         </div><!-- .relative -->
 
-                        <div class="relative editable">
+                        <!-- <div class="relative editable">
                             <div class="edit-buttons" ng-show="editable">
                                 <button ng-click="LocationBtnForm.$show()" ng-hide="LocationBtnForm.$visible">
                                     <span class="glyphicon glyphicon-pencil"></span>
@@ -118,7 +138,7 @@
                                 <span ng-if="profile.location.address.address_locality">{{profile.location.address.address_locality}}</span>
                                 <span ng-if="!profile.location.address.address_locality">Localisation non renseignée</span>
                             </p>
-                        </div>
+                        </div> -->
 
                         <div class="relative">
 
@@ -150,8 +170,6 @@
                                     <button class="btn btn-primary" ng-click="updateSocialNetworks(profile.slug, socials);socialEdit=False" >Enregistrer</button>
                                 </span>
                             </div>
-
-                            <p>Créé <span am-time-ago="profile.parent.user.date_joined"></span> / Mise à jour <span am-time-ago="profile.modified"></span></p>
                         </div><!-- .relative -->
 
                     </div><!-- .side-header -->
