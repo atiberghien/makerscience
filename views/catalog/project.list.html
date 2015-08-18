@@ -13,8 +13,15 @@
                     <tabset class="nav-tabs-listing">
                         <tab heading="Les plus récents" select="fetchRecentProjects()"></tab>
                         <tab heading="Les plus populaires" select="fetchTopProjects()"></tab>
-                        <tab heading="Sélection thématique" >
-                            En cours
+                        <tab heading="Sélection thématique" select="fetchThematicProjects()">
+                            <h1>
+                                <ng-pluralize count="selected_themes.length" when="{'0': 'Thème sélectionné', 'one': 'Thème sélectionné', 'other': 'Thèmes sélectionnés'}"></ng-pluralize>:
+                                <span ng-repeat="theme in selected_themes">
+                                    <a ui-sref="tag({slug:theme.slug})">{{theme.name}}</a>
+                                    <span ng-if="!$last">, </span>
+                                </span>
+                                <span ng-if="selected_themes.length == 0">Aucun</span>
+                            </h1>
                         </tab>
                         <tab heading="Au hasard" select="fetchRandomProjects()"></tab>
                     </tabset>

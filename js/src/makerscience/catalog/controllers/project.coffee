@@ -2,19 +2,22 @@ module = angular.module("makerscience.catalog.controllers.project", ['makerscien
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
-module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProject, MakerScienceProjectTaggedItem) ->
+module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProject, StaticContent, MakerScienceProjectTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.fetchRecentProjects = () ->
+        delete $scope.params['facet']
         $scope.params['ordering'] = '-created_on'
         $scope.refreshList()
 
     $scope.fetchTopProjects = () ->
+        delete $scope.params['facet']
         $scope.params['ordering'] = '-total_score'
         $scope.refreshList()
 
     $scope.fetchRandomProjects = () ->
-        $scope.params['ordering'] = ''
+        delete $scope.params['facet']
+        delete $scope.params['ordering']
         $scope.refreshList().then(->
             nbElmt = $scope.projects.length
             while nbElmt
@@ -22,6 +25,21 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
                 tmp = $scope.projects[nbElmt]
                 $scope.projects[nbElmt] = $scope.projects[rand]
                 $scope.projects[rand] = tmp
+        )
+
+    $scope.fetchThematicProjects = () ->
+        $scope.selected_themes = []
+        $scope.params['ordering'] = '-created_on'
+        StaticContent.one(1).get().then((staticResult) ->
+            tags = ""
+            angular.forEach(staticResult.project_thematic_selection, (tag) ->
+                if tags != ""
+                    tags += ","
+                tags += tag.slug
+                $scope.selected_themes.push(tag)
+            )
+            $scope.params['facet'] = tags
+            $scope.refreshList()
         )
 
     $scope.refreshList = ()->

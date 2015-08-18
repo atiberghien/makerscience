@@ -2,19 +2,22 @@ module = angular.module("makerscience.catalog.controllers.resource", ['makerscie
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
-module.controller("MakerScienceResourceListCtrl", ($scope, $controller, MakerScienceResource, MakerScienceResourceTaggedItem) ->
+module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticContent, MakerScienceResource, MakerScienceResourceTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.fetchRecentResources = () ->
+        delete $scope.params['facet']
         $scope.params['ordering'] = '-created_on'
         $scope.refreshList()
 
     $scope.fetchTopResources = () ->
+        delete $scope.params['facet']
         $scope.params['ordering'] = '-total_score'
         $scope.refreshList()
 
     $scope.fetchRandomResources = () ->
-        $scope.params['ordering'] = ''
+        delete $scope.params['facet']
+        delete $scope.params['ordering']
         $scope.refreshList().then(->
             nbElmt = $scope.resources.length
             while nbElmt
@@ -22,6 +25,21 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, MakerSci
                 tmp = $scope.resources[nbElmt]
                 $scope.resources[nbElmt] = $scope.resources[rand]
                 $scope.resources[rand] = tmp
+        )
+
+    $scope.fetchThematicResources = () ->
+        $scope.selected_themes = []
+        $scope.params['ordering'] = '-created_on'
+        StaticContent.one(1).get().then((staticResult) ->
+            tags = ""
+            angular.forEach(staticResult.resource_thematic_selection, (tag) ->
+                if tags != ""
+                    tags += ","
+                tags += tag.slug
+                $scope.selected_themes.push(tag)
+            )
+            $scope.params['facet'] = tags
+            $scope.refreshList()
         )
 
     $scope.refreshList = ()->
