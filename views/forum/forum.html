@@ -154,7 +154,7 @@
                         <li ng-repeat="contributor in bestContributors">
                             <div>
                                 <a ui-sref="profile.detail({slug:contributor.slug})">
-                                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
                                     {{contributor.parent.user.first_name}} <strong>{{contributor.parent.user.last_name}}</strong>
                                 </a>
                             </div>

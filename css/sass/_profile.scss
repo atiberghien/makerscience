@@ -1,18 +1,22 @@
-.avatar40 {
-    img {
-        width : 40px;
-    }
-}
+.avatar {
+    float : left;
 
-.avatar52 {
-    img {
-        width : 52px;
+    &.avatar40 {
+        img {
+            width : 40px;
+        }
     }
-}
 
-.avatar75 {
-    img {
-        width : 75px;
+    &.avatar52 {
+        img {
+            width : 52px;
+        }
+    }
+
+    &.avatar75 {
+        img {
+            width : 75px;
+        }
     }
 }
 
