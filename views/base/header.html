@@ -49,15 +49,21 @@
                                             <li role="presentation"><a ng-click="logout()" role="menuitem" tabindex="-1" href="#">Me déconnecter</a></li>
                                         </ul>
                                     </li>
-                                    <li class="dropdown" role="menu">
-                                        <button class="dropdown-toggle notifications" data-toggle="dropdown" ><span class="glyphicon glyphicon-bell"></span> <span class="badge">3</span></button>
+                                    <li id="notifications" class="dropdown" role="menu" ng-controller="NotificationCtrl">
+                                        <button class="dropdown-toggle notifications" data-toggle="dropdown" >
+                                            <span class="glyphicon glyphicon-bell"></span>
+                                            <span class="badge">{{(notifications| filter : {unread : true}).length}}</span>
+                                        </button>
                                         <ul class="dropdown-menu dropdown-menu-right dropdown-notifications">
-                                            <li class="list-group-item notification-new">Cras justo odi <button class="mark"><span class="glyphicon glyphicon-eye-open"></span></button></li>
-                                            <li class="list-group-item notification-new"><a href="">Dapibus</a> has done ac <a href="">facilisis in</a> <button class="mark"><span class="glyphicon glyphicon-eye-open"></span></button></li>
+                                            <li class="list-group-item" ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in notifications ">
+                                                <p ng-bind-html="trustAsHtml(notif.description)"></p>
+                                                <button class="mark non-closing" ng-show="notif.unread == true" ng-click="markAsRead(notif)"><span class="glyphicon glyphicon-eye-open" ></span></button>
+                                            </li>
+                                            <!--<li class="list-group-item notification-new"><a href="">Dapibus</a> has done ac <a href="">facilisis in</a> <button class="mark"><span class="glyphicon glyphicon-eye-open"></span></button></li>
                                             <li class="list-group-item notification-new">Morbi leo risus <button class="mark"><span class="glyphicon glyphicon-eye-open"></span></button></li>
                                             <li class="list-group-item">Porta ac consectetur ac</li>
-                                            <li class="list-group-item">Vestibulum at eros</li>
-                                            <li class="list-group-item"><button><span class="glyphicon glyphicon-tasks"></span></button></li>
+                                            <li class="list-group-item">Vestibulum at eros</li>-->
+                                            <li class="list-group-item"><button ng-click="markAllAsRead()"><span class="glyphicon glyphicon-tasks" ></span></button></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -91,7 +97,20 @@ $(function() {
     $('#fixed-nav').affix({
         offset: { top: $('#fixed-nav').offset().top }
     });
+
+    $('.dropdown-toggle').dropdown();
+
+    $('#notifications').on({
+        "shown.bs.dropdown": function(e) {
+            this.closable = true;
+        },
+        "click": function(e) {
+            this.closable = ! $(e.target).hasClass('non-closing');
+        },
+        "hide.bs.dropdown":  function(e) {
+            return this.closable;
+        }
+    });
 });
 
-$('.dropdown-toggle').dropdown();
 </script>

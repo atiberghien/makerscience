@@ -24,3 +24,7 @@ module.factory('FilterService', ($rootScope) ->
 module.factory('StaticContent', (Restangular) ->
     return Restangular.service('makerscience/static')
 )
+
+module.factory('Notification', (Restangular) ->
+    return Restangular.service('notification')
+)

@@ -243,3 +243,25 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
             $scope.tags_filter.push(simpleTag)
         $scope.refreshFilter()
 )
+
+module.controller("NotificationCtrl", ($scope, $controller, $interval, ObjectProfileLink, Notification) ->
+
+    $scope.updateNotifications = () ->
+        ObjectProfileLink.one().customGET('purge').then((result)->
+            if $scope.currentMakerScienceProfile != null || $scope.currentMakerScienceProfile != undefined
+                $scope.notifications = Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).$object
+        )
+
+    $scope.markAsRead = (notif) ->
+        Notification.one(notif.id).patch({unread : false})
+        notif.unread = false
+
+    $scope.markAllAsRead = () ->
+        angular.forEach($scope.notifications, $scope.markAsRead)
+
+    $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
+        if newValue != oldValue
+            $scope.updateNotifications()
+            $interval($scope.updateNotifications, 30000)
+    )
+)
