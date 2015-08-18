@@ -81,7 +81,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     level: 10,
                     detail : "Créateur/Créatrice",
                     isValidated:true
-                    , 'project/'+makerscienceResourceResult.parent.id).then((objectProfileLinkResult) ->
+                    , 'makerscienceresource/'+makerscienceResourceResult.id).then((objectProfileLinkResult) ->
                         console.log("added current user as team member", objectProfileLinkResult.profile)
                         MakerScienceResource.one(makerscienceResourceResult.id).customPOST(
                             {"user_id":objectProfileLinkResult.profile.user.id}
