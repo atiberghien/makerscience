@@ -90,37 +90,47 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
                                 return makerScienceResourceResults.objects[0]
                         )
                 )
-            if objectTypeName == 'makerscienceproject'
+            else if objectTypeName == 'makerscienceproject'
                 return MakerScienceProject.one(objectId).get().then((makerScienceProjectResult) ->
                     return makerScienceProjectResult
                 )
-            if objectTypeName == 'makerscienceresource'
+            else if objectTypeName == 'makerscienceresource'
                 return MakerScienceResource.one(objectId).get().then((makerScienceResourceResult) ->
                     return makerScienceResourceResult
                 )
-            if objectTypeName == 'makerscienceprofile'
+            else if objectTypeName == 'makerscienceprofile'
                 return MakerScienceProfile.one().get({id : objectId}).then((profileResults) ->
                     if profileResults.objects.length == 1
                         return profileResults.objects[0]
                 )
-            if objectTypeName == 'makersciencepost'
+            else if objectTypeName == 'profile'
+                return MakerScienceProfile.one().get({parent__id : objectId}).then((profileResults) ->
+                    if profileResults.objects.length == 1
+                        return profileResults.objects[0]
+                )
+            else if objectTypeName == 'user'
+                return MakerScienceProfile.one().get({parent__user__id : objectId}).then((profileResults) ->
+                    if profileResults.objects.length == 1
+                        return profileResults.objects[0]
+                )
+            else if objectTypeName == 'makersciencepost'
                 return MakerSciencePost.one(objectId).get().then((makerSciencePostResult) ->
                     return makerSciencePostResult
                 )
-            if objectTypeName == 'post'
+            else if objectTypeName == 'post'
                 return MakerSciencePost.one().get({parent__id: objectId}).then((makerSciencePostResults) ->
                     if makerSciencePostResults.objects.length == 1
                         return makerSciencePostResults.objects[0]
                 )
-            if objectTypeName == 'taggeditem'
+            else if objectTypeName == 'taggeditem'
                 return TaggedItem.one(objectId).get().then((taggedItemResult) ->
                     return taggedItemResult
                 )
-            if objectTypeName == 'tag'
+            else if objectTypeName == 'tag'
                 return Tag.one(objectId).get().then((tagResult) ->
                     return tagResult
                 )
-            if objectTypeName == 'vote'
+            else if objectTypeName == 'vote'
                 return Vote.one(objectId).get()
 
             console.log("Unable to fetch", objectTypeName, objectId)
