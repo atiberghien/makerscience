@@ -186,6 +186,13 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                     detail : '',
                     isValidated:true
                 , 'taggeditem/'+taggedItemResult.id)
+                if tag_type == 'in'
+                    ObjectProfileLink.one().customPOST(
+                        profile_id: $scope.currentMakerScienceProfile.parent.id,
+                        level: 51,
+                        detail : '',
+                        isValidated:true
+                    , 'tag/'+taggedItemResult.tag.id)
             )
 
         $scope.removeTagFromProfile = (tag) ->
