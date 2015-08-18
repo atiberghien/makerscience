@@ -174,7 +174,7 @@
                             <div class="activity">
                                 <h2>Activités</h2>
                                 <ul class="activity">
-                                    <li class="activity-pink" ng-repeat="activity in activities | orderBy : '-created_on'" ng-if="activity.content_object">
+                                    <li class="activity-pink" ng-repeat="activity in activities | limitTo : 15" ng-if="activity.content_object">
                                         <span ng-if="activity.level == 0">
                                             {{profile.parent.user.first_name}} a créé le projet <a ui-sref="project.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
                                         </span>
