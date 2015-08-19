@@ -54,19 +54,19 @@ ul.activity {
         &:last-child {
             border-bottom: none;
         }
-        &.activity-pink,
-        &.activity-green,
-        &.activity-blue {
+        &.activity-member,
+        &.activity-experience,
+        &.activity-project {
             background-repeat: no-repeat;
             background-position: 2% 50%;
         }
-        &.activity-pink {
+        &.activity-member {
             background-image: url('../img/icons/community-small.png')
         }
-        &.activity-green {
+        &.activity-experience {
             background-image: url('../img/icons/resource-small.png')
         }
-        &.activity-blue {
+        &.activity-project {
             background-image: url('../img/icons/project-small.png')
         }
         a {

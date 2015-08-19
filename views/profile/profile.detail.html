@@ -23,10 +23,10 @@
                         <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
                             <ul>
                                 <li>
-                                    <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Ajouter à mes contacts"><span class="glyphicon glyphicon-user"></span></a>
-                                    <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Retirer de mes contacts"><span class="glyphicon glyphicon-user"></span></a>
+                                    <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Ajouter à mes contacts"><span class="fa fa-user-plus"></span></a>
+                                    <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Retirer de mes contacts"><span class="fa fa-user-times"></span></a>
                                 </li>
-                                <li><a title="Contacter"><span class="lyphicon glyphicon-envelope"></span></a></li>
+                                <li><a title="Contacter"><span class="fa fa-envelope-o"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -192,7 +192,12 @@
                             <div class="activity">
                                 <h2>Activités</h2>
                                 <ul class="activity">
-                                    <li class="activity-pink" ng-repeat="activity in activities | limitTo : 15" ng-if="activity.content_object">
+                                    <!-- ALBAN 3 classes for the activity:
+                                        activity-member
+                                        activity-project
+                                        activity-experience
+                                    -->
+                                    <li class="activity-member" ng-repeat="activity in activities | limitTo : 15" ng-if="activity.content_object">
                                         <span ng-if="activity.level == 0">
                                             {{profile.parent.user.first_name}} a créé le projet <a ui-sref="project.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
                                         </span>
