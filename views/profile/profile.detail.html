@@ -257,7 +257,7 @@
                         <div class="col-md-5">
                             <div class="contribution">
                                 <h2>Mes tags préférés</h2>
-                                <ul class="tags tags-listing">
+                                <ul class="tags">
                                     <li ng-repeat="(tag,count) in favoriteTags">
                                         <a tooltip="{{tag}}" ui-sref="tag({slug:tag})">{{tag| characters:10}}</a>
                                     </li>
@@ -265,7 +265,7 @@
                             </div>
                             <div class="contribution">
                                 <h2>Les tags que je suis</h2>
-                                <ul class="tags tags-listing">
+                                <ul class="tags">
                                     <li ng-repeat="tag in followedTags">
                                         <a tooltip="{{tag.slug}}" ui-sref="tag({slug:tag.slug})">{{tag.slug| characters:10}}</a>
                                     </li>
