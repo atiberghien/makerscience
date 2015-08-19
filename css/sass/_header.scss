@@ -590,6 +590,11 @@ div.crumbs {
 	border: 2px solid $color-intro-border;
 
 	div.side-header {
+
+		/* try to keep fixed height on header */
+		overflow-y: auto;
+		height: $home-slide-height;
+
 		position: relative;
 		min-height: $home-slide-height;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */
