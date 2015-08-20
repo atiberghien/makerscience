@@ -19,17 +19,7 @@
                             ng-bind-html="profile.activity">{{ profile.activity }}
                         </h2>
                     </div>
-                    <div class="relative">
-                        <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
-                            <ul>
-                                <li>
-                                    <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Ajouter à mes contacts"><span class="fa fa-user-plus"></span></a>
-                                    <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Retirer de mes contacts"><span class="fa fa-user-times"></span></a>
-                                </li>
-                                <li><a title="Contacter"><span class="fa fa-envelope-o"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
+
                     <div class="relative">
                         <p style="text-align:center">Créé <span am-time-ago="profile.parent.user.date_joined"></span> / Mis à jour <span am-time-ago="profile.modified"></span></p>
                     </div>
@@ -67,7 +57,7 @@
                             </p>
                         </div><!-- .relative -->
 
-                        <div class="relative">
+                        <div class="relative" ng-hide="BioBtnForm.$visible">
                             <h5 class="skills">Compétences</h5>
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="addSkill=false">
@@ -96,7 +86,7 @@
                             </div>
                         </div><!-- .relative -->
 
-                        <div class="relative">
+                        <div class="relative" ng-hide="BioBtnForm.$visible">
                             <h5>Intérêts</h5>
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable" ng-init="addInterest=false">
@@ -125,22 +115,7 @@
                             </div><!-- .editable -->
                         </div><!-- .relative -->
 
-                        <!-- <div class="relative editable">
-                            <div class="edit-buttons" ng-show="editable">
-                                <button ng-click="LocationBtnForm.$show()" ng-hide="LocationBtnForm.$visible">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                            </div>
-                            <p editable-text="profile.location.address.address_locality"
-                                e-form="LocationBtnForm"
-                                onbeforesave="updateMakerScienceProfile('Place', profile.location.id , 'address', {'address_locality' : $data})">
-                                <span class="glyphicon glyphicon-map-marker"></span>
-                                <span ng-if="profile.location.address.address_locality">{{profile.location.address.address_locality}}</span>
-                                <span ng-if="!profile.location.address.address_locality">Localisation non renseignée</span>
-                            </p>
-                        </div> -->
-
-                        <div class="relative">
+                        <div class="relative" ng-hide="BioBtnForm.$visible">
 
                             <div class="edit-buttons" ng-click="socialEdit=!socialEdit" ng-show="editable" ng-init="socialEdit=False">
                                 <button> <span class="glyphicon glyphicon-pencil"></span></button>
@@ -171,9 +146,17 @@
                                 </span>
                             </div>
                         </div><!-- .relative -->
-
                     </div><!-- .side-header -->
                 </div><!-- .col-md-4 -->
+                <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
+                    <ul>
+                        <li>
+                            <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Ajouter à mes contacts"><span class="fa fa-user-plus"></span></a>
+                            <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Retirer de mes contacts"><span class="fa fa-user-times"></span></a>
+                        </li>
+                        <li><a title="Contacter"><span class="fa fa-envelope-o"></span></a></li>
+                    </ul>
+                </div>
             </div><!-- .row -->
         </div><!-- .intro -->
     </div><!-- .container -->

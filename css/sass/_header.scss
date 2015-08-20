@@ -349,11 +349,11 @@ div.crumbs {
 			padding: 0 0 2em 0;
 		}
 		div.friendship {
-			z-index: 10;
+			z-index: 20;
 			position: absolute;
-			top: $grid-gutter-width / 2;
+			bottom: 0;
 			right: 0;
-			font-size: 2em;
+			font-size: 2.5em;
 			li {
 				display: inline-block;
 				vertical-align: middle;
@@ -486,7 +486,7 @@ div.crumbs {
 			border: none;
 			background-color: rgba(255, 255, 255, 0.85);
 			div.side-header {
-				padding-right: 20em; /* leave space for the "friendship" buttons */
+				padding-right: 5em; 
 				background-color: #fff;
 			}
 			h1, h2 {
