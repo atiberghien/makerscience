@@ -21,6 +21,12 @@ class LoginService
         Login a user
         """
         constructor: (@$rootScope, @baseUrl, @$http, @$state, @Restangular, @$cookies, @authService) ->
+
+                # Add methods to scope
+                @$rootScope.submit = this.submit
+                @$rootScope.forceLogin = this.forceLogin
+                @$rootScope.logout = this.logout
+
                 @$rootScope.authVars =
                         username : "",
                         isAuthenticated: false,
@@ -45,9 +51,9 @@ class LoginService
                         @$rootScope.authVars.username = @$cookies.username
                         @$rootScope.authVars.isAuthenticated = true
                         @loginRestangular.all('account/user').get(@$cookies.username).then((data)=>
-                                        console.log("user object", data)
-                                        @$rootScope.authVars.user = data
-                                )
+                            console.log("user object", data)
+                            @$rootScope.authVars.user = data
+                        )
                 )
 
                 # set authorization header if already logged in
@@ -55,11 +61,6 @@ class LoginService
                         console.debug("Already logged in.")
                         @$http.defaults.headers.common['Authorization'] = "ApiKey #{@$cookies.username}:#{@$cookies.key}"
                         @authService.loginConfirmed()
-
-                # Add methods to scope
-                @$rootScope.submit = this.submit
-                @$rootScope.forceLogin = this.forceLogin
-                @$rootScope.logout = this.logout
 
         forceLogin: =>
                 console.debug("forcing login on request")
@@ -83,8 +84,8 @@ class LoginService
                         ).then((data) =>
                                 console.log(data)
                                 @$cookies.username = data.username
-                                @$cookies.key = data.key
-                                @$http.defaults.headers.common['Authorization'] = "ApiKey #{data.username}:#{data.key}"
+                                @$cookies.key = data.token
+                                @$http.defaults.headers.common['Authorization'] = "ApiKey #{data.username}:#{data.token}"
                                 @loginRestangular.all('account/user').get(data.username).then((data)=>
                                         console.log("user object", data)
                                         @$rootScope.authVars.user = data

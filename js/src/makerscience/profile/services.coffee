@@ -48,11 +48,21 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
     """
     Controller bound to openSignupPopup method of CurrentMakerScienceProfile service
     """
-    $scope.register = ->
-        $scope.user.email = $scope.user.username
-        User.post($scope.user).then((userResult) ->
-            $rootScope.authVars.username = $scope.user.username
-            $rootScope.authVars.password = $scope.user.password
+    $scope.first_name = null
+    $scope.last_name = null
+    $scope.username = null
+    $scope.password = null
+
+    $scope.register = () ->
+        userData =
+            first_name :$scope.first_name
+            last_name : $scope.last_name
+            username : $scope.username
+            email : $scope.username
+            password : $scope.password
+        User.post(userData).then((userResult) ->
+            $rootScope.authVars.username = $scope.username
+            $rootScope.authVars.password = $scope.password
             $rootScope.loginService.submit()
             $rootScope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
                 if newValue != oldValue

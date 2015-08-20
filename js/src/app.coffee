@@ -40,7 +40,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
 )
 
-.config(($authProvider, loginServiceProvider) ->
+.config(($authProvider) ->
     $authProvider.httpInterceptor = false;
 
     $authProvider.facebook({
@@ -62,7 +62,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
 
 )
-# Unisson auth config
+
 .config((loginServiceProvider) ->
     loginServiceProvider.setBaseUrl(config.loginBaseUrl)
 )
