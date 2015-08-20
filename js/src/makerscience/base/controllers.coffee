@@ -3,7 +3,7 @@ module = angular.module("makerscience.base.controllers", ['makerscience.base.ser
                                                           'commons.accounts.controllers', 'commons.graffiti.services'])
 
 
-module.directive('username', ($q, $timeout, User) ->
+module.directive('username', (User) ->
     require: 'ngModel'
     link: (scope, elm, attrs, ctrl) ->
         User.getList().then((userResults) ->
