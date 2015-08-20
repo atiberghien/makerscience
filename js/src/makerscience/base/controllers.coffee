@@ -248,7 +248,7 @@ module.controller("NotificationCtrl", ($scope, $controller, $interval, ObjectPro
 
     $scope.updateNotifications = () ->
         ObjectProfileLink.one().customGET('purge').then((result)->
-            if $scope.currentMakerScienceProfile != null || $scope.currentMakerScienceProfile != undefined
+            if $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
                 $scope.notifications = Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).$object
         )
 
