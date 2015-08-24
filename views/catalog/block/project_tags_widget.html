@@ -1,6 +1,6 @@
 <div class="tags">
     <div class="editable">
- 	<h5>Thématiques</h5>
+     <h5>Thématiques</h5>
         <div class="edit-buttons" ng-show="editable" ng-init="addTheme=false">
             <button ng-show="preparedThemeTags.length <= 9" ng-click="addTheme = ! addTheme"><span class="glyphicon glyphicon-pencil"></span></button>
             <button ng-show="preparedThemeTags.length > 9" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToProjectSheet, removeTagFromProjectSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -60,7 +60,6 @@
     <div class="editable">
         <h5>Formats</h5>
         <div class="edit-buttons" ng-show="editable" ng-init="addFormats=false">
-            <button ng-click="addFormats = ! addFormats"><span class="glyphicon glyphicon-pencil"></span></button>
             <button ng-show="preparedFormatsTags.length <= 9" ng-click="addFormats = ! addFormats"><span class="glyphicon glyphicon-pencil"></span></button>
             <button ng-show="preparedFormatsTags.length > 9" ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToProjectSheet, removeTagFromProjectSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
         </div>
