@@ -99,14 +99,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     level: 10,
                     detail : "Créateur/Créatrice",
                     isValidated:true
-                    , 'makerscienceresource/'+makerscienceResourceResult.id).then((objectProfileLinkResult) ->
-                        console.log("added current user as team member", objectProfileLinkResult.profile)
-                        MakerScienceResource.one(makerscienceResourceResult.id).customPOST(
-                            {"user_id":objectProfileLinkResult.profile.user.id}
-                            , 'assign').then((result)->
-                                console.log("Succesfully assigned edit rights ? : ", result)
-                        )
-                    )
+                , 'makerscienceresource/'+makerscienceProjectResult.id)
 
                 angular.forEach($scope.themesTags, (tag)->
                     MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/th", {}).then((taggedItemResult) ->
@@ -162,27 +155,20 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
     $controller('VoteCtrl', {$scope: $scope})
 
+    angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
+
     $scope.preparedThemeTags = []
     $scope.preparedFormatsTags = []
     $scope.preparedTargetTags = []
 
-    $scope.currentUserHasEditRights = false
     $scope.editable = false
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
 
-        if $rootScope.authVars.user
-            MakerScienceResource.one($scope.projectsheet.id).one('check', $rootScope.authVars.user.id).get().then((result)->
-                console.log(" Has current user edit rights ?", result.has_perm)
-                $scope.currentUserHasEditRights = result.has_perm
-                $scope.editable = result.has_perm
+        $scope.editable = $scope.projectsheet.can_edit
 
-        )
-
-        console.log("before setting datasharing", DataSharing.sharedObject)
-        DataSharing.sharedObject =  {project : $scope.projectsheet.parent, makerscienceresource : $scope.projectsheet}
-        console.log("AFTER setting datasharing", DataSharing.sharedObject)
+        $scope.initCommunityCtrl("makerscienceresource", $scope.projectsheet.id)
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 

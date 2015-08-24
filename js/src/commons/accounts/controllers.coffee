@@ -1,6 +1,6 @@
 module = angular.module("commons.accounts.controllers", ['commons.accounts.services', 'makerscience.base.services'])
 
-module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataSharing) ->
+module.controller("CommunityCtrl", ($scope, $filter, $interval, Profile, ObjectProfileLink) ->
     """
     Controller pour la manipulation des data d'une communauté liée à un objet partagé (project, fiche resource, etc.    )
     La sémantique des niveaux d'implication est à préciser en fonction de la resource.
@@ -16,10 +16,13 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
     $scope.profiles = Profile.getList().$object
     $scope.teamCandidate = null
     $scope.resourceCandidate = null
-    $scope.currentUserCandidate = false
-    $scope.community = []
 
-    $scope.init = (objectTypeName) ->
+    $scope.initCommunityCtrl = (objectTypeName, objectID) ->
+        $scope.communityObjectTypeName = objectTypeName
+        $scope.communityObjectID = objectID
+
+        $scope.community = ObjectProfileLink.one().customGETLIST($scope.communityObjectTypeName+'/'+$scope.communityObjectID).$object
+
         $scope.addMember = (profile, level, detail, isValidated)->
             if $scope.isAlreadyMember(profile, level)
                 console.log(" --- ! -- already Member with this level --- ! ---")
@@ -29,17 +32,12 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
                 level: level,
                 detail : detail,
                 isValidated:isValidated
-            , $scope.objectTypeName+'/'+$scope.object.id).then((objectProfileLinkResult) ->
+            , $scope.communityObjectTypeName+'/'+$scope.communityObjectID).then((objectProfileLinkResult) ->
                 $scope.community.push(objectProfileLinkResult)
             )
 
-        $scope.isAlreadyMember = (profile, level)->
-            # Check if selected profile is not already added with given level
-            for member in $scope.community
-                if member.profile.resource_uri == profile.resource_uri
-                    if member.level == level
-                        return true
-            return false
+        $scope.isAlreadyMember = (profile, level) ->
+            return profile && $filter('filter')($scope.community, {$:profile.resource_uri, level:level, isValidated: true}).length == 1
 
         $scope.removeMember = (member) ->
             # attention confusion possible : member ici correspond à une instance de
@@ -47,45 +45,62 @@ module.controller("CommunityCtrl", ($scope, Profile, ObjectProfileLink, DataShar
             ObjectProfileLink.one(member.id).remove().then(()->
                 memberIndex = $scope.community.indexOf(member)
                 $scope.community.splice(memberIndex, 1)
+                if member.profile.id == $scope.currentMakerScienceProfile.parent.id
+                    $scope.editable = false
             )
 
         $scope.deleteMember = (profile, level) ->
-            ObjectProfileLink.one().customGET($scope.objectTypeName+'/'+$scope.object.id, {profile_id:profile.id, level:level}).then((objectProfileLinkResults)->
+            ObjectProfileLink.one().customGET($scope.communityObjectTypeName+'/'+$scope.communityObjectID, {profile_id:profile.id, level:level}).then((objectProfileLinkResults)->
                 angular.forEach(objectProfileLinkResults.objects, (link) ->
                     $scope.removeMember(link)
                 )
             )
 
-        $scope.validateMember = ($event, member) ->
-            validated = $event.target.checked
-            console.log(" Validating ?? !", validated)
-            ObjectProfileLink.one(member.id).patch({isValidated : validated}).then(
+        $scope.validateMember = (member, isValidated) ->
+            data = {isValidated : isValidated}
+            if member.level == 5
+                member.level = data["level"] = 0
+                member.detail = data["detail"] = ""
+            else if member.level == 6
+                member.level = data["level"] = 1
+                member.detail = data["detail"] = ""
+            else if member.level == 15
+                member.level = data["level"] = 10
+                member.detail = data["detail"] = ""
+            else if member.level == 16
+                member.level = data["level"] = 11
+                member.detail = data["detail"] = ""
+
+            ObjectProfileLink.one(member.id).patch(data).then(()->
                 memberIndex = $scope.community.indexOf(member)
                 member = $scope.community[memberIndex]
-                member.isValidated = validated
-                )
+                member.isValidated = isValidated
+                if (member.level == 0 || member.level == 10) && member.profile.id == $scope.currentMakerScienceProfile.parent.id
+                    $scope.editable = isValidated
+            )
 
         $scope.updateMemberDetail = (detail, member) ->
-            ObjectProfileLink.one(member.id).patch({detail : detail}).then(
+            ObjectProfileLink.one(member.id).patch({detail : detail}).then(()->
                 memberIndex = $scope.community.indexOf(member)
                 member = $scope.community[memberIndex]
                 member.detail = detail
-                )
+                return true
+            )
+            return false
 
-        $scope.objectTypeName = objectTypeName
-        console.log(" Shared Object ? ", DataSharing.sharedObject)
-        $scope.object = DataSharing.sharedObject[$scope.objectTypeName]
-        if $scope.object
-            $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
-        $scope.$watch(
-            ()->
-                return DataSharing.sharedObject
-            ,(newVal, oldVal) ->
-                console.log(" Updating Shared Object : new =", newVal, " old = ", oldVal)
-                if newVal != oldVal
-                    $scope.object = newVal[$scope.objectTypeName]
-                    $scope.community = ObjectProfileLink.one().customGETLIST($scope.objectTypeName+'/'+$scope.object.id).$object
-        )
+        $scope.showTeamMembersFilter = (member) ->
+            return member.level == 0 || member.level== 5
+
+        $scope.showHelpersFilter = (member) ->
+            return member.level == 1 || member.level== 6
+
+        $scope.showCoAuthorsFilter = (member) ->
+            return member.level == 10 || member.level== 15
+
+        $scope.showSimilarsFilter = (member) ->
+            return member.level == 11 || member.level== 16
+
+
 )
 
 module.controller('LoginCtrl', ($scope, $rootScope, $state, $stateParams, $cookies, $http, $auth) ->

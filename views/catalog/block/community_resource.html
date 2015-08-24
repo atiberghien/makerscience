@@ -1,21 +1,41 @@
-<section class="community community-resource" ng-controller="CommunityCtrl" ng-init="init('project')">
-    <ul class="actions">
-        <li><a href="" ng-click="currentUserCandidate=!currentUserCandidate"><span class="glyphicon glyphicon-user"></span>Rejoindre</a></li>
+<section class="community community-resource" ng-init="manageCommunity=false">
+    <ul class="actions" ng-show="currentMakerScienceProfile != null">
+        <li><a href="" ng-click="manageCommunity=!manageCommunity"><span class="glyphicon glyphicon-user"></span>Rejoindre</a></li>
     </ul>
     <h3>La communauté</h3>
     <!-- Formulaire pour permettre a l'usager connecté de s'ajouter comme membre équipe ou ressource -->
-    <div class="add-member" ng-show="currentUserCandidate">
-        <button type="button" class="btn btn-primary" ng-click="addMember(currentMakerScienceProfile.parent, 10, '', false); currentUserCandidate=false">J’aimerais devenir co-rédacteur</button>
-        <button type="button" class="btn btn-primary" ng-click="addMember(currentMakerScienceProfile.parent, 11, '', true); currentUserCandidate=false">Je possède une expérience similaire</button>
-        <button type="button" class="btn btn-primary" ng-click="addMember(currentMakerScienceProfile.parent, 12, '', true); currentUserCandidate=false">Je veux mettre en favoris cette expérience</button>
+    <div class="add-member" ng-show="manageCommunity">
+        <button type="button"
+                class="btn btn-primary"
+                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember(currentMakerScienceProfile.parent, 10)"
+                ng-click="teamCandidate=currentMakerScienceProfile.parent">J’aimerais devenir co-rédacteur</button>
+
+        <button type="button"
+                class="btn btn-primary"
+                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember(currentMakerScienceProfile.parent, 11)"
+                ng-click="resourceCandidate=currentMakerScienceProfile.parent">Je possède une expérience similaire</button>
+
+        <button type="button"
+                class="btn btn-primary"
+                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember(currentMakerScienceProfile.parent, 12)"
+                ng-click="addMember(currentMakerScienceProfile.parent, 12, '', true); manageCommunity=false">Je veux mettre en favoris cette expérience</button>
+
+        <input type="text" ng-show="teamCandidate || resourceCandidate" name="role" ng-model="role" placeholder="Saisissez votre rôle ..." />
+
+        <button type="button" ng-show="teamCandidate" class="btn btn-primary" ng-click="addMember(teamCandidate, 10, role, false); manageCommunity=false; teamCandidate=null;">S'ajouter comme membre d'équipe</button>
+        <button type="button" ng-show="resourceCandidate" class="btn btn-primary" ng-click="addMember(resourceCandidate, 11, role, true); manageCommunity=false; resourceCandidate=null;">S'ajouter comme membre resource</button>
+        <button type="button" class="btn btn-default" ng-click="manageCommunity=false; teamCandidate=null; resourceCandidate=null">Annuler</button>
+
     </div>
-    <tabset ng-show="!currentUserCandidate">
+    <tabset ng-show="!manageCommunity">
+        <!-- Co-autheurs -->
         <tab ng-init="addTeamMember=false">
             <tab-heading>
                 <span>{{(community | filter: {level:10, isValidated: true}).length }}</span>Auteurs
             </tab-heading>
+            <!-- Author can invite others members to join authoring -->
             <div class="add-member" ng-show="editable">
-                <button id="addTeamMember" type="button" class="btn btn-default" ng-click="addTeamMember=true" ng-show="!teamCandidate">Ajouter un co-auteurs</button>
+                <button id="addTeamMember" type="button" class="btn btn-default" ng-click="addTeamMember=!addTeamMember" ng-show="!teamCandidate">Ajouter un co-auteurs</button>
                 <div ng-show="addTeamMember && !teamCandidate">
                     <angucomplete-alt id="team-member"
                                     placeholder="Nom du membre ..."
@@ -29,74 +49,66 @@
 
                 </div>
                 <div ng-show="teamCandidate">
-                    <button type="button" class="btn btn-primary" ng-click="addMember(teamCandidate.originalObject, 10, '', true); addTeamMember=false; teamCandidate=null">Ajouter</button>
+                    <button type="button"
+                            class="btn btn-primary"
+                            ng-click="addMember(teamCandidate.originalObject, 15, currentMakerScienceProfile.slug, false); addTeamMember=false; teamCandidate=null">
+                            Inviter {{teamCandidate.originalObject.user.first_name}} {{teamCandidate.originalObject.user.last_name}} à devenir co-autheur ?
+                    </button>
                     <button type="button" class="btn btn-default" ng-click="addTeamMember=false; teamCandidate=null">Annuler</button>
                 </div>
-            </div><!-- .add-member -->
-            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:10}">
+            </div>
+            <!-- ###################################################### -->
+
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showCoAuthorsFilter">
                 <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
-                    <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
-                    <input type="checkbox" ng-checked="member.isValidated" ng-click="validateMember($event, member)" id="validate-checkbox-{{member.id}}">
-                    <label for="validate-checkbox-{{member.id}}">Valider ce membre</label>
+                    <button ng-show="team.length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
+                    <span ng-show="member.level==10 && !member.isValidated">
+                        <button class="btn btn-default" ng-click="validateMember(member, true)">Valider ce membre</button>
+                    </span>
+                    <label ng-show="member.level==15">En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
                 </div>
-                <div ng-if="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
-                    Votre ajout à ce projet est en attente de validation
-                </div>
-                <div ng-if="!editable && member.isValidated == false && !(member.profile.id == currentMakerScienceProfile.parent.id)">
-                    Membre en attente de validation
+                <div ng-show="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
+                    <label ng-show="member.level == 10">Votre ajout à ce projet est en attente de validation par un membre de l'équipe</label>
+                    <span ng-show="member.level == 15">
+                        Vous avez été invité à rejoindre l'équipe du projet
+                        <button class="btn btn-default" ng-click="validateMember(member, true)">Accepter</button>
+                        <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
+                    </label>
                 </div>
             </div><!-- .member -->
         </tab>
+
         <!-- Membres resources  -->
-        <tab ng-init="addResourceMember=false" ng-click="addResourceMember=false">
+        <tab ng-init="addResourceMember=false">
             <tab-heading>
                 <span>{{(community | filter: {level:11, isValidated: true}).length }}</span>
-                <ng-pluralize count="0"
+                <ng-pluralize count="(community | filter: {level:11, isValidated: true}).length"
                              when="{'0': 'Expérience similaire',
                                  'one': 'Expérience similaire',
                                  'other': 'Expériences similaires'}">
                  </ng-pluralize>
             </tab-heading>
-            <!-- <div class="add-member" ng-show="editable">
-                <button id="addResourceMember" type="button" class="btn btn-default" ng-click="addResourceMember=true" ng-show="!resourceCandidate">Ajouter un membre ressource</button>
-                <div ng-show="addResourceMember && !resourceCandidate">
-                    <angucomplete-alt id="resource-member"
-                                    placeholder="Nom du membre ..."
-                                    pause="100"
-                                    selected-object="resourceCandidate"
-                                    local-data="profiles"
-                                    search-fields="user.first_name,user.last_name"
-                                    text-no-results="Aucun membre trouvé"
-                                    template-url="/views/catalog/block/community_profile_autocomplete.html"
-                                    minlength="2"/>
-                </div>
-                <div ng-show="resourceCandidate">
-                    <button type="button" class="btn btn-default" ng-click="addMember(resourceCandidate.originalObject, 11, '', true); resourceCandidate=null">Ajouter</button>
-                    <button type="button" class="btn btn-primary" ng-click="resourceCandidate=null">Annuler</button>
-                </div>
-            </div> -->
 
-            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:11}">
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showSimilarsFilter">
                 <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
-                    <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
-                <!-- FIXME : inline style, otherwise hidden by remove button -->
-                    <!-- <input type="checkbox" ng-checked="member.isValidated" ng-click="validateMember($event, member)" id="validate-checkbox-{{member.id}}" style="margin-left: 22px;">
-                    <label for="validate-checkbox-{{member.id}}">Valider ce membre</label>-->
+                    <button ng-show="team.length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
+                    <label ng-show="member.level==16 && member.isValidated == false">En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
                 </div>
-                <div ng-if="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
-                    Votre ajout à ce projet est en attente de validation
-                </div>
-                <div ng-if="!editable && member.isValidated == false && !(member.profile.id == currentMakerScienceProfile.parent.id)">
-                    Membre en attente de validation
+                <div ng-show="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
+                    <span ng-show="member.level == 16">
+                        Vous avez été invité à apporter votre aide au projet
+                        <button class="btn btn-default" ng-click="validateMember(member, true)">Accepter</button>
+                        <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
+                    </label>
                 </div>
             </div><!-- .member -->
         </tab>
         <tab>
             <tab-heading>
                 <span>{{(community | filter: {level:12}).length }}</span>
-                <ng-pluralize count="0"
+                <ng-pluralize count="(community | filter: {level:12}).length"
                             when="{'0': 'Abonné',
                             'one': 'Abonné',
                             'other': 'Abonnés'}">

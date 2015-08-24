@@ -84,6 +84,7 @@ div.forum-sidebar {
 			}
 		}
 		div.member {
+			min-height: 5em;
 			position: relative;
 			margin: 0 ($grid-gutter-width / 2) 0 $grid-gutter-width;
 			padding: 0.5em 0;
