@@ -222,6 +222,24 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             MakerScienceProfile.one(makerscienceProfileSlug).remove()
             $rootScope.loginService.logout()
             $state.go("home", {})
+    , (response) ->
+        if response.status == 404
+            MakerScienceProfile.one().get({parent__id : $stateParams.slug}).then((makerscienceProfileResults) ->
+                if makerscienceProfileResults.objects.length == 1
+                    $state.go('profile.detail', {slug : makerscienceProfileResults.objects[0].slug})
+                else
+                    $state.go('404')
+            )
+    )
+)
+    , (response) ->
+        if response.status == 404
+            MakerScienceProfile.one().get({parent__id : $stateParams.slug}).then((makerscienceProfileResults) ->
+                if makerscienceProfileResults.objects.length == 1
+                    $state.go('profile.dashboard', {slug : makerscienceProfileResults.objects[0].slug})
+                else
+                    $state.go('404')
+            )
     )
 )
 

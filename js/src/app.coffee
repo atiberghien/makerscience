@@ -78,6 +78,10 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 ncyBreadcrumb:
                     label: 'Accueil'
         )
+        $stateProvider.state('404',
+                url: '/',
+                templateUrl: 'views/404.html',
+        )
         .state('project',
                 url: '/p/'
                 abstract: true,

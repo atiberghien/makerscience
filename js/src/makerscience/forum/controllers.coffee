@@ -159,6 +159,8 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
         return true
 
     MakerSciencePost.one().get({parent__slug: $stateParams.slug}).then((makerSciencePostResult)->
+        if makerSciencePostResult.objects.length == 0
+            $state.go('404')
         $scope.post = makerSciencePostResult.objects[0]
 
         resolveMentions($scope.post.parent)
