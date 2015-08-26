@@ -180,59 +180,8 @@
                                         activity-project
                                         activity-experience
                                     -->
-                                    <li class="activity-member" ng-repeat="activity in activities | limitTo : 15" ng-if="activity.content_object">
-                                        <span ng-if="activity.level == 0">
-                                            {{profile.parent.user.first_name}} a créé le projet <a ui-sref="project.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 1">
-                                            {{profile.parent.user.first_name}} a proposé son aide au projet <a ui-sref="project.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 2">
-                                            {{profile.parent.user.first_name}} s'est abonné au projet <a ui-sref="project.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 3">
-                                            {{profile.parent.user.first_name}} a commenté le projet <a ui-sref="project.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 4">
-                                            {{profile.parent.user.first_name}} a noté le critère «{{activity.content_object.vote_type_label}}» du projet <a ui-sref="project.detail({slug:activity.content_object.votedObj.parent.slug})">{{activity.content_object.votedObj.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 10">
-                                            {{profile.parent.user.first_name}} a créé l'expérience <a ui-sref="resource.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 11">
-                                            {{profile.parent.user.first_name}} a une expérience similaire à <a ui-sref="resource.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 12">
-                                            {{profile.parent.user.first_name}} s'est abonné à l'expérience <a ui-sref="resource.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 13">
-                                            {{profile.parent.user.first_name}} a commenté l'expérience <a ui-sref="resource.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 14">
-                                            {{profile.parent.user.first_name}} a noté le critère «» de l'expérience <a ui-sref="resource.detail({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 30">
-                                            {{profile.parent.user.first_name}} a créé la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 31">
-                                            {{profile.parent.user.first_name}} a répondu à la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 32">
-                                            {{profile.parent.user.first_name}} s'est abonnée à la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 33">
-                                            {{profile.parent.user.first_name}} aime la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 34">
-                                            {{profile.parent.user.first_name}} aime une réponse de la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 40">
-                                            {{profile.parent.user.first_name}} est maintenant en contact avec <a ui-sref="profile.detail({slug:activity.content_object.slug})">{{activity.content_object.full_name}}</a>
-                                        </span>
-                                        <span ng-if="activity.level == 41">
-                                            {{profile.parent.user.first_name}} a cité <a ui-sref="profile.detail({slug:activity.mentionnedProfile.slug})">{{activity.mentionnedProfile.full_name}}</a> dans la discussion <a ui-sref="question({slug:activity.content_object.parent.slug})">{{activity.content_object.parent.title}}</a>
-                                        </span>
-                                        <span am-time-ago="activity.created_on">
+                                    <li class="activity-member" ng-repeat="activity in activities | limitTo : 15">
+                                        <p ng-bind-html="activity"></p>
                                     </li>
                                 </ul>
                             </div>

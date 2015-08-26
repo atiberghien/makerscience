@@ -25,8 +25,20 @@
 
             <tabset class="nav-tabs-project">
                 <tab heading="Mes notifications">
+                    <ul>
+                        <li class="list-group-item"><button ng-click="markAllAsRead()"><span class="glyphicon glyphicon-tasks" ></span></button></li>
+                        <li ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in notifications ">
+                            <p ng-bind-html="trustAsHtml(notif.description)"></p>
+                            <button class="mark non-closing" ng-show="notif.unread == true" ng-click="markAsRead(notif)"><span class="glyphicon glyphicon-eye-open" ></span></button>
+                        </li>
+                    </ul>
                 </tab>
                 <tab heading="Activités de mon réseau">
+                    <ul>
+                        <li class="activity-member" ng-repeat="activity in activities">
+                            <p ng-bind-html="trustAsHtml(activity)"></p>
+                        </li>
+                    </ul>
                 </tab>
                 <tab heading="Mes paramètres">
 

@@ -162,7 +162,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('profile.dashboard',
                 url: ':slug/dashboard',
                 templateUrl: '/views/profile/profile.dashboard.html'
-                controller : 'MakerScienceProfileCtrl'
+                controller : 'MakerScienceProfileDashboardCtrl'
                 ncyBreadcrumb:
                     label: 'Espace personnel'
                     parent : 'profile.detail'
