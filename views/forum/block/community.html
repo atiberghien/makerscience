@@ -1,8 +1,10 @@
 <section class="community community-forum">
     <ul class="actions">
         <li>
-            <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 32)" ng-click="addMember(currentMakerScienceProfile.parent, 32, '', true)"><span class="glyphicon glyphicon-star"></span>Suivre</a>
-            <a href="" ng-if="isAlreadyMember(currentMakerScienceProfile.parent, 32)" ng-click="deleteMember(currentMakerScienceProfile.parent, 32)" style="background-color:black"><span class="glyphicon glyphicon-star"></span>Annuler</a>
+            <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 32)"
+                    ng-click="addMember(currentMakerScienceProfile.parent, 32, '', true)"><span class="glyphicon glyphicon-star"></span>Suivre</a>
+            <a href="" ng-if="isAlreadyMember(currentMakerScienceProfile.parent, 32)"
+                    ng-click="deleteMember(currentMakerScienceProfile.parent, 32)" style="background-color:black"><span class="glyphicon glyphicon-star"></span>Annuler</a>
         </li>
     </ul>
     <h3>La communauté</h3>
@@ -17,9 +19,9 @@
                 </ng-pluralize>
             </tab-heading>
             <div class="member" ng-repeat="member in community | filter: {level:31}|unique:'profile_id'">
-                <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
                 <div class="member-details relative">
-                    <p>{{member.profile.user.first_name}} {{member.profile.user.last_name}}</p>
+                    <p><a ui-sref="profile.detail({slug : member.profile.id})"> {{member.profile.user.first_name}} {{member.profile.user.last_name}}</a></p>
                 </div>
             </div>
         </tab>
@@ -33,7 +35,7 @@
                 </ng-pluralize>
             </tab-heading>
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:32}|unique:'profile_id' ">
-                <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
                 <div class="member-details relative">
                     <p>{{member.profile.user.first_name}} {{member.profile.user.last_name}}</p>
                 </div>

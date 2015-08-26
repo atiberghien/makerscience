@@ -166,8 +166,7 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
         resolveMentions($scope.post.parent)
 
         $scope.initFromID($scope.post.parent.id)
-        DataSharing.sharedObject['post'] = $scope.post.parent #for community block
-        $scope.init('post')#for community block
+        $scope.initCommunityCtrl('post', $scope.post.parent.id)#for community block
     )
 
     $scope.saveMakersciencePostAnswer = (newAnswer, parent, authorProfile) ->
