@@ -244,13 +244,28 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
         $scope.refreshFilter()
 )
 
-module.controller("NotificationCtrl", ($scope, $controller, $interval, ObjectProfileLink, Notification) ->
+module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval, $filter, ObjectProfileLink, Notification) ->
 
     $scope.updateNotifications = () ->
         ObjectProfileLink.one().customGET('purge').then((result)->
             if $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
-                $scope.notifications = Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).$object
+                Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
+                    $scope.notifications = $filter('orderBy')(notificationResults, 'timestamp', true)
+                    $scope.lastNotifications = $filter('limitTo')($scope.notifications, 5)
+                    $scope.computeUnreadNotificationCounter()
+
+                )
         )
+
+    $scope.computeUnreadNotificationCounter = () ->
+        $scope.displayedUnreadNotifications = $filter('filter')($scope.lastNotifications, {unread:true})
+        $scope.unreadNotificationCounter = $scope.displayedUnreadNotifications.length
+
+    $scope.markDisplayedAsRead = () ->
+        $timeout(()->
+            angular.forEach($scope.displayedUnreadNotifications, $scope.markAsRead)
+            $scope.computeUnreadNotificationCounter()
+        , 2000)
 
     $scope.markAsRead = (notif) ->
         Notification.one(notif.id).patch({unread : false})

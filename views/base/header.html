@@ -49,20 +49,21 @@
                                         </ul>
                                     </li>
                                     <li id="notifications" class="dropdown" role="menu" ng-controller="NotificationCtrl">
-                                        <button class="dropdown-toggle notifications" data-toggle="dropdown" >
+                                        <button class="dropdown-toggle notifications" data-toggle="dropdown" ng-click="markDisplayedAsRead()">
                                             <span class="glyphicon glyphicon-bell"></span>
-                                            <span class="badge">{{(notifications| filter : {unread : true}).length}}</span>
+                                            <span class="badge">{{unreadNotificationCounter}}</span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-right dropdown-notifications">
-                                            <li class="list-group-item" ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in notifications ">
+                                            <li class="list-group-item" ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in lastNotifications">
                                                 <p ng-bind-html="trustAsHtml(notif.description)"></p>
-                                                <button class="mark non-closing" ng-show="notif.unread == true" ng-click="markAsRead(notif)"><span class="glyphicon glyphicon-eye-open" ></span></button>
+                                                <!-- <button class="mark non-closing" ng-show="notif.unread == true" ng-click="markAsRead(notif)"><span class="glyphicon glyphicon-eye-open" ></span></button> -->
                                             </li>
-                                            <!--<li class="list-group-item notification-new"><a href="">Dapibus</a> has done ac <a href="">facilisis in</a> <button class="mark"><span class="glyphicon glyphicon-eye-open"></span></button></li>
-                                            <li class="list-group-item notification-new">Morbi leo risus <button class="mark"><span class="glyphicon glyphicon-eye-open"></span></button></li>
-                                            <li class="list-group-item">Porta ac consectetur ac</li>
-                                            <li class="list-group-item">Vestibulum at eros</li>-->
-                                            <li class="list-group-item"><button ng-click="markAllAsRead()"><span class="glyphicon glyphicon-tasks" ></span></button></li>
+                                            <li class="list-group-item">
+                                                <a ui-sref="profile.dashboard({slug:currentMakerScienceProfile.slug})">
+                                                    {{(notifications| filter : {unread : true}).length}} non-lues
+                                                </button>
+                                            </li>
+                                            <!-- <li class="list-group-item"><button ng-click="markAllAsRead()"><span class="glyphicon glyphicon-tasks" ></span></button></li> -->
                                         </ul>
                                     </li>
                                 </ul>
