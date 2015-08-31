@@ -45,7 +45,7 @@ module.controller("CommunityCtrl", ($scope, $filter, $interval, Profile, ObjectP
             ObjectProfileLink.one(member.id).remove().then(()->
                 memberIndex = $scope.community.indexOf(member)
                 $scope.community.splice(memberIndex, 1)
-                if member.profile.id == $scope.currentMakerScienceProfile.parent.id
+                if (member.level == 0 || member.level == 10) && member.profile.id == $scope.currentMakerScienceProfile.parent.id
                     $scope.editable = false
             )
 

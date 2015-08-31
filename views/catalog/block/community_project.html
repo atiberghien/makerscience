@@ -62,7 +62,7 @@
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showTeamMembersFilter">
                 <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
-                    <button ng-show="team.length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
+                    <button ng-show="(community | filter: showTeamMembersFilter | filter : isValidated).length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
                     <span ng-show="member.level==0 && !member.isValidated">
                         <button class="btn btn-default" ng-click="validateMember(member, true)">Valider ce membre</button>
                     </span>
@@ -114,13 +114,12 @@
             <!-- ###################################################### -->
 
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showHelpersFilter">
-                <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
-                <div ng-show="editable">
-                    <button ng-show="team.length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
-                    <label ng-show="member.level==6 && member.isValidated == false">En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
-                </div>
-                <div ng-show="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
-                    <span ng-show="member.level == 6">
+                <ng-include ng-if="member.isValidated" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+
+                <div ng-show="member.level==6 && !member.isValidated">
+                    <label ng-show="member.profile.id != currentMakerScienceProfile.parent.id && editable">
+                        En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
+                    <span ng-show="member.profile.id == currentMakerScienceProfile.parent.id">
                         Vous avez été invité à apporter votre aide au projet
                         <button class="btn btn-default" ng-click="validateMember(member, true)">Accepter</button>
                         <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
