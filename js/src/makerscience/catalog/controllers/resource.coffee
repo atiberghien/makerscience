@@ -189,16 +189,6 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
 
-        $scope.$on('newTeamMember', (event, user_id)->
-                """
-                Give edit rights to newly added or validated team member (see commons.accounts.controllers)
-                """
-                console.log("Giving edit rights to user id = ", user_id)
-                MakerScienceResource.one($scope.projectsheet.id).customPOST({"user_id":user_id}, 'assign').then((result)->
-                    console.log(" succesfully assigned edit rights ? : ", result)
-                    )
-            )
-
         $scope.updateLinkedResources = ->
             MakerScienceResource.one($scope.projectsheet.id).patch(
                 linked_resources : $scope.linkedResources.map((resource) ->
