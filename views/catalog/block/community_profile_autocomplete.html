@@ -20,7 +20,7 @@
             ng-click="selectResult(result)"
             ng-mouseenter="hoverRow($index)"
             ng-class="{'angucomplete-selected-row': $index == currentIndex}">
-            <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+            <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
             <p>{{result.originalObject.user.first_name}} {{result.originalObject.user.last_name}}</p>
         </div>
     </div>

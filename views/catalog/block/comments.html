@@ -1,4 +1,4 @@
- <div ng-controller="CommentCtrl" ng-init="init(objectTypeName)">
+ <div>
     <section class="comments">
 
         <ul class="actions">
@@ -11,7 +11,7 @@
             <div class="comment">
                 <div class="author">
                     <img ng-if="!$root.authVars.user.email" src="/img/users/user-default.png" alt="User Unknown" />
-                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
                     <p><strong>{{$root.authVars.user.first_name}} {{$root.authVars.user.last_name}}</strong><br /></p>
                 </div>
             </div><!-- .comment -->
@@ -27,7 +27,7 @@
         <div>
             <div class="comment" ng-repeat="comment in comments| orderBy:'-submit_date' | limitTo :  5" ng-class="{'flagged' : comment.flags[0]}">
                 <div class="comment-gravatar">
-                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
                 </div>
                 <div class="comment-content">
                     <div class="btn-group" dropdown is-open="isopen" ng-if="$root.authVars.isAuthenticated">
