@@ -99,7 +99,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     level: 10,
                     detail : "Créateur/Créatrice",
                     isValidated:true
-                , 'makerscienceresource/'+makerscienceProjectResult.id)
+                , 'makerscienceresource/'+makerscienceResourceResult.id)
 
                 angular.forEach($scope.themesTags, (tag)->
                     MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+makerscienceResourceResult.id+"/th", {}).then((taggedItemResult) ->
