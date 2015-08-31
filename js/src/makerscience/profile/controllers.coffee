@@ -246,7 +246,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
         $scope.notifications = Notification.getList({recipient_id : $scope.profile.parent.user.id}).$object
 
         MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities').then((activityResults)->
-            $scope.activities = activityResults.objects.activities
+            $scope.activities = activityResults.objects
         )
 
 

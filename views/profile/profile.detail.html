@@ -181,7 +181,8 @@
                                         activity-experience
                                     -->
                                     <li class="activity-member" ng-repeat="activity in activities | limitTo : 15">
-                                        <p ng-bind-html="activity"></p>
+                                        <p ng-bind-html="activity.description"></p>
+                                        <span am-time-ago="activity.created_on"></span>
                                     </li>
                                 </ul>
                             </div>
