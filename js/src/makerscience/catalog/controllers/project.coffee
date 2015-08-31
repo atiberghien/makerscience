@@ -156,6 +156,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
     $controller('VoteCtrl', {$scope: $scope})
 
     angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
+    angular.extend(this, $controller('CommentCtrl', {$scope: $scope}))
 
     $scope.preparedThemeTags = []
     $scope.preparedFormatsTags = []
@@ -169,6 +170,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.editable = $scope.projectsheet.can_edit
 
         $scope.initCommunityCtrl("makerscienceproject", $scope.projectsheet.id)
+        $scope.initCommentCtrl("makerscienceproject", $scope.projectsheet.id)
 
         $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
 

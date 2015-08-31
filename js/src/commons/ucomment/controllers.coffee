@@ -8,39 +8,19 @@ module.controller("CommentCtrl", ($scope, $rootScope, Comment, Profile, ObjectPr
     $scope.newcommentForm =
         text: ""
 
-    $scope.init = (objectTypeName) ->
-        # $scope.$on(objectTypeName+'Ready', (event, args) ->
-        #     $scope.objectTypeName = objectTypeName
-        #     $scope.object = args[objectTypeName]
-        #     $scope.refreshComments($scope.objectTypeName, $scope.object.id)
-        # )
-
-        $scope.objectTypeName = objectTypeName
-        console.log(" Shared Object ? ", DataSharing.sharedObject)
-        $scope.object = DataSharing.sharedObject[$scope.objectTypeName]
-        if $scope.object
-            $scope.refreshComments($scope.objectTypeName, $scope.object.id)
-        $scope.$watch(
-            ()->
-                return DataSharing.sharedObject
-            ,(newVal, oldVal) ->
-                console.log(" Updating Shared Object : new ="+newVal+" old = "+oldVal)
-                if newVal != oldVal
-                    $scope.object = newVal[$scope.objectTypeName]
-                    $scope.refreshComments($scope.objectTypeName, $scope.object.id)
-        )
+    $scope.initCommentCtrl = (objectTypeName, objectID) ->
+        $scope.commentedObjectTypeName = objectTypeName
+        $scope.commentedObjectID = objectID
+        $scope.refreshComments()
 
     $scope.refreshComments = (objectTypeName, objectId) ->
-        $scope.comments = Comment.one().customGETLIST(objectTypeName+'/'+objectId).$object
+        $scope.comments = Comment.one().customGETLIST($scope.commentedObjectTypeName+'/'+$scope.commentedObjectID).$object
 
     $scope.isCommentAuthor = (comment)->
         """
         To check wether connected user is comment's author
         """
-        if $rootScope.authVars.username == comment.user.username
-            return true
-        else
-            return false
+        return $rootScope.authVars.username == comment.user.username
 
     $scope.removeComment = (index)->
         """
@@ -48,16 +28,16 @@ module.controller("CommentCtrl", ($scope, $rootScope, Comment, Profile, ObjectPr
         """
         Comment.one($scope.comments[index].id).remove().then((data)->
             $scope.comments.splice(index, 1)
-            )
+        )
 
     $scope.flagComment = (index)->
         Comment.one($scope.comments[index].id).customPOST({}, 'flag/').then((data)->
             $scope.comments[index].flags.push({flag:'flagged'})
-            )
+        )
 
 
     $scope.postComment = (commentType)->
-        Comment.one().customPOST({comment_text:$scope.newcommentForm.text}, $scope.objectTypeName+'/'+$scope.object.id).then((newcomment)->
+        Comment.one().customPOST({comment_text:$scope.newcommentForm.text}, $scope.commentedObjectTypeName+'/'+$scope.commentedObjectID).then((newcomment)->
             $scope.comments.push(newcomment)
             $scope.newcommentForm.text = ''
             $scope.commenting = false
@@ -70,9 +50,7 @@ module.controller("CommentCtrl", ($scope, $rootScope, Comment, Profile, ObjectPr
                         level: commentType,
                         detail : '',
                         isValidated:true
-                    , $scope.objectTypeName+'/'+$scope.object.id).then((commentLinkResult) ->
-                        console.log(commentLinkResult)
-                    )
+                    , $scope.commentedObjectTypeName+'/'+$scope.commentedObjectID)
             )
         )
 
