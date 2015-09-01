@@ -194,7 +194,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 templateUrl: '/views/forum/thread.display.html'
                 controller : 'MakerSciencePostCtrl'
                 ncyBreadcrumb:
-                    label: '{{post.title}}'
+                    label: '{{post.parent.title}}'
                     parent : 'forum'
         )
         .state('tags',
