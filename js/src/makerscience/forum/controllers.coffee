@@ -151,10 +151,9 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
                     profileAnchor = mention
                  post.text =  post.text.replace(mention, profileAnchor)
             )
-            angular.forEach(post.answers, (answer) ->
-                return resolveMentions(answer)
-
-            )
+        )
+        angular.forEach(post.answers, (answer) ->
+            return resolveMentions(answer)
         )
         return true
 

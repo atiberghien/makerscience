@@ -57,9 +57,10 @@
 
             <script type="text/ng-template" id="/subAnswer-mentions.tpl">
                 <ul class="list-group user-search">
-                    <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
-                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                    <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item" style="min-height: 55px;">
+                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
                     {{person.full_name}}
+                    </li>
                 </ul>
             </script>
 
