@@ -156,11 +156,30 @@
                             </p>
                         </section>
                     </tab>
-                    <tab heading="Actus">
+                    <tab heading="Actus ({{projectsheet.news.length}})">
                         <section>
-                            <h3>Actus</h3>
-                            <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minimididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <h3>Nouvelle actu</h3>
+                            <form novalidate>
+                                <input type="text" name="title" ng-model="newsData.title" placeholder="Titre de la news ..." class="full-width" required />
+
+                                <textarea ui-tinymce="tinyMceOptions"
+                                    name="text"
+                                    ng-model="newsData.text"
+                                    ng-trim="false"
+                                    placeholder="Saisissez votre news"
+                                    rows="8"
+                                    required>
+                                </textarea>
+                                <button type="submit" ng-click="publishNews()">Publier</button>
+                            </form>
                         </section>
+                        <section ng-repeat="news in projectsheet.news">
+                            <h3>{{news.title}}</h3>
+                            <p ng-bind-html="trustAsHtml(news.text)"></p>
+                            Posté par <a ui-sref="profile.detail({slug:news.author.id})">{{news.author.user.first_name}} {{news.author.user.last_name}}</a>
+                            <span am-time-ago="news.timestamp"></span>
+                        </section>
+
                     </tab>
                     <tab heading="Discussions ({{linked_post.length}})">
                         <section>

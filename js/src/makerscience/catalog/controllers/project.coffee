@@ -145,8 +145,8 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         )
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,
-                                                    MakerScienceProject, MakerScienceResource,
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window,
+                                                    MakerScienceProject, MakerScienceResource,  MakerSciencePost,
                                                     MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
@@ -193,6 +193,28 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
             $scope.linked_post.push(MakerSciencePost.one(makerSciencePostID).get().$object)
         )
+
+        $scope.newsData = {}
+        $scope.publishNews = () ->
+            newsText = String($scope.newsData.text).replace(/<[^>]+>/gm, '')
+            if $scope.newsData.title == '' || $scope.newsData.title == undefined || newsText == '' || newsText == 'undefined'
+                return false
+
+            $scope.newsData.author = $scope.currentMakerScienceProfile.parent.id
+            $scope.newsData.project = $scope.projectsheet.parent.id
+            MakerScienceProject.one().customPOST($scope.newsData, 'publish/news').then((newsResult)->
+                ObjectProfileLink.one().customPOST(
+                    profile_id: $scope.currentMakerScienceProfile.parent.id,
+                    level: 7,
+                    detail : '',
+                    isValidated:true
+                , 'projectnews/'+newsResult.id)
+                $scope.projectsheet.news.unshift(newsResult)
+                angular.copy({}, $scope.newsData);
+                $window.tinymce.activeEditor.setContent('')
+            )
+
+
         $scope.updateLinkedResources = ->
             MakerScienceProject.one($scope.projectsheet.id).patch(
                 linked_resources : $scope.linkedResources.map((resource) ->
