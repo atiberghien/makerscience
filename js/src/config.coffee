@@ -1,16 +1,22 @@
-@config =
-    templateBaseUrl: '/views/',
-    useHtml5Mode: false,
+debugMode = false
 
-    bucket_uri: 'http://localhost:8002/bucket/upload/',
-    loginBaseUrl: 'http://localhost:8002/api/v0',
-    oauthBaseUrl: 'http://localhost:8001',
-    media_uri: 'http://localhost:8002',
-    rest_uri: "http://localhost:8002/api/v0"
+if !debugMode
+    @config =
+        templateBaseUrl: '/views/',
+        useHtml5Mode: true,
 
-    # TO ATTACK STAGING
-    # bucket_uri: 'http://data.nonetype.net/bucket/upload/',
-    # loginBaseUrl: 'http://data.nonetype.net/api/v0',
-    # oauthBaseUrl: 'http://localhost:8001',
-    # media_uri: 'http://data.nonetype.net',
-    # rest_uri: "http://data.nonetype.net/api/v0"
+        bucket_uri: 'http://data.nonetype.net/bucket/upload/',
+        loginBaseUrl: 'http://data.nonetype.net/api/v0',
+        oauthBaseUrl: 'http://127.0.0.1:8001',
+        media_uri: 'http://data.nonetype.net',
+        rest_uri: "http://data.nonetype.net/api/v0"
+else
+    @config =
+        templateBaseUrl: '/views/',
+        useHtml5Mode: true,
+
+        bucket_uri: 'http://127.0.0.1:8002/bucket/upload/',
+        loginBaseUrl: 'http://127.0.0.1:8002/api/v0',
+        oauthBaseUrl: 'http://127.0.0.1:8001',
+        media_uri: 'http://127.0.0.1:8002',
+        rest_uri: "http://127.0.0.1:8002/api/v0"
