@@ -248,8 +248,13 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         language: "fr_FR",
     }
 
+    $rootScope.$on('$stateChangeSuccess', () ->
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+    )
+
     $rootScope.trustAsHtml = (string) ->
         return $sce.trustAsHtml(string)
+
 
 )
 

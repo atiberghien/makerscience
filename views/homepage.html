@@ -42,10 +42,10 @@
             </div>
             <div class="col-md-5" ng-init="showLoginPanel=false">
                 <div class="home-join">
-                    <p><a ui-sref="about" class="button">MakerScience c'est quoi?<img src="/img/smiley.png" alt="Smiley" /></a></p>
+                    <p><a ui-sref="about" class="button">MakerScience c'est quoi ?<img src="/img/smiley.png" alt="Smiley" /></a></p>
                     <div ng-show="!showLoginPanel" class="welcome">
                         <div class="join">
-                            <h2 ng-hide="authVars.isAuthenticated">Rejoindre la communauté MakerScience!</h2>
+                            <h2 ng-hide="authVars.isAuthenticated">Rejoignez la communauté MakerScience !</h2>
                             <h2 ng-show="authVars.isAuthenticated">Bienvenue {{currentMakerScienceProfile.parent.user.first_name}}</h2>
                         </div><!-- .join -->
                     </div>
@@ -66,12 +66,12 @@
                 <div class="row community">
                     <div class="col-md-4">
                         <img src="/img/icons/community.png" alt="Echangez et rencontrez" />
-                        <h3>Echangez et rencontrez</h3>
+                        <h3>Échangez et rencontrez</h3>
                     </div>
                     <div class="col-md-8">
                         <ul>
-                            <li><a ng-click="showLoginPanel=true">Participez à la communauté</a></li>
-                            <li><a ui-sref="profile.list">Trouvez des contacts</a></li>
+                            <li><a ui-sref="profile.list">Participez à la communauté</a></li>
+                            <li><a ui-sref="map">Trouvez des contacts</a></li>
                             <li><a ui-sref="forum">Discutez avec les membres</a></li>
                         </ul>
                     </div>
