@@ -147,7 +147,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 )
 
 module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller,
-                                                    MakerScienceResource, MakerScienceResourceTaggedItem, TaggedItem,
+                                                    MakerScienceResource, MakerScienceResourceTaggedItem, MakerSciencePost, TaggedItem,
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
@@ -187,6 +187,11 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
                 when "th" then $scope.preparedThemeTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug, taggedItemId : taggedItem.id})
                 when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
+        )
+
+        $scope.linked_post = []
+        angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
+            $scope.linked_post.push(MakerSciencePost.one(makerSciencePostID).get().$object)
         )
 
         $scope.updateLinkedResources = ->

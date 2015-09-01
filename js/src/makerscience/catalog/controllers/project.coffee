@@ -189,6 +189,10 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
 
+        $scope.linked_post = []
+        angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
+            $scope.linked_post.push(MakerSciencePost.one(makerSciencePostID).get().$object)
+        )
         $scope.updateLinkedResources = ->
             MakerScienceProject.one($scope.projectsheet.id).patch(
                 linked_resources : $scope.linkedResources.map((resource) ->

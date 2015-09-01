@@ -124,12 +124,10 @@
                             </p>
                         </section>
                     </tab>
-                    <tab heading="Discussions">
+                    <tab heading="Discussions ({{linked_post.length}})">
                         <section>
-                            <div ng-repeat="postID in resourcesheet.linked_post">
-                                <div ng-controller="MakerSciencePostEmbedCtrl" ng-init="init(postID)">
-                                    <ng-include ng-if="post.id" src="'/views/forum/block/thread.html'"></ng-include>
-                                </div>
+                            <div ng-repeat="post in linked_post">
+                                <ng-include ng-if="post.id" src="'/views/forum/block/thread.html'"></ng-include>
                             </div>
                         </section>
                     </tab>
