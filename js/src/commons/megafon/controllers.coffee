@@ -36,15 +36,6 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
         Post.one(postID).get().then((postResult) ->
             $scope.basePost =  postResult
 
-            ##Author
-            ObjectProfileLink.one().customGET('post/'+postID, {level:30}).then((objectProfileLinkResults) ->
-                #When author profile was deleted, post are without author
-                if objectProfileLinkResults.objects.length
-                    $scope.author = objectProfileLinkResults.objects[0].profile
-                else
-                    $scope.author = null
-            )
-
             ##contributors
             $scope.contributors = []
             contributorsIdx = []
@@ -65,5 +56,14 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
                         )
                 )
             )
+        )
+
+    $scope.getPostAuthor = (postID) ->
+        return ObjectProfileLink.one().customGET('post/'+postID, {level:30}).then((objectProfileLinkResults) ->
+            if objectProfileLinkResults.objects.length == 1
+                $scope["post"+postID+"Author"] = objectProfileLinkResults.objects[0].profile
+            else
+                $scope["post"+postID+"Author"] = null
+            return $scope["post"+postID+"Author"]
         )
 )

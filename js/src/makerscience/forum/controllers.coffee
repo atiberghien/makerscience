@@ -163,6 +163,17 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
             $state.go('404')
         $scope.post = makerSciencePostResult.objects[0]
 
+        fetchAuthors = (post) ->
+            $scope.getPostAuthor(post.id).then((author)->
+                post.author = author
+                angular.forEach(post.answers, (answer) ->
+                    fetchAuthors(answer)
+                )
+            )
+
+
+        fetchAuthors($scope.post.parent)
+
         resolveMentions($scope.post.parent)
 
         $scope.initFromID($scope.post.parent.id)

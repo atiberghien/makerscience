@@ -5,7 +5,7 @@
         </ul> -->
         <div class="thread-author">
             <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
-            <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
+            <p>{{answer.author.user.first_name}} <strong>{{answer.author.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
         </div>
         <div class="thread-content">
             <p ng-bind-html="trustAsHtml(answer.text)"></p>
@@ -74,7 +74,7 @@
             <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
             <div class="thread-author">
                 <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
-                <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong></p>
+                <p>{{subanswer.author.user.first_name}} <strong>{{subanswer.author.user.last_name}}</strong></p>
             </div>
             <div class="thread-content">
                 <p ng-bind-html="trustAsHtml(subanswer.text)"></p>

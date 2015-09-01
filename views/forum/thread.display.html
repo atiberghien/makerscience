@@ -46,7 +46,7 @@
                     </ul>
                     <div class="thread-author" >
                         <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
-                        <p>{{author.user.first_name}} <strong>{{author.user.last_name}}</strong>
+                        <p>{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong>
                         <span>Mis à jour le <span am-time-ago="post.parent.updated_on"></span></span></p>
                     </div>
                     <div class="thread-content">
