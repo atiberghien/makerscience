@@ -157,7 +157,7 @@
                         </section>
                     </tab>
                     <tab heading="Actus ({{projectsheet.news.length}})">
-                        <section>
+                        <section  ng-show="editable">
                             <h3>Nouvelle actu</h3>
                             <form novalidate>
                                 <input type="text" name="title" ng-model="newsData.title" placeholder="Titre de la news ..." class="full-width" required />
