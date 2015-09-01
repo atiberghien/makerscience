@@ -90,31 +90,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             $scope.activities = activityResults.objects.activities
         )
 
-        # ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults) ->
-        #     $scope.activities = objectProfileLinkResults
-        #     angular.forEach($scope.activities, (activity) ->
-        #         $scope.getObject(activity.content_type, activity.object_id).then((obj) ->
-        #             if activity.content_type == 'taggeditem'
-        #                 if obj.tag.slug of $scope.favoriteTags
-        #                     $scope.favoriteTags[obj.tag.slug]++
-        #                 else
-        #                     $scope.favoriteTags[obj.tag.slug] = 1
-        #             else if activity.content_type == 'tag'
-        #                 $scope.followedTags.push(obj)
-        #             else
-        #                 activity.content_object = obj
-        #                 if activity.content_type == 'vote'
-        #                     $scope.getObject(obj.content_type, obj.object_id).then((votedObj) ->
-        #                         activity.content_object.votedObj = votedObj
-        #                     )
-        #                 if activity.level == 41
-        #                     MakerScienceProfile.one(activity.detail).get().then((profileResult)->
-        #                         activity.mentionnedProfile = profileResult
-        #                     )
-        #         )
-        #     )
-        # )
-
         ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).then((linkedProjectResults)->
             angular.forEach(linkedProjectResults, (linkedProject) ->
                 MakerScienceProject.one().get({parent__id : linkedProject.object_id}).then((makerscienceProjectResults) ->
