@@ -51,6 +51,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
     angular.extend(this, $controller('TaggedItemCtrl', {$scope: $scope}))
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
+
         $scope.profile = makerscienceProfileResult
 
         $scope.editable = $scope.profile.can_edit
@@ -211,6 +212,8 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                     $state.go('profile.detail', {slug : makerscienceProfileResults.objects[0].slug})
                 else
                     $state.go('404')
+            , () ->
+                $state.go('profile.list')
             )
     )
 )
@@ -220,7 +223,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
 
         $scope.profile = makerscienceProfileResult
-        
+
         if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile.id != $scope.profile.id
             $state.go('profile.detail', {slug : $stateParams.slug})
 
