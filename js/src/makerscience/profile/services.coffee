@@ -64,18 +64,17 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
             $rootScope.authVars.username = $scope.username
             $rootScope.authVars.password = $scope.password
             $rootScope.loginService.submit()
-            $rootScope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
-                if newValue != oldValue
-                    $modalInstance.close()
-                    $state.go("profile.detail", {slug : $rootScope.currentMakerScienceProfile.slug})
-
-            )
         )
+
+    $rootScope.$watch('authVars.isAuthenticated', (newValue, oldValue) ->
+        if newValue == true and oldValue== false
+            $modalInstance.close()
+    )
 )
 
 module.controller('SigninPopupCtrl', ($scope, $rootScope, $modalInstance) ->
     $rootScope.$watch('authVars.isAuthenticated', (newValue, oldValue) ->
         if newValue == true and oldValue== false
-            $modalInstance.close(null)
+            $modalInstance.close()
     )
 )

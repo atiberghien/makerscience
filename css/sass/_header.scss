@@ -197,7 +197,7 @@ div.action-bar {
 			}
 		}
 	}
-	form.login {
+	form.login, div.login {
 		margin: 0 $grid-gutter-width / 2;
 		padding: 0.5em ($grid-gutter-width / 2) 0;
 		h3, p.or {

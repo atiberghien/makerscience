@@ -477,7 +477,7 @@ fieldset.phases {
 	}
 }
 
-form.login {
+form.login, div.login {
 	padding: $grid-gutter-width;
 	text-align: center;
 	background: $color-pink url("../img/bg/shape-top-bg.png") no-repeat scroll center -100px;
