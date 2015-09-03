@@ -53,6 +53,8 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
 
+        $scope.editable = $scope.profile.can_edit
+
         $rootScope.$broadcast('profile-loaded', $scope.profile)
         $rootScope.$emit('profile-loaded', $scope.profile)
 
@@ -216,7 +218,11 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
 module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $controller, $stateParams, $state, MakerScienceProfile, Notification, ObjectProfileLink) ->
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
+
         $scope.profile = makerscienceProfileResult
+        
+        if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile.id != $scope.profile.id
+            $state.go('profile.detail', {slug : $stateParams.slug})
 
         $scope.notifications = Notification.getList({recipient_id : $scope.profile.parent.user.id}).$object
 
