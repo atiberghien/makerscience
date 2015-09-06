@@ -69,6 +69,14 @@ module.controller('HomepageCtrl', ($scope, $filter, MakerScienceProject, MakerSc
     )
     MakerSciencePost.one().customGETLIST('search', {ordering: '-created_on', limit : 5}).then((makerSciencePostResults) ->
         $scope.threads =  makerSciencePostResults
+        angular.forEach($scope.threads, (thread) ->
+            $scope.getPostAuthor(thread.parent.id).then((author) ->
+                thread.author = author
+            )
+            $scope.getContributors(thread.parent.id).then((contributors) ->
+                thread.contributors = contributors
+            )
+        )
     )
 )
 

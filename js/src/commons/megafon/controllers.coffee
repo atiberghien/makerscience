@@ -32,31 +32,31 @@ module.controller("PostCreateCtrl", ($scope, $stateParams, Post, TaggedItem, Obj
 )
 module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectProfileLink, DataSharing) ->
 
-    $scope.initFromID = (postID) ->
-        Post.one(postID).get().then((postResult) ->
-            $scope.basePost =  postResult
-
-            ##contributors
-            $scope.contributors = []
-            contributorsIdx = []
-            ObjectProfileLink.one().customGET('post/'+postID, {level:31}).then((objectProfileLinkResults) ->
-                angular.forEach(objectProfileLinkResults.objects, (objectProfileLink) ->
-                    if contributorsIdx.indexOf(objectProfileLink.profile.id) == -1
-                        contributorsIdx.push(objectProfileLink.profile.id)
-                        $scope.contributors.push(objectProfileLink.profile)
-                )
+    $scope.getContributors = (postID) ->
+        ##contributors
+        $scope["contributors"+postID] = []
+        contributorsIdx = []
+        ObjectProfileLink.one().customGET('post/'+postID, {level:31}).then((objectProfileLinkResults) ->
+            angular.forEach(objectProfileLinkResults.objects, (objectProfileLink) ->
+                if contributorsIdx.indexOf(objectProfileLink.profile.id) == -1
+                    contributorsIdx.push(objectProfileLink.profile.id)
+                    $scope["contributors"+postID].push(objectProfileLink.profile)
             )
-
-            $scope.similars = []
-            TaggedItem.one().customGET("post/"+postID+"/similars").then((similarResults) ->
-                angular.forEach(similarResults, (similar) ->
-                    if similar.type == 'post'
-                        Post.one(similar.id).get().then((postResult)->
-                            $scope.similars.push(postResult)
-                        )
-                )
-            )
+            return $scope["contributors"+postID]
         )
+
+    $scope.getSimilars = (postID) ->
+        $scope["similars"+postID] = []
+        TaggedItem.one().customGET("post/"+postID+"/similars").then((similarResults) ->
+            angular.forEach(similarResults, (similar) ->
+                if similar.type == 'post'
+                    Post.one(similar.id).get().then((postResult)->
+                        $scope["similars"+postID].push(postResult)
+                    )
+            )
+            return $scope["similars"+postID]
+        )
+
 
     $scope.getPostAuthor = (postID) ->
         return ObjectProfileLink.one().customGET('post/'+postID, {level:30}).then((objectProfileLinkResults) ->
@@ -65,5 +65,21 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
             else
                 $scope["post"+postID+"Author"] = null
             return $scope["post"+postID+"Author"]
+        )
+
+    $scope.fetchAuthors = (post) ->
+        $scope.getPostAuthor(post.id).then((author)->
+            post.author = author
+            angular.forEach(post.answers, (answer) ->
+                $scope.fetchAuthors(answer)
+            )
+        )
+
+    $scope.fetchContributors = (post) ->
+        $scope.getContributors(post.id).then((contributors) ->
+            post.contributors = contributors
+            angular.forEach(post.answers, (answer) ->
+                $scope.fetchContributors(answer)
+            )
         )
 )

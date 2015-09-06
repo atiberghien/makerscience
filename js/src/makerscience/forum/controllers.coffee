@@ -25,6 +25,7 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
                                                 DataSharing, ObjectProfileLink, TaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
+    angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
     $scope.bestContributors = []
     ObjectProfileLink.one().customGET('post/best', {level:[30,31,32]}).then((profileResults) ->
@@ -49,6 +50,14 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
             $scope.threads =  makerSciencePostResults
+            angular.forEach($scope.threads, (thread) ->
+                $scope.getPostAuthor(thread.parent.id).then((author) ->
+                    thread.author = author
+                )
+                $scope.getContributors(thread.parent.id).then((contributors) ->
+                    thread.contributors = contributors
+                )
+            )
         )
 
     $scope.fetchRecentPosts()
@@ -162,20 +171,11 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
             $state.go('404')
         $scope.post = makerSciencePostResult.objects[0]
 
-        fetchAuthors = (post) ->
-            $scope.getPostAuthor(post.id).then((author)->
-                post.author = author
-                angular.forEach(post.answers, (answer) ->
-                    fetchAuthors(answer)
-                )
-            )
-
-
-        fetchAuthors($scope.post.parent)
+        $scope.fetchAuthors($scope.post.parent)
+        $scope.fetchContributors($scope.post.parent)
 
         resolveMentions($scope.post.parent)
 
-        $scope.initFromID($scope.post.parent.id)
         $scope.initCommunityCtrl('post', $scope.post.parent.id)#for community block
     )
 
@@ -206,6 +206,5 @@ module.controller("MakerSciencePostEmbedCtrl", ($scope, $controller, MakerScienc
     $scope.init = (postID) ->
         MakerSciencePost.one(postID).get().then((makerSciencePostResult)->
             $scope.post = makerSciencePostResult
-            $scope.initFromID($scope.post.parent.id)
-    )
+        )
 )
