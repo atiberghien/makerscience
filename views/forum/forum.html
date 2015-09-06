@@ -58,9 +58,10 @@
 
                 <script type="text/ng-template" id="/people-mentions.tpl">
                     <ul class="list-group user-search">
-                        <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item">
-                        <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
-                        {{person.full_name}}
+                        <li mentio-menu-item="person" ng-repeat="profile in items" class="list-group-item">
+                            <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
+                            {{profile.full_name}}
+                        </li>
                     </ul>
                 </script>
 

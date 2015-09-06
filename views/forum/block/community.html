@@ -19,7 +19,10 @@
                 </ng-pluralize>
             </tab-heading>
             <div class="member" ng-repeat="member in community | filter: {level:31}|unique:'profile_id'">
-                <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
+                <span class="avatar avatar52">
+                    <img ng-show="member.profile.avatar" src="{{$root.config.media_uri}}{{member.profile.avatar}}" class="profile img-circle">
+                    <img ng-hide="member.profile.avatar" src="/img/avatar.png" class="profile img-circle">
+                </span>
                 <div class="member-details relative">
                     <p><a ui-sref="profile.detail({slug : member.profile.id})"> {{member.profile.user.first_name}} {{member.profile.user.last_name}}</a></p>
                 </div>
@@ -35,7 +38,10 @@
                 </ng-pluralize>
             </tab-heading>
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:32}|unique:'profile_id' ">
-                <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
+                <span class="avatar avatar52">
+                    <img ng-show="member.profile.avatar" src="{{$root.config.media_uri}}{{member.profile.avatar}}" class="profile img-circle">
+                    <img ng-hide="member.profile.avatar" src="/img/avatar.png" class="profile img-circle">
+                </span>
                 <div class="member-details relative">
                     <p>{{member.profile.user.first_name}} {{member.profile.user.last_name}}</p>
                 </div>

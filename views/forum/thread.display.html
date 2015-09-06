@@ -45,7 +45,10 @@
                         <li ng-repeat="tag in post.parent.tags"><a href="">{{tag.tag.name}}</a></li>
                     </ul>
                     <div class="thread-author" >
-                        <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
+                        <span class="avatar avatar52">
+                            <img ng-show="post.parent.author.avatar" src="{{$root.config.media_uri}}{{post.parent.author.avatar}}" class="profile img-circle">
+                            <img ng-hide="post.parent.author.avatar" src="/img/avatar.png" class="profile img-circle">
+                        </span>
                         <p>{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong>
                         <span>Mis à jour le <span am-time-ago="post.parent.updated_on"></span></span></p>
                     </div>
@@ -102,9 +105,9 @@
 
                                 <script type="text/ng-template" id="/answer-mentions.tpl">
                                     <ul class="list-group user-search">
-                                        <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item" style="min-height: 55px;">
+                                        <li mentio-menu-item="person" ng-repeat="profile in items" class="list-group-item">
                                             <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
-                                            {{person.full_name}}
+                                            {{profile.full_name}}
                                         </li>
                                     </ul>
                                 </script>

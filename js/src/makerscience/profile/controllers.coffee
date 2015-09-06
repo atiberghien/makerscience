@@ -43,8 +43,48 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
     )
 )
 
+module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http, FileUploader) ->
+    uploader = $scope.uploader = new FileUploader(
+        url: config.media_uri + $scope.currentMakerScienceProfile.resource_uri + '/avatar/upload'
+        queueLimit: 2
+        headers :
+            Authorization : @$http.defaults.headers.common.Authorization
+    )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
+    uploader.filters.push(
+        name: 'imageFilter',
+        fn: (item , options) ->
+            type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|'
+            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) != -1
+    )
+
+    uploader.onAfterAddingFile = (item) ->
+        if uploader.queue.length > 1
+            uploader.removeFromQueue(0)
+        item.croppedImage = ''
+        reader = new FileReader();
+        reader.onload = (event) ->
+            $scope.$apply(()->
+                item.image = event.target.result
+            )
+        reader.readAsDataURL(item._file)
+
+    uploader.onBeforeUploadItem = (item) ->
+        blob = dataURItoBlob(item.croppedImage)
+        item._file = blob
+
+    uploader.onSuccessItem = (item, response, status, headers) ->
+        $modalInstance.close(response.avatar)
+
+    dataURItoBlob = (dataURI) ->
+        binary = atob(dataURI.split(',')[1])
+        mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+        array = []
+        array.push(binary.charCodeAt(i)) for i in [0 .. binary.length]
+
+        return new Blob([new Uint8Array(array)], {type: mimeString})
+)
+
                                             MakerScienceProfileTaggedItem, TaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
@@ -160,6 +200,15 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                 when "in" then $scope.preparedInterestTags.push({text : taggedItem.tag.name, slug: taggedItem.tag.slug, taggedItemId : taggedItem.id})
                 when "sk" then $scope.preparedSkillTags.push({text : taggedItem.tag.name, slug: taggedItem.tag.slug, taggedItemId : taggedItem.id})
         )
+
+        $scope.showAvatarPopup = () ->
+            modalInstance = $modal.open(
+                templateUrl: '/views/profile/block/avatar_uploader.html'
+                controller: 'AvatarUploaderInstanceCtrl'
+            )
+            modalInstance.result.then((avatar) ->
+                $scope.profile.parent.avatar = avatar
+            )
 
         $scope.addTagToProfile = (tag_type, tag) ->
             MakerScienceProfileTaggedItem.one().customPOST({tag : tag.text}, "makerscienceprofile/"+$scope.profile.id+"/"+tag_type, {}).then((taggedItemResult) ->

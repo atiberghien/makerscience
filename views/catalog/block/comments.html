@@ -27,7 +27,10 @@
         <div>
             <div class="comment" ng-repeat="comment in comments| orderBy:'-submit_date' | limitTo :  5" ng-class="{'flagged' : comment.flags[0]}">
                 <div class="comment-gravatar">
-                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
+                    <span class="avatar avatar40">
+                        <img ng-show="comment.user.profile.avatar" src="{{$root.config.media_uri}}{{comment.user.profile.avatar}}" class="profile img-circle">
+                        <img ng-hide="comment.user.profile.avatar" src="/img/avatar.png" class="profile img-circle">
+                    </span>
                 </div>
                 <div class="comment-content">
                     <div class="btn-group" dropdown is-open="isopen" ng-if="$root.authVars.isAuthenticated">

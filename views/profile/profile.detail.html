@@ -4,7 +4,12 @@
             <div class="row">
 
                 <div class="col-md-4">
-                    <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                    <div class="edit-buttons" ng-show="editable">
+                        <button ng-click="showAvatarPopup()">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                    </div>
+                    <ng-include src="'/views/profile/block/avatar.html'" ng-init="avatar=profile.parent.avatar"></ng-include>
 
                     <h1>{{profile.full_name}}</h1>
                     <div class="relative">

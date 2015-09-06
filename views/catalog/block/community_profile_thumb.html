@@ -1,5 +1,8 @@
-<ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
-<p>{{member.profile.user.first_name}} {{member.profile.user.last_name}}</p>
+<span class="avatar avatar52">
+    <img ng-show="member.profile.avatar" src="{{config.media_uri}}{{member.profile.avatar}}" class="profile img-circle">
+    <img ng-hide="member.profile.avatar" src="/img/avatar.png" class="profile img-circle">
+</span>
+<p><a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a></p>
 <div ng-if="member.isValidated" class="member-details relative">
     <div class="edit-buttons" ng-show="editable || member.profile.id == currentMakerScienceProfile.parent.id">
         <button ng-click="DetailBtnForm.$show()" ng-hide="DetailBtnForm.$visible">

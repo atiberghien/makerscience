@@ -4,7 +4,10 @@
             <li><a href="">Signaler un abus</a></li>
         </ul> -->
         <div class="thread-author">
-            <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+            <span class="avatar avatar52">
+                <img ng-show="answer.author.avatar" src="{{$root.config.media_uri}}{{answer.author.avatar}}" class="profile img-circle">
+                <img ng-hide="answer.author.avatar" src="/img/avatar.png" class="profile img-circle">
+            </span>
             <p>{{answer.author.user.first_name}} <strong>{{answer.author.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
         </div>
         <div class="thread-content">
@@ -57,9 +60,9 @@
 
             <script type="text/ng-template" id="/subAnswer-mentions.tpl">
                 <ul class="list-group user-search">
-                    <li mentio-menu-item="person" ng-repeat="person in items" class="list-group-item" style="min-height: 55px;">
-                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
-                    {{person.full_name}}
+                    <li mentio-menu-item="person" ng-repeat="profile in items" class="list-group-item">
+                        <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
+                        {{profile.full_name}}
                     </li>
                 </ul>
             </script>
@@ -74,7 +77,10 @@
         <div class="thread-answer answer-child" ng-repeat="subanswer in answer.answers| orderBy : posted_on">
             <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
             <div class="thread-author">
-                <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                <span class="avatar avatar52">
+                    <img ng-show="subanswer.author.avatar" src="{{$root.config.media_uri}}{{subanswer.author.avatar}}" class="profile img-circle">
+                    <img ng-hide="subanswer.author.avatar" src="/img/avatar.png" class="profile img-circle">
+                </span>
                 <p>{{subanswer.author.user.first_name}} <strong>{{subanswer.author.user.last_name}}</strong></p>
             </div>
             <div class="thread-content">
