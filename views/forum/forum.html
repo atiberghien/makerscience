@@ -152,11 +152,11 @@
                 <div class="forum-sidebar-dark">
                     <h3>Les membres les plus actifs</h3>
                     <ul class="forum-top-users" >
-                        <li ng-repeat="contributor in bestContributors">
+                        <li ng-repeat="profile in bestContributors">
                             <div>
-                                <a ui-sref="profile.detail({slug:contributor.slug})">
+                                <a ui-sref="profile.detail({slug:profile.slug})">
                                     <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
-                                    {{contributor.parent.user.first_name}} <strong>{{contributor.parent.user.last_name}}</strong>
+                                    {{profile.parent.user.first_name}} <strong>{{profile.parent.user.last_name}}</strong>
                                 </a>
                             </div>
                         </li>
