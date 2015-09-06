@@ -4,7 +4,7 @@ module.run(['$anchorScroll', ($anchorScroll) ->
   $anchorScroll.yOffset = 50
 ])
 
-module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $controller, leafletData, leafletEvents, geocoderService, MakerScienceProfile, MakerScienceProjectLight, ObjectProfileLink) ->
+module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $controller, leafletData, leafletEvents, geocoderService, MakerScienceProfileLight, MakerScienceProjectLight, ObjectProfileLink) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.gotoAnchor = (x) ->
@@ -33,16 +33,19 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
         markers : {}
     )
 
-    MakerScienceProfile.one().customGETLIST('search', $scope.params).then((profileResults) ->
+    MakerScienceProfileLight.one().customGETLIST('search', $scope.params).then((profileResults) ->
         angular.forEach(profileResults, (profile) ->
-            geocoderService.getLatLong(profile.location.address.address_locality).then((latlng)->
+            geocoderService.getLatLong(profile.address_locality).then((latlng)->
                 icon =
-                    iconUrl: '/img/avatar.png'
                     shadowUrl: '/img/users/user-shadow.png'
                     iconSize: [30, 30]
                     shadowSize:   [44, 44]
                     iconAnchor:   [15, 15]
                     shadowAnchor: [22, 22]
+                if profile.avatar
+                    icon["iconUrl"] = $scope.config.media_uri + profile.avatar
+                else
+                    icon["iconUrl"] = '/img/avatar.png'
 
                 $scope.markers[profile.id]=
                     slug : profile.slug
@@ -61,6 +64,10 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
                         shadowSize:   [67, 67]
                         iconAnchor:   [25, 25]
                         shadowAnchor: [33, 33]
+                if profile.avatar
+                    $scope.markers[profile.id]["icon_hover"]["iconUrl"] = $scope.config.media_uri + profile.avatar
+                else
+                    $scope.markers[profile.id]["icon_hover"]["iconUrl"] = '/img/avatar.png'
             )
         )
     )
@@ -68,13 +75,13 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
         marker = $scope.markers[args.modelName]
         marker.icon = marker.icon_hover
 
-        MakerScienceProfile.one(marker.slug).get().then((profileResult)->
+        MakerScienceProfileLight.one(marker.slug).get().then((profileResult)->
             $scope.spottedProfile = profileResult
             $scope.spottedProfile.projects = []
 
-            ObjectProfileLink.getList({level : 0, profile__id : $scope.spottedProfile.parent.id}).then((linkedProjectResults)->
+            ObjectProfileLink.getList({level : 0, profile__id : $scope.spottedProfile.parent_id}).then((linkedProjectResults)->
                 angular.forEach(linkedProjectResults, (linkedProject) ->
-                    MakerScienceProjectLight.one().get({parent__id : linkedProject.object_id}).then((makerscienceProjectResults) ->
+                    MakerScienceProjectLight.one().get({id : linkedProject.object_id}).then((makerscienceProjectResults) ->
                         if makerscienceProjectResults.objects.length == 1
                             $scope.spottedProfile.projects.push(makerscienceProjectResults.objects[0])
                     )
