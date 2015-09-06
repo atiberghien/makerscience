@@ -12,7 +12,7 @@
             <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Les profils comportant ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="profile in profiles">
-                    <ng-include src="'/views/profile/block/profile_thumb.html'"></ng-include>
+                    <ng-include src="'/views/profile/block/profile_thumb_light.html'"></ng-include>
                 </div>
                 <div class="box box-solo box-pink">
                     <div>
@@ -60,7 +60,7 @@
             <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Ils ont utilisé ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="profile in taggerProfiles| orderBy:'-taggingDate' | unique:'id'">
-                    <ng-include src="'/views/profile/block/profile_thumb.html'"></ng-include>
+                    <ng-include src="'/views/profile/block/profile_thumb_light.html'"></ng-include>
                 </div>
                 <div class="box box-solo box-pink">
                     <div>

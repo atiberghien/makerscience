@@ -1,7 +1,7 @@
 module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'makerscience.base.services',
                                                              'commons.accounts.services', 'makerscience.base.controllers'])
 
-module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfile, MakerScienceProfileTaggedItem) ->
+module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfileLight, MakerScienceProfileTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.fetchRecentProfiles = () ->
@@ -24,7 +24,7 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
         )
 
     $scope.refreshList = ()->
-        MakerScienceProfile.one().customGETLIST('search', $scope.params).then((makerScienceProfileResults) ->
+        MakerScienceProfileLight.one().customGETLIST('search', $scope.params).then((makerScienceProfileResults) ->
             meta = makerScienceProfileResults.metadata
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
@@ -85,7 +85,7 @@ module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http
         return new Blob([new Uint8Array(array)], {type: mimeString})
 )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal, MakerScienceProfile, MakerScienceProjectLight, MakerScienceResourceLight,
+module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal, MakerScienceProfile, MakerScienceProfileLight, MakerScienceProjectLight, MakerScienceResourceLight,
                                             MakerScienceProfileTaggedItem, TaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
@@ -146,13 +146,18 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                             else if objectProfileLink.level == 2
                                 $scope.fan_projects.push(makerscienceProjectResults.objects[0])
                     )
-                if  objectProfileLink.content_type == 'makerscienceresource'
+                else if  objectProfileLink.content_type == 'makerscienceresource'
                     MakerScienceResourceLight.one().get({parent__id : objectProfileLink.object_id}).then((makerscienceResourceResults) ->
                         if makerscienceResourceResults.objects.length == 1
                             if objectProfileLink.level == 10
                                 $scope.member_resources.push(makerscienceResourceResults.objects[0])
                             else if objectProfileLink.level == 12
                                 $scope.fan_resources.push(makerscienceResourceResults.objects[0])
+                    )
+                else if objectProfileLink.content_type == 'makerscienceprofile' && objectProfileLink.level == 40
+                    MakerScienceProfileLight.one().get({id : objectProfileLink.object_id}).then((profileResults) ->
+                        if profileResults.objects.length == 1
+                            $scope.friends.push(profileResults.objects[0])
                     )
             )
         )
@@ -182,20 +187,10 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             )
         )
 
-        ## FIXME
-        ObjectProfileLink.getList({content_type:'makerscienceprofile', profile__id : $scope.profile.parent.id, level : 40}).then((linkedFriendResults)->
-            angular.forEach(linkedFriendResults, (linkedFriend) ->
-                MakerScienceProfile.one().get({id : linkedFriend.object_id}).then((profileResults) ->
-                    if profileResults.objects.length == 1
-                        $scope.friends.push(profileResults.objects[0])
-                )
-            )
-        )
-
         TaggedItem.one().customGET("makerscienceprofile/"+$scope.profile.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
                 if similar.type == 'makerscienceprofile'
-                    $scope.similars.push(MakerScienceProfile.one(similar.id).get().$object)
+                    $scope.similars.push(MakerScienceProfileLight.one(similar.id).get().$object)
             )
         )
 

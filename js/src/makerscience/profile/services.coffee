@@ -4,6 +4,9 @@ module = angular.module("makerscience.profile.services", ['commons.accounts.serv
 module.factory('MakerScienceProfile', (Restangular) ->
     return Restangular.service('makerscience/profile')
 )
+module.factory('MakerScienceProfileLight', (Restangular) ->
+    return Restangular.service('makerscience/profilelight')
+)
 
 module.factory('MakerScienceProfileTaggedItem', (Restangular) ->
     return Restangular.service('makerscience/profiletaggeditem')

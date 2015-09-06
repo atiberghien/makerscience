@@ -56,7 +56,7 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
             )
 )
 
-module.controller('HomepageCtrl', ($scope, $filter, $controller, MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfile, MakerSciencePost) ->
+module.controller('HomepageCtrl', ($scope, $filter, $controller, MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePost) ->
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
     MakerScienceProjectLight.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceProjectResults) ->
@@ -65,7 +65,7 @@ module.controller('HomepageCtrl', ($scope, $filter, $controller, MakerSciencePro
     MakerScienceResourceLight.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceResourceResults) ->
         $scope.resources =  makerScienceResourceResults
     )
-    MakerScienceProfile.one().customGETLIST('search', {ordering: '-date_joined', limit : 3}).then((makerScienceProfileResults) ->
+    MakerScienceProfileLight.one().customGETLIST('search', {ordering: '-date_joined', limit : 3}).then((makerScienceProfileResults) ->
         $scope.profiles =  makerScienceProfileResults
     )
     MakerSciencePost.one().customGETLIST('search', {ordering: '-created_on', limit : 5}).then((makerSciencePostResults) ->
@@ -148,7 +148,7 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
 
 
 module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink,
-                                            MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfile, MakerSciencePost) ->
+                                            MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePost) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
 
@@ -161,7 +161,7 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
                     $scope.associatedTags.push(taggedItem.tag.slug)
             )
 
-        MakerScienceProfile.one().customGETLIST('search', params).then((makerScienceProfileResults) ->
+        MakerScienceProfileLight.one().customGETLIST('search', params).then((makerScienceProfileResults) ->
             angular.forEach(makerScienceProfileResults, (profile) ->
                 TaggedItem.one().customGET("makerscienceprofile/" + profile.id).then(findRelatedTag)
             )
@@ -192,7 +192,7 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
                 ObjectProfileLink.one().customGET('taggeditem/'+taggedItem.id).then((objectProfileLinkResults) ->
                     if objectProfileLinkResults.objects.length > 0
                         genericProfileId = objectProfileLinkResults.objects[0].profile.id
-                        MakerScienceProfile.one().get({'parent__id' : genericProfileId}).then((makerScienceProfileResults) ->
+                        MakerScienceProfileLight.one().get({'parent__id' : genericProfileId}).then((makerScienceProfileResults) ->
                             if makerScienceProfileResults.objects.length > 0
                                 tagger = makerScienceProfileResults.objects[0]
                                 tagger.taggingDate = objectProfileLinkResults.objects[0].created_on
