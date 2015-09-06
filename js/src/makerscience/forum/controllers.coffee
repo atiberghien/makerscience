@@ -21,7 +21,7 @@ module.controller("MentionCtrl", ($scope, MakerScienceProfile) ->
 
 
 module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
-                                                MakerSciencePost, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
+                                                MakerSciencePostLight, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
                                                 DataSharing, ObjectProfileLink, TaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
@@ -45,16 +45,16 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
         $scope.refreshList()
 
     $scope.refreshList = () ->
-        MakerSciencePost.one().customGETLIST('search', $scope.params).then((makerSciencePostResults) ->
+        MakerSciencePostLight.one().customGETLIST('search', $scope.params).then((makerSciencePostResults) ->
             meta = makerSciencePostResults.metadata
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
             $scope.threads =  makerSciencePostResults
             angular.forEach($scope.threads, (thread) ->
-                $scope.getPostAuthor(thread.parent.id).then((author) ->
+                $scope.getPostAuthor(thread.parent_id).then((author) ->
                     thread.author = author
                 )
-                $scope.getContributors(thread.parent.id).then((contributors) ->
+                $scope.getContributors(thread.parent_id).then((contributors) ->
                     thread.contributors = contributors
                 )
             )
@@ -197,14 +197,5 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
             resolveMentions(newAnswer)
             parent.answers_count++
             parent.answers.push(newAnswer)
-        )
-)
-
-module.controller("MakerSciencePostEmbedCtrl", ($scope, $controller, MakerSciencePost) ->
-    angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
-
-    $scope.init = (postID) ->
-        MakerSciencePost.one(postID).get().then((makerSciencePostResult)->
-            $scope.post = makerSciencePostResult
         )
 )

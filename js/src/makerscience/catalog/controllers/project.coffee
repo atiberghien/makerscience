@@ -146,7 +146,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 )
 
 module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window,
-                                                    MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePost,
+                                                    MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePostLight,
                                                     MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
@@ -154,6 +154,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
     $controller('VoteCtrl', {$scope: $scope})
+    $controller('PostCtrl', {$scope: $scope})
 
     angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
     angular.extend(this, $controller('CommentCtrl', {$scope: $scope}))
@@ -191,7 +192,15 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.linked_post = []
         angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
-            $scope.linked_post.push(MakerSciencePost.one(makerSciencePostID).get().$object)
+            MakerSciencePostLight.one(makerSciencePostID).get().then((makerSciencePostResult)->
+                $scope.getPostAuthor(makerSciencePostResult.parent_id).then((author) ->
+                    makerSciencePostResult.author = author
+                )
+                $scope.getContributors(makerSciencePostResult.parent_id).then((contributors) ->
+                    makerSciencePostResult.contributors = contributors
+                )
+                $scope.linked_post.push(makerSciencePostResult)
+            )
         )
 
         $scope.newsData = {}

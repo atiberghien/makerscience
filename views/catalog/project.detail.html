@@ -184,7 +184,7 @@
                     <tab heading="Discussions ({{linked_post.length}})">
                         <section>
                             <div ng-repeat="post in linked_post">
-                                <ng-include ng-if="post.id" src="'/views/forum/block/thread.html'"></ng-include>
+                                <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
                             </div>
                         </section>
                     </tab>
@@ -198,10 +198,10 @@
                             <carousel id="carousel-needs" class="carousel-no-indicators carousel-text-links">
                                 <slide class="needs-idea" ng-repeat="post in linked_post|filter:{post_type : 'need'}">
                                     <ul class="actions">
-                                        <li><a ui-sref="question({slug:post.parent.slug})"><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
+                                        <li><a ui-sref="question({slug:post.slug})"><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
                                     </ul>
-                                    <h4>{{post.parent.title}}</h4>
-                                    <p ng-bind-html="trustAsHtml(post.parent.text)"></p>
+                                    <h4>{{post.title}}</h4>
+                                    <p ng-bind-html="trustAsHtml(post.text)"></p>
                                 </slide>
                             </carousel>
                         </div><!-- .needs -->

@@ -85,11 +85,15 @@ module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http
         return new Blob([new Uint8Array(array)], {type: mimeString})
 )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal, MakerScienceProfile, MakerScienceProfileLight, MakerScienceProjectLight, MakerScienceResourceLight,
-                                            MakerScienceProfileTaggedItem, TaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
+module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal,
+                                            MakerScienceProfile, MakerScienceProfileLight,
+                                            MakerScienceProjectLight, MakerScienceResourceLight,
+                                            MakerSciencePost, MakerSciencePostLight,
+                                            MakerScienceProfileTaggedItem, TaggedItem, Post, ObjectProfileLink, Place) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
     angular.extend(this, $controller('TaggedItemCtrl', {$scope: $scope}))
+    angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
 
@@ -137,9 +141,8 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         #Current profile is a member of a project team
         ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults)->
             angular.forEach(objectProfileLinkResults, (objectProfileLink) ->
-                console.log(objectProfileLink.content_type)
                 if  objectProfileLink.content_type == 'makerscienceproject'
-                    MakerScienceProjectLight.one().get({parent__id : objectProfileLink.object_id}).then((makerscienceProjectResults) ->
+                    MakerScienceProjectLight.one().get({id : objectProfileLink.object_id}).then((makerscienceProjectResults) ->
                         if makerscienceProjectResults.objects.length == 1
                             if objectProfileLink.level == 0
                                 $scope.member_projects.push(makerscienceProjectResults.objects[0])
@@ -147,7 +150,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                                 $scope.fan_projects.push(makerscienceProjectResults.objects[0])
                     )
                 else if  objectProfileLink.content_type == 'makerscienceresource'
-                    MakerScienceResourceLight.one().get({parent__id : objectProfileLink.object_id}).then((makerscienceResourceResults) ->
+                    MakerScienceResourceLight.one().get({id : objectProfileLink.object_id}).then((makerscienceResourceResults) ->
                         if makerscienceResourceResults.objects.length == 1
                             if objectProfileLink.level == 10
                                 $scope.member_resources.push(makerscienceResourceResults.objects[0])
@@ -159,31 +162,39 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                         if profileResults.objects.length == 1
                             $scope.friends.push(profileResults.objects[0])
                     )
-            )
-        )
-
-        ObjectProfileLink.getList({content_type:'post', profile__id : $scope.profile.parent.id}).then((linkedPostResults)->
-            angular.forEach(linkedPostResults, (linkedPost) ->
-                MakerSciencePost.one().get({parent__id : linkedPost.object_id}).then((makersciencePostResults) ->
-                    if makersciencePostResults.objects.length == 1
-                        post = makersciencePostResults.objects[0]
-                        if linkedPost.level == 30 && $scope.authored_post.indexOf(post) == -1
-                            $scope.authored_post.push(post)
-                        else if linkedPost.level == 33 && $scope.liked_post.indexOf(post) == -1
-                            $scope.liked_post.push(post)
-                        else if linkedPost.level == 32 && $scope.followed_post.indexOf(post) == -1
-                            $scope.followed_post.push(post)
-                    else
-                        #anwers and subanswers have no related MakerSciencePost object
-                        if linkedPost.level == 31
-                            Post.one(linkedPost.object_id).customGET("root").then((root) ->
-                                MakerSciencePost.one().get({parent__id : root.id}).then((makersciencePostResults) ->
-                                    post = makersciencePostResults.objects[0]
-                                    if $scope.contributed_post.indexOf(post) == -1
-                                        $scope.contributed_post.push(post)
-                                )
+                else if objectProfileLink.content_type == 'post'
+                    MakerSciencePostLight.one().get({parent_id : objectProfileLink.object_id}).then((makersciencePostResults) ->
+                        if makersciencePostResults.objects.length == 1
+                            post = makersciencePostResults.objects[0]
+                            $scope.getPostAuthor(post.parent_id).then((author) ->
+                                post.author = author
                             )
-                )
+                            $scope.getContributors(post.parent_id).then((contributors) ->
+                                post.contributors = contributors
+                            )
+                            if objectProfileLink.level == 30 && $scope.authored_post.indexOf(post) == -1
+                                $scope.authored_post.push(post)
+                            else if objectProfileLink.level == 33 && $scope.liked_post.indexOf(post) == -1
+                                $scope.liked_post.push(post)
+                            else if objectProfileLink.level == 32 && $scope.followed_post.indexOf(post) == -1
+                                $scope.followed_post.push(post)
+                        else
+                            #anwers and subanswers have no related MakerSciencePost object
+                            if objectProfileLink.level == 31
+                                Post.one(objectProfileLink.object_id).customGET("root").then((root) ->
+                                    MakerSciencePostLight.one().get({parent_id : root.id}).then((makersciencePostResults) ->
+                                        post = makersciencePostResults.objects[0]
+                                        $scope.getPostAuthor(post.parent_id).then((author) ->
+                                            post.author = author
+                                        )
+                                        $scope.getContributors(post.parent_id).then((contributors) ->
+                                            post.contributors = contributors
+                                        )
+                                        if $scope.contributed_post.indexOf(post) == -1
+                                            $scope.contributed_post.push(post)
+                                    )
+                                )
+                    )
             )
         )
 
