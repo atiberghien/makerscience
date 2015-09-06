@@ -2,7 +2,7 @@ module = angular.module("makerscience.catalog.controllers.project", ['makerscien
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
-module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProject, StaticContent, MakerScienceProjectTaggedItem) ->
+module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProjectLight, StaticContent, MakerScienceProjectTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.fetchRecentProjects = () ->
@@ -43,7 +43,7 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
         )
 
     $scope.refreshList = ()->
-        return MakerScienceProject.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
+        return MakerScienceProjectLight.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
             meta = makerScienceProjectResults.metadata
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
@@ -146,7 +146,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 )
 
 module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window,
-                                                    MakerScienceProject, MakerScienceResource,  MakerSciencePost,
+                                                    MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePost,
                                                     MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
@@ -172,13 +172,13 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.initCommunityCtrl("makerscienceproject", $scope.projectsheet.id)
         $scope.initCommentCtrl("makerscienceproject", $scope.projectsheet.id)
 
-        $scope.linkedResources = angular.copy($scope.projectsheet.linked_resources)
+        $scope.linkedResources = $scope.projectsheet.linked_resources
 
         $scope.similars = []
         TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
                 if similar.type == 'makerscienceproject'
-                    $scope.similars.push(MakerScienceProject.one(similar.id).get().$object)
+                    $scope.similars.push(MakerScienceProjectLight.one(similar.id).get().$object)
             )
         )
 

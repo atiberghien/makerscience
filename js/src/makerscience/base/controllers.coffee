@@ -56,12 +56,13 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
             )
 )
 
-module.controller('HomepageCtrl', ($scope, $filter, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
+module.controller('HomepageCtrl', ($scope, $filter, $controller, MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfile, MakerSciencePost) ->
+    angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
-    MakerScienceProject.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceProjectResults) ->
+    MakerScienceProjectLight.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceProjectResults) ->
         $scope.projects =  makerScienceProjectResults
     )
-    MakerScienceResource.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceResourceResults) ->
+    MakerScienceResourceLight.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceResourceResults) ->
         $scope.resources =  makerScienceResourceResults
     )
     MakerScienceProfile.one().customGETLIST('search', {ordering: '-date_joined', limit : 3}).then((makerScienceProfileResults) ->
@@ -146,7 +147,8 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
 )
 
 
-module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink, MakerScienceProject, MakerScienceResource, MakerScienceProfile, MakerSciencePost) ->
+module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink,
+                                            MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfile, MakerSciencePost) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
 
@@ -165,13 +167,13 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
             )
             $scope.profiles = makerScienceProfileResults
         )
-        MakerScienceProject.one().customGETLIST('search', params).then((makerScienceProjectResults) ->
+        MakerScienceProjectLight.one().customGETLIST('search', params).then((makerScienceProjectResults) ->
             angular.forEach(makerScienceProjectResults, (project) ->
                 TaggedItem.one().customGET("makerscienceproject/" + project.id).then(findRelatedTag)
             )
             $scope.projects = makerScienceProjectResults
         )
-        MakerScienceResource.one().customGETLIST('search', params).then((makerScienceResourceResults) ->
+        MakerScienceResourceLight.one().customGETLIST('search', params).then((makerScienceResourceResults) ->
             angular.forEach(makerScienceResourceResults, (resource) ->
                 TaggedItem.one().customGET("makerscienceresource/" + resource.id).then(findRelatedTag)
             )

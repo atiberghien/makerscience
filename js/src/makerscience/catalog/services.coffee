@@ -10,6 +10,15 @@ module.factory('MakerScienceResource', (Restangular) ->
     return Restangular.service('makerscience/resource')
 )
 
+module.factory('MakerScienceProjectLight', (Restangular) ->
+    return Restangular.service('makerscience/projectlight')
+)
+
+module.factory('MakerScienceResourceLight', (Restangular) ->
+    return Restangular.service('makerscience/resourcelight')
+)
+
+
 module.factory('MakerScienceProjectTaggedItem', (Restangular) ->
     return Restangular.service('makerscience/projecttaggeditem')
 )

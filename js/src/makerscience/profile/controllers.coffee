@@ -85,6 +85,7 @@ module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http
         return new Blob([new Uint8Array(array)], {type: mimeString})
 )
 
+module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal, MakerScienceProfile, MakerScienceProjectLight, MakerScienceResourceLight,
                                             MakerScienceProfileTaggedItem, TaggedItem, Post, MakerSciencePost, ObjectProfileLink, Place) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
@@ -133,23 +134,26 @@ module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http
             $scope.activities = activityResults.objects.activities
         )
 
-        ObjectProfileLink.getList({content_type:'project', profile__id : $scope.profile.parent.id}).then((linkedProjectResults)->
-            angular.forEach(linkedProjectResults, (linkedProject) ->
-                MakerScienceProject.one().get({parent__id : linkedProject.object_id}).then((makerscienceProjectResults) ->
-                    if makerscienceProjectResults.objects.length == 1 #FIXME Why this test ??? in case of MKS project and commons project mismatch
-                        if linkedProject.level == 0
-                            $scope.member_projects.push(makerscienceProjectResults.objects[0])
-                        else if linkedProject.level == 2
-                            $scope.fan_projects.push(makerscienceProjectResults.objects[0])
-                    else
-                        MakerScienceResource.one().get({parent__id : linkedProject.object_id}).then((makerscienceResourceResults) ->
-                            if makerscienceResourceResults.objects.length == 1#FIXME Why this test
-                                if linkedProject.level == 10
-                                    $scope.member_resources.push(makerscienceResourceResults.objects[0])
-                                else if linkedProject.level == 12
-                                    $scope.fan_resources.push(makerscienceResourceResults.objects[0])
-                        )
-                )
+        #Current profile is a member of a project team
+        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults)->
+            angular.forEach(objectProfileLinkResults, (objectProfileLink) ->
+                console.log(objectProfileLink.content_type)
+                if  objectProfileLink.content_type == 'makerscienceproject'
+                    MakerScienceProjectLight.one().get({parent__id : objectProfileLink.object_id}).then((makerscienceProjectResults) ->
+                        if makerscienceProjectResults.objects.length == 1
+                            if objectProfileLink.level == 0
+                                $scope.member_projects.push(makerscienceProjectResults.objects[0])
+                            else if objectProfileLink.level == 2
+                                $scope.fan_projects.push(makerscienceProjectResults.objects[0])
+                    )
+                if  objectProfileLink.content_type == 'makerscienceresource'
+                    MakerScienceResourceLight.one().get({parent__id : objectProfileLink.object_id}).then((makerscienceResourceResults) ->
+                        if makerscienceResourceResults.objects.length == 1
+                            if objectProfileLink.level == 10
+                                $scope.member_resources.push(makerscienceResourceResults.objects[0])
+                            else if objectProfileLink.level == 12
+                                $scope.fan_resources.push(makerscienceResourceResults.objects[0])
+                    )
             )
         )
 
@@ -254,6 +258,7 @@ module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http
             MakerScienceProfile.one(makerscienceProfileSlug).remove()
             $rootScope.loginService.logout()
             $state.go("home", {})
+
     , (response) ->
         if response.status == 404
             MakerScienceProfile.one().get({parent__id : $stateParams.slug}).then((makerscienceProfileResults) ->

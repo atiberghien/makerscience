@@ -198,12 +198,7 @@
             <ul class="boxes boxes-medium boxes-spaced">
                 <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
                 <li class="box" ng-repeat="resource in similars">
-                    <a ui-sref="resource.detail({ slug: resource.parent.slug })">
-                        <h3>{{resource.parent.begin_date|date : format : shortdate}}<img src="/img/icons/project/project-orange.png" alt="Orange project" /></h3>
-                        <h4>{{resource.parent.baseline}}</h4>
-                        <h5>{{resource.parent.title}}</h5>
-                        <img src="/img/bacasable.jpg" alt="Image background" />
-                    </a>
+                    <ng-include src="'/views/catalog/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
                 </li
                 ><li class="box box-solo box-green">
                     <div>
