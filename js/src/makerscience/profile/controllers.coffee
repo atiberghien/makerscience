@@ -269,6 +269,8 @@ module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http
 
 module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $controller, $stateParams, $state, MakerScienceProfile, Notification, ObjectProfileLink) ->
 
+    angular.extend(this, $controller('NotificationCtrl', {$scope: $scope}))
+
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
 
         $scope.profile = makerscienceProfileResult
@@ -276,7 +278,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
         if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile.id != $scope.profile.id
             $state.go('profile.detail', {slug : $stateParams.slug})
 
-        $scope.notifications = Notification.getList({recipient_id : $scope.profile.parent.user.id}).$object
+        # $scope.notifications = Notification.getList({recipient_id : $scope.profile.parent.user.id}).$object
 
         MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities').then((activityResults)->
             $scope.activities = activityResults.objects
