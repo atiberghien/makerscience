@@ -586,3 +586,30 @@ form.mapsearch {
 section.video form p:first-child {
 	margin: $grid-gutter-width / 2 0;
 }
+
+button.search-advanced {
+	padding: 1em;
+	font-size: 1.25em;
+	text-transform: uppercase;
+}
+form#search-advanced {
+	margin-bottom: $grid-gutter-width;
+	padding: $grid-gutter-width;
+	padding-bottom: 0;
+	background-color: #fff;
+	label {
+		width: 20em;
+		margin-bottom: $grid-gutter-width;
+	}
+	input[type="text"] {
+		width: 50em;
+		padding: 0.5em;
+		border: 1px solid $color-bg;
+		background-color: $color-bg;
+	}
+	input + label {
+		width: auto;
+		margin-left: 0.5em;
+		margin-right: 2em;
+	}
+}

@@ -1,11 +1,28 @@
 <div id="intro" class="intro-tags" style="background-image: url('./img/bg/header-map.jpg')">
-    <h1>Tous les objets relatifs à</h1>
-    <h2>« {{query}} »</h2>
+    <h1>Le numérique et l'innovation</h1>
+    <h2>Au coeur de tous <u>les projets</u></h2>
 </div><!-- #intro -->
 
 <div class="row container">
     <div id="content" class="tags">
         <div class="col-md-12">
+            <h1>Résultat de la recherche "{{query}}"</h1>
+            <button class="button search-advanced">Recherche avancée</button>
+            <form id="search-advanced">
+                <label for="words-all">Tous les mots:</label>
+                <input id="words-all" type="text" name="words-all" placeholder="Conférence, " />
+                <br />
+                <label for="exact-expression">Les expressions exactes:</label>
+                <input id="exact-expression" type="text" name="exact-expression" placeholder="Conférence sur la science, " />
+                <br />
+                <label for="word-none">Aucun de ces mots:</label>
+                <input id="word-none" type="text" name="word-none" placeholder="Conférence, " />
+                <br />
+                <label>Recherche parmi ces champs:</label>
+                <input id="title" type="radio" name="amongst" value="title" /> <label for="title">Titre / Nom / sous-titre</label>
+                <input id="tag" type="radio" name="amongst" value="tag" /> <label for="tag">Tag</label>
+                <input id="everything" type="radio" name="amongst" value="everything" /> <label for="everything">Tout le contenu</label>
+            </form>
             <ng-include src="'/views/base/multiple_object_listing.html'"></ng-include>
         </div><!-- .col-md-12 -->
     </div><!-- #content -->
