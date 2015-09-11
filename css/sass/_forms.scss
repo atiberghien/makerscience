@@ -546,6 +546,12 @@ form.login, div.login {
 	}
 }
 
+.home-slide {
+	form.login {
+		background: transparent;
+	}
+}
+
 button.close-login {
 	position: absolute;
 	right: $grid-gutter-width;
