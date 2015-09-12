@@ -152,7 +152,7 @@
                 <div class="forum-sidebar-dark">
                     <h3>Les membres les plus actifs</h3>
                     <ul class="forum-top-users" >
-                        <li ng-repeat="profile in bestContributors">
+                        <li ng-repeat="profile in bestContributors | limitTo : 5">
                             <div>
                                 <a ui-sref="profile.detail({slug:profile.slug})">
                                     <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
