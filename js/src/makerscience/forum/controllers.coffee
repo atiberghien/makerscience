@@ -19,12 +19,93 @@ module.controller("MentionCtrl", ($scope, MakerScienceProfile) ->
         return "@" + mentionnedProfile.slug
 )
 
+module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, $filter, MakerSciencePost, MakerScienceProfile, ObjectProfileLink,  MakerScienceProjectLight, MakerScienceResourceLight, TaggedItem) ->
+    angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
+
+    $scope.allAvailableItems = []
+
+    MakerScienceProjectLight.getList().then((projectResults)->
+        angular.forEach(projectResults, (project) ->
+            $scope.allAvailableItems.push(
+                fullObject: project
+                title : "[Projet] " + project.title
+                type : 'project'
+            )
+        )
+    )
+
+    MakerScienceResourceLight.getList().then((resourceResults)->
+        angular.forEach(resourceResults, (resource) ->
+            $scope.allAvailableItems.push(
+                fullObject: resource
+                title : "[Expérence] " + resource.title
+                type : 'resource'
+            )
+        )
+    )
+
+    $scope.linkedItems= []
+    $scope.delLinkedItem = (item) ->
+        itemIndex = $scope.linkedItems.indexOf(item)
+        $scope.linkedItems.pop(itemIndex)
+
+    $scope.addLinkedItem = (newLinkedItem) ->
+        item = newLinkedItem.originalObject
+        if newLinkedItem && $scope.linkedItems.indexOf(item) < 0
+            $scope.linkedItems.push(item)
+            $scope.newLinkedItem = null
+            $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
+
+    $scope.saveMakersciencePost = (newPost, parent, authorProfile) ->
+        $scope.savePost(newPost, parent, authorProfile).then((newPost)->
+            makerSciencePost =
+                parent : newPost.resource_uri,
+                post_type : newPost.type || 'message'
+                linked_projects : newPost.linked_projects || []
+                linked_resources : []
+
+            angular.forEach($scope.questionTags, (tag)->
+                TaggedItem.one().get({content_type : 'post', object_id : newPost.id, tag__slug : tag.text}).then((taggedItemResults) ->
+                    if taggedItemResults.objects.length == 1
+                        taggedItem = taggedItemResults.objects[0]
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 50,
+                            detail : '',
+                            isValidated:true
+                        , 'taggeditem/'+taggedItem.id)
+                )
+            )
+
+            angular.forEach($scope.linkedItems, (item) ->
+                makerSciencePost["linked_"+item.type+"s"].push(item.fullObject.resource_uri)
+            )
+
+            return MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
+                mentions = newMakerSciencePostResult.parent.text.match(/\B@[a-z0-9_-]+/gi)
+                angular.forEach(mentions, (mention) ->
+                    profileSlug = mention.substr(1)
+                    MakerScienceProfile.one().get({slug:profileSlug}).then((makerScienceProfileResults) ->
+                        if makerScienceProfileResults.objects.length == 1
+                            ObjectProfileLink.one().customPOST(
+                                profile_id: $scope.currentMakerScienceProfile.parent.id,
+                                level: 41,
+                                detail : profileSlug,
+                                isValidated:true
+                            , 'makersciencepost/'+newMakerSciencePostResult.id)
+                    )
+                )
+                return false
+            )
+        )
+)
+
 
 module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
-                                                MakerSciencePostLight, MakerScienceProfile, MakerScienceProject, MakerScienceResource,
+                                                MakerSciencePostLight, MakerScienceProfile,
                                                 DataSharing, ObjectProfileLink, TaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
-    angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
+    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
     $scope.bestContributors = []
@@ -61,84 +142,6 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
         )
 
     $scope.fetchRecentPosts()
-
-    $scope.allAvailableItems = []
-    $scope.linkedItems= []
-
-    MakerScienceProject.getList().then((projectResults)->
-        angular.forEach(projectResults, (project) ->
-            $scope.allAvailableItems.push(
-                fullObject: project
-                title : "[Projet] " + project.parent.title
-                type : 'project'
-            )
-        )
-    )
-
-    MakerScienceResource.getList().then((resourceResults)->
-        angular.forEach(resourceResults, (resource) ->
-            $scope.allAvailableItems.push(
-                fullObject: resource
-                title : "[Expérence] " + resource.parent.title
-                type : 'resource'
-            )
-        )
-    )
-
-    $scope.delLinkedItem = (item) ->
-        itemIndex = $scope.linkedItems.indexOf(item)
-        $scope.linkedItems.pop(itemIndex)
-
-    $scope.addLinkedItem = (newLinkedItem) ->
-        item = newLinkedItem.originalObject
-        if newLinkedItem && $scope.linkedItems.indexOf(item) < 0
-            $scope.linkedItems.push(item)
-            $scope.newLinkedItem = null
-            $scope.$broadcast('angucomplete-alt:clearInput', 'linked-idea')
-
-    $scope.saveMakersciencePost = (newPost, parent, authorProfile) ->
-        $scope.savePost(newPost, parent, authorProfile).then((newPost)->
-            makerSciencePost =
-                parent : newPost.resource_uri,
-                post_type : newPost.type || 'message'
-                linked_projects : []
-                linked_resources : []
-
-            angular.forEach($scope.questionTags, (tag)->
-                TaggedItem.one().get({content_type : 'post', object_id : newPost.id, tag__slug : tag.text}).then((taggedItemResults) ->
-                    if taggedItemResults.objects.length == 1
-                        taggedItem = taggedItemResults.objects[0]
-                        ObjectProfileLink.one().customPOST(
-                            profile_id: $scope.currentMakerScienceProfile.parent.id,
-                            level: 50,
-                            detail : '',
-                            isValidated:true
-                        , 'taggeditem/'+taggedItem.id)
-                )
-            )
-
-            angular.forEach($scope.linkedItems, (item) ->
-                makerSciencePost["linked_"+item.type+"s"].push(item.fullObject.resource_uri)
-            )
-
-            return MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
-                mentions = newMakerSciencePostResult.parent.text.match(/\B@[a-z0-9_-]+/gi)
-                angular.forEach(mentions, (mention) ->
-                    profileSlug = mention.substr(1)
-                    MakerScienceProfile.one().get({slug:profileSlug}).then((makerScienceProfileResults) ->
-                        if makerScienceProfileResults.objects.length == 1
-                            ObjectProfileLink.one().customPOST(
-                                profile_id: $scope.currentMakerScienceProfile.parent.id,
-                                level: 41,
-                                detail : profileSlug,
-                                isValidated:true
-                            , 'makersciencepost/'+newMakerSciencePostResult.id)
-                    )
-                )
-                $scope.refreshList()
-                return false
-            )
-        )
 )
 
 

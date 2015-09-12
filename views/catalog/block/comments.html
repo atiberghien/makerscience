@@ -8,13 +8,13 @@
         <p>Partagez vos questions, vos avis, vos pistes d'améliorations</p>
         <!-- When adding a comment -->
         <section class="comments comments-add" ng-show="commenting">
-            <div class="comment">
+            <!-- <div class="comment">
                 <div class="author">
                     <img ng-if="!$root.authVars.user.email" src="/img/users/user-default.png" alt="User Unknown" />
                     <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
                     <p><strong>{{$root.authVars.user.first_name}} {{$root.authVars.user.last_name}}</strong><br /></p>
                 </div>
-            </div><!-- .comment -->
+            </div> -->
 
             <form id="commentform">
                 <fieldset>
@@ -42,7 +42,7 @@
                             <!-- <li><a href="" ng-click="flagComment($index)">Signaler un abus</a></li> -->
                         </ul>
                     </div>
-                    <p class="comment-author">{{comment.user.first_name}} <strong>{{comment.user.last_name}}</strong></p>
+                    <p class="comment-author"><a ui-sref="profile.detail({slug:comment.user.profile.id})">{{comment.user.first_name}} <strong>{{comment.user.last_name}}</strong></a></p>
                     <p style="word-wrap: break-word;">{{comment.comment}}</p>
                 </div>
                 <div class="comment-date">

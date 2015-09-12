@@ -109,7 +109,7 @@
                 </fieldset>
 
                 <fieldset class="right">
-                    <button type="submit" class="button" ng-click="showCreateButton = saveMakersciencePost(newPost, null, currentMakerScienceProfile.parent)">Créer</button>
+                    <button type="submit" class="button" ng-click="showCreateButton = saveMakersciencePost(newPost, null, currentMakerScienceProfile.parent)  && $scope.refreshList()">Créer</button>
                     <button type="reset" class="button">Annuler</button>
                 </fieldset>
             </form>

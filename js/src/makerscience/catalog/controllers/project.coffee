@@ -68,13 +68,24 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
 )
 
 module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, ProjectProgress,
-                                                        MakerScienceProject, MakerScienceResource, MakerScienceProjectTaggedItem, ObjectProfileLink) ->
+                                                        MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
+    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
 
     $scope.themesTags = []
     $scope.targetsTags = []
     $scope.formatsTags = []
+
+    $scope.needs = []
+    $scope.newNeed = {}
+
+    $scope.addNeed = (need) ->
+        $scope.needs.push(angular.copy($scope.newNeed))
+        $scope.newNeed = {}
+
+    $scope.delNeed = (index) ->
+        $scope.needs.splice(index, 1)
 
     $scope.saveMakerscienceProject = (formIsValid) ->
         if !formIsValid
@@ -132,6 +143,15 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         , 'taggeditem/'+taggedItemResult.id)
                     )
                 )
+
+                MakerScienceProjectLight.one(makerscienceProjectResult.id).get().then((projectResult) ->
+                    angular.forEach($scope.needs, (needPost) ->
+                        needPost.linked_projects = [projectResult.resource_uri]
+                        needPost.type='need'
+                        $scope.saveMakersciencePost(needPost, null, $scope.currentMakerScienceProfile.parent)
+                    )
+                )
+
 
                 $scope.saveVideos(projectsheetResult.id)
                 # if no photos to upload, directly go to new project sheet

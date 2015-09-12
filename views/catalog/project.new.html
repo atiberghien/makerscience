@@ -131,39 +131,28 @@
                         </text-angular>
                     </fieldset>
 
-                    <!-- #91 hidden at Alban's request 13/03/2015
+
                     <fieldset class="needs needs-select">
                         <h4>Vos besoins</h4>
                         <p>Vous avez besoin d'idées fraîches pour votre projet? Précisez ici vos besoins du moment ...</p>
                         <div class="row">
-                            <div class="col-md-3">
-                                <div class="btn-group" dropdown is-open="status.isopen">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">{{newNeed.type}}<span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li ng-repeat="needType in needTypes"><a ng-click="newNeed.type=needType">{{needType}}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-7">
+                            <div class="col-md-12">
+                                <input type="text" ng-model="newNeed.title" placeholder="Intitulé du besoin"/>
                                 <text-angular name="project-need"
                                               ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                               e-placeholder="Descrivez votre besoin"
-                                              ng-model="newNeed.description"
+                                              ng-model="newNeed.text"
                                               e-rows="3">
                                 </text-angular>
                             </div>
-                            <div class="col-md-2">
-                                <button class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
-                            </div>
+                            <button type="button" class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
                         </div>
                         <ul class="list-group">
                             <li ng-repeat="(index, need) in needs">
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <label>{{need.type}}</label>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <span ng-bind-html="need.description"></span>
+                                    <div class="col-md-10">
+                                        <p ng-bind-html="need.title"></p>
+                                        <!-- <p ng-bind-html="need.description"></p> -->
                                     </div>
                                     <div class="col-md-2">
                                         <button class="btn btn-danger" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
@@ -172,7 +161,7 @@
                             </li>
                         </ul>
                     </fieldset>
-                    -->
+
 
                     <fieldset class="linked-idea">
                         <h4>Expériences associées</h4>
