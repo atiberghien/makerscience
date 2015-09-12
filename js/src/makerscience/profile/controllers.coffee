@@ -336,3 +336,39 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, ObjectProfileLink) ->
         $scope.checkFriend(profile.id)
     )
 )
+
+module.controller('ContactFormInstanceCtrl' , ($scope, $modalInstance, $timeout, User, vcRecaptchaService, recipientId) ->
+    $scope.success = false
+
+    $scope.setResponse = (response) ->
+        $scope.response = response
+
+    $scope.setWidgetId = (widgetId) ->
+        $scope.widgetId = widgetId
+
+    $scope.cbExpiration = () ->
+        $scope.response = null
+
+    $scope.sendMessage = (message) ->
+        if $scope.response
+            message.recaptcha_response = $scope.response
+            User.one(recipientId).customPOST(message, 'send/message', {}).then((response) ->
+                $scope.success = true
+                $timeout($modalInstance.close, 3000)
+            , (response) ->
+                console.log("RECAPTCHA ERROR", response)
+            )
+)
+
+module.controller("ContactFormCtrl", ($scope, $modal) ->
+
+    $scope.showContactPopup = (recipientId) ->
+        modalInstance = $modal.open(
+            templateUrl: '/views/profile/block/contact.html'
+            controller: 'ContactFormInstanceCtrl'
+            size : 'sm'
+            resolve:
+                recipientId : () ->
+                    return recipientId
+        )
+)
