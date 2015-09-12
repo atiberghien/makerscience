@@ -43,7 +43,7 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
                     iconAnchor:   [15, 15]
                     shadowAnchor: [22, 22]
                 if profile.avatar
-                    icon["iconUrl"] = $scope.config.media_uri + profile.avatar
+                    icon["iconUrl"] = profile.avatar
                 else
                     icon["iconUrl"] = '/img/avatar.png'
 
@@ -65,7 +65,7 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
                         iconAnchor:   [25, 25]
                         shadowAnchor: [33, 33]
                 if profile.avatar
-                    $scope.markers[profile.id]["icon_hover"]["iconUrl"] = $scope.config.media_uri + profile.avatar
+                    $scope.markers[profile.id]["icon_hover"]["iconUrl"] = profile.avatar
                 else
                     $scope.markers[profile.id]["icon_hover"]["iconUrl"] = '/img/avatar.png'
             )

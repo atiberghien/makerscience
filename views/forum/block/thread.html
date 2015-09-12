@@ -10,7 +10,7 @@
         </ul><!-- .members -->
         <div>
             <span class="avatar avatar40">
-                <img ng-show="post.author.avatar" src="{{$root.config.media_uri}}{{post.author.avatar}}" class="profile img-circle">
+                <img ng-show="post.author.avatar" src="{{post.author.avatar}}" class="profile img-circle">
                 <img ng-hide="post.author.avatar" src="/img/avatar.png" class="profile img-circle">
             </span>
             <h3>{{post.author.user.first_name}} <strong>{{post.author.user.last_name}}</strong></h3>

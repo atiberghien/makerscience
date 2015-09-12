@@ -1,5 +1,5 @@
 <span class="avatar avatar52">
-    <img ng-show="member.profile.avatar" src="{{config.media_uri}}{{member.profile.avatar}}" class="profile img-circle">
+    <img ng-show="member.profile.avatar" src="{{member.profile.avatar}}" class="profile img-circle">
     <img ng-hide="member.profile.avatar" src="/img/avatar.png" class="profile img-circle">
 </span>
 <p><a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a></p>

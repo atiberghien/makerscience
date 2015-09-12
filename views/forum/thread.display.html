@@ -46,7 +46,7 @@
                     </ul>
                     <div class="thread-author" >
                         <span class="avatar avatar52">
-                            <img ng-show="post.parent.author.avatar" src="{{$root.config.media_uri}}{{post.parent.author.avatar}}" class="profile img-circle">
+                            <img ng-show="post.parent.author.avatar" src="{{post.parent.author.avatar}}" class="profile img-circle">
                             <img ng-hide="post.parent.author.avatar" src="/img/avatar.png" class="profile img-circle">
                         </span>
                         <p>{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong>
