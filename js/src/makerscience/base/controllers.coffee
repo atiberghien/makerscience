@@ -25,26 +25,29 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
     watch for changes in filterParams from FilterService
     Controllers using it need to implement a refreshList() method calling adequate [Object]Service
     """
+
     $scope.currentPage = 1
     $scope.params = {}
 
     $scope.getParams = ()->
-        # $scope.params['limit'] = $scope.limit
-        $scope.params['q'] = FilterService.filterParams.query
-        $scope.params['facet'] = FilterService.filterParams.tags
+        $scope.params['limit'] = $scope.limit
+        if FilterService.filterParams.query
+            $scope.params['q'] = FilterService.filterParams.query
+        if FilterService.filterParams.tags
+            $scope.params['facet'] = FilterService.filterParams.tags
 
     $scope.pageChanged = (newPage) ->
         $scope.params["offset"] = (newPage - 1) * $scope.limit
-        $scope.refreshList()
+        $scope.refreshListGeneric()
 
     $scope.refreshListGeneric = ()->
         $scope.getParams()
         $scope.refreshList() #Must be defined in the subclass
 
-    $scope.init = (params) ->
+    $scope.initMakerScienceAbstractListCtrl = () ->
         FilterService.filterParams.query = ''
         FilterService.filterParams.tags = []
-        $scope.refreshListGeneric()
+        # $scope.refreshListGeneric()
 
         for param of FilterService.filterParams
             $scope.$watch(

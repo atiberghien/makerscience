@@ -108,6 +108,8 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
+    $scope.params["limit"] = $scope.limit =  6
+
     $scope.bestContributors = []
     ObjectProfileLink.one().customGET('post/best', {level:[30,31,32]}).then((profileResults) ->
         angular.forEach(profileResults.objects, (profile) ->
@@ -116,15 +118,6 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
             )
         )
     )
-
-    $scope.fetchRecentPosts = () ->
-        $scope.params['ordering'] = '-updated_on'
-        $scope.refreshList()
-
-    $scope.fetchTopPosts = () ->
-        $scope.params['ordering'] = '-answers_count'
-        $scope.refreshList()
-
     $scope.refreshList = () ->
         MakerSciencePostLight.one().customGETLIST('search', $scope.params).then((makerSciencePostResults) ->
             meta = makerSciencePostResults.metadata
@@ -140,6 +133,19 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
                 )
             )
         )
+
+    # Must be called AFTER refreshList definition due to inheriance
+    $scope.initMakerScienceAbstractListCtrl()
+
+
+    $scope.fetchRecentPosts = () ->
+        $scope.params['ordering'] = '-updated_on'
+        $scope.refreshList()
+
+    $scope.fetchTopPosts = () ->
+        $scope.params['ordering'] = '-answers_count'
+        $scope.refreshList()
+
 
     $scope.fetchRecentPosts()
 )

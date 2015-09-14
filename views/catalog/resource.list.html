@@ -5,15 +5,15 @@
 
 <div class="row container">
 
-    <div id="content" class="listing resource"  ng-controller="MakerScienceResourceListCtrl" ng-init="init()">
+    <div id="content" class="listing resource">
 
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-9">
                     <tabset class="nav-tabs-resource">
-                        <tab heading="Les plus récents" select="fetchRecentResources()"></tab>
-                        <tab heading="Les plus populaires" select="fetchTopResources()"></tab>
-                        <tab heading="Sélection thématique" select="fetchThematicResources()">
+                        <tab heading="Les plus récents" ng-click="fetchRecentResources()"></tab>
+                        <tab heading="Les plus populaires" ng-click="fetchTopResources()"></tab>
+                        <tab heading="Sélection thématique" ng-click="fetchThematicResources()">
                             <h1>
                                 <ng-pluralize count="selected_themes.length" when="{'0': 'Thème sélectionné', 'one': 'Thème sélectionné', 'other': 'Thèmes sélectionnés'}"></ng-pluralize>:
                                 <span ng-repeat="theme in selected_themes">
@@ -23,7 +23,7 @@
                                 <span ng-if="selected_themes.length == 0">Aucun</span>
                             </h1>
                         </tab>
-                        <tab heading="Au hasard" select="fetchRandomResources()"></tab>
+                        <tab heading="Au hasard" ng-click="fetchRandomResources()"></tab>
                     </tabset>
                     <div class="boxes boxes-listing">
                         <div class="box" ng-repeat="resource in resources">

@@ -92,6 +92,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('project.list',
                 url: 'list',
                 templateUrl: '/views/catalog/project.list.html',
+                controller : 'MakerScienceProjectListCtrl'
                 ncyBreadcrumb:
                     label: 'Projets'
         )
@@ -114,6 +115,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 url : '/r/',
                 abstract : true,
                 templateUrl : '/views/catalog/resource.html'
+                controller : 'MakerScienceResourceListCtrl'
                 ncyBreadcrumb:
                     parent: 'home'
         )
@@ -148,6 +150,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('profile.list',
                 url: 'list',
                 templateUrl: '/views/profile/profile.list.html'
+                controller : 'MakerScienceProfileListCtrl'
                 ncyBreadcrumb:
                     label: 'Communauté'
         )

@@ -4,6 +4,19 @@ module = angular.module("makerscience.profile.controllers", ['makerscience.profi
 module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfileLight, MakerScienceProfileTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
+    $scope.params["limit"] = $scope.limit =  6
+
+    $scope.refreshList = ()->
+        MakerScienceProfileLight.one().customGETLIST('search', $scope.params).then((makerScienceProfileResults) ->
+            meta = makerScienceProfileResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.profiles =  makerScienceProfileResults
+        )
+
+    # Must be called AFTER refreshList definition due to inheriance
+    $scope.initMakerScienceAbstractListCtrl()
+
     $scope.fetchRecentProfiles = () ->
         $scope.params['ordering'] = '-date_joined'
         $scope.refreshList()
@@ -23,13 +36,6 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
                 $scope.profiles[rand] = tmp
         )
 
-    $scope.refreshList = ()->
-        MakerScienceProfileLight.one().customGETLIST('search', $scope.params).then((makerScienceProfileResults) ->
-            meta = makerScienceProfileResults.metadata
-            $scope.totalItems = meta.total_count
-            $scope.limit = meta.limit
-            $scope.profiles =  makerScienceProfileResults
-        )
 
     $scope.availableInterestTags = []
     $scope.availableSkillTags = []

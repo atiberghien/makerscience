@@ -18,22 +18,22 @@
                             <img src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         </a>
                     </slide>
-                    <slide ng-repeat="project in projects | filter:featured | limitTo : 2">
+                    <slide ng-repeat="project in featuredProjects">
                         <h3 class="category"><span>Projet</span></h3>
-                        <img ng-if="project.base_projectsheet.cover" ng-src="{{config.media_uri}}{{project.base_projectsheet.cover.thumbnail_url}}?dim=710x390&border=true" alt="Loading slide one..." />
-                        <img ng-if="!project.base_projectsheet.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <img ng-if="project.cover" ng-src="{{ $root.config.media_uri }}{{ project.cover+'?dim=710x390&border=true'}}" alt="Loading slide one..." />
+                        <img ng-if="!project.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
-                            <h3><a ui-sref="project.detail({slug:project.parent.slug})">{{project.parent.title}}</a></h3>
+                            <h3><a ui-sref="project.detail({slug:project.slug})">{{project.title}}</a></h3>
                             <h4>Par <strong><a ui-sref="profile.detail({slug:project.by.profile_slug})">
                                 {{project.by.full_name}}</a></strong></h4>
                         </div>
                     </slide>
-                    <slide ng-repeat="resource in featuredResources | filter:featured | limitTo : 2">
+                    <slide ng-repeat="resource in featuredResources">
                         <h3 class="category"><span>Expérience</span></h3>
-                        <img ng-if="resource.base_projectsheet.cover" ng-src="{{config.media_uri}}{{resource.base_projectsheet.cover.thumbnail_url}}?dim=710x390&border=true" alt="Loading slide one..." />
-                        <img ng-if="!resource.base_projectsheet.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <img ng-if="resource.cover" ng-src="{{ $root.config.media_uri }}{{ resource.cover+'?dim=710x390&border=true'}}" alt="Loading slide one..." />
+                        <img ng-if="!resource.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
-                            <h3><a ui-sref="resource.detail({slug:resource.parent.slug})">{{resource.parent.title}}</a></h3>
+                            <h3><a ui-sref="resource.detail({slug:resource.slug})">{{resource.title}}</a></h3>
                             <h4>Par <strong><a ui-sref="profile.detail({slug:resource.by.profile_slug})">
                                 {{resource.by.full_name}}</a></strong></h4>
                         </div>

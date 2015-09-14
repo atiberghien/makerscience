@@ -5,6 +5,19 @@ module = angular.module("makerscience.catalog.controllers.project", ['makerscien
 module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProjectLight, StaticContent, MakerScienceProjectTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
+    $scope.params["limit"] = $scope.limit =  6
+
+    $scope.refreshList = ()->
+        return MakerScienceProjectLight.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
+            meta = makerScienceProjectResults.metadata
+            $scope.totalItems = meta.total_count
+            $scope.limit = meta.limit
+            $scope.projects =  makerScienceProjectResults
+        )
+
+    # Must be called AFTER refreshList definition due to inheriance
+    $scope.initMakerScienceAbstractListCtrl()
+
     $scope.fetchRecentProjects = () ->
         delete $scope.params['facet']
         $scope.params['ordering'] = '-created_on'
@@ -40,14 +53,6 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
             )
             $scope.params['facet'] = tags
             $scope.refreshList()
-        )
-
-    $scope.refreshList = ()->
-        return MakerScienceProjectLight.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
-            meta = makerScienceProjectResults.metadata
-            $scope.totalItems = meta.total_count
-            $scope.limit = meta.limit
-            $scope.projects =  makerScienceProjectResults
         )
 
     $scope.fetchRecentProjects()
@@ -102,7 +107,6 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
 
             MakerScienceProject.post(makerscienceProjectData).then((makerscienceProjectResult)->
-                console.log(" Posting MakerScienceProject, result from savingProject : ", makerscienceProjectResult)
                 # add connected user as team member of project with detail "porteur"
                 ObjectProfileLink.one().customPOST(
                     profile_id: $scope.currentMakerScienceProfile.parent.id,
