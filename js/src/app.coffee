@@ -225,7 +225,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         #         url: '/auth/twitter',
         #         # templateUrl: 'closePopup.html'
         #         controller : 'TwitterAuthCtrl'
-        )
+        # )
 
 ])
 .run(($rootScope, $location, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $sce) ->
