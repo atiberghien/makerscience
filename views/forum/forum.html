@@ -3,20 +3,9 @@
     <h2>MakerScience</h2>
 </div>
 
-<div class="forum-search">
-    <div class="row container">
-        <div class="col-md-12">
-            <form method="post" action="">
-                <input type="search" name="forum-search" placeholder="Rechercher" />
-                <button class="button button-forum">OK</button>
-            </form>
-        </div>
-    </div><!-- .container -->
-</div><!-- .forum-search -->
-
 <div class="forum-create">
     <div class="row container">
-        <div class="col-md-12" ng-init="init();showCreateButton = true">
+        <div class="col-md-12" ng-init="showCreateButton = true">
             <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
             <form method="post" action="" collapse="showCreateButton" class="new-topic" ng-init="newPost.type='message'; initMention('iframeQuestionTextArea')" ng-controller="MentionCtrl">
                 <tabset>
