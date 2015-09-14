@@ -115,3 +115,19 @@ module.controller('LoginCtrl', ($scope, $rootScope, $state, $stateParams, $cooki
                 $state.go($state.current.name, $stateParams)
         )
 )
+
+# module.controller('TwitterAuthCtrl', ($scope, $rootScope, $location, $state, $stateParams, $cookies, $http, $auth, User) ->
+#     getParams = $location.search()
+#     oauth_token = getParams['oauth_token']
+#     oauth_verifier = getParams['oauth_verifier']
+#
+#     User.one().customGET('login/twitter/authenticated', $location.search()).then((response)->
+#         console.log(response)
+#         if response.success
+#             $cookies.username = response.username
+#             $cookies.key = response.token
+#             $http.defaults.headers.common['Authorization'] = "ApiKey #{response.username}:#{response.token}"
+#             $rootScope.$broadcast('event:auth-loginConfirmed')
+#             $state.go($state.current.name, $stateParams)
+#     )
+# )

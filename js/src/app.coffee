@@ -54,11 +54,9 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         clientId: '255067193649-5s7fan8nsch2cqft32fka9n36jcd37qg.apps.googleusercontent.com',
     })
 
-    $authProvider.twitter({
-        url : config.loginBaseUrl + '/account/user/login/twitter',
-        clientId: 'RXz5fy5X4M1LewAeNliME2gbM',
-        redirectUri : config.loginBaseUrl + '/account/user/login/twitter',
-    })
+    # $authProvider.twitter({
+    #     url : config.loginBaseUrl + '/account/user/login/twitter',
+    # })
 
 
 )
@@ -222,6 +220,11 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 ncyBreadcrumb:
                     label: 'Recherche'
                     parent : 'home'
+        )
+        # .state('twitter',
+        #         url: '/auth/twitter',
+        #         # templateUrl: 'closePopup.html'
+        #         controller : 'TwitterAuthCtrl'
         )
 
 ])
