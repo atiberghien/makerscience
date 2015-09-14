@@ -118,6 +118,7 @@ module.exports = function(grunt) {
         copy: {
             dist: {
                 files: [
+                  {expand: true, src: ['makerscience.fr'], dest: 'dist/'},
                   {expand: true, src: ['*.html'], dest: 'dist/'},
                   {expand: true, src: ['bower_components/**'], dest: 'dist/'},
                   {expand: true, src: ['css/*.css'], dest: 'dist/'},
