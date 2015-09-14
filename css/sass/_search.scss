@@ -1,0 +1,32 @@
+.search-results-dropdown {
+    z-index: 1000;
+    position: absolute;
+    width: 214px;
+    background-color: white;
+    h2 {
+        padding: 0.25em 0.75em;
+        font-size: 1em;
+        text-transform: capitalize;
+        span {
+            display: none;
+        }
+        &.more {
+            padding: 0.5em;
+            text-align: center;
+            background-color: $color-dark-blue;
+            a {
+                color: #fff;
+            }
+        }
+    }
+    div {
+        padding: 0.25em 0.25em 0.25em 1em;
+        border-bottom: 1px solid $color-light-grey;
+        &:last-child {
+            border-bottom: none;
+        }
+        a {
+            color: $color-text;
+        }
+    }
+}
