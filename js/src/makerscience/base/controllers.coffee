@@ -68,6 +68,13 @@ module.controller('HomepageCtrl', ($scope, $filter, $controller, MakerSciencePro
     MakerScienceResourceLight.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceResourceResults) ->
         $scope.resources =  makerScienceResourceResults
     )
+    MakerScienceProjectLight.one().customGETLIST('search', {featured: true, ordering: '-updated_on', limit : 2}).then((makerScienceProjectResults) ->
+        $scope.featuredProjects =  makerScienceProjectResults
+    )
+    MakerScienceResourceLight.one().customGETLIST('search', {featured: true, ordering: '-updated_on', limit : 2}).then((makerScienceResourceResults) ->
+        $scope.featuredResources =  makerScienceResourceResults
+    )
+
     MakerScienceProfileLight.one().customGETLIST('search', {ordering: '-date_joined', limit : 3}).then((makerScienceProfileResults) ->
         $scope.profiles =  makerScienceProfileResults
     )
@@ -145,7 +152,6 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
             else if objectTypeName == 'vote'
                 return Vote.one(objectId).get()
 
-            console.log("Unable to fetch", objectTypeName, objectId)
             return null
 )
 
@@ -153,7 +159,7 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
 module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink,
                                             MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePostLight) ->
 
-    angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
+    $scope.collapseAdvancedSearch = true
 
     $scope.runSearch = (params) ->
         $scope.associatedTags = []
@@ -227,13 +233,35 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
                     )
         )
 
+    $scope.search = {
+        advanced : true
+        searchIn : 'all'
+        allWords : []
+        exactExpressions : []
+    }
+
+    $scope.runAdvancedSearch = (search) ->
+        $scope.runSearch (search)
+        $scope.search = {
+            advanced : true
+            searchIn : 'all'
+            allWords : ""
+            exactExpressions : ""
+        }
+
+    $scope.runAutoCompleteSearch = (query, lenght) ->
+        if query.length >= lenght
+            params = {
+                limit : 2
+                q : query
+            }
+            $scope.runSearch (params)
 
 )
 
 
 module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
 
-    console.log("Init Filter Ctrl , state param ? ", $stateParams)
     $scope.tags_filter = []
     $scope.query_filter = ''
 
@@ -241,13 +269,11 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
         """
         Update FilterService data
         """
-        console.log("refreshing filter (ctrler).. ", FilterService.filterParams)
         tags_list = []
         for tag in $scope.tags_filter
             tags_list.push(tag.text)
         FilterService.filterParams.tags = tags_list
         FilterService.filterParams.query = $scope.query_filter
-        console.log("AFTER refreshing filter (ctrler).. ", FilterService.filterParams)
 
     $scope.addToTagsFilter = (aTag)->
         simpleTag =

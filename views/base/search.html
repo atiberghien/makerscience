@@ -1,2 +1,16 @@
-<input type="text" name="search" ng-model="query"  placeholder="Rechercher" />
-<button type="button" ui-sref="search({q:query})" ><span class="glyphicon glyphicon-search"></span></button>
+<style>
+    .quicksearch-results {
+        position: absolute;
+        background-color: white;
+        z-index: 1000;
+    }
+</style>
+
+<div ng-controller="MakerScienceSearchCtrl">
+    <input type="text" name="search" ng-model="query"  placeholder="Rechercher" ng-change="runAutoCompleteSearch(query, 3)"/>
+    <button type="button" ui-sref="search({q:query})" ><span class="glyphicon glyphicon-search"></span></button>
+    <div class="quicksearch-results" ng-show="projects.length || resources.length || profiles.lenght || post.lenght">
+        <ng-include src="'views/base/multiple_object_autocomplete_results.html'"></ng-include>
+        <h2 class="projects clear"><span class="glyphicon glyphicon-search"></span> <a ui-sref="search({q:query})">Voir tout</a></h2>
+    </div>
+</div>

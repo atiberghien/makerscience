@@ -1,0 +1,19 @@
+<h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+<div class="box" ng-repeat="project in projects">
+    <a ui-sref="">{{project.title}}</a>
+</div>
+
+<h2 class="resources clear"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
+<div ng-repeat="resource in resources">
+    <a ui-sref="">{{resource.title}}</a>
+</div>
+
+<h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Profils</h2>
+<div ng-repeat="profile in profiles">
+    <a ui-sref="profile.detail({slug:profile.slug})">{{profile.first_name}} <strong>{{profile.last_name}}</strong></a>
+</div>
+
+<h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Discussions</h2>
+<div ng-repeat="post in discussions">
+    <a ui-sref="">{{post.title}}</a>
+</div>

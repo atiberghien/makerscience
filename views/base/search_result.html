@@ -6,22 +6,24 @@
 <div class="row container">
     <div id="content" class="tags">
         <div class="col-md-12">
-            <h1>Résultat de la recherche "{{query}}"</h1>
-            <button class="button search-advanced">Recherche avancée</button>
-            <form id="search-advanced">
+            <h1 ng-if="query">Résultat de la recherche "{{query}}"</h1>
+            <button class="button search-advanced" ng-click="collapseAdvancedSearch = !collapseAdvancedSearch">Recherche avancée</button>
+            <form id="search-advanced" ng-show="!collapseAdvancedSearch">
                 <label for="words-all">Tous les mots:</label>
-                <input id="words-all" type="text" name="words-all" placeholder="Conférence, " />
+                <input id="words-all" type="text" name="words-all" placeholder="Conférence, " ng-model="search.allWords"/>
                 <br />
                 <label for="exact-expression">Les expressions exactes:</label>
-                <input id="exact-expression" type="text" name="exact-expression" placeholder="Conférence sur la science, " />
+                <input id="exact-expression" type="text" name="exact-expression" placeholder="Conférence sur la science, " ng-model="search.exactExpressions"/>
                 <br />
                 <label for="word-none">Aucun de ces mots:</label>
-                <input id="word-none" type="text" name="word-none" placeholder="Conférence, " />
+                <input id="word-none" type="text" name="word-none" placeholder="Conférence, " ng-model="search.noneWord"/>
                 <br />
                 <label>Recherche parmi ces champs:</label>
-                <input id="title" type="radio" name="amongst" value="title" /> <label for="title">Titre / Nom / sous-titre</label>
-                <input id="tag" type="radio" name="amongst" value="tag" /> <label for="tag">Tag</label>
-                <input id="everything" type="radio" name="amongst" value="everything" /> <label for="everything">Tout le contenu</label>
+                <input id="everything" type="radio" name="searchIn" ng-model="search.searchIn" value="all" checked="checked"/> <label for="everything">Tout le contenu</label>
+                <input id="title" type="radio" name="searchIn"  ng-model="search.searchIn" value="titles" /><label for="title"> Titre / Nom / sous-titre</label>
+                <input id="tag" type="radio" name="searchIn"  ng-model="search.searchIn" value="tags"/> <label for="tag" >Tag</label>
+                <br />
+                <button ng-click="runAdvancedSearch(search)">Rechercher</button>
             </form>
             <ng-include src="'/views/base/multiple_object_listing.html'"></ng-include>
         </div><!-- .col-md-12 -->

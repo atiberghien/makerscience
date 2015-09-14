@@ -73,7 +73,7 @@
                             </div>
 
                             <!-- Showing when loggin in and when logged in -->
-                            <form method="post" class="navbar-right" role="search">
+                            <form method="post" class="navbar-right" role="search" ng-if="!$state.includes('search')">
                                 <ng-include src="'/views/base/search.html'"></ng-include>
                             </form>
                         </div><!-- /.navbar-collapse -->
