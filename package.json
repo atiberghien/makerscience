@@ -27,6 +27,7 @@
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-rsync": "^0.6.2",
     "grunt-wiredep": "^2.0.0"
   }
 }

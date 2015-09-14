@@ -4,7 +4,6 @@ module.exports = function(grunt) {
 
     var appConfig = {
         app: require('./bower.json').appPath || 'app',
-        dist: 'dist'
     };
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -136,6 +135,33 @@ module.exports = function(grunt) {
           dist: ["dist/"],
           config: ["dist/js/config_stating.js"]
         },
+        rsync: {
+            options: {
+                args: ["--verbose"],
+                exclude: [".git*","*.scss","node_modules"],
+                recursive: true
+            },
+            staging: {
+                options: {
+                    src: "./dist/*",
+                    dest: "/var/www/makerscience/client",
+                    host: "CHANGE_ME",
+                    ssh: true,
+                    recursive: true,
+                    delete: true // Careful this option could cause data loss, read the docs!
+                }
+            },
+            prod: {
+                options: {
+                    src: "./dist/*",
+                    dest: "/home/www/makerscience.fr/client",
+                    host: "CHANGE_ME",
+                    ssh: true,
+                    recursive: true,
+                    delete: true // Careful this option could cause data loss, read the docs!
+                }
+            },
+        }
     });
 
     grunt.loadNpmTasks('grunt-wiredep');
@@ -146,16 +172,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks("grunt-rsync");
 
     grunt.registerTask('default', ['compass:dev', 'wiredep', 'coffee', 'concurrent:run']);
     grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'clean:config']);
+    grunt.registerTask('stage', ['dist', 'rsync:staging'])
 };
-//
-// "exportsOverride" : {
-//       "*": {
-//         "sass" : "**/*.scss",
-//         "js": "**/*.js",
-//         "css": "**/*.css",
-//         "fonts" : "**/fonts/*"
-//       }
-//   }
