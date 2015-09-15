@@ -51,7 +51,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
     $authProvider.google({
         url: config.loginBaseUrl + '/account/user/login/google',
-        clientId: '255067193649-5s7fan8nsch2cqft32fka9n36jcd37qg.apps.googleusercontent.com',
+        clientId: '192384401460-ntng78ie8hs2to1t1e0i9foi63rss5gr.apps.googleusercontent.com',
     })
 
     # $authProvider.twitter({
