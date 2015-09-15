@@ -5,11 +5,11 @@ if !debugMode
         templateBaseUrl: '/views/',
         useHtml5Mode: true,
 
-        bucket_uri: 'http://data.nonetype.net/bucket/upload/',
-        loginBaseUrl: 'http://data.nonetype.net/api/v0',
-        oauthBaseUrl: 'http://127.0.0.1:8001',
-        media_uri: 'http://data.nonetype.net',
-        rest_uri: "http://data.nonetype.net/api/v0"
+        bucket_uri: 'http://data.makerscience.fr/bucket/upload/',
+        loginBaseUrl: 'http://data.makerscience.fr/api/v0',
+        oauthBaseUrl: 'http://makerscience.fr',
+        media_uri: 'http://data.makerscience.fr',
+        rest_uri: "http://data.makerscience.fr/api/v0"
 else
     @config =
         templateBaseUrl: '/views/',
