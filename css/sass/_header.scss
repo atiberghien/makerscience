@@ -30,12 +30,13 @@
 			}
 			.navbar-header {
 				.navbar-brand {
-					top: -4px;
-					img {
-						margin-top: -20px;
-						margin-left: -20px;
-						width: 80px;
-					}
+					display: none;
+				}
+				img.nav-small {
+					display: block;
+					position: absolute;
+					top: -14px;
+					left: 15px;
 				}
 			}
 		}

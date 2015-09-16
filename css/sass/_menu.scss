@@ -11,22 +11,20 @@ header {
 			position: relative; /* to place the logo / brand within */
 			.navbar-brand {
 				position: absolute;
-				top: -120px;
+				top: -97px;
 				left: $grid-gutter-width;
-				img {
-					margin-left: -15px;
-				}
+			}
+			img.nav-small {
+				display: none;
 			}
 		}
 		.navbar-tagline {
 			margin-top: -70px;
-			margin-left: 200px;
+			margin-left: 450px;
 			font-size: 1.4em;
-			font-family: "LatoLight";
+			font-family: "madtype";
 			line-height: 1.25em;
-		}
-		.nav.navbar-nav {
-			padding-left: 170px; /* space for the logo */
+			font-weight: 300;
 		}
 		.register-login {
 			float: right;

@@ -1,5 +1,5 @@
 <span ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
-    <button  ng-show="!isFriend" ng-click="addFriend(profile.id)" class="add-member"><span class="fa fa-user-plus"></span></button>
+    <button  ng-if="currentMakerScienceProfile.id != profile.id" ng-show="!isFriend" ng-click="addFriend(profile.id)" class="add-member"><span class="fa fa-user-plus"></span></button>
     <button  ng-show="isFriend" ng-click="removeFriend(profile.id)" class="add-member"><span class="fa fa-user-times"></span></button>
     <!--
     FIXME : The envelope button overlap with the add-user one
