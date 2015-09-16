@@ -39,6 +39,7 @@
     "angular-xeditable": "0.1.7",
     "angularjs-gravatardirective": "~1.3.2",
     "angularjs-socialshare": "~0.1.10",
+    "angulartics-google-analytics": "~0.1.1",
     "bootstrap-sass": "~3.3.5",
     "geocoder-service": "~0.0.5",
     "jquery": "~2.1.4",
