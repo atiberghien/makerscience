@@ -157,11 +157,11 @@
                 </div><!-- .col-md-4 -->
                 <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null">
                     <ul>
-                        <li ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
+                        <li ng-if="currentMakerScienceProfile.id != profile.id" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
                             <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Suivre"><span class="fa fa-user-plus"></span></a>
                             <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Ne plus suivre"><span class="fa fa-user-times"></span></a>
                         </li>
-                        <li ng-controller="ContactFormCtrl">
+                        <li ng-if="currentMakerScienceProfile.id != profile.id" ng-controller="ContactFormCtrl">
                             <a title="Contacter" ng-click="showContactPopup(profile.parent.user.id)"><span class="fa fa-envelope-o"></span></a>
                         </li>
                     </ul>
