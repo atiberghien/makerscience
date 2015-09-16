@@ -133,7 +133,6 @@ module.exports = function(grunt) {
         },
         clean: {
           dist: ["dist/"],
-          config: ["dist/js/config_stating.js"]
         },
         rsync: {
             options: {
@@ -174,7 +173,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks("grunt-rsync");
 
+    grunt.registerTask('compile', ['compass:dev', 'wiredep', 'coffee']);
     grunt.registerTask('default', ['compass:dev', 'wiredep', 'coffee', 'concurrent:run']);
-    grunt.registerTask('dist', ['clean:dist', 'copy:dist', 'clean:config']);
-    grunt.registerTask('stage', ['dist', 'rsync:staging'])
+    grunt.registerTask('dist', ['clean:dist', 'copy:dist']);
+    grunt.registerTask('stage', ['compile', 'dist', 'rsync:staging'])
+    grunt.registerTask('prod', ["compile", 'dist', 'rsync:prod'])
 };
