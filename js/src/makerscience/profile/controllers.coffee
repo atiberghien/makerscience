@@ -331,7 +331,7 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, ObjectProfileLink) ->
         )
 
     $scope.checkFriend = (friendProfileID) ->
-        if $scope.currentMakerScienceProfile
+        if $scope.currentMakerScienceProfile && friendProfileID
             ObjectProfileLink.one().customGET('makerscienceprofile/'+friendProfileID, {profile__id: $scope.currentMakerScienceProfile.parent.id, level:40}).then((objectProfileLinkResults) ->
                 if objectProfileLinkResults.objects.length == 1
                     $scope.isFriend = true
