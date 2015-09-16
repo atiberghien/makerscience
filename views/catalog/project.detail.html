@@ -53,8 +53,7 @@
                                 e-ng-options="progress.value as progress.text for progress in progressRange"
                                     e-form="WIPBtnForm"
                                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'progress', $data);">
-                                    <span ng-if="projectsheet.parent.progress">État d'avancement : {{showProjectProgress()}}</a>
-                                    <span ng-if="!projectsheet.parent.progress">État d'avancement {{showProjectProgress()}}</span>
+                                    <span ng-if="projectsheet.parent.progress">État d'avancement {{showProjectProgress()}}</span>
                                 </p>
                             </div>
 

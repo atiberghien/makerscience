@@ -72,7 +72,7 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
 
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, ProjectProgress,
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, ProjectProgress,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
@@ -84,6 +84,10 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.needs = []
     $scope.newNeed = {}
+
+    ProjectProgress.getList({'range__slug' : 'makerscience'}).then((progressRangeResult) ->
+        $scope.progressRange = [{ value : progress.resource_uri, text : progress.label } for progress in $filter('orderBy')(progressRangeResult, 'order')][0]
+    )
 
     $scope.addNeed = (need) ->
         $scope.needs.push(angular.copy($scope.newNeed))
@@ -260,7 +264,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
             $scope.showProjectProgress = () ->
                 selected = $filter('filter')($scope.progressRange, {value: $scope.projectsheet.parent.progress.resource_uri});
-                return if $scope.projectsheet.parent.progress.label && selected.length then selected[0].text else 'non renseigné';
+                return if $scope.projectsheet.parent.progress.label && selected.length then selected[0].text else 'non renseigné'
         )
 
         $scope.removeTagFromProjectSheet = (tag) ->
