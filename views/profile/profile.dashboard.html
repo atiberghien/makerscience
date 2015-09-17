@@ -25,7 +25,7 @@
 
             <tabset class="nav-tabs-project">
                 <tab heading="Mes notifications">
-                    <ul>
+                    <ul class="activity">
                         <li class="list-group-item"><button ng-click="markAllAsRead()"><span class="glyphicon glyphicon-tasks" ></span></button></li>
                         <li ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in notifications ">
                             <p ng-bind-html="trustAsHtml(notif.description)"></p>
