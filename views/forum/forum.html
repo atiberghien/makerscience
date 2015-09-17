@@ -65,23 +65,19 @@
                 </fieldset>
 
                 <fieldset class="forum-linked">
-                    <p>Ajouter des projets ou des expériences associés <span class="glyphicon glyphicon-link"></span></p>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <angucomplete-alt id="linked-idea"
-                                            placeholder="Titre du projet ou de la ressource"
-                                            pause="100"
-                                            selected-object="newLinkedItem"
-                                            local-data="allAvailableItems"
-                                            search-fields="title"
-                                            title-field="title"
-                                            text-no-results="Aucun élément trouvé"
-                                            minlength="3"/>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="button" class="button" ng-click="addLinkedItem(newLinkedItem)">Lier</button>
-                        </div>
+                    <p>Ajouter des projets ou des expériences associés</p>
+                    <div><!-- necessary container or angularcomplete-alt will "eat" the following button -->
+                        <angucomplete-alt id="linked-idea"
+                                        placeholder="Titre du projet ou de la ressource"
+                                        pause="100"
+                                        selected-object="newLinkedItem"
+                                        local-data="allAvailableItems"
+                                        search-fields="title"
+                                        title-field="title"
+                                        text-no-results="Aucun élément trouvé"
+                                        minlength="3"/>
                     </div>
+                    <button type="button" class="button button-forum-linked" ng-click="addLinkedItem(newLinkedItem)">Lier <span class="glyphicon glyphicon-link"></span></button>
                     <ul class="list-group">
                         <li ng-repeat="item in linkedItems">
                             <div class="row">

@@ -166,17 +166,38 @@ form.forum-answer {
         margin: $grid-gutter-width 0;
         padding: $grid-gutter-width / 2;
         background-color: $color-bg;
-        button {
-            padding: 0;
-            padding-left: $grid-gutter-width / 2;
+        button.button-forum-linked, input#linked-idea_value {
+            height: 50px;
+            margin-top: $grid-gutter-width / 2;
+        }
+        button.button-forum-linked {
+            overflow: hidden;
             border: none;
+            padding-left: $grid-gutter-width;
             span {
+                top: 0;
                 margin-left: 1em;
+                margin-right: -6px;
                 padding: $grid-gutter-width / 2;
-                font-size: 2em;
+                font-size: 1.5em;
                 color: #fff;
                 background-color: $color-forum;
                 vertical-align: middle;
+            }
+        }
+        input#linked-idea_value {
+            float: left;
+            width: 868px; /* to align width delete buttons above when they appear */
+            padding: $grid-gutter-width / 2;
+            @include placeholder($color-blue);
+        }
+        ul.list-group {
+            margin: $grid-gutter-width / 2;
+            li {
+                margin-bottom: $grid-gutter-width / 2;
+            }
+            div.col-md-2 {
+                text-align: right;
             }
         }
     }
