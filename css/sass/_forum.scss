@@ -163,8 +163,8 @@ form.forum-answer {
         }
     }
     fieldset.forum-linked {
-        display: inline-block;
         margin: $grid-gutter-width 0;
+        padding: $grid-gutter-width / 2;
         background-color: $color-bg;
         button {
             padding: 0;
@@ -612,4 +612,45 @@ div.forum-answer {
 
 div.forum-answer + button {
     font-size: 1.25em;
+}
+
+/* Discussion boxes - search results */
+#content .boxes .box section.forum-topic {
+    height: 100%;
+    color: #fff;
+    background-color: $color-forum;
+    @include transition(background 0.2s ease-in-out);
+    &:hover {
+        @include opacity(0.9);
+    }
+    header h3, header h4 {
+        display: none;
+    }
+    header {
+        span.avatar {
+            float: none;
+            margin: 0 auto;
+        }
+    }
+    p.question {
+        padding: 0;
+        span {
+            display: none;
+        }
+        a {
+            color: #fff;
+        }
+    }
+    p.comments-count {
+        position: absolute;
+        bottom: 0;
+        right: 1em;
+        padding: 0.25em;
+        span {
+            color: $color-light-grey;
+        }
+    }
+    ul.tags {
+        display: none;
+    }
 }
