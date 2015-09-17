@@ -95,7 +95,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                                             MakerScienceProfile, MakerScienceProfileLight,
                                             MakerScienceProjectLight, MakerScienceResourceLight,
                                             MakerSciencePost, MakerSciencePostLight,
-                                            MakerScienceProfileTaggedItem, TaggedItem, Post, ObjectProfileLink, Place) ->
+                                            MakerScienceProfileTaggedItem, TaggedItem,Tag, Post, ObjectProfileLink, Place) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
     angular.extend(this, $controller('TaggedItemCtrl', {$scope: $scope}))
@@ -201,6 +201,18 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                                     )
                                 )
                     )
+                else if objectProfileLink.content_type == 'taggeditem' && objectProfileLink.level == 50 #object tagging
+                    TaggedItem.one(objectProfileLink.object_id).get().then((taggedItemResult)->
+                        slug = taggedItemResult.tag.slug
+                        if $scope.favoriteTags.hasOwnProperty(slug)
+                            $scope.favoriteTags[slug]++
+                        else
+                            $scope.favoriteTags[slug] = 1
+                    )
+                else if objectProfileLink.content_type == 'tag' && objectProfileLink.level == 51 #tag following
+                    Tag.one(objectProfileLink.object_id).get().then((tagResult)->
+                        $scope.followedTags.push(tagResult)
+                    )
             )
         )
 
@@ -292,10 +304,11 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
 
         $scope.profile = makerscienceProfileResult
 
-        if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile.id != $scope.profile.id
+
+        if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile == undefined || $scope.currentMakerScienceProfile.id != $scope.profile.id
             $state.go('profile.detail', {slug : $stateParams.slug})
 
-        # $scope.notifications = Notification.getList({recipient_id : $scope.profile.parent.user.id}).$object
+        $scope.updateNotifications()
 
         MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities').then((activityResults)->
             $scope.activities = activityResults.objects

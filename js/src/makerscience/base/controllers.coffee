@@ -289,12 +289,8 @@ module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval,
         ObjectProfileLink.one().customGET('purge').then((result)->
             if $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
                 Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
-                    $scope.notifications = $filter('filter')(notificationResults, (value, index, array) ->
-                        return  value.actor_object_id  != $scope.currentMakerScienceProfile.id
-                    )
-                    $scope.notifications = $filter('orderBy')($scope.notifications, 'timestamp', true)
-                    # $scope.notifications = $filter('orderBy')(notificationResults, 'timestamp', true)
-                    $scope.lastNotifications = $filter('limitTo')($scope.notifications, 5)
+                    $scope.notifications = notificationResults
+                    $scope.lastNotifications = $filter('limitTo')(notificationResults, 5)
                     $scope.computeUnreadNotificationCounter()
 
                 )
