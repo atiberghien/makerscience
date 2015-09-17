@@ -95,7 +95,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                                             MakerScienceProfile, MakerScienceProfileLight,
                                             MakerScienceProjectLight, MakerScienceResourceLight,
                                             MakerSciencePost, MakerSciencePostLight,
-                                            MakerScienceProfileTaggedItem, TaggedItem, Post, ObjectProfileLink, Place) ->
+                                            MakerScienceProfileTaggedItem, TaggedItem,Tag, Post, ObjectProfileLink, Place) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
     angular.extend(this, $controller('TaggedItemCtrl', {$scope: $scope}))
@@ -200,6 +200,18 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                                             $scope.contributed_post.push(post)
                                     )
                                 )
+                    )
+                else if objectProfileLink.content_type == 'taggeditem' && objectProfileLink.level == 50 #object tagging
+                    TaggedItem.one(objectProfileLink.object_id).get().then((taggedItemResult)->
+                        slug = taggedItemResult.tag.slug
+                        if $scope.favoriteTags.hasOwnProperty(slug)
+                            $scope.favoriteTags[slug]++
+                        else
+                            $scope.favoriteTags[slug] = 1
+                    )
+                else if objectProfileLink.content_type == 'tag' && objectProfileLink.level == 51 #tag following
+                    Tag.one(objectProfileLink.object_id).get().then((tagResult)->
+                        $scope.followedTags.push(tagResult)
                     )
             )
         )
