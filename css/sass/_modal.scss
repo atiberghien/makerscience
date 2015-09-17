@@ -73,3 +73,22 @@
         display: block;
     }
 }
+
+.modal-send-message {
+    padding: $grid-gutter-width / 2;
+    padding-top: $grid-gutter-width;
+    label {
+        float: left;
+        width: 12em;
+    }
+    .input-group {
+        width: 25em;
+        margin-bottom: 1em;
+    }
+    .captcha div {
+        margin-left: 4em;
+    }
+    #submit {
+        margin-left: 11.6em;
+    }
+}

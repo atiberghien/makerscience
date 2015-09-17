@@ -385,7 +385,6 @@ module.controller("ContactFormCtrl", ($scope, $modal) ->
         modalInstance = $modal.open(
             templateUrl: '/views/profile/block/contact.html'
             controller: 'ContactFormInstanceCtrl'
-            size : 'sm'
             resolve:
                 recipientId : () ->
                     return recipientId
