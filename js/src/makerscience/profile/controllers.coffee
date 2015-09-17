@@ -304,10 +304,11 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
 
         $scope.profile = makerscienceProfileResult
 
-        if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile.id != $scope.profile.id
+
+        if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile == undefined || $scope.currentMakerScienceProfile.id != $scope.profile.id
             $state.go('profile.detail', {slug : $stateParams.slug})
 
-        # $scope.notifications = Notification.getList({recipient_id : $scope.profile.parent.user.id}).$object
+        $scope.updateNotifications()
 
         MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities').then((activityResults)->
             $scope.activities = activityResults.objects
