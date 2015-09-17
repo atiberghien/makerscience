@@ -634,11 +634,12 @@ div.forum-answer + button {
     }
     p.question {
         padding: 0;
-        span {
-            display: none;
-        }
         a {
             color: #fff;
+            font-weight: normal;
+        }
+        span {
+            display: none;
         }
     }
     p.comments-count {
