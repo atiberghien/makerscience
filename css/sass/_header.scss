@@ -66,6 +66,26 @@ div.dropdown-logged-in {
 	// 	right: 0;
 	// 	left: auto;
 	// }
+	.dropdown-user {
+		button {
+			span {
+				vertical-align: middle;
+				&.avatar {
+					float: none;
+					margin-right: 0.25em;
+				}
+			}
+		}
+		.dropdown-menu {
+			width: 20em;
+			li {
+				width: 100%;
+				a {
+					padding: 0.75em 1em;
+				}
+			}
+		}
+	}
 	ul {
 		position: absolute;
 		top: 0;

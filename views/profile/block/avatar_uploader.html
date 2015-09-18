@@ -1,42 +1,8 @@
-<style>
-.cropArea {
-    background: #E4E4E4;
-    overflow: hidden;
-    width:400px;
-    height:400px;
-    float : left;
-}
-
-img-crop {
-    display: block;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-}
-
-img-crop canvas {
-    display: block;
-    left: 50%;
-    outline: 0 none;
-    position: absolute;
-    top: 50%;
-}
-.avatarArea {
-    float: left;
-    display: block;
-}
-
-.avatarArea img {
-    display: block;
-}
-</style>
-
-<div class="modal-body modal-gallery">
+<div class="modal-body modal-gallery modal-upload-avatar">
     <section>
         <input type="file" nv-file-select="" uploader="uploader" multiple />
         <ul class="thumbnails">
-            <li ng-repeat="item in uploader.queue" style="float: left;text-align: center;">
+            <li ng-repeat="item in uploader.queue">
                 <div class="cropArea">
                     <img-crop image="item.image"
                             result-image="item.croppedImage"
@@ -45,16 +11,13 @@ img-crop canvas {
                             area-type="square">
                     </img-crop>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
-                        <span class="glyphicon glyphicon-upload"></span> Envoyer
-                    </button>
-                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
-                        <span class="glyphicon glyphicon-trash"></span> Supprimer
-                    </button>
-                </div>
+                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                    <span class="glyphicon glyphicon-upload"></span> Envoyer
+                </button>
+                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                    <span class="glyphicon glyphicon-trash"></span> Supprimer
+                </button>
             </li>
         </ul>
-
     </section>
 </div>

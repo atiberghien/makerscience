@@ -1,3 +1,5 @@
+@import "compass/css3";
+
 #signinModal {
     .modal-body {
         padding: 0;
@@ -7,10 +9,9 @@
     }
 }
 
-@import "compass/css3";
-
 /* ============= LOGIN ============= */
 #wrap-login {
+
     background:rgba(133,201,250,0.8);
     position:fixed;
     width:100%;
@@ -27,11 +28,67 @@
         top:45%;
         left:50%;
         margin:-150px -230px;
-
-        
-
-        
     }
 
-    
+}
+
+.modal-upload-avatar {
+    ul.thumbnails li {
+        float: left;
+        width: 100%;
+        text-align: center;
+        button {
+            margin: 0.5em;
+            font-size: 1em;
+            padding: 0.25em 0.5em;
+        }
+    }
+    .cropArea {
+        overflow: hidden;
+        float : left;
+        width: 100%;
+        height: 400px;
+        margin-top: $grid-gutter-width / 2;
+        margin-bottom: $grid-gutter-width / 2;
+    }
+    img-crop {
+        overflow: hidden;
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    img-crop canvas {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        outline: 0 none;
+    }
+    .avatarArea {
+        float: left;
+        display: block;
+    }
+    .avatarArea img {
+        display: block;
+    }
+}
+
+.modal-send-message {
+    padding: $grid-gutter-width / 2;
+    padding-top: $grid-gutter-width;
+    label {
+        float: left;
+        width: 12em;
+    }
+    .input-group {
+        width: 25em;
+        margin-bottom: 1em;
+    }
+    .captcha div {
+        margin-left: 4em;
+    }
+    #submit {
+        margin-left: 11.6em;
+    }
 }

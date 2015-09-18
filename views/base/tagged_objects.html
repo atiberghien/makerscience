@@ -45,12 +45,12 @@
                 </div>
             </div><!-- .boxes -->
 
-            <h2 class="discussions clear"><span class="glyphicon glyphicon-user"></span> Les discussions comportant ce tag</h2>
+            <h2 class="forum clear"><span class="glyphicon glyphicon-user"></span> Les discussions comportant ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="post in discussions">
                     <ng-include src="'/views/forum/block/thread_light.html'"></ng-include>
                 </div>
-                <div class="box box-solo box-pink">
+                <div class="box box-solo box-purple">
                     <div>
                         <a ui-sref="forum()">Voir plus <span class="glyphicon glyphicon-chevron-right"></span></a>
                     </div>
@@ -58,7 +58,7 @@
             </div>
 
             <h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Ils ont utilisé ce tag</h2>
-            <div class="boxes boxes-medium">
+            <div class="boxes boxes-medium boxes-profiles">
                 <div class="box" ng-repeat="profile in taggerProfiles| orderBy:'-taggingDate' | unique:'id'">
                     <ng-include src="'/views/profile/block/profile_thumb_light.html'"></ng-include>
                 </div>

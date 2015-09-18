@@ -34,7 +34,7 @@
                     </ul>
                 </tab>
                 <tab heading="Activités de mon réseau">
-                    <ul>
+                    <ul class="activity">
                         <li class="activity-member" ng-repeat="activity in activities | orderBy:'-created_on'">
                             <p ng-bind-html="trustAsHtml(activity.description)"></p>
                             <span am-time-ago="activity.created_on"></span>

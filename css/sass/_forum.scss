@@ -163,20 +163,41 @@ form.forum-answer {
         }
     }
     fieldset.forum-linked {
-        display: inline-block;
         margin: $grid-gutter-width 0;
+        padding: $grid-gutter-width / 2;
         background-color: $color-bg;
-        button {
-            padding: 0;
-            padding-left: $grid-gutter-width / 2;
+        button.button-forum-linked, input#linked-idea_value {
+            height: 50px;
+            margin-top: $grid-gutter-width / 2;
+        }
+        button.button-forum-linked {
+            overflow: hidden;
             border: none;
+            padding-left: $grid-gutter-width;
             span {
+                top: 0;
                 margin-left: 1em;
+                margin-right: -6px;
                 padding: $grid-gutter-width / 2;
-                font-size: 2em;
+                font-size: 1.5em;
                 color: #fff;
                 background-color: $color-forum;
                 vertical-align: middle;
+            }
+        }
+        input#linked-idea_value {
+            float: left;
+            width: 868px; /* to align width delete buttons above when they appear */
+            padding: $grid-gutter-width / 2;
+            @include placeholder($color-blue);
+        }
+        ul.list-group {
+            margin: $grid-gutter-width / 2;
+            li {
+                margin-bottom: $grid-gutter-width / 2;
+            }
+            div.col-md-2 {
+                text-align: right;
             }
         }
     }
@@ -612,4 +633,46 @@ div.forum-answer {
 
 div.forum-answer + button {
     font-size: 1.25em;
+}
+
+/* Discussion boxes - search results */
+#content .boxes .box section.forum-topic {
+    height: 100%;
+    color: #fff;
+    background-color: $color-forum;
+    @include transition(background 0.2s ease-in-out);
+    &:hover {
+        @include opacity(0.9);
+    }
+    header h3, header h4 {
+        display: none;
+    }
+    header {
+        span.avatar {
+            float: none;
+            margin: 0 auto;
+        }
+    }
+    p.question {
+        padding: 0;
+        a {
+            color: #fff;
+            font-weight: normal;
+        }
+        span {
+            display: none;
+        }
+    }
+    p.comments-count {
+        position: absolute;
+        bottom: 0;
+        right: 1em;
+        padding: 0.25em;
+        span {
+            color: $color-light-grey;
+        }
+    }
+    ul.tags {
+        display: none;
+    }
 }
