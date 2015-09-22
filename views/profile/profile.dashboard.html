@@ -27,9 +27,10 @@
                 <tab heading="Mes notifications">
                     <ul class="activity">
                         <li class="list-group-item"><button ng-click="markAllAsRead()"><span class="glyphicon glyphicon-tasks" ></span></button></li>
-                        <li ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in notifications ">
+                        <li class="notification" ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in notifications ">
+                            <span class="glyphicon glyphicon-bell"></span>
                             <p ng-bind-html="trustAsHtml(notif.description)"></p>
-                            <span am-time-ago="notif.created_on"></span>
+                            <span am-time-ago="notif.created_on"></span><!-- FIXME Alban > ca doit pas etre .created_on ou la donnée n'est pas là... -->
                             <button class="mark non-closing" ng-show="notif.unread == true" ng-click="markAsRead(notif)"><span class="glyphicon glyphicon-eye-open" ></span></button>
                         </li>
                     </ul>
