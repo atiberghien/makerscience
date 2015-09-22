@@ -29,6 +29,7 @@
                         <li class="list-group-item"><button ng-click="markAllAsRead()"><span class="glyphicon glyphicon-tasks" ></span></button></li>
                         <li ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in notifications ">
                             <p ng-bind-html="trustAsHtml(notif.description)"></p>
+                            <span am-time-ago="notif.created_on"></span>
                             <button class="mark non-closing" ng-show="notif.unread == true" ng-click="markAsRead(notif)"><span class="glyphicon glyphicon-eye-open" ></span></button>
                         </li>
                     </ul>
@@ -59,11 +60,11 @@
                             <button class="button delete-account" ng-click="fullUpdateMakerScienceProfile(profileToUpdate)">Enregistrer</button>
                         </div>
                         <div class="col-md-6">
-                            <fieldset>
-                                <p>La suppression du compte est irréversible</p>
+                            <fieldset class="delete-account">
+                                <h3><i class="fa fa-exclamation-circle"></i> La suppression du compte est irréversible</h3>
                                 <button class="button delete-account" ng-click="deleteProfile(profile.slug)">Supprimer mon compte</button>
                             </fieldset>
-                            <fieldset>
+                            <fieldset class="change-password">
                                 <h3>Changement de mot de passe</h3>
                                 <label for="password">Votre mot de passe</label>
                                 <input type="password" name="password" id="password" />

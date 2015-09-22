@@ -207,6 +207,10 @@ div.toolbar {
 					background-color: $color-blue;
 					border: none;
 				}
+				&.change-password {
+				    padding: 0;
+				    background-color: #fff;
+				}
 			}
 			h3.confidentiality {
 				font-size: 1.25em;
