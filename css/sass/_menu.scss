@@ -18,12 +18,15 @@ header {
 				display: none;
 			}
 		}
+		.navbar-right {
+			margin-right: 0;
+		}
 		.navbar-tagline {
 			margin-top: -70px;
 			margin-left: 450px;
-			font-size: 1.4em;
-			font-family: "madtype";
-			line-height: 1.25em;
+			font-size: 1.25em;
+			line-height: 1.5em;
+			font-family: "MadType";
 			font-weight: 200;
 		}
 		.register-login {

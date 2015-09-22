@@ -50,8 +50,11 @@
 }
 
 /* Font used for the baseline */
-@font-face {
-    font-family: madtype;
-    src: url('./fonts/madtype.otf');
-    font-weight:300;
+@font-face{
+	font-family: 'MadType';
+	src: url('./fonts/MadType/madtype-webfont.eot');
+	src: url('./fonts/MadType/madtype-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('./fonts/MadType/madtype-webfont.woff') format('woff'),
+	     url('./fonts/MadType/madtype-webfont.ttf') format('truetype'),
+	     url('./fonts/MadType/madtype-webfont.svg#webfont') format('svg');
 }
