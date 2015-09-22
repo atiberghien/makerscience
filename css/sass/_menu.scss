@@ -12,7 +12,7 @@ header {
 			.navbar-brand {
 				position: absolute;
 				top: -97px;
-				left: $grid-gutter-width;
+				left: $grid-gutter-width / 2;
 			}
 			img.nav-small {
 				display: none;
@@ -24,7 +24,7 @@ header {
 			font-size: 1.4em;
 			font-family: "madtype";
 			line-height: 1.25em;
-			font-weight: 300;
+			font-weight: 200;
 		}
 		.register-login {
 			float: right;
@@ -52,6 +52,9 @@ header {
 				background-color: transparent;
 				border-color: #fff;
 			}
+		}
+		ul.navbar-nav li:first-child a {
+			margin-left: 0;
 		}
 
 		form {
