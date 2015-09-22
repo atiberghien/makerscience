@@ -1040,12 +1040,19 @@ div.toolbar {
 			&.selected {
 				background-color: $color-pink;
 			}
-			button.add-member {
+			div.member-buttons {
 				display: none;
 				z-index : 100;
+				position: absolute;
+				top: 0;
+				right: 0;
+				button {
+					position: relative;
+					float: right;
+				}
 			}
 			&:hover {
-				button.add-member {
+				div.member-buttons {
 					display: block;
 				}
 			}
