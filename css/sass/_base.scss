@@ -320,6 +320,15 @@ ul.pagination {
 			border-color: $color-resource;
 		}
 	}
+	&.pagination-forum {
+		a {
+			border-color: $color-forum;
+		}
+		li.active a {
+			background-color: $color-forum;
+			border-color: $color-forum;
+		}
+	}
 	/* Overwrite bootstrap's style */
 	&.pagination-sm li a {
 		padding: 0.2em 0.6em 0.1em;
