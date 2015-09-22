@@ -86,7 +86,7 @@ div.forum-sidebar {
 		div.member {
 			min-height: 5em;
 			position: relative;
-			margin: 0 ($grid-gutter-width / 2) 0 $grid-gutter-width;
+			margin: ($grid-gutter-width / 2) ($grid-gutter-width / 2) 0 $grid-gutter-width;
 			padding: 0.5em 0;
 			border-bottom: 1px solid $color-sidebar-community-member-border;
 			&:last-child {
@@ -95,7 +95,7 @@ div.forum-sidebar {
 			img {
 				display: inline-block;
 			}
-			div.member-details {
+			div.member-details, div.member-name {
 				display: inline-block;
 				width: 75%;
 				vertical-align: top;
@@ -105,6 +105,10 @@ div.forum-sidebar {
 					line-height: 1.25em;
 					vertical-align: top;
 					font-weight: bold;
+					a {
+						font-size: 1.25em;
+						color: #fff;
+					}
 				}
 			}
 			em {
