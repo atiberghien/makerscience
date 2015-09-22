@@ -295,7 +295,12 @@ ul.pagination {
 	}
 	&.pagination-projects {
 		a {
+			color: $color-project;
 			border-color: $color-project;
+			&:hover {
+				color: #fff;
+				background-color: $color-project;
+			}
 		}
 		li.active a {
 			background-color: $color-project;
@@ -304,7 +309,12 @@ ul.pagination {
 	}
 	&.pagination-profiles {
 		a {
+			color: $color-profile;
 			border-color: $color-profile;
+			&:hover {
+				color: #fff;
+				background-color: $color-profile;
+			}
 		}
 		li.active a {
 			background-color: $color-profile;
@@ -313,7 +323,12 @@ ul.pagination {
 	}
 	&.pagination-resources {
 		a {
+			color: $color-resource;
 			border-color: $color-resource;
+			&:hover {
+				color: #fff;
+				background-color: $color-resource;
+			}
 		}
 		li.active a {
 			background-color: $color-resource;
@@ -322,7 +337,12 @@ ul.pagination {
 	}
 	&.pagination-forum {
 		a {
+			color: $color-forum;
 			border-color: $color-forum;
+			&:hover {
+				color: #fff;
+				background-color: $color-forum;
+			}
 		}
 		li.active a {
 			background-color: $color-forum;
