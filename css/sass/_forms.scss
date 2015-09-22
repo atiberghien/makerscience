@@ -602,7 +602,6 @@ button.search-advanced {
 form#search-advanced {
 	margin-bottom: $grid-gutter-width;
 	padding: $grid-gutter-width;
-	padding-bottom: 0;
 	background-color: #fff;
 	label {
 		width: 20em;
@@ -618,5 +617,9 @@ form#search-advanced {
 		width: auto;
 		margin-left: 0.5em;
 		margin-right: 2em;
+	}
+	button[type="submit"] {
+		margin-left: 20.25em;
+		padding: 0.5em 1em;
 	}
 }
