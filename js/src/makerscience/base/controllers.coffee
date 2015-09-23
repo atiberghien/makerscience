@@ -286,15 +286,13 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
 module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval, $filter, ObjectProfileLink, Notification) ->
 
     $scope.updateNotifications = () ->
-        ObjectProfileLink.one().customGET('purge').then((result)->
-            if $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
-                Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
-                    $scope.notifications = notificationResults
-                    $scope.lastNotifications = $filter('limitTo')(notificationResults, 5)
-                    $scope.computeUnreadNotificationCounter()
+        if $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
+            Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
+                $scope.notifications = notificationResults
+                $scope.lastNotifications = $filter('limitTo')(notificationResults, 5)
+                $scope.computeUnreadNotificationCounter()
 
-                )
-        )
+            )
 
     $scope.computeUnreadNotificationCounter = () ->
         $scope.displayedUnreadNotifications = $filter('filter')($scope.lastNotifications, {unread:true})
