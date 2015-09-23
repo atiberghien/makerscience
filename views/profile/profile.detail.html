@@ -164,6 +164,50 @@
                         <li ng-if="currentMakerScienceProfile.id != profile.id" ng-controller="ContactFormCtrl">
                             <a title="Contacter" ng-click="showContactPopup(profile.parent.user.id)"><span class="fa fa-envelope-o"></span></a>
                         </li>
+                        <li ng-if="currentMakerScienceProfile.id != profile.id" ng-init="showShareDropdown = false">
+                            <a title="Partager" ng-click="showShareDropdown = !showShareDropdown"><span class="fa fa-level-down"></span></a>
+                            <ul style="position:absolute" ng-show="showShareDropdown">
+                                <li >
+                                    <a href=""
+                                        socialshare
+                                        socialshare-provider="facebook"
+                                        socialshare-text="{{profile.full_name}} sur Makerscience.fr"
+                                        socialshare-type="feed"
+                                        socialshare-via="724284684343376"
+                                        socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                                        socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg"
+                                        socialshare-redirect-uri="{{config.oauthBaseUrl}}/closePopup.html">
+                                        <i class="fa fa-facebook"></i>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href=""
+                                        socialshare
+                                        socialshare-provider="twitter"
+                                        socialshare-text="{{profile.full_name}} sur @makerscience"
+                                        socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                                        socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href=""
+                                        socialshare
+                                        socialshare-provider="google+"
+                                        socialshare-text="{{profile.full_name}} sur Makerscience.fr"
+                                        socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                                        socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg">
+                                        <i class="fa fa-google-plus"></i>
+                                    </a>
+                                </li>
+                                <li ng-controller="ReportAbuseCtrl">
+                                    <a ng-click="showReportAbusePopup(location.protocol() + '://' + location.host() + '' + location.path())">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div><!-- .row -->
