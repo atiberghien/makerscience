@@ -371,6 +371,7 @@ module.controller('ContactFormInstanceCtrl' , ($scope, $modalInstance, $timeout,
     $scope.sendMessage = (message) ->
         if $scope.response
             message.recaptcha_response = $scope.response
+            message.subject = 'Message Makerscience de ' + message.sender_full_name
             User.one(recipientId).customPOST(message, 'send/message', {}).then((response) ->
                 $scope.success = true
                 $timeout($modalInstance.close, 3000)
