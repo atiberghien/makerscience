@@ -110,8 +110,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         $rootScope.$broadcast('profile-loaded', $scope.profile)
         $rootScope.$emit('profile-loaded', $scope.profile)
 
-        $scope.profileToUpdate = angular.copy($scope.profile)
-
         $scope.preparedInterestTags = []
         $scope.preparedSkillTags = []
 
@@ -272,12 +270,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                     $scope.profile[key] = value
             )
             MakerScienceProfile.one(profileSlug).patch($scope.socials)
-
-        $scope.fullUpdateMakerScienceProfile = (makerscienceProfile) ->
-            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.last_name', makerscienceProfile.parent.user.last_name)
-            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.first_name', makerscienceProfile.parent.user.first_name)
-            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.email', makerscienceProfile.parent.user.email)
-
         $scope.deleteProfile = (makerscienceProfileSlug) ->
             MakerScienceProfile.one(makerscienceProfileSlug).remove()
             $rootScope.loginService.logout()
@@ -296,13 +288,27 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
     )
 )
 
-module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $controller, $stateParams, $state, MakerScienceProfile, Notification, ObjectProfileLink) ->
+module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $controller, $stateParams, $state, MakerScienceProfile, User,Notification,ObjectProfileLink) ->
 
     angular.extend(this, $controller('NotificationCtrl', {$scope: $scope}))
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
 
         $scope.profile = makerscienceProfileResult
+
+        $scope.user = {
+            first_name : $scope.profile.parent.user.first_name
+            last_name : $scope.profile.parent.user.last_name
+            email : $scope.profile.parent.user.email
+        }
+
+        $scope.updateMakerScienceUserInfo = () ->
+            angular.forEach($scope.user, (value, key) ->
+                data = {}
+                data[key] = value
+                User.one($scope.profile.parent.user.username).patch(data)
+            )
+            $scope.profile.full_name = $scope.user.first_name + " " + $scope.user.last_name
 
 
         if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile == undefined || $scope.currentMakerScienceProfile.id != $scope.profile.id
