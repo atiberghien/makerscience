@@ -1,5 +1,4 @@
 <div id="socialshare">
-
     <ul>
         <li style="background-color: white; border-radius: 11px;margin-bottom: 8px;padding: 5px 0 3px;text-align: center; width: 40px;">
             <a href=""
@@ -36,14 +35,10 @@
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-        <!-- <li style="width: 80px;">
-            <a facebook class="facebookShare" data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}'  data-shares='shares'>{{ shares }}</a>
+        <li style="background-color: white; border-radius: 11px;margin-bottom: 8px;padding: 5px 0 3px;text-align: center; width: 40px;" ng-controller="ReportAbuseCtrl">
+            <a ng-click="showReportAbusePopup(location.protocol() + '://' + location.host() + '' + location.path())">
+                <i class="fa fa-exclamation-circle"></i>
+            </a>
         </li>
-        <li style="width: 80px;">
-            <a twitter  data-lang="fr" data-count='horizontal' data-url='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-via='makerscience' data-size="medium" data-text='{{projectsheet.parent.title}}' ></a>
-        </li>
-        <li style="width: 80px;">
-            <div gplus class="g-plus" data-size="tall" data-annotation="bubble" data-href='{{location.protocol()}}://{{location.host()}}{{location.path()}}' data-action='share'></div>
-        </li> -->
     </ul>
 </div>

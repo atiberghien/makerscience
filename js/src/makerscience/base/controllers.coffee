@@ -317,3 +317,40 @@ module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval,
             $interval($scope.updateNotifications, 30000)
     )
 )
+
+module.controller('ReportAbuseFormInstanceCtrl' , ($scope, $modalInstance, $timeout, User, vcRecaptchaService, currentLocation) ->
+    $scope.success = false
+
+    $scope.setResponse = (response) ->
+        $scope.response = response
+
+    $scope.setWidgetId = (widgetId) ->
+        $scope.widgetId = widgetId
+
+    $scope.cbExpiration = () ->
+        $scope.response = null
+
+    $scope.sendMessage = (message) ->
+        if $scope.response
+            message.recaptcha_response = $scope.response
+            message.subject = 'Un abus a été signalé sur la page ' + currentLocation
+            User.one().customPOST(message, 'report/abuse', {}).then((response) ->
+                $scope.success = true
+                $timeout($modalInstance.close, 3000)
+            , (response) ->
+                console.log("RECAPTCHA ERROR", response)
+            )
+)
+
+module.controller("ReportAbuseCtrl", ($scope, $modal) ->
+
+    $scope.showReportAbusePopup = (currentLocation) ->
+        console.log(currentLocation)
+        modalInstance = $modal.open(
+            templateUrl: '/views/base/abuse.html'
+            controller: 'ReportAbuseFormInstanceCtrl'
+            resolve:
+                currentLocation : () ->
+                    return currentLocation
+        )
+)
