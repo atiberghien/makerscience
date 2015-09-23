@@ -81,7 +81,7 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, $filter, M
                 makerSciencePost["linked_"+item.type+"s"].push(item.fullObject.resource_uri)
             )
 
-            return MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
+            MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
                 mentions = newMakerSciencePostResult.parent.text.match(/\B@[a-z0-9_-]+/gi)
                 angular.forEach(mentions, (mention) ->
                     profileSlug = mention.substr(1)
@@ -95,7 +95,6 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, $filter, M
                             , 'makersciencepost/'+newMakerSciencePostResult.id)
                     )
                 )
-                return false
             )
         )
 )
@@ -108,6 +107,8 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
+    $scope.showCreateButton = false
+    $scope.newPost = {}
     $scope.params["limit"] = $scope.limit =  6
 
     $scope.bestContributors = []
@@ -148,6 +149,14 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
 
 
     $scope.fetchRecentPosts()
+
+    $scope.inlineSaveMakersciencePost = (newPost) ->
+        $scope.saveMakersciencePost(newPost, null, $scope.currentMakerScienceProfile.parent).then(->
+            $scope.refreshList()
+            $scope.showCreateButton = false
+            $scope.newPost = {}
+        )
+
 )
 
 

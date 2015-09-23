@@ -5,9 +5,9 @@
 
 <div class="forum-create">
     <div class="row container">
-        <div class="col-md-12" ng-init="showCreateButton = true">
+        <div class="col-md-12">
             <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
-            <form method="post" action="" collapse="showCreateButton" class="new-topic" ng-init="newPost.type='message'; initMention('iframeQuestionTextArea')" ng-controller="MentionCtrl">
+            <form method="post" action="" ng-show="showCreateButton" class="new-topic" ng-init="newPost.type='message'; initMention('iframeQuestionTextArea')" ng-controller="MentionCtrl">
                 <tabset>
                     <tab select="newPost.type='message'">
                         <tab-heading ><span class="glyphicon glyphicon-comment"></span> Message</tab-heading>
@@ -94,8 +94,8 @@
                 </fieldset>
 
                 <fieldset class="right">
-                    <button type="submit" class="button" ng-click="showCreateButton = saveMakersciencePost(newPost, null, currentMakerScienceProfile.parent)  && $scope.refreshList()">Créer</button>
-                    <button type="reset" class="button">Annuler</button>
+                    <button type="submit" class="button" ng-click="inlineSaveMakersciencePost(newPost)">Créer</button>
+                    <button type="reset" class="button" ng-click="showCreateButton=false">Annuler</button>
                 </fieldset>
             </form>
 
