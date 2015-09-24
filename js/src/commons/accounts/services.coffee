@@ -83,6 +83,7 @@ class LoginService
                         {username: @$rootScope.authVars.username, password: @$rootScope.authVars.password},"login", {}
                         ).then((data) =>
                                 console.log(data)
+                                @$rootScope.authVars.username = data.username
                                 @$cookies.username = data.username
                                 @$cookies.key = data.token
                                 @$http.defaults.headers.common['Authorization'] = "ApiKey #{data.username}:#{data.token}"

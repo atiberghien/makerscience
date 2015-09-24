@@ -106,14 +106,22 @@ module.controller("CommunityCtrl", ($scope, $filter, $interval, Profile, ObjectP
 module.controller('LoginCtrl', ($scope, $rootScope, $state, $stateParams, $cookies, $http, $auth) ->
 
     $scope.authenticate = (provider) ->
-        $auth.authenticate(provider).then((response) ->
-            if response.data.success
-                $cookies.username = response.data.username
-                $cookies.key = response.data.token
-                $http.defaults.headers.common['Authorization'] = "ApiKey #{response.data.username}:#{response.data.token}"
-                $rootScope.$broadcast('event:auth-loginConfirmed')
-                $state.go($state.current.name, $stateParams)
-        )
+        if provider == 'basic'
+
+            $rootScope.authVars.username = asmCrypto.SHA1.hex($scope.basicEmail).slice(0,30)
+            $rootScope.authVars.password = $scope.basicPassword
+            $rootScope.loginService.submit()
+            # $scope.basicEmail = ""
+            # $scope.basicPassword = ""
+        else
+            $auth.authenticate(provider).then((response) ->
+                if response.data.success
+                    $cookies.username = response.data.username
+                    $cookies.key = response.data.token
+                    $http.defaults.headers.common['Authorization'] = "ApiKey #{response.data.username}:#{response.data.token}"
+                    $rootScope.$broadcast('event:auth-loginConfirmed')
+                    $state.go($state.current.name, $stateParams)
+            )
 )
 
 # module.controller('TwitterAuthCtrl', ($scope, $rootScope, $location, $state, $stateParams, $cookies, $http, $auth, User) ->

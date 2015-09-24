@@ -57,14 +57,15 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
     $scope.password = null
 
     $scope.register = () ->
+        usernameHash = asmCrypto.SHA1.hex($scope.username).slice(0,30)
         userData =
             first_name :$scope.first_name
             last_name : $scope.last_name
-            username : $scope.username
+            username : usernameHash
             email : $scope.username
             password : $scope.password
         User.post(userData).then((userResult) ->
-            $rootScope.authVars.username = $scope.username
+            $rootScope.authVars.username = usernameHash
             $rootScope.authVars.password = $scope.password
             $rootScope.loginService.submit()
         )

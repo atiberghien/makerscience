@@ -9,15 +9,15 @@
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">@</span>
-            <input type="text" class="form-control" name="username" placeholder="Email ..." ng-model="authVars.username" required>
+            <input type="text" class="form-control" name="username" placeholder="Email ..." ng-model="basicEmail" required>
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-            <input type="text" class="form-control" name="password" placeholder="Mot de passe..." ng-model="authVars.password" required>
+            <input type="text" class="form-control" name="password" placeholder="Mot de passe..." ng-model="basicPassword" required>
 
         </div>
     </div>
-    <button type="submit"  ng-click="submit()" >Connexion</button>
+    <button type="submit"  ng-click="authenticate('basic')" >Connexion</button>
 </form>
