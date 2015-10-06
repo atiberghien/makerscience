@@ -2,23 +2,6 @@ module = angular.module("makerscience.base.controllers", ['makerscience.base.ser
                                                           'makerscience.catalog.controllers.project', 'makerscience.catalog.controllers.resource',
                                                           'commons.accounts.controllers', 'commons.graffiti.services'])
 
-
-module.directive('username', (User) ->
-    require: 'ngModel'
-    link: (scope, elm, attrs, ctrl) ->
-        User.getList().then((userResults) ->
-            usernames = userResults.map((user) ->
-                return user.username
-            )
-            ctrl.$parsers.unshift((viewValue) ->
-                if usernames.indexOf(viewValue) == -1
-                    ctrl.$setValidity('username', true);
-                else
-                    ctrl.$setValidity('username', false);
-            )
-        )
-)
-
 module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
     """
     Abstract controller that initialize some list filtering parameters and
