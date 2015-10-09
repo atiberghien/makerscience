@@ -19,7 +19,7 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
 
     angular.extend($scope,
         defaults :
-            scrollWheelZoom: false # Keep the scrolling working on the page, not in the map
+            scrollWheelZoom: true # Keep the scrolling working on the page, not in the map
             maxZoom: 14
             minZoom: 5
             path:
@@ -72,6 +72,11 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
         )
     )
     $scope.$on('leafletDirectiveMarker.click', (event, args) ->
+        if $scope.spottedProfile
+            marker = $scope.markers[$scope.spottedProfile.id]
+            marker.icon = marker.icon_standard
+            $scope.spottedProfile = null
+
         marker = $scope.markers[args.modelName]
         marker.icon = marker.icon_hover
 
