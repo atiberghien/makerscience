@@ -14,9 +14,8 @@
             </div>
         </div><!-- .container -->
     </div><!-- .forum-search -->
-
+    <ng-include src="'/views/forum/block/social_share.html'"></ng-include>
     <div ng-init="showAnswerForm=false">
-
         <div class="forum-thread">
             <div class="row container">
                 <div class="col-md-12">
@@ -57,7 +56,6 @@
                     </div>
                     <div class="thread-actions">
                         <ul>
-
                             <li>
                                 <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 33)"
                                            ng-click="addMember(currentMakerScienceProfile.parent, 33, '', true)">

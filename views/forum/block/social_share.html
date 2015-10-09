@@ -1,0 +1,44 @@
+<div id="socialshare">
+    <ul>
+        <li style="background-color: white; border-radius: 11px;margin-bottom: 8px;padding: 5px 0 3px;text-align: center; width: 40px;">
+            <a href=""
+                socialshare
+                socialshare-provider="facebook"
+                socialshare-text="{{post.parent.title}}"
+                socialshare-caption = "par {{post.parent.author.user.first_name}} {{post.parent.author.user.last_name}}"
+                socialshare-type="feed"
+                socialshare-via="724284684343376"
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg"
+                socialshare-redirect-uri="{{config.oauthBaseUrl}}/closePopup.html">
+                <i class="fa fa-facebook"></i>
+            </a>
+
+        </li>
+        <li style="background-color: white; border-radius: 11px;margin-bottom: 8px;padding: 5px 0 3px;text-align: center; width: 40px;">
+            <a href=""
+                socialshare
+                socialshare-provider="twitter"
+                socialshare-text="{{post.parent.title}} sur @makerscience"
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li style="background-color: white; border-radius: 11px;margin-bottom: 8px;padding: 5px 0 3px;text-align: center; width: 40px;" >
+            <a href=""
+                socialshare
+                socialshare-provider="google+"
+                socialshare-text="{{post.parent.title}} par {{post.parent.author.user.first_name}} {{post.parent.author.user.last_name}}"
+                socialshare-url="{{location.protocol()}}://{{location.host()}}{{location.path()}}"
+                socialshare-media="{{location.protocol()}}://{{location.host()}}/img/bacasable.jpg">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+        <li style="background-color: white; border-radius: 11px;margin-bottom: 8px;padding: 5px 0 3px;text-align: center; width: 40px;" ng-controller="ReportAbuseCtrl">
+            <a ng-click="showReportAbusePopup(location.protocol() + '://' + location.host() + '' + location.path())">
+                <i class="fa fa-exclamation-circle"></i>
+            </a>
+        </li>
+    </ul>
+</div>
