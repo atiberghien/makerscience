@@ -148,14 +148,6 @@
                     </ul>
                 </div>
 
-                <div class="forum-sidebar-light">
-                    <h3>Les derniers posts sans réponses</h3>
-                    <div class="post" ng-repeat="post in threads | orderBy : '-parent.posted_on' | filter : hasNoAnswer | limitTo : 2">
-                        <ng-include src="'/views/forum/block/small_thread_thumb.html'"></ng-include>
-                    </div><!-- .post -->
-                    <!-- <p class="more"><a href="">Tout afficher</a><p> -->
-                </div><!-- .forum-sidebar-light -->
-
                 <div class="forum-sidebar-light" >
                     <h3>Suggestion de tags</h3>
                     <ul class="tags tags-padding" ng-controller="TagListCtrl">
