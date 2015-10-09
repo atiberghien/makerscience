@@ -173,8 +173,8 @@ form.forum-answer {
         button.button-forum-linked {
             overflow: hidden;
             border: none;
-            padding-left: $grid-gutter-width;
-            background-color: $color-forum;
+            padding: 10px 15px 10px 15px;
+	    background-color: $color-forum;
             span {
                 top: 0;
                 margin-left: 1em;
@@ -188,7 +188,7 @@ form.forum-answer {
         }
         input#linked-idea_value {
             float: left;
-            width: 868px; /* to align width delete buttons above when they appear */
+            width: 955px; /* to align width delete buttons above when they appear */
             padding: $grid-gutter-width / 2;
             @include placeholder($color-blue);
         }
@@ -403,7 +403,7 @@ div.forum-sidebar {
             line-height: 4.75em;
             font-size: 1.25em;
             color: #fff;
-            border-bottom: 1px solid $color-medium-grey;
+            #border-bottom: 1px solid $color-medium-grey;
             &:hover {
                 background-color: rgba(0, 0, 0, 0.25);
                 text-decoration: none;
