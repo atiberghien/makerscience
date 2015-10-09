@@ -419,7 +419,6 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLi
             )
 
     $scope.showContactPopup = (profile) ->
-        console.log($scope.recaptchaKey)
         modalInstance = $modal.open(
             templateUrl: '/views/profile/block/contact.html'
             controller: 'ContactFormInstanceCtrl'
