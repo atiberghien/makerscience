@@ -64,7 +64,7 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
         $scope.emailError = false
         $scope.passwordError = false
 
-        if $scope.password != $scope.password2
+        if $scope.password != null && $scope.password != $scope.password2
             $scope.passwordError = true
 
         User.one().get({email : $scope.email}).then((userResults)->
