@@ -292,15 +292,20 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
 
     angular.extend(this, $controller('NotificationCtrl', {$scope: $scope}))
 
-    MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
 
+    MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
 
         $scope.user = {
             first_name : $scope.profile.parent.user.first_name
             last_name : $scope.profile.parent.user.last_name
             email : $scope.profile.parent.user.email
+            passwordReset : ''
+            passwordReset2 : ''
         }
+        $scope.passwordError = false
+        $scope.passwordResetSuccess = false
+
 
         $scope.updateMakerScienceUserInfo = () ->
             angular.forEach($scope.user, (value, key) ->
@@ -309,6 +314,19 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
                 User.one($scope.profile.parent.user.username).patch(data)
             )
             $scope.profile.full_name = $scope.user.first_name + " " + $scope.user.last_name
+
+        $scope.changeMakerScienceProfilePassword = () ->
+            $scope.passwordResetFail = false
+            $scope.passwordResetSuccess = false
+
+            if $scope.user.passwordReset != null && $scope.user.passwordReset != $scope.user.passwordReset2
+                $scope.passwordResetFail = true
+                return
+            else
+                MakerScienceProfile.one($scope.profile.slug).customPOST({password : $scope.user.passwordReset}, 'change/password', {}).then((result)->
+                    $scope.passwordResetsuccess = true
+                )
+
 
 
         if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile == undefined || $scope.currentMakerScienceProfile.id != $scope.profile.id

@@ -58,34 +58,26 @@
                             <label for="email">Email</label>
                             <input type="email" name="email" id="email" ng-model="user.email"/>
 
-                            <button class="button delete-account" ng-click="updateMakerScienceUserInfo(user)">Enregistrer</button>
+                            <button class="button delete-account" ng-click="updateMakerScienceUserInfo()">Enregistrer</button>
                         </div>
                         <div class="col-md-6">
                             <fieldset class="delete-account">
                                 <h3><i class="fa fa-exclamation-circle"></i> La suppression du compte est irréversible</h3>
-                                <button class="button delete-account" ng-click="deleteProfile(profile.slug)">Supprimer mon compte</button>
+                                <button class="button delete-account" ng-click="deleteProfile()">Supprimer mon compte</button>
                             </fieldset>
                             <fieldset class="change-password">
                                 <h3>Changement de mot de passe</h3>
                                 <label for="password">Votre mot de passe</label>
-                                <input type="password" name="password" id="password" />
+                                <input type="password" name="password" id="password" ng-model="user.passwordReset"/>
 
                                 <label for="passwordconfirmation">Confirmation de votre mot de passe</label>
-                                <input type="password" name="passwordconfirmation" id="passwordconfirmation" />
+                                <input type="password" name="passwordconfirmation" id="passwordconfirmation" ng-model="user.passwordReset2"/>
 
-                                <button class="button delete-account" >Enregistrer le nouveau mot de passe</button>
+                                <span ng-show="passwordResetFail">Les deux mots de passe doivent être identiques.</span>
+                                <span ng-show="passwordResetsuccess">Votre mot de passe a bien été ré-initialisé</span>
+
+                                <button class="button delete-account" ng-click="changeMakerScienceProfilePassword()">Enregistrer le nouveau mot de passe</button>
                             </fieldset>
-
-                            <!-- <fieldset>
-                                <h3>Liens réseaux sociaux et sites web</h3>
-                                <button class="add-link"><span class="glyphicon glyphicon-plus"></span></button>
-
-                                <input type="text" name="link1" value="http://www.google.com" />
-                                <input type="text" name="link2" value="http://www.something.com" />
-                                <input type="text" name="link3" value="http://www.foobar.com" />
-
-                            </fieldset> -->
-
                             <h3 class="confidentiality">Confidentialité</h3>
                             <ul class="confidentiality">
                                 <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
