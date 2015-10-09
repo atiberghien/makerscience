@@ -270,10 +270,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                     $scope.profile[key] = value
             )
             MakerScienceProfile.one(profileSlug).patch($scope.socials)
-        $scope.deleteProfile = (makerscienceProfileSlug) ->
-            MakerScienceProfile.one(makerscienceProfileSlug).remove()
-            $rootScope.loginService.logout()
-            $state.go("home", {})
 
     , (response) ->
         if response.status == 404
@@ -306,6 +302,10 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
         $scope.passwordError = false
         $scope.passwordResetSuccess = false
 
+        $scope.deleteProfile = () ->
+            MakerScienceProfile.one($scope.profile.slug).remove()
+            $rootScope.loginService.logout()
+            $state.go("home", {})
 
         $scope.updateMakerScienceUserInfo = () ->
             angular.forEach($scope.user, (value, key) ->
