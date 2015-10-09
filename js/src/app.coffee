@@ -221,6 +221,14 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     label: 'Recherche'
                     parent : 'home'
         )
+        .state('resetPassword',
+                url: '/reset/password/:hash/?email',
+                templateUrl: '/views/reset_password.html'
+                controller : 'MakerScienceResetPasswordCtrl'
+                ncyBreadcrumb:
+                    label: 'Ré-initialisation de mot de passe'
+                    parent : 'home'
+        )
         # .state('twitter',
         #         url: '/auth/twitter',
         #         # templateUrl: 'closePopup.html'

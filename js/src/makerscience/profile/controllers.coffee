@@ -284,6 +284,49 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
     )
 )
 
+module.controller("MakerScienceResetPasswordCtrl", ($scope, $stateParams,MakerScienceProfile) ->
+
+
+    $scope.passwordResetFail = false
+    $scope.passwordResetSuccess = false
+
+    $scope.notMatchingEmailError = false
+    $scope.passwordReset = ''
+    $scope.passwordReset2 = ''
+
+
+    if $stateParams.hasOwnProperty('hash') && $stateParams.hasOwnProperty('email')
+        $scope.email = $stateParams.email
+
+        $scope.finalizeResetPassword = () ->
+            $scope.passwordResetFail = false
+            $scope.passwordResetSuccess = false
+
+            if $scope.passwordReset != null && $scope.passwordReset != $scope.passwordReset2
+                $scope.passwordResetFail = true
+                return
+            else
+                MakerScienceProfile.one().customGET('reset/password', {email: $scope.email, hash : $stateParams.hash, password: $scope.passwordReset}).then((result) ->
+                    if result.success
+                        $scope.passwordResetSuccess = true
+                    else
+                        $scope.notMatchingEmailError = true
+                )
+
+
+    $scope.resetPassword = (email) ->
+        $scope.unknownProfileError = false
+        $scope.passwordResetEmailSent = false
+        MakerScienceProfile.one().customGET('reset/password', {email: email}).then((result) ->
+            if result.success
+                $scope.passwordResetEmailSent = true
+            else
+                $scope.unknownProfileError = true
+        )
+
+)
+
+
 module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $controller, $stateParams, $state, MakerScienceProfile, User,Notification,ObjectProfileLink) ->
 
     angular.extend(this, $controller('NotificationCtrl', {$scope: $scope}))
@@ -350,7 +393,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
     )
 )
 
-module.controller("FriendshipCtrl", ($scope, $rootScope, ObjectProfileLink) ->
+module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLink) ->
 
     $scope.addFriend = (friendProfileID) ->
         ObjectProfileLink.one().customPOST(
@@ -375,13 +418,24 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, ObjectProfileLink) ->
                     return objectProfileLinkResults.objects[0]
             )
 
+    $scope.showContactPopup = (profile) ->
+        console.log($scope.recaptchaKey)
+        modalInstance = $modal.open(
+            templateUrl: '/views/profile/block/contact.html'
+            controller: 'ContactFormInstanceCtrl'
+            resolve:
+                profile : () ->
+                    return profile
+        )
+
     $rootScope.$on('profile-loaded', (event, profile) ->
         $scope.checkFriend(profile.id)
     )
 )
 
-module.controller('ContactFormInstanceCtrl' , ($scope, $modalInstance, $timeout, User, vcRecaptchaService, recipientId) ->
+module.controller('ContactFormInstanceCtrl' , ($scope, $modalInstance, $timeout, MakerScienceProfile, vcRecaptchaService, profile) ->
     $scope.success = false
+    $scope.profile = profile
 
     $scope.setResponse = (response) ->
         $scope.response = response
@@ -395,23 +449,10 @@ module.controller('ContactFormInstanceCtrl' , ($scope, $modalInstance, $timeout,
     $scope.sendMessage = (message) ->
         if $scope.response
             message.recaptcha_response = $scope.response
-            message.subject = 'Message Makerscience de ' + message.sender_full_name
-            User.one(recipientId).customPOST(message, 'send/message', {}).then((response) ->
+            MakerScienceProfile.one(profile.slug).customPOST(message, 'send/message', {}).then((response) ->
                 $scope.success = true
                 $timeout($modalInstance.close, 3000)
             , (response) ->
                 console.log("RECAPTCHA ERROR", response)
             )
-)
-
-module.controller("ContactFormCtrl", ($scope, $modal) ->
-
-    $scope.showContactPopup = (recipientId) ->
-        modalInstance = $modal.open(
-            templateUrl: '/views/profile/block/contact.html'
-            controller: 'ContactFormInstanceCtrl'
-            resolve:
-                recipientId : () ->
-                    return recipientId
-        )
 )
