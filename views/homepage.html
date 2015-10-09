@@ -46,13 +46,10 @@
                     <div ng-show="!showLoginPanel" class="welcome">
                         <div class="join">
                             <h2 ng-hide="authVars.isAuthenticated">Rejoignez la communauté MakerScience !</h2>
-                            <form ng-hide="authVars.isAuthenticated" class="login">
-                                <ul ng-controller='LoginCtrl'>
-                                    <li><button class="connect-with-facebook" ng-click="authenticate('facebook')"></button></li>
-                                    <!--<li><button class="connect-with-twitter" ng-click="authenticate('twitter')"></button></li>-->
-                                    <li><button class="connect-with-google" ng-click="authenticate('google')"></button></li>
-                                </ul>
-                            </form>
+                            <p class="register-login" ng-show="!authVars.isAuthenticated">
+                                <button class="button" ng-click="openSignupPopup()">S'inscrire</button>
+                                <button class="button" ng-click="openSigninPopup()">Se connecter</button>
+                            </p>
                             <h2 ng-show="authVars.isAuthenticated">Bienvenue {{currentMakerScienceProfile.parent.user.first_name}}</h2>
                         </div><!-- .join -->
                     </div>
