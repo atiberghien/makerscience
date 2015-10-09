@@ -3,7 +3,7 @@
         <div class="row">
           <form role="form" action="" method="post">
             <div class="col-lg-6">
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label for="InputName">Votre nom</label>
                 <div class="input-group">
                   <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Enter Name" ng-model="message.sender_full_name" required>
@@ -12,9 +12,9 @@
                 <label for="InputEmail">Votre adresse email</label>
                 <div class="input-group">
                   <input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Enter Email" ng-model="message.sender_email" required  >
-              </div>
+              </div> -->
+                 <h1>Votre message pour {{profile.first_name}} {{profile.last_name}}</h1>
               <div class="form-group">
-                <label for="InputMessage">Votre Message</label>
                 <div class="input-group">
                   <textarea name="InputMessage" id="InputMessage" class="form-control" rows="5" ng-model="message.body" required></textarea>
               </div>
@@ -22,7 +22,7 @@
                   <div
                     vc-recaptcha
                     theme="'light'"
-                    key="'6LfrjQwTAAAAADL047Yx9IUOgsFAfHpjq8InqwMF'"
+                    key=recaptchaKey
                     on-create="setWidgetId(widgetId)"
                     on-success="setResponse(response)"
                     on-expire="cbExpiration()"

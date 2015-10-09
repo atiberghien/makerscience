@@ -1,8 +1,16 @@
 <span ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
     <div class="member-buttons">
-        <button  ng-if="currentMakerScienceProfile.id != profile.id" ng-show="!isFriend" ng-click="addFriend(profile.id)" class="add-member"><span class="fa fa-user-plus"></span></button>
-        <button  ng-show="isFriend" ng-click="removeFriend(profile.id)" class="add-member"><span class="fa fa-user-times"></span></button>
-        <button  ng-show="isFriend" class="add-member"><span class="fa fa-envelope"></span></button>
+        <button  ng-if="currentMakerScienceProfile.id != profile.id" ng-show="!isFriend" ng-click="addFriend(profile.id)" class="add-member">
+            <span class="fa fa-user-plus"></span>
+        </button>
+
+        <button  ng-show="isFriend" ng-click="removeFriend(profile.id)" class="add-member">
+            <span class="fa fa-user-times"></span>
+        </button>
+
+        <button  ng-show="isFriend" class="add-member" ng-click="showContactPopup(profile)">
+            <span class="fa fa-envelope"></span>
+        </button>
     </div>
 </span>
 <a ui-sref="profile.detail({slug:profile.slug})">
