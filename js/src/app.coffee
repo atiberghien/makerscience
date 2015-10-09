@@ -261,6 +261,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     $rootScope.trustAsHtml = (string) ->
         return $sce.trustAsHtml(string)
 
+    $rootScope.recaptchaKey = "6LfrjQwTAAAAADL047Yx9IUOgsFAfHpjq8InqwMF"
 
 )
 
