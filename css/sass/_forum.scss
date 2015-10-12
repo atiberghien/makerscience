@@ -572,6 +572,9 @@ div.thread-answers {
         margin-bottom: $grid-gutter-width;
         padding: $grid-gutter-width / 2;
         background-color: #fff;
+        .avatar {
+            float: none;
+        }
         ul.answer-report {
             float: right;
             margin-top: $grid-gutter-width / 2;
