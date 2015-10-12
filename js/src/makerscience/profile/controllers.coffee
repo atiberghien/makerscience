@@ -348,6 +348,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
             first_name : $scope.profile.parent.user.first_name
             last_name : $scope.profile.parent.user.last_name
             email : $scope.profile.parent.user.email
+            notifFreq : $scope.profile.notif_subcription_freq
             passwordReset : ''
             passwordReset2 : ''
         }
@@ -367,6 +368,10 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
             )
             $scope.profile.full_name = $scope.user.first_name + " " + $scope.user.last_name
 
+        $scope.updateNotifFrequency = (frequency)->
+            MakerScienceProfile.one($scope.profile.slug).patch({notif_subcription_freq : frequency})
+            $scope.user.notifFreq = frequency
+
         $scope.changeMakerScienceProfilePassword = () ->
             $scope.passwordResetFail = false
             $scope.passwordResetSuccess = false
@@ -384,7 +389,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
         if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile == undefined || $scope.currentMakerScienceProfile.id != $scope.profile.id
             $state.go('profile.detail', {slug : $stateParams.slug})
 
-        $scope.updateNotifications()
+        $scope.updateNotifications(true)
 
         MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities').then((activityResults)->
             $scope.activities = activityResults.objects

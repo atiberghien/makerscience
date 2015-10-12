@@ -60,7 +60,7 @@
                                         <ul class="dropdown-menu dropdown-menu-right dropdown-notifications">
                                             <li class="list-group-item" ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in lastNotifications">
                                                 <p ng-bind-html="trustAsHtml(notif.description)"></p>
-                                                <!-- <button class="mark non-closing" ng-show="notif.unread == true" ng-click="markAsRead(notif)"><span class="glyphicon glyphicon-eye-open" ></span></button> -->
+                                                <span am-time-ago="notif.timestamp"></span>
                                             </li>
                                             <li class="list-group-item">
                                                 <a ui-sref="profile.dashboard({slug:currentMakerScienceProfile.slug})">
