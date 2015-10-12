@@ -522,6 +522,9 @@ div.thread-answers {
             margin-bottom: 1em;
             color: $color-strong-grey;
         }
+        ul {
+            list-style-position: inside;
+        }
     }
     .thread-actions {
         font-size: 1.25em;
