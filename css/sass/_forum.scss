@@ -146,15 +146,17 @@ form.forum-answer {
         padding: $grid-gutter-width / 2;
         background-color: $color-bg;
         div.tags {
-            border: none;
-            background-color: transparent;
+            margin-top: $grid-gutter-width / 2;
+            padding: 0.25em 0.5em;
             box-shadow: none;
             li.tag-item {
                 background-color: $color-blue;
                 @include border-radius(0);
             }
             input.input {
+                margin-bottom: 0;
                 padding: 0;
+                background-color: transparent;
                 @include placeholder($color-blue);
             }
             ul.tag-list {
