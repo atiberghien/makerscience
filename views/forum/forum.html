@@ -113,7 +113,7 @@
                     <tab heading="Récent" select="fetchRecentPosts()"></tab>
                     <tab heading="Top" select="fetchTopPosts()"></tab>
                 </tabset>
-                <div ng-controller="FilterCtrl">
+                <div ng-controller="FilterCtrl" class="forum-tag-search">
                     <ng-include src="'/views/base/tag_input.html'"></ng-include>
                 </div>
                 <div ng-repeat="post in threads">

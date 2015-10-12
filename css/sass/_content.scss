@@ -248,6 +248,12 @@ div.toolbar {
 	}
 	&.content-forum {
 		margin-top: $grid-gutter-width;
+		div.forum-tag-search {
+			div.tags {
+				padding: 5px;
+    				margin-bottom: 12px;
+			}
+		}
 	}
 	&.thread-answers {
 		margin-top: $grid-gutter-width;
