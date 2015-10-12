@@ -236,6 +236,15 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                 $scope.profile.parent.avatar = avatar
             )
 
+        $scope.showBioPopup = () ->
+            modalInstance = $modal.open(
+                templateUrl: '/views/base/basicModal.html'
+                controller: 'BasicModalInstanceCtrl'
+                resolve:
+                    content : () ->
+                        return $scope.profile.bio
+            )
+
         $scope.addTagToProfile = (tag_type, tag) ->
             MakerScienceProfileTaggedItem.one().customPOST({tag : tag.text}, "makerscienceprofile/"+$scope.profile.id+"/"+tag_type, {}).then((taggedItemResult) ->
                 ObjectProfileLink.one().customPOST(

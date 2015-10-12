@@ -21,13 +21,13 @@
                         <h2 editable-text="profile.activity"
                             e-form="ActivityBtnForm"
                             onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'activity', $data)"
-                            ng-bind-html="profile.activity">{{ profile.activity }}
+                            >{{ profile.activity || "Titre/Accroche" }}
                         </h2>
                     </div>
 
                     <div class="relative">
                         <p style="text-align:center">
-                            Créé <span am-time-ago="profile.parent.user.date_joined"></span>
+                            Créé le {{profile.parent.user.date_joined | date:'dd/MM/yyyy'}}
                         </p>
                     </div>
                     <div class="location editable">
@@ -60,8 +60,10 @@
                                  e-rows="4"
                                  e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'bio', $data)"
-                                 ng-bind-html="profile.bio">
+                                 ng-bind-html="profile.bio"
+                                 style="max-height: 50px;">
                             </p>
+                            <a href="" ng-click="showBioPopup()">... (voir plus)</a>
                         </div><!-- .relative -->
 
                         <div class="relative" ng-hide="BioBtnForm.$visible">
@@ -127,26 +129,28 @@
                             <div class="edit-buttons" ng-click="socialEdit=!socialEdit" ng-show="editable" ng-init="socialEdit=False">
                                 <button> <span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <h4 ng-show="!profile.facebook && !profile.twitter && !profile.linkedin && !profile.contact_email && !profile.contact_email && !profile.website && !socialEdit">Aucun réseaux sociaux ni contacts n'ont été renseignés</h4>
+                            <h4 ng-show="!profile.facebook && !profile.twitter && !profile.linkedin && !profile.contact_email && !profile.contact_email && !profile.website && !socialEdit">
+                                Aucun site n’a été renseigné
+                            </h4>
                             <div ng-show="!socialEdit" class="socials">
                                 <a ng-show="profile.facebook" href="{{profile.facebook}}" target="_blank" class="share-facebook"><img src="/img/icons/social/facebook-small.png" alt="Facebook" /></a>
                                 <a ng-show="profile.twitter" href="{{profile.twitter}}" target="_blank" class="share-twitter"><img src="/img/icons/social/twitter-small.png" alt="Twitter" /></a>
                                 <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin"><img src="/img/icons/social/linkedin_small.jpg" alt="Linkedin" /></a>
-                                <a ng-show="profile.contact_email" href="{{profile.contact_email}}" target="_blank" class="share-email"><span class="glyphicon glyphicon-envelope"></span></a>
 
-                                <label><a ng-show="profile.website" href="{{profile.website}}" target="_blank" ><span ng-show="profile.website" class="glyphicon glyphicon-globe"></span></a></label>
+                                <label><a ng-show="profile.website" href="{{profile.website}}" target="_blank" >
+                                    <span ng-show="profile.website" class="glyphicon glyphicon-globe"></span>
+                                    <span>{{profile.website | limitTo:10}}<span ng-if="profile.website.length > 10">...</span></span></a></label>
                             </div>
 
-                            <div ng-show="socialEdit" >
+                            <div ng-show="socialEdit" class="socials" >
                                 <h5>Liens réseaux sociaux et contacts</h5>
                                 <div style="width: 50%;float:left">
-                                    <input style="width: 75%;" type="text" ng-model="socials.facebook" placeholder="Lien profil Facebook"/></br>
-                                    <input style="width: 75%;" type="text" ng-model="socials.twitter" placeholder="Lien profil Twitter"/></br>
-                                    <input style="width: 75%;" type="text" ng-model="socials.linkedin" placeholder="Lien profil LinkedIn"/></br>
+                                    <input style="width: 85%;" type="text" ng-model="socials.facebook" placeholder="Lien profil Facebook"/></br>
+                                    <input style="width: 85%;" type="text" ng-model="socials.twitter" placeholder="Lien profil Twitter"/></br>
                                 </div>
                                 <div>
-                                    <input style="width: 40%;" type="text" ng-model="socials.contact_email" placeholder="Courriel de contact"/></br>
-                                    <input style="width: 40%;" type="text" ng-model="socials.website" placeholder="Site web"/>
+                                    <input style="width: 50%;" type="text" ng-model="socials.linkedin" placeholder="Lien profil LinkedIn"/></br>
+                                    <input style="width: 50%;" type="text" ng-model="socials.website" placeholder="Site web"/>
                                 </div>
                                 <span class="editable-buttons">
                                     <button class="btn btn-primary" ng-click="updateSocialNetworks(profile.slug, socials);socialEdit=False" >Enregistrer</button>
@@ -206,7 +210,7 @@
                                 </ul>
                             </div>
                             <div class="contribution">
-                                <h2>Les tags que je suis</h2>
+                                <h2>Les tags suivis</h2>
                                 <ul class="tags">
                                     <li ng-repeat="tag in followedTags">
                                         <a tooltip="{{tag.slug}}" ui-sref="tag({slug:tag.slug})">{{tag.slug| characters:10}}</a>
@@ -267,7 +271,7 @@
                     <div ng-repeat="post in contributed_post">
                         <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
                     </div>
-                    <h2 class="members">Les discussions que je suis</h2>
+                    <h2 class="members">Ces discussions m’intéressent</h2>
                     <div ng-repeat="post in followed_post">
                         <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
                     </div>

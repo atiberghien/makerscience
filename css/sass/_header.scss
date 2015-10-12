@@ -1,4 +1,4 @@
-#header {
+#header {soci
 
 	// position: absolute;
 	// top: 0;
@@ -536,12 +536,14 @@ div.crumbs {
 				#margin-top: 2em;
 			}
 			&.skills {
-				margin-top: 2em;
+				#margin-top: 2em;
 			}
 		}
 		p {
-			margin-bottom: 0.25em;
-			line-height: 1.5em;
+			overflow: hidden;
+    			word-wrap: break-word;
+    			line-height: 1.25em;
+    			font-size: 1.1em;
 		}
 		p.updated, p.location {
 			text-align: center;
@@ -568,7 +570,17 @@ div.crumbs {
 		}
 		div.socials {
 			span.glyphicon {
-				font-size : 30px
+				font-size : 30px;
+			}
+			input {
+				margin-bottom: 5px;
+    				padding: 1px;
+    				border: 1px solid grey;
+			
+			}
+			button.btn {
+				margin-left: 0px;
+				margin-bottom: 0px; 
 			}
 		}
 	}

@@ -337,3 +337,15 @@ module.controller("ReportAbuseCtrl", ($scope, $modal) ->
                     return currentLocation
         )
 )
+
+module.controller('BasicModalInstanceCtrl', ($scope, $modalInstance, content) ->
+
+    $scope.content = content
+
+    $scope.ok = () ->
+        $modalInstance.close()
+
+    $scope.cancel = () ->
+        $modalInstance.dismiss('cancel')
+
+)
