@@ -15,14 +15,16 @@
     <div class="member-info member-info-hidden" ng-class="showMemberInfo ? 'member-info-visible' : 'member-info-hidden'">
         <a class="toggle" ng-click="showMemberInfo = !showMemberInfo"><span class="glyphicon glyphicon-option-vertical"></span></a>
         <div ng-show="spottedProfile">
-            <span class="avatar avatar80">
-                <img ng-show="spottedProfile.avatar" src="{{spottedProfile.avatar}}" class="profile img-circle">
-                <img ng-hide="spottedProfile.avatar" src="/img/avatar.png" class="profile img-circle">
-            </span>
-            <div class="member">
-                <p>{{spottedProfile.first_name}} {{spottedProfile.last_name}}</p>
-                <p>{{spottedProfile.activity}}</p>
-            </div><!-- .member -->
+            <a ui-sref="profile.detail({slug:profile.slug})">
+                <span class="avatar avatar80">
+                    <img ng-show="spottedProfile.avatar" src="{{spottedProfile.avatar}}" class="profile img-circle">
+                    <img ng-hide="spottedProfile.avatar" src="/img/avatar.png" class="profile img-circle">
+                </span>
+                <div class="member">
+                    <p>{{spottedProfile.first_name}} {{spottedProfile.last_name}}</p>
+                    <p>{{spottedProfile.activity}}</p>
+                </div><!-- .member -->
+            </a>
             <div class="content">
                 <h5>Participe à ces projets</h5>
                 <div class="boxes boxes-small" >
