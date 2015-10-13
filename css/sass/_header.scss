@@ -99,15 +99,16 @@ div.dropdown-logged-in {
 			}
 			ul.dropdown-notifications {
 				z-index: 10000; /* go over editing buttons */
-				min-width: 200px;
+				min-width: 315px;
 				li.list-group-item {
 					display: block;
-					padding-right: 35px; /* leave space for button to mark them as read */
 					background-color: $color-light-grey;
 					&:last-child {
 						padding-right: 10px;
 						text-align: right;
 					}
+					font-size : 12px;
+					padding : 6px 12px;
 				}
 				li.notification-new {
 					background-color: #fff;

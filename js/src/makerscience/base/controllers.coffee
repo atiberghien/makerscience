@@ -268,18 +268,19 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
 
 module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval, $filter, ObjectProfileLink, Notification) ->
 
-    $scope.updateNotifications = () ->
+    $scope.updateNotifications = (markAllAsRead) ->
         if $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
             Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
                 $scope.notifications = notificationResults
-                $scope.lastNotifications = $filter('limitTo')(notificationResults, 5)
+                $scope.lastNotifications = $filter('limitTo')(notificationResults, 10)
                 $scope.computeUnreadNotificationCounter()
-
+                if markAllAsRead
+                    angular.forEach($scope.notifications, $scope.markAsRead)
             )
 
     $scope.computeUnreadNotificationCounter = () ->
         $scope.displayedUnreadNotifications = $filter('filter')($scope.lastNotifications, {unread:true})
-        $scope.unreadNotificationCounter = $scope.displayedUnreadNotifications.length
+        $scope.unreadNotificationCounter = $filter('filter')($scope.notifications, {unread:true}).length
 
     $scope.markDisplayedAsRead = () ->
         $timeout(()->
@@ -290,9 +291,6 @@ module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval,
     $scope.markAsRead = (notif) ->
         Notification.one(notif.id).patch({unread : false})
         notif.unread = false
-
-    $scope.markAllAsRead = () ->
-        angular.forEach($scope.notifications, $scope.markAsRead)
 
     $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
         if newValue != oldValue
