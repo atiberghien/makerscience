@@ -47,8 +47,8 @@
                         <div class="join">
                             <h2 ng-hide="authVars.isAuthenticated">Rejoignez la communauté MakerScience !</h2>
                             <p class="register-login" ng-show="!authVars.isAuthenticated">
-                                <button class="button" ng-click="openSignupPopup()">S'inscrire</button>
-                                <button class="button" ng-click="openSigninPopup()">Se connecter</button>
+                                <a class="button" ng-click="openSignupPopup()">S'inscrire</a>
+                                <a class="button" ng-click="openSigninPopup()">Se connecter</a>
                             </p>
                             <h2 ng-show="authVars.isAuthenticated">Bienvenue {{currentMakerScienceProfile.parent.user.first_name}}</h2>
                         </div><!-- .join -->
