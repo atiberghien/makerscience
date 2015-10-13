@@ -277,7 +277,7 @@ section.forum-topic,
     p.question {
         position: relative;
         margin: $grid-gutter-width / 2 0;
-        padding-left: 32px;
+        padding-left: 2.25em;
         font-size: 1.2em;
         font-weight: bold;
         line-height: 1.25em;
@@ -285,8 +285,7 @@ section.forum-topic,
             position: absolute;
             top: 0;
             left: 0;
-            margin-right: 0.5em;
-            padding: 0 0.5em;
+            padding: 0.4em;
             color: #fff;
             background-color: $color-forum;
             font-size: 0.9em;
