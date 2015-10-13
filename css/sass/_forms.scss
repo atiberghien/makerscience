@@ -544,6 +544,12 @@ form.login, div.login {
 			background-color: $color-blue;
 		}
 	}
+	span.error {
+		display: block;
+		padding-top: 0.75em;
+		color: #fff;
+		font-weight: bold;
+	}
 }
 
 .home-slide {
