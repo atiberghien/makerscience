@@ -465,7 +465,9 @@ div.toolbar {
 			height: $linked-height;
 		}
 		a.carousel-control {
+			width: 10%;
 			span {
+				top: 8em; /* placed at the bottom to allow for long content */
 				font-weight: bold;
 			}
 		}
