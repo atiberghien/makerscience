@@ -567,9 +567,11 @@ div.toolbar {
 				background-image: none;
 				&.right {
 					right: -2em;
+					margin-right: -20px;
 				}
 				&.left {
 					left: -2em;
+					margin-left: -20px;
 				}
 			}
 			.text-center {
