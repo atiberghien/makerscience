@@ -365,6 +365,15 @@ ul.pagination {
 	}
 }
 
+.ta-editor div {
+	ul, ol {
+		margin-left: 1.25em;
+	}
+	ol {
+		list-style-type: decimal;
+	}
+}
+
 /*
 	Add a layer to show work in progress or future features
 	!!! Parent must have position: relative
