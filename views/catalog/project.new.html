@@ -144,8 +144,9 @@
                                               ng-model="newNeed.text"
                                               e-rows="3">
                                 </text-angular>
+                                <br />
+                                <button type="button" class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
                             </div>
-                            <button type="button" class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
                         </div>
                         <ul class="list-group">
                             <li ng-repeat="(index, need) in needs">
