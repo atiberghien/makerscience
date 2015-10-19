@@ -465,16 +465,8 @@ div.toolbar {
 			height: $linked-height;
 		}
 		a.carousel-control {
-			bottom: 1.25em;
 			span {
 				font-weight: bold;
-				text-decoration: underline;
-			}
-			&.left {
-				left: 2em;
-			}
-			&.right {
-				right: 1em;
 			}
 		}
 		h3 {
