@@ -2,8 +2,8 @@
     <div class="editable">
      <h5>Thématiques</h5>
         <div class="edit-buttons" ng-show="editable" ng-init="addTheme=false">
-            <button ng-show="preparedThemeTags.length <= 9" ng-click="addTheme = ! addTheme"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button ng-show="preparedThemeTags.length > 9" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button ng-show="preparedThemeTags.length <= 5" ng-click="addTheme = ! addTheme"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button ng-show="preparedThemeTags.length > 5" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
         </div>
 
         <div ng-show="addTheme==true" ng-controller="TagAutoCompleteCtrl">
@@ -17,11 +17,11 @@
 
         <div ng-show="addTheme==false">
             <ul class="tags skills">
-                <li ng-repeat="tag in preparedThemeTags | limitTo : 9">
+                <li ng-repeat="tag in preparedThemeTags | limitTo : 5">
                     <a ng-if="tag.text.length > 6" tooltip="{{tag.text}}" ui-sref="tag({slug:tag.slug})">{{tag.text| characters: 6}}</a>
                     <a ng-if="tag.text.length <= 6" ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
                 </li>
-                <li><a ng-show="preparedThemeTags.length > 9" tooltip="Tous les tags" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
+                <li><a ng-show="preparedThemeTags.length > 5" tooltip="Tous les tags" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
             </ul>
         </div>
     </div>
@@ -31,8 +31,8 @@
     <div class="editable">
         <h5>Cibles visées</h5>
         <div class="edit-buttons" ng-show="editable" ng-init="addTarget=false">
-            <button ng-show="preparedTargetTags.length <= 9" ng-click="addTarget = ! addTarget"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button ng-show="preparedTargetTags.length > 9" ng-click="openTagPopup(preparedTargetTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button ng-show="preparedTargetTags.length <= 5" ng-click="addTarget = ! addTarget"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button ng-show="preparedTargetTags.length > 5" ng-click="openTagPopup(preparedTargetTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
         </div>
 
         <div ng-show="addTarget==true" ng-controller="TagAutoCompleteCtrl">
@@ -46,11 +46,11 @@
 
         <div ng-show="addTarget==false">
             <ul class="tags tags-project">
-                <li ng-repeat="tag in preparedTargetTags | limitTo : 9">
+                <li ng-repeat="tag in preparedTargetTags | limitTo : 5">
                     <a ng-if="tag.text.length > 6" tooltip="{{tag.text}}" ui-sref="tag({slug:tag.slug})">{{tag.text| characters: 6}}</a>
                     <a ng-if="tag.text.length <= 6" ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
                 </li>
-                <li><a ng-show="preparedThemeTags.length > 9" tooltip="Tous les tags" ng-click="openTagPopup(preparedThemeTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
+                <li><a ng-show="preparedThemeTags.length > 5" tooltip="Tous les tags" ng-click="openTagPopup(preparedThemeTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
             </ul>
         </div>
     </div><!-- .editable -->
@@ -60,8 +60,8 @@
     <div class="editable">
         <h5>Formats</h5>
         <div class="edit-buttons" ng-show="editable" ng-init="addFormats=false">
-            <button ng-show="preparedFormatsTags.length <= 9" ng-click="addFormats = ! addFormats"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button ng-show="preparedFormatsTags.length > 9" ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button ng-show="preparedFormatsTags.length <= 5" ng-click="addFormats = ! addFormats"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button ng-show="preparedFormatsTags.length > 5" ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
         </div>
 
         <div ng-show="addFormats==true" ng-controller="TagAutoCompleteCtrl">
@@ -75,11 +75,11 @@
 
         <div ng-show="addFormats==false">
             <ul class="tags tags-project">
-                <li ng-repeat="tag in preparedFormatsTags | limitTo : 9">
+                <li ng-repeat="tag in preparedFormatsTags | limitTo : 5">
                     <a ng-if="tag.text.length > 6" tooltip="{{tag.text}}" ui-sref="tag({slug:tag.slug})">{{tag.text| characters: 6}}</a>
                     <a ng-if="tag.text.length <= 6" ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
                 </li>
-                <li><a ng-show="preparedThemeTags.length > 9" tooltip="Tous les tags" ng-click="openTagPopup(preparedThemeTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
+                <li><a ng-show="preparedFormatsTags.length > 5" tooltip="Tous les tags" ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
             </ul>
         </div>
     </div><!-- .editable -->
