@@ -189,13 +189,13 @@
                     </tab>
                 </tabset>
 
-                <div class="row">
+                <div class="row" ng-if="needs.length > 0">
                     <div class="col-md-12">
                         <div class="needs">
 
                             <h3>Besoins</h3>
                             <carousel id="carousel-needs" class="carousel-no-indicators carousel-text-links">
-                                <slide class="needs-idea" ng-repeat="post in linked_post|filter:{post_type : 'need'}">
+                                <slide class="needs-idea" ng-repeat="post in  needs">
                                     <ul class="actions">
                                         <li><a ui-sref="question({slug:post.slug})"><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
                                     </ul>

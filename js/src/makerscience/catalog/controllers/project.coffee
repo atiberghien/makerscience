@@ -219,6 +219,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         )
 
         $scope.linked_post = []
+        $scope.needs = []
         angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
             MakerSciencePostLight.one(makerSciencePostID).get().then((makerSciencePostResult)->
                 $scope.getPostAuthor(makerSciencePostResult.parent_id).then((author) ->
@@ -228,6 +229,8 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                     makerSciencePostResult.contributors = contributors
                 )
                 $scope.linked_post.push(makerSciencePostResult)
+                if makerSciencePostResult.post_type == 'need'
+                    $scope.needs.push(makerSciencePostResult)
             )
         )
 
