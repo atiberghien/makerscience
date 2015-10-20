@@ -97,7 +97,7 @@ dfiiv.forum-sidebar {
 			}
 			div.member-details, div.member-name {
 				display: inline-block;
-				width: 75%;
+				width: 60%;
 				vertical-align: top;
 				p {
 					margin-top: 0.5em;
@@ -108,6 +108,19 @@ dfiiv.forum-sidebar {
 					a {
 						font-size: 1.25em;
 						color: #fff;
+					}
+				}
+			}
+			div.contact {
+				float: right;
+				display: inline-block;
+				button {
+					margin-top: 0.4em;
+					font-size: 2em;
+					border: none;
+					background-color: transparent;
+					&:hover {
+						color: $color-dark-grey;
 					}
 				}
 			}
