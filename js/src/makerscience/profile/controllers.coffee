@@ -407,7 +407,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
     )
 )
 
-module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLink) ->
+module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLink, MakerScienceProfile) ->
 
     $scope.addFriend = (friendProfileID) ->
         ObjectProfileLink.one().customPOST(
@@ -433,13 +433,31 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLi
             )
 
     $scope.showContactPopup = (profile) ->
-        modalInstance = $modal.open(
-            templateUrl: '/views/profile/block/contact.html'
-            controller: 'ContactFormInstanceCtrl'
-            resolve:
-                profile : () ->
-                    return profile
-        )
+        ## FIXME UGLY WORKAROUND
+        if typeof(profile) == 'number'
+            # mean that profile is the id of a basic profile resource
+            # need to fetch the related MakerscienceProfile
+            MakerScienceProfile.one().get({parent__id : profile}).then((makerscienceProfileResults) ->
+                if makerscienceProfileResults.objects.length == 1
+                    profile =
+                    $modal.open(
+                        templateUrl: '/views/profile/block/contact.html'
+                        controller: 'ContactFormInstanceCtrl'
+                        resolve:
+                            profile : () ->
+                                return makerscienceProfileResults.objects[0]
+                    )
+            )
+        else
+            $modal.open(
+                templateUrl: '/views/profile/block/contact.html'
+                controller: 'ContactFormInstanceCtrl'
+                resolve:
+                    profile : () ->
+                        return profile
+            )
+
+
 
     $rootScope.$on('profile-loaded', (event, profile) ->
         $scope.checkFriend(profile.id)
