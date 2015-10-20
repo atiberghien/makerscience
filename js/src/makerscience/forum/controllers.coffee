@@ -81,7 +81,7 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, $filter, M
                 makerSciencePost["linked_"+item.type+"s"].push(item.fullObject.resource_uri)
             )
 
-            MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
+            return MakerSciencePost.post(makerSciencePost).then((newMakerSciencePostResult) ->
                 mentions = newMakerSciencePostResult.parent.text.match(/\B@[a-z0-9_-]+/gi)
                 angular.forEach(mentions, (mention) ->
                     profileSlug = mention.substr(1)
@@ -95,12 +95,13 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, $filter, M
                             , 'makersciencepost/'+newMakerSciencePostResult.id)
                     )
                 )
+                return newMakerSciencePostResult
             )
         )
 )
 
 
-module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
+module.controller("MakerScienceForumCtrl", ($scope,  $state, $controller, $filter,
                                                 MakerSciencePostLight, MakerScienceProfile,
                                                 DataSharing, ObjectProfileLink, TaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
@@ -151,10 +152,12 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
     $scope.fetchRecentPosts()
 
     $scope.inlineSaveMakersciencePost = (newPost) ->
-        $scope.saveMakersciencePost(newPost, null, $scope.currentMakerScienceProfile.parent).then(->
+        $scope.saveMakersciencePost(newPost, null, $scope.currentMakerScienceProfile.parent).then((newMakerSciencePostResult)->
             $scope.refreshList()
             $scope.showCreateButton = false
             $scope.newPost = {}
+            #  $state.go('question', {slug : newMakerSciencePostResult.slug})
+
         )
 
 )
