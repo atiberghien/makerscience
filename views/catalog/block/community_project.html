@@ -23,7 +23,7 @@
         <input type="text" ng-show="teamCandidate || resourceCandidate" name="role" ng-model="role" placeholder="Saisissez votre rôle ..." />
 
         <button type="button" ng-show="teamCandidate" class="btn btn-primary" ng-click="addMember(teamCandidate, 0, role, false); manageCommunity=false; teamCandidate=null;">S'ajouter comme membre d'équipe</button>
-        <button type="button" ng-show="resourceCandidate" class="btn btn-primary" ng-click="addMember(resourceCandidate, 1, role, true); manageCommunity=false; resourceCandidate=null;">S'ajouter comme membre resource</button>
+        <button type="button" ng-show="resourceCandidate" class="btn btn-primary" ng-click="addMember(resourceCandidate, 1, role, true); manageCommunity=false; resourceCandidate=null;">S'ajouter comme membre ressource</button>
         <button type="button" class="btn btn-default" ng-click="manageCommunity=false; teamCandidate=null; resourceCandidate=null">Annuler</button>
 
     </div>

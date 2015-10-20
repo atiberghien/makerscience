@@ -49,7 +49,7 @@
                             <img ng-hide="post.parent.author.avatar" src="/img/avatar.png" class="profile img-circle">
                         </span>
                         <p>{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong>
-                        <span>Mis à jour le <span am-time-ago="post.parent.updated_on"></span></span></p>
+                        <span>Mis à jour le {{post.parent.updated_on | date:'dd/MM/yyyy'}}</span></p>
                     </div>
                     <div class="thread-content">
                         <p ng-bind-html="trustAsHtml(post.parent.text)"></p>
@@ -137,7 +137,7 @@
                             </p>
                         </div>
                         <div class="thread-linked-resources" ng-if="post.linked_resources">
-                            <h3>Experiences associées</h3>
+                            <h3>Expériences associées</h3>
                             <div class="boxes boxes-sidebar">
                                 <div class="box" ng-repeat="resource in post.linked_resources">
                                     <ng-include src="'/views/catalog/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>

@@ -103,8 +103,8 @@
                                 </p>
                             </div>
                             <p>
-                                <span>Crée le <span am-time-ago="projectsheet.parent.created_on"></span><span> /
-                                <span>Mis à jour le <span am-time-ago="projectsheet.modified"></span><span>
+                                <span>Crée le {{projectsheet.parent.created_on | date:'dd/MM/yyyy'}}<span> /
+                                <span>Mis à jour le {{projectsheet.modified | date:'dd/MM/yyyy'}}<span>
                             </p>
 
                         </div><!-- .side-header -->
