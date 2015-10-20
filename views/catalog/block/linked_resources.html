@@ -1,8 +1,7 @@
 <div class="edit-buttons" ng-hide="!editable" ng-show="editable">
-    <button ng-click="linkResources=!linkResources" ><span class="glyphicon glyphicon-pencil"></span></button>
     <div ng-show="linkResources">
         <angucomplete-alt id="linked-idea"
-                        placeholder="Nom de l'expérience"
+                        placeholder="Lier une expérience au projet"
                         pause="100"
                         selected-object="newLinkedResource"
                         local-data="allAvailableResources"
@@ -12,8 +11,7 @@
                         minlength="3"/>
     </div>
     <div ng-show="linkResources">
-        <button ng-click="" class="nomargin"><span class="glyphicon glyphicon-remove"></span></button>
-        <button class="button" ng-click="addLinkedResource(newLinkedResource);updateLinkedResources()">Lier à l'expérience</button>
+        <button class="button" ng-click="addLinkedResource(newLinkedResource);updateLinkedResources()"><span class="glyphicon glyphicon-pencil"></span></button>
     </div>
 </div>
 <carousel class="carousel-no-indicators carousel-text-links" >
@@ -24,5 +22,8 @@
         <img src="/img/bacasable.jpg" alt="Image background" />
         <img ng-if="resource.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resource.base_projectsheet.cover.thumbnail_url+'?dim=680x270&border=true'}}" alt="Resource Image" />
         <img ng-if="!resource.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Resource Image" />
+        <div class="edit-buttons" ng-hide="!editable" ng-show="editable">
+            <button ng-click="" class="nomargin"><span class="glyphicon glyphicon-remove"></span></button>
+        </div>
     </slide>
 </carousel>
