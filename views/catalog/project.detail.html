@@ -53,7 +53,10 @@
                                 e-ng-options="progress.value as progress.text for progress in progressRange"
                                     e-form="WIPBtnForm"
                                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'progress', $data);">
-                                    <span ng-if="projectsheet.parent.progress">État d'avancement {{showProjectProgress()}}</span>
+                                    <span ng-if="projectsheet.parent.progress">
+                                        <span class="fa fa-flag-checkered"></span>
+                                        État d'avancement : {{showProjectProgress()}}
+                                    </span>
                                 </p>
                             </div>
 
@@ -98,7 +101,9 @@
                                     e-form="WebsiteBtnForm"
                                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'website', $data)">
                                     <span class="glyphicon glyphicon-globe"></span>
-                                    <a ng-if="projectsheet.parent.website" href="{{projectsheet.parent.website}}" target="_blank">{{projectsheet.parent.website}}</a>
+                                    <a ng-if="projectsheet.parent.website" href="{{projectsheet.parent.website}}" target="_blank">
+                                        {{projectsheet.parent.website| limitTo:45}}<span ng-if="projectsheet.parent.website.length > 45">...</span>
+                                    </a>
                                     <span ng-if="!projectsheet.parent.website">Site web non renseignée</span>
                                 </p>
                             </div>
