@@ -227,6 +227,20 @@ div.editable-controls {
 				}
 			}
 		}
+		&.linked {
+			button.nomargin {
+				margin: 0;
+			}
+			div.angucomplete-holder {
+				input#linked-idea_value {
+					width: 20em;
+					padding: 0.5em;
+				}
+			}
+			div.edit-buttons div:first-child {
+				margin-top: $grid-gutter-width;
+			}
+		}
 	}
 }
 
