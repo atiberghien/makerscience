@@ -59,12 +59,21 @@
                             <button class="button delete-account" ng-click="updateMakerScienceUserInfo()">Enregistrer</button>
 
                             <fieldset class="notifications">
-                                <h3>Notifications mail</h3>
+                                <h3><span class="fa fa-inbox"></span>Notifications mail</h3>
                                 <p>Souhaitez-vous recevoir un résumé de vos notifications par email :</p>
 
                                 <label><input type="radio" ng-model="user.notifFreq" value="NONE" ng-change="updateNotifFrequency('NONE')"/>Jamais</label>
                                 <label><input type="radio" ng-model="user.notifFreq" value="DAILY" ng-change="updateNotifFrequency('DAILY')" />1 fois par jour</label>
                                 <label><input type="radio" ng-model="user.notifFreq" value="WEEKLY" ng-change="updateNotifFrequency('WEEKLY')"/>1 fois par semaine</label>
+                            </fieldset>
+
+                            <fieldset class="notifications">
+                                <h3><span class="fa fa-envelope"></span>Qui peut me joindre ?</h3>
+                                <!-- <p>Souhaitez-vous recevoir un résumé de vos notifications par email :</p> -->
+
+                                <label><input type="radio" ng-model="user.authContact" value="NONE" ng-change="updateAuthContact('NONE')"/>Personne</label>
+                                <label><input type="radio" ng-model="user.authContact" value="ALL" ng-change="updateAuthContact('DAILY')" />Tout le monde</label>
+                                <label><input type="radio" ng-model="user.authContact" value="FRIENDS" ng-change="updateAuthContact('WEEKLY')"/>Les membres que je suis</label>
                             </fieldset>
 
                         </div>
