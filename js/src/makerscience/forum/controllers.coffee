@@ -191,7 +191,7 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
 
         $scope.fetchAuthors($scope.post.parent)
         $scope.fetchContributors($scope.post.parent)
-
+        $scope.getSimilars($scope.post.parent.id)
         resolveMentions($scope.post.parent)
 
         $scope.initCommunityCtrl('post', $scope.post.parent.id)#for community block
