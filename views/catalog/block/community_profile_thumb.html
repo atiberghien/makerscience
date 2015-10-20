@@ -5,8 +5,8 @@
 <div class="member-name">
     <p><a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a></p>
 </div>
-<div class="contact">
-    <button><span class="fa fa-envelope-o"></span></button>
+<div class="contact" ng-controller="FriendshipCtrl">
+    <button><span class="fa fa-envelope-o" ng-click="showContactPopup(member.profile.id)"></span></button>
 </div>
 <div ng-if="member.isValidated" class="member-details relative">
     <div class="edit-buttons" ng-show="editable || member.profile.id == currentMakerScienceProfile.parent.id">
