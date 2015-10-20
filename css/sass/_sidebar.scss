@@ -111,6 +111,18 @@ dfiiv.forum-sidebar {
 					}
 				}
 			}
+			div.member-details {
+				div.edit-buttons {
+					top: -15px;
+					right: -20px;
+					button {
+						background-color: transparent;
+						&:hover {
+							color: $color-dark-grey;
+						}
+					}
+				}
+			}
 			div.contact {
 				float: right;
 				display: inline-block;
