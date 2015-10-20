@@ -262,6 +262,26 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         language: "fr_FR",
     }
 
+    $rootScope.tinyMceFullOptions = {
+        plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking"],
+        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist |outdent indent blockquote | link unlink anchor | media",
+        menubar: false,
+        statusbar: false,
+        toolbar_items_size: 'small',
+        language_url: "/js/tinymce_fr_FR.js",
+        language: "fr_FR",
+        style_formats: [
+            {title: "Titre", items: [
+                {title: "Titre 1", format: "h1"},
+                {title: "Titre 2", format: "h2"},
+                {title: "Titre 3", format: "h3"},
+                {title: "Titre 4", format: "h4"},
+                {title: "Titre 5", format: "h5"},
+                {title: "Titre 6", format: "h6"}
+            ]},
+        ]
+    }
+
     $rootScope.$on('$stateChangeSuccess', () ->
         document.body.scrollTop = document.documentElement.scrollTop = 0;
     )
