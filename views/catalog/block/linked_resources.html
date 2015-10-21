@@ -17,7 +17,7 @@
 <carousel class="carousel-no-indicators carousel-text-links" >
     <slide class="left-aligned" ng-repeat="resource in linkedResources">
         <div class="edit-buttons" ng-hide="!editable" ng-show="editable">
-            <button ng-click="" class="nomargin"><span class="glyphicon glyphicon-remove"></span></button>
+            <button ng-click="alert('plop')" class="nomargin"><span class="glyphicon glyphicon-remove"></span></button>
         </div>
         <h3><a ui-sref="resource.detail({slug:resource.parent.slug})">Expériences associées</a></h3>
         <h4><a ui-sref="resource.detail({slug:resource.parent.slug})">{{resource.parent.title}}</a></h4>
