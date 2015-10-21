@@ -228,6 +228,11 @@ div.editable-controls {
 			}
 		}
 		&.linked {
+			.carousel {
+				.edit-buttons {
+					top: 34px;
+				}
+			}
 			button.nomargin {
 				margin: 0;
 			}
@@ -238,9 +243,6 @@ div.editable-controls {
 					position: absolute;
 					right: 2.7em;
 				}
-			}
-			div.edit-buttons div:first-child {
-				margin-top: $grid-gutter-width;
 			}
 		}
 	}
