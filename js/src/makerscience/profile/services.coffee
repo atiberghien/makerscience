@@ -76,7 +76,7 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
         if $scope.emailError || $scope.passwordError
             return
 
-        usernameHash = asmCrypto.SHA1.hex($scope.username).slice(0,30)
+        usernameHash = asmCrypto.SHA1.hex($scope.email).slice(0,30)
         userData =
             first_name :$scope.first_name
             last_name : $scope.last_name
