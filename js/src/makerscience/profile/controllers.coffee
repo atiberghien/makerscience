@@ -138,9 +138,28 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         $scope.favoriteTags = {}
         $scope.followedTags = []
 
-        MakerScienceProfile.one($scope.profile.slug).customGET('activities').then((activityResults)->
-            $scope.activities = activityResults.objects.activities
-        )
+        ## INFINITE SCROLL PROFILE ACTIVITIES
+        $scope.infiniteScrollActivitiesLimit = 3
+        $scope.infiniteScrollActivitiesTotalCount = null
+        $scope.infiniteScrollActivitiesCall = 0
+        $scope.infiniteScrollActivitiesCounter = 1
+
+        $scope.addMoreActivities = () ->
+            $scope.infiniteScrollActivitiesCall++
+            if $scope.infiniteScrollActivitiesTotalCount && $scope.infiniteScrollActivitiesLimit * $scope.infiniteScrollActivitiesCounter > $scope.infiniteScrollActivitiesTotalCount
+                return
+
+            if $scope.infiniteScrollActivitiesCall == $scope.infiniteScrollActivitiesCounter
+                MakerScienceProfile.one($scope.profile.slug).customGET('activities', {limit : $scope.infiniteScrollActivitiesLimit * $scope.infiniteScrollActivitiesCounter}).then((activityResults)->
+                    $scope.infiniteScrollActivitiesTotalCount = activityResults.metadata.total_count
+                    $scope.infiniteScrollActivities = activityResults.objects
+                    $scope.infiniteScrollActivitiesCounter++
+                )
+            else
+                $scope.infiniteScrollActivitiesCall--
+        #################################
+
+        $scope.addMoreActivities()
 
         #Current profile is a member of a project team
         ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults)->
@@ -293,7 +312,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
     )
 )
 
-module.controller("MakerScienceResetPasswordCtrl", ($scope, $stateParams,MakerScienceProfile) ->
+module.controller("MakerScienceResetPasswordCtrl", ($scope, $state, $stateParams, $timeout, MakerScienceProfile) ->
 
 
     $scope.passwordResetFail = false
@@ -338,11 +357,11 @@ module.controller("MakerScienceResetPasswordCtrl", ($scope, $stateParams,MakerSc
 
 module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $controller, $stateParams, $state, MakerScienceProfile, User,Notification,ObjectProfileLink) ->
 
-    angular.extend(this, $controller('NotificationCtrl', {$scope: $scope}))
-
-
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
         $scope.profile = makerscienceProfileResult
+
+        if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile == undefined || $scope.currentMakerScienceProfile.id != $scope.profile.id
+            $state.go('profile.detail', {slug : $stateParams.slug})
 
         $scope.user = {
             first_name : $scope.profile.parent.user.first_name
@@ -354,6 +373,51 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
         }
         $scope.passwordError = false
         $scope.passwordResetSuccess = false
+
+        ## INFINITE SCROLL NOTIFICATIONS
+        $scope.infiniteScrollNotificationsLimit = 6
+        $scope.infiniteScrollNotificationsTotalCount = null
+        $scope.infiniteScrollNotificationsCall = 0
+        $scope.infiniteScrollNotificationsCounter = 1
+
+        $scope.addMoreNotifications = () ->
+            $scope.infiniteScrollNotificationsCall++
+            if $scope.infiniteScrollNotificationsTotalCount && $scope.infiniteScrollNotificationsLimit * $scope.infiniteScrollNotificationsCounter > $scope.infiniteScrollNotificationsTotalCount
+                return
+
+            if $scope.infiniteScrollNotificationsCall == $scope.infiniteScrollNotificationsCounter
+                Notification.getList({recipient_id : $scope.profile.parent.user.id, limit : $scope.infiniteScrollNotificationsLimit * $scope.infiniteScrollNotificationsCounter}).then((notificationResults)->
+                    $scope.infiniteScrollNotificationsTotalCount = notificationResults.metadata.total_count
+                    $scope.infiniteScrollNotifications = notificationResults
+                    $scope.infiniteScrollNotificationsCounter++
+                )
+            else
+                $scope.infiniteScrollNotificationsCall--
+        #################################
+
+        ## INFINITE SCROLL FRIEND ACTIVITIES
+        $scope.infiniteScrollActivitiesLimit = 6
+        $scope.infiniteScrollActivitiesTotalCount = null
+        $scope.infiniteScrollActivitiesCall = 0
+        $scope.infiniteScrollActivitiesCounter = 1
+
+        $scope.addMoreActivities = () ->
+            $scope.infiniteScrollActivitiesCall++
+            if $scope.infiniteScrollActivitiesTotalCount && $scope.infiniteScrollActivitiesLimit * $scope.infiniteScrollActivitiesCounter > $scope.infiniteScrollActivitiesTotalCount
+                return
+
+            if $scope.infiniteScrollActivitiesCall == $scope.infiniteScrollActivitiesCounter
+                MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities', {limit : $scope.infiniteScrollActivitiesLimit * $scope.infiniteScrollActivitiesCounter}).then((activityResults)->
+                    $scope.infiniteScrollActivitiesTotalCount = activityResults.metadata.total_count
+                    $scope.infiniteScrollActivities = activityResults.objects
+                    $scope.infiniteScrollActivitiesCounter++
+                )
+            else
+                $scope.infiniteScrollActivitiesCall--
+        #################################
+
+        $scope.addMoreNotifications()
+        $scope.addMoreActivities()
 
         $scope.deleteProfile = () ->
             MakerScienceProfile.one($scope.profile.slug).remove()
@@ -383,19 +447,6 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
                 MakerScienceProfile.one($scope.profile.slug).customPOST({password : $scope.user.passwordReset}, 'change/password', {}).then((result)->
                     $scope.passwordResetsuccess = true
                 )
-
-
-
-        if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile == undefined || $scope.currentMakerScienceProfile.id != $scope.profile.id
-            $state.go('profile.detail', {slug : $stateParams.slug})
-
-        $scope.updateNotifications(true)
-
-        MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities').then((activityResults)->
-            $scope.activities = activityResults.objects
-        )
-
-
     , (response) ->
         if response.status == 404
             MakerScienceProfile.one().get({parent__id : $stateParams.slug}).then((makerscienceProfileResults) ->

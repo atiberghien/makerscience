@@ -25,8 +25,8 @@
 
             <tabset class="nav-tabs-project">
                 <tab heading="Mes notifications">
-                    <ul class="activity">
-                        <li class="notification" ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in notifications ">
+                    <ul class="activity" infinite-scroll="addMoreNotifications()">
+                        <li class="notification" ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in infiniteScrollNotifications">
                             <span class="glyphicon glyphicon-bell"></span>
                             <p ng-bind-html="trustAsHtml(notif.description)"></p>
                             <span am-time-ago="notif.timestamp"></span>
@@ -34,8 +34,8 @@
                     </ul>
                 </tab>
                 <tab heading="Activités de mon réseau">
-                    <ul class="activity">
-                        <li class="activity-member" ng-repeat="activity in activities | orderBy:'-created_on'">
+                    <ul class="activity" infinite-scroll="addMoreActivities()" >
+                        <li class="activity-member" ng-repeat="activity in infiniteScrollActivities | orderBy:'-created_on'">
                             <p ng-bind-html="trustAsHtml(activity.description)"></p>
                             <span am-time-ago="activity.created_on"></span>
                         </li>
@@ -71,9 +71,9 @@
                                 <h3><span class="fa fa-envelope"></span>Qui peut me joindre ?</h3>
                                 <!-- <p>Souhaitez-vous recevoir un résumé de vos notifications par email :</p> -->
 
-                                <label><input type="radio" ng-model="user.authContact" value="NONE" ng-change="updateAuthContact('NONE')"/>Personne</label>
-                                <label><input type="radio" ng-model="user.authContact" value="ALL" ng-change="updateAuthContact('DAILY')" />Tout le monde</label>
-                                <label><input type="radio" ng-model="user.authContact" value="FRIENDS" ng-change="updateAuthContact('WEEKLY')"/>Les membres que je suis</label>
+                                <label><input type="radio" ng-model="user.authorizedContact" value="NONE" ng-change="updateAuthorizedContact('NONE')"/>Personne</label>
+                                <label><input type="radio" ng-model="user.authorizedContact" value="ALL" ng-change="updateAuthorizedContact('ALL')" />Tout le monde</label>
+                                <label><input type="radio" ng-model="user.authorizedContact" value="FOLLOWED" ng-change="updateAuthorizedContact('FOLLOWED')"/>Les membres que je suis</label>
                             </fieldset>
 
                         </div>

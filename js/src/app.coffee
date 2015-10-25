@@ -14,7 +14,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                                 'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
                                 'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies', '720kb.socialshare',
-                                'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha'])
+                                'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'infinite-scroll'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
