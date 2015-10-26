@@ -368,6 +368,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
             last_name : $scope.profile.parent.user.last_name
             email : $scope.profile.parent.user.email
             notifFreq : $scope.profile.notif_subcription_freq
+            authorizedContact  : $scope.profile.authorized_contact
             passwordReset : ''
             passwordReset2 : ''
         }
@@ -436,6 +437,10 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
             MakerScienceProfile.one($scope.profile.slug).patch({notif_subcription_freq : frequency})
             $scope.user.notifFreq = frequency
 
+        $scope.updateAuthorizedContact = (authorizedContact)->
+            MakerScienceProfile.one($scope.profile.slug).patch({authorized_contact : authorizedContact})
+            $scope.user.authorizedContact = authorizedContact
+
         $scope.changeMakerScienceProfilePassword = () ->
             $scope.passwordResetFail = false
             $scope.passwordResetSuccess = false
@@ -475,11 +480,21 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLi
             $scope.isFriend = false
         )
 
-    $scope.checkFriend = (friendProfileID) ->
-        if $scope.currentMakerScienceProfile && friendProfileID
-            ObjectProfileLink.one().customGET('makerscienceprofile/'+friendProfileID, {profile__id: $scope.currentMakerScienceProfile.parent.id, level:40}).then((objectProfileLinkResults) ->
+    $scope.checkFriend = (makerscienceProfileID) ->
+        if $scope.currentMakerScienceProfile && makerscienceProfileID
+            ObjectProfileLink.one().customGET('makerscienceprofile/'+makerscienceProfileID, {profile__id: $scope.currentMakerScienceProfile.parent.id, level:40}).then((objectProfileLinkResults) ->
                 if objectProfileLinkResults.objects.length == 1
+                    console.log("YES : current profile #", $scope.currentMakerScienceProfile.parent.id, 'is following mks profile #', makerscienceProfileID)
                     $scope.isFriend = true
+                    return objectProfileLinkResults.objects[0]
+            )
+
+    $scope.checkFollowing = (profileID) ->
+        if $scope.currentMakerScienceProfile && profileID
+            ObjectProfileLink.one().customGET('makerscienceprofile/'+$scope.currentMakerScienceProfile.id, {profile__id: profileID, level:40}).then((objectProfileLinkResults) ->
+                if objectProfileLinkResults.objects.length == 1
+                    console.log("YES : current mks profile #", $scope.currentMakerScienceProfile.id, 'is followed by basic profile #', profileID)
+                    $scope.isFollowed = true
                     return objectProfileLinkResults.objects[0]
             )
 
