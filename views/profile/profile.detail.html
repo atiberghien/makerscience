@@ -20,8 +20,9 @@
                         </div>
                         <h2 editable-text="profile.activity"
                             e-form="ActivityBtnForm"
+                            e-maxlength="30"
                             onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'activity', $data)"
-                            >{{ profile.activity || "Titre/Accroche" }}
+                            >{{ profile.activity|limitTo:30 || "Titre/Accroche" }}
                         </h2>
                     </div>
 
@@ -38,10 +39,11 @@
                         </div>
                         <p editable-text="profile.location.address.address_locality"
                             e-form="LocationBtnForm"
+                            e-maxlength="30"
                             onbeforesave="updateMakerScienceProfile('Place', profile.location.id , 'address', {'address_locality' : $data})"
                             class="location">
                             <span class="glyphicon glyphicon-map-marker"></span>
-                            <span ng-if="profile.location.address.address_locality">{{profile.location.address.address_locality}}</span>
+                            <span ng-if="profile.location.address.address_locality">{{profile.location.address.address_locality|limitTo:30}}</span>
                             <span ng-if="!profile.location.address.address_locality">Localisation non renseignée</span>
                         </p>
                     </div>
@@ -58,12 +60,13 @@
                             <p editable-text-angular="profile.bio"
                                  e-form="BioBtnForm"
                                  e-rows="4"
+                                 e-cols="40"
                                  e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'bio', $data)"
                                  ng-bind-html="profile.bio"
                                  style="max-height: 50px;">
                             </p>
-                            <a href="" ng-click="showBioPopup()">... (voir plus)</a>
+                            <a ng-if="profile.bio.length > 445" href="" ng-click="showBioPopup()">... (voir plus)</a>
                         </div><!-- .relative -->
 
                         <div class="relative" ng-hide="BioBtnForm.$visible">
@@ -139,7 +142,7 @@
 
                                 <label><a ng-show="profile.website" href="{{profile.website}}" target="_blank" >
                                     <span ng-show="profile.website" class="glyphicon glyphicon-globe"></span>
-                                    <span>{{profile.website | limitTo:10}}<span ng-if="profile.website.length > 10">...</span></span></a></label>
+                                    <span>{{profile.website | limitTo:40}}<span ng-if="profile.website.length > 40">...</span></span></a></label>
                             </div>
 
                             <div ng-show="socialEdit" class="socials" >
