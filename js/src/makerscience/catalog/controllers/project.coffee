@@ -19,17 +19,17 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
     $scope.initMakerScienceAbstractListCtrl()
 
     $scope.fetchRecentProjects = () ->
-        delete $scope.params['facet']
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = '-created_on'
         $scope.refreshList()
 
     $scope.fetchTopProjects = () ->
-        delete $scope.params['facet']
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = '-total_score'
         $scope.refreshList()
 
     $scope.fetchRandomProjects = () ->
-        delete $scope.params['facet']
+        $scope.$broadcast('clearFacetFilter')
         delete $scope.params['ordering']
         $scope.refreshList().then(->
             nbElmt = $scope.projects.length

@@ -19,17 +19,17 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
     $scope.initMakerScienceAbstractListCtrl()
 
     $scope.fetchRecentResources = () ->
-        delete $scope.params['facet']
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = '-created_on'
         $scope.refreshList()
 
     $scope.fetchTopResources = () ->
-        delete $scope.params['facet']
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = '-total_score'
         $scope.refreshList()
 
     $scope.fetchRandomResources = () ->
-        delete $scope.params['facet']
+        $scope.$broadcast('clearFacetFilter')
         delete $scope.params['ordering']
         $scope.refreshList().then(->
             nbElmt = $scope.resources.length

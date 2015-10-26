@@ -18,14 +18,17 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
     $scope.initMakerScienceAbstractListCtrl()
 
     $scope.fetchRecentProfiles = () ->
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = '-date_joined'
         $scope.refreshList()
 
     $scope.fetchTopProfiles = () ->
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = '-activity_score'
         $scope.refreshList()
 
     $scope.fetchRandomProfiles = () ->
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = ''
         $scope.refreshList().then(->
             nbElmt = $scope.profiles.length

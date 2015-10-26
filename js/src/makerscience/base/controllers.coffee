@@ -40,6 +40,10 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
                     if newVal != oldVal
                         $scope.refreshListGeneric()
             )
+
+    $scope.$on('clearFacetFilter', () ->
+        delete $scope.params['facet']
+    )
 )
 
 module.controller('HomepageCtrl', ($scope, $filter, $controller, MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePostLight) ->
@@ -264,6 +268,11 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
         if $scope.tags_filter.indexOf(simpleTag) == -1
             $scope.tags_filter.push(simpleTag)
         $scope.refreshFilter()
+
+    $scope.$on('clearFacetFilter', () ->
+        $scope.tags_filter = []
+        FilterService.filterParams.tags = []
+    )
 )
 
 module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval, $filter, ObjectProfileLink, Notification) ->
