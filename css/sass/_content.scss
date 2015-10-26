@@ -1083,8 +1083,8 @@ div.toolbar {
 			margin-right: 0;
 			div {
 				position: relative;
-				margin-right: $grid-gutter-width;
-				margin-bottom: $grid-gutter-width / 2;
+				#margin-right: $grid-gutter-width;
+				#margin-bottom: $grid-gutter-width / 2;
 				background-color: #fff;
 				&:hover {
 					background-color: $color-light-grey;
