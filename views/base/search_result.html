@@ -1,13 +1,12 @@
 <div id="intro" class="intro-tags" style="background-image: url('./img/bg/header-map.jpg')">
-    <h1>Le numérique et l'innovation</h1>
-    <h2>Au coeur de tous <u>les projets</u></h2>
+    <h1>Tous les objets comportant le mot</h1>
+    <h2>« {{query}} »</h2>
 </div><!-- #intro -->
 
 <div class="row container">
     <div id="content" class="tags">
         <div class="col-md-12">
-            <h1 ng-if="query">Résultat de la recherche "{{query}}"</h1>
-            <button class="button search-advanced" ng-click="collapseAdvancedSearch = !collapseAdvancedSearch">Recherche avancée</button>
+            <button class="button search-advanced" ng-click="collapseAdvancedSearch = !collapseAdvancedSearch" style="margin-bottom: 1em;">Recherche avancée</button>
             <form id="search-advanced" ng-show="!collapseAdvancedSearch">
                 <label for="words-all">Tous les mots:</label>
                 <input id="words-all" type="text" name="words-all" placeholder="Conférence, " ng-model="search.allWords"/>
