@@ -88,7 +88,7 @@ div.forum-sidebar {
 			position: relative;
 			margin: ($grid-gutter-width / 2) ($grid-gutter-width / 2) 0 $grid-gutter-width;
 			padding: 0.5em 0;
-			border-bottom: 1px solid $color-sidebar-community-member-border;
+			#border-bottom: 1px solid $color-sidebar-community-member-border;
 			&:last-child {
 				border: none;
 			}
