@@ -537,14 +537,17 @@ div.crumbs {
 				#margin-top: 2em;
 			}
 			&.skills {
-				#margin-top: 2em;
+				margin-top: 2em;
+			}
+			&.interests {
+				margin-top:2em;
 			}
 		}
 		p {
 			overflow: hidden;
     			word-wrap: break-word;
     			line-height: 1.25em;
-    			font-size: 1.1em;
+    			font-size: 1.2em;
 		}
 		p.updated, p.location {
 			text-align: center;
@@ -570,6 +573,7 @@ div.crumbs {
 			#margin-bottom: 3em;
 		}
 		div.socials {
+			margin-top : 2em;
 			span.glyphicon {
 				font-size : 30px;
 			}
@@ -632,13 +636,17 @@ div.crumbs {
 		position: relative;
 		min-height: $home-slide-height;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */
-		padding: 2em;
+		padding: 1em 2em 0em 1em;
 		padding-bottom: 0;
 		color: $color-intro;
 		background-color: $color-intro-project-bg;
 		p.location img {
 			margin-right: 1em;
 			vertical-align: middle;
+		}
+		ul.tags {
+			margin : 0;
+			min-height: 5em;	
 		}
 	}
 

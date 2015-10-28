@@ -94,6 +94,36 @@ module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http
         return new Blob([new Uint8Array(array)], {type: mimeString})
 )
 
+module.controller('BioInstanceCtrl', ($scope, $modalInstance, MakerScienceProfile, editable, profile) ->
+    $scope.editable = editable
+    $scope.profile = profile
+
+    $scope.ok = () ->
+        if editable
+            MakerScienceProfile.one($scope.profile.slug).patch({bio : $scope.profile.bio})
+        $modalInstance.close()
+
+    $scope.cancel = () ->
+        $modalInstance.dismiss('cancel')
+)
+
+module.controller('SocialsEditInstanceCtrl', ($scope, $modalInstance, MakerScienceProfile, socials, profile) ->
+    $scope.profile = profile
+    $scope.socials = socials
+
+    $scope.ok = () ->
+        angular.forEach($scope.socials, (value, key) ->
+            if value != null || value != ""
+                $scope.profile[key] = value
+        )
+        MakerScienceProfile.one($scope.profile.slug).patch($scope.socials).then(->
+            $modalInstance.close()
+        )
+
+    $scope.cancel = () ->
+        $modalInstance.dismiss('cancel')
+)
+
 module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal,
                                             MakerScienceProfile, MakerScienceProfileLight,
                                             MakerScienceProjectLight, MakerScienceResourceLight,
@@ -239,7 +269,10 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         TaggedItem.one().customGET("makerscienceprofile/"+$scope.profile.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
                 if similar.type == 'makerscienceprofile'
-                    $scope.similars.push(MakerScienceProfileLight.one(similar.id).get().$object)
+                    MakerScienceProfileLight.one().get({id: similar.id}).then((makersciencePostResults)->
+                        $scope.similars.push(makersciencePostResults.objects[0])
+                    )
+
             )
         )
 
@@ -258,13 +291,28 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                 $scope.profile.parent.avatar = avatar
             )
 
-        $scope.showBioPopup = () ->
+        $scope.openBioPopup = (editable) ->
             modalInstance = $modal.open(
-                templateUrl: '/views/base/basicModal.html'
-                controller: 'BasicModalInstanceCtrl'
+                templateUrl: '/views/profile/block/bioModal.html'
+                controller: 'BioInstanceCtrl'
                 resolve:
-                    content : () ->
-                        return $scope.profile.bio
+                    editable : () ->
+                        return editable
+                    profile : () ->
+                        return $scope.profile
+
+            )
+
+        $scope.openSocialsEditPopup = () ->
+            modalInstance = $modal.open(
+                templateUrl: 'views/profile/block/socialsEditPopup.html'
+                controller: 'SocialsEditInstanceCtrl'
+                resolve:
+                    profile : () ->
+                        return $scope.profile
+                    socials : () ->
+                        return $scope.socials
+
             )
 
         $scope.addTagToProfile = (tag_type, tag) ->
@@ -294,13 +342,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             switch resourceName
                 when 'MakerScienceProfile' then MakerScienceProfile.one(resourceId).patch(putData)
                 when 'Place' then Place.one(resourceId).patch(putData)
-
-        $scope.updateSocialNetworks = (profileSlug) ->
-            angular.forEach($scope.socials, (value, key) ->
-                if value != null || value != ""
-                    $scope.profile[key] = value
-            )
-            MakerScienceProfile.one(profileSlug).patch($scope.socials)
 
     , (response) ->
         if response.status == 404

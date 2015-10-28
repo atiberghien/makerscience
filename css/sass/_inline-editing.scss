@@ -88,7 +88,7 @@
 			padding: 0.5em;
 		}
 		div.editable {
-			min-height: 3em; /* Fix issue when there are no tags by giving it a minimum height */
+			min-height: 2.5em;
 		}
 		div.edit-buttons {
 			right: -20px;
@@ -97,6 +97,12 @@
 			form.editable-text input.editable-input {
 				width: 5em !important;
 			}
+		}
+		div.since {
+			bottom: 0px;
+    			position: absolute;
+    			margin-bottom: 5px;
+    			font-weight: bold;
 		}
 	}
 	div.tags {
