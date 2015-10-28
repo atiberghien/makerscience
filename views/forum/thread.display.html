@@ -41,15 +41,17 @@
                         {{post.parent.title}}
                     </h2>
                     <ul class="tags">
-                        <li ng-repeat="tag in post.parent.tags"><a href="">{{tag.tag.name}}</a></li>
+                        <li ng-repeat="tag in post.parent.tags"><a ui-sref="tag({slug:tag.tag.slug})">{{tag.tag.name}}</a></li>
                     </ul>
                     <div class="thread-author" >
                         <span class="avatar avatar52">
                             <img ng-show="post.parent.author.avatar" src="{{post.parent.author.avatar}}" class="profile img-circle">
                             <img ng-hide="post.parent.author.avatar" src="/img/avatar.png" class="profile img-circle">
                         </span>
-                        <p>{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong>
-                        <span>Mis à jour le {{post.parent.updated_on | date:'dd/MM/yyyy'}}</span></p>
+                        <p>
+                            <a ui-sref="profile.detail({slug:post.parent.author.id})" style="color: inherit;">{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong></a>
+                            <span>Mis à jour le {{post.parent.updated_on | date:'dd/MM/yyyy'}}</span>
+                        </p>
                     </div>
                     <div class="thread-content">
                         <p ng-bind-html="trustAsHtml(post.parent.text)"></p>

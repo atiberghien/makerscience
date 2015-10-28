@@ -24,7 +24,9 @@
                     <img ng-hide="member.profile.avatar" src="/img/avatar.png" class="profile img-circle">
                 </span>
                 <div class="member-details relative">
-                    <p><a ui-sref="profile.detail({slug : member.profile.id})"> {{member.profile.user.first_name}} {{member.profile.user.last_name}}</a></p>
+                    <p>
+                        <a ui-sref="profile.detail({slug : member.profile.id})"> {{member.profile.user.first_name}} {{member.profile.user.last_name}}</a>
+                    </p>
                 </div>
             </div>
         </tab>

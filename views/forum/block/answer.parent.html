@@ -8,7 +8,10 @@
                 <img ng-show="answer.author.avatar" src="{{answer.author.avatar}}" class="profile img-circle">
                 <img ng-hide="answer.author.avatar" src="/img/avatar.png" class="profile img-circle">
             </span>
-            <p>{{answer.author.user.first_name}} <strong>{{answer.author.user.last_name}}</strong> <span><span am-time-ago="answer.updated_on"></span></span></p>
+            <p>
+                <a ui-sref="profile.detail({slug:answer.author.id})" style="color: inherit;">{{answer.author.user.first_name}} <strong>{{answer.author.user.last_name}}</strong> </a>
+                <span><span am-time-ago="answer.updated_on"></span></span>
+            </p>
         </div>
         <div class="thread-content">
             <p ng-bind-html="trustAsHtml(answer.text)"></p>
@@ -81,7 +84,10 @@
                     <img ng-show="subanswer.author.avatar" src="{{subanswer.author.avatar}}" class="profile img-circle">
                     <img ng-hide="subanswer.author.avatar" src="/img/avatar.png" class="profile img-circle">
                 </span>
-                <p>{{subanswer.author.user.first_name}} <strong>{{subanswer.author.user.last_name}}</strong></p>
+                <p>
+                    <a ui-sref="profile.detail({slug:subanswer.author.id})" style="color: inherit;">{{subanswer.author.user.first_name}} <strong>{{subanswer.author.user.last_name}}</strong></a>
+                    <span><span am-time-ago="subanswer.updated_on"></span></span>
+                </p>
             </div>
             <div class="thread-content">
                 <p ng-bind-html="trustAsHtml(subanswer.text)"></p>
