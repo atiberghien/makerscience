@@ -145,6 +145,7 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
 
 module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink,
                                             MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePostLight) ->
+    angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
     $scope.collapseAdvancedSearch = true
 
@@ -179,7 +180,15 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
             angular.forEach(makerSciencePostResults, (post) ->
                 TaggedItem.one().customGET("makersciencepost/" + post.id).then(findRelatedTag)
             )
-            $scope.discussions = makerSciencePostResults
+            $scope.threads = makerSciencePostResults
+            angular.forEach($scope.threads, (thread) ->
+                $scope.getPostAuthor(thread.parent_id).then((author) ->
+                    thread.author = author
+                )
+                $scope.getContributors(thread.parent_id).then((contributors) ->
+                    thread.contributors = contributors
+                )
+            )
         )
 
         TaggedItem.getList({tag__slug : params["facet"]}).then((taggedItemResults) ->
