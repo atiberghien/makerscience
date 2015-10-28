@@ -11,13 +11,24 @@
     <tabset>
         <tab>
             <tab-heading>
-                <span>{{(community | filter: {level:31}|unique:'profile_id').length}}</span>
-                <ng-pluralize count="(community | filter: {level:31}|unique:'profile_id').length"
+                <span>{{(community | filter: {level:31}|unique:'profile_id').length +1}}</span>
+                <ng-pluralize count="(community | filter: {level:31}|unique:'profile_id').length + 1"
                             when="{'0': 'Contributeur',
                             'one': 'Contributeur',
                             'other': 'Contributeurs'}">
                 </ng-pluralize>
             </tab-heading>
+            <div class="member">
+                <span class="avatar avatar52">
+                    <img ng-show="post.parent.author.avatar" src="{{post.parent.author.avatar}}" class="profile img-circle">
+                    <img ng-hide="post.parent.author.avatar" src="/img/avatar.png" class="profile img-circle">
+                </span>
+                <div class="member-details relative">
+                    <p>
+                        <a ui-sref="profile.detail({slug:post.parent.author.id})" >{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong></a>
+                    </p>
+                </div>
+            </div>
             <div class="member" ng-repeat="member in community | filter: {level:31}|unique:'profile_id'">
                 <span class="avatar avatar52">
                     <img ng-show="member.profile.avatar" src="{{member.profile.avatar}}" class="profile img-circle">
