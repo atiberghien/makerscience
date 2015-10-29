@@ -33,42 +33,43 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
         markers : {}
     )
 
-    MakerScienceProfileLight.one().customGETLIST('search', $scope.params).then((profileResults) ->
+    MakerScienceProfileLight.one().customGETLIST('search', {limit : 0}).then((profileResults) ->
         angular.forEach(profileResults, (profile) ->
-            geocoderService.getLatLong(profile.address_locality).then((latlng)->
-                icon =
-                    shadowUrl: '/img/users/user-shadow.png'
-                    iconSize: [30, 30]
-                    shadowSize:   [44, 44]
-                    iconAnchor:   [15, 15]
-                    shadowAnchor: [22, 22]
-                if profile.avatar
-                    icon["iconUrl"] = profile.avatar
-                else
-                    icon["iconUrl"] = '/img/avatar.png'
+            if profile.address_locality
+                geocoderService.getLatLong(profile.address_locality).then((latlng)->
+                    icon =
+                        shadowUrl: '/img/users/user-shadow.png'
+                        iconSize: [30, 30]
+                        shadowSize:   [44, 44]
+                        iconAnchor:   [15, 15]
+                        shadowAnchor: [22, 22]
+                    if profile.avatar
+                        icon["iconUrl"] = profile.avatar
+                    else
+                        icon["iconUrl"] = '/img/avatar.png'
 
-                $scope.markers[profile.id]=
-                    slug : profile.slug
-                    group: "center"
-                    groupOption :
-                        showCoverageOnHover : false
-                    lat: latlng.lat()
-                    lng: latlng.lng()
-                    draggable: false
-                    icon: icon
-                    icon_standard : icon
-                    icon_hover:
-                        iconUrl: '/img/avatar.png'
-                        shadowUrl: 'img/users/user-shadow.png'
-                        iconSize: [52, 51]
-                        shadowSize:   [67, 67]
-                        iconAnchor:   [25, 25]
-                        shadowAnchor: [33, 33]
-                if profile.avatar
-                    $scope.markers[profile.id]["icon_hover"]["iconUrl"] = profile.avatar
-                else
-                    $scope.markers[profile.id]["icon_hover"]["iconUrl"] = '/img/avatar.png'
-            )
+                    $scope.markers[profile.id]=
+                        slug : profile.slug
+                        group: "center"
+                        groupOption :
+                            showCoverageOnHover : false
+                        lat: latlng.lat()
+                        lng: latlng.lng()
+                        draggable: false
+                        icon: icon
+                        icon_standard : icon
+                        icon_hover:
+                            iconUrl: '/img/avatar.png'
+                            shadowUrl: 'img/users/user-shadow.png'
+                            iconSize: [52, 51]
+                            shadowSize:   [67, 67]
+                            iconAnchor:   [25, 25]
+                            shadowAnchor: [33, 33]
+                    if profile.avatar
+                        $scope.markers[profile.id]["icon_hover"]["iconUrl"] = profile.avatar
+                    else
+                        $scope.markers[profile.id]["icon_hover"]["iconUrl"] = '/img/avatar.png'
+                )
         )
     )
     $scope.$on('leafletDirectiveMarker.click', (event, args) ->
