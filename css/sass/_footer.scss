@@ -50,7 +50,8 @@ footer {
 				padding-left: 1em;
 				color: $color-dark-grey;
 			}
-			button {
+			.button {
+				margin-left:0em;
 				margin-right: 3em;
 				color: #fff;
 				background-color: $color-dark-blue;
