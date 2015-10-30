@@ -30,6 +30,7 @@
                             <ng-include src="'/views/catalog/block/project_thumb_light.html'"></ng-include>
                         </div>
                     </div>
+                    <div ng-show="projects.length > 0">
                     <pagination total-items="totalItems"
                                 items-per-page='limit'
                                 ng-model="currentPage"
@@ -41,6 +42,13 @@
                                 previous-text="<<"
                                 next-text=">>">
                     </pagination>
+                    </div>
+                    <div ng-show="projects.length == 0 && !waitingList">
+                        Aucun projet ne correspond à votre recherche.
+                    </div>
+                    <div ng-show="waitingList">
+                        En attente de résultat ...
+                    </div>
                     <a ui-sref="project.new" class="large large-red">Créer un projet <img src="/img/smiley.png" class="smiley" alt="Smiley" /></a>
                 </div>
                 <div class="col-md-3">
