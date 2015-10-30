@@ -229,6 +229,22 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     label: 'Ré-initialisation de mot de passe'
                     parent : 'home'
         )
+        .state('cgu',
+                url: '/cgu',
+                templateUrl: '/views/cgu.html'
+                controller : 'StaticContentCtrl'
+                ncyBreadcrumb:
+                    label: "Conditions d’utilisation"
+                    parent : 'home'
+        )
+        .state('mentions',
+                url: '/mentions-legales',
+                templateUrl: '/views/mentions.html'
+                controller : 'StaticContentCtrl'
+                ncyBreadcrumb:
+                    label: "Mentions Légales"
+                    parent : 'home'
+        )
         # .state('twitter',
         #         url: '/auth/twitter',
         #         # templateUrl: 'closePopup.html'

@@ -28,11 +28,11 @@
                     </div>
                     <!--End mc_embed_signup-->
                 <h3>Suivez MakerScience sur</h3>
-                <ul class="social">
-                    <li><a href="https://twitter.com/makersciencefr" target="_blank"><img src="/img/footer/social-twitter.png" alt="Twitter" /></a></li>
-                    <li><a href="https://www.facebook.com/makerscience" target="_blank"><img src="/img/footer/social-facebook.png" alt="Facebook" /></a></li>
-                    <li><a href="https://www.linkedin.com/company/makerscience?trk=biz-companies-cym" target="_blank"><img src="/img/footer/social-linkedin.png" alt="LinkedIn" /></a></li>
-                    <li><a href="https://www.youtube.com/channel/UCsnstxyQ6FepyQGVEGmWqtg/feed" target="_blank"><img src="/img/footer/social-youtube.png" alt="YouTube" /></a></li>
+                <ul class="social" ng-controller="StaticContentCtrl">
+                    <li><a href="{{static.twitter}}" target="_blank"><img src="/img/footer/social-twitter.png" alt="Twitter" /></a></li>
+                    <li><a href="{{static.facebook}}" target="_blank"><img src="/img/footer/social-facebook.png" alt="Facebook" /></a></li>
+                    <li><a href="{{static.linkedin}}" target="_blank"><img src="/img/footer/social-linkedin.png" alt="LinkedIn" /></a></li>
+                    <li><a href="{{static.youtube}}" target="_blank"><img src="/img/footer/social-youtube.png" alt="YouTube" /></a></li>
                 </ul>
             </div><!-- .col -->
         </div><!-- .row -->
@@ -91,7 +91,7 @@ Au sein de la communauté, une même volonté : rendre accessibles les sciences 
     <div class="row container">
         <div class="col-md-12 copyright">
             <p>© Copyright 2014 - Makerscience Tous droits réservés
-                <span><a ui-sref="about">Mentions légales</a> <a ui-sref="about">Conditions d’utilisation</a></span>
+                <span><a ui-sref="mentions">Mentions légales</a> <a ui-sref="cgu">Conditions d’utilisation</a></span>
             </p>
         </div><!-- .col -->
     </div><!-- .row -->
