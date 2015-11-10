@@ -102,13 +102,17 @@
 			bottom: 0px;
     			position: absolute;
     			margin-bottom: 5px;
-    			font-weight: bold;
+    			#font-weight: bold;
 		}
 	}
 	div.tags {
 		position: relative;
 		div.tags {
 			width: 90%;
+		}
+		h5 {
+			font-weight : bold;
+			font-size: 1.2em;
 		}
 	}
 	.intro > form {
