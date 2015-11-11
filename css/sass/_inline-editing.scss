@@ -163,6 +163,8 @@
 						div.ta-bind {
 							min-height: 200px;
 							padding: 1em;
+							white-space: pre;
+                                        		word-wrap: break-word;
 						}
 					}
 					span.editable-buttons {
@@ -221,6 +223,8 @@ div.editable-controls {
 				}
 				.ta-scroll-window > .ta-bind {
 					padding: 1em;
+					white-space: pre;
+					word-wrap: break-word;
 				}
 				textarea, div.editable-input {
 					display: block;
@@ -235,6 +239,18 @@ div.editable-controls {
 						box-shadow: none;
 					}
 				}
+			}
+		}
+		p.editable {
+			white-space: pre;
+                        word-wrap: break-word;
+			ul {
+				list-style : initial ;
+				margin-left: 15px;	
+			}
+			ol {
+				list-style-type: decimal;
+				margin-left: 15px;
 			}
 		}
 		&.linked {
