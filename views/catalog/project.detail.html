@@ -29,8 +29,7 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'}}" alt="Project Image" />
-                        <img ng-if="!projectsheet.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Project Image" />
+                        <img ng-src="{{coverURL}}" alt="Project Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
                                 <button ng-click="openGallery(projectsheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
