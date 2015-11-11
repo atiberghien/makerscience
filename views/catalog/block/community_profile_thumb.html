@@ -2,7 +2,25 @@
     <img ng-show="member.profile.avatar" src="{{member.profile.avatar}}" class="profile img-circle">
     <img ng-hide="member.profile.avatar" src="/img/avatar.png" class="profile img-circle">
 </span>
-<p><a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a></p>
+<div class="member-name">
+    <p><a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a></p>
+</div>
+<div class="contact" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFollowing(member.profile.id)">
+    <div class="member-buttons" >
+        <button ng-if="viewedMakerscienceProfile.authorized_contact == 'NONE' && currentMakerScienceProfile.parent.id != member.profile.id" class="add-member">
+            <span class="fa fa-envelope-o" tooltip="Ce membre ne souhaite pas être contacté." tooltip-placement="bottom"></span>
+        </button>
+        <button ng-if="viewedMakerscienceProfile.authorized_contact == 'FOLLOWED' && currentMakerScienceProfile.parent.id != member.profile.id && !isFollowed" class="add-member">
+            <span class="fa fa-envelope-o" tooltip="Ce membre ne peut être contacté que par les personnes auxquelles il est abonné." tooltip-placement="bottom"></span>
+        </button>
+        <button ng-if="viewedMakerscienceProfile.authorized_contact == 'FOLLOWED' && currentMakerScienceProfile.parent.id != member.profile.id && isFollowed" class="add-member" ng-click="showContactPopup(viewedMakerscienceProfile)">
+            <span class="fa fa-envelope-o"></span>
+        </button>
+        <button ng-if="viewedMakerscienceProfile.authorized_contact == 'ALL' && currentMakerScienceProfile.parent.id != member.profile.id" class="add-member" ng-click="showContactPopup(viewedMakerscienceProfile)">
+            <span class="fa fa-envelope-o"></span>
+        </button>
+    </div>
+</div>
 <div ng-if="member.isValidated" class="member-details relative">
     <div class="edit-buttons" ng-show="editable || member.profile.id == currentMakerScienceProfile.parent.id">
         <button ng-click="DetailBtnForm.$show()" ng-hide="DetailBtnForm.$visible">

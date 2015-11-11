@@ -29,8 +29,7 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-if="resourcesheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'}}" alt="Resource Image" />
-                        <img ng-if="!resourcesheet.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Resource Image" />
+                        <img ng-src="{{coverURL}}" alt="Experience Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
                                 <button ng-click="openGallery(resourcesheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
@@ -72,10 +71,10 @@
                                     <span ng-if="!resourcesheet.parent.website">Site web non renseignée</span>
                                 </p>
                             </div>
-                            <p>
-                                <span>Crée le <span am-time-ago="resourcesheet.parent.created_on"></span><span> /
-                                <span>Mis à jour le <span am-time-ago="resourcesheet.modified"></span><span>
-                            </p>
+                            <div class="since">
+                                <span>Crée le {{resourcesheet.parent.created_on | date:'dd/MM/yyyy'}}<span> /
+                                <span>Mis à jour le {{resourcesheet.modified | date:'dd/MM/yyyy'}}<span>
+                            </div>
 
                         </div><!-- .side-header -->
 

@@ -99,15 +99,16 @@ div.dropdown-logged-in {
 			}
 			ul.dropdown-notifications {
 				z-index: 10000; /* go over editing buttons */
-				min-width: 200px;
+				min-width: 315px;
 				li.list-group-item {
 					display: block;
-					padding-right: 35px; /* leave space for button to mark them as read */
 					background-color: $color-light-grey;
 					&:last-child {
 						padding-right: 10px;
 						text-align: right;
 					}
+					font-size : 12px;
+					padding : 6px 12px;
 				}
 				li.notification-new {
 					background-color: #fff;
@@ -538,10 +539,15 @@ div.crumbs {
 			&.skills {
 				margin-top: 2em;
 			}
+			&.interests {
+				margin-top:2em;
+			}
 		}
 		p {
-			margin-bottom: 0.25em;
-			line-height: 1.5em;
+			overflow: hidden;
+    			word-wrap: break-word;
+    			line-height: 1.25em;
+    			font-size: 1.2em;
 		}
 		p.updated, p.location {
 			text-align: center;
@@ -564,11 +570,22 @@ div.crumbs {
 			}
 		}
 		ul.skills {
-			margin-bottom: 3em;
+			#margin-bottom: 3em;
 		}
 		div.socials {
+			margin-top : 2em;
 			span.glyphicon {
-				font-size : 30px
+				font-size : 30px;
+			}
+			input {
+				margin-bottom: 5px;
+    				padding: 1px;
+    				border: 1px solid grey;
+
+			}
+			button.btn {
+				margin-left: 0px;
+				margin-bottom: 0px;
 			}
 		}
 	}
@@ -619,13 +636,17 @@ div.crumbs {
 		position: relative;
 		min-height: $home-slide-height;
 		margin-right: -1px; /* fix 1px bug from boostrap grid */
-		padding: 2em;
+		padding: 1em 2em 0em 1em;
 		padding-bottom: 0;
 		color: $color-intro;
 		background-color: $color-intro-project-bg;
 		p.location img {
 			margin-right: 1em;
 			vertical-align: middle;
+		}
+		ul.tags {
+			margin : 0;
+			min-height: 5em;	
 		}
 	}
 

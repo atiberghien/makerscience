@@ -28,8 +28,10 @@
             <div class="comment" ng-repeat="comment in comments| orderBy:'-submit_date' | limitTo :  5" ng-class="{'flagged' : comment.flags[0]}">
                 <div class="comment-gravatar">
                     <span class="avatar avatar40">
-                        <img ng-show="comment.user.profile.avatar" src="{{comment.user.profile.avatar}}" class="profile img-circle">
-                        <img ng-hide="comment.user.profile.avatar" src="/img/avatar.png" class="profile img-circle">
+                        <a ui-sref="profile.detail({slug:comment.user.profile.id})">
+                            <img ng-show="comment.user.profile.avatar" src="{{comment.user.profile.avatar}}" class="profile img-circle">
+                            <img ng-hide="comment.user.profile.avatar" src="/img/avatar.png" class="profile img-circle">
+                        </a>
                     </span>
                 </div>
                 <div class="comment-content">
@@ -39,10 +41,14 @@
                         <ul class="dropdown-menu" role="menu">
                             <!-- <li><a href="">Modifier</a></li> -->
                             <li ng-if="isCommentAuthor(comment)"><a href="" ng-click="removeComment($index)">Supprimer</a></li>
-                            <!-- <li><a href="" ng-click="flagComment($index)">Signaler un abus</a></li> -->
+                            <li ng-controller="ReportAbuseCtrl">
+                                <a href="" ng-click="showReportAbusePopup(location.protocol() + '://' + location.host() + '' + location.path())">Signaler un abus</a>
+                            </li>
                         </ul>
                     </div>
-                    <p class="comment-author"><a ui-sref="profile.detail({slug:comment.user.profile.id})">{{comment.user.first_name}} <strong>{{comment.user.last_name}}</strong></a></p>
+                    <p class="comment-author">
+                        <a ui-sref="profile.detail({slug:comment.user.profile.id})">{{comment.user.first_name}} <strong>{{comment.user.last_name}}</strong></a>
+                    </p>
                     <p style="word-wrap: break-word;">{{comment.comment}}</p>
                 </div>
                 <div class="comment-date">

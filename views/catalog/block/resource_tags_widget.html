@@ -1,86 +1,56 @@
 <div class="tags">
     <div class="editable">
-     <h5>Thématiques</h5>
-        <div class="edit-buttons" ng-show="editable" ng-init="addTheme=false">
-            <button ng-show="preparedThemeTags.length <= 9" ng-click="addTheme = ! addTheme"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button ng-show="preparedThemeTags.length > 9" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
+        <h5>Thématiques</h5>
+        <div class="edit-buttons" ng-show="editable">
+            <button ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
         </div>
-
-        <div ng-show="addTheme==true" ng-controller="TagAutoCompleteCtrl">
-            <tags-input ng-model="$parent.preparedThemeTags"
-                        placeholder="> Mot-clé"
-                        on-tag-added="$parent.addTagToResourceSheet('th', $tag)"
-                        on-tag-removed="$parent.removeTagFromResourceSheet($tag)">
-                        <auto-complete source="loadTags($query)"></auto-complete>
-            </tags-input>
-        </div>
-
-        <div ng-show="addTheme==false">
-            <ul class="tags skills">
-                <li ng-repeat="tag in preparedThemeTags | limitTo : 9">
-                    <a ng-if="tag.text.length > 6" tooltip="{{tag.text}}" ui-sref="tag({slug:tag.slug})">{{tag.text| characters: 6}}</a>
-                    <a ng-if="tag.text.length <= 6" ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
-                </li>
-                <li><a ng-show="preparedThemeTags.length > 9" tooltip="Tous les tags" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
-            </ul>
-        </div>
+        <ul class="tags skills">
+            <li ng-repeat="tag in preparedThemeTags | limitTo : 6">
+                <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
+            </li>
+            <li ng-if="preparedThemeTags.length > 6">
+                <a tooltip="Tous les thèmes" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
+            </li>
+        </ul>
     </div>
 </div><!-- .relative -->
 
 <div class="tags">
     <div class="editable">
         <h5>Cibles visées</h5>
-        <div class="edit-buttons" ng-show="editable" ng-init="addTarget=false">
-            <button ng-show="preparedTargetTags.length <= 9" ng-click="addTarget = ! addTarget"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button ng-show="preparedTargetTags.length > 9" ng-click="openTagPopup(preparedTargetTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
+        <div class="edit-buttons" ng-show="editable">
+            <button ng-click="openTagPopup(preparedTargetTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
         </div>
-
-        <div ng-show="addTarget==true" ng-controller="TagAutoCompleteCtrl">
-            <tags-input ng-model="$parent.preparedTargetTags"
-                        placeholder="> Mot-clé"
-                        on-tag-added="$parent.addTagToResourceSheet('tg', $tag)"
-                        on-tag-removed="$parent.removeTagFromResourceSheet($tag)">
-                        <auto-complete source="loadTags($query)"></auto-complete>
-            </tags-input>
-        </div>
-
-        <div ng-show="addTarget==false">
-            <ul class="tags tags-project">
-                <li ng-repeat="tag in preparedTargetTags | limitTo : 9">
-                    <a ng-if="tag.text.length > 6" tooltip="{{tag.text}}" ui-sref="tag({slug:tag.slug})">{{tag.text| characters: 6}}</a>
-                    <a ng-if="tag.text.length <= 6" ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
-                </li>
-                <li><a ng-show="preparedThemeTags.length > 9" tooltip="Tous les tags" ng-click="openTagPopup(preparedThemeTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
-            </ul>
-        </div>
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in preparedTargetTags | limitTo : 6">
+                <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
+            </li>
+            <li ng-if="preparedTargetTags.length > 6">
+                <a tooltip="Toutes les cibles" ng-click="openTagPopup(preparedThemeTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
+            </li>
+        </ul>
     </div><!-- .editable -->
 </div><!-- .relative -->
 
 <div class="tags">
     <div class="editable">
         <h5>Formats</h5>
-        <div class="edit-buttons" ng-show="editable" ng-init="addFormats=false">
-            <button ng-show="preparedFormatsTags.length <= 9" ng-click="addFormats = ! addFormats"><span class="glyphicon glyphicon-pencil"></span></button>
-            <button ng-show="preparedFormatsTags.length > 9" ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)"><span class="glyphicon glyphicon-pencil"></span></button>
+        <div class="edit-buttons" ng-show="editable">
+            <button ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
         </div>
-
-        <div ng-show="addFormats==true" ng-controller="TagAutoCompleteCtrl">
-            <tags-input ng-model="$parent.preparedFormatsTags"
-                        placeholder="> Mot-clé"
-                        on-tag-added="$parent.addTagToResourceSheet('fm', $tag)"
-                        on-tag-removed="$parent.removeTagFromResourceSheet($tag)">
-                        <auto-complete source="loadTags($query)"></auto-complete>
-            </tags-input>
-        </div>
-
-        <div ng-show="addFormats==false">
-            <ul class="tags tags-project">
-                <li ng-repeat="tag in preparedFormatsTags | limitTo : 9">
-                    <a ng-if="tag.text.length > 6" tooltip="{{tag.text}}" ui-sref="tag({slug:tag.slug})">{{tag.text| characters: 6}}</a>
-                    <a ng-if="tag.text.length <= 6" ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
-                </li>
-                <li><a ng-show="preparedThemeTags.length > 9" tooltip="Tous les tags" ng-click="openTagPopup(preparedThemeTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a></li>
-            </ul>
-        </div>
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in preparedFormatsTags | limitTo : 6">
+                <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
+            </li>
+            <li ng-if="preparedFormatsTags.length > 6">
+                <a tooltip="Tous les formats" ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
+            </li>
+        </ul>
     </div><!-- .editable -->
 </div><!-- .relative -->

@@ -29,8 +29,7 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-if="projectsheet.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'}}" alt="Project Image" />
-                        <img ng-if="!projectsheet.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Project Image" />
+                        <img ng-src="{{coverURL}}" alt="Project Image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
                                 <button ng-click="openGallery(projectsheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
@@ -53,7 +52,10 @@
                                 e-ng-options="progress.value as progress.text for progress in progressRange"
                                     e-form="WIPBtnForm"
                                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'progress', $data);">
-                                    <span ng-if="projectsheet.parent.progress">État d'avancement {{showProjectProgress()}}</span>
+                                    <span ng-if="projectsheet.parent.progress">
+                                        <span class="fa fa-flag-checkered"></span>
+                                        État d'avancement : {{showProjectProgress()}}
+                                    </span>
                                 </p>
                             </div>
 
@@ -68,7 +70,7 @@
                                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'end_date', $data)"
                                     e-datepicker-popup="dd/MM/yyyy">
                                     <span class="glyphicon glyphicon glyphicon-time"></span>
-                                    <span ng-if="projectsheet.parent.end_date">Fin de projet: {{projectsheet.parent.end_date|date:"dd/MM/yyyy"}}</span>
+                                    <span ng-if="projectsheet.parent.end_date">Fin de projet : {{projectsheet.parent.end_date|date:"dd/MM/yyyy"}}</span>
                                     <span ng-if="!projectsheet.parent.end_date">Fin de projet non renseigné</span>
                                 </p>
                             </div>
@@ -98,14 +100,16 @@
                                     e-form="WebsiteBtnForm"
                                     onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'website', $data)">
                                     <span class="glyphicon glyphicon-globe"></span>
-                                    <a ng-if="projectsheet.parent.website" href="{{projectsheet.parent.website}}" target="_blank">{{projectsheet.parent.website}}</a>
+                                    <a ng-if="projectsheet.parent.website" href="{{projectsheet.parent.website}}" target="_blank">
+                                        {{projectsheet.parent.website| limitTo:45}}<span ng-if="projectsheet.parent.website.length > 45">...</span>
+                                    </a>
                                     <span ng-if="!projectsheet.parent.website">Site web non renseignée</span>
                                 </p>
                             </div>
-                            <p>
-                                <span>Crée le <span am-time-ago="projectsheet.parent.created_on"></span><span> /
-                                <span>Mis à jour le <span am-time-ago="projectsheet.modified"></span><span>
-                            </p>
+                            <div class="since">
+                                <span>Crée le {{projectsheet.parent.created_on | date:'dd/MM/yyyy'}}<span> /
+                                <span>Mis à jour le {{projectsheet.modified | date:'dd/MM/yyyy'}}<span>
+                            </div>
 
                         </div><!-- .side-header -->
 
@@ -161,7 +165,7 @@
                             <form novalidate>
                                 <input type="text" name="title" ng-model="newsData.title" placeholder="Titre de la news ..." class="full-width" required />
 
-                                <textarea ui-tinymce="tinyMceOptions"
+                                <textarea ui-tinymce="tinyMceFullOptions"
                                     name="text"
                                     ng-model="newsData.text"
                                     ng-trim="false"
@@ -189,13 +193,13 @@
                     </tab>
                 </tabset>
 
-                <div class="row">
+                <div class="row" ng-if="needs.length > 0">
                     <div class="col-md-12">
                         <div class="needs">
 
                             <h3>Besoins</h3>
                             <carousel id="carousel-needs" class="carousel-no-indicators carousel-text-links">
-                                <slide class="needs-idea" ng-repeat="post in linked_post|filter:{post_type : 'need'}">
+                                <slide class="needs-idea" ng-repeat="post in  needs">
                                     <ul class="actions">
                                         <li><a ui-sref="question({slug:post.slug})"><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
                                     </ul>

@@ -146,15 +146,17 @@ form.forum-answer {
         padding: $grid-gutter-width / 2;
         background-color: $color-bg;
         div.tags {
-            border: none;
-            background-color: transparent;
+            margin-top: $grid-gutter-width / 2;
+            padding: 0.25em 0.5em;
             box-shadow: none;
             li.tag-item {
                 background-color: $color-blue;
                 @include border-radius(0);
             }
             input.input {
+                margin-bottom: 0;
                 padding: 0;
+                background-color: transparent;
                 @include placeholder($color-blue);
             }
             ul.tag-list {
@@ -173,7 +175,8 @@ form.forum-answer {
         button.button-forum-linked {
             overflow: hidden;
             border: none;
-            padding-left: $grid-gutter-width;
+            padding: 10px 15px 10px 15px;
+	    background-color: $color-forum;
             span {
                 top: 0;
                 margin-left: 1em;
@@ -187,7 +190,7 @@ form.forum-answer {
         }
         input#linked-idea_value {
             float: left;
-            width: 868px; /* to align width delete buttons above when they appear */
+            width: 955px; /* to align width delete buttons above when they appear */
             padding: $grid-gutter-width / 2;
             @include placeholder($color-blue);
         }
@@ -274,16 +277,15 @@ section.forum-topic,
     p.question {
         position: relative;
         margin: $grid-gutter-width / 2 0;
-        padding-left: 32px;
+        padding-left: 2.25em;
         font-size: 1.2em;
         font-weight: bold;
         line-height: 1.25em;
         span {
             position: absolute;
-            top: 0;
+            top: -2px;
             left: 0;
-            margin-right: 0.5em;
-            padding: 0 0.5em;
+            padding: 0.4em 0.4em;
             color: #fff;
             background-color: $color-forum;
             font-size: 0.9em;
@@ -363,6 +365,8 @@ div.forum-sidebar {
                 }
             }
             p.post-topic {
+                clear: both;
+                padding-top: 1em;
                 font-size: 1.1em;
                 line-height: 1.7em;
                 font-weight: bold;
@@ -400,7 +404,7 @@ div.forum-sidebar {
             line-height: 4.75em;
             font-size: 1.25em;
             color: #fff;
-            border-bottom: 1px solid $color-medium-grey;
+            #border-bottom: 1px solid $color-medium-grey;
             &:hover {
                 background-color: rgba(0, 0, 0, 0.25);
                 text-decoration: none;
@@ -461,9 +465,9 @@ div.thread-answers {
         font-weight: bold;
         span {
             position: absolute;
-            top: 1px;
+            top: -5px;
             left: 0;
-            padding: 0 0.4em;
+            padding: 8px;
             color: #fff;
             background-color: $color-forum;
             @include border-radius(50%);
@@ -519,6 +523,9 @@ div.thread-answers {
             margin-bottom: 1em;
             color: $color-strong-grey;
         }
+        ul, ol {
+            list-style-position: inside;
+        }
     }
     .thread-actions {
         font-size: 1.25em;
@@ -566,6 +573,9 @@ div.thread-answers {
         margin-bottom: $grid-gutter-width;
         padding: $grid-gutter-width / 2;
         background-color: #fff;
+        .avatar {
+            float: none;
+        }
         ul.answer-report {
             float: right;
             margin-top: $grid-gutter-width / 2;
@@ -590,7 +600,7 @@ div.thread-answers {
         }
         span.answer-count {
             margin-right: 0.25em;
-            padding: 0.25em 0.5em;
+            padding: 0.1em 0.5em;
             color: #fff;
             background-color: $color-forum;
             @include border-radius(50%);

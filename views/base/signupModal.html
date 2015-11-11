@@ -23,23 +23,23 @@
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon" id="basic-addon1">@</span>
-            <input type="text" class="form-control" name="username" placeholder="Email ..." ng-model="username" required>
-            <span ng-show="form.username.$error.username">Cet email est déjà pris.</span>
+            <input type="text" class="form-control" name="email" placeholder="Email ..." ng-model="email" required>
         </div>
+        <span class="error" ng-show="emailError">Cet email est déjà associé à un compte.</span>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-            <input type="text" class="form-control" name="pwd1" placeholder="Mot de passe..." ng-model="password" required>
+            <input type="password" class="form-control" name="pwd1" placeholder="Mot de passe..." ng-model="password" required>
 
         </div>
     </div>
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-            <input type="text" class="form-control" name="pwd2" placeholder="Confirmation du mot de passe ..." ng-model="password2" password required>
-            <span ng-show="password != password2">Les deux mots de passe sont différents.</span>
+            <input type="password" class="form-control" name="pwd2" placeholder="Confirmation du mot de passe ..." ng-model="password2" password required>
         </div>
+        <span class="error" ng-show="passwordError">Les deux mots de passe doivent être identiques.</span>
     </div>
-    <button type="submit"  ng-click="register()" >Connexion</button>
+    <button type="submit"  ng-click="register()" >S'inscrire</button>
 </form>

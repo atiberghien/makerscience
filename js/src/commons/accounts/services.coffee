@@ -73,28 +73,28 @@ class LoginService
                 delete @$cookies['key']
                 @$rootScope.authVars.username = ""
 
-                if @$rootScope.homeStateName
-                        @$state.go(@$rootScope.homeStateName, {}, {reload:true})
-
-
         submit: =>
                 console.debug('submitting login...')
                 @loginRestangular.all('account/user').customPOST(
                         {username: @$rootScope.authVars.username, password: @$rootScope.authVars.password},"login", {}
                         ).then((data) =>
-                                console.log(data)
-                                @$cookies.username = data.username
-                                @$cookies.key = data.token
-                                @$http.defaults.headers.common['Authorization'] = "ApiKey #{data.username}:#{data.token}"
-                                @loginRestangular.all('account/user').get(data.username).then((data)=>
-                                        console.log("user object", data)
-                                        @$rootScope.authVars.user = data
-                                        @authService.loginConfirmed()
-                                )
+                                if data.success
+                                    @$rootScope.authVars.username = data.username
+                                    @$cookies.username = data.username
+                                    @$cookies.key = data.token
+                                    @$http.defaults.headers.common['Authorization'] = "ApiKey #{data.username}:#{data.token}"
+                                    @loginRestangular.all('account/user').get(data.username).then((data)=>
+                                            console.log("user object", data)
+                                            @$rootScope.authVars.user = data
+                                            @authService.loginConfirmed()
+                                    )
+                                    return {success : true}
+                                else
+                                    return {success : false}
 
                         , (data) =>
-                                console.debug("LoginController submit error: #{data.reason}")
                                 @$rootScope.errorMsg = data.reason
+                                return {success : false}
                 )
 
 module.provider("loginService", ->

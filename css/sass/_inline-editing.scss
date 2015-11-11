@@ -23,6 +23,7 @@
 				background-color: $color-red;
 				border-color: $color-red;
 			}
+
 		}
 	}
 }
@@ -55,7 +56,7 @@
 				margin: 0 auto;
 				text-align: center;
 				input {
-					width: 75%;
+					width: 50%;
 					text-align: center;
 				}
 			}
@@ -88,7 +89,7 @@
 			padding: 0.5em;
 		}
 		div.editable {
-			min-height: 3em; /* Fix issue when there are no tags by giving it a minimum height */
+			min-height: 2.5em;
 		}
 		div.edit-buttons {
 			right: -20px;
@@ -98,9 +99,22 @@
 				width: 5em !important;
 			}
 		}
+		div.since {
+			bottom: 0px;
+    			position: absolute;
+    			margin-bottom: 5px;
+    			#font-weight: bold;
+		}
 	}
 	div.tags {
 		position: relative;
+		div.tags {
+			width: 90%;
+		}
+		h5 {
+			font-weight : bold;
+			font-size: 1.2em;
+		}
 	}
 	.intro > form {
 		width: 100%;
@@ -150,6 +164,8 @@
 						div.ta-bind {
 							min-height: 200px;
 							padding: 1em;
+							white-space: pre;
+                                        		word-wrap: break-word;
 						}
 					}
 					span.editable-buttons {
@@ -208,6 +224,8 @@ div.editable-controls {
 				}
 				.ta-scroll-window > .ta-bind {
 					padding: 1em;
+					white-space: pre;
+					word-wrap: break-word;
 				}
 				textarea, div.editable-input {
 					display: block;
@@ -221,6 +239,36 @@ div.editable-controls {
 						border-color: $color-dark-grey;
 						box-shadow: none;
 					}
+				}
+			}
+		}
+		p.editable {
+			white-space: pre;
+                        word-wrap: break-word;
+			ul {
+				list-style : initial ;
+				margin-left: 15px;	
+			}
+			ol {
+				list-style-type: decimal;
+				margin-left: 15px;
+			}
+		}
+		&.linked {
+			.carousel {
+				.edit-buttons {
+					top: 34px;
+				}
+			}
+			button.nomargin {
+				margin: 0;
+			}
+			div.angucomplete-holder {
+				input#linked-idea_value {
+					width: 20em;
+					padding: 0.36em;
+					position: absolute;
+					right: 2.7em;
 				}
 			}
 		}
@@ -356,10 +404,16 @@ div.editable-controls {
 				background-color: $color-red;
 			}
 		}
+		button.valid-button {
+			margin-top: 5px;
+    			font-size: 1em;
+    			padding: 0.4em;
+    			margin-left: 1em;
+		}
 	}
 	div.member-details {
 		form {
-			margin: 0.5em 0 0.5em 1em;
+			margin: 0.5em 0 0.5em 0.5em;
 			input {
 				display: block;
 				width: 100%;

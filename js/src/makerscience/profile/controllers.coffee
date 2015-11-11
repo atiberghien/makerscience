@@ -18,14 +18,17 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
     $scope.initMakerScienceAbstractListCtrl()
 
     $scope.fetchRecentProfiles = () ->
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = '-date_joined'
         $scope.refreshList()
 
     $scope.fetchTopProfiles = () ->
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = '-activity_score'
         $scope.refreshList()
 
     $scope.fetchRandomProfiles = () ->
+        $scope.$broadcast('clearFacetFilter')
         $scope.params['ordering'] = ''
         $scope.refreshList().then(->
             nbElmt = $scope.profiles.length
@@ -91,6 +94,36 @@ module.controller('AvatarUploaderInstanceCtrl' , ($scope, $modalInstance, @$http
         return new Blob([new Uint8Array(array)], {type: mimeString})
 )
 
+module.controller('BioInstanceCtrl', ($scope, $modalInstance, MakerScienceProfile, editable, profile) ->
+    $scope.editable = editable
+    $scope.profile = profile
+
+    $scope.ok = () ->
+        if editable
+            MakerScienceProfile.one($scope.profile.slug).patch({bio : $scope.profile.bio})
+        $modalInstance.close()
+
+    $scope.cancel = () ->
+        $modalInstance.dismiss('cancel')
+)
+
+module.controller('SocialsEditInstanceCtrl', ($scope, $modalInstance, MakerScienceProfile, socials, profile) ->
+    $scope.profile = profile
+    $scope.socials = socials
+
+    $scope.ok = () ->
+        angular.forEach($scope.socials, (value, key) ->
+            if value != null || value != ""
+                $scope.profile[key] = value
+        )
+        MakerScienceProfile.one($scope.profile.slug).patch($scope.socials).then(->
+            $modalInstance.close()
+        )
+
+    $scope.cancel = () ->
+        $modalInstance.dismiss('cancel')
+)
+
 module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal,
                                             MakerScienceProfile, MakerScienceProfileLight,
                                             MakerScienceProjectLight, MakerScienceResourceLight,
@@ -109,8 +142,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
 
         $rootScope.$broadcast('profile-loaded', $scope.profile)
         $rootScope.$emit('profile-loaded', $scope.profile)
-
-        $scope.profileToUpdate = angular.copy($scope.profile)
 
         $scope.preparedInterestTags = []
         $scope.preparedSkillTags = []
@@ -140,12 +171,31 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         $scope.favoriteTags = {}
         $scope.followedTags = []
 
-        MakerScienceProfile.one($scope.profile.slug).customGET('activities').then((activityResults)->
-            $scope.activities = activityResults.objects.activities
-        )
+        ## INFINITE SCROLL PROFILE ACTIVITIES
+        $scope.infiniteScrollActivitiesLimit = 3
+        $scope.infiniteScrollActivitiesTotalCount = null
+        $scope.infiniteScrollActivitiesCall = 0
+        $scope.infiniteScrollActivitiesCounter = 1
+
+        $scope.addMoreActivities = () ->
+            $scope.infiniteScrollActivitiesCall++
+            if $scope.infiniteScrollActivitiesTotalCount && $scope.infiniteScrollActivitiesLimit * $scope.infiniteScrollActivitiesCounter > $scope.infiniteScrollActivitiesTotalCount
+                return
+
+            if $scope.infiniteScrollActivitiesCall == $scope.infiniteScrollActivitiesCounter
+                MakerScienceProfile.one($scope.profile.slug).customGET('activities', {limit : $scope.infiniteScrollActivitiesLimit * $scope.infiniteScrollActivitiesCounter}).then((activityResults)->
+                    $scope.infiniteScrollActivitiesTotalCount = activityResults.metadata.total_count
+                    $scope.infiniteScrollActivities = activityResults.objects
+                    $scope.infiniteScrollActivitiesCounter++
+                )
+            else
+                $scope.infiniteScrollActivitiesCall--
+        #################################
+
+        $scope.addMoreActivities()
 
         #Current profile is a member of a project team
-        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults)->
+        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id, isValidated: true}).then((objectProfileLinkResults)->
             angular.forEach(objectProfileLinkResults, (objectProfileLink) ->
                 if  objectProfileLink.content_type == 'makerscienceproject'
                     MakerScienceProjectLight.one().get({id : objectProfileLink.object_id}).then((makerscienceProjectResults) ->
@@ -219,7 +269,10 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         TaggedItem.one().customGET("makerscienceprofile/"+$scope.profile.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
                 if similar.type == 'makerscienceprofile'
-                    $scope.similars.push(MakerScienceProfileLight.one(similar.id).get().$object)
+                    MakerScienceProfileLight.one().get({id: similar.id}).then((makersciencePostResults)->
+                        $scope.similars.push(makersciencePostResults.objects[0])
+                    )
+
             )
         )
 
@@ -236,6 +289,30 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             )
             modalInstance.result.then((avatar) ->
                 $scope.profile.parent.avatar = avatar
+            )
+
+        $scope.openBioPopup = (editable) ->
+            modalInstance = $modal.open(
+                templateUrl: '/views/profile/block/bioModal.html'
+                controller: 'BioInstanceCtrl'
+                resolve:
+                    editable : () ->
+                        return editable
+                    profile : () ->
+                        return $scope.profile
+
+            )
+
+        $scope.openSocialsEditPopup = () ->
+            modalInstance = $modal.open(
+                templateUrl: 'views/profile/block/socialsEditPopup.html'
+                controller: 'SocialsEditInstanceCtrl'
+                resolve:
+                    profile : () ->
+                        return $scope.profile
+                    socials : () ->
+                        return $scope.socials
+
             )
 
         $scope.addTagToProfile = (tag_type, tag) ->
@@ -266,23 +343,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                 when 'MakerScienceProfile' then MakerScienceProfile.one(resourceId).patch(putData)
                 when 'Place' then Place.one(resourceId).patch(putData)
 
-        $scope.updateSocialNetworks = (profileSlug) ->
-            angular.forEach($scope.socials, (value, key) ->
-                if value != null || value != ""
-                    $scope.profile[key] = value
-            )
-            MakerScienceProfile.one(profileSlug).patch($scope.socials)
-
-        $scope.fullUpdateMakerScienceProfile = (makerscienceProfile) ->
-            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.last_name', makerscienceProfile.parent.user.last_name)
-            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.first_name', makerscienceProfile.parent.user.first_name)
-            $scope.updateMakerScienceProfile('MakerScienceProfile', makerscienceProfile.slug , 'parent.user.email', makerscienceProfile.parent.user.email)
-
-        $scope.deleteProfile = (makerscienceProfileSlug) ->
-            MakerScienceProfile.one(makerscienceProfileSlug).remove()
-            $rootScope.loginService.logout()
-            $state.go("home", {})
-
     , (response) ->
         if response.status == 404
             MakerScienceProfile.one().get({parent__id : $stateParams.slug}).then((makerscienceProfileResults) ->
@@ -296,25 +356,146 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
     )
 )
 
-module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $controller, $stateParams, $state, MakerScienceProfile, Notification, ObjectProfileLink) ->
+module.controller("MakerScienceResetPasswordCtrl", ($scope, $state, $stateParams, $timeout, MakerScienceProfile) ->
 
-    angular.extend(this, $controller('NotificationCtrl', {$scope: $scope}))
+
+    $scope.passwordResetFail = false
+    $scope.passwordResetSuccess = false
+
+    $scope.notMatchingEmailError = false
+    $scope.passwordReset = ''
+    $scope.passwordReset2 = ''
+
+
+    if $stateParams.hasOwnProperty('hash') && $stateParams.hasOwnProperty('email')
+        $scope.email = $stateParams.email
+
+        $scope.finalizeResetPassword = () ->
+            $scope.passwordResetFail = false
+            $scope.passwordResetSuccess = false
+
+            if $scope.passwordReset != null && $scope.passwordReset != $scope.passwordReset2
+                $scope.passwordResetFail = true
+                return
+            else
+                MakerScienceProfile.one().customGET('reset/password', {email: $scope.email, hash : $stateParams.hash, password: $scope.passwordReset}).then((result) ->
+                    if result.success
+                        $scope.passwordResetSuccess = true
+                    else
+                        $scope.notMatchingEmailError = true
+                )
+
+
+    $scope.resetPassword = (email) ->
+        $scope.unknownProfileError = false
+        $scope.passwordResetEmailSent = false
+        MakerScienceProfile.one().customGET('reset/password', {email: email}).then((result) ->
+            if result.success
+                $scope.passwordResetEmailSent = true
+            else
+                $scope.unknownProfileError = true
+        )
+
+)
+
+
+module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $controller, $stateParams, $state, MakerScienceProfile, User,Notification,ObjectProfileLink) ->
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
-
         $scope.profile = makerscienceProfileResult
-
 
         if !$scope.authVars.isAuthenticated || $scope.currentMakerScienceProfile == undefined || $scope.currentMakerScienceProfile.id != $scope.profile.id
             $state.go('profile.detail', {slug : $stateParams.slug})
 
-        $scope.updateNotifications()
+        $scope.user = {
+            first_name : $scope.profile.parent.user.first_name
+            last_name : $scope.profile.parent.user.last_name
+            email : $scope.profile.parent.user.email
+            notifFreq : $scope.profile.notif_subcription_freq
+            authorizedContact  : $scope.profile.authorized_contact
+            passwordReset : ''
+            passwordReset2 : ''
+        }
+        $scope.passwordError = false
+        $scope.passwordResetSuccess = false
 
-        MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities').then((activityResults)->
-            $scope.activities = activityResults.objects
-        )
+        ## INFINITE SCROLL NOTIFICATIONS
+        $scope.infiniteScrollNotificationsLimit = 6
+        $scope.infiniteScrollNotificationsTotalCount = null
+        $scope.infiniteScrollNotificationsCall = 0
+        $scope.infiniteScrollNotificationsCounter = 1
 
+        $scope.addMoreNotifications = () ->
+            $scope.infiniteScrollNotificationsCall++
+            if $scope.infiniteScrollNotificationsTotalCount && $scope.infiniteScrollNotificationsLimit * $scope.infiniteScrollNotificationsCounter > $scope.infiniteScrollNotificationsTotalCount
+                return
 
+            if $scope.infiniteScrollNotificationsCall == $scope.infiniteScrollNotificationsCounter
+                Notification.getList({recipient_id : $scope.profile.parent.user.id, limit : $scope.infiniteScrollNotificationsLimit * $scope.infiniteScrollNotificationsCounter}).then((notificationResults)->
+                    $scope.infiniteScrollNotificationsTotalCount = notificationResults.metadata.total_count
+                    $scope.infiniteScrollNotifications = notificationResults
+                    $scope.infiniteScrollNotificationsCounter++
+                )
+            else
+                $scope.infiniteScrollNotificationsCall--
+        #################################
+
+        ## INFINITE SCROLL FRIEND ACTIVITIES
+        $scope.infiniteScrollActivitiesLimit = 6
+        $scope.infiniteScrollActivitiesTotalCount = null
+        $scope.infiniteScrollActivitiesCall = 0
+        $scope.infiniteScrollActivitiesCounter = 1
+
+        $scope.addMoreActivities = () ->
+            $scope.infiniteScrollActivitiesCall++
+            if $scope.infiniteScrollActivitiesTotalCount && $scope.infiniteScrollActivitiesLimit * $scope.infiniteScrollActivitiesCounter > $scope.infiniteScrollActivitiesTotalCount
+                return
+
+            if $scope.infiniteScrollActivitiesCall == $scope.infiniteScrollActivitiesCounter
+                MakerScienceProfile.one($scope.profile.slug).customGET('contacts/activities', {limit : $scope.infiniteScrollActivitiesLimit * $scope.infiniteScrollActivitiesCounter}).then((activityResults)->
+                    $scope.infiniteScrollActivitiesTotalCount = activityResults.metadata.total_count
+                    $scope.infiniteScrollActivities = activityResults.objects
+                    $scope.infiniteScrollActivitiesCounter++
+                )
+            else
+                $scope.infiniteScrollActivitiesCall--
+        #################################
+
+        $scope.addMoreNotifications()
+        $scope.addMoreActivities()
+
+        $scope.deleteProfile = () ->
+            MakerScienceProfile.one($scope.profile.slug).remove()
+            $rootScope.loginService.logout()
+            $state.go("home", {})
+
+        $scope.updateMakerScienceUserInfo = () ->
+            angular.forEach($scope.user, (value, key) ->
+                data = {}
+                data[key] = value
+                User.one($scope.profile.parent.user.username).patch(data)
+            )
+            $scope.profile.full_name = $scope.user.first_name + " " + $scope.user.last_name
+
+        $scope.updateNotifFrequency = (frequency)->
+            MakerScienceProfile.one($scope.profile.slug).patch({notif_subcription_freq : frequency})
+            $scope.user.notifFreq = frequency
+
+        $scope.updateAuthorizedContact = (authorizedContact)->
+            MakerScienceProfile.one($scope.profile.slug).patch({authorized_contact : authorizedContact})
+            $scope.user.authorizedContact = authorizedContact
+
+        $scope.changeMakerScienceProfilePassword = () ->
+            $scope.passwordResetFail = false
+            $scope.passwordResetSuccess = false
+
+            if $scope.user.passwordReset != null && $scope.user.passwordReset != $scope.user.passwordReset2
+                $scope.passwordResetFail = true
+                return
+            else
+                MakerScienceProfile.one($scope.profile.slug).customPOST({password : $scope.user.passwordReset}, 'change/password', {}).then((result)->
+                    $scope.passwordResetsuccess = true
+                )
     , (response) ->
         if response.status == 404
             MakerScienceProfile.one().get({parent__id : $stateParams.slug}).then((makerscienceProfileResults) ->
@@ -326,7 +507,7 @@ module.controller("MakerScienceProfileDashboardCtrl", ($scope, $rootScope, $cont
     )
 )
 
-module.controller("FriendshipCtrl", ($scope, $rootScope, ObjectProfileLink) ->
+module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLink, MakerScienceProfile) ->
 
     $scope.addFriend = (friendProfileID) ->
         ObjectProfileLink.one().customPOST(
@@ -343,21 +524,64 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, ObjectProfileLink) ->
             $scope.isFriend = false
         )
 
-    $scope.checkFriend = (friendProfileID) ->
-        if $scope.currentMakerScienceProfile && friendProfileID
-            ObjectProfileLink.one().customGET('makerscienceprofile/'+friendProfileID, {profile__id: $scope.currentMakerScienceProfile.parent.id, level:40}).then((objectProfileLinkResults) ->
+    $scope.checkFriend = (makerscienceProfileID) ->
+        if $scope.currentMakerScienceProfile && makerscienceProfileID
+            ObjectProfileLink.one().customGET('makerscienceprofile/'+makerscienceProfileID, {profile__id: $scope.currentMakerScienceProfile.parent.id, level:40}).then((objectProfileLinkResults) ->
                 if objectProfileLinkResults.objects.length == 1
+                    # console.log("YES : current profile #", $scope.currentMakerScienceProfile.parent.id, 'is following mks profile #', makerscienceProfileID)
                     $scope.isFriend = true
                     return objectProfileLinkResults.objects[0]
             )
+
+    $scope.checkFollowing = (profileID) ->
+        console.log("checkFollowing", $scope.currentMakerScienceProfile , profileID)
+        if $scope.currentMakerScienceProfile && profileID
+            MakerScienceProfile.one().get({parent__id : profileID}).then((makerscienceProfileResults) ->
+                if makerscienceProfileResults.objects.length == 1
+                    $scope.viewedMakerscienceProfile = makerscienceProfileResults.objects[0]
+                    ObjectProfileLink.one().customGET('makerscienceprofile/'+$scope.currentMakerScienceProfile.id, {profile__id: profileID, level:40}).then((objectProfileLinkResults) ->
+                        console.log(profileID, 'makerscienceprofile/'+$scope.currentMakerScienceProfile.id)
+                        if objectProfileLinkResults.objects.length == 1
+                            console.log("YES : current mks profile #", $scope.currentMakerScienceProfile.id, 'is followed by basic profile #', profileID)
+                            $scope.isFollowed = true
+                            return objectProfileLinkResults.objects[0]
+                    )
+            )
+
+    $scope.showContactPopup = (profile) ->
+        ## FIXME UGLY WORKAROUND
+        if typeof(profile) == 'number'
+            # mean that profile is the id of a basic profile resource
+            # need to fetch the related MakerscienceProfile
+            MakerScienceProfile.one().get({parent__id : profile}).then((makerscienceProfileResults) ->
+                if makerscienceProfileResults.objects.length == 1
+                    $modal.open(
+                        templateUrl: '/views/profile/block/contact.html'
+                        controller: 'ContactFormInstanceCtrl'
+                        resolve:
+                            profile : () ->
+                                return makerscienceProfileResults.objects[0]
+                    )
+            )
+        else
+            $modal.open(
+                templateUrl: '/views/profile/block/contact.html'
+                controller: 'ContactFormInstanceCtrl'
+                resolve:
+                    profile : () ->
+                        return profile
+            )
+
+
 
     $rootScope.$on('profile-loaded', (event, profile) ->
         $scope.checkFriend(profile.id)
     )
 )
 
-module.controller('ContactFormInstanceCtrl' , ($scope, $modalInstance, $timeout, User, vcRecaptchaService, recipientId) ->
+module.controller('ContactFormInstanceCtrl' , ($scope, $modalInstance, $timeout, MakerScienceProfile, vcRecaptchaService, profile) ->
     $scope.success = false
+    $scope.profile = profile
 
     $scope.setResponse = (response) ->
         $scope.response = response
@@ -371,22 +595,10 @@ module.controller('ContactFormInstanceCtrl' , ($scope, $modalInstance, $timeout,
     $scope.sendMessage = (message) ->
         if $scope.response
             message.recaptcha_response = $scope.response
-            User.one(recipientId).customPOST(message, 'send/message', {}).then((response) ->
+            MakerScienceProfile.one(profile.slug).customPOST(message, 'send/message', {}).then((response) ->
                 $scope.success = true
                 $timeout($modalInstance.close, 3000)
             , (response) ->
                 console.log("RECAPTCHA ERROR", response)
             )
-)
-
-module.controller("ContactFormCtrl", ($scope, $modal) ->
-
-    $scope.showContactPopup = (recipientId) ->
-        modalInstance = $modal.open(
-            templateUrl: '/views/profile/block/contact.html'
-            controller: 'ContactFormInstanceCtrl'
-            resolve:
-                recipientId : () ->
-                    return recipientId
-        )
 )

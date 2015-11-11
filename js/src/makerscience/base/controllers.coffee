@@ -2,23 +2,6 @@ module = angular.module("makerscience.base.controllers", ['makerscience.base.ser
                                                           'makerscience.catalog.controllers.project', 'makerscience.catalog.controllers.resource',
                                                           'commons.accounts.controllers', 'commons.graffiti.services'])
 
-
-module.directive('username', (User) ->
-    require: 'ngModel'
-    link: (scope, elm, attrs, ctrl) ->
-        User.getList().then((userResults) ->
-            usernames = userResults.map((user) ->
-                return user.username
-            )
-            ctrl.$parsers.unshift((viewValue) ->
-                if usernames.indexOf(viewValue) == -1
-                    ctrl.$setValidity('username', true);
-                else
-                    ctrl.$setValidity('username', false);
-            )
-        )
-)
-
 module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
     """
     Abstract controller that initialize some list filtering parameters and
@@ -57,6 +40,10 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
                     if newVal != oldVal
                         $scope.refreshListGeneric()
             )
+
+    $scope.$on('clearFacetFilter', () ->
+        delete $scope.params['facet']
+    )
 )
 
 module.controller('HomepageCtrl', ($scope, $filter, $controller, MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePostLight) ->
@@ -158,6 +145,7 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
 
 module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink,
                                             MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePostLight) ->
+    angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
     $scope.collapseAdvancedSearch = true
 
@@ -192,7 +180,15 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
             angular.forEach(makerSciencePostResults, (post) ->
                 TaggedItem.one().customGET("makersciencepost/" + post.id).then(findRelatedTag)
             )
-            $scope.discussions = makerSciencePostResults
+            $scope.threads = makerSciencePostResults
+            angular.forEach($scope.threads, (thread) ->
+                $scope.getPostAuthor(thread.parent_id).then((author) ->
+                    thread.author = author
+                )
+                $scope.getContributors(thread.parent_id).then((contributors) ->
+                    thread.contributors = contributors
+                )
+            )
         )
 
         TaggedItem.getList({tag__slug : params["facet"]}).then((taggedItemResults) ->
@@ -281,24 +277,28 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
         if $scope.tags_filter.indexOf(simpleTag) == -1
             $scope.tags_filter.push(simpleTag)
         $scope.refreshFilter()
+
+    $scope.$on('clearFacetFilter', () ->
+        $scope.tags_filter = []
+        FilterService.filterParams.tags = []
+    )
 )
 
-module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval, $filter, ObjectProfileLink, Notification) ->
+module.controller("NotificationCtrl", ($scope, $rootScope, $controller, $timeout, $interval, $filter, ObjectProfileLink, Notification) ->
 
-    $scope.updateNotifications = () ->
-        ObjectProfileLink.one().customGET('purge').then((result)->
-            if $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
-                Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
-                    $scope.notifications = notificationResults
-                    $scope.lastNotifications = $filter('limitTo')(notificationResults, 5)
-                    $scope.computeUnreadNotificationCounter()
-
-                )
-        )
+    $scope.updateNotifications = (markAllAsRead) ->
+        if $rootScope.authVars.isAuthenticated && $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
+            Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
+                $scope.notifications = notificationResults
+                $scope.lastNotifications = $filter('limitTo')(notificationResults, 10)
+                $scope.computeUnreadNotificationCounter()
+                if markAllAsRead
+                    angular.forEach($scope.notifications, $scope.markAsRead)
+            )
 
     $scope.computeUnreadNotificationCounter = () ->
         $scope.displayedUnreadNotifications = $filter('filter')($scope.lastNotifications, {unread:true})
-        $scope.unreadNotificationCounter = $scope.displayedUnreadNotifications.length
+        $scope.unreadNotificationCounter = $filter('filter')($scope.notifications, {unread:true}).length
 
     $scope.markDisplayedAsRead = () ->
         $timeout(()->
@@ -310,12 +310,60 @@ module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval,
         Notification.one(notif.id).patch({unread : false})
         notif.unread = false
 
-    $scope.markAllAsRead = () ->
-        angular.forEach($scope.notifications, $scope.markAsRead)
-
     $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
         if newValue != oldValue
             $scope.updateNotifications()
             $interval($scope.updateNotifications, 30000)
     )
+
+
+)
+
+module.controller('ReportAbuseFormInstanceCtrl' , ($scope, $modalInstance, $timeout, User, vcRecaptchaService, currentLocation) ->
+    $scope.success = false
+
+    $scope.setResponse = (response) ->
+        $scope.response = response
+
+    $scope.setWidgetId = (widgetId) ->
+        $scope.widgetId = widgetId
+
+    $scope.cbExpiration = () ->
+        $scope.response = null
+
+    $scope.sendMessage = (message) ->
+        if $scope.response
+            message.recaptcha_response = $scope.response
+            message.subject = 'Un abus a été signalé sur la page ' + currentLocation
+            User.one().customPOST(message, 'report/abuse', {}).then((response) ->
+                $scope.success = true
+                $timeout($modalInstance.close, 3000)
+            , (response) ->
+                console.log("RECAPTCHA ERROR", response)
+            )
+)
+
+module.controller("ReportAbuseCtrl", ($scope, $modal) ->
+
+    $scope.showReportAbusePopup = (currentLocation) ->
+        console.log(currentLocation)
+        modalInstance = $modal.open(
+            templateUrl: '/views/base/abuse.html'
+            controller: 'ReportAbuseFormInstanceCtrl'
+            resolve:
+                currentLocation : () ->
+                    return currentLocation
+        )
+)
+
+module.controller('BasicModalInstanceCtrl', ($scope, $modalInstance, content) ->
+
+    $scope.content = content
+
+    $scope.ok = () ->
+        $modalInstance.close()
+
+    $scope.cancel = () ->
+        $modalInstance.dismiss('cancel')
+
 )

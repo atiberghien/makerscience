@@ -12,19 +12,21 @@ header {
 			.navbar-brand {
 				position: absolute;
 				top: -97px;
-				left: $grid-gutter-width;
+				left: $grid-gutter-width / 2;
 			}
 			img.nav-small {
 				display: none;
 			}
 		}
+		.navbar-right {
+			margin-right: 0;
+		}
 		.navbar-tagline {
 			margin-top: -70px;
 			margin-left: 450px;
-			font-size: 1.4em;
+			font-size: 1.25em;
+			line-height: 1.5em;
 			font-family: "madtype";
-			line-height: 1.25em;
-			font-weight: 300;
 		}
 		.register-login {
 			float: right;
@@ -52,6 +54,9 @@ header {
 				background-color: transparent;
 				border-color: #fff;
 			}
+		}
+		ul.navbar-nav li:first-child a {
+			margin-left: 0;
 		}
 
 		form {

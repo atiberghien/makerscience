@@ -53,18 +53,38 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
     """
     $scope.first_name = null
     $scope.last_name = null
-    $scope.username = null
+    $scope.email = null
     $scope.password = null
+    $scope.password2 = null
+
+    $scope.emailError = false
+    $scope.passwordError = false
 
     $scope.register = () ->
+        $scope.emailError = false
+        $scope.passwordError = false
+
+        if $scope.password != null && $scope.password != $scope.password2
+            $scope.passwordError = true
+
+        User.one().get({email : $scope.email}).then((userResults)->
+            console.log(userResults.objects.length)
+            if userResults.objects.length > 0
+                $scope.emailError = true
+        )
+
+        if $scope.emailError || $scope.passwordError
+            return
+
+        usernameHash = asmCrypto.SHA1.hex($scope.email).slice(0,30)
         userData =
             first_name :$scope.first_name
             last_name : $scope.last_name
-            username : $scope.username
-            email : $scope.username
+            username : usernameHash
+            email : $scope.email
             password : $scope.password
         User.post(userData).then((userResult) ->
-            $rootScope.authVars.username = $scope.username
+            $rootScope.authVars.username = usernameHash
             $rootScope.authVars.password = $scope.password
             $rootScope.loginService.submit()
         )

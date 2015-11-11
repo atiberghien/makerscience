@@ -13,7 +13,7 @@
                 <img ng-show="post.author.avatar" src="{{post.author.avatar}}" class="profile img-circle">
                 <img ng-hide="post.author.avatar" src="/img/avatar.png" class="profile img-circle">
             </span>
-            <h3>{{post.author.user.first_name}} <strong>{{post.author.user.last_name}}</strong></h3>
+            <h3><a ui-sref="profile.detail({slug:post.author.id})" style="color: inherit;">{{post.author.user.first_name}} <strong>{{post.author.user.last_name}}</strong></a></h3>
         </div>
         <h4>Mise à jour: <strong><span am-time-ago="post.updated_on"></span></strong></h4>
     </header>

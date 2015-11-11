@@ -95,19 +95,21 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, $filter, M
                             , 'makersciencepost/'+newMakerSciencePostResult.id)
                     )
                 )
-                return false
+                return newMakerSciencePostResult
             )
         )
 )
 
 
-module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
+module.controller("MakerScienceForumCtrl", ($scope,  $state, $controller, $filter,
                                                 MakerSciencePostLight, MakerScienceProfile,
                                                 DataSharing, ObjectProfileLink, TaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
+    $scope.showCreateButton = false
+    $scope.newPost = {}
     $scope.params["limit"] = $scope.limit =  6
 
     $scope.bestContributors = []
@@ -148,6 +150,16 @@ module.controller("MakerScienceForumCtrl", ($scope, $controller, $filter,
 
 
     $scope.fetchRecentPosts()
+
+    $scope.inlineSaveMakersciencePost = (newPost) ->
+        $scope.saveMakersciencePost(newPost, null, $scope.currentMakerScienceProfile.parent).then((newMakerSciencePostResult)->
+            $scope.refreshList()
+            $scope.showCreateButton = false
+            $scope.newPost = {}
+            #  $state.go('question', {slug : newMakerSciencePostResult.slug})
+
+        )
+
 )
 
 
@@ -182,7 +194,7 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
 
         $scope.fetchAuthors($scope.post.parent)
         $scope.fetchContributors($scope.post.parent)
-
+        $scope.getSimilars($scope.post.parent.id)
         resolveMentions($scope.post.parent)
 
         $scope.initCommunityCtrl('post', $scope.post.parent.id)#for community block

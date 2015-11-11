@@ -134,7 +134,7 @@
 
                     <fieldset class="needs needs-select">
                         <h4>Vos besoins</h4>
-                        <p>Vous avez besoin d'idées fraîches pour votre projet? Précisez ici vos besoins du moment ...</p>
+                        <p>Créer une discussion précisant vos besoins : idées, matériel, financement, testeurs, relais ...</p>
                         <div class="row">
                             <div class="col-md-12">
                                 <input type="text" ng-model="newNeed.title" placeholder="Intitulé du besoin"/>
@@ -144,8 +144,9 @@
                                               ng-model="newNeed.text"
                                               e-rows="3">
                                 </text-angular>
+                                <br />
+                                <button type="button" class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
                             </div>
-                            <button type="button" class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
                         </div>
                         <ul class="list-group">
                             <li ng-repeat="(index, need) in needs">
@@ -179,7 +180,7 @@
                                                 minlength="3"/>
                             </div>
                             <div class="col-md-2">
-                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'éxpérience</button>
+                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'expérience</button>
                             </div>
                         </div>
                         <ul class="list-group">

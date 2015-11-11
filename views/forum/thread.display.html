@@ -14,9 +14,8 @@
             </div>
         </div><!-- .container -->
     </div><!-- .forum-search -->
-
+    <ng-include src="'/views/forum/block/social_share.html'"></ng-include>
     <div ng-init="showAnswerForm=false">
-
         <div class="forum-thread">
             <div class="row container">
                 <div class="col-md-12">
@@ -42,27 +41,23 @@
                         {{post.parent.title}}
                     </h2>
                     <ul class="tags">
-                        <li ng-repeat="tag in post.parent.tags"><a href="">{{tag.tag.name}}</a></li>
+                        <li ng-repeat="tag in post.parent.tags"><a ui-sref="tag({slug:tag.tag.slug})">{{tag.tag.name}}</a></li>
                     </ul>
                     <div class="thread-author" >
                         <span class="avatar avatar52">
                             <img ng-show="post.parent.author.avatar" src="{{post.parent.author.avatar}}" class="profile img-circle">
                             <img ng-hide="post.parent.author.avatar" src="/img/avatar.png" class="profile img-circle">
                         </span>
-                        <p>{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong>
-                        <span>Mis à jour le <span am-time-ago="post.parent.updated_on"></span></span></p>
+                        <p>
+                            <a ui-sref="profile.detail({slug:post.parent.author.id})" style="color: inherit;">{{post.parent.author.user.first_name}} <strong>{{post.parent.author.user.last_name}}</strong></a>
+                            <span>Mis à jour le {{post.parent.updated_on | date:'dd/MM/yyyy'}}</span>
+                        </p>
                     </div>
                     <div class="thread-content">
                         <p ng-bind-html="trustAsHtml(post.parent.text)"></p>
                     </div>
                     <div class="thread-actions">
                         <ul>
-                            <!-- <li class="left"><a href=""><span class="glyphicon glyphicon-link"></span> Voir les 12 liens</a></li>
-                            <li><a href="">Signaler un abus</a></li> -->
-                            <!-- <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li> -->
-                            <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li>
-
-
                             <li>
                                 <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 33)"
                                            ng-click="addMember(currentMakerScienceProfile.parent, 33, '', true)">
@@ -144,7 +139,7 @@
                             </p>
                         </div>
                         <div class="thread-linked-resources" ng-if="post.linked_resources">
-                            <h3>Experiences associées</h3>
+                            <h3>Expériences associées</h3>
                             <div class="boxes boxes-sidebar">
                                 <div class="box" ng-repeat="resource in post.linked_resources">
                                     <ng-include src="'/views/catalog/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>

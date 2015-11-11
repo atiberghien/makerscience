@@ -286,3 +286,8 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'madtype';
+    src: url('madtype.otf') format('opentype');
+}

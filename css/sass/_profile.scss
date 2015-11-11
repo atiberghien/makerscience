@@ -76,6 +76,15 @@ ul.activity {
                 color: $color-pink;
             }
         }
+        &.notification {
+            position: relative;
+            span.glyphicon-bell {
+                position: absolute;
+                top: $grid-gutter-width / 2;
+                left: $grid-gutter-width;
+                font-size: 1.5em;
+            }
+        }
     }
     span {
         display: block;
