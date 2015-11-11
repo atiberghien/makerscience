@@ -63,8 +63,8 @@
                 <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
                     <button ng-show="(community | filter: showTeamMembersFilter | filter : isValidated).length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
-                    <span ng-show="member.level==0 && !member.isValidated">
-                        <button class="btn btn-default" ng-click="validateMember(member, true)">Valider ce membre</button>
+                    <span ng-show="member.level==0 && !member.isValidated" class="editable-buttons">
+                        <button class="btn btn-primary valid-button" ng-click="validateMember(member, true)">Valider ce membre</button>
                     </span>
                     <label ng-show="member.level==5">En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
                 </div>

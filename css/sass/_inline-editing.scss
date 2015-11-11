@@ -23,6 +23,7 @@
 				background-color: $color-red;
 				border-color: $color-red;
 			}
+
 		}
 	}
 }
@@ -403,10 +404,16 @@ div.editable-controls {
 				background-color: $color-red;
 			}
 		}
+		button.valid-button {
+			margin-top: 5px;
+    			font-size: 1em;
+    			padding: 0.4em;
+    			margin-left: 1em;
+		}
 	}
 	div.member-details {
 		form {
-			margin: 0.5em 0 0.5em 1em;
+			margin: 0.5em 0 0.5em 0.5em;
 			input {
 				display: block;
 				width: 100%;
