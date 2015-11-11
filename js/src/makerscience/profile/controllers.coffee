@@ -195,7 +195,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         $scope.addMoreActivities()
 
         #Current profile is a member of a project team
-        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id}).then((objectProfileLinkResults)->
+        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id, isValidated: true}).then((objectProfileLinkResults)->
             angular.forEach(objectProfileLinkResults, (objectProfileLink) ->
                 if  objectProfileLink.content_type == 'makerscienceproject'
                     MakerScienceProjectLight.one().get({id : objectProfileLink.object_id}).then((makerscienceProjectResults) ->
@@ -528,18 +528,24 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLi
         if $scope.currentMakerScienceProfile && makerscienceProfileID
             ObjectProfileLink.one().customGET('makerscienceprofile/'+makerscienceProfileID, {profile__id: $scope.currentMakerScienceProfile.parent.id, level:40}).then((objectProfileLinkResults) ->
                 if objectProfileLinkResults.objects.length == 1
-                    console.log("YES : current profile #", $scope.currentMakerScienceProfile.parent.id, 'is following mks profile #', makerscienceProfileID)
+                    # console.log("YES : current profile #", $scope.currentMakerScienceProfile.parent.id, 'is following mks profile #', makerscienceProfileID)
                     $scope.isFriend = true
                     return objectProfileLinkResults.objects[0]
             )
 
     $scope.checkFollowing = (profileID) ->
+        console.log("checkFollowing", $scope.currentMakerScienceProfile , profileID)
         if $scope.currentMakerScienceProfile && profileID
-            ObjectProfileLink.one().customGET('makerscienceprofile/'+$scope.currentMakerScienceProfile.id, {profile__id: profileID, level:40}).then((objectProfileLinkResults) ->
-                if objectProfileLinkResults.objects.length == 1
-                    console.log("YES : current mks profile #", $scope.currentMakerScienceProfile.id, 'is followed by basic profile #', profileID)
-                    $scope.isFollowed = true
-                    return objectProfileLinkResults.objects[0]
+            MakerScienceProfile.one().get({parent__id : profileID}).then((makerscienceProfileResults) ->
+                if makerscienceProfileResults.objects.length == 1
+                    $scope.viewedMakerscienceProfile = makerscienceProfileResults.objects[0]
+                    ObjectProfileLink.one().customGET('makerscienceprofile/'+$scope.currentMakerScienceProfile.id, {profile__id: profileID, level:40}).then((objectProfileLinkResults) ->
+                        console.log(profileID, 'makerscienceprofile/'+$scope.currentMakerScienceProfile.id)
+                        if objectProfileLinkResults.objects.length == 1
+                            console.log("YES : current mks profile #", $scope.currentMakerScienceProfile.id, 'is followed by basic profile #', profileID)
+                            $scope.isFollowed = true
+                            return objectProfileLinkResults.objects[0]
+                    )
             )
 
     $scope.showContactPopup = (profile) ->
@@ -549,7 +555,6 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLi
             # need to fetch the related MakerscienceProfile
             MakerScienceProfile.one().get({parent__id : profile}).then((makerscienceProfileResults) ->
                 if makerscienceProfileResults.objects.length == 1
-                    profile =
                     $modal.open(
                         templateUrl: '/views/profile/block/contact.html'
                         controller: 'ContactFormInstanceCtrl'

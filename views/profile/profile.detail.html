@@ -117,14 +117,25 @@
                         </div><!-- .relative -->
                     </div><!-- .side-header -->
                 </div><!-- .col-md-4 -->
-                <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl">
-                    <ul>
-                        <li ng-if="currentMakerScienceProfile.id != profile.id" ng-init="checkFriend(profile.id)">
+                <div class="friendship" ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
+                    <ul ng-mouseenter="checkFollowing(profile.parent.id)">
+                        <li ng-if="currentMakerScienceProfile.id != profile.id">
                             <a ng-show="!isFriend" ng-click="addFriend(profile.id)" title="Suivre"><span class="fa fa-user-plus"></span></a>
                             <a ng-show="isFriend" ng-click="removeFriend(profile.id)" title="Ne plus suivre"><span class="fa fa-user-times"></span></a>
                         </li>
-                        <li ng-if="currentMakerScienceProfile.id != profile.id">
-                            <a title="Contacter" ng-click="showContactPopup(profile)"><span class="fa fa-envelope-o"></span></a>
+                        <li ng-if="currentMakerScienceProfile.id != profile.id" >
+                            <a ng-if="profile.authorized_contact == 'NONE'" title="Contacter" href="">
+                                <span class="fa fa-envelope-o" tooltip="Ce membre ne souhaite pas être contacté." tooltip-placement="bottom"></span>
+                            </a>
+                            <a ng-if="profile.authorized_contact == 'FOLLOWED' && !isFollowed" title="Contacter" href="">
+                                <span class="fa fa-envelope-o" tooltip="Ce membre ne peut être contacté que par les personnes auxquelles il est abonné." tooltip-placement="bottom"></span>
+                            </a>
+                            <a ng-if="profile.authorized_contact == 'FOLLOWED' && isFollowed" title="Contacter" ng-click="showContactPopup(profile)">
+                                <span class="fa fa-envelope-o"></span>
+                            </a>
+                            <a  ng-if="profile.authorized_contact == 'ALL'" title="Contacter" ng-click="showContactPopup(profile)">
+                                <span class="fa fa-envelope-o"></span>
+                            </a>
                         </li>
                     </ul>
                 </div>
