@@ -14,7 +14,7 @@
                         <tab heading="Les plus récents" ng-click="fetchRecentProjects()"></tab>
                         <tab heading="Les plus populaires" ng-click="fetchTopProjects()"></tab>
                         <tab heading="Sélection thématique" ng-click="fetchThematicProjects()">
-                            <h1>
+                            <h1 class="thematic">
                                 <ng-pluralize count="selected_themes.length" when="{'0': 'Thème à la Une', 'one': 'Thème à la Une', 'other': 'Thèmes à la Une'}"></ng-pluralize>:
                                 <span ng-repeat="theme in selected_themes">
                                     <a ui-sref="tag({slug:theme.slug})">{{theme.name}}</a>

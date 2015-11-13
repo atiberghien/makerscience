@@ -311,6 +311,11 @@ div.toolbar {
 			}
 		}
 	}
+	.tab-pane {
+		h1.thematic {
+			margin-bottom: $grid-gutter-width;
+		}
+	}
 	/* Added to work with bootstrapui's extra div around the ul  */
 	.nav-tabs-listing ul.nav-tabs,
 	.nav-tabs-slide ul.nav-tabs,
