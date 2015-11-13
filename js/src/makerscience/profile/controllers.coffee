@@ -381,6 +381,9 @@ module.controller("MakerScienceResetPasswordCtrl", ($scope, $state, $stateParams
                 MakerScienceProfile.one().customGET('reset/password', {email: $scope.email, hash : $stateParams.hash, password: $scope.passwordReset}).then((result) ->
                     if result.success
                         $scope.passwordResetSuccess = true
+                        $timeout(()->
+                            $state.go('home')
+                        , 5000)
                     else
                         $scope.notMatchingEmailError = true
                 )

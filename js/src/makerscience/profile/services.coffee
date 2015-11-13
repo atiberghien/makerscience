@@ -89,6 +89,10 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
             $rootScope.loginService.submit()
         )
 
+    $scope.viewCGU = () ->
+        $modalInstance.close()
+        $state.go('cgu')
+
     $rootScope.$watch('authVars.isAuthenticated', (newValue, oldValue) ->
         if newValue == true and oldValue== false
             $modalInstance.close()
