@@ -874,11 +874,12 @@ div.toolbar {
 		&.box-orange { background-color: $color-orange; }
 		&.box-purple { background-color: $color-purple; }
 		&.box-red { background-color: $color-red; }
-		&.box-pink { background-color: $color-pink; }
+		&.box-pink { background-color: $color-pink !important; }
 		&.box-solo {
 			a {
 				height: 100%;
 				padding: 1em;
+				color: #fff;
 				font-family: latoblack;
 				font-size: 1.75em;
 				font-weight: bold;
@@ -973,6 +974,17 @@ div.toolbar {
 			}
 			&.box-solo {
 				a {
+					font-size: 1.75em;
+					font-family: "LatoLight";
+				}
+			}
+		}
+	}
+	&.boxes-profiles {
+		.box {
+			&.box-solo {
+				a {
+					color: #fff;
 					font-size: 1.75em;
 					font-family: "LatoLight";
 				}
