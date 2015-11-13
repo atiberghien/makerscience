@@ -63,8 +63,8 @@
                 <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
                     <button ng-show="(community | filter: showTeamMembersFilter | filter : isValidated).length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
-                    <span ng-show="member.level==0 && !member.isValidated">
-                        <button class="btn btn-default" ng-click="validateMember(member, true)">Valider ce membre</button>
+                    <span ng-show="member.level==0 && !member.isValidated" class="editable-buttons">
+                        <button class="btn btn-primary valid-button" ng-click="validateMember(member, true)">Valider ce membre</button>
                     </span>
                     <label ng-show="member.level==5">En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
                 </div>
@@ -90,7 +90,7 @@
                  </ng-pluralize>
             </tab-heading>
             <div class="add-member" ng-show="editable">
-                <button id="addResourceMember" type="button" class="btn btn-default" ng-click="addResourceMember=!addResourceMember" ng-show="!resourceCandidate">Ajouter un membre ressource</button>
+                <button id="addResourceMember" type="button" class="btn btn-default" ng-click="addResourceMember=!addResourceMember" ng-show="!resourceCandidate">Demander à un membre de vous aider</button>
                 <div ng-show="addResourceMember && !resourceCandidate">
                     <angucomplete-alt id="resource-member"
                                     placeholder="Nom du membre ..."

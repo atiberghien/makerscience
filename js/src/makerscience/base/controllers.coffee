@@ -284,10 +284,10 @@ module.controller("FilterCtrl", ($scope, $stateParams, Tag, FilterService) ->
     )
 )
 
-module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval, $filter, ObjectProfileLink, Notification) ->
+module.controller("NotificationCtrl", ($scope, $rootScope, $controller, $timeout, $interval, $filter, ObjectProfileLink, Notification) ->
 
     $scope.updateNotifications = (markAllAsRead) ->
-        if $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
+        if $rootScope.authVars.isAuthenticated && $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
             Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
                 $scope.notifications = notificationResults
                 $scope.lastNotifications = $filter('limitTo')(notificationResults, 10)
@@ -315,6 +315,8 @@ module.controller("NotificationCtrl", ($scope, $controller, $timeout, $interval,
             $scope.updateNotifications()
             $interval($scope.updateNotifications, 30000)
     )
+
+
 )
 
 module.controller('ReportAbuseFormInstanceCtrl' , ($scope, $modalInstance, $timeout, User, vcRecaptchaService, currentLocation) ->

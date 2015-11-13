@@ -23,6 +23,7 @@
 				background-color: $color-red;
 				border-color: $color-red;
 			}
+
 		}
 	}
 }
@@ -102,13 +103,17 @@
 			bottom: 0px;
     			position: absolute;
     			margin-bottom: 5px;
-    			font-weight: bold;
+    			#font-weight: bold;
 		}
 	}
 	div.tags {
 		position: relative;
 		div.tags {
 			width: 90%;
+		}
+		h5 {
+			font-weight : bold;
+			font-size: 1.2em;
 		}
 	}
 	.intro > form {
@@ -159,6 +164,8 @@
 						div.ta-bind {
 							min-height: 200px;
 							padding: 1em;
+							white-space: pre;
+                                        		word-wrap: break-word;
 						}
 					}
 					span.editable-buttons {
@@ -217,6 +224,8 @@ div.editable-controls {
 				}
 				.ta-scroll-window > .ta-bind {
 					padding: 1em;
+					white-space: pre;
+					word-wrap: break-word;
 				}
 				textarea, div.editable-input {
 					display: block;
@@ -231,6 +240,18 @@ div.editable-controls {
 						box-shadow: none;
 					}
 				}
+			}
+		}
+		p.editable {
+			white-space: pre;
+                        word-wrap: break-word;
+			ul {
+				list-style : initial ;
+				margin-left: 15px;	
+			}
+			ol {
+				list-style-type: decimal;
+				margin-left: 15px;
 			}
 		}
 		&.linked {
@@ -383,10 +404,16 @@ div.editable-controls {
 				background-color: $color-red;
 			}
 		}
+		button.valid-button {
+			margin-top: 5px;
+    			font-size: 1em;
+    			padding: 0.4em;
+    			margin-left: 1em;
+		}
 	}
 	div.member-details {
 		form {
-			margin: 0.5em 0 0.5em 1em;
+			margin: 0.5em 0 0.5em 0.5em;
 			input {
 				display: block;
 				width: 100%;

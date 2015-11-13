@@ -7,24 +7,41 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
 
     $scope.params["limit"] = $scope.limit =  6
 
+    $scope.selected_themes = []
+    $scope.selected_themes_facets = ""
+    StaticContent.one(1).get().then((staticResult) ->
+        angular.forEach(staticResult.project_thematic_selection, (tag) ->
+            if $scope.selected_themes_facets != ""
+                $scope.selected_themes_facets += ","
+            $scope.selected_themes_facets += tag.slug
+            $scope.selected_themes.push(tag)
+        )
+    )
+
+    $scope.clearList = () ->
+        $scope.$broadcast('clearFacetFilter')
+        $scope.resources = []
+        $scope.waitingList = true
+
     $scope.refreshList = ()->
         return MakerScienceResourceLight.one().customGETLIST('search', $scope.params).then((makerScienceResourceResults) ->
             meta = makerScienceResourceResults.metadata
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
             $scope.resources =  makerScienceResourceResults
+            $scope.waitingList = false
         )
 
     # Must be called AFTER refreshList definition due to inheriance
     $scope.initMakerScienceAbstractListCtrl()
 
     $scope.fetchRecentResources = () ->
-        $scope.$broadcast('clearFacetFilter')
+        $scope.clearList()
         $scope.params['ordering'] = '-created_on'
         $scope.refreshList()
 
     $scope.fetchTopResources = () ->
-        $scope.$broadcast('clearFacetFilter')
+        $scope.clearList()
         $scope.params['ordering'] = '-total_score'
         $scope.refreshList()
 
@@ -41,19 +58,10 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
         )
 
     $scope.fetchThematicResources = () ->
-        $scope.selected_themes = []
+        $scope.clearList()
         $scope.params['ordering'] = '-created_on'
-        StaticContent.one(1).get().then((staticResult) ->
-            tags = ""
-            angular.forEach(staticResult.resource_thematic_selection, (tag) ->
-                if tags != ""
-                    tags += ","
-                tags += tag.slug
-                $scope.selected_themes.push(tag)
-            )
-            $scope.params['facet'] = tags
-            $scope.refreshList()
-        )
+        FilterService.filterParams.tags = $scope.selected_themes_facets
+        # $scope.refreshList()
 
     $scope.fetchRecentResources()
 
@@ -69,7 +77,6 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
                 when 'tg' then $scope.availableTargetTags.push(taggedItem.tag)
         )
     )
-
 )
 
 module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller,
@@ -177,6 +184,10 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         $scope.initCommentCtrl("makerscienceresource", $scope.projectsheet.id)
 
         $scope.linkedResources = $scope.projectsheet.linked_resources
+
+        $scope.coverURL = "/img/bacasable.jpg"
+        if $scope.resourcesheet.base_projectsheet.cover
+            $scope.coverURL = $scope.config.media_uri + $scope.resourcesheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
 
         $scope.similars = []
         TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/similars").then((similarResults) ->

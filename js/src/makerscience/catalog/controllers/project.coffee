@@ -2,10 +2,26 @@ module = angular.module("makerscience.catalog.controllers.project", ['makerscien
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
-module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProjectLight, StaticContent, MakerScienceProjectTaggedItem) ->
+module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScienceProjectLight, StaticContent, FilterService, MakerScienceProjectTaggedItem) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.params["limit"] = $scope.limit =  6
+
+    $scope.selected_themes = []
+    $scope.selected_themes_facets = ""
+    StaticContent.one(1).get().then((staticResult) ->
+        angular.forEach(staticResult.project_thematic_selection, (tag) ->
+            if $scope.selected_themes_facets != ""
+                $scope.selected_themes_facets += ","
+            $scope.selected_themes_facets += tag.slug
+            $scope.selected_themes.push(tag)
+        )
+    )
+
+    $scope.clearList = () ->
+        $scope.$broadcast('clearFacetFilter')
+        $scope.projects = []
+        $scope.waitingList = true
 
     $scope.refreshList = ()->
         return MakerScienceProjectLight.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
@@ -13,23 +29,24 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
             $scope.projects =  makerScienceProjectResults
+            $scope.waitingList = false
         )
 
     # Must be called AFTER refreshList definition due to inheriance
     $scope.initMakerScienceAbstractListCtrl()
 
     $scope.fetchRecentProjects = () ->
-        $scope.$broadcast('clearFacetFilter')
+        $scope.clearList()
         $scope.params['ordering'] = '-created_on'
         $scope.refreshList()
 
     $scope.fetchTopProjects = () ->
-        $scope.$broadcast('clearFacetFilter')
+        $scope.clearList()
         $scope.params['ordering'] = '-total_score'
         $scope.refreshList()
 
     $scope.fetchRandomProjects = () ->
-        $scope.$broadcast('clearFacetFilter')
+        $scope.clearList()
         delete $scope.params['ordering']
         $scope.refreshList().then(->
             nbElmt = $scope.projects.length
@@ -41,19 +58,10 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
         )
 
     $scope.fetchThematicProjects = () ->
-        $scope.selected_themes = []
+        $scope.clearList()
         $scope.params['ordering'] = '-created_on'
-        StaticContent.one(1).get().then((staticResult) ->
-            tags = ""
-            angular.forEach(staticResult.project_thematic_selection, (tag) ->
-                if tags != ""
-                    tags += ","
-                tags += tag.slug
-                $scope.selected_themes.push(tag)
-            )
-            $scope.params['facet'] = tags
-            $scope.refreshList()
-        )
+        FilterService.filterParams.tags = $scope.selected_themes_facets
+        # $scope.refreshList()
 
     $scope.fetchRecentProjects()
 
@@ -69,7 +77,6 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
                 when 'tg' then $scope.availableTargetTags.push(taggedItem.tag)
         )
     )
-
 )
 
 module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, ProjectProgress,
@@ -202,6 +209,10 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.initCommentCtrl("makerscienceproject", $scope.projectsheet.id)
 
         $scope.linkedResources = $scope.projectsheet.linked_resources
+
+        $scope.coverURL = "/img/bacasable.jpg"
+        if $scope.projectsheet.base_projectsheet.cover
+            $scope.coverURL = $scope.config.media_uri + $scope.projectsheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
 
         $scope.similars = []
         TaggedItem.one().customGET("makerscienceproject/"+$scope.projectsheet.id+"/similars").then((similarResults) ->
