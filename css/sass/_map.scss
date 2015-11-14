@@ -85,13 +85,17 @@ div.map-search {
 			}
 		}
 		div.content {
-			height: 100%;
-			padding: 0 $grid-gutter-width / 2;
+			height: 330px;
+			padding: 0px 15px 0px 5px;
 			background-color: #fff;
 		}
-		div.boxes.boxes-small {
-			overflow: scroll;
-			height: $boxes-small-height;
+
+		div.boxes {
+			margin-right : -13px;
+			&.boxes-small {
+				height: 100%;
+				overflow: scroll;
+			}
 		}
 		p.scroll-buttons {
 			position: absolute;
