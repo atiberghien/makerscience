@@ -38,7 +38,7 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, $filter, M
         angular.forEach(resourceResults, (resource) ->
             $scope.allAvailableItems.push(
                 fullObject: resource
-                title : "[Expérence] " + resource.title
+                title : "[Expérience] " + resource.title
                 type : 'resource'
             )
         )
