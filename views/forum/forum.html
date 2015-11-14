@@ -47,7 +47,7 @@
 
                 <script type="text/ng-template" id="/people-mentions.tpl">
                     <ul class="list-group user-search">
-                        <li mentio-menu-item="person" ng-repeat="profile in items" class="list-group-item">
+                        <li mentio-menu-item="profile" ng-repeat="profile in items" class="list-group-item">
                             <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
                             {{profile.full_name}}
                         </li>
@@ -82,7 +82,7 @@
                         <li ng-repeat="item in linkedItems">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <label>[{{item.type}}] : {{item.fullObject.parent.title}}</label>
+                                    <label>{{item.title}}</label>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-danger">

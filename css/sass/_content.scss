@@ -1178,16 +1178,14 @@ div.badges {
 	}
 }
 
-mention-menu {
-	ul.list-group {
-		li.list-group-item {
-			overflow: hidden;
-			height: 60px; /* img (40px) + padding 2x10px */
-			img {
-				height: 40px; /* height of the img */
-				margin-right: 1em;
-				vertical-align: middle;
-			}
+ul.user-search {
+	li.list-group-item {
+		min-height: 60px;
+		overflow: hidden;
+		img {
+			height: 40px; /* height of the img */
+			margin-right: 1em;
+			vertical-align: middle;
 		}
 	}
 }
