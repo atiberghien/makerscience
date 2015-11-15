@@ -189,6 +189,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         if $scope.resourcesheet.base_projectsheet.cover
             $scope.coverURL = $scope.config.media_uri + $scope.resourcesheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
 
+
         $scope.similars = []
         TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/similars").then((similarResults) ->
             angular.forEach(similarResults, (similar) ->
@@ -203,6 +204,9 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
                 when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
+
+        if _.isEmpty($scope.resourcesheet.base_projectsheet.videos)
+            $scope.resourcesheet.base_projectsheet.videos = null
 
         $scope.linked_post = []
         angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->

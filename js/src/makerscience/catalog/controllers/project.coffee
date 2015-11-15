@@ -229,6 +229,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
 
+        if _.isEmpty($scope.projectsheet.base_projectsheet.videos)
+            $scope.projectsheet.base_projectsheet.videos = null
+
         $scope.linked_post = []
         $scope.needs = []
         angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
