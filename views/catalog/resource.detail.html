@@ -158,7 +158,7 @@
                         <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.videos.length)">Préc.</button>
                         <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.videos.length">Suiv.</button>
                         <div ng-if="!resourcesheet.base_projectsheet.videos">
-                            <img src="/img/slides/slide_one.png" alt="Slide One">
+                            <img src="/img/slides/no_video.png" alt="Pas de vidéo">
                         </div>
                     </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
