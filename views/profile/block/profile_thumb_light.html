@@ -8,11 +8,11 @@
             <span class="fa fa-user-times"></span>
         </button>
 
-        <button ng-if="profile.authorized_contact == 'NONE' && currentMakerScienceProfile.id != profile.id" class="add-member">
-            <span class="fa fa-envelope" tooltip="Ce membre ne souhaite pas être contacté." tooltip-placement="bottom"></span>
+        <button ng-if="profile.authorized_contact == 'NONE' && currentMakerScienceProfile.id != profile.id" class="add-member" tooltip="Ce membre ne souhaite pas être contacté." tooltip-placement="bottom">
+            <span class="fa fa-envelope"></span>
         </button>
-        <button ng-if="profile.authorized_contact == 'FOLLOWED' && currentMakerScienceProfile.id != profile.id && !isFollowed" class="add-member">
-            <span class="fa fa-envelope" tooltip="Ce membre ne peut être contacté que par les personnes auxquelles il est abonné." tooltip-placement="bottom"></span>
+        <button ng-if="profile.authorized_contact == 'FOLLOWED' && currentMakerScienceProfile.id != profile.id && !isFollowed" class="add-member" tooltip="Ce membre ne peut être contacté que par les personnes auxquelles il est abonné." tooltip-placement="bottom">
+            <span class="fa fa-envelope"></span>
         </button>
         <button ng-if="profile.authorized_contact == 'FOLLOWED' && currentMakerScienceProfile.id != profile.id && isFollowed" class="add-member" ng-click="showContactPopup(profile)">
             <span class="fa fa-envelope"></span>
