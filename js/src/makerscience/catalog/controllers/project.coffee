@@ -210,7 +210,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.linkedResources = $scope.projectsheet.linked_resources
 
-        $scope.coverURL = "/img/bacasable.jpg"
+        $scope.coverURL = "/img/default_project.jpg"
         if $scope.projectsheet.base_projectsheet.cover
             $scope.coverURL = $scope.config.media_uri + $scope.projectsheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
 

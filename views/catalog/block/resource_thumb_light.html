@@ -1,7 +1,7 @@
 <h3>{{resource.begin_date|date : format : shortdate}}</h3>
 <a ui-sref="resource.detail({ slug: resource.slug })">
     <img class="background" ng-if="resource.cover" ng-src="{{ config.media_uri }}{{ resource.cover+'?dim=200x200&border=true'}}" alt="resource Image" />
-    <img class="background" ng-if="!resource.cover" src="/img/bacasable.jpg" alt="resource Image" />
+    <img class="background" ng-if="!resource.cover" src="/img/default_resource.jpg" alt="resource Image" />
 </a>
 <div class="description">
     <h4><a ui-sref="resource.detail({ slug: resource.slug })">{{resource.title}}</a></h4>
