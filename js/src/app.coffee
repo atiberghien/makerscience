@@ -279,8 +279,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     }
 
     $rootScope.tinyMceFullOptions = {
-        plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking"],
-        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignjustify | bullist numlist |outdent indent | link unlink anchor | image media | code",
+        plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking image"],
+        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignjustify | bullist numlist |outdent indent | link unlink anchor |  image | code",
         menubar: false,
         statusbar: false,
         toolbar_items_size: 'small',
@@ -295,7 +295,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 {title: "Titre 5", format: "h5"},
                 {title: "Titre 6", format: "h6"}
             ]},
-        ]
+        ],
     }
 
     $rootScope.$on('$stateChangeSuccess', () ->
