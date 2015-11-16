@@ -150,7 +150,7 @@
                     </tab>
                     <tab ng-init="currentVid=0">
                         <tab-heading>
-                            <span class="glyphicon glyphicon-facetime-video">{{resourcesheet.base_projectsheet.videos.keys().length}}</span>
+                            <span class="glyphicon glyphicon-facetime-video"></span>
                         </tab-heading>
                         <carousel interval="3000" ng-show="resourcesheet.base_projectsheet.videos">
                           <slide ng-repeat="(url, comment) in resourcesheet.base_projectsheet.videos">
@@ -159,8 +159,6 @@
                               </embed-video>
                           </slide>
                         </carousel>
-                        <!-- <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.videos.length)">Préc.</button>
-                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.videos.length">Suiv.</button> -->
                         <div ng-show="!resourcesheet.base_projectsheet.videos">
                             <img src="/img/slides/no_video.png" alt="Pas de vidéo">
                         </div>

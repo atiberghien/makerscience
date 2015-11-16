@@ -235,12 +235,14 @@
                         <tab-heading>
                             <span class="glyphicon glyphicon-picture"></span>
                         </tab-heading>
-                        <div ng-if="projectsheet.base_projectsheet.bucket.files.length" ng-repeat="img in projectsheet.base_projectsheet.bucket.files" ng-show="$index==currentImg">
-                            <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?dim=680x340&border=true" alt="Slide">
-                        </div>
-                        <button ng-click="currentImg = Math.abs((currentImg - 1) % projectsheet.base_projectsheet.bucket.files.length)"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
-                        <button ng-click="currentImg = (currentImg + 1) % projectsheet.base_projectsheet.bucket.files.length"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
-                        <div ng-if="!projectsheet.base_projectsheet.bucket.files.length">
+                        <carousel ng-show="projectsheet.base_projectsheet.bucket.files.length">
+                            <slide ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
+                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?dim=680x340&border=true" alt="Slide">
+                            </slide>
+                        </carousel>
+                        <!-- <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
+                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button> -->
+                        <div ng-show="!projectsheet.base_projectsheet.bucket.files.length">
                             <img src="/img/slides/slide_one.png" alt="Slide One">
                         </div>
                     </tab>
@@ -248,15 +250,15 @@
                         <tab-heading>
                             <span class="glyphicon glyphicon-facetime-video"></span>
                         </tab-heading>
-                        <div ng-if="projectsheet.base_projectsheet.videos" ng-repeat="(url, comment) in projectsheet.base_projectsheet.videos" ng-show="$index==currentImg">
-                            <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
-                                <a href="{{url}}">Watch</a>
-                            </embed-video>
-                        </div>
-                        <button ng-click="currentImg = Math.abs((currentImg - 1) % projectsheet.base_projectsheet.videos.length)"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>
-                        <button ng-click="currentImg = (currentImg + 1) % projectsheet.base_projectsheet.videos.length"><span class="glyphicon glyphicon-circle-arrow-right"></span></button>
-                        <div ng-if="!projectsheet.base_projectsheet.videos">
-                            <img src="/img/slides/slide_one.png" alt="Slide One">
+                        <carousel interval="3000" ng-show="projectsheet.base_projectsheet.videos">
+                          <slide ng-repeat="(url, comment) in projectsheet.base_projectsheet.videos">
+                              <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
+                                  <a href="{{url}}">Watch</a>
+                              </embed-video>
+                          </slide>
+                        </carousel>
+                        <div ng-show="!projectsheet.base_projectsheet.videos">
+                            <img src="/img/slides/no_video.png" alt="Pas de vidéo">
                         </div>
                     </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
