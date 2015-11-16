@@ -1,4 +1,4 @@
-<form name="form" role="form" class="login">
+<form name="form" role="form" class="login" ng-init="showSubmitBtn=false">
     <h3>Inscrivez-vous via les réseaux sociaux</h3>
     <ul ng-controller='LoginCtrl'>
         <li><button class="connect-with-facebook" ng-click="authenticate('facebook')"></button></li>
@@ -41,5 +41,10 @@
         </div>
         <span class="error" ng-show="passwordError">Les deux mots de passe doivent être identiques.</span>
     </div>
-    <button type="submit"  ng-click="register()" >S'inscrire</button>
+    <div class="form-group">
+        <div class="checkbox">
+            <label><input type="checkbox" ng-click="showSubmitBtn=!showSubmitBtn"> J'accepte les <a ng-click="viewCGU()">conditions d'utilisation</a></label>
+        </div>
+    </div>
+    <button ng-show="showSubmitBtn" type="submit"  ng-click="register()" >S'inscrire</button>
 </form>

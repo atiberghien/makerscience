@@ -381,6 +381,9 @@ module.controller("MakerScienceResetPasswordCtrl", ($scope, $state, $stateParams
                 MakerScienceProfile.one().customGET('reset/password', {email: $scope.email, hash : $stateParams.hash, password: $scope.passwordReset}).then((result) ->
                     if result.success
                         $scope.passwordResetSuccess = true
+                        $timeout(()->
+                            $state.go('home')
+                        , 5000)
                     else
                         $scope.notMatchingEmailError = true
                 )
@@ -534,15 +537,15 @@ module.controller("FriendshipCtrl", ($scope, $rootScope, $modal, ObjectProfileLi
             )
 
     $scope.checkFollowing = (profileID) ->
-        console.log("checkFollowing", $scope.currentMakerScienceProfile , profileID)
+        # console.log("checkFollowing", $scope.currentMakerScienceProfile , profileID)
         if $scope.currentMakerScienceProfile && profileID
             MakerScienceProfile.one().get({parent__id : profileID}).then((makerscienceProfileResults) ->
                 if makerscienceProfileResults.objects.length == 1
                     $scope.viewedMakerscienceProfile = makerscienceProfileResults.objects[0]
                     ObjectProfileLink.one().customGET('makerscienceprofile/'+$scope.currentMakerScienceProfile.id, {profile__id: profileID, level:40}).then((objectProfileLinkResults) ->
-                        console.log(profileID, 'makerscienceprofile/'+$scope.currentMakerScienceProfile.id)
+                        # console.log(profileID, 'makerscienceprofile/'+$scope.currentMakerScienceProfile.id)
                         if objectProfileLinkResults.objects.length == 1
-                            console.log("YES : current mks profile #", $scope.currentMakerScienceProfile.id, 'is followed by basic profile #', profileID)
+                            # console.log("YES : current mks profile #", $scope.currentMakerScienceProfile.id, 'is followed by basic profile #', profileID)
                             $scope.isFollowed = true
                             return objectProfileLinkResults.objects[0]
                     )

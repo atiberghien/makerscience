@@ -182,7 +182,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
 module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window,
                                                     MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePostLight,
-                                                    MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress
+                                                    MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress, ProjectNews
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
     $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
@@ -229,6 +229,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
 
+        if _.isEmpty($scope.projectsheet.base_projectsheet.videos)
+            $scope.projectsheet.base_projectsheet.videos = null
+
         $scope.linked_post = []
         $scope.needs = []
         angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
@@ -265,6 +268,15 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 $window.tinymce.activeEditor.setContent('')
             )
 
+        $scope.deleteNews = (news) ->
+            ProjectNews.one(news.id).remove().then(->
+                $scope.projectsheet.news.splice($scope.projectsheet.news.indexOf(news), 1)
+            )
+
+        $scope.updateNews = (news) ->
+            ProjectNews.one(news.id).patch({text: news.text}).then(->
+                $scope.projectsheet.news[$scope.projectsheet.news.indexOf(news)].text = news.text
+            )
 
         $scope.updateLinkedResources = ->
             MakerScienceProject.one($scope.projectsheet.id).patch(

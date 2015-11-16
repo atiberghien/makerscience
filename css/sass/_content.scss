@@ -159,6 +159,30 @@ div.toolbar {
 			margin: $grid-gutter-width;
 		}
 	}
+	&.content-about {
+		ul.nav-tabs {
+			margin-bottom: 1px;
+		}
+		div.tab-content {
+			padding: $grid-gutter-width;
+			background-color: white;
+		}
+	}
+	div.tab-content {
+		h1 {
+			margin-bottom: 1em;
+			font-size: 1em;
+			font-weight: bold;
+		}
+		p {
+			margin-bottom: 1em;
+			white-space: normal;
+		}
+		ul {
+			margin-bottom: 1em;
+			margin-left: 1em;
+		}
+	}
 	&.content-dashboard {
 		.tab-content {
 			margin-bottom: $grid-gutter-width;
@@ -288,6 +312,11 @@ div.toolbar {
 			&.active a {
 				//color: $color-content-tab-active;
 			}
+		}
+	}
+	.tab-pane {
+		h1.thematic {
+			margin-bottom: $grid-gutter-width;
 		}
 	}
 	/* Added to work with bootstrapui's extra div around the ul  */
@@ -848,11 +877,12 @@ div.toolbar {
 		&.box-orange { background-color: $color-orange; }
 		&.box-purple { background-color: $color-purple; }
 		&.box-red { background-color: $color-red; }
-		&.box-pink { background-color: $color-pink; }
+		&.box-pink { background-color: $color-pink !important; }
 		&.box-solo {
 			a {
 				height: 100%;
 				padding: 1em;
+				color: #fff;
 				font-family: latoblack;
 				font-size: 1.75em;
 				font-weight: bold;
@@ -947,6 +977,17 @@ div.toolbar {
 			}
 			&.box-solo {
 				a {
+					font-size: 1.75em;
+					font-family: "LatoLight";
+				}
+			}
+		}
+	}
+	&.boxes-profiles {
+		.box {
+			&.box-solo {
+				a {
+					color: #fff;
 					font-size: 1.75em;
 					font-family: "LatoLight";
 				}
@@ -1134,5 +1175,17 @@ div.badges {
 	h3 {
 		font-weight: bold;
 		text-transform: uppercase;
+	}
+}
+
+ul.user-search {
+	li.list-group-item {
+		min-height: 60px;
+		overflow: hidden;
+		img {
+			height: 40px; /* height of the img */
+			margin-right: 1em;
+			vertical-align: middle;
+		}
 	}
 }
