@@ -10,3 +10,5 @@
 /dist/
 /css_imports.css
 /js_imports.css
+/js/src/config_prod.coffee
+/js/src/config_staging.coffee

@@ -45,13 +45,13 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
     $authProvider.facebook({
         url: config.loginBaseUrl + '/account/user/login/facebook',
-        clientId: '724284684343376',
+        clientId: config.facebook.clientId,
         scope: ['email', 'public_profile']
     })
 
     $authProvider.google({
         url: config.loginBaseUrl + '/account/user/login/google',
-        clientId: '192384401460-ntng78ie8hs2to1t1e0i9foi63rss5gr.apps.googleusercontent.com',
+        clientId: config.google.clientId,
     })
 
     # $authProvider.twitter({
@@ -305,7 +305,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     $rootScope.trustAsHtml = (string) ->
         return $sce.trustAsHtml(string)
 
-    $rootScope.recaptchaKey = "6LfrjQwTAAAAADL047Yx9IUOgsFAfHpjq8InqwMF"
+    $rootScope.recaptchaKey = config.google.recaptchaKey
 
 )
 
