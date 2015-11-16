@@ -33,6 +33,10 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
                         projectsheet : projectsheet
                     }
         )
+        modalInstance.result.then((result)->
+            $scope.$broadcast('cover-updated')
+            $scope.$emit('cover-updated')
+        )
 )
 
 module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, Project,
@@ -176,6 +180,8 @@ module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params
         fileIndex = $scope.bucket.files.indexOf(file)
         $scope.bucket.files.splice(fileIndex, 1)
         BucketFile.one(file.id).remove()
+        ## TODO : DEAL WITH COVER/FAVORITE UPDATE
+
 
     $scope.updateFavorite = (file) ->#EDIT MODE
         $scope.projectsheet.cover = file

@@ -185,10 +185,15 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
         $scope.linkedResources = $scope.projectsheet.linked_resources
 
-        $scope.coverURL = "/img/bacasable.jpg"
-        if $scope.resourcesheet.base_projectsheet.cover
-            $scope.coverURL = $scope.config.media_uri + $scope.resourcesheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
+        $scope.fetchCoverURL = () ->
+            $scope.coverURL = "/img/default_resource.jpg"
+            if $scope.resourcesheet.base_projectsheet.cover
+                $scope.coverURL = $scope.config.media_uri + $scope.resourcesheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
 
+        $scope.fetchCoverURL()
+        $scope.$on('cover-updated', ()->
+            $scope.fetchCoverURL()
+        )
 
         $scope.similars = []
         TaggedItem.one().customGET("makerscienceresource/"+$scope.resourcesheet.id+"/similars").then((similarResults) ->
