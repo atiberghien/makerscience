@@ -176,9 +176,27 @@
                                 <button type="submit" ng-click="publishNews()">Publier</button>
                             </form>
                         </section>
-                        <section ng-repeat="news in projectsheet.news">
+                        <section ng-repeat="news in projectsheet.news" ng-init="showEditor=false">
                             <h3>{{news.title}}</h3>
-                            <p ng-bind-html="trustAsHtml(news.text)"></p>
+                            <div class="edit-buttons" ng-show="editable">
+                                <button ng-click="deleteNews(news)">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                                <button ng-click="showEditor=true">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                            </div>
+                            <div ng-hide="showEditor" ng-bind-html="news.text"></div>
+                            <div ng-show="showEditor">
+                                <textarea ui-tinymce="tinyMceFullOptions"
+                                    name="text"
+                                    ng-model="news.text"
+                                    ng-trim="false"
+                                    rows="8"
+                                    required>
+                                </textarea>
+                                <button type="submit" ng-click="updateNews(news);showEditor=false">Mettre à jour</button>
+                            </div>
                             Posté par <a ui-sref="profile.detail({slug:news.author.id})">{{news.author.user.first_name}} {{news.author.user.last_name}}</a>
                             <span am-time-ago="news.timestamp"></span>
                         </section>

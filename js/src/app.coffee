@@ -280,7 +280,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
     $rootScope.tinyMceFullOptions = {
         plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking"],
-        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist |outdent indent blockquote | link unlink anchor | media",
+        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignjustify | bullist numlist |outdent indent | link unlink anchor | image media | code",
         menubar: false,
         statusbar: false,
         toolbar_items_size: 'small',
