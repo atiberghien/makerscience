@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">Exprimez un nouveau besoin</h3>
+</div>
+<div class="modal-body">
+    <fieldset class="needs needs-select">
+        <input type="text" ng-model="newNeed.title" placeholder="Intitulé du besoin"/>
+        <text-angular name="project-need"
+                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
+                      e-placeholder="Descrivez votre besoin"
+                      ng-model="newNeed.text"
+                      e-rows="3">
+        </text-angular>
+        <br />
+        <fieldset class="forum-keywords">
+            <div ng-controller="TagAutoCompleteCtrl">
+                <h4>Quels sont les mots-clés associés à votre discussion ?</h4>
+                <tags-input ng-model="questionTags"
+                            placeholder="> Mot-clé">
+                  <auto-complete source="loadTags($query)"></auto-complete>
+                </tags-input>
+            </div>
+        </fieldset>
+    </fieldset>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

@@ -211,18 +211,24 @@
                     </tab>
                 </tabset>
 
-                <div class="row" ng-if="needs.length > 0">
+                <div class="row" >
                     <div class="col-md-12">
                         <div class="needs">
-
+                            <div class="edit-buttons" ng-show="editable">
+                                <button class="button"  ng-click="openNewNeedPopup()"><span class="fa fa-plus"></span></button>
+                            </div>
                             <h3>Besoins</h3>
-                            <carousel id="carousel-needs" class="carousel-no-indicators carousel-text-links">
+                            <carousel  ng-show="needs.length > 0" id="carousel-needs" class="carousel-no-indicators carousel-text-links">
                                 <slide class="needs-idea" ng-repeat="post in  needs">
                                     <ul class="actions">
                                         <li><a ui-sref="question({slug:post.slug})"><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
                                     </ul>
                                     <h4>{{post.title}}</h4>
                                     <p ng-bind-html="trustAsHtml(post.text)"></p>
+                                    <ul class="tags" >
+                                        <li ng-repeat="tag in post.tags|limitTo : 4"><a ui-sref="tag({slug:tag.tag.slug})">{{tag.tag.name}}</a></li>
+                                        <li class="more" ng-if="post.tags.length > 4"><a href="">+{{post.tags.length-4}}</a></li>
+                                    </ul><!-- .tags -->
                                 </slide>
                             </carousel>
                         </div><!-- .needs -->

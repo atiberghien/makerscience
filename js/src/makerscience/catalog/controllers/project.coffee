@@ -180,7 +180,24 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         )
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window,
+module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInstance, projectsheet, MakerScienceProjectLight) ->
+
+    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
+
+
+    $scope.ok = () ->
+        MakerScienceProjectLight.one(projectsheet.id).get().then((projectResult) ->
+            $scope.newNeed.linked_projects = [projectResult.resource_uri]
+            $scope.newNeed.type='need'
+            $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent)
+        )
+        $modalInstance.close()
+
+    $scope.cancel = () ->
+        $modalInstance.dismiss('cancel')
+)
+
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window, $modal
                                                     MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePostLight,
                                                     MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress, ProjectNews
                                                     Comment, ObjectProfileLink, DataSharing) ->
@@ -272,6 +289,15 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 $scope.projectsheet.news.unshift(newsResult)
                 angular.copy({}, $scope.newsData);
                 $window.tinymce.activeEditor.setContent('')
+            )
+
+        $scope.openNewNeedPopup = () ->
+            modalInstance = $modal.open(
+                templateUrl: '/views/catalog/block/newNeedPopup.html'
+                controller: 'NewNeedPopupInstanceCtrl'
+                resolve:
+                    projectsheet: ->
+                        return $scope.projectsheet
             )
 
         $scope.deleteNews = (news) ->
