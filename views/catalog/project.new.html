@@ -145,6 +145,15 @@
                                               e-rows="3">
                                 </text-angular>
                                 <br />
+                                <fieldset class="forum-keywords">
+                                    <div ng-controller="TagAutoCompleteCtrl">
+                                        <h4>Quels sont les mots-clés associés à votre discussion ?</h4>
+                                        <tags-input ng-model="questionTags"
+                                                    placeholder="> Mot-clé">
+                                          <auto-complete source="loadTags($query)"></auto-complete>
+                                        </tags-input>
+                                    </div>
+                                </fieldset>
                                 <button type="button" class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
                             </div>
                         </div>
