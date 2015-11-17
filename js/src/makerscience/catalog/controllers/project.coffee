@@ -180,7 +180,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         )
 )
 
-module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInstance, projectsheet, MakerScienceProjectLight) ->
+module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInstance, projectsheet, MakerScienceProjectLight, MakerSciencePostLight) ->
 
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
 
@@ -189,7 +189,11 @@ module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInsta
         MakerScienceProjectLight.one(projectsheet.id).get().then((projectResult) ->
             $scope.newNeed.linked_projects = [projectResult.resource_uri]
             $scope.newNeed.type='need'
-            $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent)
+            $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then((postResult)->
+                MakerSciencePostLight.one(postResult.id).get().then((post)->
+                    projectsheet.linked_makersciencepost.push(post)
+                )
+            )
         )
         $modalInstance.close()
 
@@ -255,19 +259,12 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         if _.isEmpty($scope.projectsheet.base_projectsheet.videos)
             $scope.projectsheet.base_projectsheet.videos = null
 
-        $scope.linked_post = []
-        $scope.needs = []
-        angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
-            MakerSciencePostLight.one(makerSciencePostID).get().then((makerSciencePostResult)->
-                $scope.getPostAuthor(makerSciencePostResult.parent_id).then((author) ->
-                    makerSciencePostResult.author = author
-                )
-                $scope.getContributors(makerSciencePostResult.parent_id).then((contributors) ->
-                    makerSciencePostResult.contributors = contributors
-                )
-                $scope.linked_post.push(makerSciencePostResult)
-                if makerSciencePostResult.post_type == 'need'
-                    $scope.needs.push(makerSciencePostResult)
+        angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostResult) ->
+            $scope.getPostAuthor(makerSciencePostResult.parent_id).then((author) ->
+                makerSciencePostResult.author = author
+            )
+            $scope.getContributors(makerSciencePostResult.parent_id).then((contributors) ->
+                makerSciencePostResult.contributors = contributors
             )
         )
 

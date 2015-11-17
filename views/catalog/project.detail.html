@@ -202,9 +202,9 @@
                         </section>
 
                     </tab>
-                    <tab heading="Discussions ({{linked_post.length}})">
+                    <tab heading="Discussions ({{projectsheet.linked_makersciencepost.length}})">
                         <section>
-                            <div ng-repeat="post in linked_post">
+                            <div ng-repeat="post in projectsheet.linked_makersciencepost">
                                 <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
                             </div>
                         </section>
@@ -218,8 +218,8 @@
                                 <button class="button"  ng-click="openNewNeedPopup()"><span class="fa fa-plus"></span></button>
                             </div>
                             <h3>Besoins</h3>
-                            <carousel  ng-show="needs.length > 0" id="carousel-needs" class="carousel-no-indicators carousel-text-links">
-                                <slide class="needs-idea" ng-repeat="post in  needs">
+                            <carousel  ng-show="projectsheet.linked_makersciencepost.length > 0" id="carousel-needs" class="carousel-no-indicators carousel-text-links">
+                                <slide class="needs-idea" ng-repeat="post in  projectsheet.linked_makersciencepost|filter:{post_type:'need'}">
                                     <ul class="actions">
                                         <li><a ui-sref="question({slug:post.slug})"><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
                                     </ul>

@@ -123,9 +123,9 @@
                             </p>
                         </section>
                     </tab>
-                    <tab heading="Discussions ({{linked_post.length}})">
+                    <tab heading="Discussions ({{resourcesheet.linked_makersciencepost.length}})">
                         <section>
-                            <div ng-repeat="post in linked_post">
+                            <div ng-repeat="post in resourcesheet.linked_makersciencepost">
                                 <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
                             </div>
                         </section>

@@ -213,11 +213,6 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         if _.isEmpty($scope.resourcesheet.base_projectsheet.videos)
             $scope.resourcesheet.base_projectsheet.videos = null
 
-        $scope.linked_post = []
-        angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostID) ->
-            $scope.linked_post.push(MakerSciencePostLight.one(makerSciencePostID).get().$object)
-        )
-
         $scope.updateLinkedResources = ->
             MakerScienceResource.one($scope.projectsheet.id).patch(
                 linked_resources : $scope.linkedResources.map((resource) ->
