@@ -32,4 +32,6 @@
         onbeforesave="updateMemberDetail($data, member)"
         ng-bind-html="member.detail"></p>
 </div>
-<button ng-show="editable" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
+<button ng-show="editable && !(team.length == 1 && (member.level == 10 || member.level == 0))" class="remove" ng-click="removeMember(member)">
+    <span class="glyphicon glyphicon-remove" >
+</span></button>
