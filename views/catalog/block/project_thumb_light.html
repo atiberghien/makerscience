@@ -1,4 +1,4 @@
-<h3>{{project.begin_date|date : format : shortdate}}</h3>
+<!-- <h3>{{project.begin_date|date : format : shortdate}}</h3> -->
 <a ui-sref="project.detail({ slug: project.slug })">
     <img class="background" ng-if="project.cover" ng-src="{{ config.media_uri }}{{ project.cover+'?dim=200x200&border=true'}}" alt="Project Image" />
     <img class="background" ng-if="!project.cover" src="/img/default_project.jpg" alt="Project Image" />
