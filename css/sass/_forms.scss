@@ -87,7 +87,7 @@
 							}
 						}
 						p {
-							margin-bottom: 1em;
+							margin: 0.5em;
 							&.right {
 								margin-top: 1em;
 								button {
@@ -104,6 +104,28 @@
 							border: 1px solid #ccc;
 							@include border-radius(2px);
 						}
+						.need-keywords {
+        						div.tags {
+            							box-shadow: none;
+            							li.tag-item {
+                							background-color: $color-blue;
+                							@include border-radius(0);
+            							}
+            							input.input {
+                							background-color: white !important;
+									padding: 0.25em !important;
+									border: 1px solid #d3d7da;
+            							}
+            							ul.tag-list {
+                							margin-right: $grid-gutter-width;
+            							}
+        						}
+    						}
+						button.button {
+							position: relative;
+    							float: right;
+						}
+
 					}
 					&.needs-save {
 						padding-bottom: $grid-gutter-width / 2;

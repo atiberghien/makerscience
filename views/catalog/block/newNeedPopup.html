@@ -11,15 +11,15 @@
                       e-rows="3">
         </text-angular>
         <br />
-        <fieldset class="forum-keywords">
+        <div class="need-keywords">
             <div ng-controller="TagAutoCompleteCtrl">
-                <h4>Quels sont les mots-clés associés à votre discussion ?</h4>
+                <p>Précisez votre besoin grâce à des mots-clés :</p>
                 <tags-input ng-model="questionTags"
                             placeholder="> Mot-clé">
                   <auto-complete source="loadTags($query)"></auto-complete>
                 </tags-input>
             </div>
-        </fieldset>
+        </div>
     </fieldset>
 </div>
 <div class="modal-footer">
