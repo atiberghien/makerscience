@@ -1,14 +1,19 @@
-<!-- <h3>{{project.begin_date|date : format : shortdate}}</h3> -->
+<h3>{{project.begin_date|date : format : shortdate}}</h3>
 <a ui-sref="project.detail({ slug: project.slug })">
     <img class="background" ng-if="project.cover" ng-src="{{ config.media_uri }}{{ project.cover+'?dim=200x200&border=true'}}" alt="Project Image" />
-    <img class="background" ng-if="!project.cover" src="/img/default_project.jpg" alt="Project Image" />
+    <img class="background" ng-if="!project.cover" src="/img/default_project_thumb.jpg" alt="Project Image" />
 </a>
 <div class="description">
-    <h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title}}</a></h4>
+    <h4><a ui-sref="project.detail({ slug: project.slug })">{{project.title|limitTo:20}}<span ng-show="resource.title.length > 20">...</a></h4>
     <h5 ng-if="project.by">Par
         <a ui-sref="profile.detail({slug:project.by.profile_slug})">
             {{project.by.full_name}}
         </a>
     </h5>
 </div>
-<p class="baseline"><a ui-sref="project.detail({ slug: project.slug })">{{project.baseline}}</a></p>
+<p class="baseline">
+    <a ui-sref="project.detail({ slug: project.slug })">
+        <stong>{{project.title}}</stong><br/>
+        {{project.baseline}}
+    </a>
+</p>

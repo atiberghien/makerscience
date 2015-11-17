@@ -32,7 +32,9 @@
                                 <h4>Nom du projet</h4>
                                 <input type="text"
                                        name="projectName"
-                                       ng-model="projectsheet.project.title" required/>
+                                       ng-model="projectsheet.project.title"
+                                       maxlength="50"
+                                       required/>
                                 <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Nom du projet requis</p>
                            </fieldset>
 
@@ -40,7 +42,9 @@
                                 <h4>Résumez votre projet en une courte phrase</h4>
                                 <input type="text"
                                            name="projectBaseline"
-                                           ng-model="projectsheet.project.baseline" required/>
+                                           ng-model="projectsheet.project.baseline"
+                                            maxlength="100"
+                                           required/>
                                 <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Courte description du projet requise</p>
                            </fieldset>
 

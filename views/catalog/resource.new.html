@@ -30,6 +30,7 @@
                                        name="resourceName"
                                        placeholder=">"
                                        ng-model="projectsheet.project.title"
+                                       maxlength="50"
                                        required/>
                                 <p ng-show="newResourceForm.resourceName.$invalid && submitted" class="help-block">
                                     Nom de l'expérience requis</p>
@@ -42,6 +43,7 @@
                                             name="resourceBaseline"
                                             placeholder=">"
                                             ng-model="projectsheet.project.baseline"
+                                             maxlength="100"
                                             required/>
                                 <p ng-show="newResourceForm.resourceBaseline.$invalid && submitted" class="help-block">
                                     Court résumé de l'expérience requis</p>

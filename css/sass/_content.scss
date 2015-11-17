@@ -863,6 +863,7 @@ div.toolbar {
 			left: 0;
 			padding: $grid-gutter-width / 2;
 			color: $color-text;
+			word-break: break-word;
 			@include transition(opacity, background-color .2s ease-in-out);
 		}
 		&:hover p.baseline a {
