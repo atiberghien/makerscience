@@ -166,6 +166,7 @@
 							padding: 1em;
 							white-space: pre-line;
                                         		word-wrap: break-word;
+							text-align: justify;
 						}
 					}
 					span.editable-buttons {
@@ -224,8 +225,9 @@ div.editable-controls {
 				}
 				.ta-scroll-window > .ta-bind {
 					padding: 1em;
-					white-space: pre;
+					white-space: pre-line;
 					word-wrap: break-word;
+					text-align: justify;
 				}
 				textarea, div.editable-input {
 					display: block;
@@ -243,8 +245,9 @@ div.editable-controls {
 			}
 		}
 		p.editable {
-			white-space: pre;
+			white-space: pre-line;
                         word-wrap: break-word;
+			text-align: justify;
 			ul {
 				list-style : initial ;
 				margin-left: 15px;	
