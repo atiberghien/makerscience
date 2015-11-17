@@ -4,7 +4,7 @@
     <img class="background" ng-if="!resource.cover" src="/img/default_resource_thumb.jpg" alt="resource Image" />
 </a>
 <div class="description">
-    <h4><a ui-sref="resource.detail({ slug: resource.slug })">{{resource.title|limitTo:20}}<span ng-show="resource.title.length > 20">...</span></a></h4>
+    <h4><a ui-sref="resource.detail({ slug: resource.slug })">{{resource.title|limitTo:20}}<span ng-show="resource.title.length >= 20">...</span></a></h4>
     <h5 ng-if="resource.by">Par
         <a ui-sref="profile.detail({slug:resource.by.profile_slug})">
             {{resource.by.full_name}}
@@ -13,7 +13,7 @@
 </div>
 <p class="baseline">
     <a ui-sref="resource.detail({ slug: resource.slug })">
-        <stong>{{resource.title}}</stong><br/>
+        <strong>{{resource.title}}</strong><br/>
         {{resource.baseline}}
     </a>
 </p>
