@@ -292,7 +292,7 @@ module.controller("NotificationCtrl", ($scope, $rootScope, $controller, $timeout
                 $scope.notifications = notificationResults
                 $scope.lastNotifications = $filter('limitTo')(notificationResults, 10)
                 $scope.computeUnreadNotificationCounter()
-                if markAllAsRead
+                if markAllAsRead == true
                     angular.forEach($scope.notifications, $scope.markAsRead)
             )
 
@@ -312,8 +312,10 @@ module.controller("NotificationCtrl", ($scope, $rootScope, $controller, $timeout
 
     $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
         if newValue != oldValue
-            $scope.updateNotifications()
-            $interval($scope.updateNotifications, 30000)
+            $scope.updateNotifications(false)
+            $interval(()->
+                $scope.updateNotifications(false)
+            , 30000)
     )
 
 
