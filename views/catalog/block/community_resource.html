@@ -106,21 +106,6 @@
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
-
-            <!-- <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showSimilarsFilter">
-                <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
-                <div ng-show="editable">
-                    <button ng-show="team.length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
-                    <label ng-show="member.level==16 && member.isValidated == false">En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
-                </div>
-                <div ng-show="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
-                    <span ng-show="member.level == 16">
-                        Vous avez été invité à apporter votre aide au projet
-                        <button class="btn btn-default" ng-click="validateMember(member, true)">Accepter</button>
-                        <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
-                    </label>
-                </div>
-            </div> -->
         </tab>
         <tab>
             <tab-heading>
