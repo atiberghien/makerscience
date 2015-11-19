@@ -59,15 +59,40 @@
             </div>
             <!-- ###################################################### -->
 
-            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showCoAuthorsFilter">
-                <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
-            </div><!-- .member -->
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coAuthorMembers=(community|filter:{level:10, isValidated:true}|orderBy:'created_on')">
+                <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <button ng-show="editable && coAuthorMembers.length > 1" class="remove" ng-click="removeMember(member)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coAuthorRequestingMembers=(community|filter:{level:10, isValidated:false}|orderBy:'created_on')">
+                <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
+                    <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                    <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button class="btn btn-primary valid-button" ng-click="validateMember(member, true)">Valider ce membre</button>
+                </div>
+                <div ng-show="currentMakerScienceProfile.parent.id == member.profile.id">
+                    Votre demande pour devenir co-autheur est en attente de validation
+                    <a class="remove" ng-click="removeMember(member)"><span class="fa fa-trash" tooltip="Annuler votre demande"></span></a>
+                </div>
+            </div>
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coAuthorInvitedMembers=(community|filter:{level:15, isValidated:false}|orderBy:'created_on')">
+                <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
+                    Invitation envoyée à <a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a>
+                    <a ng-click="removeMember(member)"><span class="fa fa-trash" tooltip="Annuler l'invitation"></span></a>
+                </div>
+                <div ng-show="currentMakerScienceProfile.parent.id == member.profile.id">
+                    <label>Vous avez été invité à devenir co-autheur</label>
+                    <button class="btn btn-primary" ng-click="validateMember(member, true)">Accepter</button>
+                    <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
+                </div>
+            </div>
         </tab>
 
         <!-- Membres resources  -->
         <tab ng-init="addResourceMember=false">
             <tab-heading>
-                <span>{{(community | filter: {level:11, isValidated: true}).length }}</span>
+                <span>{{(community|filter:{level:11, isValidated: true}).length }}</span>
                 <ng-pluralize count="(community | filter: {level:11, isValidated: true}).length"
                              when="{'0': 'Expérience similaire',
                                  'one': 'Expérience similaire',
@@ -75,7 +100,14 @@
                  </ng-pluralize>
             </tab-heading>
 
-            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showSimilarsFilter">
+            <div class="member" ng-class="{'member-edit': editable || currentMakerScienceProfile.parent.id == member.profile.id}" ng-repeat="member in helperMembers=community|filter:{level:11, isValidated:true}|orderBy:'created_on'">
+                <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <button ng-show="editable || currentMakerScienceProfile.parent.id == member.profile.id" class="remove" ng-click="removeMember(member)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+
+            <!-- <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showSimilarsFilter">
                 <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
                 <div ng-show="editable">
                     <button ng-show="team.length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
@@ -88,7 +120,7 @@
                         <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
                     </label>
                 </div>
-            </div><!-- .member -->
+            </div> -->
         </tab>
         <tab>
             <tab-heading>

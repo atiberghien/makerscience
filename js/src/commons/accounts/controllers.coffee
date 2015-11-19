@@ -21,85 +21,89 @@ module.controller("CommunityCtrl", ($scope, $filter, $interval, Profile, ObjectP
         $scope.communityObjectTypeName = objectTypeName
         $scope.communityObjectID = objectID
 
-        $scope.community = ObjectProfileLink.one().customGETLIST($scope.communityObjectTypeName+'/'+$scope.communityObjectID).$object
-
-        $scope.addMember = (profile, level, detail, isValidated)->
-            if $scope.isAlreadyMember(profile, level)
-                console.log(" --- ! -- already Member with this level --- ! ---")
-                return true
-            ObjectProfileLink.one().customPOST(
-                profile_id: profile.id,
-                level: level,
-                detail : detail,
-                isValidated:isValidated
-            , $scope.communityObjectTypeName+'/'+$scope.communityObjectID).then((objectProfileLinkResult) ->
-                $scope.community.push(objectProfileLinkResult)
+        ObjectProfileLink.one().customGETLIST($scope.communityObjectTypeName+'/'+$scope.communityObjectID).then((objectProfileLinkResults) ->
+            $scope.community = objectProfileLinkResults
+            angular.forEach($scope.community, (member) ->
+                console.log(member.id, member.level)
             )
 
-        $scope.isAlreadyMember = (profile, level) ->
-            return profile && $filter('filter')($scope.community, {$:profile.resource_uri, level:level, isValidated: true}).length == 1
-
-        $scope.removeMember = (member) ->
-            # attention confusion possible : member ici correspond à une instance de
-            # ObjectProfileLink. L'id du profil concerné e.g se trouve à member.profile.id
-            ObjectProfileLink.one(member.id).remove().then(()->
-                memberIndex = $scope.community.indexOf(member)
-                $scope.community.splice(memberIndex, 1)
-                if (member.level == 0 || member.level == 10) && member.profile.id == $scope.currentMakerScienceProfile.parent.id
-                    $scope.editable = false
-            )
-
-        $scope.deleteMember = (profile, level) ->
-            ObjectProfileLink.one().customGET($scope.communityObjectTypeName+'/'+$scope.communityObjectID, {profile_id:profile.id, level:level}).then((objectProfileLinkResults)->
-                angular.forEach(objectProfileLinkResults.objects, (link) ->
-                    $scope.removeMember(link)
+            $scope.addMember = (profile, level, detail, isValidated)->
+                if $scope.isAlreadyMember(profile, level)
+                    console.log(" --- ! -- already Member with this level --- ! ---")
+                    return true
+                ObjectProfileLink.one().customPOST(
+                    profile_id: profile.id,
+                    level: level,
+                    detail : detail,
+                    isValidated:isValidated
+                , $scope.communityObjectTypeName+'/'+$scope.communityObjectID).then((objectProfileLinkResult) ->
+                    $scope.community.push(objectProfileLinkResult)
                 )
-            )
 
-        $scope.validateMember = (member, isValidated) ->
-            data = {isValidated : isValidated}
-            if member.level == 5
-                member.level = data["level"] = 0
-                member.detail = data["detail"] = ""
-            else if member.level == 6
-                member.level = data["level"] = 1
-                member.detail = data["detail"] = ""
-            else if member.level == 15
-                member.level = data["level"] = 10
-                member.detail = data["detail"] = ""
-            else if member.level == 16
-                member.level = data["level"] = 11
-                member.detail = data["detail"] = ""
+            $scope.isAlreadyMember = (profile, level) ->
+                return profile && $filter('filter')($scope.community, {$:profile.resource_uri, level:level, isValidated: true}).length == 1
 
-            ObjectProfileLink.one(member.id).patch(data).then(()->
-                memberIndex = $scope.community.indexOf(member)
-                member = $scope.community[memberIndex]
-                member.isValidated = isValidated
-                if (member.level == 0 || member.level == 10) && member.profile.id == $scope.currentMakerScienceProfile.parent.id
-                    $scope.editable = isValidated
-            )
+            $scope.removeMember = (member) ->
+                # attention confusion possible : member ici correspond à une instance de
+                # ObjectProfileLink. L'id du profil concerné e.g se trouve à member.profile.id
+                ObjectProfileLink.one(member.id).remove().then(()->
+                    memberIndex = $scope.community.indexOf(member)
+                    $scope.community.splice(memberIndex, 1)
+                    if (member.level == 0 || member.level == 10) && member.profile.id == $scope.currentMakerScienceProfile.parent.id
+                        $scope.editable = false
+                )
 
-        $scope.updateMemberDetail = (detail, member) ->
-            ObjectProfileLink.one(member.id).patch({detail : detail}).then(()->
-                memberIndex = $scope.community.indexOf(member)
-                member = $scope.community[memberIndex]
-                member.detail = detail
-                return true
-            )
-            return false
+            $scope.deleteMember = (profile, level) ->
+                ObjectProfileLink.one().customGET($scope.communityObjectTypeName+'/'+$scope.communityObjectID, {profile_id:profile.id, level:level}).then((objectProfileLinkResults)->
+                    angular.forEach(objectProfileLinkResults.objects, (link) ->
+                        $scope.removeMember(link)
+                    )
+                )
 
-        $scope.showTeamMembersFilter = (member) ->
-            return member.level == 0 || member.level== 5
+            $scope.validateMember = (member, isValidated) ->
+                data = {isValidated : isValidated}
+                if member.level == 5
+                    member.level = data["level"] = 0
+                    member.detail = data["detail"] = ""
+                else if member.level == 6
+                    member.level = data["level"] = 1
+                    member.detail = data["detail"] = ""
+                else if member.level == 15
+                    member.level = data["level"] = 10
+                    member.detail = data["detail"] = ""
+                else if member.level == 16
+                    member.level = data["level"] = 11
+                    member.detail = data["detail"] = ""
 
-        $scope.showHelpersFilter = (member) ->
-            return member.level == 1 || member.level== 6
+                ObjectProfileLink.one(member.id).patch(data).then(()->
+                    memberIndex = $scope.community.indexOf(member)
+                    member = $scope.community[memberIndex]
+                    member.isValidated = isValidated
+                    if (member.level == 0 || member.level == 10) && member.profile.id == $scope.currentMakerScienceProfile.parent.id
+                        $scope.editable = isValidated
+                )
 
-        $scope.showCoAuthorsFilter = (member) ->
-            return member.level == 10 || member.level== 15
+            $scope.updateMemberDetail = (detail, member) ->
+                ObjectProfileLink.one(member.id).patch({detail : detail}).then(()->
+                    memberIndex = $scope.community.indexOf(member)
+                    member = $scope.community[memberIndex]
+                    member.detail = detail
+                    return true
+                )
+                return false
 
-        $scope.showSimilarsFilter = (member) ->
-            return member.level == 11 || member.level== 16
+            $scope.showTeamMembersFilter = (member) ->
+                return member.level == 0 || member.level== 5
 
+            $scope.showHelpersFilter = (member) ->
+                return member.level == 1 || member.level== 6
+
+            $scope.showCoAuthorsFilter = (member) ->
+                return member.level == 10 || member.level== 15
+
+            $scope.showSimilarsFilter = (member) ->
+                return member.level == 11 || member.level== 16
+        )
 
 )
 

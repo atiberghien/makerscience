@@ -22,7 +22,7 @@
     </div>
 </div>
 <div ng-if="member.isValidated" class="member-details relative">
-    <div class="edit-buttons" ng-show="editable || member.profile.id == currentMakerScienceProfile.parent.id">
+    <div class="edit-buttons" ng-show="editable || member.profile.id==currentMakerScienceProfile.parent.id">
         <button ng-click="DetailBtnForm.$show()" ng-hide="DetailBtnForm.$visible">
             <span class="glyphicon glyphicon-pencil"></span>
         </button>
@@ -32,6 +32,3 @@
         onbeforesave="updateMemberDetail($data, member)"
         ng-bind-html="member.detail"></p>
 </div>
-<button ng-show="editable && !(team.length == 1 && (member.level == 10 || member.level == 0))" class="remove" ng-click="removeMember(member)">
-    <span class="glyphicon glyphicon-remove" >
-</span></button>

@@ -8,7 +8,7 @@
         <button type="button"
                 class="btn btn-primary"
                 ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember(currentMakerScienceProfile.parent, 0)"
-                ng-click="teamCandidate=currentMakerScienceProfile.parent">Vous êtes membre de l'équipe</button>
+                ng-click="teamCandidate=currentMakerScienceProfile.parent">Vous voulez rejoindre l'équipe</button>
 
         <button type="button"
                 class="btn btn-primary"
@@ -22,8 +22,14 @@
 
         <input type="text" ng-show="teamCandidate || resourceCandidate" name="role" ng-model="role" placeholder="Saisissez votre rôle ..." />
 
-        <button type="button" ng-show="teamCandidate" class="btn btn-primary" ng-click="addMember(teamCandidate, 0, role, false); manageCommunity=false; teamCandidate=null;">S'ajouter comme membre d'équipe</button>
-        <button type="button" ng-show="resourceCandidate" class="btn btn-primary" ng-click="addMember(resourceCandidate, 1, role, true); manageCommunity=false; resourceCandidate=null;">S'ajouter comme membre ressource</button>
+        <button type="button"
+                ng-show="teamCandidate"
+                class="btn btn-primary"
+                ng-click="addMember(teamCandidate, 0, role, false); manageCommunity=false; teamCandidate=null;">Demander à rejoindre l'équipe</button>
+        <button type="button"
+                ng-show="resourceCandidate"
+                class="btn btn-primary"
+                ng-click="addMember(resourceCandidate, 1, role, true); manageCommunity=false; resourceCandidate=null;">Proposer votre aide</button>
         <button type="button" class="btn btn-default" ng-click="manageCommunity=false; teamCandidate=null; resourceCandidate=null">Annuler</button>
 
     </div>
@@ -31,7 +37,7 @@
         <!-- Membres de l'équipe -->
         <tab ng-init="addTeamMember=false">
             <tab-heading>
-                <span>{{(community | filter: {level:0, isValidated: true}).length }}</span>L'équipe projet
+                <span>{{(community|filter:{level:0, isValidated: true}).length}}</span>L'équipe projet
             </tab-heading>
             <!-- Team member can invite others members to join the tean -->
             <div class="add-member" ng-show="editable">
@@ -59,31 +65,41 @@
             </div>
             <!-- ###################################################### -->
 
-            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showTeamMembersFilter">
-                <ng-include ng-if="member.isValidated || editable" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
-                <div ng-show="editable">
-                    <button ng-show="(community | filter: showTeamMembersFilter | filter : isValidated).length > 1" class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove" ></span></button>
-                    <span ng-show="member.level==0 && !member.isValidated" class="editable-buttons">
-                        <button class="btn btn-primary valid-button" ng-click="validateMember(member, true)">Valider ce membre</button>
-                    </span>
-                    <label ng-show="member.level==5">En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coreTeam=(community|filter:{level:0, isValidated:true}|orderBy:'created_on')">
+                <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <button ng-show="editable && coreTeam.length > 1" class="remove" ng-click="removeMember(member)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coreTeamRequestingMembers=(community|filter:{level:0, isValidated:false}|orderBy:'created_on')">
+                <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
+                    <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                    <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button class="btn btn-primary valid-button" ng-click="validateMember(member, true)">Valider ce membre</button>
                 </div>
-                <div ng-show="!editable && member.isValidated == false && member.profile.id == currentMakerScienceProfile.parent.id">
-                    <label ng-show="member.level == 0">Votre ajout à ce projet est en attente de validation par un membre de l'équipe</label>
-                    <span ng-show="member.level == 5">
-                        Vous avez été invité à rejoindre l'équipe du projet
-                        <button class="btn btn-default" ng-click="validateMember(member, true)">Accepter</button>
-                        <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
-                    </label>
+                <div ng-show="currentMakerScienceProfile.parent.id == member.profile.id">
+                    Votre demande pour intégrer l'équipe est en attente de validation par un membre de l'équipe
+                    <a class="remove" ng-click="removeMember(member)"><span class="fa fa-trash" tooltip="Annuler votre demande"></span></a>
                 </div>
-            </div><!-- .member -->
+            </div>
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coreTeamInvitedMembers=(community|filter:{level:5, isValidated:false}|orderBy:'created_on')">
+                <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
+                    Invitation envoyée à <a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a>
+                    <a ng-click="removeMember(member)"><span class="fa fa-trash" tooltip="Annuler l'invitation"></span></a>
+                </div>
+                <div ng-show="currentMakerScienceProfile.parent.id == member.profile.id">
+                    <label>Vous avez été invité à rejoindre l'équipe</label>
+                    <button class="btn btn-primary" ng-click="validateMember(member, true)">Accepter</button>
+                    <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
+                </div>
+            </div>
         </tab>
 
         <!-- Membres resources  -->
         <tab ng-init="addResourceMember=false">
             <tab-heading>
-                <span>{{(community | filter: {level:1, isValidated: true}).length }}</span>
-                <ng-pluralize count="(community | filter: {level:1, isValidated: true}).length"
+                <span>{{(community|filter:{level:1, isValidated: true}).length}}</span>
+                <ng-pluralize count="(community|filter:{level:1, isValidated: true}).length"
                              when="{'0': 'Personne ressource',
                                  'one': 'Personne ressource',
                                  'other': 'Personnes ressources'}">
@@ -113,20 +129,27 @@
             </div>
             <!-- ###################################################### -->
 
-            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in team = community | filter: showHelpersFilter">
-                <ng-include ng-if="member.isValidated" src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+            <div class="member" ng-class="{'member-edit': editable || currentMakerScienceProfile.parent.id == member.profile.id}" ng-repeat="member in helperMembers=community|filter:{level:1, isValidated:true}|orderBy:'created_on'">
+                <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <button ng-show="editable || currentMakerScienceProfile.parent.id == member.profile.id" class="remove" ng-click="removeMember(member)">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
 
-                <div ng-show="member.level==6 && !member.isValidated">
-                    <label ng-show="member.profile.id != currentMakerScienceProfile.parent.id && editable">
-                        En attente de la validation de {{member.profile.user.first_name}} {{member.profile.user.last_name}}</label>
-                    <span ng-show="member.profile.id == currentMakerScienceProfile.parent.id">
-                        Vous avez été invité à apporter votre aide au projet
-                        <button class="btn btn-default" ng-click="validateMember(member, true)">Accepter</button>
-                        <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
-                    </label>
+            <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in helperInvitedMembers=community|filter:{level:6, isValidated:false}|orderBy:'created_on'">
+                <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
+                    Demande d'aide envoyée à <a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a>
+                    <a ng-click="removeMember(member)"><span class="fa fa-trash" tooltip="Annuler la demande"></span></a>
                 </div>
-            </div><!-- .member -->
+                <div ng-show="currentMakerScienceProfile.parent.id == member.profile.id">
+                    <label>Un membre de l'équipe a solliciter votre aide</label>
+                    <button class="btn btn-primary" ng-click="validateMember(member, true)">Accepter</button>
+                    <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
+                </div>
+            </div>
         </tab>
+
+        <!-- ###################################################### -->
         <tab>
             <tab-heading>
                 <span>{{(community | filter: {level:2}).length }}</span>
