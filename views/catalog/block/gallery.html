@@ -6,13 +6,15 @@
         <tab heading="Photos">
             <section>
                 <input type="file" nv-file-select="" uploader="uploader" multiple />
-                Couverture : {{cover.file.name || projectsheet.cover.filename || 'Aucune image'}}
+                <!-- Couverture : {{ projectsheet.cover.filename || 'Aucune image'}} -->
                 <ul class="thumbnails">
-                    <li ng-repeat="file in bucket.files" style="float: left;text-align: center;">
+                    <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
                         <img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" height="100px"/>
-                        <div>{{ file.filename }}</div>
-                        <button type="button" class="btn btn-xs" ng-click="updateFavorite(file)">
-                            <span class="glyphicon glyphicon-star"></span> Couverture
+                        <div></div>
+                        <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
+                            <span ng-hide="isCover(file)" class="glyphicon glyphicon-star"></span>
+                            <span ng-show="isCover(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+                            Couverture
                         </button>
                         <button type="button" class="btn btn-danger btn-xs" ng-click="removePicture(file)">
                             <span class="glyphicon glyphicon-trash"></span> Supprimer
@@ -20,18 +22,20 @@
                     </li>
                     <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
                         <div ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
-                        <div>{{ file.file.name }}</div>
-                        <button type="button" class="btn btn-xs" ng-click="setFavorite(file)">
-                            <span class="glyphicon glyphicon-star"></span> Couverture
+                        <div></div>
+                        <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
+                            <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
+                            <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+                            Couverture
                         </button>
                         <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
                             <span class="glyphicon glyphicon-trash"></span> Supprimer
                         </button>
                     </li>
                 </ul>
-                <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                <!-- <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
                     <span class="glyphicon glyphicon-trash"></span> Supprimer tout
-                </button>
+                </button> -->
             </section>
         </tab>
         <tab heading="Vidéos">
@@ -53,7 +57,12 @@
         </tab>
     </tabset>
 </div>
-<div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
+
+<div class="progress" ng-show="hideControls">
+    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
+</div>
+
+<div class="modal-footer" ng-hide="hideControls">
+    <button class="btn btn-primary" ng-click="hideControls=true;ok()">OK</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>

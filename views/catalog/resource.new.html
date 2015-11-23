@@ -18,9 +18,12 @@
 
                 <h3>Nouvelle expérience</h3>
 
-                <form name="newResourceForm" novalidate ng-controller="MakerScienceResourceSheetCreateCtrl"
-                    ng-init="init('experience-makerscience'); submitted=false" ng-submit="saveMakerscienceResource(newResourceForm.$valid)"
-                    ng-class="{ 'has-error' : newResourceForm.$invalid && submitted }">
+                <form name="newResourceForm"
+                      novalidate
+                      ng-controller="MakerScienceResourceSheetCreateCtrl"
+                      ng-init="submitted=false"
+                      ng-submit="saveMakerscienceResource(newResourceForm.$valid)"
+                      ng-class="{ 'has-error' : newResourceForm.$invalid && submitted }">
                     <div class="row">
                         <div class="col-md-8">
 
@@ -32,9 +35,7 @@
                                        ng-model="projectsheet.project.title"
                                        maxlength="50"
                                        required/>
-                                <p ng-show="newResourceForm.resourceName.$invalid && submitted" class="help-block">
-                                    Nom de l'expérience requis</p>
-
+                                <p ng-show="newResourceForm.resourceName.$invalid && submitted" class="help-block">Nom de l'expérience requis</p>
                            </fieldset>
 
                             <fieldset class="fake-placeholder">
@@ -43,10 +44,9 @@
                                             name="resourceBaseline"
                                             placeholder=">"
                                             ng-model="projectsheet.project.baseline"
-                                             maxlength="100"
+                                            maxlength="100"
                                             required/>
-                                <p ng-show="newResourceForm.resourceBaseline.$invalid && submitted" class="help-block">
-                                    Court résumé de l'expérience requis</p>
+                                <p ng-show="newResourceForm.resourceBaseline.$invalid && submitted" class="help-block">Court résumé de l'expérience requis</p>
                            </fieldset>
 
                            <fieldset class="fake-placeholder">
@@ -92,7 +92,6 @@
                                     <span class="glyphicon glyphicon-facetime-video"></span>
                                 </button>
                             </fieldset>
-
                             <fieldset class="fake-placeholder">
                                 <h4><span class="glyphicon glyphicon-time"></span> Durée de mise en oeuvre : </h4>
                                 <input type="text" ng-model="projectsheet.duration" />
@@ -124,47 +123,12 @@
                                       e-rows="4">
                         </text-angular>
                     </fieldset>
-                    <!-- Besoins : désactivés pour l'instant -->
-                    <!-- <fieldset class="needs needs-select">
-                        <h4>Vos besoins</h4>
-                        <p>Créer une discussion précisant vos besoins : idées, matériel, financement, testeurs, relais…</p>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="btn-group" dropdown is-open="status.isopen">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">{{newNeed.type}}<span class="caret"></span></button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li ng-repeat="needType in needTypes"><a ng-click="newNeed.type=needType">{{needType}}</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <text-angular name="project-need"
-                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                              e-placeholder="Descrivez votre besoin"
-                                              ng-model="newNeed.description"
-                                              e-rows="3">
-                                </text-angular>
-                            </div>
-                            <div class="col-md-2">
-                                <button type="button" class="button" ng-click="addNeed(newNeed)">Ajouter le besoin</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ul class="list-group">
-                                <li ng-repeat="(index, need) in needs">
-                                    <label>{{need.type}}</label>
-                                    <span ng-bind-html="need.description"></span>
-                                    <button type="button" class="transparent" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span></button>
-                                </li>
-                            </ul>
-                        </div>
-                    </fieldset> -->
-                    <!-- Experiences associées  -->
+                    
                     <fieldset class="linked-idea">
                         <h4>Projets associés</h4>
                         <p>Voulez-vous associer cette expérience à des pages de projets ?</p>
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <angucomplete-alt id="linked-idea"
                                                 placeholder="Nom de l'expérience"
                                                 pause="100"
@@ -175,8 +139,8 @@
                                                 text-no-results="Aucune expérience trouvée"
                                                 minlength="3"/>
                             </div>
-                            <div class="col-md-3">
-                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier à l'éxpérience</button>
+                            <div class="col-md-2">
+                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'expérience</button>
                             </div>
                         </div>
                         <ul class="list-group">
@@ -193,15 +157,15 @@
                         </ul>
                     </fieldset>
 
-                    <p class="right">
+                    <p class="right" ng-hide="hideControls">
                         <button type="button" class="button cancel" ui-sref="resource.list">Annuler</button>
                         <!-- FIXME : set up ctrler to allow 'save as draft'  -->
                         <!-- <button type="button" class="button">Enregistrer en brouillon</button>
                         <button type="button" class="button" ng-click="submitted=true">Publier</button>
                          -->
-                        <button type="submit" class="button" ng-click="submitted=true">Enregistrer</button>
+                        <button type="submit" class="button" ng-click="submitted=true;hideControls=true">Enregistrer</button>
                     </p>
-                    <div class="progress">
+                    <div class="progress" ng-show="hideControls">
                         <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
                     </div>
                 </form>

@@ -79,7 +79,7 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
     )
 )
 
-module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller,
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, $timeout, ProjectSheet,
                              MakerScienceResource,  MakerScienceResourceTaggedItem, ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
@@ -88,9 +88,14 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
     $scope.targetsTags = []
     $scope.formatsTags = []
 
+    $scope.hideControls = false
+
+    $scope.initProjectSheetCreateCtrl('experience-makerscience')
+    
     $scope.saveMakerscienceResource = (formIsValid) ->
         if !formIsValid
             console.log(" Form invalid !")
+            $scope.hideControls = false
             return false
         else
             console.log("submitting form")
@@ -145,14 +150,29 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
                 )
 
-                $scope.saveVideos(resourcesheetResult.id)
+
+                ProjectSheet.one(resourcesheetResult.id).patch({videos:$scope.projectsheet.videos})
                 # if no photos to upload, directly go to new project sheet
-                if $scope.uploader.queue.length <= 0
-                    $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
+                if $scope.uploader.queue.length == 0
+                    $timeout(() ->
+                        $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
+                    ,5000)
                 else
-                    $scope.savePhotos(resourcesheetResult.id, resourcesheetResult.bucket.id)
+                    $scope.uploader.onBeforeUploadItem = (item) ->
+                        item.formData.push(
+                            bucket : resourcesheetResult.bucket.id
+                        )
+                        item.headers =
+                           Authorization : $scope.uploader.headers["Authorization"]
+
+                    $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
+                        if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
+                            ProjectSheet.one(resourcesheetResult.id).patch({cover:response.resource_uri})
+
                     $scope.uploader.onCompleteAll = () ->
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
+
+                    $scope.uploader.uploadAll()
             )
         )
 )
@@ -185,14 +205,9 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
         $scope.linkedResources = $scope.projectsheet.linked_resources
 
-        $scope.fetchCoverURL = () ->
-            $scope.coverURL = "/img/default_resource.jpg"
-            if $scope.resourcesheet.base_projectsheet.cover
-                $scope.coverURL = $scope.config.media_uri + $scope.resourcesheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
-
-        $scope.fetchCoverURL()
+        $scope.fetchCoverURL($scope.projectsheet.base_projectsheet)
         $scope.$on('cover-updated', ()->
-            $scope.fetchCoverURL()
+            $scope.fetchCoverURL($scope.projectsheet.base_projectsheet)
         )
 
         $scope.similars = []

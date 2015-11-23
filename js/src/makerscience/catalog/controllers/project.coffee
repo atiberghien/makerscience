@@ -79,8 +79,9 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
     )
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, ProjectProgress,
-                                                        MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem, ObjectProfileLink) ->
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, $timeout, ProjectProgress, ProjectSheet,
+                                                        MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
+                                                        ObjectProfileLink) ->
     $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
@@ -91,6 +92,10 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.needs = []
     $scope.newNeed = {}
+
+    $scope.hideControls = false
+
+    $scope.initProjectSheetCreateCtrl('projet-makerscience')
 
     ProjectProgress.getList({'range__slug' : 'makerscience'}).then((progressRangeResult) ->
         $scope.progressRange = [{ value : progress.resource_uri, text : progress.label } for progress in $filter('orderBy')(progressRangeResult, 'order')][0]
@@ -106,6 +111,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     $scope.saveMakerscienceProject = (formIsValid) ->
         if !formIsValid
             console.log(" Form invalid !")
+            $scope.hideControls = false
             return false
         else
             console.log("submitting form")
@@ -167,15 +173,28 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
                 )
 
-
-                $scope.saveVideos(projectsheetResult.id)
+                ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
                 # if no photos to upload, directly go to new project sheet
-                if $scope.uploader.queue.length <= 0
-                    $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+                if $scope.uploader.queue.length == 0
+                    $timeout(() ->
+                        $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+                    ,5000)
                 else
-                    $scope.savePhotos(projectsheetResult.id, projectsheetResult.bucket.id)
+                    $scope.uploader.onBeforeUploadItem = (item) ->
+                        item.formData.push(
+                            bucket : projectsheetResult.bucket.id
+                        )
+                        item.headers =
+                           Authorization : $scope.uploader.headers["Authorization"]
+
+                    $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
+                        if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
+                            ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
+
                     $scope.uploader.onCompleteAll = () ->
                         $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+
+                    $scope.uploader.uploadAll()
             )
         )
 )
@@ -231,14 +250,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.linkedResources = $scope.projectsheet.linked_resources
 
-        $scope.fetchCoverURL = () ->
-            $scope.coverURL = "/img/default_project.jpg"
-            if $scope.projectsheet.base_projectsheet.cover
-                $scope.coverURL = $scope.config.media_uri + $scope.projectsheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
-
-        $scope.fetchCoverURL()
+        $scope.fetchCoverURL($scope.projectsheet.base_projectsheet)
         $scope.$on('cover-updated', ()->
-            $scope.fetchCoverURL()
+            $scope.fetchCoverURL($scope.projectsheet.base_projectsheet)
         )
 
         $scope.similars = []

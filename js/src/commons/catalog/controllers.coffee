@@ -8,10 +8,11 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
                                         Project, ProjectSheetQuestionAnswer, Bucket, Place
                                         @$http, FileUploader, $modal) ->
 
-    $scope.init = ->
-        return ProjectSheet.one().get({'project__slug' : $stateParams.slug}).then((projectsheetResult) ->
-            return projectsheetResult.objects[0]
-        )
+    $scope.fetchCoverURL = (projectsheet) ->
+        projectsheet.coverURL = "/img/default_project.jpg"
+        if $scope.projectsheet.base_projectsheet.cover
+            projectsheet.coverURL = $scope.config.media_uri + $scope.projectsheet.base_projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
+
 
     $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
         putData = {}
@@ -25,16 +26,15 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
     $scope.openGallery = (projectsheet) ->
         modalInstance = $modal.open(
             templateUrl: '/views/catalog/block/gallery.html'
-            controller: 'GalleryInstanceCtrl'
+            controller: 'GalleryEditionInstanceCtrl'
             size: 'lg'
+            backdrop : 'static'
+            keyboard : false
             resolve:
-                params: ->
-                    return {
-                        projectsheet : projectsheet
-                    }
+                projectsheet: ->
+                    return projectsheet
         )
         modalInstance.result.then((result)->
-            $scope.$broadcast('cover-updated')
             $scope.$emit('cover-updated')
         )
 )
@@ -48,11 +48,11 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
         headers :
             Authorization : @$http.defaults.headers.common.Authorization
     )
-    $scope.favorite = "-1" #To define which photo will be the cover
-    $scope.videos = {}
+    $scope.coverIndex = null #To define which photo will be the cover
 
-    $scope.init = (templateSlug) ->
-        $scope.projectsheet = {}
+    $scope.initProjectSheetCreateCtrl = (templateSlug) ->
+        $scope.projectsheet =
+            videos : {}
         $scope.QAItems = []
 
         ProjectSheetTemplate.one().get({'slug' : templateSlug}).then((templateResult) ->
@@ -82,109 +82,143 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
             return projectsheetResult
         )
 
-    $scope.savePhotos = (projectsheetID, bucketID) ->
-        angular.forEach($scope.uploader.queue, (item) ->
-            item.formData.push(
-                bucket : bucketID
-            )
-            item.headers =
-               Authorization : $scope.uploader.headers["Authorization"]
-        )
-        $scope.uploader.uploadAll()
-
-        $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
-            if $scope.uploader.getIndexOfItem(fileItem) == $scope.favorite
-                ProjectSheet.one(projectsheetID).patch({cover:response.resource_uri})
-
-    $scope.saveVideos = (projectsheetID) ->
-        ProjectSheet.one(projectsheetID).patch({videos:$scope.videos})
-
     $scope.openGallery = ->
         modalInstance = $modal.open(
             templateUrl: '/views/catalog/block/gallery.html'
-            controller: 'GalleryInstanceCtrl'
+            controller: 'GalleryCreationInstanceCtrl'
             size: 'lg'
             resolve:
-                params: ->
-                    return {uploader : $scope.uploader, videos : $scope.videos, favorite : $scope.favorite}
+                uploader: ->
+                    return $scope.uploader
         )
         modalInstance.result.then((result)->
-            $scope.favorite = result.favorite
+            $scope.coverIndex = result.coverCandidateQueueIndex
+            $scope.projectsheet.videos = result.videos
         , () ->
             return
         )
 )
 
-module.controller('GalleryInstanceCtrl', ($scope, $modalInstance, @$http, params, FileUploader, ProjectSheet, BucketFile) ->
+module.controller('GalleryCreationInstanceCtrl', ($scope, $modalInstance, uploader) ->
 
-    if params.projectsheet
-        $scope.uploader = new FileUploader(
-            url: config.bucket_uri
-            headers :
-                Authorization : @$http.defaults.headers.common.Authorization
-        )
-        $scope.bucket = params.projectsheet.bucket
-        $scope.projectsheet = params.projectsheet
-        $scope.videos = if params.projectsheet.videos then params.projectsheet.videos else {}
+    $scope.videos = {}
+    $scope.coverCandidateQueueIndex = null
 
-        $scope.uploader.onAfterAddingFile = (item) ->
-            item.formData.push(
-                bucket : $scope.bucket.id
-            )
-            item.headers =
-               Authorization : $scope.uploader.headers["Authorization"]
-            item.upload()
-
-        $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
-            $scope.uploader.removeFromQueue(fileItem)
-            $scope.bucket.files.push(response)
-            if $scope.bucket.files.length == 1
-                $scope.updateFavorite(response)
-
-    else
-        $scope.uploader = params.uploader
-        $scope.videos = params.videos
-        $scope.favorite = params.favorite
-        $scope.cover = null
-
-        $scope.uploader.onAfterAddingFile = (item) ->
-            if $scope.uploader.queue.length == 1
-                $scope.setFavorite(item)
+    $scope.uploader = uploader
 
     $scope.ok = ->
-        result =
-            uploader : $scope.uploader
-            videos : $scope.videos
-            favorite : $scope.favorite
-        $modalInstance.close(result)
+        $modalInstance.close({coverCandidateQueueIndex : $scope.coverCandidateQueueIndex})
 
     $scope.cancel = ->
+        $scope.uploader.clearQueue()
         $modalInstance.dismiss('cancel')
 
-    $scope.addVideo = (newVideosURL) ->
-        $scope.videos[newVideosURL] = null
-        if $scope.projectsheet #EDIT MODE
-            ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.videos})
+    $scope.isCoverCandidate = (fileItem) ->
+        fileQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
+        return $scope.coverCandidateQueueIndex != null && $scope.coverCandidateQueueIndex == fileQueueIndex
 
-    $scope.delVideo = (videosURL) ->
-        delete $scope.videos[videosURL]
-        if $scope.projectsheet #EDIT MODE
-            ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.videos})
+    $scope.toggleCoverCandidate = (fileItem) ->
+        if $scope.isCoverCandidate(fileItem)
+            $scope.coverCandidateQueueIndex = null
+        else
+            $scope.coverCandidateQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
 
-    $scope.setFavorite = (file) ->
-        $scope.cover = file
-        $scope.favorite = $scope.uploader.getIndexOfItem(file)
+    $scope.addVideo = (newVideoURL) ->
+        $scope.videos[newVideoURL] = null
 
+    $scope.delVideo = (videoURL) ->
+        delete $scope.videos[videoURL]
+)
 
-    $scope.removePicture = (file) ->#EDIT MODE
-        fileIndex = $scope.bucket.files.indexOf(file)
-        $scope.bucket.files.splice(fileIndex, 1)
-        BucketFile.one(file.id).remove()
-        ## TODO : DEAL WITH COVER/FAVORITE UPDATE
+module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, @$http, projectsheet, FileUploader, ProjectSheet, BucketFile) ->
 
+    $scope.projectsheet = projectsheet
+    $scope.coverCandidateQueueIndex = null
 
-    $scope.updateFavorite = (file) ->#EDIT MODE
-        $scope.projectsheet.cover = file
-        ProjectSheet.one($scope.projectsheet.id).patch({cover:file.resource_uri})
+    $scope.hideControls = false
 
+    $scope.uploader = new FileUploader(
+        url: config.bucket_uri
+        headers :
+            Authorization : @$http.defaults.headers.common.Authorization
+    )
+
+    if !$scope.projectsheet.videos
+        $scope.projectsheet.videos = {}
+
+    $scope.uploader.onBeforeUploadItem = (item) ->
+        item.formData.push(
+            bucket : $scope.projectsheet.bucket.id
+        )
+        item.headers =
+           Authorization : $scope.uploader.headers["Authorization"]
+
+    # must use tmp var in order to not modify queue during cover candidate saving ... sync issue
+    $scope.tmpBucketFiles = []
+    $scope.tmpNewCover = null
+    $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
+        if $scope.isCoverCandidate(fileItem)
+            $scope.tmpNewCover = response
+        $scope.tmpBucketFiles.push(response)
+
+    $scope.uploader.onCompleteAll = () ->
+        if $scope.tmpNewCover
+            $scope.toggleCover($scope.tmpNewCover).then(->
+                angular.forEach($scope.tmpBucketFiles, (file) ->
+                    $scope.projectsheet.bucket.files.push(file)
+                )
+            )
+        else
+            angular.forEach($scope.tmpBucketFiles, (file) ->
+                $scope.projectsheet.bucket.files.push(file)
+            )
+        $modalInstance.close()
+
+    $scope.ok = ->
+        if $scope.uploader.queue.length > 0
+            $scope.uploader.uploadAll()
+        else
+            $scope.uploader.onCompleteAll()
+
+    $scope.cancel = ->
+        $scope.uploader.clearQueue()
+        $modalInstance.dismiss('cancel')
+
+    $scope.removePicture = (file) ->
+        if $scope.isCover(file)
+            $scope.toggleCover(file) #reset cover
+
+        BucketFile.one(file.id).remove().then(->
+            fileBucketIndex = $scope.projectsheet.bucket.files.indexOf(file)
+            $scope.projectsheet.bucket.files.splice(fileBucketIndex, 1)
+        )
+
+    $scope.isCoverCandidate = (fileItem) ->
+        fileQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
+        return $scope.coverCandidateQueueIndex != null && $scope.coverCandidateQueueIndex == fileQueueIndex
+
+    $scope.isCover = (file) ->
+        return $scope.projectsheet.cover != null && $scope.projectsheet.cover.id == file.id
+
+    $scope.toggleCoverCandidate = (fileItem) ->
+        if $scope.isCoverCandidate(fileItem)
+            $scope.coverCandidateQueueIndex = null
+        else
+            $scope.coverCandidateQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
+
+    $scope.toggleCover = (file) ->
+        if $scope.isCover(file)
+            $scope.projectsheet.cover = null
+            return ProjectSheet.one($scope.projectsheet.id).patch({cover:null})
+        else
+            $scope.projectsheet.cover = file
+            return ProjectSheet.one($scope.projectsheet.id).patch({cover:file.resource_uri})
+
+    $scope.addVideo = (newVideoURL) ->
+        $scope.projectsheet.videos[newVideoURL] = null
+        ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
+
+    $scope.delVideo = (videoURL) ->
+        delete $scope.projectsheet.videos[videoURL]
+        ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
 )
