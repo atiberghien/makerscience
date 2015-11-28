@@ -142,6 +142,33 @@ module.controller("MakerScienceObjectGetter", ($scope, $q, Vote, Tag, TaggedItem
             return null
 )
 
+module.controller("MakerScienceSearchEveryWhereCtrl", ($scope, $controller,
+                                            MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePostLight) ->
+
+    $scope.globalQuery = null
+    $scope.globalProjects = []
+    $scope.globalResources = []
+    $scope.globalProfiles = []
+    $scope.globalThreads = []
+
+    $scope.globalSearch = () ->
+        MakerScienceProfileLight.one().customGETLIST('search', {q : $scope.globalQuery}).then((makerScienceProfileResults) ->
+            $scope.globalProfiles = makerScienceProfileResults
+        )
+        MakerScienceProjectLight.one().customGETLIST('search', {q : $scope.globalQuery}).then((makerScienceProjectResults) ->
+            $scope.globalProjects = makerScienceProjectResults
+        )
+        MakerScienceResourceLight.one().customGETLIST('search', {q : $scope.globalQuery}).then((makerScienceResourceResults) ->
+            $scope.globalResources = makerScienceResourceResults
+        )
+        MakerSciencePostLight.one().customGETLIST('search', {q : $scope.globalQuery}).then((makerSciencePostResults) ->
+            $scope.globalThreads = makerSciencePostResults
+        )
+
+    $scope.runAutoCompleteSearch = ->
+        if $scope.globalQuery.length >= 3
+            $scope.globalSearch()
+)
 
 module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $stateParams, Tag, TaggedItem, ObjectProfileLink,
                                             MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePostLight) ->

@@ -1,19 +1,19 @@
-<h2 class="projects clear"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
-<div class="box" ng-repeat="project in projects">
-    <a ui-sref="">{{project.title}}</a>
+<h2 class="projects clear" ng-show="globalProjects.length > 0"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+<div class="box" ng-repeat="project in globalProjects">
+    <a ui-sref="project.detail({slug:project.slug})">{{project.title}}</a>
 </div>
 
-<h2 class="resources clear"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
-<div ng-repeat="resource in resources">
-    <a ui-sref="">{{resource.title}}</a>
+<h2 class="resources clear" ng-show="globalResources.length > 0"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
+<div ng-repeat="resource in globalResources">
+    <a ui-sref="resource.detail({slug:resource.slug})">{{resource.title}}</a>
 </div>
 
-<h2 class="members clear"><span class="glyphicon glyphicon-user"></span> Profils</h2>
-<div ng-repeat="profile in profiles">
+<h2 class="members clear" ng-show="globalProfiles.length > 0"><span class="glyphicon glyphicon-user"></span> Profils</h2>
+<div ng-repeat="profile in globalProfiles">
     <a ui-sref="profile.detail({slug:profile.slug})">{{profile.first_name}} <strong>{{profile.last_name}}</strong></a>
 </div>
 
-<h2 class="forum clear"><span class="glyphicon glyphicon-user"></span> Discussions</h2>
-<div ng-repeat="post in discussions">
-    <a ui-sref="">{{post.title}}</a>
+<h2 class="forum clear" ng-show="globalThreads.length > 0"><span class="glyphicon glyphicon-user"></span> Discussions</h2>
+<div ng-repeat="post in globalThreads">
+    <a ui-sref="question({slug:post.slug})">{{post.title}}</a>
 </div>
