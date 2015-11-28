@@ -145,6 +145,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, @$http,
 
     if !$scope.projectsheet.videos
         $scope.projectsheet.videos = {}
+    $scope.videos = $scope.projectsheet.videos
 
     $scope.uploader.onBeforeUploadItem = (item) ->
         item.formData.push(
@@ -216,9 +217,11 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, @$http,
 
     $scope.addVideo = (newVideoURL) ->
         $scope.projectsheet.videos[newVideoURL] = null
+        $scope.videos[newVideoURL] = null # just for display concerns
         ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
 
     $scope.delVideo = (videoURL) ->
         delete $scope.projectsheet.videos[videoURL]
+        delete $scope.videos[videoURL] # just for display concerns
         ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
 )
