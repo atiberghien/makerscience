@@ -163,7 +163,7 @@ module.controller("MakerScienceForumCtrl", ($scope,  $state, $controller, $filte
 )
 
 
-module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $controller, MakerSciencePost, MakerScienceProfile, ObjectProfileLink, DataSharing) ->
+module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $controller, $filter, MakerSciencePost, MakerScienceProfile, ObjectProfileLink, DataSharing) ->
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCreateCtrl', {$scope: $scope}))
     angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
@@ -195,13 +195,56 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
         $scope.fetchAuthors($scope.post.parent)
         $scope.fetchContributors($scope.post.parent)
         $scope.getSimilars($scope.post.parent.id)
+        $scope.fetchPostLikes($scope.post.parent)
         resolveMentions($scope.post.parent)
 
-        $scope.initCommunityCtrl('post', $scope.post.parent.id)#for community block
+        $scope.initCommunityCtrl('post', $scope.post.parent.id).then(->
+            $scope.community = $filter('filter')($scope.community, (value, index, array) ->
+                if value.level == 31
+                    return value.profile.id != $scope.post.parent.author.id
+                return true
+            )
+        )#for community block
+
+        $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
+            if newValue != null and newValue != undefined
+                $scope.fetchCurrentProfileLikes = (post) ->
+                    ObjectProfileLink.one().get(
+                        level: 34,
+                        profile_id : $scope.currentMakerScienceProfile.parent.id
+                        content_type : 'post'
+                        object_id : post.id).then((results) ->
+                            if results.objects.length == 1
+                                post.currentProfileLike = results.objects[0]
+                            else
+                                post.currentProfileLike = null
+                            angular.forEach(post.answers, (answer) ->
+                                $scope.fetchCurrentProfileLikes(answer)
+                            )
+                        )
+                $scope.fetchCurrentProfileLikes($scope.post.parent)
+
+                $scope.likePost = (post) ->
+                    ObjectProfileLink.one().customPOST(
+                        profile_id: $scope.currentMakerScienceProfile.parent.id,
+                        level: 34,
+                        detail : '',
+                        isValidated:true
+                    , 'post/'+post.id).then(->
+                        $scope.fetchPostLikes(post)
+                        $scope.fetchCurrentProfileLikes(post)
+                    )
+                $scope.unlikePost = (post) ->
+                    ObjectProfileLink.one(post.currentProfileLike.id).remove().then(->
+                        $scope.fetchPostLikes(post)
+                        $scope.fetchCurrentProfileLikes(post)
+                    )
+        )
     )
 
     $scope.saveMakersciencePostAnswer = (newAnswer, parent, authorProfile) ->
         $scope.savePost(newAnswer, parent, authorProfile).then((newAnswer)->
+            newAnswer.author = authorProfile
             mentions = newAnswer.text.match(/\B@[a-z0-9_-]+/gi)
             angular.forEach(mentions, (mention) ->
                 profileSlug = mention.substr(1)

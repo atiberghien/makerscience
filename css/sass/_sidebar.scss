@@ -84,11 +84,24 @@ div.forum-sidebar {
 				color : $color-text;
 			}
 		}
+		div.member-forum {
+			position: relative;
+                        margin: 0 ($grid-gutter-width / 3) ($grid-gutter-width / 2) $grid-gutter-width;
+                        padding: 0.5em 0.2em 0.3em 0.2em;
+			min-height: 50px;
+			a.member-details {
+				font-size: 1.25em;
+				margin-top: 10px;
+				margin-left: 60px;
+				display: block;
+				color: #fff;
+			}
+		}
 		div.member {
 			#min-height: 5em;
 			position: relative;
 			margin: 0 ($grid-gutter-width / 3) ($grid-gutter-width / 2) $grid-gutter-width;
-    			padding: 0.5em 0.2em 0.3em 0.2em;
+			padding: 0.5em 0.2em 0.3em 0.2em;
 			#border-bottom: 1px solid $color-sidebar-community-member-border;
 			&:last-child {
 				border: none;

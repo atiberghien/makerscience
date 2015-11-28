@@ -21,24 +21,18 @@
                 <li class="left"><span class="answer-count">
                     <span ng-if="answer.answers_count > 0 && answer.answers_count <= 9">0</span>
                     {{answer.answers_count}}</span>
-                    <ng-pluralize count="answer.answers_count"
-                                when="{'0': 'Réponse',
-                                'one': 'Réponse',
-                                'other': 'Réponses'}">
-                    </ng-pluralize>
+                    <ng-pluralize count="answer.answers_count" when="{'0': 'Réponse', 'one': 'Réponse', 'other': 'Réponses'}"></ng-pluralize>
                 </li>
-                <!-- <li><a href=""><span class="glyphicon glyphicon-star"></span></a></li> -->
-                <!-- <li><a href=""><span class="glyphicon glyphicon-share-alt"></span></a></li> -->
                 <li>
-                    <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 34)"
-                               ng-click="addMember(currentMakerScienceProfile.parent, 34, '', true)">
+                    <a href="" ng-show="answer.currentProfileLike == null"
+                               ng-click="likePost(answer)">
                                <span class="glyphicon glyphicon-thumbs-up"></span>
                     </a>
-                    <a href="" ng-if="isAlreadyMember(currentMakerScienceProfile.parent, 34)"
-                               ng-click="deleteMember(currentMakerScienceProfile.parent, 34)">
+                    <a href="" ng-show="answer.currentProfileLike != null"
+                               ng-click="unlikePost(answer)">
                                <span class="glyphicon glyphicon-thumbs-down"></span>
                     </a>
-                    {{(community | filter: {level:34, isValidated: true}).length }} J'aime
+                    {{answer.likes.length}} J'aime
                 </li>
                 <li><button class="button button-forum" ng-click="showSubAnswerForm[answer.id] = ! showSubAnswerForm[answer.id]">Répondre</button></li>
         </div>
@@ -70,14 +64,14 @@
                 </ul>
             </script>
 
-            <fieldset class="right">
+            <fieldset class="right" style="margin-top: 15px;">
                 <button type="submit" class="button" ng-click="saveMakersciencePostAnswer(subanswer, answer, currentMakerScienceProfile.parent);showSubAnswerForm[answer.id]=false">Envoyer</button>
                 <button type="reset" ng-click="showSubAnswerForm[answer.id]=false" class="button">Annuler</button>
             </fieldset>
         </form>
     </div>
     <div>
-        <div class="thread-answer answer-child" ng-repeat="subanswer in answer.answers| orderBy : posted_on">
+        <div class="thread-answer answer-child" ng-repeat="subanswer in answer.answers|orderBy:'posted_on'">
             <img src="/img/forum/thread.png" alt="Decoration" class="thread" />
             <div class="thread-author">
                 <span class="avatar avatar52">

@@ -29,7 +29,7 @@
                             <ng-pluralize count="post.parent.answers_count" when="{'0': 'Réponse', 'one': 'Réponse', 'other': 'Réponses'}">
                             </ng-pluralize>
                         </li>
-                        <li><span class="glyphicon glyphicon-thumbs-up"></span> {{(community | filter: {level:33, isValidated: true}).length }} J'aime</li>
+                        <li><span class="glyphicon glyphicon-thumbs-up"></span> {{post.parent.likes.length}} J'aime</li>
                     </ul>
                     <h2>
                         <span ng-if="post.post_type == 'message'" class="glyphicon glyphicon-comment"></span>
@@ -59,12 +59,12 @@
                     <div class="thread-actions">
                         <ul>
                             <li>
-                                <a href="" ng-if="!isAlreadyMember(currentMakerScienceProfile.parent, 33)"
-                                           ng-click="addMember(currentMakerScienceProfile.parent, 33, '', true)">
+                                <a href="" ng-show="post.parent.currentProfileLike == null"
+                                           ng-click="likePost(post.parent)">
                                            <span class="glyphicon glyphicon-thumbs-up"></span>
                                 </a>
-                                <a href="" ng-if="isAlreadyMember(currentMakerScienceProfile.parent, 33)"
-                                           ng-click="deleteMember(currentMakerScienceProfile.parent, 33)">
+                                <a href="" ng-show="post.parent.currentProfileLike != null"
+                                           ng-click="unlikePost(post.parent)">
                                            <span class="glyphicon glyphicon-thumbs-down"></span>
                                 </a>
                             </li>
@@ -107,13 +107,13 @@
                                     </ul>
                                 </script>
 
-                                <fieldset class="right">
+                                <fieldset class="right" style="margin-top: 15px;">
                                     <button type="submit" class="button" ng-click="$parent.showAnswerForm=false;saveMakersciencePostAnswer(answer, post.parent, currentMakerScienceProfile.parent)">Envoyer</button>
                                     <button type="reset" class="button" ng-click="$parent.showAnswerForm=false">Annuler</button>
                                 </fieldset>
                             </form>
                         </div>
-                        <ng-include src="'/views/forum/block/answer.parent.html'" ng-repeat="answer in post.parent.answers | orderBy : posted_on"></ng-include>
+                        <ng-include src="'/views/forum/block/answer.parent.html'" ng-repeat="answer in post.parent.answers|orderBy:'posted_on'"></ng-include>
 
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                                     <ng-include src="'/views/catalog/block/project_thumb_light.html'" ng-init="project=project"></ng-include>
                                 </div>
                             </div>
-                            <p class="scroll-buttons">
+                            <p class="scroll-buttons" ng-show="post.linked_projects.length > 1">
                                 <a href=""><img ng-click="gotoAnchor(3)" src="/img/icons/scroll-down-blue.png" alt="Scroll Down" /></a>
                                 <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll-up-blue.png" alt="Scroll Up" /></a>
                             </p>
@@ -145,7 +145,7 @@
                                     <ng-include src="'/views/catalog/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
                                 </div>
                             </div>
-                            <p class="scroll-buttons">
+                            <p class="scroll-buttons" ng-show="post.linked_resources.length > 1">
                                 <a href=""><img ng-click="gotoAnchor(3)" src="/img/icons/scroll-down-green.png" alt="Scroll Down" /></a>
                                 <a href=""><img ng-click="gotoAnchor(0)" src="/img/icons/scroll-up-green.png" alt="Scroll Up" /></a>
                             </p>

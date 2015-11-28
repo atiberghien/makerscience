@@ -82,4 +82,18 @@ module.controller("PostCtrl", ($scope, $stateParams, Post, TaggedItem, ObjectPro
                 $scope.fetchContributors(answer)
             )
         )
+
+    $scope.getLikes = (postID) ->
+        return ObjectProfileLink.one().get(
+            level: 34,
+            content_type : 'post'
+            object_id : postID)
+
+    $scope.fetchPostLikes = (post) ->
+        $scope.getLikes(post.id).then((likes) ->
+            post.likes = likes.objects
+            angular.forEach(post.answers, (answer) ->
+                $scope.fetchPostLikes(answer)
+            )
+        )
 )

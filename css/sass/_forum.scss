@@ -62,7 +62,7 @@ div.forum-create {
             }
             &:hover {
                 color: $color-forum;
-                background-color: #fff;
+                background-color: $color-bg;
                 span {
                     background-color: $color-forum;
                 }
@@ -142,10 +142,25 @@ form.forum-answer {
             background-color: $color-forum;
         }
     }
+    fieldset.forum-category {
+        padding: $grid-gutter-width / 2;
+        background-color: $color-bg;
+	ul.nav-tabs {
+		margin-top: 15px;
+		li.active { 
+			a, a:focus, a:hover {
+				background-color: $color-bg;
+			}
+		}
+	}
+	margin-bottom: 1em;
+    }
+    
     fieldset.forum-keywords {
         padding: $grid-gutter-width / 2;
         background-color: $color-bg;
-        div.tags {
+        margin-top: 1em;
+	div.tags {
             margin-top: $grid-gutter-width / 2;
             padding: 0.25em 0.5em;
             box-shadow: none;
@@ -494,7 +509,7 @@ div.thread-answers {
     }
     .thread-author {
         margin-top: $grid-gutter-width / 2;
-        margin-bottom: $grid-gutter-width;
+        margin-bottom: $grid-gutter-width / 3;
         font-size: 1.25em;
         img {
             display: inline-block;
@@ -516,7 +531,7 @@ div.thread-answers {
         }
     }
     .thread-content {
-        margin-bottom: $grid-gutter-width;
+        #margin-bottom: $grid-gutter-width;
         font-size: 1.25em;
         line-height: 1.5em;
         p {

@@ -21,7 +21,7 @@ module.controller("CommunityCtrl", ($scope, $filter, $interval, Profile, ObjectP
         $scope.communityObjectTypeName = objectTypeName
         $scope.communityObjectID = objectID
 
-        ObjectProfileLink.one().customGETLIST($scope.communityObjectTypeName+'/'+$scope.communityObjectID).then((objectProfileLinkResults) ->
+        return ObjectProfileLink.one().customGETLIST($scope.communityObjectTypeName+'/'+$scope.communityObjectID).then((objectProfileLinkResults) ->
             $scope.community = objectProfileLinkResults
             angular.forEach($scope.community, (member) ->
                 console.log(member.id, member.level)
@@ -92,17 +92,7 @@ module.controller("CommunityCtrl", ($scope, $filter, $interval, Profile, ObjectP
                 )
                 return false
 
-            $scope.showTeamMembersFilter = (member) ->
-                return member.level == 0 || member.level== 5
-
-            $scope.showHelpersFilter = (member) ->
-                return member.level == 1 || member.level== 6
-
-            $scope.showCoAuthorsFilter = (member) ->
-                return member.level == 10 || member.level== 15
-
-            $scope.showSimilarsFilter = (member) ->
-                return member.level == 11 || member.level== 16
+            return $scope.community
         )
 
 )
