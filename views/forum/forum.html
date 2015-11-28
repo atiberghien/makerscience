@@ -8,56 +8,61 @@
         <div class="col-md-12">
             <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
             <form method="post" action="" ng-show="showCreateButton" class="new-topic" ng-init="newPost.type='message'; initMention('iframeQuestionTextArea')" ng-controller="MentionCtrl">
-                <tabset>
-                    <tab select="newPost.type='message'">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-comment"
-                                  tooltip="Choisissez cette catégorie pour poster un message ne rentrant pas dans les autres catégories.">
-                            </span>
-                            Message
-                        </tab-heading>
-                    </tab>
-                    <tab select="newPost.type='question'">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-question-sign"
-                                  tooltip="Choisissez cette catégorie pour poser une question aux membres. Exemples : « Savez-vous comment... ? », « Qui puis-je contacter pour... ? »">
-                            </span>
-                            Question
-                        </tab-heading>
-                    </tab>
-                    <tab select="newPost.type='idea'">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-flash"
-                                  tooltip="Choisissez cette catégorie lorsqu’une idée vous trotte dans la tête et que vous avez envie de la partager. Exemples : « Qui est partant pour... », « J’aimerais lancer un super truc... ».">
-                            </span>
-                            Idée
-                        </tab-heading>
-                    </tab>
-                    <tab select="newPost.type='need'">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-hand-up"
-                                  tooltip="Choisissez cette catégorie pour indiquer un besoin pour accomplir un projet. Exemples : « Je cherche une imprimante 3D pour... », « Quelqu’un pourrait m’aider pour... ».">
-                            </span>
-                            Besoin
-                        </tab-heading>
-                    </tab>
-                    <tab select="newPost.type='resource'">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-book"
-                                  tooltip="Choisissez cette catégorie pour partager une ressource, un document, une vidéo... Exemples : « J’ai trouve ce super guide pour monter une exposition... », « A voir : une vidéo bien faite pour expliquer le changement climatique... ».">
-                            </span>
-                            Ressources
-                        </tab-heading>
-                    </tab>
-                    <tab select="newPost.type='event'">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-calendar"
-                                  tooltip="Choisissez cette catégorie pour annoncer un évènement. Exemples : « On organise... », « Rendez-vous le... pour le congrès de l’Amcsti ! ».">
-                            </span>
-                            Evènements
-                        </tab-heading>
-                    </tab>
-                </tabset>
+
+                <fieldset class="forum-category">
+                    <h4>Choisissez une catégorie pour votre discussion</h4>
+                    <tabset>
+                        <tab select="newPost.type='message'">
+                            <tab-heading>
+                                <span class="glyphicon glyphicon-comment"
+                                      tooltip="Choisissez cette catégorie pour poster un message ne rentrant pas dans les autres catégories.">
+                                </span>
+                                Message
+                            </tab-heading>
+                        </tab>
+                        <tab select="newPost.type='question'">
+                            <tab-heading>
+                                <span class="glyphicon glyphicon-question-sign"
+                                      tooltip="Choisissez cette catégorie pour poser une question aux membres. Exemples : « Savez-vous comment... ? », « Qui puis-je contacter pour... ? »">
+                                </span>
+                                Question
+                            </tab-heading>
+                        </tab>
+                        <tab select="newPost.type='idea'">
+                            <tab-heading>
+                                <span class="glyphicon glyphicon-flash"
+                                      tooltip="Choisissez cette catégorie lorsqu’une idée vous trotte dans la tête et que vous avez envie de la partager. Exemples : « Qui est partant pour... », « J’aimerais lancer un super truc... ».">
+                                </span>
+                                Idée
+                            </tab-heading>
+                        </tab>
+                        <tab select="newPost.type='need'">
+                            <tab-heading>
+                                <span class="glyphicon glyphicon-hand-up"
+                                      tooltip="Choisissez cette catégorie pour indiquer un besoin pour accomplir un projet. Exemples : « Je cherche une imprimante 3D pour... », « Quelqu’un pourrait m’aider pour... ».">
+                                </span>
+                                Besoin
+                            </tab-heading>
+                        </tab>
+                        <tab select="newPost.type='resource'">
+                            <tab-heading>
+                                <span class="glyphicon glyphicon-book"
+                                      tooltip="Choisissez cette catégorie pour partager une ressource, un document, une vidéo... Exemples : « J’ai trouve ce super guide pour monter une exposition... », « A voir : une vidéo bien faite pour expliquer le changement climatique... ».">
+                                </span>
+                                Ressources
+                            </tab-heading>
+                        </tab>
+                        <tab select="newPost.type='event'">
+                            <tab-heading>
+                                <span class="glyphicon glyphicon-calendar"
+                                      tooltip="Choisissez cette catégorie pour annoncer un évènement. Exemples : « On organise... », « Rendez-vous le... pour le congrès de l’Amcsti ! ».">
+                                </span>
+                                Evènements
+                            </tab-heading>
+                        </tab>
+                    </tabset>
+                </fieldset>
+
                 <input type="text" name="title" ng-model="newPost.title" placeholder="Titre de la discussion ..." class="full-width" />
 
                 <textarea  ui-tinymce="tinyMceOptions" mentio
