@@ -175,6 +175,7 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
     $scope.collapseAdvancedSearch = true
+    $scope.followedTag = null
 
     $scope.runSearch = (params) ->
         $scope.associatedTags = []
@@ -236,24 +237,28 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
 
         )
 
-
     if $stateParams.hasOwnProperty('q')
         $scope.query = $stateParams.q
         $scope.runSearch({q : $stateParams.q})
+
     if $stateParams.hasOwnProperty('slug')
         Tag.one().get({slug : $stateParams.slug}).then((tagResults) ->
             if tagResults.objects.length == 1
                 $scope.tag = tagResults.objects[0]
                 $scope.runSearch({facet : $stateParams.slug})
 
-                $scope.followTag = (profileID) ->
-                    ObjectProfileLink.one().customPOST(
-                        profile_id: profileID,
-                        level: 51,
-                        detail : '',
-                        isValidated:true
-                    , 'tag/'+$scope.tag.id
-                    )
+                $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
+                    if newValue != null && newValue != undefined && $scope.followedTag == null
+                        ObjectProfileLink.one().get(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 51,
+                        , 'tag/'+$scope.tag.id
+                        ).then((results)->
+                            if results.objects.length == 1
+                                $scope.followedTag = results.objects[0]
+
+                        )
+                )
         )
 
     $scope.search = {
@@ -272,13 +277,21 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
             exactExpressions : ""
         }
 
-    $scope.runAutoCompleteSearch = (query, lenght) ->
-        if query.length >= lenght
-            params = {
-                limit : 2
-                q : query
-            }
-            $scope.runSearch (params)
+    $scope.followTag = (tag) ->
+        ObjectProfileLink.one().customPOST(
+            profile_id: $scope.currentMakerScienceProfile.parent.id,
+            level: 51,
+            detail : '',
+            isValidated:true
+        , 'tag/'+$scope.tag.id
+        ).then((result)->
+            $scope.followedTag = result
+        )
+
+    $scope.unfollowTag = () ->
+        ObjectProfileLink.one($scope.followedTag.id).remove().then(->
+            $scope.followedTag = null
+        )
 
 )
 
@@ -375,7 +388,6 @@ module.controller('ReportAbuseFormInstanceCtrl' , ($scope, $modalInstance, $time
 module.controller("ReportAbuseCtrl", ($scope, $modal) ->
 
     $scope.showReportAbusePopup = (currentLocation) ->
-        console.log(currentLocation)
         modalInstance = $modal.open(
             templateUrl: '/views/base/abuse.html'
             controller: 'ReportAbuseFormInstanceCtrl'

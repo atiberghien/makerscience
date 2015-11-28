@@ -2,7 +2,8 @@
     <h1>Tous les objets taggés avec</h1>
     <h2>« {{tag.name}} »</h2>
     <p class="center">
-        <button class="button" ng-click="followTag(currentMakerScienceProfile.parent.id)" tooltip="Recevoir des notifications dès qu’un nouveau contenu est posté avec ce tag">S'abonner</button>
+        <button class="button" ng-show="followedTag == null" ng-click="followTag()" tooltip="Recevoir des notifications dès qu’un nouveau contenu est posté avec ce tag">S'abonner</button>
+        <button class="button" ng-show="followedTag != null" ng-click="unfollowTag()" tooltip="Ne plus recevoir les notifications relatives à ce tag">Se désabonner</button>
     </p>
 </div><!-- #intro -->
 
