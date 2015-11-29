@@ -21,6 +21,7 @@
                         <h2 editable-text="profile.activity"
                             e-form="ActivityBtnForm"
                             e-maxlength="30"
+                            e-placeholder="Votre activité ..."
                             onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'activity', $data)"
                             >{{ profile.activity|limitTo:30 || "Titre/Accroche" }}
                         </h2>
@@ -41,6 +42,7 @@
                             e-form="LocationBtnForm"
                             e-maxlength="30"
                             onbeforesave="updateMakerScienceProfile('Place', profile.location.id , 'address', {'address_locality' : $data})"
+                            e-placeholder="Votre ville ..."
                             class="location">
                             <span class="glyphicon glyphicon-map-marker"></span>
                             <span ng-if="profile.location.address.address_locality">{{profile.location.address.address_locality|limitTo:30}}</span>

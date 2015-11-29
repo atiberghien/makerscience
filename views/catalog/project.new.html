@@ -137,13 +137,13 @@
 
                     <fieldset class="needs needs-select">
                         <h4>Vos besoins</h4>
-                        <p>Créer une discussion précisant vos besoins : idées, matériel, financement, testeurs, relais ...</p>
+                        <p>Créez une discussion précisant vos besoins (idées, matériel, financement, testeurs, relais…). Elle sera affichée sur votre projet et sur le forum de discussions.</p>
                         <div class="row">
                             <div class="col-md-12">
                                 <input type="text" ng-model="newNeed.title" placeholder="Intitulé du besoin"/>
                                 <text-angular name="project-need"
                                               ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                              e-placeholder="Descrivez votre besoin"
+                                              e-placeholder="J’ai besoin de ... pour le projet .. "
                                               ng-model="newNeed.text"
                                               e-rows="3">
                                 </text-angular>
