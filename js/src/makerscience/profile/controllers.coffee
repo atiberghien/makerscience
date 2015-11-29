@@ -242,12 +242,12 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                                         post = makersciencePostResults.objects[0]
                                         $scope.getPostAuthor(post.parent_id).then((author) ->
                                             post.author = author
+                                            if $scope.contributed_post.indexOf(post) == -1 && post.author.id != $scope.profile.parent.id
+                                                $scope.getContributors(post.parent_id).then((contributors) ->
+                                                    post.contributors = contributors
+                                                    $scope.contributed_post.push(post)
+                                                )
                                         )
-                                        $scope.getContributors(post.parent_id).then((contributors) ->
-                                            post.contributors = contributors
-                                        )
-                                        if $scope.contributed_post.indexOf(post) == -1
-                                            $scope.contributed_post.push(post)
                                     )
                                 )
                     )
