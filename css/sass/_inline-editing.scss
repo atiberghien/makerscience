@@ -133,9 +133,11 @@
 					width: 100%;
 					text-align: center;
 					input[type=text] {
-						width: 8em;
+						width: 23em;
 						padding-right: 0.5em;
 						padding-left: 0.5em;
+						display: block;
+						margin-bottom:0.5em;
 					}
 				}
 			}

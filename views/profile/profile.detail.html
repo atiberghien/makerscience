@@ -20,7 +20,7 @@
                         </div>
                         <h2 editable-text="profile.activity"
                             e-form="ActivityBtnForm"
-                            e-maxlength="30"
+                            e-maxlength="60"
                             e-placeholder="Votre activité ..."
                             onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'activity', $data)"
                             >{{ profile.activity|limitTo:30 || "Titre/Accroche" }}
