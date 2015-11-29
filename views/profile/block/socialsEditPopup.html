@@ -2,24 +2,24 @@
     <h3 class="modal-title">Liens réseaux sociaux et contacts</h3>
 </div>
 <div class="modal-body">
-    <div class="form-group">
-        <img src="/img/icons/social/facebook-small.png" alt="Facebook" />
-        <input style="width: 85%;" type="text" ng-model="socials.facebook" placeholder="Lien profil Facebook"/></br>
+    <div class="form-group socials">
+        <span class="fa fa-facebook"></span>
+        <input type="text" ng-model="socials.facebook" placeholder="Lien profil Facebook"/></br>
     </div>
-    <div class="form-group">
-        <img src="/img/icons/social/twitter-small.png" alt="Twitter" /></a>
-        <input style="width: 85%;" type="text" ng-model="socials.twitter" placeholder="Lien profil Twitter"/></br>
+    <div class="form-group socials">
+        <span class="fa fa-twitter"></span>
+        <input type="text" ng-model="socials.twitter" placeholder="Lien profil Twitter"/></br>
     </div>
-    <div class="form-group">
-        <img src="/img/icons/social/linkedin_small.jpg" alt="Linkedin" />
-        <input style="width: 50%;" type="text" ng-model="socials.linkedin" placeholder="Lien profil LinkedIn"/></br>
+    <div class="form-group socials">
+        <span class="fa fa-linkedin"></span>
+        <input type="text" ng-model="socials.linkedin" placeholder="Lien profil LinkedIn"/></br>
     </div>
-    <div class="form-group">
-        <span ng-show="profile.website" class="glyphicon glyphicon-globe"></span>
-        <input style="width: 50%;" type="text" ng-model="socials.website" placeholder="Site web"/>
+    <div class="form-group socials">
+        <span class="fa fa-globe"></span>
+        <input type="text" ng-model="socials.website" placeholder="Site web"/>
     </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer socials">
     <button class="btn btn-primary" ng-click="ok()">OK</button>
     <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
 </div>

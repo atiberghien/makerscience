@@ -108,13 +108,22 @@
                                 Aucun site n’a été renseigné
                             </h4>
                             <div class="socials">
-                                <a ng-show="profile.facebook" href="{{profile.facebook}}" target="_blank" class="share-facebook"><img src="/img/icons/social/facebook-small.png" alt="Facebook" /></a>
-                                <a ng-show="profile.twitter" href="{{profile.twitter}}" target="_blank" class="share-twitter"><img src="/img/icons/social/twitter-small.png" alt="Twitter" /></a>
-                                <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin"><img src="/img/icons/social/linkedin_small.jpg" alt="Linkedin" /></a>
+                                <a ng-show="profile.facebook" href="{{profile.facebook}}" target="_blank" class="share-facebook">
+                                    <!-- <img src="/img/icons/social/facebook-small.png" alt="Facebook" /> -->
+                                    <span class="fa fa-facebook"></span>
+                                </a>
+                                <a ng-show="profile.twitter" href="{{profile.twitter}}" target="_blank" class="share-twitter">
+                                    <!-- <img src="/img/icons/social/twitter-small.png" alt="Twitter" /> -->
+                                    <span class="fa fa-twitter"></span>
+                                </a>
+                                <a ng-show="profile.linkedin" href="{{profile.linkedin}}" target="_blank" class="share-linkedin">
+                                    <!-- <img src="/img/icons/social/linkedin_small.jpg" alt="Linkedin" /> -->
+                                    <span class="fa fa-linkedin"></span>
+                                </a>
 
                                 <label><a ng-show="profile.website" href="{{profile.website}}" target="_blank" >
-                                    <span ng-show="profile.website" class="glyphicon glyphicon-globe"></span>
-                                    <span>{{profile.website | limitTo:40}}<span ng-if="profile.website.length > 40">...</span></span></a></label>
+                                    <span ng-show="profile.website" class="fa fa-globe"></span>
+                                    <span>{{profile.website | limitTo:50}}<span ng-if="profile.website.length > 50">...</span></span></a></label>
                             </div>
                         </div><!-- .relative -->
                     </div><!-- .side-header -->

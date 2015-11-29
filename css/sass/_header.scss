@@ -588,6 +588,18 @@ div.crumbs {
 				margin-left: 0px;
 				margin-bottom: 0px;
 			}
+			a {
+				span.fa {
+					font-size: 2em;
+					background-color: $color-blue;
+					color: white;
+					width: 1.4em;
+					height: 1.4em;
+					text-align: center;
+					padding: 0.2em 0.1em 0.1em 0.1em;
+					border-radius: 0.7em
+				}
+			}
 		}
 	}
 	&.intro-tags {
