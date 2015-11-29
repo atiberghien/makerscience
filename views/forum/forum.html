@@ -94,7 +94,7 @@
                         <h4>Quels sont les mots-clés associés à votre discussion ?</h4>
                         <tags-input ng-model="questionTags"
                                     placeholder="> Mot-clé">
-                          <auto-complete source="loadTags($query)"></auto-complete>
+                          <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
                         </tags-input>
                     </div>
                 </fieldset>

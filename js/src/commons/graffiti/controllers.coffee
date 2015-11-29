@@ -13,6 +13,7 @@ module.controller("TagAutoCompleteCtrl", ($scope, Tag) ->
                 if tag.name.indexOf(query) > -1
                     tmpTag =
                         'text' : tag.name
+                        'weight' : tag.weight
                     availableTags.push(tmpTag)
             )
             return availableTags

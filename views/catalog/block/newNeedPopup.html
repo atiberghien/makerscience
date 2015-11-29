@@ -16,7 +16,7 @@
                 <p>Précisez votre besoin grâce à des mots-clés :</p>
                 <tags-input ng-model="questionTags"
                             placeholder="> Mot-clé">
-                  <auto-complete source="loadTags($query)"></auto-complete>
+                  <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
                 </tags-input>
             </div>
         </div>
