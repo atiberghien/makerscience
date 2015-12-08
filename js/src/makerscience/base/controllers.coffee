@@ -247,18 +247,27 @@ module.controller("MakerScienceSearchCtrl", ($scope, $controller, $parse, $state
                 $scope.tag = tagResults.objects[0]
                 $scope.runSearch({facet : $stateParams.slug})
 
-                $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
-                    if newValue != null && newValue != undefined && $scope.followedTag == null
-                        ObjectProfileLink.one().get(
-                            profile_id: $scope.currentMakerScienceProfile.parent.id,
-                            level: 51,
-                        , 'tag/'+$scope.tag.id
-                        ).then((results)->
-                            if results.objects.length == 1
-                                $scope.followedTag = results.objects[0]
+                checkFollowedTag = () ->
+                    ObjectProfileLink.one().get(
+                        profile_id: $scope.currentMakerScienceProfile.parent.id,
+                        level: 51
+                        content_type : 'tag'
+                        object_id : $scope.tag.id
+                    ).then((results)->
+                        if results.objects.length == 1
+                            $scope.followedTag = results.objects[0]
+                        else
+                            $scope.followedTag = null
+                    )
 
-                        )
-                )
+                if $scope.currentMakerScienceProfile  && $scope.followedTag == null
+                    checkFollowedTag()
+                else
+                    $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
+                        if newValue != null && newValue != undefined && $scope.followedTag == null
+                            console.log("ET LA ?")
+                            checkFollowedTag()
+                    )
         )
 
     $scope.search = {
