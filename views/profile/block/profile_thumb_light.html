@@ -25,6 +25,7 @@
 <a ui-sref="profile.detail({slug:profile.slug})">
     <ng-include src="'/views/profile/block/avatar.html'" class="avatar75"></ng-include>
     <h3>{{profile.first_name}} <strong>{{profile.last_name}}</strong></h3>
-    <h4>{{profile.activity}}</h4>
-    <h5><span class="glyphicon glyphicon-map-marker"></span> {{profile.address_locality}}</h5>
+    <h4 ng-if="profile.activity.length >= 40" tooltip="{{profile.activity}}">{{profile.activity | limitTo:40}}<span>...</span></h4>
+    <h4 ng-if="profile.activity.length < 40">{{profile.activity}}</h4>
+    <h5 style="font-size:0.8em"><span class="glyphicon glyphicon-map-marker"></span> {{profile.address_locality}}</h5>
 </a>

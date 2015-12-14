@@ -20,10 +20,10 @@
                         </div>
                         <h2 editable-text="profile.activity"
                             e-form="ActivityBtnForm"
-                            e-maxlength="60"
+                            e-maxlength="90"
                             e-placeholder="Votre activité ..."
                             onbeforesave="updateMakerScienceProfile('MakerScienceProfile', profile.slug , 'activity', $data)"
-                            >{{ profile.activity|limitTo:30 || "Titre/Accroche" }}
+                            >{{ profile.activity || "Titre/Accroche" }}
                         </h2>
                     </div>
 
@@ -40,7 +40,7 @@
                         </div>
                         <p editable-text="profile.location.address.address_locality"
                             e-form="LocationBtnForm"
-                            e-maxlength="30"
+                            e-maxlength="60"
                             onbeforesave="updateMakerScienceProfile('Place', profile.location.id , 'address', {'address_locality' : $data})"
                             e-placeholder="Votre ville ..."
                             class="location">
