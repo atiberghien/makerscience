@@ -14,7 +14,7 @@
             </div>
         </div>
     </div> -->
-    
+
     <ng-include src="'/views/forum/block/social_share.html'"></ng-include>
     <div ng-init="showAnswerForm=false">
         <div class="forum-thread">
@@ -81,6 +81,8 @@
             <div class="row container">
                 <div class="col-md-8" >
                     <div id="content" class="thread-answers">
+                        <ng-include src="'/views/forum/block/answer.parent.html'" ng-repeat="answer in post.parent.answers|orderBy:'posted_on'"></ng-include>
+                        <button class="button button-forum" ng-click="showAnswerForm=true" ng-show="showAnswerForm==false && post.parent.answers.length >= 1">Répondre</button>
                         <div class="forum-answer" ng-show="showAnswerForm" >
                             <h2>Espace réponse</h2>
                             <form method="post" action="" class="forum-answer" ng-controller="MentionCtrl" ng-init="initMention('iframeAnswerTextArea')">
@@ -114,7 +116,7 @@
                                 </fieldset>
                             </form>
                         </div>
-                        <ng-include src="'/views/forum/block/answer.parent.html'" ng-repeat="answer in post.parent.answers|orderBy:'posted_on'"></ng-include>
+
 
                     </div>
                 </div>
@@ -156,11 +158,10 @@
             </div>
         </div><!-- .forum-content -->
 
-        <div class="row container">
+        <!-- <div class="row container">
             <div class="col-md-12">
-                <!-- <button class="button button-forum full-width">Charger les autres réponses</button> -->
                 <a ui-sref="forum()" class="large large-purple">Créer votre sujet ici <img src="/img/smiley-large.png" class="smiley" alt="Smiley" /></a>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
