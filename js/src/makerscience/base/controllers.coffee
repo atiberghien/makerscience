@@ -339,7 +339,7 @@ module.controller("NotificationCtrl", ($scope, $rootScope, $controller, $timeout
         if $rootScope.authVars.isAuthenticated && $scope.currentMakerScienceProfile != null && $scope.currentMakerScienceProfile != undefined
             Notification.getList({recipient_id : $scope.currentMakerScienceProfile.parent.user.id}).then((notificationResults)->
                 $scope.notifications = notificationResults
-                $scope.lastNotifications = $filter('limitTo')(notificationResults, 10)
+                $scope.lastNotifications = $filter('limitTo')(notificationResults, 8)
                 $scope.computeUnreadNotificationCounter()
                 if markAllAsRead == true
                     angular.forEach($scope.notifications, $scope.markAsRead)
