@@ -91,7 +91,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
     $scope.hideControls = false
 
     $scope.initProjectSheetCreateCtrl('experience-makerscience')
-    
+
     $scope.saveMakerscienceResource = (formIsValid) ->
         if !formIsValid
             console.log(" Form invalid !")
@@ -252,7 +252,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
                 $scope.saveMakerScienceResourceVote = (voteType, score) ->
                     # profileID, objectTypeName, objectID, voteType, score, objectProfileLinkType
-                    $scope.saveVote($scope.currentMakerScienceProfile.parent.id, 'makerscienceproject', $scope.projectsheet.id, voteType, score, 4)
+                    $scope.saveVote($scope.currentMakerScienceProfile.parent.id, 'makerscienceproject', $scope.projectsheet.id, voteType, score, 14)
 
                 $scope.loadVotes($scope.currentMakerScienceProfile.parent.id, 'makerscienceresource', $scope.resourcesheet.id)
             else
