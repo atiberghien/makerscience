@@ -108,22 +108,24 @@
 
                     <fieldset class="new-resource">
                         <h4>Résumez votre expérience en quelques lignes</h4>
-                        <text-angular name="resource-about"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                      ng-model="projectsheet.project.description"
-                                      e-rows="4">
-                        </text-angular>
+                        <textarea ui-tinymce="tinyMceFullOptions"
+                                    ng-trim="false"
+                                    name="resource-about"
+                                    ng-model="projectsheet.project.description"
+                                    rows="4">
+                        </textarea>
                     </fieldset>
 
                     <fieldset class="new-resource" ng-repeat="item in QAItems">
                         <h4>{{item.questionLabel}}</h4>
-                        <text-angular ng-model="item.answer"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                      name="question_{{$index}}"
-                                      e-rows="4">
-                        </text-angular>
+                        <textarea ui-tinymce="tinyMceFullOptions"
+                                    ng-trim="false"
+                                    ng-model="item.answer"
+                                    name="question_{{$index}}"
+                                    rows="4">
+                        </textarea>
                     </fieldset>
-                    
+
                     <fieldset class="linked-idea">
                         <h4>Projets associés</h4>
                         <p>Voulez-vous associer cette expérience à des pages de projets ?</p>

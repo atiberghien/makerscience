@@ -118,20 +118,22 @@
 
                     <fieldset class="new-project">
                         <h4>Résumez votre projet en quelques lignes</h4>
-                        <text-angular name="project-about"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                      ng-model="projectsheet.project.description"
-                                      e-rows="4">
-                        </text-angular>
+                        <textarea ui-tinymce="tinyMceFullOptions"
+                                    ng-trim="false"
+                                    name="project-about"
+                                    ng-model="projectsheet.project.description"
+                                    rows="4">
+                        </textarea>
                     </fieldset>
 
                     <fieldset class="new-project" ng-repeat="item in QAItems">
                         <h4>{{item.questionLabel}}</h4>
-                        <text-angular ng-model="item.answer"
-                                      ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                      name="question_{{$index}}"
-                                      e-rows="4">
-                        </text-angular>
+                        <textarea ui-tinymce="tinyMceFullOptions"
+                                    ng-trim="false"
+                                    name="question_{{$index}}"
+                                    ng-model="item.answer"
+                                    e-rows="4">
+                        </textarea>
                     </fieldset>
 
 
@@ -140,13 +142,14 @@
                         <p>Créez une discussion précisant vos besoins (idées, matériel, financement, testeurs, relais…). Elle sera affichée sur votre projet et sur le forum de discussions.</p>
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="text" ng-model="newNeed.title" placeholder="Intitulé du besoin"/>
-                                <text-angular name="project-need"
-                                              ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                              e-placeholder="J’ai besoin de ... pour le projet ... "
-                                              ng-model="newNeed.text"
-                                              e-rows="3">
-                                </text-angular>
+                                <input type="text" ng-model="newNeed.title" placeholder="J’ai besoin de ... pour le projet ..."/>
+                                <textarea ui-tinymce="tinyMceFullOptions"
+                                            ng-trim="false"
+                                            ng-model="newNeed.text"
+                                            name="project-need"
+                                            placeholder="Descrivez votre besoin le plus précisement possible."
+                                            rows="3">
+                                </textarea>
                                 <br />
                                 <div class="need-keywords">
                                     <div ng-controller="TagAutoCompleteCtrl">

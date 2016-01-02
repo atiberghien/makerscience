@@ -269,7 +269,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     $rootScope.location = $location
 
     $rootScope.tinyMceOptions = {
-        plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking"],
+        plugins: ["placeholder advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking"],
         toolbar1: "italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist |outdent indent blockquote | link unlink anchor",
         menubar: false,
         statusbar: false,
@@ -279,8 +279,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     }
 
     $rootScope.tinyMceFullOptions = {
-        plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking image"],
-        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignjustify | bullist numlist |outdent indent | link unlink anchor |  image | code",
+        plugins: ["placeholder advlist autolink autosave link image lists anchor wordcount code fullscreen insertdatetime nonbreaking"],
+        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignjustify | bullist numlist |outdent indent | link unlink anchor |  image | removeformat code",
         menubar: false,
         statusbar: false,
         toolbar_items_size: 'small',
@@ -309,9 +309,9 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
 )
 
-angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->
+angular.module('xeditable').directive('editableTinyAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->
     return editableDirectiveFactory(
-            directiveName : 'editableTextAngular'
-            inputTpl : '<div text-angular></div>'
+            directiveName : 'editableTinyAngular'
+            inputTpl : '<textarea ui-tinymce="tinyMceFullOptions" ng-trim="false"></textarea>'
     )]
 )
