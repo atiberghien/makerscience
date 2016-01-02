@@ -7,10 +7,10 @@
             </button>
         </div>
         <ul class="tags skills">
-            <li ng-repeat="tag in preparedThemeTags | limitTo : 6">
+            <li ng-repeat="tag in preparedThemeTags | limitTo : 4">
                 <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
             </li>
-            <li ng-if="preparedThemeTags.length > 6">
+            <li ng-if="preparedThemeTags.length > 4">
                 <a tooltip="Tous les thèmes" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
             </li>
         </ul>
@@ -26,10 +26,10 @@
             </button>
         </div>
         <ul class="tags tags-project">
-            <li ng-repeat="tag in preparedTargetTags | limitTo : 6">
+            <li ng-repeat="tag in preparedTargetTags | limitTo : 4">
                 <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
             </li>
-            <li ng-if="preparedTargetTags.length > 6">
+            <li ng-if="preparedTargetTags.length > 4">
                 <a tooltip="Toutes les cibles" ng-click="openTagPopup(preparedThemeTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
             </li>
         </ul>
@@ -45,10 +45,10 @@
             </button>
         </div>
         <ul class="tags tags-project">
-            <li ng-repeat="tag in preparedFormatsTags | limitTo : 6">
+            <li ng-repeat="tag in preparedFormatsTags | limitTo : 4">
                 <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
             </li>
-            <li ng-if="preparedFormatsTags.length > 6">
+            <li ng-if="preparedFormatsTags.length > 4">
                 <a tooltip="Tous les formats" ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
             </li>
         </ul>
