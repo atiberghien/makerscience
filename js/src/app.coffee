@@ -11,10 +11,10 @@ angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makersc
 
 angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
-                                'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularFileUpload',
+                                'restangular', 'ui.bootstrap', 'ui.router', 'ui.unique', 'xeditable', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
-                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies', '720kb.socialshare',
-                                'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'angulartics', 'angulartics.google.analytics', 'infinite-scroll'])
+                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'satellizer', 'ngCookies', '720kb.socialshare',
+                                'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'infinite-scroll'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
