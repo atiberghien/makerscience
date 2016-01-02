@@ -289,6 +289,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             )
             modalInstance.result.then((avatar) ->
                 $scope.profile.parent.avatar = avatar
+                $scope.currentMakerScienceProfile.parent.avatar = avatar
             )
 
         $scope.openBioPopup = (editable) ->
