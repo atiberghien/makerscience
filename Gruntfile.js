@@ -117,6 +117,7 @@ module.exports = function(grunt) {
                 files: [
                   {expand: true, src: ['makerscience.fr'], dest: 'dist/'},
                   {expand: true, src: ['*.html'], dest: 'dist/'},
+                  {expand: true, src: ['favicon.png'], dest: 'dist/'},
                   {expand: true, src: ['bower_components/**'], dest: 'dist/'},
                   {expand: true, src: ['css/*.css'], dest: 'dist/'},
                   {expand: true, src: ['img/**'], dest: 'dist/'},
