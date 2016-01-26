@@ -55,7 +55,8 @@
     "underscore": "~1.8.3",
     "ngInfiniteScroll": "1.0.0",
     "tinymce-placeholder": "https://github.com/mohan999/tinymce-placeholder.git",
-    "angular-sanitize": "~1.4.8"
+    "angular-sanitize": "~1.4.8",
+    "angular-confirm-modal": "1.1.2"
   },
   "resolutions": {
     "angular": "~1.2.29"

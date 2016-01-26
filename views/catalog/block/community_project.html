@@ -67,7 +67,11 @@
 
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coreTeam=(community|filter:{level:0, isValidated:true}|orderBy:'created_on')">
                 <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
-                <button ng-show="editable && coreTeam.length > 1" class="remove" ng-click="removeMember(member)">
+                <button ng-show="editable && coreTeam.length > 1"
+                        class="remove"
+                        ng-click="removeMember(member)"
+                        confirm="Êtes-vous sûr de vouloir faire cela ? Vous ne pourrez plus gérer cette page. "
+                        confirm-settings="{size: 'sm'}">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>

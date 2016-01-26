@@ -80,7 +80,10 @@
                         <div class="col-md-6">
                             <fieldset class="delete-account">
                                 <h3><i class="fa fa-exclamation-circle"></i> La suppression du compte est irréversible</h3>
-                                <button class="button delete-account" ng-click="deleteProfile()">Supprimer mon compte</button>
+                                <button class="button delete-account"
+                                        ng-click="deleteProfile()"
+                                        confirm="{{profile.full_name}}, êtes vous sûr de vouloir supprimer votre compte ?"
+                                        confirm-settings="{size: 'sm'}">Supprimer mon compte</button>
                             </fieldset>
                             <fieldset class="change-password">
                                 <h3>Changement de mot de passe</h3>

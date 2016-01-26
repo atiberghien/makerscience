@@ -14,7 +14,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                                 'restangular', 'ui.bootstrap', 'ui.router', 'ui.unique', 'xeditable', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
                                 'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'satellizer', 'ngCookies', '720kb.socialshare',
-                                'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'infinite-scroll'])
+                                'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'infinite-scroll', 'angular-confirm'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -252,7 +252,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         # )
 
 ])
-.run(($rootScope, $location, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $sce) ->
+.run(($rootScope, $location, editableOptions, editableThemes, $confirmModalDefaults, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $sce) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
@@ -306,6 +306,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         return $sce.trustAsHtml(string)
 
     $rootScope.recaptchaKey = config.google.recaptchaKey
+
+    $confirmModalDefaults.templateUrl = 'views/base/confirmModal.html';
 
 )
 
