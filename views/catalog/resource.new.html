@@ -42,7 +42,7 @@
                                 <h4>Résumez l'expérience en une courte phrase</h4>
                                 <input type="text"
                                             name="resourceBaseline"
-                                            placeholder=">"
+                                            placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)"
                                             ng-model="projectsheet.project.baseline"
                                             maxlength="100"
                                             required/>
@@ -53,7 +53,7 @@
                                <div ng-controller="TagAutoCompleteCtrl">
                                    <h4>Ajoutez des tags précisant aux mieux les thématiques abordées par votre projet (biologie, sport, art, histoire...)</h4>
                                    <tags-input ng-model="themesTags"
-                                               placeholder="> Mot-clé">
+                                               placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)">
                                      <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
                                    </tags-input>
                                </div>
@@ -63,7 +63,7 @@
                                <div ng-controller="TagAutoCompleteCtrl">
                                    <h4>Ajoutez des tags précisant aux mieux les publics visés (jeunes, seniors, enfants, 3-6 ans...)</h4>
                                    <tags-input ng-model="targetsTags"
-                                               placeholder="> Mot-clé">
+                                               placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)">
                                      <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
                                    </tags-input>
                                </div>

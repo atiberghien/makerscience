@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
     <fieldset class="needs needs-select">
-        <input type="text" ng-model="newNeed.title" placeholder="J’ai besoin de … pour le projet … "/>
+        <input type="text" ng-model="newNeed.title" placeholder="J’ai besoin de ... pour le projet ... "/>
         <textarea ui-tinymce="tinyMceFullOptions"
                     ng-trim="false"
                     name="project-need"
@@ -15,7 +15,7 @@
             <div ng-controller="TagAutoCompleteCtrl">
                 <p>Précisez votre besoin grâce à des mots-clés :</p>
                 <tags-input ng-model="questionTags"
-                            placeholder="> Mot-clé">
+                            placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)">
                   <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
                 </tags-input>
             </div>

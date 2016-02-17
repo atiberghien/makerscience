@@ -4,7 +4,7 @@
 <div class="modal-body modal-gallery">
     <div ng-show="editableTag==true" ng-controller="TagAutoCompleteCtrl">
         <tags-input ng-model="preparedTags"
-                    placeholder="> Mot-clé"
+                    placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)"
                     on-tag-added="$parent.addTag(tagType, $tag)"
                     on-tag-removed="$parent.removeTag($tag)">
                     <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
