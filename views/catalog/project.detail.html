@@ -137,6 +137,7 @@
                             <h3>A propos du projet</h3>
 
                             <p editable-tiny-angular="projectsheet.parent.description"
+                                blur="ignore"
                                  e-form="DescBtnForm"
                                  e-rows="4"
                                  onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
@@ -150,6 +151,7 @@
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
                             <p editable-tiny-angular="item.answer"
+                                blur="ignore"
                                  e-form="AnswerBtnForm"
                                  e-rows="4"
                                  onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
