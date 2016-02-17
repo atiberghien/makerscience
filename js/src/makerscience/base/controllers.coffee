@@ -349,9 +349,9 @@ module.controller("NotificationCtrl", ($scope, $rootScope, $controller, $timeout
         $scope.displayedUnreadNotifications = $filter('filter')($scope.lastNotifications, {unread:true})
         $scope.unreadNotificationCounter = $filter('filter')($scope.notifications, {unread:true}).length
 
-    $scope.markDisplayedAsRead = () ->
+    $scope.markAllAsRead = () ->
         $timeout(()->
-            angular.forEach($scope.displayedUnreadNotifications, $scope.markAsRead)
+            angular.forEach($filter('filter')($scope.notifications, {unread:true}), $scope.markAsRead)
             $scope.computeUnreadNotificationCounter()
         , 2000)
 
