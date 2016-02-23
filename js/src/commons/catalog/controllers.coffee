@@ -106,7 +106,10 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, $modalInstance, upload
     $scope.uploader = uploader
 
     $scope.ok = ->
-        $modalInstance.close({coverCandidateQueueIndex : $scope.coverCandidateQueueIndex})
+        $modalInstance.close({
+            coverCandidateQueueIndex : $scope.coverCandidateQueueIndex,
+            videos : $scope.videos
+        })
 
     $scope.cancel = ->
         $scope.uploader.clearQueue()
