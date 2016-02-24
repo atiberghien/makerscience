@@ -22,9 +22,6 @@ module.exports = function(grunt) {
                         "bower_components/geocoder-service/geocoder-service.min.js",
                     ],
                     overrides: {
-                        "angularjs-gravatardirective": {
-                            "main": "dist/angularjs-gravatardirective.js"
-                        },
                         "angular-oauth" : {
                             'main' : ["src/js/googleOauth.js", "src/js/angularOauth.js"]
                         },
@@ -51,10 +48,13 @@ module.exports = function(grunt) {
                             'main' : ['angular-socialshare.min.js']
                         },
                         "angular-ui-tinymce" : {
-                            'main' : ["src/tinymce.js"],
-                            "dependencies": {
-                                'tinymce-dist' : 'tinymce.min.js'
-                            }
+                            'main' : ["tinymce.js"],
+                        },
+                        "tinymce-placeholder" : {
+                            'main' : ["placeholder/plugin.js"],
+                        },
+                        "cookieconsent2" : {
+                            'main' : ["build/cookieconsent.min.js"],
                         }
                       }
                 }
@@ -120,6 +120,7 @@ module.exports = function(grunt) {
                 files: [
                   {expand: true, src: ['makerscience.fr'], dest: 'dist/'},
                   {expand: true, src: ['*.html'], dest: 'dist/'},
+                  {expand: true, src: ['favicon.png'], dest: 'dist/'},
                   {expand: true, src: ['bower_components/**'], dest: 'dist/'},
                   {expand: true, src: ['css/*.css'], dest: 'dist/'},
                   {expand: true, src: ['img/**'], dest: 'dist/'},

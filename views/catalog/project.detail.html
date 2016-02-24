@@ -136,12 +136,12 @@
                             </div>
                             <h3>A propos du projet</h3>
 
-                            <p editable-text-angular="projectsheet.parent.description"
+                            <p editable-tiny-angular="projectsheet.parent.description"
+                                blur="ignore"
                                  e-form="DescBtnForm"
                                  e-rows="4"
-                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
-                                 ng-bind-html="projectsheet.parent.description">
+                                 ng-bind-html="trustAsHtml(projectsheet.parent.description)">
                             </p>
 
                         </section>
@@ -150,12 +150,12 @@
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <p editable-text-angular="item.answer"
+                            <p editable-tiny-angular="item.answer"
+                                blur="ignore"
                                  e-form="AnswerBtnForm"
                                  e-rows="4"
-                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
                                  onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
-                                 ng-bind-html="item.answer">
+                                 ng-bind-html="trustAsHtml(item.answer)">
                             </p>
                         </section>
                     </tab>

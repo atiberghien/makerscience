@@ -173,7 +173,10 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
                 )
 
-                ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
+                ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos}).then((result) ->
+                    console.log("Videos patched");
+                )
+
                 # if no photos to upload, directly go to new project sheet
                 if $scope.uploader.queue.length == 0
                     $timeout(() ->

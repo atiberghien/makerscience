@@ -68,7 +68,6 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
         )
 
     $scope.saveProject = ()->
-        console.log("saving project ..")
         if $scope.projectsheet.project.begin_date is undefined
             $scope.projectsheet.project.begin_date = new Date()
 
@@ -107,7 +106,10 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, $modalInstance, upload
     $scope.uploader = uploader
 
     $scope.ok = ->
-        $modalInstance.close({coverCandidateQueueIndex : $scope.coverCandidateQueueIndex})
+        $modalInstance.close({
+            coverCandidateQueueIndex : $scope.coverCandidateQueueIndex,
+            videos : $scope.videos
+        })
 
     $scope.cancel = ->
         $scope.uploader.clearQueue()

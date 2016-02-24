@@ -121,9 +121,11 @@
                                     <span class="fa fa-linkedin"></span>
                                 </a>
 
-                                <label><a ng-show="profile.website" href="{{profile.website}}" target="_blank" >
+                                <label>
+                                    <a ng-show="profile.website" href="{{profile.website}}" target="_blank" >
                                     <span ng-show="profile.website" class="fa fa-globe"></span>
-                                    <span>{{profile.website | limitTo:50}}<span ng-if="profile.website.length > 50">...</span></span></a></label>
+                                    <span>{{profile.website | limitTo:50}}<span ng-if="profile.website.length > 50">...</span></span>
+                                </a></label>
                             </div>
                         </div><!-- .relative -->
                     </div><!-- .side-header -->

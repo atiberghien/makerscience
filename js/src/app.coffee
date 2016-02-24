@@ -11,10 +11,10 @@ angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makersc
 
 angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
-                                'restangular', 'ui.bootstrap', 'ui.router', 'xeditable', 'textAngular', 'angularFileUpload',
+                                'restangular', 'ui.bootstrap', 'ui.router', 'ui.unique', 'xeditable', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
-                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'ui.unique', 'satellizer', 'ngCookies', '720kb.socialshare',
-                                'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'angulartics', 'angulartics.google.analytics', 'infinite-scroll'])
+                                'geocoder-service', 'ncy-angular-breadcrumb', 'truncate', 'satellizer', 'ngCookies', '720kb.socialshare',
+                                'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'infinite-scroll', 'angular-confirm'])
 
 # CORS
 .config(['$httpProvider', ($httpProvider) ->
@@ -252,7 +252,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         # )
 
 ])
-.run(($rootScope, $location, editableOptions, editableThemes, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $sce) ->
+.run(($rootScope, $location, editableOptions, editableThemes, $confirmModalDefaults, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $sce) ->
     editableOptions.theme = 'bs3'
     editableThemes['bs3'].submitTpl = '<button type="submit" class="btn btn-primary">Enregistrer</button>'
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
@@ -269,7 +269,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     $rootScope.location = $location
 
     $rootScope.tinyMceOptions = {
-        plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking"],
+        plugins: ["placeholder advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking"],
         toolbar1: "italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist |outdent indent blockquote | link unlink anchor",
         menubar: false,
         statusbar: false,
@@ -279,8 +279,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     }
 
     $rootScope.tinyMceFullOptions = {
-        plugins: ["advlist autolink autosave link image lists anchor wordcount  code fullscreen insertdatetime media nonbreaking image"],
-        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignjustify | bullist numlist |outdent indent | link unlink anchor |  image | code",
+        plugins: ["placeholder advlist autolink autosave link image lists anchor wordcount code fullscreen insertdatetime nonbreaking"],
+        toolbar1: "styleselect | italic underline strikethrough | alignleft aligncenter alignjustify | bullist numlist |outdent indent | link unlink anchor |  image | removeformat code",
         menubar: false,
         statusbar: false,
         toolbar_items_size: 'small',
@@ -307,11 +307,13 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
     $rootScope.recaptchaKey = config.google.recaptchaKey
 
+    $confirmModalDefaults.templateUrl = 'views/base/confirmModal.html';
+
 )
 
-angular.module('xeditable').directive('editableTextAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->
+angular.module('xeditable').directive('editableTinyAngular', ['editableDirectiveFactory', (editableDirectiveFactory) ->
     return editableDirectiveFactory(
-            directiveName : 'editableTextAngular'
-            inputTpl : '<div text-angular></div>'
+            directiveName : 'editableTinyAngular'
+            inputTpl : '<textarea ui-tinymce="tinyMceFullOptions" ng-trim="false"></textarea>'
     )]
 )

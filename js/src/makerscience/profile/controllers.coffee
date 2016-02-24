@@ -113,7 +113,9 @@ module.controller('SocialsEditInstanceCtrl', ($scope, $modalInstance, MakerScien
 
     $scope.ok = () ->
         angular.forEach($scope.socials, (value, key) ->
-            if value != null || value != ""
+            if value
+                if value.startsWith("http://") == false or value.startsWith("https://") != false
+                    value = "http://" + value
                 $scope.profile[key] = value
         )
         MakerScienceProfile.one($scope.profile.slug).patch($scope.socials).then(->
@@ -289,6 +291,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             )
             modalInstance.result.then((avatar) ->
                 $scope.profile.parent.avatar = avatar
+                $scope.currentMakerScienceProfile.parent.avatar = avatar
             )
 
         $scope.openBioPopup = (editable) ->
