@@ -5,16 +5,16 @@ if !debugMode
         templateBaseUrl: '/views/',
         useHtml5Mode: true,
 
-        bucket_uri: 'http://data.makerscience.fr/bucket/upload/',
-        loginBaseUrl: 'http://data.makerscience.fr/api/v0',
-        oauthBaseUrl: 'http://makerscience.fr',
-        media_uri: 'http://data.makerscience.fr',
-        rest_uri: "http://data.makerscience.fr/api/v0"
+        bucket_uri: 'http://data.nonetype.net/bucket/upload/',
+        loginBaseUrl: 'http://data.nonetype.net/api/v0',
+        oauthBaseUrl: 'http://127.0.0.1:8001',
+        media_uri: 'http://data.nonetype.net',
+        rest_uri: "http://data.nonetype.net/api/v0"
 
         facebook :
             clientId : '724284684343376'
         google :
-            clientId : '192384401460-ntng78ie8hs2to1t1e0i9foi63rss5gr.apps.googleusercontent.com'
+            clientId : '255067193649-5s7fan8nsch2cqft32fka9n36jcd37qg.apps.googleusercontent.com'
             recaptchaKey : "6LfrjQwTAAAAADL047Yx9IUOgsFAfHpjq8InqwMF"
 
 else
@@ -31,5 +31,5 @@ else
         facebook :
             clientId : '724284684343376'
         google :
-            clientId : '192384401460-ntng78ie8hs2to1t1e0i9foi63rss5gr.apps.googleusercontent.com'
+            clientId : '255067193649-5s7fan8nsch2cqft32fka9n36jcd37qg.apps.googleusercontent.com'
             recaptchaKey : "6LfrjQwTAAAAADL047Yx9IUOgsFAfHpjq8InqwMF"
