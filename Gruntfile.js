@@ -52,6 +52,9 @@ module.exports = function(grunt) {
                         },
                         "tinymce-placeholder" : {
                             'main' : ["placeholder/plugin.js"],
+                        },
+                        "cookieconsent2" : {
+                            'main' : ["build/cookieconsent.min.js"],
                         }
                       }
                 }
