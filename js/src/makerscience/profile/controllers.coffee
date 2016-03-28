@@ -130,7 +130,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                                             MakerScienceProfile, MakerScienceProfileLight,
                                             MakerScienceProjectLight, MakerScienceResourceLight,
                                             MakerSciencePost, MakerSciencePostLight,
-                                            MakerScienceProfileTaggedItem, TaggedItem,Tag, Post, ObjectProfileLink, Place) ->
+                                            MakerScienceProfileTaggedItem, TaggedItem,Tag, Post, ObjectProfileLink, PostalAddress) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
     angular.extend(this, $controller('TaggedItemCtrl', {$scope: $scope}))
@@ -342,9 +342,10 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             # in case of MakerScienceProfile, resourceId must be the profile slug
             putData = {}
             putData[fieldName] = data
+            console.log(resourceName, resourceId, fieldName, data)
             switch resourceName
                 when 'MakerScienceProfile' then MakerScienceProfile.one(resourceId).patch(putData)
-                when 'Place' then Place.one(resourceId).patch(putData)
+                when 'PostalAddress' then PostalAddress.one(resourceId).patch(putData)
 
     , (response) ->
         if response.status == 404
