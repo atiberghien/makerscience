@@ -1,11 +1,11 @@
-module = angular.module("commons.catalog.controllers", ['commons.catalog.services'])
+module = angular.module("commons.catalog.controllers", ['commons.catalog.services', 'commons.scout.services'])
 
 module.controller("ProjectListCtrl", ($scope, Project) ->
     $scope.projects = Project.getList().$object
 )
 
 module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectSheet
-                                        Project, ProjectSheetQuestionAnswer, Bucket, Place
+                                        Project, ProjectSheetQuestionAnswer, Bucket, PostalAddress,
                                         @$http, FileUploader, $modal) ->
 
     $scope.fetchCoverURL = (projectsheet) ->
@@ -21,7 +21,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
             when 'Project' then Project.one(resourceId).patch(putData)
             when 'ProjectSheetQuestionAnswer' then ProjectSheetQuestionAnswer.one(resourceId).patch(putData)
             when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
-            when 'Place' then Place.one(resourceId).patch(putData)
+            when 'PostalAddress' then PostalAddress.one(resourceId).patch(putData)
 
     $scope.openGallery = (projectsheet) ->
         modalInstance = $modal.open(

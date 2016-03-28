@@ -12,9 +12,6 @@ module.factory('ProjectNews', (Restangular) ->
 module.factory('ProjectSheet', (Restangular) ->
     return Restangular.service('project/sheet/projectsheet')
 )
-module.factory('Place', (Restangular) ->
-    return Restangular.service('scout/place')
-)
 
 module.factory('ProjectSheetTemplate', (Restangular) ->
     return Restangular.service('project/sheet/template')

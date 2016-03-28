@@ -3,13 +3,14 @@ angular.module('commons.accounts', ['commons.accounts.services', 'commons.accoun
 angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
 angular.module('commons.megafon', ['commons.megafon.controllers', 'commons.megafon.services'])
 angular.module('commons.starlet', ['commons.starlet.controllers', 'commons.starlet.services'])
+angular.module('commons.scout', ['commons.scout.services'])
 angular.module('makerscience.catalog', ['makerscience.catalog.controllers.project', 'makerscience.catalog.controllers.resource', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services'])
 
-angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
+angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.scout', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'ui.unique', 'xeditable', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
@@ -17,11 +18,10 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                                 'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'infinite-scroll', 'angular-confirm'])
 
 # CORS
-.config(['$httpProvider', ($httpProvider) ->
-        $httpProvider.defaults.useXDomain = true
-        delete $httpProvider.defaults.headers.common['X-Requested-With']
-])
-
+.config(($httpProvider) ->
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common["X-Requested-With"];
+)
 # Tastypie
 .config((RestangularProvider) ->
         RestangularProvider.setBaseUrl(config.rest_uri)

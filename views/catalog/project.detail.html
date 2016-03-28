@@ -83,7 +83,7 @@
                                 </div>
                                 <p editable-text="projectsheet.parent.location.address.address_locality"
                                     e-form="LocationBtnForm"
-                                    onbeforesave="updateProjectSheet('Place', projectsheet.parent.location.id , 'address', {'address_locality' : $data})">
+                                    onbeforesave="updateProjectSheet('PostalAddress', projectsheet.parent.location.address.id , 'address_locality', $data)">
                                     <span class="glyphicon glyphicon-map-marker"></span>
                                     <span ng-if="projectsheet.parent.location.address.address_locality">{{projectsheet.parent.location.address.address_locality}}</span>
                                     <span ng-if="!projectsheet.parent.location.address.address_locality">Localisation non renseignée</span>

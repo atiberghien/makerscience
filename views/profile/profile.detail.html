@@ -41,7 +41,7 @@
                         <p editable-text="profile.location.address.address_locality"
                             e-form="LocationBtnForm"
                             e-maxlength="60"
-                            onbeforesave="updateMakerScienceProfile('Place', profile.location.id , 'address', {'address_locality' : $data})"
+                            onbeforesave="updateMakerScienceProfile('PostalAddress', profile.location.address.id , 'address_locality', $data)"
                             e-placeholder="Votre ville ..."
                             class="location">
                             <span class="glyphicon glyphicon-map-marker"></span>
