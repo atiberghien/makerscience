@@ -339,9 +339,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 return if $scope.projectsheet.parent.progress.label && selected.length then selected[0].text else 'non renseigné'
         )
 
-        $scope.removeTagFromProjectSheet = (tag) ->
-            MakerScienceProjectTaggedItem.one(tag.taggedItemId).remove()
-
         ## ONLY DEFINE AND/OR CALL THESE METHODS IF AND ONLY IF $scope.currentMakerScienceProfile IS AVAILABLE
         $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
             if newValue != null && newValue != undefined
@@ -353,7 +350,11 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                             detail : '',
                             isValidated:true
                         , 'taggeditem/'+taggedItemResult.id)
+                        tag.taggedItemId = taggedItemResult.id
                     )
+
+                $scope.removeTagFromProjectSheet = (tag) ->
+                  MakerScienceProjectTaggedItem.one(tag.taggedItemId).remove()
 
                 $scope.saveMakerScienceProjectVote = (voteType, score) ->
                     # profileID, objectTypeName, objectID, voteType, score, objectProfileLinkType

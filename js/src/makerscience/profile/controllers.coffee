@@ -274,7 +274,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                     MakerScienceProfileLight.one().get({id: similar.id}).then((makersciencePostResults)->
                         $scope.similars.push(makersciencePostResults.objects[0])
                     )
-
             )
         )
 
@@ -333,6 +332,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                         detail : '',
                         isValidated:true
                     , 'tag/'+taggedItemResult.tag.id)
+                tag.taggedItemId = taggedItemResult.id
             )
 
         $scope.removeTagFromProfile = (tag) ->

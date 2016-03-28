@@ -234,12 +234,11 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
                     return resource.resource_uri
                 )
             )
-        $scope.removeTagFromResourceSheet = (tag) ->
-            MakerScienceResourceTaggedItem.one(tag.taggedItemId).remove()
 
         ## ONLY DEFINE AND/OR CALL THESE METHODS IF AND ONLY IF $scope.currentMakerScienceProfile IS AVAILABLE
         $scope.$watch('currentMakerScienceProfile', (newValue, oldValue) ->
             if newValue != null && newValue != undefined
+
                 $scope.addTagToResourceSheet = (tag_type, tag) ->
                     MakerScienceResourceTaggedItem.one().customPOST({tag : tag.text}, "makerscienceresource/"+$scope.projectsheet.id+"/"+tag_type, {}).then((taggedItemResult) ->
                         ObjectProfileLink.one().customPOST(
@@ -248,7 +247,11 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
                             detail : '',
                             isValidated:true
                         , 'taggeditem/'+taggedItemResult.id)
+                        tag.taggedItemId = taggedItemResult.id
                     )
+
+                $scope.removeTagFromResourceSheet = (tag) ->
+                  MakerScienceResourceTaggedItem.one(tag.taggedItemId).remove()
 
                 $scope.saveMakerScienceResourceVote = (voteType, score) ->
                     # profileID, objectTypeName, objectID, voteType, score, objectProfileLinkType
