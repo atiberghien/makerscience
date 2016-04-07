@@ -18,7 +18,10 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
         putData = {}
         putData[fieldName] = data
         switch resourceName
-            when 'Project' then Project.one(resourceId).patch(putData)
+            when 'Project' then Project.one(resourceId).patch(putData).then((projectResult) ->
+                $scope.projectsheet.parent.website = projectResult.website
+                return false
+            )
             when 'ProjectSheetQuestionAnswer' then ProjectSheetQuestionAnswer.one(resourceId).patch(putData)
             when 'ProjectSheet' then ProjectSheet.one(resourceId).patch(putData)
             when 'PostalAddress' then PostalAddress.one(resourceId).patch(putData)
