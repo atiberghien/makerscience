@@ -90,7 +90,7 @@
                     <div class="col-md-8">
                         <ul>
                             <li><a ui-sref="project.list">Parcourez les projets</a></li>
-                            <li><a ui-sref="project.new">Ajoutez votre projet</a></li>
+                            <li><a ui-sref="project.new">Ajoutez votre projet <i class="fa fa-lock" ng-show="!authVars.isAuthenticated"></i></a></li>
                             <li><a ui-sref="map">Localisez des porteurs</a></li>
                         </ul>
                     </div>
@@ -105,7 +105,7 @@
                     <div class="col-md-8">
                         <ul>
                             <li><a ui-sref="resource.list">Explorez les expériences partagées</a></li>
-                            <li><a ui-sref="resource.new">Partagez votre expérience</a></li>
+                            <li><a ui-sref="resource.new">Partagez votre expérience <i class="fa fa-lock" ng-show="!authVars.isAuthenticated"></i></a></li>
                             <li><a ui-sref="forum">Posez vos questions</a></li>
                         </ul>
                     </div>

@@ -76,7 +76,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 ncyBreadcrumb:
                     label: 'Accueil'
         )
-        $stateProvider.state('404',
+        .state('404',
                 url: '/',
                 templateUrl: 'views/404.html',
         )
@@ -100,6 +100,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 ncyBreadcrumb:
                     label: 'Nouveau projet'
                     parent : 'project.list'
+                loginRequired : true
+
         )
         .state('project.detail',
                 url: ':slug',
@@ -129,6 +131,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                 ncyBreadcrumb:
                     label: 'Nouvelle expérience'
                     parent : 'resource.list'
+                loginRequired : true
         )
         .state('resource.detail',
                 url: ':slug',
@@ -253,6 +256,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
     editableThemes['bs3'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()">Annuler</button>'
 
     amMoment.changeLocale('fr')
+
     $rootScope.CurrentMakerScienceProfileService = CurrentMakerScienceProfileService
     $rootScope.loginService = loginService
     $rootScope.config = config
@@ -295,6 +299,16 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
 
     $rootScope.$on('$stateChangeSuccess', () ->
         document.body.scrollTop = document.documentElement.scrollTop = 0;
+    )
+
+    $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams, options) ->
+        $rootScope.afterLoginState = null
+        $rootScope.beforeLoginState = null
+        if(toState.loginRequired && !$rootScope.authVars.isAuthenticated)
+            $rootScope.afterLoginState = toState
+            $rootScope.beforeLoginState = fromState
+            $rootScope.authVars.loginrequired = true
+            event.preventDefault();
     )
 
     $rootScope.trustAsHtml = (string) ->
