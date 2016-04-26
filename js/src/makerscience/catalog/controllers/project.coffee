@@ -205,19 +205,31 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInstance, projectsheet, MakerScienceProjectLight, MakerSciencePostLight) ->
 
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
+    $scope.newNeed = {
+        title : '',
+        text : '',
+        type : 'need'
+    }
 
 
     $scope.ok = () ->
-        MakerScienceProjectLight.one(projectsheet.id).get().then((projectResult) ->
-            $scope.newNeed.linked_projects = [projectResult.resource_uri]
-            $scope.newNeed.type='need'
-            $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then((postResult)->
-                MakerSciencePostLight.one(postResult.id).get().then((post)->
-                    projectsheet.linked_makersciencepost.push(post)
+        $scope.errors = []
+        if $scope.newNeed.title == ""
+            $scope.errors.push("title")
+        if String($scope.newNeed.text).replace(/<[^>]+>/gm, '') == ""
+            $scope.errors.push("text")
+
+        if $scope.errors.length == 0
+            MakerScienceProjectLight.one(projectsheet.id).get().then((projectResult) ->
+                $scope.newNeed.linked_projects = [projectResult.resource_uri]
+                $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then((postResult)->
+                    MakerSciencePostLight.one(postResult.id).get().then((post)->
+                        post.author = $scope.currentMakerScienceProfile.parent
+                        projectsheet.linked_makersciencepost.push(post)
+                    )
                 )
             )
-        )
-        $modalInstance.close()
+            $modalInstance.close()
 
     $scope.cancel = () ->
         $modalInstance.dismiss('cancel')
