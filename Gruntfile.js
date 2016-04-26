@@ -55,6 +55,9 @@ module.exports = function(grunt) {
                         },
                         "cookieconsent2" : {
                             'main' : ["build/cookieconsent.min.js"],
+                        },
+                        "font-awesome" : {
+                            "main" : ["css/font-awesome.min.css"],
                         }
                       }
                 }
