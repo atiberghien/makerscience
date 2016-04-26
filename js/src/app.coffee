@@ -245,11 +245,6 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                     label: "Mentions Légales"
                     parent : 'home'
         )
-        # .state('twitter',
-        #         url: '/auth/twitter',
-        #         # templateUrl: 'closePopup.html'
-        #         controller : 'TwitterAuthCtrl'
-        # )
 
 ])
 .run(($rootScope, $location, editableOptions, editableThemes, $confirmModalDefaults, amMoment, $state, $stateParams, loginService, CurrentMakerScienceProfileService, $sce) ->
