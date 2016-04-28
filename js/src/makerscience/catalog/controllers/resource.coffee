@@ -154,6 +154,11 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 ProjectSheet.one(resourcesheetResult.id).patch({videos:$scope.projectsheet.videos})
                 # if no photos to upload, directly go to new project sheet
                 if $scope.uploader.queue.length == 0
+                    $scope.fake_progress = 0
+                    ##UGLY : to be sur that all remote ops are finished ... :/
+                    for x in [1..5]
+                        $scope.fake_progress += 100/5
+                    
                     $timeout(() ->
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
                     ,5000)

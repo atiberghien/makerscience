@@ -220,7 +220,8 @@
                         <button type="submit" class="button" ng-click="submitted=true;hideControls=true">Enregistrer</button>
                     </p>
                     <div class="progress" ng-show="hideControls">
-                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
+                        <div ng-show="uploader.queue.length > 0" class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
+                        <div ng-show="uploader.queue.length == 0" class="progress-bar" role="progressbar" ng-style="{ 'width': fake_progress + '%' }" style="width: 0%;"></div>
                     </div>
                 </form>
 
