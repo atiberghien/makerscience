@@ -14,7 +14,7 @@ module.factory('MakerScienceProfileTaggedItem', (Restangular) ->
 
 # Specific services
 class CurrentMakerScienceProfileService
-    constructor : ($rootScope, $modal, MakerScienceProfile) ->
+    constructor : ($rootScope, $modal, $state, MakerScienceProfile) ->
 
         $rootScope.$watch('authVars.user', (newValue, oldValue) ->
             if newValue != oldValue
@@ -34,6 +34,16 @@ class CurrentMakerScienceProfileService
                 templateUrl: '/views/base/signinModal.html',
                 controller: 'SigninPopupCtrl',
             )
+            modalInstance.result.then(() ->
+                $rootScope.authVars.loginrequired = false
+            , () ->
+                $rootScope.authVars.loginrequired = false
+                if $rootScope.beforeLoginState != null && $rootScope.beforeLoginState.name
+                    $state.transitionTo($rootScope.beforeLoginState.name)
+                else
+                    $state.transitionTo('home')
+            )
+
 
         $rootScope.$watch('authVars.loginrequired', (newValue, oldValue) ->
             console.log('loginRequired', newValue, oldValue)
@@ -42,8 +52,8 @@ class CurrentMakerScienceProfileService
 
         )
 
-module.factory('CurrentMakerScienceProfileService', ($rootScope, $modal, MakerScienceProfile) ->
-    return new CurrentMakerScienceProfileService($rootScope, $modal, MakerScienceProfile)
+module.factory('CurrentMakerScienceProfileService', ($rootScope, $modal, $state, MakerScienceProfile) ->
+    return new CurrentMakerScienceProfileService($rootScope, $modal, $state, MakerScienceProfile)
 )
 
 

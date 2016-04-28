@@ -103,13 +103,17 @@ module.controller("MakerSciencePostCreateCtrl", ($scope, $controller, $filter, M
 
 module.controller("MakerScienceForumCtrl", ($scope,  $state, $controller, $filter,
                                                 MakerSciencePostLight, MakerScienceProfile,
-                                                DataSharing, ObjectProfileLink, TaggedItem) ->
+                                                DataSharing, ObjectProfileLink, TaggedItem, CurrentMakerScienceProfileService) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
-    $scope.showCreateButton = false
-    $scope.newPost = {}
+    # $scope.showCreateButton = false
+    $scope.newPost = {
+        title : '',
+        text : '',
+        type : 'message'
+    }
     $scope.params["limit"] = $scope.limit =  6
 
     $scope.bestContributors = []
@@ -152,13 +156,22 @@ module.controller("MakerScienceForumCtrl", ($scope,  $state, $controller, $filte
     $scope.fetchRecentPosts()
 
     $scope.inlineSaveMakersciencePost = (newPost) ->
-        $scope.saveMakersciencePost(newPost, null, $scope.currentMakerScienceProfile.parent).then((newMakerSciencePostResult)->
-            $scope.refreshList()
-            $scope.showCreateButton = false
-            $scope.newPost = {}
-            #  $state.go('question', {slug : newMakerSciencePostResult.slug})
+        $scope.errors = []
+        if $scope.newPost.title == ""
+            $scope.errors.push("title")
+        if String($scope.newPost.text).replace(/<[^>]+>/gm, '') == ""
+            $scope.errors.push("text")
 
-        )
+        if $scope.errors.length == 0
+            $scope.saveMakersciencePost(newPost, null, $scope.currentMakerScienceProfile.parent).then((newMakerSciencePostResult)->
+                $scope.refreshList()
+                $scope.showCreateButton = false
+                $scope.newPost = {
+                    title : '',
+                    text : '',
+                    type : 'message'
+                }
+            )
 
 )
 

@@ -6,8 +6,16 @@
 <div class="forum-create">
     <div class="row container">
         <div class="col-md-12">
-            <button class="create-topic" ng-click="showCreateButton = !showCreateButton">Créez votre sujet ici</button>
-            <form method="post" action="" ng-show="showCreateButton" class="new-topic" ng-init="newPost.type='message'; initMention('iframeQuestionTextArea')" ng-controller="MentionCtrl">
+            <button class="create-topic"
+                    ng-click="authVars.loginrequired=true"
+                    ng-show="!authVars.isAuthenticated">Créez votre sujet ici <i class="fa fa-lock"></i>
+            </button>
+            <button class="create-topic"
+                    ng-click="showCreateButton = !showCreateButton"
+                    ng-show="authVars.isAuthenticated">Créez votre sujet ici
+            </button>
+
+            <form method="post" action="" ng-show="showCreateButton" class="new-topic" ng-init="initMention('iframeQuestionTextArea')" ng-controller="MentionCtrl">
 
                 <fieldset class="forum-category">
                     <h4>Choisissez une catégorie pour votre discussion</h4>
@@ -64,6 +72,7 @@
                 </fieldset>
 
                 <input type="text" name="title" ng-model="newPost.title" placeholder="Titre de la discussion ..." class="full-width" />
+                <div class="alert alert-danger" ng-show="errors.indexOf('title') > -1"> Titre obligatoire </div>
 
                 <textarea  ui-tinymce="tinyMceOptions" mentio
                     mentio-iframe-element="iframeQuestionTextArea"
@@ -79,6 +88,7 @@
                     placeholder="Saisissez votre réponse ici."
                     rows="8">
                 </textarea>
+                <div class="alert alert-danger" ng-show="errors.indexOf('text') > -1"> Titre obligatoire </div>
 
                 <script type="text/ng-template" id="/people-mentions.tpl">
                     <ul class="list-group user-search">
@@ -103,7 +113,7 @@
                     <p>Ajouter des projets ou des expériences associés</p>
                     <div><!-- necessary container or angularcomplete-alt will "eat" the following button -->
                         <angucomplete-alt id="linked-idea"
-                                        placeholder="Titre du projet ou de la ressource"
+                                        placeholder="Titre du projet ou de l'expérience"
                                         pause="100"
                                         selected-object="newLinkedItem"
                                         local-data="allAvailableItems"
@@ -130,7 +140,7 @@
 
                 <fieldset class="right">
                     <button type="submit" class="button" ng-click="inlineSaveMakersciencePost(newPost)">Créer</button>
-                    <button type="reset" class="button" ng-click="showCreateButton=false">Annuler</button>
+                    <button type="reset" class="button" ng-click="$parent.showCreateButton = false">Annuler</button>
                 </fieldset>
             </form>
 
