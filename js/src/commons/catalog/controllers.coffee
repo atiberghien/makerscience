@@ -74,8 +74,6 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
         if $scope.projectsheet.project.begin_date is undefined
             $scope.projectsheet.project.begin_date = new Date()
 
-        $scope.projectsheet.project.slug = slug($scope.projectsheet.project.title)
-
         ProjectSheet.post($scope.projectsheet).then((projectsheetResult) ->
             angular.forEach($scope.QAItems, (q_a) ->
                 q_a.projectsheet = projectsheetResult.resource_uri
