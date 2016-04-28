@@ -95,8 +95,11 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.hideControls = false
 
+    #TODO : externalise 'projet-makerscience' info in static config table
+    ## initialize projectsheet, QAItems, projectsheet.template in scope
     $scope.initProjectSheetCreateCtrl('projet-makerscience')
 
+    #TODO : externalise 'makerscience' info in static config table
     ProjectProgress.getList({'range__slug' : 'makerscience'}).then((progressRangeResult) ->
         $scope.progressRange = [{ value : progress.resource_uri, text : progress.label } for progress in $filter('orderBy')(progressRangeResult, 'order')][0]
     )
