@@ -211,11 +211,21 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
         $scope.fetchPostLikes($scope.post.parent)
         resolveMentions($scope.post.parent)
 
-        $scope.initCommunityCtrl('post', $scope.post.parent.id).then(->
-            $scope.community = $filter('filter')($scope.community, (value, index, array) ->
-                if value.level == 31
-                    return value.profile.id != $scope.post.parent.author.id
-                return true
+        $scope.initCommunityCtrl('post', $scope.post.parent.id).then((community)->
+            $scope.contributors = []
+            $scope.followers = []
+
+            alreadyHasProfileMember = (list, profile) ->
+                for value in list
+                    if profile.id == value.profile.id
+                        return true
+                return false
+
+            angular.forEach(community, (value, key) ->
+                if value.level in [30, 31] and not alreadyHasProfileMember($scope.contributors, value.profile)
+                    $scope.contributors.push(value)
+                else if value.level == 32 and not alreadyHasProfileMember($scope.followers, value.profile)
+                    $scope.followers.push(value)
             )
         )#for community block
 
