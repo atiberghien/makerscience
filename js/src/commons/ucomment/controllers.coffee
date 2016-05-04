@@ -11,6 +11,7 @@ module.controller("CommentCtrl", ($scope, $rootScope, Comment, Profile, ObjectPr
     $scope.initCommentCtrl = (objectTypeName, objectID) ->
         $scope.commentedObjectTypeName = objectTypeName
         $scope.commentedObjectID = objectID
+        console.log($scope.commentedObjectTypeName, $scope.commentedObjectID)
         $scope.refreshComments()
 
     $scope.refreshComments = (objectTypeName, objectId) ->

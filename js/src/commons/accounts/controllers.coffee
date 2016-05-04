@@ -23,13 +23,12 @@ module.controller("CommunityCtrl", ($scope, $filter, $interval, Profile, ObjectP
 
         return ObjectProfileLink.one().customGETLIST($scope.communityObjectTypeName+'/'+$scope.communityObjectID).then((objectProfileLinkResults) ->
             $scope.community = objectProfileLinkResults
-            angular.forEach($scope.community, (member) ->
-                console.log(member.id, member.level)
-            )
+            # angular.forEach($scope.community, (member) ->
+            #     console.log(member.profile.user.email, member.level)
+            # )
 
             $scope.addMember = (profile, level, detail, isValidated)->
                 if $scope.isAlreadyMember(profile, level)
-                    console.log(" --- ! -- already Member with this level --- ! ---")
                     return true
                 ObjectProfileLink.one().customPOST(
                     profile_id: profile.id,
