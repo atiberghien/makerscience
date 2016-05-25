@@ -5,8 +5,23 @@ module.exports = function(grunt) {
     var appConfig = {
         app: require('./bower.json').appPath || 'app',
     };
+
+    var prod = grunt.option('backend');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        shell: {
+            prod: {
+                command: function(target) {
+                    return 'sed -i\'\' \'s/prodMode = false/prodMode = true/\' ./js/src/config.coffee'
+                },
+                options: {
+                    execOptions: {
+                        maxBuffer: Infinity
+                    }
+                }
+            }
+        },
         wiredep: {
             task: {
                 directory: 'bower_components',
@@ -182,5 +197,5 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['compass:dev', 'wiredep', 'coffee', 'concurrent:run']);
     grunt.registerTask('dist', ['clean:dist', 'copy:dist']);
     grunt.registerTask('stage', ['compile', 'dist', 'rsync:staging'])
-    grunt.registerTask('prod', ["compile", 'dist', 'rsync:prod'])
+    grunt.registerTask('prod', ['shell:prod', "compile", 'dist', 'rsync:prod'])
 };
