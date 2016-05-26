@@ -11,3 +11,7 @@
 /js_imports.css
 /js/src/config_prod.coffee
 /js/src/config_staging.coffee
+/corpus-frontendapp/
+/node_env.sh
+
+
