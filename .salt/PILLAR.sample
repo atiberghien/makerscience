@@ -1,0 +1,61 @@
+#
+# This file contains default values which are used
+# by the salt states deploying your project.
+# you may copy them to your relevant PILLAR file
+# before editing them.
+# If you need to add variables, this is where to begin.
+# Please keep defaults in there, but real passwords
+# must be putted inside pillar
+#
+# replace project_name in your pillar by
+# the current projectname
+# you can also merge parts of this file
+# with the relevant pillar
+makina-projects.projectname:
+  data:
+    PROJECT: makerscience
+    app_root: "{project_root}/"
+    #app_download_root: "{app_root}"
+    #app_url: "https://github.com/makinacorpus/makerscience.git"
+    #app_url_rev: "master"
+    #app_url_type: git
+    #app_url_tar_opts: "xzvf"
+    #app_url_archive_format: tar
+    #app_url_hash: "md5=123"
+    #app_archive_test_exists: 'test ! -e {data_root}/www/index.php'
+    #configs:
+    #  {% for i in ['site_settings.py'] %}
+    #  "{{i}}":
+    #    source: "salt://makina-projects/{name}/files/config.py"
+    #    target: "{app_root}/{PROJECT}/{{i}}"
+    #    mode: 640
+    #  {%endfor%}
+    js_dir: "{app_root}"
+    node_root: "/srv/apps/node/{{salt['mc_nodejs.ver']()}}"
+    node_packages:
+      - >
+        grunt-cli
+        grunt-wiredep
+        grunt-contrib-watch
+        grunt-contrib-compass
+        grunt-contrib-coffee
+        grunt-contrib-connect
+        grunt-concurrent
+        grunt-contrib-copy
+        grunt-contrib-clean
+        grunt-rsync
+    dist_root: "{app_root}/dist"
+    doc_root: "{data_root}/www"
+    do_bower: false
+    do_gulp: false
+    do_grunt: false
+    gulp_targets: []
+    grunt_targets: ['clean', 'compile', 'copy']
+    domain: "{PROJECT}.mydomain.tld"
+    server_aliases: []
+    host: localhost
+    nginx_top: salt://makina-projects/{name}/files/nginx.top.conf
+    nginx_vhost: salt://makina-projects/{name}/files/nginx.content.conf
+    norobots: false
+    rsync_dist_opts: '-aA -delete'
+# vim:set ft=yaml:
