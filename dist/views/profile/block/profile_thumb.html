@@ -1,0 +1,15 @@
+<span ng-show="authVars.isAuthenticated && currentMakerScienceProfile != null" ng-controller="FriendshipCtrl" ng-init="checkFriend(profile.id)">
+    <button  ng-show="!isFriend" ng-click="addFriend(profile.id)" class="add-member"><span class="fa fa-user-plus"></span></button>
+    <button  ng-show="isFriend" ng-click="removeFriend(profile.id)" class="add-member"><span class="fa fa-user-times"></span></button>
+    <!--
+    FIXME : The envelope button overlap with the add-user one
+    <button  ng-show="isFriend" class="add-member"><span class="fa fa-envelope"></span></button>
+    -->
+</span>
+<a ui-sref="profile.detail({slug:profile.slug})">
+    <ng-include src="'/views/profile/block/avatar.html'" class="avatar75"></ng-include>
+    <h3>{{profile.parent.user.first_name}} <strong>{{profile.parent.user.last_name}}</strong></h3>
+    <h4 ng-if="profile.activity.length >= 40" tooltip="{{profile.activity}}">{{profile.activity | limitTo:40}}<span>...</span></h4>
+    <h4 ng-if="profile.activity.length < 40">{{profile.activity}}</h4>
+    <h5><span class="glyphicon glyphicon-map-marker"></span> {{profile.location.address.address_locality}}</h5>
+</a>

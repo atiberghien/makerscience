@@ -1,0 +1,56 @@
+<div class="tags">
+    <div class="editable">
+        <h5>Thématiques</h5>
+        <div class="edit-buttons" ng-show="editable">
+            <button ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </div>
+        <ul class="tags skills">
+            <li ng-repeat="tag in preparedThemeTags | limitTo : 4">
+                <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
+            </li>
+            <li ng-if="preparedThemeTags.length > 4">
+                <a tooltip="Tous les thèmes" ng-click="openTagPopup(preparedThemeTags, 'th', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
+            </li>
+        </ul>
+    </div>
+</div><!-- .relative -->
+
+<div class="tags">
+    <div class="editable">
+        <h5>Publics visés</h5>
+        <div class="edit-buttons" ng-show="editable">
+            <button ng-click="openTagPopup(preparedTargetTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </div>
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in preparedTargetTags | limitTo : 4">
+                <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
+            </li>
+            <li ng-if="preparedTargetTags.length > 4">
+                <a tooltip="Toutes les cibles" ng-click="openTagPopup(preparedThemeTags, 'tg', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
+            </li>
+        </ul>
+    </div><!-- .editable -->
+</div><!-- .relative -->
+
+<div class="tags">
+    <div class="editable">
+        <h5>Formats</h5>
+        <div class="edit-buttons" ng-show="editable">
+            <button ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </div>
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in preparedFormatsTags | limitTo : 4">
+                <a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a>
+            </li>
+            <li ng-if="preparedFormatsTags.length > 4">
+                <a tooltip="Tous les formats" ng-click="openTagPopup(preparedFormatsTags, 'fm', editable, addTagToResourceSheet, removeTagFromResourceSheet)">+</a>
+            </li>
+        </ul>
+    </div><!-- .editable -->
+</div><!-- .relative -->

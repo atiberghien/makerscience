@@ -1,0 +1,30 @@
+<div id="intro" class="intro-tags" style="background-image: url('./img/bg/header-map.jpg')">
+    <h1>Tous les objets comportant le mot</h1>
+    <h2>« {{query}} »</h2>
+</div><!-- #intro -->
+
+<div class="row container">
+    <div id="content" class="tags">
+        <div class="col-md-12">
+            <button class="button search-advanced" ng-click="collapseAdvancedSearch = !collapseAdvancedSearch" style="margin-bottom: 1em;">Recherche avancée</button>
+            <form id="search-advanced" ng-show="!collapseAdvancedSearch">
+                <label for="words-all">Tous les mots:</label>
+                <input id="words-all" type="text" name="words-all" placeholder="Conférence, " ng-model="search.allWords"/>
+                <br />
+                <label for="exact-expression">Les expressions exactes:</label>
+                <input id="exact-expression" type="text" name="exact-expression" placeholder="Conférence sur la science, " ng-model="search.exactExpressions"/>
+                <br />
+                <label for="word-none">Aucun de ces mots:</label>
+                <input id="word-none" type="text" name="word-none" placeholder="Conférence, " ng-model="search.noneWord"/>
+                <br />
+                <label>Recherche parmi ces champs:</label>
+                <input id="everything" type="radio" name="searchIn" ng-model="search.searchIn" value="all" checked="checked"/> <label for="everything">Tout le contenu</label>
+                <input id="title" type="radio" name="searchIn"  ng-model="search.searchIn" value="titles" /><label for="title"> Titre / Nom / sous-titre</label>
+                <input id="tag" type="radio" name="searchIn"  ng-model="search.searchIn" value="tags"/> <label for="tag" >Tag</label>
+                <br />
+                <button ng-click="runAdvancedSearch(search)" class="button" type="submit">Rechercher</button>
+            </form>
+            <ng-include src="'/views/base/multiple_object_listing.html'"></ng-include>
+        </div><!-- .col-md-12 -->
+    </div><!-- #content -->
+</div><!-- .containter -->

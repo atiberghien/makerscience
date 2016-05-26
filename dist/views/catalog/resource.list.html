@@ -1,0 +1,62 @@
+<div id="intro" class="intro-project-create" style="background-image: url('/img/bg/header-listing-resources.jpg')">
+    <h1>Inspirez-vous des expériences</h1>
+    <h2>partagées par la communauté</h2>
+</div>
+
+<div class="row container">
+
+    <div id="content" class="listing resource">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-9">
+                    <tabset class="nav-tabs-resource">
+                        <tab heading="Les plus récents" ng-click="fetchRecentResources()"></tab>
+                        <tab heading="Les plus populaires" ng-click="fetchTopResources()"></tab>
+                        <tab heading="Sélection thématique" ng-click="fetchThematicResources()">
+                            <h1 class="thematic">
+                                <ng-pluralize count="selected_themes.length" when="{'0': 'Thème sélectionné', 'one': 'Thème sélectionné', 'other': 'Thèmes sélectionnés'}"></ng-pluralize>:
+                                <span ng-repeat="theme in selected_themes">
+                                    <a ui-sref="tag({slug:theme.slug})">{{theme.name}}</a>
+                                    <span ng-if="!$last">, </span>
+                                </span>
+                                <span ng-if="selected_themes.length == 0">Aucun</span>
+                            </h1>
+                        </tab>
+                        <tab heading="Au hasard" ng-click="fetchRandomResources()"></tab>
+                    </tabset>
+                    <div class="boxes boxes-listing">
+                        <div class="box" ng-repeat="resource in resources">
+                            <ng-include src="'/views/catalog/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
+                        </div>
+                    </div>
+                    <div ng-show="resources.length > 0">
+                    <pagination total-items="totalItems"
+                                items-per-page='limit'
+                                ng-model="currentPage"
+                                max-size="10"
+                                class="pagination-sm pagination-resources"
+                                rotate="false"
+                                num-pages="numPages"
+                                ng-change="pageChanged(currentPage)"
+                                previous-text="<<"
+                                next-text=">>">
+                    </pagination>
+                    </div>
+                    <div ng-show="resources.length == 0 && !waitingList">
+                        Aucune expérience ne correspond à votre recherche.
+                    </div>
+                    <div ng-show="waitingList">
+                        En attente de résultat ...
+                    </div>
+                    <a ui-sref="resource.new" class="large large-purple">Partager une expérience <i class="fa fa-lock" ng-show="!authVars.isAuthenticated"></i><img src="/img/smiley.png" class="smiley" alt="Smiley" /></a>
+                </div>
+                <div class="col-md-3">
+                    <ng-include src="'/views/catalog/block/filters_resource.html'" ng-init="objectType='makerscienceresource'" ></ng-include>
+                </div>
+            </div>
+        </div><!-- .col-md-12 -->
+
+    </div><!-- #content -->
+
+</div><!-- .row .container -->

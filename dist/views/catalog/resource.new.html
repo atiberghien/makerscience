@@ -1,0 +1,181 @@
+<div class="admin">
+
+    <div id="intro" class="intro-resource-create">
+        <h1>Créez une page</h1>
+        <h2>partageant une expérience</h2>
+    </div><!-- #intro -->
+
+    <div class="row container">
+
+        <div class="col-md-12">
+
+            <div id="content" class="new-resource">
+
+                <h2>Créer une expérience</h2>
+                <p>Ce formulaire vous permet de décrire en détails une expérience que vous avez eu afin que d'autres puissent les tester à leur tour. Tous les champs ne sont pas obligatoires et peuvent être modifiés par la suite si vous n'avez pas beaucoup de temps.<br />
+                <p>Mais plus vous détaillerez, plus vous aiderez d'autres membres à reproduire votre initiative et la disséminer au plus grand nombre.</p>
+                <p>Pour toute question ou besoin d'accompagnement dans la création de cette page, n'hésitez pas à contacter l'équipe de Makerscience ! ;-)</p>
+
+                <h3>Nouvelle expérience</h3>
+
+                <form name="newResourceForm"
+                      novalidate
+                      ng-controller="MakerScienceResourceSheetCreateCtrl"
+                      ng-init="submitted=false"
+                      ng-submit="saveMakerscienceResource(newResourceForm.$valid)"
+                      ng-class="{ 'has-error' : newResourceForm.$invalid && submitted }">
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            <fieldset class="fake-placeholder">
+                                <h4>Nom de l'expérience</h4>
+                                <input type="text"
+                                       name="resourceName"
+                                       placeholder=">"
+                                       ng-model="projectsheet.project.title"
+                                       maxlength="50"
+                                       required/>
+                                <p ng-show="newResourceForm.resourceName.$invalid && submitted" class="help-block">Nom de l'expérience requis</p>
+                           </fieldset>
+
+                            <fieldset class="fake-placeholder">
+                                <h4>Résumez l'expérience en une courte phrase</h4>
+                                <input type="text"
+                                            name="resourceBaseline"
+                                            placeholder="> "
+                                            ng-model="projectsheet.project.baseline"
+                                            maxlength="100"
+                                            required/>
+                                <p ng-show="newResourceForm.resourceBaseline.$invalid && submitted" class="help-block">Court résumé de l'expérience requis</p>
+                           </fieldset>
+
+                           <fieldset class="fake-placeholder">
+                               <div ng-controller="TagAutoCompleteCtrl">
+                                   <h4>Ajoutez des tags précisant aux mieux les thématiques abordées par votre projet (biologie, sport, art, histoire...)</h4>
+                                   <tags-input ng-model="themesTags"
+                                               placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)">
+                                     <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+                                   </tags-input>
+                               </div>
+                           </fieldset>
+
+                           <fieldset class="fake-placeholder">
+                               <div ng-controller="TagAutoCompleteCtrl">
+                                   <h4>Ajoutez des tags précisant aux mieux les publics visés (jeunes, seniors, enfants, 3-6 ans...)</h4>
+                                   <tags-input ng-model="targetsTags"
+                                               placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)">
+                                     <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+                                   </tags-input>
+                               </div>
+                           </fieldset>
+
+                           <fieldset class="fake-placeholder">
+                               <div ng-controller="TagAutoCompleteCtrl">
+                                   <h4>Ajoutez des tags précisant aux mieux les formats déployés à travers votre projet (exposition, jeu, atelier, plateforme web...)</h4>
+                                   <tags-input ng-model="formatsTags"
+                                               placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)">
+                                     <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+                                   </tags-input>
+                               </div>
+                           </fieldset>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <fieldset class="addPhotosVideos">
+                                <label ng-click="openGallery()">Ajouter des médias</label>
+                                <button type="button" class="addPhotos" ng-click="openGallery()">
+                                    <span class="glyphicon glyphicon-camera"></span>
+                                </button>
+                                <button type="button" class="addVideos" ng-click="openGallery()">
+                                    <span class="glyphicon glyphicon-facetime-video"></span>
+                                </button>
+                            </fieldset>
+                            <fieldset class="fake-placeholder">
+                                <h4><span class="glyphicon glyphicon-time"></span> Durée de mise en oeuvre : </h4>
+                                <input type="text" ng-model="projectsheet.duration" />
+                                </select>
+                            </fieldset>
+                            <fieldset class="fake-placeholder">
+                                <h4><span class="glyphicon glyphicon-globe"></span> Site web : </h4>
+                                <input type="text" ng-model="projectsheet.project.website" />
+                                </select>
+                            </fieldset>
+                        </div>
+
+                    </div><!-- .row -->
+
+                    <fieldset class="new-resource">
+                        <h4>Résumez votre expérience en quelques lignes</h4>
+                        <textarea ui-tinymce="tinyMceFullOptions"
+                                    ng-trim="false"
+                                    name="resource-about"
+                                    ng-model="projectsheet.project.description"
+                                    rows="4">
+                        </textarea>
+                    </fieldset>
+
+                    <fieldset class="new-resource" ng-repeat="item in QAItems">
+                        <h4>{{item.questionLabel}}</h4>
+                        <textarea ui-tinymce="tinyMceFullOptions"
+                                    ng-trim="false"
+                                    ng-model="item.answer"
+                                    name="question_{{$index}}"
+                                    rows="4">
+                        </textarea>
+                    </fieldset>
+
+                    <fieldset class="linked-idea">
+                        <h4>Projets associés</h4>
+                        <p>Voulez-vous associer cette expérience à des pages de projets ?</p>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <angucomplete-alt id="linked-idea"
+                                                placeholder="Nom de l'expérience"
+                                                pause="100"
+                                                selected-object="newLinkedResource"
+                                                local-data="allAvailableResources"
+                                                search-fields="title"
+                                                title-field="title"
+                                                text-no-results="Aucune expérience trouvée"
+                                                minlength="3"/>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="button" ng-click="addLinkedResource(newLinkedResource)">Lier l'expérience</button>
+                            </div>
+                        </div>
+                        <ul class="list-group">
+                            <li ng-repeat="resource in linkedResources">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <label>{{resource.parent.title}}</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger" ng-click="delLinkedResource(resource)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                     </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </fieldset>
+
+                    <p class="right" ng-hide="hideControls">
+                        <button type="button" class="button cancel" ui-sref="resource.list">Annuler</button>
+                        <!-- FIXME : set up ctrler to allow 'save as draft'  -->
+                        <!-- <button type="button" class="button">Enregistrer en brouillon</button>
+                        <button type="button" class="button" ng-click="submitted=true">Publier</button>
+                         -->
+                        <button type="submit" class="button" ng-click="submitted=true;hideControls=true">Enregistrer</button>
+                    </p>
+                    <div class="progress" ng-show="hideControls">
+                        <div ng-show="uploader.queue.length > 0" class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
+                        <div ng-show="uploader.queue.length == 0" class="progress-bar" role="progressbar" ng-style="{ 'width': fake_progress + '%' }" style="width: 0%;"></div>
+                    </div>
+                </form>
+
+            </div><!-- #content -->
+
+        </div><!-- .row -->
+
+    </div><!-- .row .container -->
+</div>

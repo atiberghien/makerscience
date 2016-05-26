@@ -1,0 +1,13 @@
+<div class="post-author">
+    <span class="avatar avatar52">
+        <img ng-show="post.author.avatar" src="{{post.author.avatar}}" class="profile img-circle">
+        <img ng-hide="post.author.avatar" src="/img/avatar.png" class="profile img-circle">
+    </span>
+    <div class="post-details">
+        <p class="post-author-name">{{post.author.user.first_name}} <strong>{{post.author.user.last_name}}</strong></p>
+        <ul class="tags">
+            <li ng-repeat="tag in post.tags"><a href="">{{tag.tag.name}}</a></li>
+        </ul>
+    </div>
+</div>
+<p class="post-topic"><a ui-sref="question({slug : post.slug})">{{post.title}}</a></p>

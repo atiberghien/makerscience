@@ -1,0 +1,26 @@
+<style>
+.nav.nav-tabs {
+    display: none;
+    visibility: hidden;
+}
+#content {
+    margin-top : 0px !important;
+}
+</style>
+<div class="row container" ng-controller="StaticContentCtrl">
+
+    <div class="col-md-12">
+
+        <div id="content" class="content-about">
+
+            <tabset class="nav-tabs-default">
+                <tab>
+                    <div ng-bind-html="static.mentions"></div>
+                </tab>
+            </tabset>
+
+        </div><!-- #content -->
+
+    </div>
+
+</div><!-- .container -->

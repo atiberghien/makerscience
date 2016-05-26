@@ -1,0 +1,8 @@
+<div class="" ng-controller="TagAutoCompleteCtrl">
+    <tags-input ng-model="tags_filter"
+                placeholder="> Mot-clé"
+                on-tag-added="refreshFilter()"
+                on-tag-removed="refreshFilter()">
+                <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+    </tags-input>
+</div>

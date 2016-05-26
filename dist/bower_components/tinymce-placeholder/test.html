@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>Placeholder plugin test</title>
+  <script src="http://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+  <script src="placeholder/plugin.js"></script>
+  <script type="text/javascript">
+  tinymce.init({
+      selector: ".tinymce",
+      plugins: [ "placeholder" ],
+      toolbar: false
+  });
+  tinymce.init({
+      selector: "#tinymce-custom-placeholder",
+      plugins: [ "placeholder" ],
+      placeholder:'placeholder set  in editor.settings',
+      toolbar: false
+  });
+  tinymce.init({
+      selector: "#tinymce-custom-style",
+      plugins: [ "placeholder" ],
+      placeholder_attrs: { style: {position: 'absolute', top:'5px', left:0, color: '#FF0000', padding: '1%', width:'98%', overflow: 'hidden', 'white-space': 'pre-wrap'} },
+      toolbar: false
+  });
+  </script>
+</head>
+<body>
+  <h2>Empty Editor</h2>
+  <textarea class="tinymce" placeholder="This is a test placeholder."></textarea>
+
+  <h2>Non-empty Editor</h2>
+  <textarea class="tinymce" placeholder="This is a test placeholder...">This is an editor with text</textarea>
+
+  <h2>Editor without placeholder attribute</h2>
+  <textarea class="tinymce"></textarea>
+
+  <h2>Empty Editor Long Placeholder</h2>
+  <textarea class="tinymce" placeholder="This is a test placeholder. Very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long placeholder."></textarea>
+
+  <h2>Editor placeholder set in editor.settings</h2>
+  <div id="tinymce-custom-placeholder"></div>
+
+  <h2>Tinymce placeholder with custom style</h2>
+  <textarea id="tinymce-custom-style" placeholder="This is a test placeholder."></textarea>
+</body>
+</html>

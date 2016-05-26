@@ -1,0 +1,196 @@
+<div class="container" ng-controller="HomepageCtrl">
+
+    <div class="home-slide">
+        <div class="row">
+            <div class="col-md-7">
+                <carousel class="carousel-no-indicators"  interval="4000">
+                    <!-- Presentation -->
+                    <slide>
+                        <div class="caption">
+                            <div>
+                                <h1>Makerscience : site collaboratif pour tous ceux qui s’emploient à mettre la science, la technique et l'innovation à portée de tous</h1>
+                                <p>Faciliter la réalisation de projets</p>
+                                <p>Favoriser les échanges et rencontres</p>
+                                <p>Valoriser toutes les personnes investies</p>
+                            </div>
+                        </div>
+                        <a ui-sref="forum">
+                            <img src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        </a>
+                    </slide>
+                    <slide ng-repeat="project in featuredProjects">
+                        <h3 class="category"><span>Projet</span></h3>
+                        <img ng-if="project.cover" ng-src="{{ $root.config.media_uri }}{{ project.cover+'?dim=710x390&border=true'}}" alt="Loading slide one..." />
+                        <img ng-if="!project.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3><a ui-sref="project.detail({slug:project.slug})">{{project.title}}</a></h3>
+                            <h4>Par <strong><a ui-sref="profile.detail({slug:project.by.profile_slug})">
+                                {{project.by.full_name}}</a></strong></h4>
+                        </div>
+                    </slide>
+                    <slide ng-repeat="resource in featuredResources">
+                        <h3 class="category"><span>Expérience</span></h3>
+                        <img ng-if="resource.cover" ng-src="{{ $root.config.media_uri }}{{ resource.cover+'?dim=710x390&border=true'}}" alt="Loading slide one..." />
+                        <img ng-if="!resource.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
+                        <div class="description">
+                            <h3><a ui-sref="resource.detail({slug:resource.slug})">{{resource.title}}</a></h3>
+                            <h4>Par <strong><a ui-sref="profile.detail({slug:resource.by.profile_slug})">
+                                {{resource.by.full_name}}</a></strong></h4>
+                        </div>
+                    </slide>
+                </carousel>
+            </div>
+            <div class="col-md-5" ng-init="showLoginPanel=false">
+                <div class="home-join">
+                    <p><a ui-sref="about" class="button">MakerScience c'est quoi ?<img src="/img/smiley.png" alt="Smiley" /></a></p>
+                    <div ng-show="!showLoginPanel" class="welcome">
+                        <div class="join">
+                            <h2 ng-hide="authVars.isAuthenticated">Rejoignez la communauté MakerScience !</h2>
+                            <p class="register-login" ng-show="!authVars.isAuthenticated">
+                                <a class="button" ng-click="openSignupPopup()">S'inscrire</a>
+                                <a class="button" ng-click="openSigninPopup()">Se connecter</a>
+                            </p>
+                            <h2 ng-show="authVars.isAuthenticated">Bienvenue {{currentMakerScienceProfile.parent.user.first_name}}</h2>
+                        </div><!-- .join -->
+                    </div>
+                    <div ng-show="showLoginPanel" >
+                       <p class="right">
+                           <button class="close-login" ng-click="showLoginPanel=false"><img src="/img/icons/buttons/close-white-24.png" alt="Fermer" /></button>
+                       </p>
+                       <!-- <ng-include src="'./views/base/login.html'"></ng-include> -->
+                    </div>
+                </div><!-- .home-join -->
+            </div>
+        </div><!-- .row -->
+    </div><!-- .home-slide -->
+
+    <div class="home-links">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row community">
+                    <div class="col-md-4">
+                        <img src="/img/icons/community.png" alt="Echangez et rencontrez" />
+                        <h3>Échangez et rencontrez</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <ul>
+                            <li><a ui-sref="profile.list">Participez à la communauté</a></li>
+                            <li><a ui-sref="map">Trouvez des contacts</a></li>
+                            <li><a ui-sref="forum">Discutez avec les membres</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+            <div class="col-md-4">
+                <div class="row projects">
+                    <div class="col-md-4">
+                        <img src="/img/icons/project.png" alt="Stimulez des idées et des projets" />
+                        <h3>Stimulez des idées et des projets</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <ul>
+                            <li><a ui-sref="project.list">Parcourez les projets</a></li>
+                            <li><a ui-sref="project.new">Ajoutez votre projet <i class="fa fa-lock" ng-show="!authVars.isAuthenticated"></i></a></li>
+                            <li><a ui-sref="map">Localisez des porteurs</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+            <div class="col-md-4">
+                <div class="row resources">
+                    <div class="col-md-4">
+                        <img src="/img/icons/resource.png" alt="Trouvez des méthodes, des outils, des réponses" />
+                        <h3>Trouvez des méthodes, des outils, des réponses</h3>
+                    </div>
+                    <div class="col-md-8">
+                        <ul>
+                            <li><a ui-sref="resource.list">Explorez les expériences partagées</a></li>
+                            <li><a ui-sref="resource.new">Partagez votre expérience <i class="fa fa-lock" ng-show="!authVars.isAuthenticated"></i></a></li>
+                            <li><a ui-sref="forum">Posez vos questions</a></li>
+                        </ul>
+                    </div>
+                </div><!-- .row -->
+            </div>
+        </div><!-- row -->
+    </div><!-- .home-links -->
+
+    <div class="home-fullwidth">
+        <div class="row">
+            <div class="col-md-4">
+                <h2 class="members"><span class="glyphicon glyphicon-user"></span> Membres</h2>
+                <div class="boxes boxes-small boxes-small-home boxes-profiles">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="profile in profiles | orderBy : '-date_joined' | limitTo : 3">
+                        <ng-include src="'/views/profile/block/profile_thumb_light.html'"></ng-include>
+                    </div
+                    ><div class="box box-solo box-pink">
+                        <div><a ui-sref="profile.list">Voir tous les membres <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
+            <div class="col-md-4">
+                <h2 class="projects"><span class="glyphicon glyphicon-tasks"></span> Projets</h2>
+                <div class="boxes boxes-small boxes-small-home boxes-projects">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="project in projects | orderBy : '-parent.created_on'| limitTo : 3" >
+                        <ng-include src="'/views/catalog/block/project_thumb_light.html'"></ng-include> -->
+                    </div
+                    ><div class="box box-solo box-blue">
+                        <div><a ui-sref="project.list">Voir tous les <br />projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
+            <div class="col-md-4">
+                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Expériences partagées</h2>
+                <div class="boxes boxes-small boxes-small-home boxes-resources">
+                    <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
+                    <div class="box" ng-repeat="resource in resources| orderBy : '-parent.created_on'| limitTo : 3">
+                        <ng-include src="'/views/catalog/block/resource_thumb_light.html'"></ng-include>
+                    </div
+                    ><div class="box box-solo box-green">
+                        <div><a ui-sref="resource.list">Voir toutes les expériences <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+                    </div>
+                </div><!-- .boxes -->
+            </div><!-- .col-md-4 -->
+        </div><!-- .row -->
+    </div><!-- .home-fullwidth -->
+
+    <div class="row home-tags">
+        <div class="col-md-12">
+            <div class="home-tags">
+                <h2>Tags / Mots clés</h2>
+                <ul class="tags" ng-controller="TagListCtrl">
+                    <li ng-repeat="tag in tags | orderBy : '-weight' | limitTo : 25 "><a ui-sref="tag({slug:tag.slug})">{{tag.name}}</a></li>
+                    <li><a ng-show="tags.length > 25" ui-sref="tags" tooltip="Cherchez d’autres tags">Cherchez d’autres tags</a></li>
+                </ul>
+            </div><!-- .home-tags -->
+        </div>
+    </div><!-- .row -->
+
+    <div class="row row-home">
+        <div class="col-md-7">
+
+            <div class="home-forum">
+                <!-- <div class="preview"></div> -->
+                <h2 class="forum">Discussions <a ui-sref="forum">Voir toutes les discussions</a></h2>
+                <div ng-repeat="post in threads| orderBy : '-posted_on' | limitTo:3">
+                    <ng-include src="'/views/forum/block/thread_light.html'"></ng-include>
+                </div>
+            </div><!-- .home-forum -->
+
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="home-twitter">
+                <a class="twitter-timeline"
+                href="https://twitter.com/makersciencefr"
+                data-widget-id="582859506276765696">Tweets de @makersciencefr</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div><!-- .home-tweeter -->
+
+        </div>
+
+    </div><!-- .row -->
+
+</div><!-- .container -->

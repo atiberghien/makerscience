@@ -1,0 +1,29 @@
+<div class="edit-buttons" ng-hide="!editable" ng-show="editable">
+    <div ng-show="linkResources">
+        <angucomplete-alt id="linked-idea"
+                        placeholder="Lier une expérience au projet"
+                        pause="100"
+                        selected-object="newLinkedResource"
+                        local-data="allAvailableResources"
+                        search-fields="title"
+                        title-field="title"
+                        text-no-results="Aucune expérience trouvée"
+                        minlength="3"/>
+    </div>
+    <div ng-show="linkResources">
+        <button class="button" ng-click="addLinkedResource(newLinkedResource);updateLinkedResources()"><span class="fa fa-plus"></span></button>
+    </div>
+</div>
+<carousel class="carousel-no-indicators carousel-text-links" >
+    <slide class="left-aligned" ng-repeat="resource in linkedResources">
+        <div class="edit-buttons" ng-hide="!editable" ng-show="editable">
+            <button ng-click="alert('trash')" class="nomargin"><span class="glyphicon glyphicon-trash"></span></button>
+        </div>
+        <h3><a ui-sref="resource.detail({slug:resource.parent.slug})">Expériences associées</a></h3>
+        <h4><a ui-sref="resource.detail({slug:resource.parent.slug})">{{resource.parent.title}}</a></h4>
+        <h5><a ui-sref="resource.detail({slug:resource.parent.slug})">{{resource.parent.baseline}}</a></h5>
+        <img src="/img/bacasable.jpg" alt="Image background" />
+        <img ng-if="resource.base_projectsheet.cover" ng-src="{{ config.media_uri }}{{ resource.base_projectsheet.cover.thumbnail_url+'?dim=680x270&border=true'}}" alt="Resource Image" />
+        <img ng-if="!resource.base_projectsheet.cover" src="/img/bacasable.jpg" alt="Resource Image" />
+    </slide>
+</carousel>
