@@ -49,16 +49,16 @@
       $scope.$broadcast('clearFacetFilter');
       delete $scope.params['ordering'];
       return $scope.refreshList().then(function() {
-        var nbElmt, rand, results, tmp;
+        var nbElmt, rand, tmp, _results;
         nbElmt = $scope.resources.length;
-        results = [];
+        _results = [];
         while (nbElmt) {
           rand = Math.floor(Math.random() * nbElmt--);
           tmp = $scope.resources[nbElmt];
           $scope.resources[nbElmt] = $scope.resources[rand];
-          results.push($scope.resources[rand] = tmp);
+          _results.push($scope.resources[rand] = tmp);
         }
-        return results;
+        return _results;
       });
     };
     $scope.fetchThematicResources = function() {
@@ -116,7 +116,7 @@
           })
         };
         return MakerScienceResource.post(makerscienceResourceData).then(function(makerscienceResourceResult) {
-          var i, x;
+          var x, _i;
           ObjectProfileLink.one().customPOST({
             profile_id: $scope.currentMakerScienceProfile.parent.id,
             level: 10,
@@ -164,7 +164,7 @@
           });
           if ($scope.uploader.queue.length === 0) {
             $scope.fake_progress = 0;
-            for (x = i = 1; i <= 5; x = ++i) {
+            for (x = _i = 1; _i <= 5; x = ++_i) {
               $scope.fake_progress += 100 / 5;
             }
             return $timeout(function() {

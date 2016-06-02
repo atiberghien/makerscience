@@ -1,6 +1,6 @@
 (function() {
   var LoginService, module,
-    bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   module = angular.module("commons.accounts.services", ['http-auth-interceptor', 'ngCookies', 'restangular']);
 
@@ -22,17 +22,17 @@
 
   LoginService = (function() {
     "Login a user";
-    function LoginService($rootScope1, baseUrl1, $http1, $state1, Restangular1, $cookies1, authService1) {
-      this.$rootScope = $rootScope1;
-      this.baseUrl = baseUrl1;
-      this.$http = $http1;
-      this.$state = $state1;
-      this.Restangular = Restangular1;
-      this.$cookies = $cookies1;
-      this.authService = authService1;
-      this.submit = bind(this.submit, this);
-      this.logout = bind(this.logout, this);
-      this.forceLogin = bind(this.forceLogin, this);
+    function LoginService($rootScope, baseUrl, $http, $state, Restangular, $cookies, authService) {
+      this.$rootScope = $rootScope;
+      this.baseUrl = baseUrl;
+      this.$http = $http;
+      this.$state = $state;
+      this.Restangular = Restangular;
+      this.$cookies = $cookies;
+      this.authService = authService;
+      this.submit = __bind(this.submit, this);
+      this.logout = __bind(this.logout, this);
+      this.forceLogin = __bind(this.forceLogin, this);
       this.$rootScope.submit = this.submit;
       this.$rootScope.forceLogin = this.forceLogin;
       this.$rootScope.logout = this.logout;

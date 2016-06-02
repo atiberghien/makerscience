@@ -249,9 +249,9 @@
         $scope.contributors = [];
         $scope.followers = [];
         alreadyHasProfileMember = function(list, profile) {
-          var i, len, value;
-          for (i = 0, len = list.length; i < len; i++) {
-            value = list[i];
+          var value, _i, _len;
+          for (_i = 0, _len = list.length; _i < _len; _i++) {
+            value = list[_i];
             if (profile.id === value.profile.id) {
               return true;
             }
@@ -259,8 +259,8 @@
           return false;
         };
         return angular.forEach(community, function(value, key) {
-          var ref;
-          if (((ref = value.level) === 30 || ref === 31) && !alreadyHasProfileMember($scope.contributors, value.profile)) {
+          var _ref;
+          if (((_ref = value.level) === 30 || _ref === 31) && !alreadyHasProfileMember($scope.contributors, value.profile)) {
             return $scope.contributors.push(value);
           } else if (value.level === 32 && !alreadyHasProfileMember($scope.followers, value.profile)) {
             return $scope.followers.push(value);

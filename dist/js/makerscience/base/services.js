@@ -4,8 +4,8 @@
   module = angular.module("makerscience.base.services", ['restangular']);
 
   DataSharing = (function() {
-    function DataSharing($rootScope1) {
-      this.$rootScope = $rootScope1;
+    function DataSharing($rootScope) {
+      this.$rootScope = $rootScope;
       this.sharedObject = {};
     }
 
@@ -18,8 +18,8 @@
   });
 
   FilterService = (function() {
-    function FilterService($rootScope1) {
-      this.$rootScope = $rootScope1;
+    function FilterService($rootScope) {
+      this.$rootScope = $rootScope;
       console.log("init FilterService");
       this.filterParams = {};
     }

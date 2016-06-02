@@ -32,16 +32,16 @@
       $scope.$broadcast('clearFacetFilter');
       $scope.params['ordering'] = '';
       return $scope.refreshList().then(function() {
-        var nbElmt, rand, results, tmp;
+        var nbElmt, rand, tmp, _results;
         nbElmt = $scope.profiles.length;
-        results = [];
+        _results = [];
         while (nbElmt) {
           rand = Math.floor(Math.random() * nbElmt--);
           tmp = $scope.profiles[nbElmt];
           $scope.profiles[nbElmt] = $scope.profiles[rand];
-          results.push($scope.profiles[rand] = tmp);
+          _results.push($scope.profiles[rand] = tmp);
         }
-        return results;
+        return _results;
       });
     };
     $scope.availableInterestTags = [];
@@ -101,11 +101,11 @@
       return $modalInstance.close(response.avatar);
     };
     return dataURItoBlob = function(dataURI) {
-      var array, binary, i, j, mimeString, ref;
+      var array, binary, i, mimeString, _i, _ref;
       binary = atob(dataURI.split(',')[1]);
       mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
       array = [];
-      for (i = j = 0, ref = binary.length; 0 <= ref ? j <= ref : j >= ref; i = 0 <= ref ? ++j : --j) {
+      for (i = _i = 0, _ref = binary.length; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
         array.push(binary.charCodeAt(i));
       }
       return new Blob([new Uint8Array(array)], {

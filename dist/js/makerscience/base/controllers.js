@@ -25,12 +25,12 @@
       return $scope.refreshList();
     };
     $scope.initMakerScienceAbstractListCtrl = function() {
-      var param, results1;
+      var param, _results;
       FilterService.filterParams.query = '';
       FilterService.filterParams.tags = [];
-      results1 = [];
+      _results = [];
       for (param in FilterService.filterParams) {
-        results1.push($scope.$watch(function() {
+        _results.push($scope.$watch(function() {
           return FilterService.filterParams[param];
         }, function(newVal, oldVal) {
           if (newVal !== oldVal) {
@@ -38,7 +38,7 @@
           }
         }));
       }
-      return results1;
+      return _results;
     };
     return $scope.$on('clearFacetFilter', function() {
       return delete $scope.params['facet'];
@@ -365,11 +365,11 @@
     $scope.query_filter = '';
     $scope.refreshFilter = function() {
       "Update FilterService data";
-      var i, len, ref, tag, tags_list;
+      var tag, tags_list, _i, _len, _ref;
       tags_list = [];
-      ref = $scope.tags_filter;
-      for (i = 0, len = ref.length; i < len; i++) {
-        tag = ref[i];
+      _ref = $scope.tags_filter;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        tag = _ref[_i];
         tags_list.push(tag.text);
       }
       FilterService.filterParams.tags = tags_list;

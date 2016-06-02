@@ -49,16 +49,16 @@
       $scope.clearList();
       delete $scope.params['ordering'];
       return $scope.refreshList().then(function() {
-        var nbElmt, rand, results, tmp;
+        var nbElmt, rand, tmp, _results;
         nbElmt = $scope.projects.length;
-        results = [];
+        _results = [];
         while (nbElmt) {
           rand = Math.floor(Math.random() * nbElmt--);
           tmp = $scope.projects[nbElmt];
           $scope.projects[nbElmt] = $scope.projects[rand];
-          results.push($scope.projects[rand] = tmp);
+          _results.push($scope.projects[rand] = tmp);
         }
-        return results;
+        return _results;
       });
     };
     $scope.fetchThematicProjects = function() {
@@ -109,17 +109,17 @@
       var progress;
       return $scope.progressRange = [
         (function() {
-          var i, len, ref, results;
-          ref = $filter('orderBy')(progressRangeResult, 'order');
-          results = [];
-          for (i = 0, len = ref.length; i < len; i++) {
-            progress = ref[i];
-            results.push({
+          var _i, _len, _ref, _results;
+          _ref = $filter('orderBy')(progressRangeResult, 'order');
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            progress = _ref[_i];
+            _results.push({
               value: progress.resource_uri,
               text: progress.label
             });
           }
-          return results;
+          return _results;
         })()
       ][0];
     });
@@ -147,7 +147,7 @@
           })
         };
         return MakerScienceProject.post(makerscienceProjectData).then(function(makerscienceProjectResult) {
-          var i, x;
+          var x, _i;
           ObjectProfileLink.one().customPOST({
             profile_id: $scope.currentMakerScienceProfile.parent.id,
             level: 0,
@@ -202,7 +202,7 @@
           });
           if ($scope.uploader.queue.length === 0) {
             $scope.fake_progress = 0;
-            for (x = i = 1; i <= 5; x = ++i) {
+            for (x = _i = 1; _i <= 5; x = ++_i) {
               $scope.fake_progress += 100 / 5;
             }
             return $timeout(function() {
@@ -411,17 +411,17 @@
         var progress;
         $scope.progressRange = [
           (function() {
-            var i, len, ref, results;
-            ref = $filter('orderBy')(progressRangeResult, 'order');
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              progress = ref[i];
-              results.push({
+            var _i, _len, _ref, _results;
+            _ref = $filter('orderBy')(progressRangeResult, 'order');
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              progress = _ref[_i];
+              _results.push({
                 value: progress.resource_uri,
                 text: progress.label
               });
             }
-            return results;
+            return _results;
           })()
         ][0];
         return $scope.showProjectProgress = function() {
