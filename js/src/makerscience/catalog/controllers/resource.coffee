@@ -2,7 +2,7 @@ module = angular.module("makerscience.catalog.controllers.resource", ['makerscie
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
-module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticContent, MakerScienceResourceLight, MakerScienceResourceTaggedItem) ->
+module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticContent, MakerScienceResourceLight, MakerScienceResourceTaggedItem, FilterService) ->
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {$scope: $scope}))
 
     $scope.params["limit"] = $scope.limit =  6
