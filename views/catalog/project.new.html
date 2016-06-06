@@ -12,10 +12,10 @@
             <div id="content" class="new-project">
 
                 <h2>Créer un projet</h2>
-                <p>Ce formulaire vous permet de décrire en détails votre projet. Plus vous détaillerez, plus vous donnerez envie aux membres de s'investir dans votre projet et le relayer.</p>
-                <p>Pour toute question <a href="">contacter l'équipe de Makerscience</a></p>
-
-
+                <div class="introduction">
+                  <p>Ce formulaire vous permet de décrire en détails votre projet. Plus vous détaillerez, plus vous donnerez envie aux membres de s'investir dans votre projet et le relayer.</p>
+                  <p>Pour toute question <a href="">contacter l'équipe de Makerscience</a></p>
+                </div>
 
                 <form name="newProjectForm"
                       novalidate
@@ -31,11 +31,10 @@
                                     <accordion-heading>
                                         Caractéristiques du projet
                                     </accordion-heading>
-                                    <fieldset class="fake-placeholder">
+                                    <fieldset>
                                         <label>Nom du projet <span class="required">*</span></label>
                                         <input type="text"
                                                name="projectName"
-                                               placeholder=">"
                                                ng-model="projectsheet.project.title"
                                                maxlength="50"
                                                required/>
@@ -44,7 +43,6 @@
                                         <label>Description courte <span class="required">*</span></label>
                                         <input type="text"
                                                     name="projectBaseline"
-                                                    placeholder=">"
                                                     ng-model="projectsheet.project.baseline"
                                                     maxlength="100"
                                                     required/>
@@ -53,7 +51,6 @@
                                         <label>Thématiques <span class="required">*</span></label>
                                         <input type="text"
                                             name="projectBaseline"
-                                            placeholder=">"
                                             ng-model="projectsheet.project.baseline"
                                             maxlength="100"
                                             required/>
@@ -62,9 +59,9 @@
 
                                 <accordion-group is-open="status1.open">
                                     <accordion-heading>
-                                        Informations complémentaires <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status1.open, 'glyphicon-chevron-right': !status1.open}"></i>
+                                        <p>Informations complémentaires <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status1.open, 'glyphicon-chevron-right': !status1.open}"></i></p>
                                     </accordion-heading>
-                                    <fieldset class="fake-placeholder">
+                                    <fieldset>
                                         <label>État d'avancement</label>
                                         <select ng-model="projectsheet.project.progress" ng-options="progress.value as progress.text for progress in progressRange">
                                         </select>
@@ -89,7 +86,7 @@
 
                                 <accordion-group is-open="status2.open">
                                     <accordion-heading>
-                                        Médias <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status2.open, 'glyphicon-chevron-right': !status2.open}"></i>
+                                        <p>Médias <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status2.open, 'glyphicon-chevron-right': !status2.open}"></i></p>
                                     </accordion-heading>
                                     <fieldset class="addPhotosVideos">
                                         <label ng-click="openGallery()">Ajouter des médias</label>
@@ -108,7 +105,7 @@
 
                                 <accordion-group is-open="status3.open">
                                     <accordion-heading>
-                                        Précisions sur le projet <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status3.open, 'glyphicon-chevron-right': !status3.open}"></i>
+                                        <p>Précisions sur le projet <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status3.open, 'glyphicon-chevron-right': !status3.open}"></i></p>
                                     </accordion-heading>
                                     <fieldset class="new-project">
                                         <label>Description complète</label>
@@ -147,7 +144,7 @@
 
                                 <accordion-group is-open="status4.open">
                                     <accordion-heading>
-                                        Contacts <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status4.open, 'glyphicon-chevron-right': !status4.open}"></i>
+                                        <p>Contacts <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status4.open, 'glyphicon-chevron-right': !status4.open}"></i></p>
                                     </accordion-heading>
                                     <fieldset class="fake-placeholder">
                                       <label><span class="glyphicon glyphicon-globe"></span> Site web</label>
@@ -171,7 +168,6 @@
                                         <p class="small subtitle">Créez une discussion précisant vos besoins (idées, matériel, financement, testeurs, relais…). Elle sera affichée sur votre projet et sur le forum de discussions.</p>
                                     </accordion-heading>
                                     <fieldset class="needs needs-select">
-
                                         <label for="new-need">Description du besoin <span class="required">*</span></label>
                                         <input type="text" id="new-need" ng-model="newNeed.title" placeholder="J’ai besoin de ... pour le projet ..."/>
 
