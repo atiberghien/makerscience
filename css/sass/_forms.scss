@@ -28,6 +28,17 @@
 
 		form {
 
+			.panel {
+				.subtitle {
+					line-height: 2em;
+					float: left;
+				}
+			}
+
+			.panel-heading {
+				overflow: hidden;
+			}
+
 			fieldset {
 				margin-bottom: 0.75em;
 				padding: 0.5em 1.5em 2.5em 1.5em;

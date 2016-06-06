@@ -25,174 +25,193 @@
                       ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3>Caractéristiques du projet</h3>
-                            <fieldset class="fake-placeholder">
-                                <label>Nom du projet <span class="required">*</span></label>
-                                <input type="text"
-                                       name="projectName"
-                                       placeholder=">"
-                                       ng-model="projectsheet.project.title"
-                                       maxlength="50"
-                                       required/>
-                                <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Nom du projet requis</p>
 
-                                <label>Description courte <span class="required">*</span></label>
-                                <input type="text"
+                            <accordion close-others="false">
+                                <accordion-group is-open="true" is-disabled="true">
+                                    <accordion-heading>
+                                        Caractéristiques du projet
+                                    </accordion-heading>
+                                    <fieldset class="fake-placeholder">
+                                        <label>Nom du projet <span class="required">*</span></label>
+                                        <input type="text"
+                                               name="projectName"
+                                               placeholder=">"
+                                               ng-model="projectsheet.project.title"
+                                               maxlength="50"
+                                               required/>
+                                        <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Nom du projet requis</p>
+
+                                        <label>Description courte <span class="required">*</span></label>
+                                        <input type="text"
+                                                    name="projectBaseline"
+                                                    placeholder=">"
+                                                    ng-model="projectsheet.project.baseline"
+                                                    maxlength="100"
+                                                    required/>
+                                        <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Courte description du projet requise</p>
+
+                                        <label>Thématiques <span class="required">*</span></label>
+                                        <input type="text"
                                             name="projectBaseline"
                                             placeholder=">"
                                             ng-model="projectsheet.project.baseline"
                                             maxlength="100"
                                             required/>
-                                <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Courte description du projet requise</p>
+                                   </fieldset>
+                                </accordion-group>
 
-                                <label>Thématiques <span class="required">*</span></label>
-                                <input type="text"
-                                    name="projectBaseline"
-                                    placeholder=">"
-                                    ng-model="projectsheet.project.baseline"
-                                    maxlength="100"
-                                    required/>
-                           </fieldset>
+                                <accordion-group is-open="status1.open">
+                                    <accordion-heading>
+                                        Informations complémentaires <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status1.open, 'glyphicon-chevron-right': !status1.open}"></i>
+                                    </accordion-heading>
+                                    <fieldset class="fake-placeholder">
+                                        <label>État d'avancement</label>
+                                        <select ng-model="projectsheet.project.progress" ng-options="progress.value as progress.text for progress in progressRange">
+                                        </select>
 
-                           <h3>Informations complémentaires</h3>
-                           <fieldset class="fake-placeholder">
-                               <label>État d'avancement</label>
-                               <select ng-model="projectsheet.project.progress" ng-options="progress.value as progress.text for progress in progressRange">
-                               </select>
+                                        <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet</label>
+                                        <input type="text" ng-model="projectsheet.project.end_date" />
+                                        </select>
 
-                               <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet</label>
-                               <input type="text" ng-model="projectsheet.project.end_date" />
-                               </select>
+                                        <label><span class="glyphicon glyphicon-map-marker"></span> Localisation : </label>
+                                        <input type="text" ng-model="projectsheet.project.location.address.address_locality" />
+                                        </select>
 
-                               <label><span class="glyphicon glyphicon-map-marker"></span> Localisation : </label>
-                               <input type="text" ng-model="projectsheet.project.location.address.address_locality" />
-                               </select>
+                                        <label>Porteurs et partenaires</label>
+                                        <textarea ui-tinymce="tinyMceFullOptions"
+                                                    ng-trim="false"
+                                                    name="project-about"
+                                                    ng-model="projectsheet.project.description"
+                                                    rows="4">
+                                        </textarea>
+                                    </fieldset>
+                                </accordion-group>
 
-                               <label>Porteurs et partenaires</label>
-                               <textarea ui-tinymce="tinyMceFullOptions"
-                                           ng-trim="false"
-                                           name="project-about"
-                                           ng-model="projectsheet.project.description"
-                                           rows="4">
-                               </textarea>
-                           </fieldset>
-                           <!-- <fieldset class="fake-placeholder">
-                               <div ng-controller="TagAutoCompleteCtrl">
-                                   <label>Ajoutez des tags précisant aux mieux les thématiques abordées par votre projet (biologie, sport, art, histoire...)</label>
-                                   <tags-input ng-model="themesTags"
-                                               placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)">
-                                     <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
-                                   </tags-input>
-                               </div>
-                           </fieldset> -->
+                                <accordion-group is-open="status2.open">
+                                    <accordion-heading>
+                                        Médias <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status2.open, 'glyphicon-chevron-right': !status2.open}"></i>
+                                    </accordion-heading>
+                                    <fieldset class="addPhotosVideos">
+                                        <label ng-click="openGallery()">Ajouter des médias</label>
+                                        <button type="button" class="addPhotos" ng-click="openGallery()">
+                                            <span class="glyphicon glyphicon-camera"></span>
+                                        </button>
+                                        <button type="button" class="addVideos" ng-click="openGallery()">
+                                            <span class="glyphicon glyphicon-facetime-video"></span>
+                                        </button>
 
-                          <h3>Médias</h3>
-                          <fieldset class="addPhotosVideos">
-                              <label ng-click="openGallery()">Ajouter des médias</label>
-                              <button type="button" class="addPhotos" ng-click="openGallery()">
-                                  <span class="glyphicon glyphicon-camera"></span>
-                              </button>
-                              <button type="button" class="addVideos" ng-click="openGallery()">
-                                  <span class="glyphicon glyphicon-facetime-video"></span>
-                              </button>
+                                        <label><span class="glyphicon glyphicon-globe"></span> Site web : </label>
+                                        <input type="text" ng-model="projectsheet.project.website" />
+                                        </select>
+                                    </fieldset>
+                                </accordion-group>
 
-                              <label><span class="glyphicon glyphicon-globe"></span> Site web : </label>
-                              <input type="text" ng-model="projectsheet.project.website" />
-                              </select>
-                          </fieldset>
+                                <accordion-group is-open="status3.open">
+                                    <accordion-heading>
+                                        Précisions sur le projet <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status3.open, 'glyphicon-chevron-right': !status3.open}"></i>
+                                    </accordion-heading>
+                                    <fieldset class="new-project">
+                                        <label>Description complète</label>
+                                        <textarea ui-tinymce="tinyMceFullOptions"
+                                            ng-trim="false"
+                                            name="project-about"
+                                            ng-model="projectsheet.project.description"
+                                            rows="4">
+                                        </textarea>
 
-                          <h3>Précisions sur le projet</h3>
-                          <fieldset class="new-project">
-                              <label>Description complète</label>
-                              <textarea ui-tinymce="tinyMceFullOptions"
-                                  ng-trim="false"
-                                  name="project-about"
-                                  ng-model="projectsheet.project.description"
-                                  rows="4">
-                              </textarea>
+                                        <label>Détails du projet</label>
+                                        <textarea ui-tinymce="tinyMceFullOptions"
+                                            ng-trim="false"
+                                            name="project-about"
+                                            ng-model="projectsheet.project.description"
+                                            rows="4">
+                                        </textarea>
 
-                              <label>Détails du projet</label>
-                              <textarea ui-tinymce="tinyMceFullOptions"
-                                  ng-trim="false"
-                                  name="project-about"
-                                  ng-model="projectsheet.project.description"
-                                  rows="4">
-                              </textarea>
+                                        <label>Éléments de réussite du projet</label>
+                                        <textarea ui-tinymce="tinyMceFullOptions"
+                                            ng-trim="false"
+                                            name="project-about"
+                                            ng-model="projectsheet.project.description"
+                                            rows="4">
+                                        </textarea>
 
-                              <label>Éléments de réussite du projet</label>
-                              <textarea ui-tinymce="tinyMceFullOptions"
-                                  ng-trim="false"
-                                  name="project-about"
-                                  ng-model="projectsheet.project.description"
-                                  rows="4">
-                              </textarea>
+                                        <label>Reste à faire sur le projet</label>
+                                        <textarea ui-tinymce="tinyMceFullOptions"
+                                            ng-trim="false"
+                                            name="project-about"
+                                            ng-model="projectsheet.project.description"
+                                            rows="4">
+                                        </textarea>
+                                    </fieldset>
+                                </accordion-group>
 
-                              <label>Reste à faire sur le projet</label>
-                              <textarea ui-tinymce="tinyMceFullOptions"
-                                  ng-trim="false"
-                                  name="project-about"
-                                  ng-model="projectsheet.project.description"
-                                  rows="4">
-                              </textarea>
-                          </fieldset>
+                                <accordion-group is-open="status4.open">
+                                    <accordion-heading>
+                                        Contacts <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status4.open, 'glyphicon-chevron-right': !status4.open}"></i>
+                                    </accordion-heading>
+                                    <fieldset class="fake-placeholder">
+                                      <label><span class="glyphicon glyphicon-globe"></span> Site web</label>
+                                      <input type="text" ng-model="projectsheet.project.website" />
+                                      </select>
 
-                          <h3>Contacts</h3>
-                          <fieldset class="fake-placeholder">
-                            <label><span class="glyphicon glyphicon-globe"></span> Site web</label>
-                            <input type="text" ng-model="projectsheet.project.website" />
-                            </select>
+                                        <label>Pour en savoir plus</label>
+                                        <textarea ui-tinymce="tinyMceFullOptions"
+                                          ng-trim="false"
+                                          name="question_{{$index}}"
+                                          ng-model="item.answer"
+                                          e-rows="4">
+                                        </textarea>
+                                    </fieldset>
+                                </accordion-group>
 
-                              <label>Pour en savoir plus</label>
-                              <textarea ui-tinymce="tinyMceFullOptions"
-                                ng-trim="false"
-                                name="question_{{$index}}"
-                                ng-model="item.answer"
-                                e-rows="4">
-                              </textarea>
-                          </fieldset>
+                                <accordion-group is-open="status5.open">
+                                    <accordion-heading>
+                                        <span>Besoins</span>
+                                        <button class="btn btn-sm btn-primary pull-right">Ajouter un besoin</button>
+                                        <p class="small subtitle">Créez une discussion précisant vos besoins (idées, matériel, financement, testeurs, relais…). Elle sera affichée sur votre projet et sur le forum de discussions.</p>
+                                    </accordion-heading>
+                                    <fieldset class="needs needs-select">
 
-                          <h3>Besoins</h3>
-                          <p>Créez une discussion précisant vos besoins (idées, matériel, financement, testeurs, relais…). Elle sera affichée sur votre projet et sur le forum de discussions.</p>
-                          <fieldset class="needs needs-select">
+                                        <label for="new-need">Description du besoin <span class="required">*</span></label>
+                                        <input type="text" id="new-need" ng-model="newNeed.title" placeholder="J’ai besoin de ... pour le projet ..."/>
 
-                              <label for="new-need">Description du besoin <span class="required">*</span></label>
-                              <input type="text" id="new-need" ng-model="newNeed.title" placeholder="J’ai besoin de ... pour le projet ..."/>
-
-                              <label for="">Précisions sur le besoin</label>
-                              <textarea ui-tinymce="tinyMceFullOptions"
-                                ng-trim="false"
-                                ng-model="newNeed.text"
-                                name="project-need"
-                                placeholder="Descrivez votre besoin le plus précisement possible."
-                                rows="3">
-                              </textarea>
+                                        <label for="">Précisions sur le besoin</label>
+                                        <textarea ui-tinymce="tinyMceFullOptions"
+                                          ng-trim="false"
+                                          ng-model="newNeed.text"
+                                          name="project-need"
+                                          placeholder="Descrivez votre besoin le plus précisement possible."
+                                          rows="3">
+                                        </textarea>
 
 
-                              <div class="need-keywords">
-                                  <div ng-controller="TagAutoCompleteCtrl">
-                                      <label>Mots-clés :</label>
-                                      <tags-input ng-model="questionTags"
-                                        placeholder="> Mot-clé">
-                                        <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
-                                      </tags-input>
-                                  </div>
-                              </div>
-                              <button type="button" class="button" ng-click="addNeed(newNeed);questionTags=null">Ajouter le besoin</button>
-
-                              <ul class="list-group">
-                                  <li ng-repeat="(index, need) in needs">
-                                      <div class="row">
-                                        <div class="col-md-10">
-                                          <p ng-bind-html="need.title"></p>
-                                          <!-- <p ng-bind-html="need.description"></p> -->
+                                        <div class="need-keywords">
+                                            <div ng-controller="TagAutoCompleteCtrl">
+                                                <label>Mots-clés :</label>
+                                                <tags-input ng-model="questionTags"
+                                                  placeholder="> Mot-clé">
+                                                  <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+                                                </tags-input>
+                                            </div>
                                         </div>
-                                        <div class="col-md-2">
-                                          <button class="btn btn-danger" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
-                                        </div>
-                                      </div>
-                                  </li>
-                              </ul>
-                          </fieldset>
+                                        <button type="button" class="button" ng-click="addNeed(newNeed);questionTags=null">Ajouter le besoin</button>
+
+                                        <ul class="list-group">
+                                            <li ng-repeat="(index, need) in needs">
+                                                <div class="row">
+                                                  <div class="col-md-10">
+                                                    <p ng-bind-html="need.title"></p>
+                                                    <!-- <p ng-bind-html="need.description"></p> -->
+                                                  </div>
+                                                  <div class="col-md-2">
+                                                    <button class="btn btn-danger" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                                  </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                </accordion-group>
+                            </accordion>
                         </div>
                     </div><!-- .row -->
 
