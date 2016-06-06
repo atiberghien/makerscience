@@ -76,10 +76,10 @@
 
                                         <label>Porteurs et partenaires</label>
                                         <textarea ui-tinymce="tinyMceFullOptions"
-                                                    ng-trim="false"
-                                                    name="project-about"
-                                                    ng-model="projectsheet.project.description"
-                                                    rows="4">
+                                            ng-trim="false"
+                                            name="project-about"
+                                            ng-model="projectsheet.project.description"
+                                            rows="4">
                                         </textarea>
                                     </fieldset>
                                 </accordion-group>
@@ -185,7 +185,7 @@
                                             <div ng-controller="TagAutoCompleteCtrl">
                                                 <label>Mots-clés :</label>
                                                 <tags-input ng-model="questionTags"
-                                                  placeholder="> Mot-clé">
+                                                  placeholder="Nouveau mot-clé">
                                                   <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
                                                 </tags-input>
                                             </div>

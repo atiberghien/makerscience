@@ -57,6 +57,9 @@
 						transform: rotate(-90deg);
 					}
 				}
+				.panel-body {
+					padding-top: .25em;
+				}
 			}
 
 			.panel-heading {
@@ -126,23 +129,6 @@
 							border: 1px solid #ccc;
 							@include border-radius(2px);
 						}
-						.need-keywords {
-        						div.tags {
-            							box-shadow: none;
-            							li.tag-item {
-                							background-color: $color-blue;
-                							@include border-radius(0);
-            							}
-            							input.input {
-                							background-color: white !important;
-									padding: 0.25em !important;
-									border: 1px solid #d3d7da;
-            							}
-            							ul.tag-list {
-                							margin-right: $grid-gutter-width;
-            							}
-        						}
-    						}
 						button.button {
 							position: relative;
     							float: right;
@@ -344,16 +330,12 @@
 			}
 			label {
 				padding-bottom: .5em;
-				&:not(:first-child) {
-					padding-top: 1em;
-				}
+				padding-top: 1em;
 			}
 			input, textarea {
 				width: 100%;
-				// margin-bottom: 0.75em;
 				padding: 0.75em;
 				color: $color-form-text;
-				background-color: $color-form-input-bg;
 				background-color: #fff;
 				border: solid 1px $color-light-grey;
 				@include placeholder($color-form-text);
@@ -364,6 +346,9 @@
 			select {
 				display: block;
 				margin-bottom: 1em;
+			}
+			.mce-panel {
+				border: solid 1px $color-light-grey;
 			}
 			ul.phases {
 				margin: 1em 0 0;
@@ -495,14 +480,30 @@
 			background-color: transparent;
 			box-shadow: none;
 			input {
-				padding: 0 !important;
+				padding: 0.75em;
+				margin: 0;
+				height: auto;
 				background-color: transparent !important;
+				width: 100% !important;
 			}
 			li.tag-item {
 				background-color: $color-blue !important;
 				@include border-radius(1px);
 				a, a.remove-button {
 					background-color: $color-blue !important;
+				}
+			}
+			.tag-list {
+				overflow: hidden;
+				padding-bottom: .25em;
+			}
+			.tag-item {
+				margin-top: 0;
+				&:first-child {
+          margin-left: 0;
+        }
+				.remove-button {
+					color: white;
 				}
 			}
 		}
