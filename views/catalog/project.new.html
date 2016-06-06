@@ -59,7 +59,7 @@
 
                                 <accordion-group is-open="status1.open">
                                     <accordion-heading>
-                                        <p>Informations complémentaires <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status1.open, 'glyphicon-chevron-right': !status1.open}"></i></p>
+                                        <p>Informations complémentaires <i class="pull-right glyphicon glyphicon-chevron-down" ng-class="{'right': !status1.open}"></i></p>
                                     </accordion-heading>
                                     <fieldset>
                                         <label>État d'avancement</label>
@@ -86,7 +86,7 @@
 
                                 <accordion-group is-open="status2.open">
                                     <accordion-heading>
-                                        <p>Médias <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status2.open, 'glyphicon-chevron-right': !status2.open}"></i></p>
+                                        <p>Médias <i class="pull-right glyphicon glyphicon-chevron-down" ng-class="{'right': !status2.open}"></i></p>
                                     </accordion-heading>
                                     <fieldset class="addPhotosVideos">
                                         <label ng-click="openGallery()">Ajouter des médias</label>
@@ -105,7 +105,7 @@
 
                                 <accordion-group is-open="status3.open">
                                     <accordion-heading>
-                                        <p>Précisions sur le projet <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status3.open, 'glyphicon-chevron-right': !status3.open}"></i></p>
+                                        <p>Précisions sur le projet <i class="pull-right glyphicon glyphicon-chevron-down" ng-class="{'right': !status3.open}"></i></p>
                                     </accordion-heading>
                                     <fieldset class="new-project">
                                         <label>Description complète</label>
@@ -144,7 +144,7 @@
 
                                 <accordion-group is-open="status4.open">
                                     <accordion-heading>
-                                        <p>Contacts <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status4.open, 'glyphicon-chevron-right': !status4.open}"></i></p>
+                                        <p>Contacts <i class="pull-right glyphicon glyphicon-chevron-down" ng-class="{'right': !status4.open}"></i></p>
                                     </accordion-heading>
                                     <fieldset class="fake-placeholder">
                                       <label><span class="glyphicon glyphicon-globe"></span> Site web</label>
@@ -164,7 +164,7 @@
                                 <accordion-group is-open="status5.open">
                                     <accordion-heading>
                                         <span>Besoins</span>
-                                        <button class="btn btn-sm btn-primary pull-right">Ajouter un besoin</button>
+                                        <button class="btn btn-sm btn-primary toggle-button">Ajouter un besoin</button>
                                         <p class="small subtitle">Créez une discussion précisant vos besoins (idées, matériel, financement, testeurs, relais…). Elle sera affichée sur votre projet et sur le forum de discussions.</p>
                                     </accordion-heading>
                                     <fieldset class="needs needs-select">

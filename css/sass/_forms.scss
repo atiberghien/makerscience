@@ -34,9 +34,28 @@
 					font-weight: bold;
 					color: $color-content-tab;
 				}
+				.accordion-toggle {
+					&:hover {
+						text-decoration: none;
+					}
+				}
 				.subtitle {
-					line-height: 2em;
-					float: left;
+					line-height: 1.2em;
+					padding-right: 1em;
+					padding-top: 8px;
+				}
+				.toggle-button {
+					float: right;
+					width: 130px;
+				}
+				.toggle-button + .subtitle {
+					padding-right: 150px;
+				}
+				.glyphicon-chevron-down {
+					transition: transform .2s;
+					&.right {
+						transform: rotate(-90deg);
+					}
 				}
 			}
 
