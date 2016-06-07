@@ -76,6 +76,11 @@ button.button {
 	}
 }
 
+.btn-warning:hover {
+	border-color: transparent;
+	color: $color-red;
+}
+
 h2.boxed {
 	margin-top: $grid-gutter-width;
 	padding: 1.25em;
