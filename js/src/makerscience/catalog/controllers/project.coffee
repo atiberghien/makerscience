@@ -178,31 +178,31 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
                 ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
                 # if no photos to upload, directly go to new project sheet
-                if $scope.uploader.queue.length == 0
-                    $scope.fake_progress = 0
-                    ##UGLY : to be sur that all remote ops are finished ... :/
-                    for x in [1..5]
-                        $scope.fake_progress += 100/5
-                    
-                    $timeout(() ->
-                        $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
-                    ,5000)
-                else
-                    $scope.uploader.onBeforeUploadItem = (item) ->
-                        item.formData.push(
-                            bucket : projectsheetResult.bucket.id
-                        )
-                        item.headers =
-                           Authorization : $scope.uploader.headers["Authorization"]
-
-                    $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
-                        if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
-                            ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
-
-                    $scope.uploader.onCompleteAll = () ->
-                        $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
-
-                    $scope.uploader.uploadAll()
+                # if $scope.uploader.queue.length == 0
+                #     $scope.fake_progress = 0
+                #     ##UGLY : to be sur that all remote ops are finished ... :/
+                #     for x in [1..5]
+                #         $scope.fake_progress += 100/5
+                #
+                #     $timeout(() ->
+                #         $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+                #     ,5000)
+                # else
+                #     $scope.uploader.onBeforeUploadItem = (item) ->
+                #         item.formData.push(
+                #             bucket : projectsheetResult.bucket.id
+                #         )
+                #         item.headers =
+                #            Authorization : $scope.uploader.headers["Authorization"]
+                #
+                #     $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
+                #         if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
+                #             ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
+                #
+                #     $scope.uploader.onCompleteAll = () ->
+                #         $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+                #
+                #     $scope.uploader.uploadAll()
             )
         )
 )

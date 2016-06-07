@@ -141,7 +141,24 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, FileUploader, @$http) 
             $scope.coverCandidateQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
 
     $scope.addMedia = (media) ->
-        console.log(media)
+        console.log($scope.uploader.queue)
+
+        $scope.uploader.onBeforeUploadItem = (item) ->
+            item.formData.push(
+                bucket : projectsheetResult.bucket.id
+            )
+            item.headers =
+               Authorization : $scope.uploader.headers["Authorization"]
+
+        $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
+            if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
+                ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
+
+        $scope.uploader.onCompleteAll = () ->
+            $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+
+        $scope.uploader.uploadAll()
+
 
     $scope.addVideo = (newVideoURL) ->
         $scope.videos[newVideoURL] = null

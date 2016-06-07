@@ -122,12 +122,12 @@
                                             <tabset>
                                                 <tab select="tabSelect('image')">
                                                     <tab-heading>
-                                                        <span class="glyphicon glyphicon-camera"></span>
+                                                        <span class="glyphicon glyphicon-picture"></span>
                                                         Image
                                                     </tab-heading>
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <inputfile id="file-image" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
+                                                            <inputfile id="file-image" uploader="uploader" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
                                                             <span class="parcourir">ou</span>
                                                         </div>
                                                         <div class="col-md-8">
@@ -143,7 +143,7 @@
                                                     </tab-heading>
                                                     <div class="row">
                                                       <div class="col-md-4">
-                                                          <inputfile id="file-document" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
+                                                          <inputfile id="file-document" uploader="uploader" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
                                                           <span class="parcourir">ou</span>
                                                       </div>
                                                         <div class="col-md-8">
@@ -183,20 +183,39 @@
                                                     </p>
                                                 </div>
                                             </div>
+
+                                            <div class="progress" ng-show="hideControls">
+                                                <div ng-show="uploader.queue.length > 0" class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
+                                                <div ng-show="uploader.queue.length == 0" class="progress-bar" role="progressbar" ng-style="{ 'width': fake_progress + '%' }" style="width: 0%;"></div>
+                                            </div>
                                         </form>
 
-                                        <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
-                                            <div ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
-                                            <div></div>
-                                            <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
-                                                <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
-                                                <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
-                                                Couverture
-                                            </button>
-                                            <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
-                                                <span class="glyphicon glyphicon-trash"></span> Supprimer
-                                            </button>
-                                        </li>
+                                        <ul class="thumbnails">
+                                            <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
+                                                <img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" height="100px"/>
+                                                <div></div>
+                                                <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
+                                                    <span ng-hide="isCover(file)" class="glyphicon glyphicon-star"></span>
+                                                    <span ng-show="isCover(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+                                                    Couverture
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-xs" ng-click="removePicture(file)">
+                                                    <span class="glyphicon glyphicon-trash"></span> Supprimer
+                                                </button>
+                                            </li>
+                                            <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
+                                                <div ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
+                                                <div></div>
+                                                <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
+                                                    <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
+                                                    <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+                                                    Couverture
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
+                                                    <span class="glyphicon glyphicon-trash"></span> Supprimer
+                                                </button>
+                                            </li>
+                                        </ul>
                                     </fieldset>
                                 </accordion-group>
 
@@ -288,7 +307,7 @@
                         </div>
                     </div><!-- .row -->
 
-                    <p class="right" ng-hide="hideControls">
+                    <p class="right">
                         <button type="button" class="btn btn-warning btn-lg cancel" ui-sref="project.list">Annuler</button>
                         <!-- FIXME : set up ctrler to allow 'save as draft'  -->
                         <!-- <button type="button" class="button">Enregistrer en brouillon</button>
@@ -296,10 +315,6 @@
                          -->
                         <button type="submit" class="btn btn-primary btn-lg" ng-click="submitted=true;hideControls=true">Enregistrer</button>
                     </p>
-                    <div class="progress" ng-show="hideControls">
-                        <div ng-show="uploader.queue.length > 0" class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
-                        <div ng-show="uploader.queue.length == 0" class="progress-bar" role="progressbar" ng-style="{ 'width': fake_progress + '%' }" style="width: 0%;"></div>
-                    </div>
                 </form>
 
             </div><!-- #content -->
