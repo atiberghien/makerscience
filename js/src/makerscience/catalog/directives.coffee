@@ -44,6 +44,7 @@ module.directive('inputfile', [ ->
     return {
       restrict: 'E'
       scope: {
+        setTitle: '&'
         id: '='
         fileread: '='
         label: '='
@@ -54,10 +55,10 @@ module.directive('inputfile', [ ->
       '''
       link: (scope, element, attributes) ->
           element.bind 'change', (changeEvent) ->
-              console.log(scope)
               scope.$apply ->
                 scope.fileread = changeEvent.target.files[0]
                 return
+              scope.setTitle(scope.fileread.name)
     }
 
 ])

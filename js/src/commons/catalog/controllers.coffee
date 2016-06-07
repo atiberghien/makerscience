@@ -95,33 +95,20 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
 )
 
 module.controller('GalleryCreationInstanceCtrl', ($scope, FileUploader, @$http) ->
-    $scope.newMedia = {}
+    $scope.newMedia = {
+        title: 'title'
+    }
 
-    # inputs = document.querySelectorAll('.inputfile')
-    # Array::forEach.call inputs, (input) ->
-    #   label = input.nextElementSibling
-    #   labelVal = label.innerHTML
-    #   console.log label
-    #   console.log labelVal
-    #   input.addEventListener 'change', (e) ->
-
-    #   fileName = ''
-    #   if @files and @files.length > 1
-    #     fileName = (@getAttribute('data-multiple-caption') or '').replace('{count}', @files.length)
-    #   else
-    #     fileName = e.target.value.split('\\').pop()
-    #   if fileName
-    #     label.querySelector('span').innerHTML = fileName
-    #   else
-    #     label.innerHTML = labelVal
-    #   return
-    # return
+    $scope.setTitle = (title) ->
+        $scope.$apply ->
+          $scope.newMedia.title = title
+          return
 
     $scope.tabSelect = (type) ->
         $scope.newMedia = {
+          title: ''
           type: type
         }
-        console.log($scope.newMedia)
 
     $scope.videos = {}
     $scope.coverCandidateQueueIndex = null
