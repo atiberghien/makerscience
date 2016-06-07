@@ -182,8 +182,9 @@
 				}
 				&.addPhotosVideos {
 					ul.nav-tabs {
-						margin-bottom: 0;
+						margin-bottom: 10px;
 						> li {
+							margin-right: 6px;
 							&.active {
 								a {
 									background: $color-blue;
@@ -191,8 +192,17 @@
 								}
 							}
 							a {
+								span {
+									font-size: 30px;
+									display: block;
+									padding: 6px 0;
+								}
+								padding: 4px;
 								font-size: 1em;
-								padding: 8px 12px;
+								width: 76px;
+								height: 76px;
+								border-radius: 0;
+								text-align: center;
 							}
 						}
 					}
