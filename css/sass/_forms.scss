@@ -30,11 +30,19 @@
 
 			.panel {
 				h4 {
-					font-size: 1.4em;
+					font-size: 1.3em;
 					font-weight: bold;
-					color: $color-content-tab;
+				}
+				h5 {
+					font-size: 1.3em;
+					font-weight: bold;
+					margin-top: .75em;
+					color: $color-crumbs-grey;
 				}
 				.accordion-toggle {
+					> span {
+						vertical-align: middle;
+					}
 					&:hover {
 						text-decoration: none;
 					}
@@ -46,10 +54,10 @@
 				}
 				.toggle-button {
 					float: right;
-					width: 130px;
+					width: 160px;
 				}
 				.toggle-button + .subtitle {
-					padding-right: 150px;
+					padding-right: 180px;
 				}
 				.glyphicon-chevron-down {
 					transition: transform .2s;
@@ -69,20 +77,12 @@
 			fieldset {
 				margin: 0;
 				padding: 0;
+				.item-validate {
+					margin-top: 80px;
+					text-align: right;
+				}
 				&.needs-idea, &.needs-select, &.linked-idea {
 					background-color: transparent;
-					h5 {
-						margin-top: 0.5em;
-						margin-left: 25%;
-						font-size: 1.5em;
-						text-transform: uppercase;
-					}
-					p {
-						margin-bottom: 1em;
-						&:last-child {
-							margin-bottom: 0;
-						}
-					}
 					textarea {
 						width: 75%;
 						margin-left: 25%;
@@ -109,16 +109,6 @@
 						button.dropdown-toggle {
 							.caret {
 								margin-left: 1em;
-							}
-						}
-						p {
-							margin: 0.5em;
-							&.right {
-								margin-top: 1em;
-								button {
-									display: inline-block;
-									padding: 0.5em 1em;
-								}
 							}
 						}
 						textarea {
@@ -191,27 +181,41 @@
 					}
 				}
 				&.addPhotosVideos {
-					text-align: right;
-					padding: 0;
-					label {
-						float: left;
-						padding: 15px 20px 0;
+					ul.nav-tabs {
+						margin-bottom: 0;
+						> li {
+							&.active {
+								a {
+									background: $color-blue;
+									color: white;
+								}
+							}
+							a {
+								font-size: 1em;
+								padding: 8px 12px;
+							}
+						}
 					}
-					button {
-						&.addPhotos, &.addVideos {
-							display: inline-block;
-							margin: 0;
-							padding: 10px 15px;
-							color: #fff;
-							font-size: 2em;
-							border: none;
-						}
-						&.addPhotos {
-							background-color: $color-blue;
-						}
-						&.addVideos {
-							background-color: $color-dark-blue;
-						}
+					.parcourir {
+						display: block;
+						text-align: center;
+						margin-top: 40px;
+						width: 100%;
+					}
+					.inputfile {
+						width: 0.1px;
+						height: 0.1px;
+						opacity: 0;
+						overflow: hidden;
+						position: absolute;
+						z-index: -1;
+						margin-top: 40px;
+					}
+					.inputfile + label {
+						display: block;
+						text-align: center;
+						margin-top: 40px;
+						padding: 6px 12px;
 					}
 					input.video-youtube,
 					input.video-vimeo {
@@ -231,14 +235,6 @@
 					input.video-vimeo {
 						background-color: $color-vimeo;
 						background-image: url('../img/icons/buttons/video-vimeo.png');
-					}
-					& > div {
-						text-align: right;
-						border-top: 1px solid #fff;
-						background-color: $color-medium-grey;
-						button {
-							margin-top: 0.5em;
-						}
 					}
 				}
 				&.compact {
@@ -349,6 +345,11 @@
 			}
 			.mce-panel {
 				border: solid 1px $color-light-grey;
+			}
+			.help {
+				margin-top: 0.25em;
+				font-style: italic;
+				color: $color-crumbs-grey;
 			}
 			ul.phases {
 				margin: 1em 0 0;
@@ -495,10 +496,10 @@
 			}
 			.tag-list {
 				overflow: hidden;
-				padding-bottom: .25em;
 			}
 			.tag-item {
 				margin-top: 0;
+				margin-bottom: .25em;
 				&:first-child {
           margin-left: 0;
         }
