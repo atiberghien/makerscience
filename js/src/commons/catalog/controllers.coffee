@@ -44,13 +44,8 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
 
 module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, Project,
                                              ProjectSheetTemplate, ProjectSheetQuestionAnswer,
-                                             @$http, FileUploader, $modal, ObjectProfileLink) ->
+                                             $modal, ObjectProfileLink) ->
 
-    $scope.uploader = new FileUploader(
-        url: config.bucket_uri
-        headers :
-            Authorization : @$http.defaults.headers.common.Authorization
-    )
     $scope.coverIndex = null #To define which photo will be the cover
 
     $scope.initProjectSheetCreateCtrl = (templateSlug) ->
@@ -99,22 +94,54 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
         )
 )
 
-module.controller('GalleryCreationInstanceCtrl', ($scope, $modalInstance, uploader) ->
+module.controller('GalleryCreationInstanceCtrl', ($scope, FileUploader, @$http) ->
+    $scope.newMedia = {}
+
+    # inputs = document.querySelectorAll('.inputfile')
+    # Array::forEach.call inputs, (input) ->
+    #   label = input.nextElementSibling
+    #   labelVal = label.innerHTML
+    #   console.log label
+    #   console.log labelVal
+    #   input.addEventListener 'change', (e) ->
+
+    #   fileName = ''
+    #   if @files and @files.length > 1
+    #     fileName = (@getAttribute('data-multiple-caption') or '').replace('{count}', @files.length)
+    #   else
+    #     fileName = e.target.value.split('\\').pop()
+    #   if fileName
+    #     label.querySelector('span').innerHTML = fileName
+    #   else
+    #     label.innerHTML = labelVal
+    #   return
+    # return
+
+    $scope.tabSelect = (type) ->
+        $scope.newMedia = {
+          type: type
+        }
+        console.log($scope.newMedia)
 
     $scope.videos = {}
     $scope.coverCandidateQueueIndex = null
 
-    $scope.uploader = uploader
+    $scope.uploader = new FileUploader(
+        url: config.bucket_uri
+        headers :
+            Authorization : @$http.defaults.headers.common.Authorization
+    )
+    # $scope.uploader = $rootScope.uploader
 
-    $scope.ok = ->
-        $modalInstance.close({
-            coverCandidateQueueIndex : $scope.coverCandidateQueueIndex,
-            videos : $scope.videos
-        })
+    # $scope.ok = ->
+    #     $modalInstance.close({
+    #         coverCandidateQueueIndex : $scope.coverCandidateQueueIndex,
+    #         videos : $scope.videos
+    #     })
 
     $scope.cancel = ->
         $scope.uploader.clearQueue()
-        $modalInstance.dismiss('cancel')
+        # $modalInstance.dismiss('cancel')
 
     $scope.isCoverCandidate = (fileItem) ->
         fileQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
@@ -125,6 +152,9 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, $modalInstance, upload
             $scope.coverCandidateQueueIndex = null
         else
             $scope.coverCandidateQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
+
+    $scope.addMedia = (media) ->
+        console.log(media)
 
     $scope.addVideo = (newVideoURL) ->
         $scope.videos[newVideoURL] = null

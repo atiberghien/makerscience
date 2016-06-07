@@ -40,7 +40,7 @@
 					color: $color-crumbs-grey;
 				}
 				.accordion-toggle {
-					> span {
+					.title {
 						vertical-align: middle;
 					}
 					&:hover {
@@ -51,13 +51,6 @@
 					line-height: 1.2em;
 					padding-right: 1em;
 					padding-top: 8px;
-				}
-				.toggle-button {
-					float: right;
-					width: 160px;
-				}
-				.toggle-button + .subtitle {
-					padding-right: 180px;
 				}
 				.glyphicon-chevron-down {
 					transition: transform .2s;
@@ -207,10 +200,11 @@
 						}
 					}
 					.parcourir {
-						display: block;
+						position: absolute;
+						right: 0;
+						top: 50px;
 						text-align: center;
-						margin-top: 40px;
-						width: 100%;
+						width: 50px;
 					}
 					.inputfile {
 						width: 0.1px;
@@ -223,9 +217,12 @@
 					}
 					.inputfile + label {
 						display: block;
+						margin-right: 50px;
 						text-align: center;
 						margin-top: 40px;
-						padding: 6px 12px;
+						padding: .75em 1em;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 					input.video-youtube,
 					input.video-vimeo {
