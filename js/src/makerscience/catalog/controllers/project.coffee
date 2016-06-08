@@ -79,10 +79,11 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
     )
 )
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, $timeout, ProjectProgress, ProjectSheet,
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, $timeout, ProjectProgress, ProjectSheet, ProjectService,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
                                                         ObjectProfileLink) ->
-    $controller('ProjectSheetCreateCtrl', {$scope: $scope})
+
+    # $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
 
@@ -95,9 +96,18 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.hideControls = false
 
+    $scope.projectsheet =
+        videos : {}
+    $scope.QAItems = []
+
+    ProjectService.init('projet-makerscience').then((response) ->
+        $scope.QAItems = response.QAItems
+        $scope.projectsheet = response.projectsheet
+    )
+
     #TODO : externalise 'projet-makerscience' info in static config table
     ## initialize projectsheet, QAItems, projectsheet.template in scope
-    $scope.initProjectSheetCreateCtrl('projet-makerscience')
+    # $scope.initProjectSheetCreateCtrl('projet-makerscience')
 
     #TODO : externalise 'makerscience' info in static config table
     ProjectProgress.getList({'range__slug' : 'makerscience'}).then((progressRangeResult) ->
@@ -119,7 +129,8 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         else
             console.log("submitting form")
 
-        $scope.saveProject().then((projectsheetResult) ->
+        ProjectService.save($scope.projectsheet).then((projectsheetResult) ->
+            console.log(projectsheetResult)
             makerscienceProjectData =
                 parent : projectsheetResult.project.resource_uri
                 linked_resources : $scope.linkedResources.map((resource) ->
@@ -176,7 +187,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
                 )
 
-                ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
+                # ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
                 # if no photos to upload, directly go to new project sheet
                 # if $scope.uploader.queue.length == 0
                 #     $scope.fake_progress = 0

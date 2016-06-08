@@ -60,7 +60,6 @@ module.directive('inputfile', [ ->
                 scope.fileread = changeEvent.target.files[0]
                 return
               scope.setTitle(scope.fileread.name)
-              console.log scope.uploader
     }
 
 ])

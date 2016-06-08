@@ -3,14 +3,13 @@ angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.uco
 angular.module('commons.megafon', ['commons.megafon.controllers', 'commons.megafon.services'])
 angular.module('commons.starlet', ['commons.starlet.controllers', 'commons.starlet.services'])
 angular.module('commons.scout', ['commons.scout.services'])
-angular.module('commons.gallery', ['commons.gallery.controllers'])
+angular.module('commons.gallery', ['commons.gallery.controllers', 'commons.gallery.directives'])
 angular.module('makerscience.projects', ['makerscience.projects.controllers', 'makerscience.projects.services'])
 angular.module('makerscience.catalog', ['makerscience.catalog.controllers.project', 'makerscience.catalog.controllers.resource', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services'])
-
 angular.module('makerscience', ['commons.accounts', 'commons.scout', 'commons.ucomment', 'commons.gallery', 'makerscience.projects', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'ui.unique', 'xeditable', 'angularFileUpload',

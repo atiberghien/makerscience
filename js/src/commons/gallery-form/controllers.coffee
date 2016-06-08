@@ -1,6 +1,6 @@
 module = angular.module("commons.gallery.controllers", [])
 
-module.controller('GalleryCreationInstanceCtrl', ($scope, FileUploader, @$http) ->
+module.controller('GalleryCreationInstanceCtrl', ($scope, FileUploader, @$http, ProjectSheet, ProjectService) ->
     $scope.newMedia = {
         title: 'title'
     }
@@ -47,7 +47,7 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, FileUploader, @$http) 
             $scope.coverCandidateQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
 
     $scope.addMedia = (media) ->
-        console.log($scope.uploader.queue)
+        ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
 
         $scope.uploader.onBeforeUploadItem = (item) ->
             item.formData.push(
@@ -61,7 +61,7 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, FileUploader, @$http) 
                 ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
 
         $scope.uploader.onCompleteAll = () ->
-            $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+            console.log('complete all')
 
         $scope.uploader.uploadAll()
 
