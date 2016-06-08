@@ -1,4 +1,4 @@
-module = angular.module("commons.catalog.controllers", ['commons.catalog.services', 'commons.scout.services'])
+module = angular.module("makerscience.projects.controllers", ['makerscience.projects.services', 'commons.scout.services'])
 
 module.controller("ProjectListCtrl", ($scope, Project) ->
     $scope.projects = Project.getList().$object

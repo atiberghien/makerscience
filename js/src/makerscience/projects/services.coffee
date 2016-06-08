@@ -1,4 +1,4 @@
-module = angular.module("commons.catalog.services", ['restangular'])
+module = angular.module("makerscience.projects.services", ['restangular'])
 
 
 # Services
