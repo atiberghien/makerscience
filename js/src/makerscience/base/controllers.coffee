@@ -1,5 +1,4 @@
-module = angular.module("makerscience.base.controllers", ['makerscience.base.services', 'makerscience.profile.controllers',
-                                                          'makerscience.catalog.controllers.resource',
+module = angular.module("makerscience.base.controllers", ['makerscience.base.services',
                                                           'commons.accounts.controllers', 'commons.graffiti.services'])
 
 module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->

@@ -1,5 +1,4 @@
-module = angular.module("makerscience.catalog.controllers.resource", ['makerscience.catalog.services',
-            'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
+module = angular.module("makerscience.resources.controllers", ['commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
 module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticContent, MakerScienceResourceLight, MakerScienceResourceTaggedItem, FilterService) ->
@@ -79,7 +78,7 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
     )
 )
 
-module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, $timeout, ProjectSheet, ProjectService,
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, $timeout, ProjectSheet, FormService,
                              MakerScienceResource,  MakerScienceResourceTaggedItem, ObjectProfileLink) ->
 
     $scope.themesTags = []
@@ -92,7 +91,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         videos : {}
     $scope.QAItems = []
 
-    ProjectService.init('experience-makerscience').then((response) ->
+    FormService.init('experience-makerscience').then((response) ->
         $scope.QAItems = response.QAItems
         $scope.projectsheet = response.projectsheet
     )
@@ -105,7 +104,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         else
             console.log("submitting form")
 
-        ProjectService.save().then((resourcesheetResult) ->
+        FormService.save().then((resourcesheetResult) ->
             makerscienceResourceData =
                 parent : resourcesheetResult.project.resource_uri
                 duration : $scope.projectsheet.duration

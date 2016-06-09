@@ -1,5 +1,4 @@
-module = angular.module("makerscience.projects.controllers", ['makerscience.catalog.services',
-            'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
+module = angular.module("makerscience.projects.controllers", ['commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
 # module.controller("ProjectListCtrl", ($scope, Project) ->
@@ -85,7 +84,7 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
 )
 
 module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, $timeout, @$http, FileUploader,
-                                                        ProjectProgress, ProjectSheet, ProjectCreateService, ProjectSheetQuestionAnswer,
+                                                        ProjectProgress, ProjectSheet, FormService, ProjectSheetQuestionAnswer,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
                                                         ObjectProfileLink) ->
 
@@ -104,7 +103,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         videos : {}
     $scope.QAItems = []
 
-    ProjectCreateService.init('projet-makerscience').then((response) ->
+    FormService.init('projet-makerscience').then((response) ->
         $scope.QAItems = response.QAItems
         $scope.projectsheet = response.projectsheet
     )
@@ -139,7 +138,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         else
             console.log("submitting form")
 
-        ProjectCreateService.save($scope.projectsheet).then((projectsheetResult) ->
+        FormService.save($scope.projectsheet).then((projectsheetResult) ->
             angular.forEach($scope.QAItems, (q_a) ->
                 q_a.projectsheet = projectsheetResult.resource_uri
                 ProjectSheetQuestionAnswer.post(q_a)
