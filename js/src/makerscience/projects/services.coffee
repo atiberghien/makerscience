@@ -57,16 +57,11 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet) ->
                 }
             )
 
-        save: (projectsheet)->
+        save: (projectsheet, QAItems)->
             if projectsheet.project.begin_date is undefined
                 projectsheet.project.begin_date = new Date()
-            console.log projectsheet
+
             ProjectSheet.post(projectsheet).then((projectsheetResult) ->
-                console.log projectsheetResult
-                angular.forEach($scope.QAItems, (q_a) ->
-                    q_a.projectsheet = projectsheetResult.resource_uri
-                    ProjectSheetQuestionAnswer.post(q_a)
-                )
                 return projectsheetResult
             )
     }
