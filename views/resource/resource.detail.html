@@ -11,7 +11,7 @@
         <div class="container">
 
             <div class="intro edit">
-                <ng-include src="'/views/catalog/block/social_share.html'"></ng-include>
+                <ng-include src="'/views/block/social_share.html'"></ng-include>
                 <div class="edit-buttons edit-resource-baseline" ng-show="editable">
                     <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
                         <span class="glyphicon glyphicon-pencil"></span>
@@ -40,7 +40,7 @@
                     <div class="col-md-4">
 
                         <div class="side-header">
-                            <ng-include src="'/views/catalog/block/resource_tags_widget.html'"></ng-include>
+                            <ng-include src="'/views/block/resource_tags_widget.html'"></ng-include>
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
@@ -173,7 +173,7 @@
                 </tabset>
 
                 <section class="linked linked-resource" ng-init="linkResources=true" ng-show="linkResources && (linkedResources.length || editable)">
-                    <ng-include src="'/views/catalog/block/linked_resources.html'"></ng-include>
+                    <ng-include src="'/views/block/linked_resources.html'"></ng-include>
                 </section>
 
             </div><!-- #content -->
@@ -182,9 +182,9 @@
 
         <div class="col-md-4">
             <div id="sidebar" ng-init="objectTypeName='makerscienceresource';commentType=13;parentColor='resource'">
-                <ng-include src="'/views/catalog/block/community_resource.html'"></ng-include>
-                <ng-include src="'/views/catalog/block/comments.html'"></ng-include>
-                <ng-include src="'/views/catalog/block/popularity.html'"></ng-include>
+                <ng-include src="'/views/block/community_resource.html'"></ng-include>
+                <ng-include src="'/views/block/comments.html'"></ng-include>
+                <ng-include src="'/views/block/popularity.html'"></ng-include>
 
             </div><!-- #sidebar -->
 
@@ -201,7 +201,7 @@
             <ul class="boxes boxes-medium boxes-spaced">
                 <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
                 <li class="box" ng-repeat="resource in similars">
-                    <ng-include src="'/views/catalog/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
+                    <ng-include src="'/views/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
                 </li
                 ><li class="box box-solo box-green">
                     <div>

@@ -27,7 +27,7 @@
                     </tabset>
                     <div class="boxes boxes-listing">
                         <div class="box" ng-repeat="project in projects">
-                            <ng-include src="'/views/catalog/block/project_thumb_light.html'"></ng-include>
+                            <ng-include src="'/views/block/project_thumb_light.html'"></ng-include>
                         </div>
                     </div>
                     <div ng-show="projects.length > 0">
@@ -56,7 +56,7 @@
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <ng-include src="'/views/catalog/block/filters_project.html'" ng-init="objectType='makerscienceproject'" ></ng-include>
+                    <ng-include src="'/views/block/filters_project.html'" ng-init="objectType='makerscienceproject'" ></ng-include>
                 </div>
             </div>
         </div><!-- .col-md-12 -->

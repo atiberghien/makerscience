@@ -133,7 +133,7 @@
                 <div class="boxes boxes-small boxes-small-home boxes-projects">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
                     <div class="box" ng-repeat="project in projects | orderBy : '-parent.created_on'| limitTo : 3" >
-                        <ng-include src="'/views/catalog/block/project_thumb_light.html'"></ng-include> -->
+                        <ng-include src="'/views/block/project_thumb_light.html'"></ng-include> -->
                     </div
                     ><div class="box box-solo box-blue">
                         <div><a ui-sref="project.list">Voir tous les <br />projets <span class="glyphicon glyphicon-chevron-right"></span></a></div>
@@ -145,7 +145,7 @@
                 <div class="boxes boxes-small boxes-small-home boxes-resources">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
                     <div class="box" ng-repeat="resource in resources| orderBy : '-parent.created_on'| limitTo : 3">
-                        <ng-include src="'/views/catalog/block/resource_thumb_light.html'"></ng-include>
+                        <ng-include src="'/views/block/resource_thumb_light.html'"></ng-include>
                     </div
                     ><div class="box box-solo box-green">
                         <div><a ui-sref="resource.list">Voir toutes les expériences <span class="glyphicon glyphicon-chevron-right"></span></a></div>

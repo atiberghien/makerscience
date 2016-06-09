@@ -28,7 +28,7 @@ module.controller("ProjectSheetCtrl", ($scope, $stateParams, $filter, ProjectShe
 
     $scope.openGallery = (projectsheet) ->
         modalInstance = $modal.open(
-            templateUrl: '/views/catalog/block/gallery.html'
+            templateUrl: '/views/block/gallery.html'
             controller: 'GalleryEditionInstanceCtrl'
             size: 'lg'
             backdrop : 'static'

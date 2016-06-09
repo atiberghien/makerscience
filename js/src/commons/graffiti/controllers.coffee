@@ -30,7 +30,7 @@ module.controller("TaggedItemCtrl", ($scope, $stateParams, $modal, TaggedItem) -
 
     $scope.openTagPopup =  (preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)->
         modalInstance = $modal.open(
-            templateUrl: '/views/catalog/block/modal_tags.html'
+            templateUrl: '/views/block/modal_tags.html'
             controller: 'TagPopupCtrl'
             size: 'lg'
             resolve :

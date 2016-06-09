@@ -27,7 +27,7 @@
                     </tabset>
                     <div class="boxes boxes-listing">
                         <div class="box" ng-repeat="resource in resources">
-                            <ng-include src="'/views/catalog/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
+                            <ng-include src="'/views/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
                         </div>
                     </div>
                     <div ng-show="resources.length > 0">
@@ -52,7 +52,7 @@
                     <a ui-sref="resource.new" class="large large-purple">Partager une expérience <i class="fa fa-lock" ng-show="!authVars.isAuthenticated"></i><img src="/img/smiley.png" class="smiley" alt="Smiley" /></a>
                 </div>
                 <div class="col-md-3">
-                    <ng-include src="'/views/catalog/block/filters_resource.html'" ng-init="objectType='makerscienceresource'" ></ng-include>
+                    <ng-include src="'/views/block/filters_resource.html'" ng-init="objectType='makerscienceresource'" ></ng-include>
                 </div>
             </div>
         </div><!-- .col-md-12 -->

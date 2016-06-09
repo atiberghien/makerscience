@@ -37,7 +37,7 @@ module.controller("ProjectSheetCreateCtrl", ($rootScope, $scope, ProjectSheet, P
 
     $scope.openGallery = ->
         modalInstance = $modal.open(
-            templateUrl: '/views/catalog/block/gallery.html'
+            templateUrl: '/views/block/gallery.html'
             controller: 'GalleryCreationInstanceCtrl'
             size: 'lg'
             resolve:

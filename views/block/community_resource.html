@@ -44,7 +44,7 @@
                                     local-data="profiles"
                                     search-fields="user.first_name,user.last_name"
                                     text-no-results="Aucun membre trouvé"
-                                    template-url="/views/catalog/block/community_profile_autocomplete.html"
+                                    template-url="/views/block/community_profile_autocomplete.html"
                                     minlength="2"/>
 
                 </div>
@@ -60,14 +60,14 @@
             <!-- ###################################################### -->
 
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coAuthorMembers=(community|filter:{level:10, isValidated:true}|orderBy:'created_on')">
-                <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <ng-include src="'/views/block/community_profile_thumb.html'"></ng-include>
                 <button ng-show="editable && coAuthorMembers.length > 1" class="remove" ng-click="removeMember(member)">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coAuthorRequestingMembers=(community|filter:{level:10, isValidated:false}|orderBy:'created_on')">
                 <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
-                    <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                    <ng-include src="'/views/block/community_profile_thumb.html'"></ng-include>
                     <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove"></span></button>
                     <button class="btn btn-primary valid-button" ng-click="validateMember(member, true)">Valider ce membre</button>
                 </div>
@@ -101,7 +101,7 @@
             </tab-heading>
 
             <div class="member" ng-class="{'member-edit': editable || currentMakerScienceProfile.parent.id == member.profile.id}" ng-repeat="member in helperMembers=community|filter:{level:11, isValidated:true}|orderBy:'created_on'">
-                <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <ng-include src="'/views/block/community_profile_thumb.html'"></ng-include>
                 <button ng-show="editable || currentMakerScienceProfile.parent.id == member.profile.id" class="remove" ng-click="removeMember(member)">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
@@ -118,7 +118,7 @@
             </tab-heading>
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in community | filter: {level:12}">
                 <button class="remove" ng-click="removeMember(member)" ng-show="editable"><span class="glyphicon glyphicon-remove" ></span></button>
-                <ng-include src="'/views/catalog/block/community_profile_thumb.html'"></ng-include>
+                <ng-include src="'/views/block/community_profile_thumb.html'"></ng-include>
             </div><!-- .member -->
         </tab>
     </tabset>

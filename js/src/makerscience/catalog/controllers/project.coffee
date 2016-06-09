@@ -335,7 +335,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.openNewNeedPopup = () ->
             modalInstance = $modal.open(
-                templateUrl: '/views/catalog/block/newNeedPopup.html'
+                templateUrl: '/views/block/newNeedPopup.html'
                 controller: 'NewNeedPopupInstanceCtrl'
                 resolve:
                     projectsheet: ->

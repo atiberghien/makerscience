@@ -67,20 +67,20 @@
       }).state('project', {
         url: '/p/',
         abstract: true,
-        templateUrl: '/views/catalog/project.html',
+        templateUrl: '/views/project/project.html',
         ncyBreadcrumb: {
           parent: 'home'
         }
       }).state('project.list', {
         url: 'list',
-        templateUrl: '/views/catalog/project.list.html',
+        templateUrl: '/views/project/project.list.html',
         controller: 'MakerScienceProjectListCtrl',
         ncyBreadcrumb: {
           label: 'Projets'
         }
       }).state('project.new', {
         url: 'new',
-        templateUrl: '/views/catalog/project.new.html',
+        templateUrl: '/views/project/project.new.html',
         ncyBreadcrumb: {
           label: 'Nouveau projet',
           parent: 'project.list'
@@ -88,7 +88,7 @@
         loginRequired: true
       }).state('project.detail', {
         url: ':slug',
-        templateUrl: '/views/catalog/project.detail.html',
+        templateUrl: '/views/project/project.detail.html',
         controller: 'MakerScienceProjectSheetCtrl',
         ncyBreadcrumb: {
           label: '{{projectsheet.parent.title}}',
@@ -97,20 +97,20 @@
       }).state('resource', {
         url: '/r/',
         abstract: true,
-        templateUrl: '/views/catalog/resource.html',
+        templateUrl: '/views/resource/resource.html',
         controller: 'MakerScienceResourceListCtrl',
         ncyBreadcrumb: {
           parent: 'home'
         }
       }).state('resource.list', {
         url: 'list',
-        templateUrl: '/views/catalog/resource.list.html',
+        templateUrl: '/views/resource/resource.list.html',
         ncyBreadcrumb: {
           label: 'Expériences'
         }
       }).state('resource.new', {
         url: 'new',
-        templateUrl: '/views/catalog/resource.new.html',
+        templateUrl: '/views/resource/resource.new.html',
         ncyBreadcrumb: {
           label: 'Nouvelle expérience',
           parent: 'resource.list'
@@ -118,7 +118,7 @@
         loginRequired: true
       }).state('resource.detail', {
         url: ':slug',
-        templateUrl: '/views/catalog/resource.detail.html',
+        templateUrl: '/views/resource/resource.detail.html',
         controller: 'MakerScienceResourceSheetCtrl',
         ncyBreadcrumb: {
           label: '{{projectsheet.parent.title}}',
