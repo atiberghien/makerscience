@@ -190,7 +190,6 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
     $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('VoteCtrl', {$scope: $scope})
 
-    angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
     angular.extend(this, $controller('CommentCtrl', {$scope: $scope}))
 
     $scope.preparedThemeTags = []
@@ -198,13 +197,13 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
     $scope.preparedTargetTags = []
 
     $scope.editable = false
+    $scope.objectId = null
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
-
+        $scope.objectId = $scope.projectsheet.id
         $scope.editable = $scope.projectsheet.can_edit
 
-        $scope.initCommunityCtrl("makerscienceresource", $scope.projectsheet.id)
         $scope.initCommentCtrl("makerscienceresource", $scope.projectsheet.id)
 
         $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->

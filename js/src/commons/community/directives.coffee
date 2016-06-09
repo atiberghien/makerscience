@@ -7,7 +7,19 @@ module.directive('communityProject', [ ->
           objectId: '='
         }
         restrict: 'E'
-        templateUrl: 'views/block/community_project.html'
+        templateUrl: 'views/block/community_project.directive.html'
+        controller: 'CommunityCtrl'
+    }
+])
+
+module.directive('communityResource', [ ->
+    return {
+        scope: {
+          objectTypeName: '@'
+          objectId: '='
+        }
+        restrict: 'E'
+        templateUrl: 'views/block/community_resource.directive.html'
         controller: 'CommunityCtrl'
     }
 ])
