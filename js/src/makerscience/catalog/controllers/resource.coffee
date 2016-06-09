@@ -1,4 +1,4 @@
-module = angular.module("makerscience.catalog.controllers.resource", ['makerscience.catalog.services', "makerscience.catalog.controllers.generic",
+module = angular.module("makerscience.catalog.controllers.resource", ['makerscience.catalog.services',
             'commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
             'makerscience.base.controllers'])
 
@@ -81,8 +81,6 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
 
 module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, $timeout, ProjectSheet, ProjectService,
                              MakerScienceResource,  MakerScienceResourceTaggedItem, ObjectProfileLink) ->
-                               
-    $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.themesTags = []
     $scope.targetsTags = []
@@ -189,13 +187,11 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller,
+module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, ProjectService,
                                                     MakerScienceResource, MakerScienceResourceLight, MakerScienceResourceTaggedItem, MakerSciencePostLight, TaggedItem,
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
-    $controller('ProjectSheetCtrl', {$scope: $scope, $stateParams: $stateParams})
     $controller('TaggedItemCtrl', {$scope: $scope})
-    $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
     $controller('VoteCtrl', {$scope: $scope})
 
     angular.extend(this, $controller('CommunityCtrl', {$scope: $scope}))
@@ -215,11 +211,18 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         $scope.initCommunityCtrl("makerscienceresource", $scope.projectsheet.id)
         $scope.initCommentCtrl("makerscienceresource", $scope.projectsheet.id)
 
-        $scope.linkedResources = $scope.projectsheet.linked_resources
+        $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
+            resources = {
+              resourceName: resourceName
+              resourceId: resourceId
+              fieldName: fieldName
+              data: data
+            }
+            ProjectService.updateProjectSheet(resources, $scope.projectsheet)
 
-        $scope.fetchCoverURL($scope.projectsheet.base_projectsheet)
+        ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet)
         $scope.$on('cover-updated', ()->
-            $scope.fetchCoverURL($scope.projectsheet.base_projectsheet)
+            ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet)
         )
 
         $scope.similars = []
