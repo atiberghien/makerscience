@@ -1,4 +1,4 @@
-module = angular.module("commons.gallery.controllers", [])
+module = angular.module('commons.gallery.controllers', [])
 
 module.controller('GalleryCreationInstanceCtrl', ($scope, FileUploader, @$http, ProjectSheet, ProjectService) ->
     $scope.newMedia = {
