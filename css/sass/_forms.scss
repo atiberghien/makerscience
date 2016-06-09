@@ -7,6 +7,10 @@
 		padding: $grid-gutter-width;
 		background: $color-content-edit-bg;
 
+		.introduction {
+			margin-bottom: $grid-gutter-width;
+		}
+
 		h2, h3 {
 			font-size: 1.5em;
 			text-transform: uppercase;
@@ -421,9 +425,6 @@
 				margin-bottom: $grid-gutter-width;
 				background-color: $color-blue;
 			}
-			.introduction {
-				margin-bottom: $grid-gutter-width;
-			}
 			form {
 				fieldset.fake-placeholder {
 					input, textarea {
@@ -453,6 +454,7 @@
 		/* Resources */
 		&.new-resource {
 			h2 {
+				margin-bottom: $grid-gutter-width;
 				background-color: $color-green;
 			}
 			form {
