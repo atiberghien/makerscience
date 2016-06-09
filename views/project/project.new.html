@@ -79,19 +79,15 @@
                                         <p ng-show="newProjectForm.localisation.$invalid && submitted" class="help-block">Localisation requise</p>
 
                                         <label>Thématiques <span class="required">*</span></label>
-                                        <input type="text"
-                                            name="thematiques"
-                                            ng-model="projectsheet.project.thematiques"
-                                            maxlength="100"
-                                            required/>
+                                        <tags-input ng-model="themesTags" placeholder="Mot-clé">
+                                            <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+                                        </tags-input>
                                         <p ng-show="newProjectForm.thematiques.$invalid && submitted" class="help-block">Thematiques requise</p>
 
                                         <label>Publics visés <span class="required">*</span></label>
-                                        <input type="text"
-                                               name="target"
-                                               ng-model="projectsheet.project.target"
-                                               maxlength="50"
-                                               required/>
+                                        <tags-input ng-model="targetsTags" placeholder="Mot-clé">
+                                            <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+                                        </tags-input>
                                         <p ng-show="newProjectForm.target.$invalid && submitted" class="help-block">Publics visés requis</p>
 
                                         <label>Formats <span class="required">*</span></label>

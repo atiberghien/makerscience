@@ -31,7 +31,6 @@
 		}
 
 		form {
-
 			.panel {
 				h4 {
 					font-size: 1.3em;
@@ -345,7 +344,7 @@
 				color: $color-form-text;
 				background-color: #fff;
 				border: solid 1px $color-light-grey;
-				@include placeholder($color-form-text);
+				@include placeholder($color-crumbs-grey);
 			}
 			textarea {
 				display: block;
