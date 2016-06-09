@@ -280,7 +280,7 @@
 
         <div class="col-md-4">
             <div id="sidebar" ng-init="parentColor='project';objectTypeName='makerscienceproject';commentType=3">
-                <ng-include src="'/views/block/community_project.html'"></ng-include>
+                <community-project object-type-name="makerscienceproject" object-id="objectId" ng-if="objectId"></community-project>
                 <ng-include src="'/views/block/comments.html'"></ng-include>
                 <ng-include src="'/views/block/popularity.html'"></ng-include>
 
