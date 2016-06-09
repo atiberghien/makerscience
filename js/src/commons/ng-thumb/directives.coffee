@@ -1,4 +1,4 @@
-module = angular.module('makerscience.catalog.directives', [])
+module = angular.module('commons.directives.thumb', [])
 
 module.directive('ngThumb', ['$window', ($window) ->
     helper = {
@@ -39,27 +39,3 @@ module.directive('ngThumb', ['$window', ($window) ->
             reader.readAsDataURL(params.file)
     }
 ]);
-
-module.directive('inputfile', [ ->
-    return {
-      restrict: 'E'
-      scope: {
-        setTitle: '&'
-        id: '='
-        fileread: '='
-        label: '='
-        uploader: '='
-      }
-      template: '''
-        <input id="id" class="inputfile" type="file" fileread="fileread" ng-model="fileread" nv-file-select="" uploader="uploader" />
-        <label for="id" class="btn btn-primary">{{label}}</label>
-      '''
-      link: (scope, element, attributes) ->
-          element.bind 'change', (changeEvent) ->
-              scope.$apply ->
-                scope.fileread = changeEvent.target.files[0]
-                return
-              scope.setTitle(scope.fileread.name)
-    }
-
-])

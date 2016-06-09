@@ -1,4 +1,4 @@
-module = angular.module('commons.gallery.directives')
+module = angular.module('commons.directives.gallery')
 
 module.directive('gallery', [ ->
     return {
