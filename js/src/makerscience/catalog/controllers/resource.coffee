@@ -79,9 +79,9 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
     )
 )
 
-module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, $timeout, ProjectSheet,
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, $timeout, ProjectSheet, ProjectService,
                              MakerScienceResource,  MakerScienceResourceTaggedItem, ObjectProfileLink) ->
-    $controller('ProjectSheetCreateCtrl', {$scope: $scope})
+                               
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
 
     $scope.themesTags = []
@@ -90,7 +90,14 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
     $scope.hideControls = false
 
-    $scope.initProjectSheetCreateCtrl('experience-makerscience')
+    $scope.projectsheet =
+        videos : {}
+    $scope.QAItems = []
+
+    ProjectService.init('experience-makerscience').then((response) ->
+        $scope.QAItems = response.QAItems
+        $scope.projectsheet = response.projectsheet
+    )
 
     $scope.saveMakerscienceResource = (formIsValid) ->
         if !formIsValid
@@ -100,7 +107,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         else
             console.log("submitting form")
 
-        $scope.saveProject().then((resourcesheetResult) ->
+        ProjectService.save().then((resourcesheetResult) ->
             makerscienceResourceData =
                 parent : resourcesheetResult.project.resource_uri
                 duration : $scope.projectsheet.duration
@@ -158,7 +165,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     ##UGLY : to be sur that all remote ops are finished ... :/
                     for x in [1..5]
                         $scope.fake_progress += 100/5
-                    
+
                     $timeout(() ->
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
                     ,5000)

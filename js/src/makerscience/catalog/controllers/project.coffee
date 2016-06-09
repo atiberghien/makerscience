@@ -84,7 +84,6 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
                                                         ObjectProfileLink) ->
 
-    # $controller('ProjectSheetCreateCtrl', {$scope: $scope})
     $controller('MakerScienceLinkedResourceCtrl', {$scope: $scope})
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
 
