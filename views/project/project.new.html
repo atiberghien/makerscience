@@ -91,11 +91,9 @@
                                         <p ng-show="newProjectForm.target.$invalid && submitted" class="help-block">Publics visés requis</p>
 
                                         <label>Formats <span class="required">*</span></label>
-                                        <input type="text"
-                                               name="formats"
-                                               ng-model="projectsheet.project.formats"
-                                               maxlength="50"
-                                               required/>
+                                        <tags-input ng-model="formatsTags" placeholder="Mot-clé">
+                                        <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+                                        </tags-input>
                                         <p ng-show="newProjectForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
                                    </fieldset>
                                 </accordion-group>
