@@ -6,7 +6,7 @@ module.directive('gallery', [ ->
             uploader: '='
         }
         restrict: 'E'
-        templateUrl: 'views/gallery/gallery.html'
+        templateUrl: 'views/gallery/gallery.directive.html'
         # controller: 'GalleryCreationInstanceCtrl'
         link: (scope) ->
             console.log scope

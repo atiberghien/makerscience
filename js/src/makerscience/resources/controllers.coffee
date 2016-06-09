@@ -108,9 +108,6 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
             makerscienceResourceData =
                 parent : resourcesheetResult.project.resource_uri
                 duration : $scope.projectsheet.duration
-                linked_resources : $scope.linkedResources.map((resource) ->
-                        return resource.resource_uri
-                    )
 
             MakerScienceResource.post(makerscienceResourceData).then((makerscienceResourceResult)->
                 # add connected user as team member of project with detail "porteur"

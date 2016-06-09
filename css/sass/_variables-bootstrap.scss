@@ -150,12 +150,12 @@ $table-border-color:            #ddd !default;
 $btn-font-weight:                bold;
 
 $btn-default-color:              $brand-primary;
-$btn-default-bg:                 transparent;
-$btn-default-border:             $brand-primary;
+$btn-default-bg:                 white;
+$btn-default-border:             white;
 
 $btn-primary-color:              #fff !default;
-$btn-primary-bg:                 $brand-primary !default;
-$btn-primary-border:             $brand-primary;
+$btn-primary-bg:                 darken($brand-primary, 5%);
+$btn-primary-border:             darken($brand-primary, 5%);
 
 $btn-success-color:              #fff !default;
 $btn-success-bg:                 $brand-success !default;

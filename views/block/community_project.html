@@ -2,7 +2,7 @@
     <ul class="actions" ng-show="currentMakerScienceProfile != null">
         <li><a href="" ng-click="manageCommunity=!manageCommunity"><span class="glyphicon glyphicon-user"></span>Rejoindre</a></li>
     </ul>
-    <h3>La communauté</h3>
+    <h3>Communauté</h3>
     <!-- Formulaire pour permettre a l'usager connecté de s'ajouter comme membre équipe ou ressource -->
     <div class="add-member" ng-show="manageCommunity">
         <button type="button"
@@ -37,7 +37,7 @@
         <!-- Membres de l'équipe -->
         <tab ng-init="addTeamMember=false">
             <tab-heading>
-                <span>{{(community|filter:{level:0, isValidated: true}).length}}</span>L'équipe projet
+                <span>{{(community|filter:{level:0, isValidated: true}).length}}</span>Équipe projet
             </tab-heading>
             <!-- Team member can invite others members to join the tean -->
             <div class="add-member" ng-show="editable">

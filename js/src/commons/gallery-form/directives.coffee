@@ -7,7 +7,7 @@ module.directive('galleryForm', [ ->
           uploader: '='
       }
       restrict: 'E'
-      templateUrl: 'views/gallery-form/gallery-form.html'
+      templateUrl: 'views/gallery-form/gallery-form.directive.html'
       link: (scope, ProjectSheet) ->
           scope.newMedia = {
               title: 'title'
