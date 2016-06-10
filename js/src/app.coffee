@@ -1,5 +1,5 @@
 angular.module('commons.accounts', ['commons.accounts.services', 'commons.accounts.controllers'])
-angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
+angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services', 'commons.ucomment.directives'])
 angular.module('commons.megafon', ['commons.megafon.controllers', 'commons.megafon.services'])
 angular.module('commons.starlet', ['commons.starlet.controllers', 'commons.starlet.services'])
 angular.module('commons.scout', ['commons.scout.services'])

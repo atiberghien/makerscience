@@ -179,7 +179,7 @@
         <div class="col-md-4">
             <div id="sidebar" ng-init="objectTypeName='makerscienceresource';commentType=13;parentColor='resource'">
                 <community-resource object-type-name="makerscienceresource" object-id="objectId" ng-if="objectId"></community-resource>
-                <ng-include src="'/views/block/comments.html'"></ng-include>
+                <comments object-type-name="makerscienceresource" object-id="objectId" ng-if="objectId"></comments>
                 <ng-include src="'/views/block/popularity.html'"></ng-include>
 
             </div><!-- #sidebar -->
