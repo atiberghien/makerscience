@@ -97,9 +97,9 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
                 ncyBreadcrumb:
                     label: 'Projets'
         )
-        .state('project.new',
+        .state('project.form',
                 url: 'new',
-                templateUrl: '/views/project/project.new.html',
+                templateUrl: '/views/project/project.form.html',
                 ncyBreadcrumb:
                     label: 'Nouveau projet'
                     parent : 'project.list'
@@ -128,9 +128,9 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
                 ncyBreadcrumb:
                     label: 'Expériences'
         )
-        .state('resource.new',
+        .state('resource.form',
                 url: 'new',
-                templateUrl: '/views/resource/resource.new.html'
+                templateUrl: '/views/resource/resource.form.html'
                 ncyBreadcrumb:
                     label: 'Nouvelle expérience'
                     parent : 'resource.list'
