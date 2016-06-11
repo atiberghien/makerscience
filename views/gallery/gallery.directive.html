@@ -1,5 +1,5 @@
 <ul class="thumbnails">
-    <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
+    <li ng-repeat="file in files" style="float: left;text-align: center;">
         <img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" height="100px"/>
         <div></div>
         <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
@@ -11,7 +11,7 @@
             <span class="glyphicon glyphicon-trash"></span> Supprimer
         </button>
     </li>
-    <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
+    <!-- <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
         <div ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
         <div></div>
         <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
@@ -22,5 +22,5 @@
         <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
             <span class="glyphicon glyphicon-trash"></span> Supprimer
         </button>
-    </li>
+    </li> -->
 </ul>

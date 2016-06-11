@@ -4,6 +4,7 @@ module.directive('gallery', [ ->
     return {
         scope: {
             uploader: '='
+            files: '='
         }
         restrict: 'E'
         templateUrl: 'views/gallery/gallery.directive.html'

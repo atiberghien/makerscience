@@ -1,6 +1,6 @@
 module = angular.module("makerscience.projects.controllers")
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, $timeout, @$http, FileUploader,
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, $timeout, @$http, FileUploader, ProjectService
                                                         ProjectProgress, ProjectSheet, FormService, ProjectSheetQuestionAnswer,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
                                                         ObjectProfileLink) ->
@@ -16,13 +16,30 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.hideControls = false
 
+    $scope.coverIndex = null
     $scope.projectsheet =
         videos : {}
     $scope.QAItems = []
+    projectsheetResult = {}
 
+    console.log 'init'
     FormService.init('projet-makerscience').then((response) ->
         $scope.QAItems = response.QAItems
-        $scope.projectsheet = response.projectsheet
+        FormService.save(response.projectsheet).then((savedResponse) ->
+          projectsheetResult = savedResponse
+          # $scope.projectsheet = response.projectsheet
+          console.log $scope.projectsheet
+          if !$scope.projectsheet.project
+              $scope.projectsheet.project = FormService.projectsheetResult.project
+
+          if !$scope.projectsheet.bucket
+              $scope.projectsheet.bucket = FormService.projectsheetResult.bucket
+
+          if !!$scope.projectsheet.project.title
+              $scope.projectsheet.project.title = ''
+          console.log $scope.projectsheet
+          )
+
     )
 
     $scope.uploader = new FileUploader(
@@ -55,93 +72,99 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         else
             console.log("submitting form")
 
-        FormService.save($scope.projectsheet).then((projectsheetResult) ->
-            angular.forEach($scope.QAItems, (q_a) ->
-                q_a.projectsheet = projectsheetResult.resource_uri
-                ProjectSheetQuestionAnswer.post(q_a)
-            )
-            makerscienceProjectData =
-                parent : projectsheetResult.project.resource_uri
+        # projectsheetResult = FormService.projectsheetResult
+        # FormService.save($scope.projectsheet).then((projectsheetResult) ->
+        console.log projectsheetResult
+        console.log $scope.uploader.queue
 
-            MakerScienceProject.post(makerscienceProjectData).then((makerscienceProjectResult)->
-                # add connected user as team member of project with detail "porteur"
-                ObjectProfileLink.one().customPOST(
-                    profile_id: $scope.currentMakerScienceProfile.parent.id,
-                    level: 0,
-                    detail : "Créateur/Créatrice",
-                    isValidated:true
-                , 'makerscienceproject/'+makerscienceProjectResult.id)
-
-                angular.forEach($scope.themesTags, (tag)->
-                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/th", {}).then((taggedItemResult) ->
-                        ObjectProfileLink.one().customPOST(
-                            profile_id: $scope.currentMakerScienceProfile.parent.id,
-                            level: 50,
-                            detail : '',
-                            isValidated:true
-                        , 'taggeditem/'+taggedItemResult.id)
-                    )
-                )
-
-                angular.forEach($scope.formatsTags, (tag)->
-                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/fm", {}).then((taggedItemResult) ->
-                        ObjectProfileLink.one().customPOST(
-                            profile_id: $scope.currentMakerScienceProfile.parent.id,
-                            level: 50,
-                            detail : '',
-                            isValidated:true
-                        , 'taggeditem/'+taggedItemResult.id)
-                    )
-                )
-
-                angular.forEach($scope.targetsTags, (tag)->
-                    MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/tg", {}).then((taggedItemResult) ->
-                        ObjectProfileLink.one().customPOST(
-                            profile_id: $scope.currentMakerScienceProfile.parent.id,
-                            level: 50,
-                            detail : '',
-                            isValidated:true
-                        , 'taggeditem/'+taggedItemResult.id)
-                    )
-                )
-
-                MakerScienceProjectLight.one(makerscienceProjectResult.id).get().then((projectResult) ->
-                    angular.forEach($scope.needs, (needPost) ->
-                        needPost.linked_projects = [projectResult.resource_uri]
-                        needPost.type='need'
-                        $scope.saveMakersciencePost(needPost, null, $scope.currentMakerScienceProfile.parent)
-                    )
-                )
-
-                ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
-                # if no photos to upload, directly go to new project sheet
-                if $scope.uploader.queue.length == 0
-                    $scope.fake_progress = 0
-                    ##UGLY : to be sur that all remote ops are finished ... :/
-                    for x in [1..5]
-                        $scope.fake_progress += 100/5
-
-                    $timeout(() ->
-                        $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
-                    ,5000)
-                else
-                    $scope.uploader.onBeforeUploadItem = (item) ->
-                        item.formData.push(
-                            bucket : projectsheetResult.bucket.id
-                        )
-                        item.headers =
-                           Authorization : $scope.uploader.headers["Authorization"]
-
-                    $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
-                        if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
-                            ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
-
-                    $scope.uploader.onCompleteAll = () ->
-                        $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
-
-                    $scope.uploader.uploadAll()
-            )
+        angular.forEach($scope.QAItems, (q_a) ->
+            q_a.projectsheet = projectsheetResult.resource_uri
+            ProjectSheetQuestionAnswer.post(q_a)
         )
+        makerscienceProjectData =
+            parent : projectsheetResult.project.resource_uri
+
+        MakerScienceProject.post(makerscienceProjectData).then((makerscienceProjectResult)->
+            # add connected user as team member of project with detail "porteur"
+            ObjectProfileLink.one().customPOST(
+                profile_id: $scope.currentMakerScienceProfile.parent.id,
+                level: 0,
+                detail : "Créateur/Créatrice",
+                isValidated:true
+            , 'makerscienceproject/'+makerscienceProjectResult.id)
+
+            angular.forEach($scope.themesTags, (tag)->
+                MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/th", {}).then((taggedItemResult) ->
+                    ObjectProfileLink.one().customPOST(
+                        profile_id: $scope.currentMakerScienceProfile.parent.id,
+                        level: 50,
+                        detail : '',
+                        isValidated:true
+                    , 'taggeditem/'+taggedItemResult.id)
+                )
+            )
+
+            angular.forEach($scope.formatsTags, (tag)->
+                MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/fm", {}).then((taggedItemResult) ->
+                    ObjectProfileLink.one().customPOST(
+                        profile_id: $scope.currentMakerScienceProfile.parent.id,
+                        level: 50,
+                        detail : '',
+                        isValidated:true
+                    , 'taggeditem/'+taggedItemResult.id)
+                )
+            )
+
+            angular.forEach($scope.targetsTags, (tag)->
+                MakerScienceProjectTaggedItem.one().customPOST({tag : tag.text}, "makerscienceproject/"+makerscienceProjectResult.id+"/tg", {}).then((taggedItemResult) ->
+                    ObjectProfileLink.one().customPOST(
+                        profile_id: $scope.currentMakerScienceProfile.parent.id,
+                        level: 50,
+                        detail : '',
+                        isValidated:true
+                    , 'taggeditem/'+taggedItemResult.id)
+                )
+            )
+
+            MakerScienceProjectLight.one(makerscienceProjectResult.id).get().then((projectResult) ->
+                angular.forEach($scope.needs, (needPost) ->
+                    needPost.linked_projects = [projectResult.resource_uri]
+                    needPost.type='need'
+                    $scope.saveMakersciencePost(needPost, null, $scope.currentMakerScienceProfile.parent)
+                )
+            )
+
+            ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
+            # if no photos to upload, directly go to new project sheet
+
+            # must use tmp var in order to not modify queue during cover candidate saving ... sync issue
+            if $scope.uploader.queue.length == 0
+                $scope.fake_progress = 0
+                ##UGLY : to be sur that all remote ops are finished ... :/
+                for x in [1..5]
+                    $scope.fake_progress += 100/5
+
+                $timeout(() ->
+                    $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+                ,5000)
+            else
+                $scope.uploader.onBeforeUploadItem = (item) ->
+                    item.formData.push(
+                        bucket : projectsheetResult.bucket.id
+                    )
+                    item.headers =
+                       Authorization : $scope.uploader.headers["Authorization"]
+
+                $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
+                    if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
+                        ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
+
+                $scope.uploader.onCompleteAll = () ->
+                    $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+
+                $scope.uploader.uploadAll()
+        )
+        # )
 )
 
 # module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInstance, projectsheet, MakerScienceProjectLight, MakerSciencePostLight) ->

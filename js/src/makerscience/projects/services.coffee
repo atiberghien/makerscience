@@ -1,7 +1,16 @@
 module = angular.module("makerscience.projects.services", ['restangular'])
 
 module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet) ->
+    projectsheetResult = null
+
     return {
+
+        getSavedInstance: () ->
+            if (projectsheetResult)
+                console.log 'ok'
+            else
+                console.log 'nok'
+
         fetchCoverURL: (projectsheet) ->
             if projectsheet.cover
                 return config.media_uri + projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
