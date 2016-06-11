@@ -57,29 +57,11 @@
             <input type="text" id="media-title" ng-model="newMedia.title" ng-required="newMedia.link || newMedia.file" />
         </div>
 
-        <div class="col-md-4" ng-hide="hideControls">
+        <!-- <div class="col-md-4" ng-hide="hideControls">
             <p class="item-validate">
               <button type="button" class="btn btn-warning cancel" ng-click="cancelAction()">Annuler</button>
               <button type="button" class="btn btn-primary" ng-click="addMedia(newMedia)">Valider</button>
             </p>
-        </div>
+        </div> -->
     </div>
 </ng-form>
-<div class="progress ng-scope ng-hide" ng-show="hideControls">
-    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
-</div>
-<ul class="thumbnails">
-    <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
-        <img ng-src="{{config.media_uri}}{{file.file}}" height="100px"/>
-        <!-- <img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" height="100px"/> -->
-        <div></div>
-        <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
-            <span ng-hide="isCover(file)" class="glyphicon glyphicon-star"></span>
-            <span ng-show="isCover(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
-            Couverture
-        </button>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="removePicture(file)">
-            <span class="glyphicon glyphicon-trash"></span> Supprimer
-        </button>
-    </li>
-</ul>

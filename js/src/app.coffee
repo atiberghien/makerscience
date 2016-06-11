@@ -100,11 +100,11 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
         .state('project.form',
                 url: 'new',
                 templateUrl: '/views/project/project.form.html',
+                controller : 'MakerScienceProjectSheetCreateCtrl'
                 ncyBreadcrumb:
                     label: 'Nouveau projet'
                     parent : 'project.list'
                 loginRequired : false
-
         )
         .state('project.detail',
                 url: ':slug',

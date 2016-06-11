@@ -1,6 +1,6 @@
 module = angular.module("makerscience.projects.services", ['restangular'])
 
-module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet) ->
+module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project) ->
     projectsheetResult = null
 
     return {
@@ -16,7 +16,7 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet) ->
                 return config.media_uri + projectsheet.cover.thumbnail_url+'?dim=710x390&border=true'
             return "/img/default_project.jpg"
 
-        updateProjectSheet: (resources, projectsheet) ->
+        updateProjectSheet: (resources, projectsheet, fieldName, data) ->
             putData = {}
             putData[fieldName] = resources.data
             switch resources.resourceName
