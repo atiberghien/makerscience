@@ -7,13 +7,13 @@
         uploader="uploader"
         projectsheet="projectsheet"
         cover-index="coverIndex"></gallery-form>
+    <div class="progress" ng-show="hideControls">
+      <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
+    </div>
 </div>
 
-<div class="progress" ng-show="hideControls">
-    <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
-</div>
 
 <div class="modal-footer" ng-hide="hideControls">
-    <button class="btn btn-primary" ng-click="hideControls=true;ok()">Valider</button>
-    <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+  <button class="btn btn-warning btn-lg" ng-click="cancel()">Annuler</button>
+    <button class="btn btn-primary btn-lg" ng-click="hideControls=true;ok()">Enregistrer</button>
 </div>

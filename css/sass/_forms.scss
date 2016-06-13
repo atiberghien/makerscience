@@ -337,10 +337,6 @@
 				margin-left: 0.75em;
 			}
 
-			.required {
-				color: $color-red;
-			}
-
 		}
 
 		/* Projects */
@@ -649,15 +645,15 @@ form#search-advanced {
 			&.active {
 				a {
 					background: $color-light-cream;
-					color: $color-blue;
+					color: $color-text;
 					span {
-							background-color: $color-blue;
+							background-color: $color-text;
 					}
 				}
 			}
 			a {
 				padding-right: 2em;
-				color: $color-text;
+				color: $color-medium-grey;
 				font-size: 1.1em;
 				font-weight: bold;
 				border: none;
@@ -670,15 +666,15 @@ form#search-advanced {
 						padding: 0.5em;
 						font-size: 1.5em;
 						border-radius: 1em;
-						background: $color-text;
+						background: $color-medium-grey;
 						color: white;
 				}
 				&:hover {
 						border: none;
-						color: $color-blue;
+						color: $color-text;
 						background-color: $color-bg;
 						span {
-								background-color: $color-blue;
+								background-color: $color-text;
 						}
 				}
 				&:focus {
@@ -731,4 +727,8 @@ form#search-advanced {
 		background-color: $color-vimeo;
 		background-image: url('../img/icons/buttons/video-vimeo.png');
 	}
+}
+
+.required {
+	color: $color-red;
 }
