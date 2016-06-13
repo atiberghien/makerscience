@@ -13,6 +13,7 @@ module.factory("FormService", (ProjectSheetTemplate, ProjectSheet) ->
         .toString(16)
         .substring(1)
       return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4()
+      
 
     FormService.init = (templateSlug) ->
         projectsheet = {
@@ -43,6 +44,7 @@ module.factory("FormService", (ProjectSheetTemplate, ProjectSheet) ->
             uuid = guid()
             projectsheet.project = {title: 'temp_' + uuid}
             projectsheet.project.begin_date = new Date()
+
 
         ProjectSheet.post(projectsheet).then((response) ->
             FormService.projectsheetResult = response

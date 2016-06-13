@@ -176,77 +176,6 @@
 						}
 					}
 				}
-				&.addPhotosVideos {
-					ul.nav-tabs {
-						margin-bottom: 10px;
-						> li {
-							margin-right: 6px;
-							&.active {
-								a {
-									background: $color-blue;
-									color: white;
-								}
-							}
-							a {
-								span {
-									font-size: 30px;
-									display: block;
-									padding: 6px 0;
-								}
-								padding: 4px;
-								font-size: 1em;
-								width: 76px;
-								height: 76px;
-								border-radius: 0;
-								text-align: center;
-							}
-						}
-					}
-					.parcourir {
-						position: absolute;
-						right: 0;
-						top: 50px;
-						text-align: center;
-						width: 50px;
-					}
-					.inputfile {
-						width: 0.1px;
-						height: 0.1px;
-						opacity: 0;
-						overflow: hidden;
-						position: absolute;
-						z-index: -1;
-						margin-top: 40px;
-					}
-					.inputfile + label {
-						display: block;
-						margin-right: 50px;
-						text-align: center;
-						margin-top: 40px;
-						padding: .75em 1em;
-						overflow: hidden;
-						text-overflow: ellipsis;
-					}
-					input.video-youtube,
-					input.video-vimeo {
-						margin: 0;
-						padding: 20px;
-						padding-left: 75px;
-						color: #fff;
-						font-size: 1.1em;
-						@include placeholder($color-light-grey);
-						background-repeat: no-repeat;
-						background-position: 1% 50%;
-					}
-					input.video-youtube {
-						background-color: $color-youtube;
-						background-image: url('../img/icons/buttons/video-youtube.png');
-					}
-					input.video-vimeo {
-						background-color: $color-vimeo;
-						background-image: url('../img/icons/buttons/video-vimeo.png');
-					}
-				}
 				&.compact {
 					padding: 0;
 					input {
@@ -694,5 +623,111 @@ form#search-advanced {
 	button[type="submit"] {
 		margin-left: 20.25em;
 		padding: 0.5em 1em;
+	}
+}
+
+#content .gallery-form, .gallery-form  {
+	label {
+		padding-bottom: .5em;
+		padding-top: 1em;
+	}
+	input, textarea {
+		width: 100%;
+		padding: 0.75em;
+		color: $color-form-text;
+		background-color: #fff;
+		border: solid 1px $color-light-grey;
+		@include placeholder($color-crumbs-grey);
+	}
+	ul.nav-tabs {
+		margin: 10px 0;
+		border: none;
+		> li {
+			border: none;
+			margin-right: 6px;
+			&.active {
+				a {
+					background: $color-light-cream;
+					color: $color-blue;
+					span {
+							background-color: $color-blue;
+					}
+				}
+			}
+			a {
+				padding-right: 2em;
+				color: $color-text;
+				font-size: 1.1em;
+				font-weight: bold;
+				border: none;
+				border-radius: 0;
+				@include transition(color .2s ease-in-out);
+				span {
+						@include transition(background-color .2s ease-in-out);
+						margin-right: 0.25em;
+						margin-bottom: 0.25em;
+						padding: 0.5em;
+						font-size: 1.5em;
+						border-radius: 1em;
+						background: $color-text;
+						color: white;
+				}
+				&:hover {
+						border: none;
+						color: $color-blue;
+						background-color: $color-bg;
+						span {
+								background-color: $color-blue;
+						}
+				}
+				&:focus {
+					border: none;
+				}
+			}
+		}
+	}
+	.parcourir {
+		position: absolute;
+		right: 0;
+		top: 50px;
+		text-align: center;
+		width: 50px;
+	}
+	.inputfile {
+		width: 0.1px;
+		height: 0.1px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		z-index: -1;
+		margin-top: 40px;
+	}
+	.inputfile + label {
+		display: block;
+		margin-right: 50px;
+		text-align: center;
+		margin-top: 40px;
+		padding: .75em 1em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	input.video-youtube,
+	input.video-vimeo {
+		margin: 0;
+		padding: 20px;
+		padding-left: 75px;
+		color: #fff;
+		font-size: 1.1em;
+		@include placeholder($color-light-grey);
+		background-repeat: no-repeat;
+		background-position: 1% 50%;
+	}
+	input.video-youtube {
+		background-color: $color-youtube;
+		background-image: url('../img/icons/buttons/video-youtube.png');
+	}
+	input.video-vimeo {
+		background-color: $color-vimeo;
+		background-image: url('../img/icons/buttons/video-vimeo.png');
 	}
 }

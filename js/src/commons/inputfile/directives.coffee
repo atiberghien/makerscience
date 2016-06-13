@@ -8,13 +8,13 @@ module.directive('inputfile', [ ->
         id: '='
         fileread: '='
         label: '='
-        uploader: '='
       }
       template: '''
-        <input id="id" class="inputfile" type="file" fileread="fileread" ng-model="fileread" nv-file-select="" uploader="uploader" />
-        <label for="id" class="btn btn-primary">{{label}}</label>
+        <input id="{{id}}" class="inputfile" type="file" fileread="fileread" ng-model="fileread" />
+        <label for="{{id}}" class="btn btn-primary">{{label}}</label>
       '''
       link: (scope, element, attributes) ->
+          console.log scope
           element.bind 'change', (changeEvent) ->
               scope.$apply ->
                 scope.fileread = changeEvent.target.files[0]

@@ -27,20 +27,5 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project) -
                 when 'ProjectSheetQuestionAnswer' then ProjectSheetQuestionAnswer.one(resources.resourceId).patch(putData)
                 when 'ProjectSheet' then ProjectSheet.one(resources.resourceId).patch(putData)
                 when 'PostalAddress' then PostalAddress.one(resources.resourceId).patch(putData)
-
-        openGallery: (projectsheet) ->
-            modalInstance = $modal.open(
-                templateUrl: '/views/block/gallery.html'
-                controller: 'GalleryEditionInstanceCtrl'
-                size: 'lg'
-                backdrop : 'static'
-                keyboard : false
-                resolve:
-                    projectsheet: ->
-                        return projectsheet
-            )
-            modalInstance.result.then((result)->
-                $scope.$emit('cover-updated')
-            )
     }
 )

@@ -5,14 +5,15 @@ angular.module('commons.starlet', ['commons.starlet.controllers', 'commons.starl
 angular.module('commons.scout', ['commons.scout.services'])
 angular.module('commons.form', ['commons.form.services'])
 angular.module('commons.community', ['commons.community.controllers', 'commons.community.directives'])
-angular.module('commons.directives', ['commons.directives.inputfile', 'commons.directives.thumb', 'commons.directives.gallery'])
+angular.module('commons.gallery', ['commons.gallery.controllers', 'commons.gallery.directives'])
+angular.module('commons.directives', ['commons.directives.inputfile', 'commons.directives.thumb'])
 angular.module('makerscience.projects', ['makerscience.projects.controllers', 'makerscience.projects.services'])
 angular.module('makerscience.resources', ['makerscience.resources.controllers'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services'])
-angular.module('makerscience', ['commons.accounts', 'commons.community', 'commons.scout', 'commons.ucomment', 'commons.directives', 'commons.form',
+angular.module('makerscience', ['commons.accounts', 'commons.community', 'commons.gallery', 'commons.scout', 'commons.ucomment', 'commons.directives', 'commons.form',
                                 'makerscience.projects', 'makerscience.resources', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'ui.unique', 'xeditable', 'angularFileUpload',
