@@ -89,3 +89,9 @@
         </button>
     </li>
 </ul>
+<ul class="list-group links">
+    <li class="list-group-item" ng-repeat="(videoURL, nop) in videos">
+        {{videoURL}}
+        <button class="transparent" ng-click="delVideo(videoURL)"><span class="glyphicon glyphicon-trash"></span></button>
+    </li>
+</ul>

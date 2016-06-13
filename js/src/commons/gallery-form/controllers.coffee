@@ -1,6 +1,6 @@
 module = angular.module('commons.gallery.controllers', [])
 
-module.controller('GalleryCreationInstanceCtrl', ($scope) ->
+module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
     $scope.setTitle = (title) ->
         $scope.$apply ->
           $scope.newMedia.title = title
@@ -21,8 +21,15 @@ module.controller('GalleryCreationInstanceCtrl', ($scope) ->
       item.file.name = $scope.newMedia.title
 
     $scope.addMedia = (newMedia) ->
-        $scope.newMedia = newMedia
-        $scope.uploader.addToQueue(newMedia.file)
+        if newMedia.type == 'image'
+            $scope.newMedia = newMedia
+            $scope.uploader.addToQueue(newMedia.file)
+
+        if newMedia.type == 'video'
+            console.log 'video'
+            $scope.projectsheet.videos[newMedia.link] = null
+            $scope.videos[newMedia.link] = null # just for display concerns
+
         $scope.newMedia = {}
 
     $scope.cancel = ->
@@ -37,9 +44,6 @@ module.controller('GalleryCreationInstanceCtrl', ($scope) ->
             $scope.coverCandidateQueueIndex = null
         else
             $scope.coverCandidateQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
-
-    $scope.addVideo = (newVideoURL) ->
-        $scope.videos[newVideoURL] = null
 
     $scope.delVideo = (videoURL) ->
         delete $scope.videos[videoURL]
@@ -92,6 +96,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, @$http,
         $modalInstance.close()
 
     $scope.ok = ->
+        ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
         if $scope.uploader.queue.length > 0
             $scope.uploader.uploadAll()
         else
