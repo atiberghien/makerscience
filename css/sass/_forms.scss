@@ -73,10 +73,6 @@
 			fieldset {
 				margin: 0;
 				padding: 0;
-				.item-validate {
-					margin-top: 80px;
-					text-align: right;
-				}
 				&.needs-idea, &.needs-select, &.linked-idea {
 					background-color: transparent;
 					textarea {
@@ -638,6 +634,11 @@ form#search-advanced {
 		background-color: #fff;
 		border: solid 1px $color-light-grey;
 		@include placeholder($color-crumbs-grey);
+	}
+	.item-validate {
+		margin-top: 40px;
+		width: 100%;
+		padding: .75em 1em;
 	}
 	ul.nav-tabs {
 		margin: 10px 0;

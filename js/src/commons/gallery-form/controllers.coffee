@@ -1,11 +1,6 @@
 module = angular.module('commons.gallery.controllers', [])
 
 module.controller('GalleryCreationInstanceCtrl', ($scope) ->
-    console.log $scope
-    $scope.newMedia = {
-        title: 'title'
-    }
-
     $scope.setTitle = (title) ->
         $scope.$apply ->
           $scope.newMedia.title = title
@@ -21,6 +16,14 @@ module.controller('GalleryCreationInstanceCtrl', ($scope) ->
 
     $scope.videos = {}
     $scope.coverCandidateQueueIndex = null
+
+    $scope.uploader.onAfterAddingFile = (item) ->
+      item.file.name = $scope.newMedia.title
+
+    $scope.addMedia = (newMedia) ->
+        $scope.newMedia = newMedia
+        $scope.uploader.addToQueue(newMedia.file)
+        $scope.newMedia = {}
 
     $scope.cancel = ->
         $scope.uploader.clearQueue()
@@ -55,14 +58,6 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, @$http,
         headers :
             Authorization : @$http.defaults.headers.common.Authorization
     )
-
-    $scope.uploader.onAfterAddingFile = (item) ->
-      item.file.name = $scope.newMedia.title
-
-    $scope.addMedia = (newMedia) ->
-        $scope.newMedia = newMedia
-        $scope.uploader.addToQueue(newMedia.file)
-        console.log $scope.uploader.queue
 
     if !$scope.projectsheet.videos
         $scope.projectsheet.videos = {}

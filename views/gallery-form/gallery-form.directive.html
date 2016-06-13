@@ -52,16 +52,13 @@
     </tabset>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <label for="media-title">Titre  <span class="required">*</span></label>
             <input type="text" id="media-title" ng-model="newMedia.title" ng-required="newMedia.link || newMedia.file" />
         </div>
 
-        <div class="col-md-4" ng-hide="hideControls">
-            <p class="item-validate">
-              <button type="button" class="btn btn-warning cancel" ng-click="cancelAction()">Annuler</button>
-              <button type="button" class="btn btn-primary" ng-click="addMedia(newMedia)">Valider</button>
-            </p>
+        <div class="col-md-2" ng-hide="hideControls">
+            <button type="button" class="btn btn-primary item-validate" ng-click="addMedia(newMedia)">Valider</button>
         </div>
     </div>
 </ng-form>
