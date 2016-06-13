@@ -14,7 +14,6 @@ module.directive('inputfile', [ ->
         <label for="{{id}}" class="btn btn-primary">{{label}}</label>
       '''
       link: (scope, element, attributes) ->
-          console.log scope
           element.bind 'change', (changeEvent) ->
               scope.$apply ->
                 scope.fileread = changeEvent.target.files[0]

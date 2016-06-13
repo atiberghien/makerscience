@@ -1,4 +1,9 @@
-<ng-form novalidate name="mediaForm" class="gallery-form">
+<ng-form
+  novalidate
+  ng-init="submitted=false"
+  name="mediaForm"
+  class="gallery-form"
+  ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }">
     <label>Sélectionner le type de média à ajouter</label>
     <tabset>
         <tab select="tabSelect('image')">
@@ -51,14 +56,16 @@
         </tab>
     </tabset>
 
+    <p ng-show="!$scope.newMedia.link && !$scope.newMedia.file && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
     <div class="row">
         <div class="col-md-10">
             <label for="media-title">Titre  <span class="required">*</span></label>
-            <input type="text" id="media-title" ng-model="newMedia.title" ng-required="newMedia.link || newMedia.file" />
+            <input type="text" name="mediaTitle" id="media-title" ng-model="newMedia.title" ng-required="newMedia.link || newMedia.file" maxlength="50" required />
+            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
         </div>
 
         <div class="col-md-2" ng-hide="hideControls">
-            <button type="button" class="btn btn-primary item-validate" ng-click="addMedia(newMedia)">Valider</button>
+            <button type="button" class="btn btn-primary item-validate" ng-click="submitted=true;addMedia(newMedia)">Valider</button>
         </div>
     </div>
 </ng-form>

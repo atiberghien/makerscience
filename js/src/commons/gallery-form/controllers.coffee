@@ -1,6 +1,8 @@
 module = angular.module('commons.gallery.controllers', [])
 
 module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
+    $scope.currentType = null
+
     $scope.setTitle = (title) ->
         $scope.$apply ->
           $scope.newMedia.title = title
@@ -11,6 +13,7 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
           title: ''
           type: type
         }
+        $scope.currentType = type
 
     $scope.config = config
 
@@ -19,19 +22,22 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
 
     $scope.uploader.onAfterAddingFile = (item) ->
       item.file.name = $scope.newMedia.title
-      $scope.newMedia.file = {}
+      $scope.newMedia = { type: $scope.currentType }
 
     $scope.addMedia = (newMedia) ->
-        console.log newMedia
+        if $scope.mediaForm.$invalid || (!$scope.newMedia.link && !$scope.newMedia.file)
+            console.log 'invalid form'
+            return false
+
         if newMedia.type == 'image'
             $scope.newMedia = newMedia
             $scope.uploader.addToQueue(newMedia.file)
 
         if newMedia.type == 'video'
-            console.log 'video'
             $scope.projectsheet.videos[newMedia.link] = null
             $scope.videos[newMedia.link] = null # just for display concerns
 
+        $scope.submitted = false
 
     $scope.cancel = ->
         $scope.uploader.clearQueue()
