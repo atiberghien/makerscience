@@ -19,8 +19,10 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
 
     $scope.uploader.onAfterAddingFile = (item) ->
       item.file.name = $scope.newMedia.title
+      $scope.newMedia.file = {}
 
     $scope.addMedia = (newMedia) ->
+        console.log newMedia
         if newMedia.type == 'image'
             $scope.newMedia = newMedia
             $scope.uploader.addToQueue(newMedia.file)
@@ -30,7 +32,6 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
             $scope.projectsheet.videos[newMedia.link] = null
             $scope.videos[newMedia.link] = null # just for display concerns
 
-        $scope.newMedia = {}
 
     $scope.cancel = ->
         $scope.uploader.clearQueue()

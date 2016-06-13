@@ -78,7 +78,7 @@
     </li>
     <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
         <div class="thumbnail" ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
-        <p class="filename">{{file._file.name}}</p>
+        <p class="filename">{{file.file.name}}</p>
         <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
             <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
             <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
