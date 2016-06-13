@@ -16,8 +16,6 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
         $scope.currentType = type
 
     $scope.config = config
-
-    $scope.videos = {}
     $scope.coverCandidateQueueIndex = null
 
     $scope.uploader.onAfterAddingFile = (item) ->
@@ -25,18 +23,21 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
       $scope.newMedia = { type: $scope.currentType }
 
     $scope.addMedia = (newMedia) ->
-        if $scope.mediaForm.$invalid || (!$scope.newMedia.link && !$scope.newMedia.file)
+        if $scope.mediaForm.$invalid || (!$scope.newMedia.url && !$scope.newMedia.file)
             console.log 'invalid form'
             return false
 
-        if newMedia.type == 'image'
+        uniqueId = _.uniqueId()
+        if newMedia.file
+            newMedia.description
             $scope.newMedia = newMedia
+            newMedia.bucket = true
             $scope.uploader.addToQueue(newMedia.file)
+        else
+            newMedia.bucket = false
 
-        if newMedia.type == 'video'
-            $scope.projectsheet.videos[newMedia.link] = null
-            $scope.videos[newMedia.link] = null # just for display concerns
-
+        $scope.projectsheet.medias[uniqueId] = newMedia
+        console.log $scope.projectsheet
         $scope.submitted = false
 
     $scope.cancel = ->

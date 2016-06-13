@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-8">
                     <label for="media-image">Ajouter un lien vers une image</label>
-                    <input id="media-image" type="text" ng-model="newMedia.link" placeholder="http://" />
+                    <input id="media-image" type="text" ng-model="newMedia.url" placeholder="http://" />
                 </div>
             </div>
         </tab>
@@ -34,7 +34,7 @@
               </div>
                 <div class="col-md-8">
                     <label for="media-doc">Ajouter un lien vers un document</label>
-                    <input id="media-doc" type="text" ng-model="newMedia.link" placeholder="http://" />
+                    <input id="media-doc" type="text" ng-model="newMedia.url" placeholder="http://" />
                 </div>
             </div>
         </tab>
@@ -44,19 +44,19 @@
                 Vidéo
             </tab-heading>
             <label for="media-video">Ajouter un lien vers une vidéo</label>
-            <input id="media-video" type="text" ng-model="newMedia.link" placeholder="http://" />
+            <input id="media-video" type="text" ng-model="newMedia.url" placeholder="http://" />
         </tab>
         <tab>
             <tab-heading>
                 <span class="glyphicon glyphicon-link"></span>
                 Site web
             </tab-heading>
-            <label for="media-link">Ajouter un lien</label>
-            <input id="media-link" type="text" ng-model="newMedia.link" placeholder="http://" />
+            <label for="media-url">Ajouter un lien</label>
+            <input id="media-url" type="text" ng-model="newMedia.url" placeholder="http://" />
         </tab>
     </tabset>
 
-    <p ng-show="!$scope.newMedia.link && !$scope.newMedia.file && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
+    <p ng-show="!$scope.newMedia.url && !$scope.newMedia.file && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
     <div class="row">
         <div class="col-md-10">
             <label for="media-title">Titre  <span class="required">*</span></label>
@@ -71,7 +71,7 @@
 </ng-form>
 <hr/>
 <ul class="gallery-thumbnails thumbnails">
-    <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
+    <!-- <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
         <div class="thumbnail"><img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" /></div>
         <p class="filename">{{file.filename}}</p>
         <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
@@ -86,6 +86,28 @@
     <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
         <div class="thumbnail" ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
         <p class="filename">{{file.file.name}}</p>
+        <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
+            <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
+            <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+            Choisir l'image en une
+        </button>
+        <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
+            <span class="glyphicon glyphicon-trash"></span> Supprimer
+        </button>
+    </li> -->
+
+    <li ng-repeat="media in projectsheet.medias track by $index" style="float: left;text-align: center;">
+        <div class="thumbnail" ng-show="uploader.isHTML5 && media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
+        <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div>
+        <p class="filename">
+          <div ng-switch on="media.type">
+              <span class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></span>
+              <span class="glyphicon glyphicon-facetime-video" ng-switch-when="video"></span>
+              <span class="glyphicon glyphicon-file" ng-switch-when="document"></span>
+              <span class="glyphicon glyphicon-link" ng-switch-when="link"></span>
+          </div>
+          {{media.title}}
+        </p>
         <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
             <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
             <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>

@@ -41,16 +41,18 @@
                                         </div>
                                     </accordion-heading>
                                     <fieldset>
-                                        <label>Titre du projet <span class="required">*</span></label>
+                                        <label for="title">Titre du projet <span class="required">*</span></label>
                                         <input type="text"
+                                            id="title"
                                             name="projectName"
                                             ng-model="projectsheet.project.title"
                                             maxlength="50"
                                             required/>
                                         <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Titre du projet requis</p>
 
-                                        <label>Sous-titre du projet <span class="required">*</span></label>
+                                        <label for="baseline">Sous-titre du projet <span class="required">*</span></label>
                                         <input type="text"
+                                            id="baseline"
                                             name="projectBaseline"
                                             ng-model="projectsheet.project.baseline"
                                             maxlength="100"
@@ -58,13 +60,17 @@
                                         <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Sous-titre du projet requise</p>
                                         <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Résumez en une courte phrase votre projet</p>
 
-                                        <label>Présentation du projet</label>
-                                        <textarea ui-tinymce="tinyMceFullOptions"
-                                            ng-trim="false"
-                                            name="project-about"
-                                            ng-model="projectsheet.project.description"
-                                            rows="4">
-                                        </textarea>
+                                        <div ng-repeat="item in QAItems">
+                                            <label for="question_{{$index}}">{{item.questionLabel}}</label>
+                                            <textarea
+                                                ui-tinymce="tinyMceFullOptions"
+                                                ng-trim="false"
+                                                name="question_{{$index}}"
+                                                id="question_{{$index}}"
+                                                ng-model="item.answer"
+                                                e-rows="4">
+                                            </textarea>
+                                        </div>
 
                                         <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet  <span class="required">*</span></label>
                                         <input type="date" ng-model="projectsheet.project.end_date" />

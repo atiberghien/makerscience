@@ -7,7 +7,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
 
     $scope.isEditingMode = false
-    FormService.init('projet-makerscience').then((response) ->
+    FormService.init('projet-makerscience-2016').then((response) ->
         $scope.QAItems = response.QAItems
         $scope.projectsheet = response.projectsheet
     )
@@ -23,8 +23,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     $scope.hideControls = false
 
     $scope.coverIndex = null
-    $scope.projectsheet =
-        videos : {}
+    $scope.projectsheet = {}
     $scope.QAItems = []
     projectsheetResult = {}
 
@@ -118,7 +117,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
                 )
 
-                ProjectSheet.one(projectsheetResult.id).patch({videos:$scope.projectsheet.videos})
+                ProjectSheet.one(projectsheetResult.id).patch({medias:$scope.projectsheet.medias})
                 # if no photos to upload, directly go to new project sheet
 
                 # must use tmp var in order to not modify queue during cover candidate saving ... sync issue
@@ -140,7 +139,17 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                            Authorization : $scope.uploader.headers["Authorization"]
 
                     $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
-                        if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
+                        fileIndex = $scope.uploader.getIndexOfItem(fileItem)
+
+                        angular.forEach($scope.projectsheet.medias, (media, key) ->
+                            if media.bucket && Number(key) == fileIndex + 1
+                                media.file = fileItem.file
+                                console.log
+                          )
+                        console.log $scope.projectsheet.medias
+                        ProjectSheet.one(projectsheetResult.id).patch({medias: $scope.projectsheet.medias})
+
+                        if fileIndex == $scope.coverIndex
                             ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
 
                     $scope.uploader.onCompleteAll = () ->
