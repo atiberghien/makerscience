@@ -6,6 +6,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                                                         ObjectProfileLink) ->
 
 
+    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     $scope.QAItems = []
 
     FormService.init('projet-makerscience-2016').then((response) ->

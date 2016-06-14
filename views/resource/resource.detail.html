@@ -11,7 +11,7 @@
         <div class="container">
 
             <div class="intro edit">
-                <ng-include src="'/views/block/social_share.html'"></ng-include>
+                <socialshare></socialshare>
                 <div class="edit-buttons edit-resource-baseline" ng-show="editable">
                     <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
                         <span class="glyphicon glyphicon-pencil"></span>
@@ -181,6 +181,7 @@
                 <community-resource object-type-name="makerscienceresource" object-id="objectId" ng-if="objectId"></community-resource>
                 <comments object-type-name="makerscienceresource" object-id="objectId" ng-if="objectId"></comments>
                 <ng-include src="'/views/block/popularity.html'"></ng-include>
+                <report-abuse></report-abuse>
 
             </div><!-- #sidebar -->
 

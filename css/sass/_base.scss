@@ -362,15 +362,36 @@ ul.pagination {
 	}
 }
 
-#socialshare {
+.socialshare {
 	position: fixed;
 	top: 14em;
 	left: 50%;
+	margin-left: - $page-width / 2 - 50px;
 	font-size: 3em;
-	ul {
-		margin-left: - $page-width / 2 - 50px;
+	display: block;
+	overflow: hidden;
+	li {
+		background-color: white !important;
+		border-radius: 11px !important;
+		margin-bottom: 8px !important;
+		text-align: center;
+		width: 40px;
+		height: 40px;
+		font-size: 24px;
+		line-height: 40px;
+		a {
+			display: block;
+		}
+		.fa-google-plus {
+			font-size: 20px;
+			vertical-align: middle;
+			display: inline-block;
+			height: 40px;
+			line-height: 35px;
+		}
 	}
 }
+
 
 .ta-editor div {
 	ul, ol {

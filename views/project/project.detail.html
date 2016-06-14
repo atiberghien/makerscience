@@ -11,7 +11,7 @@
         <div class="container">
 
             <div class="intro edit">
-                <ng-include src="'/views/block/social_share.html'"></ng-include>
+                <socialshare></socialshare>
                 <div class="edit-buttons" ng-show="editable">
                     <button ng-click="BaselineBtnForm.$show()" ng-hide="BaselineBtnForm.$visible">
                         <span class="glyphicon glyphicon-pencil"></span>
@@ -196,30 +196,6 @@
                     </tab>
                 </tabset>
 
-                <div class="row" >
-                    <div class="col-md-12">
-                        <div class="needs">
-                            <div class="edit-buttons" ng-show="editable">
-                                <button class="button"  ng-click="openNewNeedPopup()"><span class="fa fa-plus"></span></button>
-                            </div>
-                            <h3>Besoins</h3>
-                            <carousel  ng-show="projectsheet.linked_makersciencepost.length > 0" id="carousel-needs" class="carousel-no-indicators carousel-text-links">
-                                <slide class="needs-idea" ng-repeat="post in  projectsheet.linked_makersciencepost|filter:{post_type:'need'}">
-                                    <ul class="actions">
-                                        <li><a ui-sref="question({slug:post.slug})"><span class="glyphicon glyphicon-comment"></span>Répondre</a></li>
-                                    </ul>
-                                    <h4>{{post.title}}</h4>
-                                    <p ng-bind-html="trustAsHtml(post.text)"></p>
-                                    <ul class="tags" >
-                                        <li ng-repeat="tag in post.tags|limitTo : 4"><a ui-sref="tag({slug:tag.tag.slug})">{{tag.tag.name}}</a></li>
-                                        <li class="more" ng-if="post.tags.length > 4"><a href="">+{{post.tags.length-4}}</a></li>
-                                    </ul><!-- .tags -->
-                                </slide>
-                            </carousel>
-                        </div><!-- .needs -->
-                    </div>
-                </div><!-- .row -->
-
                 <!-- Angular UI Tabs -->
                 <tabset class="nav-tabs-slide nav-tabs-slide-project">
                     <tab ng-init="currentImg=0">
@@ -268,7 +244,7 @@
                 <community-project object-type-name="makerscienceproject" object-id="objectId" ng-if="objectId"></community-project>
                 <comments object-type-name="makerscienceproject" object-id="objectId" ng-if="objectId"></comments>
                 <ng-include src="'/views/block/popularity.html'"></ng-include>
-
+                <report-abuse></report-abuse>
             </div><!-- #sidebar -->
 
         </div><!-- .col-md-4 -->

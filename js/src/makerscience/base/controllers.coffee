@@ -393,18 +393,6 @@ module.controller('ReportAbuseFormInstanceCtrl' , ($scope, $modalInstance, $time
             )
 )
 
-module.controller("ReportAbuseCtrl", ($scope, $modal) ->
-
-    $scope.showReportAbusePopup = (currentLocation) ->
-        modalInstance = $modal.open(
-            templateUrl: '/views/base/abuse.html'
-            controller: 'ReportAbuseFormInstanceCtrl'
-            resolve:
-                currentLocation : () ->
-                    return currentLocation
-        )
-)
-
 module.controller('BasicModalInstanceCtrl', ($scope, $modalInstance, content) ->
 
     $scope.content = content
