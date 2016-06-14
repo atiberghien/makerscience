@@ -130,20 +130,18 @@
 
                 <tabset class="nav-tabs-project">
                     <tab heading="Projet">
-                        <section>
-                            <div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
-                                <button> <span class="glyphicon glyphicon-pencil"></span></button>
+                        <section ng-repeat="item in projectsheet.base_projectsheet.question_answers">
+                            <h3>{{item.question.text}}</h3>
+                            <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
+                                <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <h3>Présentation du projet</h3>
-
-                            <p editable-tiny-angular="projectsheet.parent.description"
+                            <p editable-tiny-angular="item.answer"
                                 blur="ignore"
-                                 e-form="DescBtnForm"
+                                 e-form="AnswerBtnForm"
                                  e-rows="4"
-                                 onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
-                                 ng-bind-html="trustAsHtml(projectsheet.parent.description)">
+                                 onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
+                                 ng-bind-html="trustAsHtml(item.answer)">
                             </p>
-
                         </section>
                     </tab>
                     <tab heading="Actus ({{projectsheet.news.length}})">

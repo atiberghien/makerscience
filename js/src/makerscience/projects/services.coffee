@@ -1,6 +1,6 @@
 module = angular.module("makerscience.projects.services", ['restangular'])
 
-module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project) ->
+module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, ProjectSheetQuestionAnswer, PostalAddress) ->
     projectsheetResult = null
 
     return {

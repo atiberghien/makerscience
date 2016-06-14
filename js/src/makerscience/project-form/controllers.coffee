@@ -6,12 +6,12 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                                                         ObjectProfileLink) ->
 
 
-    $scope.isEditingMode = false
+    $scope.QAItems = []
+
     FormService.init('projet-makerscience-2016').then((response) ->
         $scope.QAItems = response.QAItems
         $scope.projectsheet = response.projectsheet
     )
-
 
     $scope.themesTags = []
     $scope.targetsTags = []
@@ -21,11 +21,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     $scope.newNeed = {}
 
     $scope.hideControls = false
-
     $scope.coverIndex = null
-    $scope.projectsheet = {}
-    $scope.QAItems = []
-    projectsheetResult = {}
 
     $scope.uploader = uploader = new FileUploader(
         url: config.bucket_uri
