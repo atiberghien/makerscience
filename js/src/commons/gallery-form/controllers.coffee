@@ -37,21 +37,19 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
             newMedia.bucket = false
 
         $scope.projectsheet.medias[uniqueId] = newMedia
-        console.log $scope.projectsheet
         $scope.submitted = false
 
     $scope.cancel = ->
         $scope.uploader.clearQueue()
 
-    $scope.isCoverCandidate = (fileItem) ->
-        fileQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
-        return $scope.coverCandidateQueueIndex != null && $scope.coverCandidateQueueIndex == fileQueueIndex
+    $scope.isCoverCandidate = (fileIndex) ->
+        return $scope.coverCandidateQueueIndex != null && $scope.coverCandidateQueueIndex == fileIndex
 
-    $scope.toggleCoverCandidate = (fileItem) ->
-        if $scope.isCoverCandidate(fileItem)
+    $scope.toggleCoverCandidate = (fileIndex) ->
+        if $scope.isCoverCandidate(fileIndex)
             $scope.coverCandidateQueueIndex = null
         else
-            $scope.coverCandidateQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
+            $scope.coverCandidateQueueIndex = fileIndex
 
     $scope.delVideo = (videoURL) ->
         delete $scope.videos[videoURL]

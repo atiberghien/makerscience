@@ -108,9 +108,9 @@
           </div>
           {{media.title}}
         </p>
-        <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
-            <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
-            <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+        <button ng-if="media.type === 'image'" type="button" class="btn btn-xs" ng-click="toggleCoverCandidate($index)">
+            <span ng-hide="isCoverCandidate($index)" class="glyphicon glyphicon-star"></span>
+            <span ng-show="isCoverCandidate($index)" class="glyphicon glyphicon-star" style="color:orange"></span>
             Choisir l'image en une
         </button>
         <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
