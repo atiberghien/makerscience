@@ -19,7 +19,6 @@
 
                 <form name="newResourceForm"
                       novalidate
-                      ng-controller="MakerScienceResourceSheetCreateCtrl"
                       ng-init="submitted=false"
                       ng-submit="saveMakerscienceResource(newResourceForm.$valid)"
                       ng-class="{ 'has-error' : newResourceForm.$invalid && submitted }">
@@ -88,64 +87,7 @@
                                 </accordion-heading>
                                 <fieldset class="addPhotosVideos">
                                     <h5>Nouveau média</h5>
-                                    <ng-form novalidate name="mediaForm">
-                                        <label>Sélectionner le type de ressource à ajouter</label>
-                                        <tabset>
-                                            <tab select="tabSelect('image')">
-                                                <tab-heading>
-                                                    <span class="glyphicon glyphicon-picture"></span>
-                                                    Méthode (tutos)
-                                                </tab-heading>
-                                            </tab>
-                                            <tab select="tabSelect('document')">
-                                                <tab-heading>
-                                                    <span class="glyphicon glyphicon-file"></span>
-                                                    Article de référence
-                                                </tab-heading>
-                                            </tab>
-                                            <tab select="tabSelect('video')">
-                                                <tab-heading>
-                                                    <span class="glyphicon glyphicon-camera"></span>
-                                                    Liste de ressources
-                                                </tab-heading>
-                                            </tab>
-                                        </tabset>
-
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <inputfile id="file-document" uploader="uploader" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
-                                                <span class="parcourir">ou</span>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <label for="media-doc">Ajouter un lien</label>
-                                                <input id="media-doc" type="text" ng-model="newMedia.link" placeholder="http://" />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <span class="parcourir">ou</span>
-                                                <button class="btn btn-primary">Saisir une expérience</button>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <label for="media-title">Titre  <span class="required">*</span></label>
-                                                <input type="text" id="media-title" ng-model="newMedia.title" ng-required="newMedia.link || newMedia.file" />
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <p class="item-validate">
-                                                  <button type="button" class="btn btn-warning cancel" ng-click="cancelAction()">Annuler</button>
-                                                  <button type="button" class="btn btn-primary" ng-click="addMedia(newMedia)">Valider</button>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <div class="progress" ng-show="hideControls">
-                                            <div ng-show="uploader.queue.length > 0" class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
-                                            <div ng-show="uploader.queue.length == 0" class="progress-bar" role="progressbar" ng-style="{ 'width': fake_progress + '%' }" style="width: 0%;"></div>
-                                        </div>
-                                    </ng-form>
-
+                                    <gallery-resource></gallery-resource>
                                 </fieldset>
                             </accordion-group>
                         </div>

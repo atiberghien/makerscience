@@ -134,6 +134,7 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
         .state('resource.form',
                 url: 'new',
                 templateUrl: '/views/resource/resource.form.html'
+                controller : 'MakerScienceResourceSheetCreateCtrl'
                 ncyBreadcrumb:
                     label: 'Nouvelle expérience'
                     parent : 'resource.list'

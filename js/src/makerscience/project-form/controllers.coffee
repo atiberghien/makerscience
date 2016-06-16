@@ -129,9 +129,9 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     ,5000)
                 else
                     $scope.uploader.onBeforeUploadItem = (item) ->
+                        console.log item.formData
                         item.formData.push(
-                            bucket : projectsheetResult.bucket.id,
-                            description: 'coucou'
+                            bucket : projectsheetResult.bucket.id
                         )
                         item.headers =
                            Authorization : $scope.uploader.headers["Authorization"]
@@ -139,11 +139,11 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
                         fileIndex = $scope.uploader.getIndexOfItem(fileItem)
 
-                        angular.forEach($scope.projectsheet.medias, (media, key) ->
-                            if media.bucket && Number(key) == fileIndex + 1
-                                media.file = fileItem.file
-                                console.log
-                          )
+                        # angular.forEach($scope.projectsheet.medias, (media, key) ->
+                        #     if media.bucket && Number(key) == fileIndex + 1
+                        #         media.file = fileItem.file
+                        #         console.log
+                        #   )
                         console.log $scope.projectsheet.medias
                         ProjectSheet.one(projectsheetResult.id).patch({medias: $scope.projectsheet.medias})
 

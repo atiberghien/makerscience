@@ -1,0 +1,126 @@
+<ng-form
+  novalidate
+  ng-init="submitted=false"
+  name="mediaForm"
+  class="gallery-form"
+  ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }">
+    <label>Sélectionner le type de média à ajouter</label>
+    <tabset>
+        <tab select="tabSelect('image')">
+            <tab-heading>
+                <span class="glyphicon glyphicon-picture"></span>
+                Image
+            </tab-heading>
+            <div class="row">
+                <div class="col-md-4">
+                    <inputfile id="file-image" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
+                    <span class="parcourir">ou</span>
+                </div>
+                <div class="col-md-8">
+                    <label for="media-image">Ajouter un lien vers une image</label>
+                    <input id="media-image" type="text" ng-model="newMedia.url" placeholder="http://" />
+                </div>
+            </div>
+        </tab>
+        <tab select="tabSelect('document')">
+            <tab-heading>
+                <span class="glyphicon glyphicon-file"></span>
+                Document
+            </tab-heading>
+            <div class="row">
+              <div class="col-md-4">
+                  <inputfile id="file-document" uploader="uploader" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
+                  <span class="parcourir">ou</span>
+              </div>
+                <div class="col-md-8">
+                    <label for="media-doc">Ajouter un lien vers un document</label>
+                    <input id="media-doc" type="text" ng-model="newMedia.url" placeholder="http://" />
+                </div>
+            </div>
+        </tab>
+        <tab select="tabSelect('video')">
+            <tab-heading>
+                <span class="glyphicon glyphicon-camera"></span>
+                Vidéo
+            </tab-heading>
+            <label for="media-video">Ajouter un lien vers une vidéo</label>
+            <input id="media-video" type="text" ng-model="newMedia.url" placeholder="http://" />
+        </tab>
+        <tab>
+            <tab-heading>
+                <span class="glyphicon glyphicon-link"></span>
+                Site web
+            </tab-heading>
+            <label for="media-url">Ajouter un lien</label>
+            <input id="media-url" type="text" ng-model="newMedia.url" placeholder="http://" />
+        </tab>
+    </tabset>
+
+    <p ng-show="!$scope.newMedia.url && !$scope.newMedia.file && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
+    <div class="row">
+        <div class="col-md-10">
+            <label for="media-title">Titre  <span class="required">*</span></label>
+            <input type="text" name="mediaTitle" id="media-title" ng-model="newMedia.title" ng-required="newMedia.link || newMedia.file" maxlength="50" required />
+            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
+        </div>
+
+        <div class="col-md-2" ng-hide="hideControls">
+            <button type="button" class="btn btn-primary item-validate" ng-click="submitted=true;addMedia(newMedia)">Valider</button>
+        </div>
+    </div>
+</ng-form>
+<hr/>
+<ul class="gallery-thumbnails thumbnails">
+    <!-- <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
+        <div class="thumbnail"><img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" /></div>
+        <p class="filename">{{file.filename}}</p>
+        <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
+            <span ng-hide="isCover(file)" class="glyphicon glyphicon-star"></span>
+            <span ng-show="isCover(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+            Choisir l'image en une
+        </button>
+        <button type="button" class="btn btn-danger btn-xs" ng-click="removePicture(file)">
+            <span class="glyphicon glyphicon-trash"></span> Supprimer
+        </button>
+    </li>
+    <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
+        <div class="thumbnail" ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
+        <p class="filename">{{file.file.name}}</p>
+        <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
+            <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
+            <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+            Choisir l'image en une
+        </button>
+        <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
+            <span class="glyphicon glyphicon-trash"></span> Supprimer
+        </button>
+    </li> -->
+
+    <li ng-repeat="media in projectsheet.medias track by $index" style="float: left;text-align: center;">
+        <div class="thumbnail" ng-show="uploader.isHTML5 && media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
+        <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div>
+        <p class="filename">
+          <div ng-switch on="media.type">
+              <span class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></span>
+              <span class="glyphicon glyphicon-facetime-video" ng-switch-when="video"></span>
+              <span class="glyphicon glyphicon-file" ng-switch-when="document"></span>
+              <span class="glyphicon glyphicon-link" ng-switch-when="link"></span>
+          </div>
+          {{media.title}}
+        </p>
+        <button ng-if="media.type === 'image'" type="button" class="btn btn-xs" ng-click="toggleCoverCandidate($index)">
+            <span ng-hide="isCoverCandidate($index)" class="glyphicon glyphicon-star"></span>
+            <span ng-show="isCoverCandidate($index)" class="glyphicon glyphicon-star" style="color:orange"></span>
+            Choisir l'image en une
+        </button>
+        <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
+            <span class="glyphicon glyphicon-trash"></span> Supprimer
+        </button>
+    </li>
+</ul>
+<ul class="list-group links">
+    <li class="list-group-item" ng-repeat="(videoURL, nop) in videos">
+        {{videoURL}}
+        <button class="transparent" ng-click="delVideo(videoURL)"><span class="glyphicon glyphicon-trash"></span></button>
+    </li>
+</ul>
