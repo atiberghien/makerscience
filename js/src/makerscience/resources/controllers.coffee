@@ -1,4 +1,4 @@
-module = angular.module("makerscience.resources.controllers", ['commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
+module = angular.module("makerscience.resources.controllers", ["commons.accounts.controllers", 'makerscience.base.services', 'commons.tags.services',
             'makerscience.base.controllers'])
 
 module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticContent, MakerScienceResourceLight, MakerScienceResourceTaggedItem, FilterService) ->
@@ -183,12 +183,14 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, ProjectService,
+module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, ProjectService, TaggedItemService,
                                                     MakerScienceResource, MakerScienceResourceLight, MakerScienceResourceTaggedItem, MakerSciencePostLight, TaggedItem,
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
-    $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('VoteCtrl', {$scope: $scope})
+
+    $scope.openTagPopup = (preparedTags, tagType, editableTag, addTagCallback, removeTagCallback) ->
+      TaggedItemService.openTagPopup(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)
 
     $scope.preparedThemeTags = []
     $scope.preparedFormatsTags = []

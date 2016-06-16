@@ -1,5 +1,5 @@
 module = angular.module("makerscience.base.controllers", ['makerscience.base.services',
-                                                          'commons.accounts.controllers', 'commons.graffiti.services'])
+                                                          'commons.accounts.controllers'])
 
 module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
     """
@@ -365,8 +365,6 @@ module.controller("NotificationCtrl", ($scope, $rootScope, $controller, $timeout
                 $scope.updateNotifications(false)
             , 30000)
     )
-
-
 )
 
 module.controller('ReportAbuseFormInstanceCtrl' , ($scope, $modalInstance, $timeout, User, vcRecaptchaService, currentLocation) ->

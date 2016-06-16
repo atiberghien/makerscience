@@ -7,6 +7,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
 
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
+    $scope.projectsheet = { medias: {} }
     $scope.QAItems = []
 
     FormService.init('projet-makerscience-2016').then((response) ->
@@ -54,7 +55,6 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         else
             console.log("submitting form")
 
-        # projectsheetResult = FormService.projectsheetResult
         FormService.save($scope.projectsheet).then((projectsheetResult) ->
             angular.forEach($scope.QAItems, (q_a) ->
                 q_a.projectsheet = projectsheetResult.resource_uri

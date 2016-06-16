@@ -81,21 +81,15 @@
                                         <p ng-show="newProjectForm.localisation.$invalid && submitted" class="help-block">Localisation requise</p>
 
                                         <label>Thématiques <span class="required">*</span></label>
-                                        <tags-input ng-model="themesTags" placeholder="Mot-clé">
-                                            <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
-                                        </tags-input>
+                                        <tag-auto-complete model="themesTags" placeholder="Mot-clé"></tag-auto-complete>
                                         <p ng-show="newProjectForm.thematiques.$invalid && submitted" class="help-block">Thematiques requise</p>
 
                                         <label>Publics visés <span class="required">*</span></label>
-                                        <tags-input ng-model="targetsTags" placeholder="Mot-clé">
-                                            <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
-                                        </tags-input>
+                                        <tag-auto-complete model="targetsTags" placeholder="Mot-clé"></tag-auto-complete>
                                         <p ng-show="newProjectForm.target.$invalid && submitted" class="help-block">Publics visés requis</p>
 
                                         <label>Formats <span class="required">*</span></label>
-                                        <tags-input ng-model="formatsTags" placeholder="Mot-clé">
-                                        <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
-                                        </tags-input>
+                                        <tag-auto-complete model="formatsTags" placeholder="Mot-clé"></tag-auto-complete>
                                         <p ng-show="newProjectForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
                                    </fieldset>
                                 </accordion-group>
@@ -180,13 +174,8 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="need-keywords">
-                                                  <div ng-controller="TagAutoCompleteCtrl">
-                                                    <label>Mots-clés</label>
-                                                    <tags-input ng-model="questionTags"
-                                                    placeholder="Nouveau mot-clé">
-                                                    <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
-                                                  </tags-input>
-                                                </div>
+                                                  <label>Mots-clés</label>
+                                                  <tag-auto-complete model="questionTags" placeholder="Mot-clé"></tag-auto-complete>
                                               </div>
                                             </div>
 

@@ -40,6 +40,7 @@ module.factory("FormService", (ProjectSheetTemplate, ProjectSheet) ->
         )
 
     FormService.save = (projectsheet)->
+        console.log projectsheet
         if !projectsheet.project
             uuid = guid()
             projectsheet.project = {title: 'temp_' + uuid}

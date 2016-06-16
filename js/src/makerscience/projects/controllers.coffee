@@ -1,4 +1,4 @@
-module = angular.module("makerscience.projects.controllers", ['commons.graffiti.controllers', "commons.accounts.controllers", 'makerscience.base.services',
+module = angular.module("makerscience.projects.controllers", ["commons.accounts.controllers", 'makerscience.base.services', 'commons.tags.services',
             'makerscience.base.controllers'])
 
 # module.controller("ProjectListCtrl", ($scope, Project) ->
@@ -116,14 +116,16 @@ module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInsta
         $modalInstance.dismiss('cancel')
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window, $modal, ProjectService,
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window, $modal, ProjectService, TaggedItemService,
                                                     MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePostLight,
                                                     MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress, ProjectNews
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
-    $controller('TaggedItemCtrl', {$scope: $scope})
     $controller('VoteCtrl', {$scope: $scope})
     $controller('PostCtrl', {$scope: $scope})
+
+    $scope.openTagPopup = (preparedTags, tagType, editableTag, addTagCallback, removeTagCallback) ->
+      TaggedItemService.openTagPopup(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)
 
     $scope.preparedThemeTags = []
     $scope.preparedFormatsTags = []
