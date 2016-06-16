@@ -130,7 +130,8 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                 else
                     $scope.uploader.onBeforeUploadItem = (item) ->
                         item.formData.push(
-                            bucket : projectsheetResult.bucket.id
+                            bucket : projectsheetResult.bucket.id,
+                            description: 'coucou'
                         )
                         item.headers =
                            Authorization : $scope.uploader.headers["Authorization"]
