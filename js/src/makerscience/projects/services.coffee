@@ -1,15 +1,7 @@
 module = angular.module("makerscience.projects.services", ['restangular'])
 
 module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, ProjectSheetQuestionAnswer, PostalAddress) ->
-    projectsheetResult = null
-
     return {
-
-        getSavedInstance: () ->
-            if (projectsheetResult)
-                console.log 'ok'
-            else
-                console.log 'nok'
 
         fetchCoverURL: (projectsheet) ->
             if projectsheet.cover

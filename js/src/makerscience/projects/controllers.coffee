@@ -144,7 +144,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.openGallery = (projectsheet) ->
             modalInstance = $modal.open(
-                templateUrl: '/views/gallery/gallery-modal.html'
+                templateUrl: '/views/gallery/gallery-project-modal.html'
                 controller: 'GalleryEditionInstanceCtrl'
                 size: 'lg'
                 backdrop : 'static'

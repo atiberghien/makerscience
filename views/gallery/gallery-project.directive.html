@@ -100,12 +100,12 @@
         <div class="thumbnail" ng-show="uploader.isHTML5 && media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
         <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div>
         <p class="filename">
-          <div ng-switch on="media.type">
-              <span class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></span>
-              <span class="glyphicon glyphicon-facetime-video" ng-switch-when="video"></span>
-              <span class="glyphicon glyphicon-file" ng-switch-when="document"></span>
-              <span class="glyphicon glyphicon-link" ng-switch-when="link"></span>
-          </div>
+          <span ng-switch on="media.type">
+              <i class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></i>
+              <i class="glyphicon glyphicon-facetime-video" ng-switch-when="video"></i>
+              <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
+              <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+          </span>
           {{media.title}}
         </p>
         <button ng-if="media.type === 'image'" type="button" class="btn btn-xs" ng-click="toggleCoverCandidate($index)">
@@ -117,6 +117,18 @@
             <span class="glyphicon glyphicon-trash"></span> Supprimer
         </button>
     </li>
+    <!-- <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
+        <div class="thumbnail"><img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" /></div>
+        <p class="filename">{{file.filename}}</p>
+        <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
+            <span ng-hide="isCover(file)" class="glyphicon glyphicon-star"></span>
+            <span ng-show="isCover(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
+            Choisir l'image en une
+        </button>
+        <button type="button" class="btn btn-danger btn-xs" ng-click="removePicture(file)">
+            <span class="glyphicon glyphicon-trash"></span> Supprimer
+        </button>
+    </li> -->
 </ul>
 <ul class="list-group links">
     <li class="list-group-item" ng-repeat="(videoURL, nop) in videos">

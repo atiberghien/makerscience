@@ -1,6 +1,6 @@
 module = angular.module("makerscience.projects.controllers")
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $filter, $timeout, @$http, FileUploader, ProjectService
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $modal, $filter, $timeout, @$http, FileUploader, ProjectService
                                                         ProjectProgress, ProjectSheet, FormService, ProjectSheetQuestionAnswer, Project,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
                                                         ObjectProfileLink) ->
@@ -39,6 +39,22 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     ProjectProgress.getList({'range__slug' : 'makerscience'}).then((progressRangeResult) ->
         $scope.progressRange = [{ value : progress.resource_uri, text : progress.label } for progress in $filter('orderBy')(progressRangeResult, 'order')][0]
     )
+
+    $scope.openInfosLink = (projectsheet) ->
+        modalInstance = $modal.open(
+            templateUrl: '/views/infolink/infolink-modal.html'
+            controller: 'InfoLinkCtrl'
+            size: 'lg'
+            backdrop : 'static'
+            keyboard : false
+            resolve:
+                projectsheet: ->
+                    return projectsheet
+        )
+        modalInstance.result.then((result)->
+            $scope.$emit('cover-updated')
+        )
+
 
     $scope.addNeed = (need) ->
         $scope.needs.push(angular.copy($scope.newNeed))
@@ -129,9 +145,9 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     ,5000)
                 else
                     $scope.uploader.onBeforeUploadItem = (item) ->
-                        console.log item.formData
                         item.formData.push(
-                            bucket : projectsheetResult.bucket.id
+                            bucket : projectsheetResult.bucket.id,
+                            description: 'salut salut'
                         )
                         item.headers =
                            Authorization : $scope.uploader.headers["Authorization"]
@@ -142,9 +158,8 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         # angular.forEach($scope.projectsheet.medias, (media, key) ->
                         #     if media.bucket && Number(key) == fileIndex + 1
                         #         media.file = fileItem.file
-                        #         console.log
                         #   )
-                        console.log $scope.projectsheet.medias
+
                         ProjectSheet.one(projectsheetResult.id).patch({medias: $scope.projectsheet.medias})
 
                         if fileIndex == $scope.coverIndex
@@ -156,4 +171,29 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     $scope.uploader.uploadAll()
             )
         )
+)
+
+module.controller("InfoLinkCtrl", ($scope, $modalInstance, MediaRestangular, projectsheet) ->
+
+    $scope.projectsheet = projectsheet
+
+    $scope.close = ->
+        $modalInstance.dismiss('close')
+
+    $scope.ok = (link) ->
+        if ($scope.infoLinkForm.$invalid)
+            return false
+
+        MediaRestangular.one('geturl').get({'url': link.$modelValue})
+          .then((res) ->
+              if !$scope.projectsheet.project
+                  $scope.projectsheet.project = {}
+              $scope.projectsheet.project.title = res.title
+              $scope.projectsheet.project.baseline = res.description
+              $modalInstance.dismiss()
+          )
+          .catch((err) ->
+              console.error err
+          )
+
 )

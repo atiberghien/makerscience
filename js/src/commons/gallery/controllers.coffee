@@ -23,14 +23,12 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
       $scope.newMedia = { type: $scope.currentType }
 
     $scope.addMedia = (newMedia) ->
-        console.log 'addMedia'
         if $scope.mediaForm.$invalid || (!$scope.newMedia.url && !$scope.newMedia.file)
             console.log 'invalid form'
             return false
 
         uniqueId = _.uniqueId()
         if newMedia.file
-            newMedia.file.filename = 'coucou'
             $scope.newMedia = newMedia
             newMedia.bucket = true
             $scope.uploader.addToQueue(newMedia.file)
@@ -104,6 +102,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, @$http,
 
     $scope.ok = ->
         ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
+
         if $scope.uploader.queue.length > 0
             $scope.uploader.uploadAll()
         else

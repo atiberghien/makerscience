@@ -5,7 +5,6 @@ module = angular.module("commons.form.services", [])
 module.factory("FormService", (ProjectSheetTemplate, ProjectSheet) ->
 
     FormService = {}
-    FormService.projectsheetResult
 
     guid = () ->
       s4 = () ->
@@ -40,16 +39,11 @@ module.factory("FormService", (ProjectSheetTemplate, ProjectSheet) ->
         )
 
     FormService.save = (projectsheet)->
-        console.log projectsheet
         if !projectsheet.project
-            uuid = guid()
-            projectsheet.project = {title: 'temp_' + uuid}
             projectsheet.project.begin_date = new Date()
 
-
         ProjectSheet.post(projectsheet).then((response) ->
-            FormService.projectsheetResult = response
-            return FormService.projectsheetResult
+            return response
         ).catch((error) ->
             console.error error
           )

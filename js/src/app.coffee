@@ -23,6 +23,8 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
                                 'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'infinite-scroll', 'angular-confirm'])
 
 # CORS
+
+.constant('Config', config)
 .config(($httpProvider) ->
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common["X-Requested-With"];
