@@ -1,19 +1,19 @@
 module = angular.module('commons.gallery.directives', [])
 
-module.directive('galleryProject', (BucketFile, ProjectSheet) ->
+module.directive('galleryProject', () ->
     return {
       scope: true
       restrict: 'E'
       templateUrl: 'views/gallery/gallery-project.directive.html',
-      controller: 'GalleryCreationInstanceCtrl'
+      controller: 'GalleryCreationProjectCtrl'
     }
 )
 
-module.directive('galleryResource', (BucketFile, ProjectSheet) ->
+module.directive('galleryResource', () ->
     return {
       scope: true
       restrict: 'E'
       templateUrl: 'views/gallery/gallery-resource.directive.html',
-      controller: 'GalleryCreationInstanceCtrl'
+      controller: 'GalleryCreationResourceCtrl'
     }
 )

@@ -278,6 +278,17 @@
 				display: block;
 				margin-bottom: 1em;
 			}
+			.radio {
+				padding-top: 1em;
+				label {
+					padding: 0;
+					margin: 0 20px;
+				}
+
+				input {
+					width: auto;
+				}
+			}
 			.mce-panel {
 				border: solid 1px $color-light-grey;
 			}

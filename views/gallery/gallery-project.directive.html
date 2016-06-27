@@ -6,7 +6,7 @@
   ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }">
     <label>Sélectionner le type de média à ajouter</label>
     <tabset>
-        <tab select="tabSelect('image')">
+        <tab select="initMedia('image')">
             <tab-heading>
                 <span class="glyphicon glyphicon-picture"></span>
                 Image
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </tab>
-        <tab select="tabSelect('document')">
+        <tab select="initMedia('document')">
             <tab-heading>
                 <span class="glyphicon glyphicon-file"></span>
                 Document
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </tab>
-        <tab select="tabSelect('video')">
+        <tab select="initMedia('video')">
             <tab-heading>
                 <span class="glyphicon glyphicon-camera"></span>
                 Vidéo
@@ -46,7 +46,7 @@
             <label for="media-video">Ajouter un lien vers une vidéo</label>
             <input id="media-video" type="text" ng-model="newMedia.url" placeholder="http://" />
         </tab>
-        <tab>
+        <tab select="initMedia('link')">
             <tab-heading>
                 <span class="glyphicon glyphicon-link"></span>
                 Site web
@@ -71,33 +71,8 @@
 </ng-form>
 <hr/>
 <ul class="gallery-thumbnails thumbnails">
-    <!-- <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
-        <div class="thumbnail"><img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" /></div>
-        <p class="filename">{{file.filename}}</p>
-        <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
-            <span ng-hide="isCover(file)" class="glyphicon glyphicon-star"></span>
-            <span ng-show="isCover(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
-            Choisir l'image en une
-        </button>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="removePicture(file)">
-            <span class="glyphicon glyphicon-trash"></span> Supprimer
-        </button>
-    </li>
-    <li ng-repeat="file in uploader.queue" style="float: left;text-align: center;">
-        <div class="thumbnail" ng-show="uploader.isHTML5" ng-thumb="{ file: file._file, height: 100 }"></div>
-        <p class="filename">{{file.file.name}}</p>
-        <button type="button" class="btn btn-xs" ng-click="toggleCoverCandidate(file)">
-            <span ng-hide="isCoverCandidate(file)" class="glyphicon glyphicon-star"></span>
-            <span ng-show="isCoverCandidate(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
-            Choisir l'image en une
-        </button>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
-            <span class="glyphicon glyphicon-trash"></span> Supprimer
-        </button>
-    </li> -->
-
-    <li ng-repeat="media in projectsheet.medias track by $index" style="float: left;text-align: center;">
-        <div class="thumbnail" ng-show="uploader.isHTML5 && media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
+    <li ng-repeat="media in medias track by $index" style="float: left;text-align: center;">
+        <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
         <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div>
         <p class="filename">
           <span ng-switch on="media.type">
@@ -109,26 +84,14 @@
           {{media.title}}
         </p>
         <button ng-if="media.type === 'image'" type="button" class="btn btn-xs" ng-click="toggleCoverCandidate($index)">
-            <span ng-hide="isCoverCandidate($index)" class="glyphicon glyphicon-star"></span>
-            <span ng-show="isCoverCandidate($index)" class="glyphicon glyphicon-star" style="color:orange"></span>
+            <span ng-show="!media.isCover" class="glyphicon glyphicon-star"></span>
+            <span ng-show="media.isCover" class="glyphicon glyphicon-star" style="color:orange"></span>
             Choisir l'image en une
         </button>
         <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
             <span class="glyphicon glyphicon-trash"></span> Supprimer
         </button>
     </li>
-    <!-- <li ng-repeat="file in projectsheet.bucket.files" style="float: left;text-align: center;">
-        <div class="thumbnail"><img ng-src="{{config.media_uri}}{{file.thumbnail_url}}?height=100" /></div>
-        <p class="filename">{{file.filename}}</p>
-        <button type="button" class="btn btn-xs" ng-click="toggleCover(file)">
-            <span ng-hide="isCover(file)" class="glyphicon glyphicon-star"></span>
-            <span ng-show="isCover(file)" class="glyphicon glyphicon-star" style="color:orange"></span>
-            Choisir l'image en une
-        </button>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="removePicture(file)">
-            <span class="glyphicon glyphicon-trash"></span> Supprimer
-        </button>
-    </li> -->
 </ul>
 <ul class="list-group links">
     <li class="list-group-item" ng-repeat="(videoURL, nop) in videos">

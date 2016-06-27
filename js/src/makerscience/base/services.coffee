@@ -93,3 +93,10 @@ module.factory('MediaRestangular', (Restangular, Config) ->
       RestangularConfigurer.setBaseUrl(Config.media_uri);
     )
 )
+
+module.factory('BucketRestangular', (Restangular, Config) ->
+    return Restangular.withConfig((RestangularConfigurer) ->
+      RestangularConfigurer.setRequestSuffix('/');
+      RestangularConfigurer.setBaseUrl(Config.bucket_uri);
+    )
+)

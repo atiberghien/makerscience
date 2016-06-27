@@ -1,9 +1,9 @@
 module = angular.module("makerscience.projects.controllers")
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $modal, $filter, $timeout, @$http, FileUploader, ProjectService
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $modal, $filter, $timeout, ProjectService
                                                         ProjectProgress, ProjectSheet, FormService, ProjectSheetQuestionAnswer, Project,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
-                                                        ObjectProfileLink) ->
+                                                        ObjectProfileLink, BucketRestangular) ->
 
 
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
@@ -23,13 +23,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     $scope.newNeed = {}
 
     $scope.hideControls = false
-    $scope.coverIndex = null
-
-    $scope.uploader = uploader = new FileUploader(
-        url: config.bucket_uri
-        headers :
-            Authorization : @$http.defaults.headers.common.Authorization
-    )
+    $scope.medias = {}
 
     #TODO : externalise 'projet-makerscience' info in static config table
     ## initialize projectsheet, QAItems, projectsheet.template in scope
@@ -130,11 +124,8 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     )
                 )
 
-                ProjectSheet.one(projectsheetResult.id).patch({medias:$scope.projectsheet.medias})
                 # if no photos to upload, directly go to new project sheet
-
-                # must use tmp var in order to not modify queue during cover candidate saving ... sync issue
-                if $scope.uploader.queue.length == 0
+                if $scope.medias.length == 0
                     $scope.fake_progress = 0
                     ##UGLY : to be sur that all remote ops are finished ... :/
                     for x in [1..5]
@@ -144,31 +135,25 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
                     ,5000)
                 else
-                    $scope.uploader.onBeforeUploadItem = (item) ->
-                        item.formData.push(
-                            bucket : projectsheetResult.bucket.id,
-                            description: 'salut salut'
-                        )
-                        item.headers =
-                           Authorization : $scope.uploader.headers["Authorization"]
+                    angular.forEach($scope.medias, (media, index) ->
+                        formData = new FormData()
+                        formData.append('file',   media.file)
+                        formData.append('bucket', projectsheetResult.bucket.id)
+                        formData.append('title',  media.title)
+                        formData.append('type',   media.type)
 
-                    $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
-                        fileIndex = $scope.uploader.getIndexOfItem(fileItem)
 
-                        # angular.forEach($scope.projectsheet.medias, (media, key) ->
-                        #     if media.bucket && Number(key) == fileIndex + 1
-                        #         media.file = fileItem.file
-                        #   )
-
-                        ProjectSheet.one(projectsheetResult.id).patch({medias: $scope.projectsheet.medias})
-
-                        if fileIndex == $scope.coverIndex
-                            ProjectSheet.one(projectsheetResult.id).patch({cover:response.resource_uri})
-
-                    $scope.uploader.onCompleteAll = () ->
-                        $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
-
-                    $scope.uploader.uploadAll()
+                        BucketRestangular.all(projectsheetResult.id)
+                          .withHttpConfig({transformRequest: angular.identity})
+                          .customPOST(formData, undefined, undefined, { 'Content-Type': undefined }).then((res) ->
+                              if media.isCover
+                                  ProjectSheet.one(projectsheetResult.id).patch({cover: res.resource_uri}).then(() ->
+                                    $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+                                    )
+                            ).catch((err) ->
+                              console.error err
+                            )
+                    )
             )
         )
 )

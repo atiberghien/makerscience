@@ -1,8 +1,48 @@
 module = angular.module('commons.gallery.controllers', [])
 
-module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
+module.controller('GalleryCreationProjectCtrl', ($scope, ProjectSheet) ->
     $scope.currentType = null
+    $scope.config = config
 
+    $scope.setTitle = (title) ->
+        $scope.$apply ->
+            $scope.newMedia.title = title
+            return
+
+    $scope.initMedia = (type) ->
+        $scope.newMedia = {
+            title: ''
+            type: type
+        }
+        if type == 'image'
+            $scope.newMedia.isCover = false
+
+        $scope.currentType = type
+
+    $scope.addMedia = (newMedia) ->
+        if $scope.mediaForm.$invalid || (!$scope.newMedia.url && !$scope.newMedia.file)
+            console.log 'invalid form'
+            return false
+
+        if newMedia.file
+            newMedia.bucket = true
+        else
+            newMedia.bucket = false
+
+        id = _.size($scope.medias)
+        $scope.medias[id] = newMedia
+        $scope.initMedia(newMedia.type)
+        $scope.submitted = false
+
+    $scope.toggleCoverCandidate = (mediaIndex) ->
+        $scope.medias[mediaIndex].isCover = if $scope.medias[mediaIndex].isCover then false else true
+
+    $scope.delVideo = (videoURL) ->
+        delete $scope.videos[videoURL]
+)
+
+module.controller('GalleryCreationResourceCtrl', ($scope, ProjectSheet) ->
+    $scope.currentType = null
     $scope.setTitle = (title) ->
         $scope.$apply ->
           $scope.newMedia.title = title
@@ -12,6 +52,7 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
         $scope.newMedia = {
           title: ''
           type: type
+          isAuthor: true
         }
         $scope.currentType = type
 
@@ -27,15 +68,18 @@ module.controller('GalleryCreationInstanceCtrl', ($scope, ProjectSheet) ->
             console.log 'invalid form'
             return false
 
-        uniqueId = _.uniqueId()
-        if newMedia.file
-            $scope.newMedia = newMedia
-            newMedia.bucket = true
-            $scope.uploader.addToQueue(newMedia.file)
-        else
-            newMedia.bucket = false
+        # if newMedia.file
+        #     $scope.newMedia = newMedia
+        #     newMedia.bucket = true
+        #     $scope.uploader.addToQueue(newMedia.file)
+        # else
+        #     newMedia.bucket = false
 
-        $scope.projectsheet.medias[uniqueId] = newMedia
+        uniqueId = _.uniqueId()
+        # $scope.projectsheet.medias[uniqueId] = newMedia
+        $scope.projectsheet.medias = []
+
+
         $scope.submitted = false
 
     $scope.cancel = ->

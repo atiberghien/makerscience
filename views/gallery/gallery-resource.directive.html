@@ -4,39 +4,68 @@
   name="mediaForm"
   class="gallery-form"
   ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }">
-    <label>Sélectionner le type de média à ajouter</label>
+    <label>Sélectionner le type de ressource à ajouter <span class="required">*</span></label>
     <tabset>
-        <tab select="tabSelect('image')">
-            <tab-heading>
-                <span class="glyphicon glyphicon-picture"></span>
-                Image
-            </tab-heading>
-            <div class="row">
-                <div class="col-md-4">
-                    <inputfile id="file-image" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
-                    <span class="parcourir">ou</span>
-                </div>
-                <div class="col-md-8">
-                    <label for="media-image">Ajouter un lien vers une image</label>
-                    <input id="media-image" type="text" ng-model="newMedia.url" placeholder="http://" />
-                </div>
-            </div>
-        </tab>
         <tab select="tabSelect('document')">
             <tab-heading>
                 <span class="glyphicon glyphicon-file"></span>
                 Document
             </tab-heading>
             <div class="row">
-              <div class="col-md-4">
-                  <inputfile id="file-document" uploader="uploader" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
-                  <span class="parcourir">ou</span>
-              </div>
+                <div class="col-md-4">
+                    <inputfile id="file-document" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
+                    <span class="parcourir">ou</span>
+                </div>
                 <div class="col-md-8">
-                    <label for="media-doc">Ajouter un lien vers un document</label>
-                    <input id="media-doc" type="text" ng-model="newMedia.url" placeholder="http://" />
+                    <label for="media-document">Ajouter un lien vers une image</label>
+                    <input id="media-document" type="text" ng-model="newMedia.url" placeholder="http://" />
                 </div>
             </div>
+            <label for="title-document">Titre</label>
+            <input id="title-document" type="text" ng-model="newMedia.title" />
+
+            <label for="description-document">Description</label>
+            <textarea
+                ui-tinymce="tinyMceFullOptions"
+                ng-trim="false"
+                name="description-document"
+                id="description-document"
+                ng-model="newMedia.description"
+                e-rows="4">
+            </textarea>
+
+            <div class="radio">
+                <p>Auteur de la ressource <span class="required">*</span></p>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>
+                        <input type="radio" ng-model="newMedia.isAuthor" value="true" />
+                        Vous faite partie des auteurs
+                    </label>
+                  </div>
+                  <div class="col-md-6">
+                    <label>
+                        <input type="radio" ng-model="newMedia.isAuthor" value="false" />
+                        Vous n'êtes pas auteur et vous recommandez la ressource
+                    </label>
+                  </div>
+                </div>
+            </div>
+
+            <div ng-hide="newMedia.isAuthor">
+                <label for="author-document">Nom de l'auteur <span class="required">*</span></label>
+                <input id="author-document" type="text" ng-model="newMedia.author" />
+            </div>
+
+            <label for="review-document">Avis sur la ressource {{newMedia.isAuthor}}</label>
+            <textarea
+              ui-tinymce="tinyMceFullOptions"
+              ng-trim="false"
+              name="review-document"
+              id="review-document"
+              ng-model="newMedia.review"
+              e-rows="4">
+            </textarea>
         </tab>
         <tab select="tabSelect('video')">
             <tab-heading>
@@ -55,19 +84,6 @@
             <input id="media-url" type="text" ng-model="newMedia.url" placeholder="http://" />
         </tab>
     </tabset>
-
-    <p ng-show="!$scope.newMedia.url && !$scope.newMedia.file && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
-    <div class="row">
-        <div class="col-md-10">
-            <label for="media-title">Titre  <span class="required">*</span></label>
-            <input type="text" name="mediaTitle" id="media-title" ng-model="newMedia.title" ng-required="newMedia.link || newMedia.file" maxlength="50" required />
-            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
-        </div>
-
-        <div class="col-md-2" ng-hide="hideControls">
-            <button type="button" class="btn btn-primary item-validate" ng-click="submitted=true;addMedia(newMedia)">Valider</button>
-        </div>
-    </div>
 </ng-form>
 <hr/>
 <ul class="gallery-thumbnails thumbnails">
