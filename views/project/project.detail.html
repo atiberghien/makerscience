@@ -222,14 +222,12 @@
                         </tab-heading>
                         <carousel interval="3000">
                           <slide ng-repeat="video in filteredItems = (projectsheet.base_projectsheet.bucket.files | filter: {type: 'video'})">
+                              {{filteredItems.length}}
                               <embed-video ng-href="{{video.url}}" width="683" height="342" style="height:342px; margin:0 auto;">
                                   <a href="{{video.url}}">Watch</a>
                               </embed-video>
                           </slide>
                         </carousel>
-                        <div ng-show="!filteredItems">
-                            <img src="/img/slides/no_video.png" alt="Pas de vidéo">
-                        </div>
                     </tab>
                     <tab ng-show="editable" disabled="true" class="editable">
                         <tab-heading>

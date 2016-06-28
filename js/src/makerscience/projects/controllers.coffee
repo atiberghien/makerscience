@@ -138,7 +138,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.projectsheet = makerScienceProjectResult.objects[0]
         $scope.editable = $scope.projectsheet.can_edit
         $scope.objectId = $scope.projectsheet.id
-
+        console.log $scope.projectsheet
         $scope.openGallery = (projectsheet) ->
             modalInstance = $modal.open(
                 templateUrl: '/views/gallery/gallery-project-modal.html'

@@ -27,6 +27,8 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
                     formData.append('file', media.file)
                 if media.url
                     formData.append('url', media.url)
+                if media.type == 'video'
+                    formData.append('video_id', media.videoId)
                 formData.append('bucket', bucketId)
                 formData.append('title', media.title)
                 formData.append('type', media.type)

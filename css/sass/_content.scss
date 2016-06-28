@@ -403,7 +403,7 @@ div.toolbar {
                         color: $color-blue;
                     }
                 }
-                & > li a:hover {
+                & > li:not(.active) a:hover {
                   border: none;
                   color: $color-blue;
                   background-color: $color-bg;

@@ -1,34 +1,28 @@
 module = angular.module('commons.gallery.controllers', [])
 
 module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService) ->
-    $scope.currentType = null
     $scope.config = config
     $scope.coverIndex = null
+    $scope.newMedia = GalleryService.initMediaProject('image')
 
     $scope.setTitle = (title) ->
         $scope.$apply ->
             $scope.newMedia.title = title
             return
 
-    $scope.initMedia = (type) ->
-        $scope.newMedia = GalleryService.initMediaProject(type)
-        $scope.currentType = type
-
     $scope.addMedia = (newMedia) ->
-        if $scope.mediaForm.$invalid || (!$scope.newMedia.url && !$scope.newMedia.file)
-            console.log 'invalid form'
+        if !$scope.mediaForm.$pristine && $scope.mediaForm.$invalid
             return false
 
-        if newMedia.file
-            newMedia.bucket = true
-        else
-            newMedia.bucket = false
+        if newMedia.type == 'video'
+            newMedia.videoId = newMedia.url.split('/').pop()
+            newMedia.videoProvider = GalleryService.getVideoProvider(newMedia.url)
 
         id = _.size($scope.medias)
         $scope.medias[id] = newMedia
         if $scope.tmpMedias
             $scope.tmpMedias[id] = newMedia
-        $scope.initMedia(newMedia.type)
+        $scope.newMedia = GalleryService.initMediaProject(newMedia.type)
         $scope.submitted = false
 
     $scope.toggleCoverCandidate = (index) ->
@@ -58,15 +52,7 @@ module.controller('GalleryCreationResourceCtrl', ($scope, ProjectSheet) ->
             console.log 'invalid form'
             return false
 
-        # if newMedia.file
-        #     $scope.newMedia = newMedia
-        #     newMedia.bucket = true
-        #     $scope.uploader.addToQueue(newMedia.file)
-        # else
-        #     newMedia.bucket = false
-
         uniqueId = _.uniqueId()
-        # $scope.projectsheet.medias[uniqueId] = newMedia
         $scope.projectsheet.medias = []
 
 

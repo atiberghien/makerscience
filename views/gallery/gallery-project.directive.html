@@ -1,12 +1,12 @@
 <ng-form
   novalidate
-  ng-init="submitted=false"
   name="mediaForm"
   class="gallery-form"
-  ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }">
+  ng-class="{ 'has-error' : newProjectForm.$invalid }"
+  check-form>
     <label>Sélectionner le type de média à ajouter</label>
     <tabset>
-        <tab select="initMedia('image')">
+        <tab select="newMedia.type = 'image'">
             <tab-heading>
                 <span class="glyphicon glyphicon-picture"></span>
                 Image
@@ -15,38 +15,43 @@
                 <div class="col-md-4">
                     <inputfile id="file-image" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
                     <span class="parcourir">ou</span>
+                    <p ng-show="mediaForm.$error.imageFileFormat" class="help-block">Format non valide, vérifiez le format de l'image ou changer de type de média</p>
                 </div>
                 <div class="col-md-8">
-                    <label for="media-image">Ajouter un lien vers une image</label>
-                    <input id="media-image" type="text" ng-model="newMedia.url" placeholder="http://" />
+                    <label for="media-image">Ajouter un lien vers une image (.png, .jpg, .gif)</label>
+                    <input name="imageUrl" id="media-image" type="text" ng-model="newMedia.url" placeholder="http://" />
+                    <p ng-show="mediaForm.imageFile.$error.format" class="help-block">Format non valide, vérifier le format de l'image ou changer de type de média</p>
                 </div>
             </div>
         </tab>
-        <tab select="initMedia('document')">
+        <tab select="newMedia.type = 'document'">
             <tab-heading>
                 <span class="glyphicon glyphicon-file"></span>
                 Document
             </tab-heading>
             <div class="row">
               <div class="col-md-4">
-                  <inputfile id="file-document" uploader="uploader" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
+                  <inputfile id="file-document" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
                   <span class="parcourir">ou</span>
+                  <p ng-show="mediaForm.$error.documentFileFormat" class="help-block">Format non valide, vérifiez le format de l'image ou changer de type de média</p>
               </div>
                 <div class="col-md-8">
-                    <label for="media-doc">Ajouter un lien vers un document</label>
-                    <input id="media-doc" type="text" ng-model="newMedia.url" placeholder="http://" />
+                    <label for="media-doc">Ajouter un lien vers un document (.doc, .pdf, odt, xls,...)</label>
+                    <input name="documentUrl" id="media-doc" type="text" ng-model="newMedia.url" placeholder="http://" />
+                    <p ng-show="mediaForm.documentUrl.$error.format" class="help-block">Format non valide, vérifier le format du document ou changer de type de média</p>
                 </div>
             </div>
         </tab>
-        <tab select="initMedia('video')">
+        <tab select="newMedia.type = 'video'">
             <tab-heading>
                 <span class="glyphicon glyphicon-facetime-video"></span>
                 Vidéo
             </tab-heading>
-            <label for="media-video">Ajouter un lien vers une vidéo</label>
-            <input id="media-video" type="text" ng-model="newMedia.url" placeholder="http://" />
+            <label for="media-video">Ajouter un lien vers une vidéo (lien de partage Youtube ou Dailymotion)</label>
+            <input name="videoUrl" id="media-video" type="text" ng-model="newMedia.url" placeholder="http://" />
+            <p ng-show="mediaForm.videoUrl.$error.format" class="help-block">Format non valide, vérifier qu'il s'agit bien d'un lien youtube ou dailymotion ou changer de type de média</p>
         </tab>
-        <tab select="initMedia('link')">
+        <tab select="newMedia.type = 'link'">
             <tab-heading>
                 <span class="glyphicon glyphicon-link"></span>
                 Site web
@@ -56,7 +61,8 @@
         </tab>
     </tabset>
 
-    <p ng-show="!$scope.newMedia.url && !$scope.newMedia.file && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
+    <p ng-show="$scope.mediaForm.$pristine" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
+
     <div class="row">
         <div class="col-md-10">
             <label for="media-title">Titre  <span class="required">*</span></label>
@@ -65,15 +71,17 @@
         </div>
 
         <div class="col-md-2" ng-hide="hideControls">
-            <button type="button" class="btn btn-primary item-validate" ng-click="submitted=true;addMedia(newMedia)">Valider</button>
+            <button type="button" class="btn btn-primary item-validate" ng-click="addMedia(newMedia)">Valider</button>
         </div>
     </div>
 </ng-form>
 <hr/>
 <ul class="gallery-thumbnails thumbnails">
     <li ng-repeat="media in medias track by $index" style="float: left;text-align: center;">
-        <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
-        <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div>
+        <div class="thumbnail" ng-show="media.file" ng-thumb="{ file: media.file, height: 100 }"></div>
+        <div class="thumbnail" ng-show="media.type === 'image' && media.url"><img ng-src="{{media.url}}" /></div>
+        <div class="thumbnail" ng-show="media.type === 'video' && media.videoProvider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.videoId}}/0.jpg" /></div>
+        <div class="thumbnail" ng-show="media.type === 'video' && media.videoProvider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
         <p class="filename">
           <span ng-switch on="media.type">
               <i class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></i>
@@ -93,8 +101,10 @@
         </button>
     </li>
     <li ng-repeat="media in projectsheet.bucket.files track by $index" style="float: left;text-align: center;">
-        <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
-        <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div>
+        <div class="thumbnail" ng-show="media.file"><img ng-src="{{ config.media_uri }}{{ media.file }}" alt="{{media.title}}"></div>
+        <div class="thumbnail" ng-show="media.type === 'image' && media.url"><img ng-src="{{media.url}}"  alt="{{media.title}}"></div>
+        <div class="thumbnail" ng-show="media.type === 'video' && media.videoProvider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.video_id}}/0.jpg" /></div>
+        <div class="thumbnail" ng-show="media.type === 'video' && media.videoProvider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
         <p class="filename">
           <span ng-switch on="media.type">
               <i class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></i>
