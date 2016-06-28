@@ -1,8 +1,9 @@
 module = angular.module('commons.gallery.controllers', [])
 
-module.controller('GalleryCreationProjectCtrl', ($scope, ProjectSheet) ->
+module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService) ->
     $scope.currentType = null
     $scope.config = config
+    $scope.coverIndex = null
 
     $scope.setTitle = (title) ->
         $scope.$apply ->
@@ -10,13 +11,7 @@ module.controller('GalleryCreationProjectCtrl', ($scope, ProjectSheet) ->
             return
 
     $scope.initMedia = (type) ->
-        $scope.newMedia = {
-            title: ''
-            type: type
-        }
-        if type == 'image'
-            $scope.newMedia.isCover = false
-
+        $scope.newMedia = GalleryService.initMediaProject(type)
         $scope.currentType = type
 
     $scope.addMedia = (newMedia) ->
@@ -31,14 +26,13 @@ module.controller('GalleryCreationProjectCtrl', ($scope, ProjectSheet) ->
 
         id = _.size($scope.medias)
         $scope.medias[id] = newMedia
+        if $scope.tmpMedias
+            $scope.tmpMedias[id] = newMedia
         $scope.initMedia(newMedia.type)
         $scope.submitted = false
 
-    $scope.toggleCoverCandidate = (mediaIndex) ->
-        $scope.medias[mediaIndex].isCover = if $scope.medias[mediaIndex].isCover then false else true
-
-    $scope.delVideo = (videoURL) ->
-        delete $scope.videos[videoURL]
+    $scope.toggleCoverCandidate = (index) ->
+        $scope.coverIndex = GalleryService.setCoverIndex(index)
 )
 
 module.controller('GalleryCreationResourceCtrl', ($scope, ProjectSheet) ->
@@ -49,11 +43,7 @@ module.controller('GalleryCreationResourceCtrl', ($scope, ProjectSheet) ->
           return
 
     $scope.tabSelect = (type) ->
-        $scope.newMedia = {
-          title: ''
-          type: type
-          isAuthor: true
-        }
+        $scope.newMedia = GalleryService.initMediaResource()
         $scope.currentType = type
 
     $scope.config = config
@@ -98,85 +88,54 @@ module.controller('GalleryCreationResourceCtrl', ($scope, ProjectSheet) ->
         delete $scope.videos[videoURL]
 )
 
-module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, @$http, projectsheet, FileUploader, ProjectSheet, BucketFile) ->
-
-    $scope.newMedia = {}
+module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, projectsheet, medias, ProjectService, ProjectSheet, BucketFile, GalleryService) ->
+    $scope.currentType = null
+    $scope.config = config
     $scope.projectsheet = projectsheet
-    $scope.coverCandidateQueueIndex = null
-
     $scope.hideControls = false
-
-    $scope.uploader = new FileUploader(
-        url: config.bucket_uri
-        headers :
-            Authorization : @$http.defaults.headers.common.Authorization
-    )
-
-    if !$scope.projectsheet.videos
-        $scope.projectsheet.videos = {}
-    $scope.videos = $scope.projectsheet.videos
-
-    $scope.uploader.onBeforeUploadItem = (item) ->
-        item.formData.push(
-            bucket : $scope.projectsheet.bucket.id
-        )
-        item.headers =
-           Authorization : $scope.uploader.headers["Authorization"]
-
-    # must use tmp var in order to not modify queue during cover candidate saving ... sync issue
-    $scope.tmpBucketFiles = []
-    $scope.tmpNewCover = null
-    $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
-        if $scope.isCoverCandidate(fileItem)
-            $scope.tmpNewCover = response
-        $scope.tmpBucketFiles.push(response)
-
-    $scope.uploader.onCompleteAll = () ->
-        if $scope.tmpNewCover
-            $scope.toggleCover($scope.tmpNewCover).then(->
-                angular.forEach($scope.tmpBucketFiles, (file) ->
-                    $scope.projectsheet.bucket.files.push(file)
-                )
-            )
-        else
-            angular.forEach($scope.tmpBucketFiles, (file) ->
-                $scope.projectsheet.bucket.files.push(file)
-            )
-        $modalInstance.close()
+    $scope.newMedia = {}
+    $scope.medias = medias
 
     $scope.ok = ->
-        ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
+        $scope.coverIndex = GalleryService.coverIndex
+        if _.size($scope.medias) != 0
+            promises = []
+            angular.forEach($scope.medias, (media, index) ->
+                promise = ProjectService.uploadMedia(media, $scope.projectsheet.bucket.id, $scope.projectsheet.id)
+                promises.push(promise)
 
-        if $scope.uploader.queue.length > 0
-            $scope.uploader.uploadAll()
+                promise.then((res) ->
+                    if $scope.coverIndex != null
+                        ProjectSheet.one($scope.projectsheet.id).patch({cover: res.resource_uri})
+                  )
+            )
+
+            Promise.all(promises).then(() ->
+                $modalInstance.dismiss()
+                $scope.medias = {}
+            ).catch((err) ->
+                console.error err
+            )
         else
-            $scope.uploader.onCompleteAll()
+            $modalInstance.dismiss()
 
     $scope.cancel = ->
-        $scope.uploader.clearQueue()
         $modalInstance.dismiss('cancel')
 
-    $scope.removePicture = (file) ->
-        if $scope.isCover(file)
-            $scope.toggleCover(file) #reset cover
+    $scope.remove = (media) ->
+        if $scope.isCover(media)
+            $scope.toggleCover(media) #reset cover
 
-        BucketFile.one(file.id).remove().then(->
-            fileBucketIndex = $scope.projectsheet.bucket.files.indexOf(file)
+        BucketFile.one(media.id).remove().then(->
+            fileBucketIndex = $scope.projectsheet.bucket.files.indexOf(media)
             $scope.projectsheet.bucket.files.splice(fileBucketIndex, 1)
         )
 
-    $scope.isCoverCandidate = (fileItem) ->
-        fileQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
-        return $scope.coverCandidateQueueIndex != null && $scope.coverCandidateQueueIndex == fileQueueIndex
+    $scope.isCover = (media) ->
+        return $scope.projectsheet.cover != null && $scope.projectsheet.cover.id == media.id
 
-    $scope.isCover = (file) ->
-        return $scope.projectsheet.cover != null && $scope.projectsheet.cover.id == file.id
-
-    $scope.toggleCoverCandidate = (fileItem) ->
-        if $scope.isCoverCandidate(fileItem)
-            $scope.coverCandidateQueueIndex = null
-        else
-            $scope.coverCandidateQueueIndex = $scope.uploader.getIndexOfItem(fileItem)
+    $scope.toggleCoverCandidate = (index) ->
+        $scope.coverIndex = GalleryService.setCoverIndex(index)
 
     $scope.toggleCover = (file) ->
         if $scope.isCover(file)
@@ -186,13 +145,4 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, @$http,
             $scope.projectsheet.cover = file
             return ProjectSheet.one($scope.projectsheet.id).patch({cover:file.resource_uri})
 
-    $scope.addVideo = (newVideoURL) ->
-        $scope.projectsheet.videos[newVideoURL] = null
-        $scope.videos[newVideoURL] = null # just for display concerns
-        ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
-
-    $scope.delVideo = (videoURL) ->
-        delete $scope.projectsheet.videos[videoURL]
-        delete $scope.videos[videoURL] # just for display concerns
-        ProjectSheet.one($scope.projectsheet.id).patch({videos:$scope.projectsheet.videos})
 )

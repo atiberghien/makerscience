@@ -116,7 +116,7 @@ module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInsta
         $modalInstance.dismiss('cancel')
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter,$window, $modal, ProjectService, TaggedItemService,
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter, $window, $modal, ProjectService, TaggedItemService,
                                                     MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePostLight,
                                                     MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress, ProjectNews
                                                     Comment, ObjectProfileLink, DataSharing) ->
@@ -132,15 +132,12 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
     $scope.preparedTargetTags = []
     $scope.editable = false
     $scope.objectId = null
+    $scope.medias = {}
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]
-        console.log $scope.projectsheet
         $scope.editable = $scope.projectsheet.can_edit
         $scope.objectId = $scope.projectsheet.id
-
-        console.log $scope.projectsheet.base_projectsheet.bucket.files
-
 
         $scope.openGallery = (projectsheet) ->
             modalInstance = $modal.open(
@@ -152,8 +149,11 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 resolve:
                     projectsheet: ->
                         return projectsheet
+                    medias: ->
+                        return $scope.medias
             )
             modalInstance.result.then((result)->
+                console.log result
                 $scope.$emit('cover-updated')
             )
 

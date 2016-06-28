@@ -1,6 +1,6 @@
 module = angular.module("makerscience.projects.controllers")
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $modal, $filter, $timeout, ProjectService
+module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $modal, $filter, $timeout, ProjectService, GalleryService,
                                                         ProjectProgress, ProjectSheet, FormService, ProjectSheetQuestionAnswer, Project,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
                                                         ObjectProfileLink, BucketRestangular) ->
@@ -48,7 +48,6 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         modalInstance.result.then((result)->
             $scope.$emit('cover-updated')
         )
-
 
     $scope.addNeed = (need) ->
         $scope.needs.push(angular.copy($scope.newNeed))
@@ -125,7 +124,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                 )
 
                 # if no photos to upload, directly go to new project sheet
-                if $scope.medias.length == 0
+                if _.size($scope.medias) == 0
                     $scope.fake_progress = 0
                     ##UGLY : to be sur that all remote ops are finished ... :/
                     for x in [1..5]
@@ -135,24 +134,23 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
                     ,5000)
                 else
+                    $scope.coverIndex = GalleryService.coverIndex
+                    promises = []
+
                     angular.forEach($scope.medias, (media, index) ->
-                        formData = new FormData()
-                        formData.append('file',   media.file)
-                        formData.append('bucket', projectsheetResult.bucket.id)
-                        formData.append('title',  media.title)
-                        formData.append('type',   media.type)
+                        promise = ProjectService.uploadMedia(media, projectsheetResult.bucket.id, projectsheetResult.id)
+                        promises.push(promise)
 
+                        promise.then((res) ->
+                            if $scope.coverIndex != null
+                                ProjectSheet.one(projectsheetResult.id).patch({cover: res.resource_uri})
+                          )
+                    )
 
-                        BucketRestangular.all(projectsheetResult.id)
-                          .withHttpConfig({transformRequest: angular.identity})
-                          .customPOST(formData, undefined, undefined, { 'Content-Type': undefined }).then((res) ->
-                              if media.isCover
-                                  ProjectSheet.one(projectsheetResult.id).patch({cover: res.resource_uri}).then(() ->
-                                    $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
-                                    )
-                            ).catch((err) ->
-                              console.error err
-                            )
+                    Promise.all(promises).then(() ->
+                        $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
+                    ).catch((err) ->
+                        console.error err
                     )
             )
         )

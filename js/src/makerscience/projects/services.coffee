@@ -1,6 +1,6 @@
 module = angular.module("makerscience.projects.services", ['restangular'])
 
-module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, ProjectSheetQuestionAnswer, PostalAddress) ->
+module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, ProjectSheetQuestionAnswer, PostalAddress, BucketRestangular) ->
     return {
 
         fetchCoverURL: (projectsheet) ->
@@ -19,5 +19,26 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
                 when 'ProjectSheetQuestionAnswer' then ProjectSheetQuestionAnswer.one(resources.resourceId).patch(putData)
                 when 'ProjectSheet' then ProjectSheet.one(resources.resourceId).patch(putData)
                 when 'PostalAddress' then PostalAddress.one(resources.resourceId).patch(putData)
+
+        uploadMedia: (media, bucketId, projectId) ->
+            return new Promise((resolve, reject) ->
+                formData = new FormData()
+                if media.file
+                    formData.append('file', media.file)
+                if media.url
+                    formData.append('url', media.url)
+                formData.append('bucket', bucketId)
+                formData.append('title', media.title)
+                formData.append('type', media.type)
+
+                BucketRestangular.all(projectId)
+                  .withHttpConfig({transformRequest: angular.identity})
+                  .customPOST(formData, undefined, undefined, { 'Content-Type': undefined }).then((res) ->
+                        resolve(res)
+                    ).catch((err) ->
+                        reject(err)
+                    )
+            )
+
     }
 )

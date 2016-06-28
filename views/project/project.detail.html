@@ -201,10 +201,12 @@
                     <tab ng-init="currentImg=0">
                         <tab-heading>
                             <span class="glyphicon glyphicon-picture"></span>
+                            Image
                         </tab-heading>
                         <carousel ng-show="projectsheet.base_projectsheet.bucket.files.length">
-                            <slide ng-repeat="img in projectsheet.base_projectsheet.bucket.files">
-                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?dim=680x340&border=true" alt="Slide">
+                            <slide ng-repeat="img in projectsheet.base_projectsheet.bucket.files | filter: {type: 'image'}">
+                                <img ng-show="img.file" ng-src="{{ config.media_uri }}{{ img.file }}" alt="{{img.title}}">
+                                <img ng-show="img.url" ng-src="{{ img.url }}" alt="{{img.title}}">
                             </slide>
                         </carousel>
                         <!-- <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
@@ -216,15 +218,16 @@
                     <tab ng-init="currentVid=0">
                         <tab-heading>
                             <span class="glyphicon glyphicon-facetime-video"></span>
+                            Vidéo
                         </tab-heading>
-                        <carousel interval="3000" ng-show="projectsheet.base_projectsheet.videos">
-                          <slide ng-repeat="(url, comment) in projectsheet.base_projectsheet.videos">
-                              <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
-                                  <a href="{{url}}">Watch</a>
+                        <carousel interval="3000">
+                          <slide ng-repeat="video in filteredItems = (projectsheet.base_projectsheet.bucket.files | filter: {type: 'video'})">
+                              <embed-video ng-href="{{video.url}}" width="683" height="342" style="height:342px; margin:0 auto;">
+                                  <a href="{{video.url}}">Watch</a>
                               </embed-video>
                           </slide>
                         </carousel>
-                        <div ng-show="!projectsheet.base_projectsheet.videos">
+                        <div ng-show="!filteredItems">
                             <img src="/img/slides/no_video.png" alt="Pas de vidéo">
                         </div>
                     </tab>
@@ -234,6 +237,28 @@
                         </tab-heading>
                     </tab>
                 </tabset>
+
+
+                <ul class="gallery-links">
+                    <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files | filter: {type: 'document' || 'link'}">
+                        <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
+                        <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
+                        <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
+                          <span ng-switch on="media.type">
+                              <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
+                              <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+                          </span>
+                          {{media.title}}
+                        </a>
+                        <a ng-show="media.url" class="filename" href="{{media.url}}">
+                          <span ng-switch on="media.type">
+                              <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
+                              <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+                          </span>
+                          {{media.title}}
+                        </a>
+                    </li>
+                </ul>
 
             </div><!-- #content -->
 

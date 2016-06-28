@@ -5,7 +5,7 @@ angular.module('commons.starlet', ['commons.starlet.controllers', 'commons.starl
 angular.module('commons.scout', ['commons.scout.services'])
 angular.module('commons.form', ['commons.form.services'])
 angular.module('commons.community', ['commons.community.controllers', 'commons.community.directives'])
-angular.module('commons.gallery', ['commons.gallery.controllers', 'commons.gallery.directives'])
+angular.module('commons.gallery', ['commons.gallery.services', 'commons.gallery.controllers', 'commons.gallery.directives'])
 angular.module('commons.tags', ['commons.tags.directives', 'commons.tags.controllers', 'commons.tags.services'])
 angular.module('commons.directives', ['commons.directives.reportabuse' ,'commons.directives.inputfile', 'commons.directives.thumb', 'commons.directives.socialshare'])
 angular.module('makerscience.projects', ['makerscience.projects.controllers', 'makerscience.projects.services'])

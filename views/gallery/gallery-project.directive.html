@@ -40,7 +40,7 @@
         </tab>
         <tab select="initMedia('video')">
             <tab-heading>
-                <span class="glyphicon glyphicon-camera"></span>
+                <span class="glyphicon glyphicon-facetime-video"></span>
                 Vidéo
             </tab-heading>
             <label for="media-video">Ajouter un lien vers une vidéo</label>
@@ -84,11 +84,32 @@
           {{media.title}}
         </p>
         <button ng-if="media.type === 'image'" type="button" class="btn btn-xs" ng-click="toggleCoverCandidate($index)">
-            <span ng-show="!media.isCover" class="glyphicon glyphicon-star"></span>
-            <span ng-show="media.isCover" class="glyphicon glyphicon-star" style="color:orange"></span>
+            <span ng-hide="coverIndex === $index" class="glyphicon glyphicon-star"></span>
+            <span ng-show="coverIndex === $index" class="glyphicon glyphicon-star" style="color:orange"></span>
             Choisir l'image en une
         </button>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="file.remove()">
+        <button type="button" class="btn btn-danger btn-xs" ng-click="remove(media)">
+            <span class="glyphicon glyphicon-trash"></span> Supprimer
+        </button>
+    </li>
+    <li ng-repeat="media in projectsheet.bucket.files track by $index" style="float: left;text-align: center;">
+        <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
+        <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div>
+        <p class="filename">
+          <span ng-switch on="media.type">
+              <i class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></i>
+              <i class="glyphicon glyphicon-facetime-video" ng-switch-when="video"></i>
+              <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
+              <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+          </span>
+          {{media.title}}
+        </p>
+        <button ng-if="media.type === 'image'" type="button" class="btn btn-xs" ng-click="toggleCoverCandidate($index)">
+            <span ng-hide="coverIndex === $index" class="glyphicon glyphicon-star"></span>
+            <span ng-show="coverIndex === $index" class="glyphicon glyphicon-star" style="color:orange"></span>
+            Choisir l'image en une
+        </button>
+        <button type="button" class="btn btn-danger btn-xs" ng-click="remove(media)">
             <span class="glyphicon glyphicon-trash"></span> Supprimer
         </button>
     </li>
