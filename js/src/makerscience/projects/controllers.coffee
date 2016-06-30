@@ -139,6 +139,12 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.editable = $scope.projectsheet.can_edit
         $scope.objectId = $scope.projectsheet.id
         console.log $scope.projectsheet
+        hasPictures = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'image'})
+        hasVideos = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'video'})
+
+        $scope.hasPictures = if hasPictures == -1 then false else true
+        $scope.hasVideos = if hasVideos == -1 then false else true
+
         $scope.openGallery = (projectsheet) ->
             modalInstance = $modal.open(
                 templateUrl: '/views/gallery/gallery-project-modal.html'

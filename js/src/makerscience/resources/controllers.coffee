@@ -78,7 +78,7 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
     )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, ProjectService, TaggedItemService,
+module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $modal, ProjectService, TaggedItemService,
                                                     MakerScienceResource, MakerScienceResourceLight, MakerScienceResourceTaggedItem, MakerSciencePostLight, TaggedItem,
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
@@ -99,6 +99,25 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         $scope.objectId = $scope.projectsheet.id
         $scope.editable = $scope.projectsheet.can_edit
         console.log $scope.projectsheet
+
+        $scope.openGallery = (projectsheet) ->
+            modalInstance = $modal.open(
+                templateUrl: '/views/gallery/gallery-resource-modal.html'
+                controller: 'GalleryEditionInstanceCtrl'
+                size: 'lg'
+                backdrop : 'static'
+                keyboard : false
+                resolve:
+                    projectsheet: ->
+                        return projectsheet
+                    medias: ->
+                        return $scope.medias
+            )
+            modalInstance.result.then((result)->
+                $scope.$emit('cover-updated')
+                $scope.medias = []
+            )
+
         $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
             resources = {
               resourceName: resourceName

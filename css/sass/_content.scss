@@ -181,7 +181,7 @@ div.toolbar {
             font-size: 1.25em;
         }
         h3 {
-            font-size: 1em;
+            font-size: 1.2em;
         }
         h4 {
             font-size: .75em;
@@ -556,6 +556,11 @@ div.toolbar {
     }
     section:nth-child(even) {
         background-color: $color-content-section-bg-even;
+    }
+
+    section.medias {
+      background-color: white;
+      padding-bottom: 10px;
     }
 
     section.linked {

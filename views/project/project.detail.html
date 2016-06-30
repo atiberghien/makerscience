@@ -145,13 +145,13 @@
                         </section>
 
                         <!-- Angular UI Tabs -->
-                        <tabset class="nav-tabs-slide nav-tabs-slide-project">
-                            <tab ng-init="currentImg=0">
+                        <tabset class="nav-tabs-slide nav-tabs-slide-project" ng-show="hasPictures || hasVideos">
+                            <tab ng-init="currentImg=0" ng-show="hasPictures">
                                 <tab-heading>
                                     <span class="glyphicon glyphicon-picture"></span>
                                     Image
                                 </tab-heading>
-                                <carousel ng-show="projectsheet.base_projectsheet.bucket.files.length">
+                                <carousel>
                                     <slide ng-repeat="img in projectsheet.base_projectsheet.bucket.files | filter: {type: 'image'}">
                                         <img ng-show="img.file" ng-src="{{ config.media_uri }}{{ img.file }}" alt="{{img.title}}">
                                         <img ng-show="img.url" ng-src="{{ img.url }}" alt="{{img.title}}">
@@ -163,7 +163,7 @@
                                     <img src="/img/slides/slide_one.png" alt="Slide One">
                                 </div>
                             </tab>
-                            <tab ng-init="currentVid=0">
+                            <tab ng-init="currentVid=0" ng-show="hasVideos">
                                 <tab-heading>
                                     <span class="glyphicon glyphicon-facetime-video"></span>
                                     Vidéo

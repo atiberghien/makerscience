@@ -51,6 +51,16 @@ module.controller('GalleryCreationResourceCtrl', ($scope, GalleryService, Projec
     $scope.coverId = if $scope.projectsheet.cover then $scope.projectsheet.cover.id else null
     GalleryService.setCoverId($scope.coverId)
 
+    # $scope.newMedia.isAuthor.bind('change', () ->
+    #     console.log $scope.newMedia
+    #   )
+    $scope.$watch('newMedia', () ->
+        if $scope.newMedia.isAuthor
+            $scope.newMedia.author = 'alex'
+        else
+          $scope.newMedia = ''
+      )
+
     $scope.toggleCoverCandidate = (media) ->
         $scope.coverId = GalleryService.setCoverId(media.id)
 
