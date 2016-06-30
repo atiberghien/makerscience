@@ -101,8 +101,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, project
             )
 
             Promise.all(promises).then(() ->
-                $modalInstance.dismiss()
-                $scope.medias = []
+                $modalInstance.close($scope.projectsheet)
             ).catch((err) ->
                 console.error err
             )

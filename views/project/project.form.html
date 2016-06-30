@@ -94,7 +94,7 @@
                                    </fieldset>
                                 </accordion-group>
 
-                                <accordion-group is-open="true">
+                                <accordion-group is-open="status1.open">
                                     <accordion-heading>
                                         <div class="row">
                                             <div class="col-md-9">
@@ -186,16 +186,16 @@
                                                 </p>
                                             </div>
                                         </div>
-
+                                        <hr>
                                         <ul class="list-group">
                                             <li ng-repeat="(index, need) in needs">
                                                 <div class="row">
                                                   <div class="col-md-10">
-                                                    <p ng-bind-html="need.title"></p>
-                                                    <!-- <p ng-bind-html="need.description"></p> -->
+                                                    <p><strong ng-bind-html="need.title"></strong></p>
+                                                    <p ng-bind-html="need.text"></p>
                                                   </div>
                                                   <div class="col-md-2">
-                                                    <button type="button" class="btn btn-danger" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                                    <button type="button" class="btn btn-xs btn-danger" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
                                                   </div>
                                                 </div>
                                             </li>

@@ -153,8 +153,8 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                         return $scope.medias
             )
             modalInstance.result.then((result)->
-                console.log result
                 $scope.$emit('cover-updated')
+                $scope.medias = []
             )
 
         $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
@@ -170,6 +170,9 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.$on('cover-updated', ()->
             ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet)
+            MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
+                $scope.projectsheet = makerScienceProjectResult.objects[0]
+            )
         )
 
         $scope.similars = []
@@ -186,9 +189,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 when "tg" then $scope.preparedTargetTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
-
-        if _.isEmpty($scope.projectsheet.base_projectsheet.videos)
-            $scope.projectsheet.base_projectsheet.videos = null
 
         angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostResult) ->
             $scope.getPostAuthor(makerSciencePostResult.parent_id).then((author) ->

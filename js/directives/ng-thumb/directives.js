@@ -51,7 +51,10 @@
             };
             return img.src = event.target.result;
           };
-          return scope.$watch('params', function() {
+          scope.$watch('params', function() {
+            return reader.readAsDataURL(scope.params.file);
+          });
+          return element.bind('change', function(changeEvent) {
             return reader.readAsDataURL(scope.params.file);
           });
         }

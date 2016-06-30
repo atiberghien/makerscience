@@ -40,5 +40,8 @@ module.directive('ngThumb', ['$window', ($window) ->
             scope.$watch('params', () ->
                 reader.readAsDataURL(scope.params.file)
             )
+
+            element.bind 'change', (changeEvent) ->
+                reader.readAsDataURL(scope.params.file)
     }
 ]);

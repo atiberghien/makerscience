@@ -143,13 +143,78 @@
                                  ng-bind-html="trustAsHtml(item.answer)">
                             </p>
                         </section>
+
+                        <!-- Angular UI Tabs -->
+                        <tabset class="nav-tabs-slide nav-tabs-slide-project">
+                            <tab ng-init="currentImg=0">
+                                <tab-heading>
+                                    <span class="glyphicon glyphicon-picture"></span>
+                                    Image
+                                </tab-heading>
+                                <carousel ng-show="projectsheet.base_projectsheet.bucket.files.length">
+                                    <slide ng-repeat="img in projectsheet.base_projectsheet.bucket.files | filter: {type: 'image'}">
+                                        <img ng-show="img.file" ng-src="{{ config.media_uri }}{{ img.file }}" alt="{{img.title}}">
+                                        <img ng-show="img.url" ng-src="{{ img.url }}" alt="{{img.title}}">
+                                    </slide>
+                                </carousel>
+                                <!-- <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
+                                <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button> -->
+                                <div ng-show="!projectsheet.base_projectsheet.bucket.files.length">
+                                    <img src="/img/slides/slide_one.png" alt="Slide One">
+                                </div>
+                            </tab>
+                            <tab ng-init="currentVid=0">
+                                <tab-heading>
+                                    <span class="glyphicon glyphicon-facetime-video"></span>
+                                    Vidéo
+                                </tab-heading>
+                                <carousel interval="3000">
+                                  <slide ng-repeat="video in filteredItems = (projectsheet.base_projectsheet.bucket.files | filter: {type: 'video'})">
+                                      {{filteredItems.length}}
+                                      <embed-video ng-href="{{video.url}}" width="683" height="342" style="height:342px; margin:0 auto;">
+                                          <a href="{{video.url}}">Watch</a>
+                                      </embed-video>
+                                  </slide>
+                                </carousel>
+                            </tab>
+                            <tab ng-show="editable" disabled="true" class="editable">
+                                <tab-heading>
+                                    <span ng-click="openGallery(projectsheet.base_projectsheet)" class="glyphicon glyphicon-pencil"></span>
+                                </tab-heading>
+                            </tab>
+                        </tabset>
+
+
+                        <ul class="gallery-links">
+                            <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files | filter: {type: 'document' || 'link'}">
+                                <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
+                                <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
+                                <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
+                                  <span ng-switch on="media.type">
+                                      <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
+                                      <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+                                  </span>
+                                  {{media.title}}
+                                </a>
+                                <a ng-show="media.url" class="filename" href="{{media.url}}">
+                                  <span ng-switch on="media.type">
+                                      <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
+                                      <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+                                  </span>
+                                  {{media.title}}
+                                </a>
+                            </li>
+                        </ul>
+
                     </tab>
                     <tab heading="Actus ({{projectsheet.news.length}})">
-                        <section  ng-show="editable">
+                        <section  ng-show="editable" class="news-form">
                             <h3>Nouvelle actu</h3>
                             <form novalidate>
+                                <label>Titre <span class="required">*</span></label>
                                 <input type="text" name="title" ng-model="newsData.title" placeholder="Titre de la news ..." class="full-width" required />
 
+                                <label>Contenu <span class="required">*</span></label>
                                 <textarea ui-tinymce="tinyMceFullOptions"
                                     name="text"
                                     ng-model="newsData.text"
@@ -158,7 +223,7 @@
                                     rows="8"
                                     required>
                                 </textarea>
-                                <button type="submit" ng-click="publishNews()">Publier</button>
+                                <button type="submit" class="btn btn-primary" ng-click="publishNews()">Publier</button>
                             </form>
                         </section>
                         <section ng-repeat="news in projectsheet.news" ng-init="showEditor=false">
@@ -187,7 +252,7 @@
                         </section>
 
                     </tab>
-                    <tab heading="Discussions ({{projectsheet.linked_makersciencepost.length}})">
+                    <tab ng-if="projectsheet.linked_makersciencepost" heading="Discussions ({{projectsheet.linked_makersciencepost.length}})">
                         <section>
                             <div ng-repeat="post in projectsheet.linked_makersciencepost">
                                 <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
@@ -195,69 +260,6 @@
                         </section>
                     </tab>
                 </tabset>
-
-                <!-- Angular UI Tabs -->
-                <tabset class="nav-tabs-slide nav-tabs-slide-project">
-                    <tab ng-init="currentImg=0">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-picture"></span>
-                            Image
-                        </tab-heading>
-                        <carousel ng-show="projectsheet.base_projectsheet.bucket.files.length">
-                            <slide ng-repeat="img in projectsheet.base_projectsheet.bucket.files | filter: {type: 'image'}">
-                                <img ng-show="img.file" ng-src="{{ config.media_uri }}{{ img.file }}" alt="{{img.title}}">
-                                <img ng-show="img.url" ng-src="{{ img.url }}" alt="{{img.title}}">
-                            </slide>
-                        </carousel>
-                        <!-- <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
-                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button> -->
-                        <div ng-show="!projectsheet.base_projectsheet.bucket.files.length">
-                            <img src="/img/slides/slide_one.png" alt="Slide One">
-                        </div>
-                    </tab>
-                    <tab ng-init="currentVid=0">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-facetime-video"></span>
-                            Vidéo
-                        </tab-heading>
-                        <carousel interval="3000">
-                          <slide ng-repeat="video in filteredItems = (projectsheet.base_projectsheet.bucket.files | filter: {type: 'video'})">
-                              {{filteredItems.length}}
-                              <embed-video ng-href="{{video.url}}" width="683" height="342" style="height:342px; margin:0 auto;">
-                                  <a href="{{video.url}}">Watch</a>
-                              </embed-video>
-                          </slide>
-                        </carousel>
-                    </tab>
-                    <tab ng-show="editable" disabled="true" class="editable">
-                        <tab-heading>
-                            <span ng-click="openGallery(projectsheet.base_projectsheet)" class="glyphicon glyphicon-pencil"></span>
-                        </tab-heading>
-                    </tab>
-                </tabset>
-
-
-                <ul class="gallery-links">
-                    <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files | filter: {type: 'document' || 'link'}">
-                        <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
-                        <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
-                        <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
-                          <span ng-switch on="media.type">
-                              <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                              <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                          </span>
-                          {{media.title}}
-                        </a>
-                        <a ng-show="media.url" class="filename" href="{{media.url}}">
-                          <span ng-switch on="media.type">
-                              <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                              <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                          </span>
-                          {{media.title}}
-                        </a>
-                    </li>
-                </ul>
-
             </div><!-- #content -->
 
         </div><!-- .col-md-8 -->

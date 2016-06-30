@@ -291,6 +291,7 @@
 			}
 			.mce-panel {
 				border: solid 1px $color-light-grey;
+				@include placeholder($color-crumbs-grey);
 			}
 			.help {
 				margin-top: 0.25em;
@@ -629,7 +630,26 @@ form#search-advanced {
 	}
 }
 
-#content .gallery-form, .gallery-form, .info-link-form  {
+#content .news-form {
+	overflow: hidden;
+	clear: both;
+	.btn {
+		margin: 1em 0;
+		float: right;
+	}
+}
+
+.item-validate {
+	margin-top: 40px;
+	width: 100%;
+	padding: .75em 1em;
+}
+
+.needs .item-validate {
+	text-align: right;	
+}
+
+#content .gallery-form, .gallery-form, .info-link-form, .news-form {
 	label {
 		padding-bottom: .5em;
 		padding-top: 1em;
@@ -642,10 +662,9 @@ form#search-advanced {
 		border: solid 1px $color-light-grey;
 		@include placeholder($color-crumbs-grey);
 	}
-	.item-validate {
-		margin-top: 40px;
-		width: 100%;
-		padding: .75em 1em;
+	.mce-panel {
+		border: solid 1px $color-light-grey;
+		@include placeholder($color-crumbs-grey);
 	}
 	ul.nav-tabs {
 		margin: 10px 0;
