@@ -6,6 +6,8 @@
 .gallery-thumbnails {
 	overflow: hidden; /* restore block size */
 	margin: 1em 0;
+	display: flex;
+	flex-wrap: wrap;
 	li {
 		position: relative;
 		margin-right: 0.5em;

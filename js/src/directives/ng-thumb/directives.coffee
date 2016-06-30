@@ -11,18 +11,18 @@ module.directive('ngThumb', ['$window', ($window) ->
     }
 
     return {
-        restrict: 'A'
+        restrict: 'E'
+        scope: {
+            params: '='
+        }
         template: '<canvas/>'
         link: (scope, element, attributes) ->
             if !helper.support
                 return
 
-            params = scope.$eval(attributes.ngThumb)
-
-
-            if !helper.isFile(params.file)
+            if !helper.isFile(scope.params.file)
                 return
-            if !helper.isImage(params.file)
+            if !helper.isImage(scope.params.file)
                 return
 
             canvas = element.find('canvas')
@@ -31,11 +31,14 @@ module.directive('ngThumb', ['$window', ($window) ->
             reader.onload = (event) ->
                 img = new Image()
                 img.onload = () ->
-                    width = params.width || this.width / this.height * params.height
-                    height = params.height || this.height / this.width * params.width
+                    width = scope.params.width || this.width / this.height * scope.params.height
+                    height = scope.params.height || this.height / this.width * scope.params.width
                     canvas.attr({ width: width, height: height })
                     canvas[0].getContext('2d').drawImage(this, 0, 0, width, height)
                 img.src = event.target.result
-            reader.readAsDataURL(params.file)
+
+            scope.$watch('params', () ->
+                reader.readAsDataURL(scope.params.file)
+            )
     }
 ]);

@@ -2,14 +2,16 @@ module = angular.module("commons.gallery.services", [])
 
 
 module.factory("GalleryService", () ->
-    coverIndex = null
+    coverId = null
 
     extensionIsValid = (url, validExtensions) ->
       ext = url.split('.').pop()
       return validExtensions.indexOf(ext) > -1
 
     initMediaProject = (type) ->
+      uniqueId = _.uniqueId()
       media = {
+        id: uniqueId
         title: ''
         type: type
       }
@@ -23,9 +25,9 @@ module.factory("GalleryService", () ->
         }
         return media
 
-    setCoverIndex = (index) ->
-        this.coverIndex = if this.coverIndex != null && this.coverIndex == index then null else index
-        return this.coverIndex
+    setCoverId = (id) ->
+        this.coverId = if this.coverId != null && this.coverId == id then null else id
+        return this.coverId
 
     getVideoProvider = (url) ->
         youtube = 'youtube.com'
@@ -83,13 +85,13 @@ module.factory("GalleryService", () ->
     return {
         initMediaProject: initMediaProject
         initMediaResource: initMediaResource
-        setCoverIndex: setCoverIndex
+        setCoverId: setCoverId
         getVideoProvider: getVideoProvider
         isUrlImage: isUrlImage
         isUrlDocument: isUrlDocument
         isUrlVideo: isUrlVideo
         isTypeImage: isTypeImage
         isTypeDocument: isTypeDocument
-        coverIndex: this.coverIndex
+        coverId: this.coverId
     }
 )

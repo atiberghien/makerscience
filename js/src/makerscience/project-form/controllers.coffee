@@ -7,7 +7,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
 
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
-    $scope.projectsheet = { medias: {} }
+    $scope.projectsheet = { medias: [] }
     $scope.QAItems = []
 
     FormService.init('projet-makerscience-2016').then((response) ->
@@ -23,7 +23,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
     $scope.newNeed = {}
 
     $scope.hideControls = false
-    $scope.medias = {}
+    $scope.medias = []
 
     #TODO : externalise 'projet-makerscience' info in static config table
     ## initialize projectsheet, QAItems, projectsheet.template in scope
@@ -134,7 +134,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         $state.go("project.detail", {slug : makerscienceProjectResult.parent.slug})
                     ,5000)
                 else
-                    $scope.coverIndex = GalleryService.coverIndex
+                    $scope.coverId = GalleryService.coverId
                     promises = []
 
                     angular.forEach($scope.medias, (media, index) ->
@@ -142,7 +142,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                         promises.push(promise)
 
                         promise.then((res) ->
-                            if $scope.coverIndex != null
+                            if $scope.coverId == media.id
                                 ProjectSheet.one(projectsheetResult.id).patch({cover: res.resource_uri})
                           )
                     )

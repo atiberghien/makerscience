@@ -132,7 +132,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
     $scope.preparedTargetTags = []
     $scope.editable = false
     $scope.objectId = null
-    $scope.medias = {}
+    $scope.medias = []
 
     MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
         $scope.projectsheet = makerScienceProjectResult.objects[0]

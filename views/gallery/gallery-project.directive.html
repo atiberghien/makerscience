@@ -2,7 +2,7 @@
   novalidate
   name="mediaForm"
   class="gallery-form"
-  ng-class="{ 'has-error' : newProjectForm.$invalid }"
+  ng-class="{ 'has-error' : mediaForm.$invalid }"
   check-form>
     <label>Sélectionner le type de média à ajouter</label>
     <tabset>
@@ -77,11 +77,12 @@
 </ng-form>
 <hr/>
 <ul class="gallery-thumbnails thumbnails">
-    <li ng-repeat="media in medias track by $index" style="float: left;text-align: center;">
-        <div class="thumbnail" ng-show="media.file" ng-thumb="{ file: media.file, height: 100 }"></div>
+    <li ng-if="media" ng-repeat="media in medias.concat(projectsheet.bucket.files) track by $index" style="float: left;text-align: center;">
+        <ng-thumb class="thumbnail" ng-show="media.file && !media.uploaded_on" params="{ file: media.file, height: 100 }"></ng-thumb>
+        <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{ config.media_uri }}{{ media.file }}" alt="{{media.title}}"></div>
         <div class="thumbnail" ng-show="media.type === 'image' && media.url"><img ng-src="{{media.url}}" /></div>
-        <div class="thumbnail" ng-show="media.type === 'video' && media.videoProvider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.videoId}}/0.jpg" /></div>
-        <div class="thumbnail" ng-show="media.type === 'video' && media.videoProvider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
+        <div class="thumbnail" ng-if="media.type === 'video' && media.videoProvider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.videoId}}/0.jpg" /></div>
+        <div class="thumbnail" ng-if="media.type === 'video' && media.videoProvider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
         <p class="filename">
           <span ng-switch on="media.type">
               <i class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></i>
@@ -89,44 +90,11 @@
               <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
               <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
           </span>
-          {{media.title}}
+          {{media.title}} {{media.id}}
         </p>
-        <button ng-if="media.type === 'image'" type="button" class="btn btn-xs" ng-click="toggleCoverCandidate($index)">
-            <span ng-hide="coverIndex === $index" class="glyphicon glyphicon-star"></span>
-            <span ng-show="coverIndex === $index" class="glyphicon glyphicon-star" style="color:orange"></span>
-            Choisir l'image en une
-        </button>
+        <cover-button ng-if="media.type === 'image'" toggle="toggleCoverCandidate(media)" cover-id="coverId" media="media"></cover-button>
         <button type="button" class="btn btn-danger btn-xs" ng-click="remove(media)">
             <span class="glyphicon glyphicon-trash"></span> Supprimer
         </button>
-    </li>
-    <li ng-repeat="media in projectsheet.bucket.files track by $index" style="float: left;text-align: center;">
-        <div class="thumbnail" ng-show="media.file"><img ng-src="{{ config.media_uri }}{{ media.file }}" alt="{{media.title}}"></div>
-        <div class="thumbnail" ng-show="media.type === 'image' && media.url"><img ng-src="{{media.url}}"  alt="{{media.title}}"></div>
-        <div class="thumbnail" ng-show="media.type === 'video' && media.videoProvider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.video_id}}/0.jpg" /></div>
-        <div class="thumbnail" ng-show="media.type === 'video' && media.videoProvider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
-        <p class="filename">
-          <span ng-switch on="media.type">
-              <i class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></i>
-              <i class="glyphicon glyphicon-facetime-video" ng-switch-when="video"></i>
-              <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-              <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-          </span>
-          {{media.title}}
-        </p>
-        <button ng-if="media.type === 'image'" type="button" class="btn btn-xs" ng-click="toggleCoverCandidate($index)">
-            <span ng-hide="coverIndex === $index" class="glyphicon glyphicon-star"></span>
-            <span ng-show="coverIndex === $index" class="glyphicon glyphicon-star" style="color:orange"></span>
-            Choisir l'image en une
-        </button>
-        <button type="button" class="btn btn-danger btn-xs" ng-click="remove(media)">
-            <span class="glyphicon glyphicon-trash"></span> Supprimer
-        </button>
-    </li>
-</ul>
-<ul class="list-group links">
-    <li class="list-group-item" ng-repeat="(videoURL, nop) in videos">
-        {{videoURL}}
-        <button class="transparent" ng-click="delVideo(videoURL)"><span class="glyphicon glyphicon-trash"></span></button>
     </li>
 </ul>

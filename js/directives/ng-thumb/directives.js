@@ -18,18 +18,20 @@
         }
       };
       return {
-        restrict: 'A',
+        restrict: 'E',
+        scope: {
+          params: '='
+        },
         template: '<canvas/>',
         link: function(scope, element, attributes) {
-          var canvas, params, reader;
+          var canvas, reader;
           if (!helper.support) {
             return;
           }
-          params = scope.$eval(attributes.ngThumb);
-          if (!helper.isFile(params.file)) {
+          if (!helper.isFile(scope.params.file)) {
             return;
           }
-          if (!helper.isImage(params.file)) {
+          if (!helper.isImage(scope.params.file)) {
             return;
           }
           canvas = element.find('canvas');
@@ -39,8 +41,8 @@
             img = new Image();
             img.onload = function() {
               var height, width;
-              width = params.width || this.width / this.height * params.height;
-              height = params.height || this.height / this.width * params.width;
+              width = scope.params.width || this.width / this.height * scope.params.height;
+              height = scope.params.height || this.height / this.width * scope.params.width;
               canvas.attr({
                 width: width,
                 height: height
@@ -49,7 +51,9 @@
             };
             return img.src = event.target.result;
           };
-          return reader.readAsDataURL(params.file);
+          return scope.$watch('params', function() {
+            return reader.readAsDataURL(scope.params.file);
+          });
         }
       };
     }
