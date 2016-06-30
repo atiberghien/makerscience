@@ -14,13 +14,9 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
             $scope.projectsheet.cover = media
             ProjectSheet.one($scope.projectsheet.id).patch({cover: media.resource_uri})
 
-    $scope.setTitle = (title) ->
-        $scope.$apply ->
-            $scope.newMedia.title = title
-            return
-
     $scope.addMedia = (newMedia) ->
-        if $scope.mediaForm.$invalid
+        console.log $scope.mediaForm
+        if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
             return false
 
         if newMedia.type == 'video'
@@ -48,36 +44,44 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
                 )
 )
 
-module.controller('GalleryCreationResourceCtrl', ($scope, ProjectSheet) ->
-    $scope.currentType = null
-    $scope.setTitle = (title) ->
-        $scope.$apply ->
-          $scope.newMedia.title = title
-          return
-
-    $scope.tabSelect = (type) ->
-        $scope.newMedia = GalleryService.initMediaResource()
-        $scope.currentType = type
-
+module.controller('GalleryCreationResourceCtrl', ($scope, GalleryService, ProjectSheet) ->
     $scope.config = config
-    $scope.coverCandidateQueueIndex = null
+    $scope.newMedia = GalleryService.initMediaProject('image')
+
+    $scope.coverId = if $scope.projectsheet.cover then $scope.projectsheet.cover.id else null
+    GalleryService.setCoverId($scope.coverId)
+
+    $scope.toggleCoverCandidate = (media) ->
+        $scope.coverId = GalleryService.setCoverId(media.id)
+
+        if $scope.projectsheet.id
+            $scope.projectsheet.cover = media
+            ProjectSheet.one($scope.projectsheet.id).patch({cover: media.resource_uri})
 
     $scope.addMedia = (newMedia) ->
-        if $scope.mediaForm.$invalid || (!$scope.newMedia.url && !$scope.newMedia.file)
-            console.log 'invalid form'
+        if $scope.mediaForm.$invalid
             return false
 
-        uniqueId = _.uniqueId()
-        $scope.projectsheet.medias = []
+        if newMedia.type == 'video'
+            newMedia.videoId = newMedia.url.split('/').pop()
+            newMedia.videoProvider = GalleryService.getVideoProvider(newMedia.url)
 
-
+        $scope.medias.push(newMedia)
+        $scope.newMedia = GalleryService.initMediaProject(newMedia.type)
         $scope.submitted = false
 
-    $scope.cancel = ->
-        $scope.uploader.clearQueue()
+    $scope.remove = (media) ->
+        mediaIndex = $scope.medias.indexOf(media)
 
-    $scope.delVideo = (videoURL) ->
-        delete $scope.videos[videoURL]
+        if mediaIndex != -1
+            $scope.medias.splice(mediaIndex, 1)
+
+        else
+            if $scope.projectsheet.bucket
+                BucketFile.one(media.id).remove().then(->
+                    fileBucketIndex = $scope.projectsheet.bucket.files.indexOf(media)
+                    $scope.projectsheet.bucket.files.splice(fileBucketIndex, 1)
+                )
 )
 
 module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, projectsheet, medias, ProjectService, ProjectSheet, BucketFile, GalleryService) ->

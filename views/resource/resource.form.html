@@ -21,7 +21,8 @@
                       novalidate
                       ng-init="submitted=false"
                       ng-submit="saveMakerscienceResource(newResourceForm.$valid)"
-                      ng-class="{ 'has-error' : newResourceForm.$invalid && submitted }">
+                      ng-class="{ 'has-error' : newResourceForm.$invalid && submitted }"
+                      class="resource-form">
                     <div class="row">
                         <div class="col-md-12">
 
@@ -48,33 +49,21 @@
                                     <p ng-show="newResourceForm.projectBaseline.$invalid && submitted" class="help-block">Sous-titre de la ressource requise</p>
                                     <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Résumez en une courte phrase votre ressource</p>
 
-                                    <label>Thématiques <span class="required">*</span></label>
-                                    <input type="text"
-                                        name="thematiques"
-                                        ng-model="projectsheet.project.thematiques"
-                                        maxlength="100"
-                                        required/>
+                                    <label>Thématiques</label>
+                                    <tag-auto-complete model="themesTags" placeholder="Mot-clé"></tag-auto-complete>
                                     <p ng-show="newResourceForm.thematiques.$invalid && submitted" class="help-block">Thematiques requise</p>
 
-                                    <label>Publics visés <span class="required">*</span></label>
-                                    <input type="text"
-                                           name="target"
-                                           ng-model="projectsheet.project.target"
-                                           maxlength="50"
-                                           required/>
+                                    <label>Publics visés</label>
+                                    <tag-auto-complete model="targetsTags" placeholder="Mot-clé"></tag-auto-complete>
                                     <p ng-show="newResourceForm.target.$invalid && submitted" class="help-block">Publics visés requis</p>
 
-                                    <label>Formats <span class="required">*</span></label>
-                                    <input type="text"
-                                           name="formats"
-                                           ng-model="projectsheet.project.formats"
-                                           maxlength="50"
-                                           required/>
+                                    <label>Formats</label>
+                                    <tag-auto-complete model="formatsTags" placeholder="Mot-clé"></tag-auto-complete>
                                     <p ng-show="newResourceForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
                                </fieldset>
                             </accordion-group>
 
-                            <accordion-group is-open="true">
+                            <accordion-group is-open="true" is-disabled="true">
                                 <accordion-heading>
                                     <div class="row">
                                         <div class="col-md-9">
@@ -94,12 +83,12 @@
                     </div><!-- .row -->
 
                     <p class="right" ng-hide="hideControls">
-                        <button type="button" class="button cancel" ui-sref="resource.list">Annuler</button>
+                        <button type="button" class="btn btn-warning btn-lg cancel" ui-sref="resource.list">Annuler</button>
                         <!-- FIXME : set up ctrler to allow 'save as draft'  -->
                         <!-- <button type="button" class="button">Enregistrer en brouillon</button>
                         <button type="button" class="button" ng-click="submitted=true">Publier</button>
                          -->
-                        <button type="submit" class="button" ng-click="submitted=true;hideControls=true">Enregistrer</button>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="submitted=true;hideControls=true">Enregistrer</button>
                     </p>
                     <div class="progress" ng-show="hideControls">
                         <div ng-show="uploader.queue.length > 0" class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>

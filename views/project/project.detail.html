@@ -190,14 +190,15 @@
                                 <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
                                 <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
                                 <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
-                                  <span ng-switch on="media.type">
+                                  <span class="icon" ng-switch on="media.type">
                                       <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
                                       <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
                                   </span>
-                                  {{media.title}}
+                                  <span class="title">{{media.title}}</span>
+                                  <span class="url">{{media.url}}</span>
                                 </a>
                                 <a ng-show="media.url" class="filename" href="{{media.url}}">
-                                  <span ng-switch on="media.type">
+                                  <span class="icon" ng-switch on="media.type">
                                       <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
                                       <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
                                   </span>

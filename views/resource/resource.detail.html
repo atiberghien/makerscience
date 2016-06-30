@@ -124,6 +124,28 @@
                                  ng-bind-html="item.answer">
                             </p>
                         </section>
+
+                        <ul class="gallery-links">
+                            <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files">
+                                <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
+                                <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
+                                <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
+                                  <span class="icon" ng-switch on="media.type">
+                                      <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
+                                      <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+                                  </span>
+                                  <span class="title">{{media.title}}</span>
+                                  <span class="url">{{media.url}}</span>
+                                </a>
+                                <a ng-show="media.url" class="filename" href="{{media.url}}">
+                                  <span class="icon" ng-switch on="media.type">
+                                      <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
+                                      <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+                                  </span>
+                                  <span class="title">{{media.title}}</span>
+                                </a>
+                            </li>
+                        </ul>
                     </tab>
                     <tab heading="Discussions ({{resourcesheet.linked_makersciencepost.length}})">
                         <section>
@@ -133,45 +155,6 @@
                         </section>
                     </tab>
                 </tabset>
-
-                <tabset class="nav-tabs-slide nav-tabs-slide-resource">
-                    <tab ng-init="currentImg=0">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-picture"></span>
-                        </tab-heading>
-                        <carousel ng-show="resourcesheet.base_projectsheet.bucket.files.length">
-                            <slide ng-repeat="img in resourcesheet.base_projectsheet.bucket.files">
-                                <img ng-src="{{ config.media_uri }}{{ img.thumbnail_url }}?dim=680x340&border=true" alt="Slide">
-                            </slide>
-                        </carousel>
-                        <!-- <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
-                        <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button> -->
-                        <div ng-show="!resourcesheet.base_projectsheet.bucket.files.length">
-                            <img src="/img/slides/slide_one.png" alt="Slide One">
-                        </div>
-                    </tab>
-                    <tab ng-init="currentVid=0">
-                        <tab-heading>
-                            <span class="glyphicon glyphicon-facetime-video"></span>
-                        </tab-heading>
-                        <carousel interval="3000" ng-show="resourcesheet.base_projectsheet.videos">
-                          <slide ng-repeat="(url, comment) in resourcesheet.base_projectsheet.videos">
-                              <embed-video ng-href="{{url}}" width="683" height="342" style="height:342px; margin:0 auto;">
-                                  <a href="{{url}}">Watch</a>
-                              </embed-video>
-                          </slide>
-                        </carousel>
-                        <div ng-show="!resourcesheet.base_projectsheet.videos">
-                            <img src="/img/slides/no_video.png" alt="Pas de vidéo">
-                        </div>
-                    </tab>
-                    <tab ng-show="editable" disabled="true" class="editable">
-                        <tab-heading>
-                            <span ng-click="openGallery(resourcesheet.base_projectsheet)" class="glyphicon glyphicon-pencil"></span>
-                        </tab-heading>
-                    </tab>
-                </tabset>
-
             </div><!-- #content -->
 
         </div><!-- .col-md-8 -->

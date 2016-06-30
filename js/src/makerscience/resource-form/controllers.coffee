@@ -1,16 +1,11 @@
 module = angular.module('makerscience.projects.controllers')
 
-module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, $timeout, ProjectSheet, FormService, @$http, FileUploader,
+module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $controller, $timeout, ProjectSheet, FormService, ProjectService, GalleryService,
                              MakerScienceResource,  MakerScienceResourceTaggedItem, ObjectProfileLink) ->
 
-    $scope.themesTags = []
-    $scope.targetsTags = []
-    $scope.formatsTags = []
 
-    $scope.hideControls = false
-
-    $scope.projectsheet =
-        videos : {}
+    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
+    $scope.projectsheet = { medias: [] }
     $scope.QAItems = []
 
     FormService.init('experience-makerscience').then((response) ->
@@ -18,11 +13,12 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         $scope.projectsheet = response.projectsheet
     )
 
-    $scope.uploader = uploader = new FileUploader(
-        url: config.bucket_uri
-        headers :
-            Authorization : @$http.defaults.headers.common.Authorization
-    )
+    $scope.themesTags = []
+    $scope.targetsTags = []
+    $scope.formatsTags = []
+    $scope.medias = []
+
+    $scope.hideControls = false
 
     $scope.saveMakerscienceResource = (formIsValid) ->
         if !formIsValid
@@ -32,7 +28,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         else
             console.log("submitting form")
 
-        FormService.save().then((resourcesheetResult) ->
+        FormService.save($scope.projectsheet).then((resourcesheetResult) ->
             makerscienceResourceData =
                 parent : resourcesheetResult.project.resource_uri
                 duration : $scope.projectsheet.duration
@@ -80,7 +76,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 )
 
                 # if no photos to upload, directly go to new project sheet
-                if $scope.uploader.queue.length == 0
+                if _.size($scope.medias) == 0
                     $scope.fake_progress = 0
                     ##UGLY : to be sur that all remote ops are finished ... :/
                     for x in [1..5]
@@ -90,21 +86,20 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
                     ,5000)
                 else
-                    $scope.uploader.onBeforeUploadItem = (item) ->
-                        item.formData.push(
-                            bucket : resourcesheetResult.bucket.id
-                        )
-                        item.headers =
-                           Authorization : $scope.uploader.headers["Authorization"]
+                    $scope.coverId = GalleryService.coverId
+                    promises = []
 
-                    $scope.uploader.onCompleteItem = (fileItem, response, status, headers) ->
-                        if $scope.uploader.getIndexOfItem(fileItem) == $scope.coverIndex
-                            ProjectSheet.one(resourcesheetResult.id).patch({cover:response.resource_uri})
+                    angular.forEach($scope.medias, (media, index) ->
+                        promise = ProjectService.uploadMedia(media, resourcesheetResult.bucket.id, resourcesheetResult.id)
+                        promises.push(promise)
+                    )
 
-                    $scope.uploader.onCompleteAll = () ->
+                    Promise.all(promises).then(() ->
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
+                    ).catch((err) ->
+                        console.error err
+                    )
 
-                    $scope.uploader.uploadAll()
             )
         )
 )

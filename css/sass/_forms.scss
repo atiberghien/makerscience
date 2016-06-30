@@ -646,7 +646,7 @@ form#search-advanced {
 }
 
 .needs .item-validate {
-	text-align: right;	
+	text-align: right;
 }
 
 #content .gallery-form, .gallery-form, .info-link-form, .news-form {
@@ -727,13 +727,13 @@ form#search-advanced {
 		overflow: hidden;
 		position: absolute;
 		z-index: -1;
-		margin-top: 40px;
+		margin-top: 20px;
 	}
 	.inputfile + label {
 		display: block;
 		margin-right: 50px;
 		text-align: center;
-		margin-top: 40px;
+		margin-top: 20px;
 		padding: .75em 1em;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -756,6 +756,68 @@ form#search-advanced {
 	input.video-vimeo {
 		background-color: $color-vimeo;
 		background-image: url('../img/icons/buttons/video-vimeo.png');
+	}
+}
+
+.project-form .gallery-form {
+	.inputfile, .inputfile + label {
+		margin-top: 40px;
+	}
+}
+
+#content div.tab-content ul.gallery-links {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 10px 0;
+
+	li {
+		display: flex;
+		margin: 0.5em;
+		width: 130px;
+		text-align: center;
+		&:first-child {
+			margin-left: 0;
+		}
+		a {
+			display: block;
+			width: 100%;
+			border: solid 2px $color-blue;
+			padding: 10px;
+			&:hover {
+				text-decoration: none;
+				border-color: darken($color-blue, 5);
+			}
+		}
+		span {
+			display: block;
+			&.title {
+				color: $text-color;
+				font-size: 1em;
+				font-weight: bold;
+			}
+			&.icon {
+				color: $color-blue;
+				font-size: 1.2em;
+				padding: 5px;
+			}
+			&.url {
+				color: $color-blue;
+			}
+		}
+	}
+}
+
+.nav-tabs-resource .gallery-links {
+	li {
+		a {
+			border-color: $color-green;
+			&:hover {
+				border-color: darken($color-green, 5)
+			}
+		}
+		span.icon, span.url {
+			color: $color-green
+		}
 	}
 }
 

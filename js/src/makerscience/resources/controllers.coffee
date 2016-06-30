@@ -98,7 +98,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
         $scope.objectId = $scope.projectsheet.id
         $scope.editable = $scope.projectsheet.can_edit
-
+        console.log $scope.projectsheet
         $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
             resources = {
               resourceName: resourceName

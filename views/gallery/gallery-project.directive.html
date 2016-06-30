@@ -6,7 +6,7 @@
   check-form>
     <label>Sélectionner le type de média à ajouter</label>
     <tabset>
-        <tab select="newMedia.type = 'image'">
+        <tab select="changeTab('image')">
             <tab-heading>
                 <span class="glyphicon glyphicon-picture"></span>
                 Image
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </tab>
-        <tab select="newMedia.type = 'document'">
+        <tab select="changeTab('document')">
             <tab-heading>
                 <span class="glyphicon glyphicon-file"></span>
                 Document
@@ -33,7 +33,7 @@
               <div class="col-md-4">
                   <inputfile id="file-document" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
                   <span class="parcourir">ou</span>
-                  <p ng-show="mediaForm.$error.documentFileFormat" class="help-block">Format non valide, vérifiez le format de l'image ou changer de type de média</p>
+                  <p ng-show="mediaForm.$error.documentFileFormat" class="help-block">Format non valide, vérifiez le format du document ou changer de type de média</p>
               </div>
                 <div class="col-md-8">
                     <label for="media-doc">Ajouter un lien vers un document (.doc, .pdf, odt, xls,...)</label>
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </tab>
-        <tab select="newMedia.type = 'video'">
+        <tab select="changeTab('video')">
             <tab-heading>
                 <span class="glyphicon glyphicon-facetime-video"></span>
                 Vidéo
@@ -51,7 +51,7 @@
             <input name="videoUrl" id="media-video" type="text" ng-model="newMedia.url" placeholder="http://" />
             <p ng-show="mediaForm.videoUrl.$error.format" class="help-block">Format non valide, vérifier qu'il s'agit bien d'un lien youtube ou dailymotion ou changer de type de média</p>
         </tab>
-        <tab select="newMedia.type = 'link'">
+        <tab select="changeTab('link')">
             <tab-heading>
                 <span class="glyphicon glyphicon-link"></span>
                 Site web
