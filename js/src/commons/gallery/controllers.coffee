@@ -45,11 +45,9 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
 
 module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, GalleryService, ProjectSheet, CurrentMakerScienceProfileService) ->
     $scope.config = config
-    $scope.newMedia = GalleryService.initMediaResource('document')
-
     user = @$rootScope.authVars.user
     $scope.user = user.first_name + ' ' + user.last_name
-    $scope.newMedia.author = $scope.user
+    $scope.newMedia = GalleryService.initMediaResource('document', $scope.user)
 
     $scope.addMedia = (newMedia) ->
         console.log newMedia
@@ -57,7 +55,8 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, GallerySe
             return false
 
         $scope.medias.push(newMedia)
-        $scope.newMedia = GalleryService.initMediaProject(newMedia.type)
+        $scope.newMedia = GalleryService.initMediaResource(newMedia.type, $scope.user)
+
         $scope.submitted = false
 
     $scope.remove = (media) ->

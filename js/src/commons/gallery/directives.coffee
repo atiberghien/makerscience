@@ -60,6 +60,5 @@ module.directive('checkForm', (GalleryService) ->
 
             scope.changeTab = (type) ->
                 scope.newMedia.type = type
-                # scope.newMedia = GalleryService.initMediaProject(type)
     }
 )

@@ -17,13 +17,14 @@ module.factory("GalleryService", () ->
       }
       return media
 
-    initMediaResource = (type) ->
+    initMediaResource = (type, author) ->
         uniqueId = _.uniqueId()
         media = {
             id: uniqueId
             title: ''
             type: type
             isAuthor: true
+            author: author
         }
         return media
 
