@@ -57,8 +57,5 @@ module.directive('checkForm', (GalleryService) ->
                     scope.mediaForm.$setDirty()
                     scope.newMedia.title = title
                     return
-
-            scope.changeTab = (type) ->
-                scope.newMedia.type = type
     }
 )

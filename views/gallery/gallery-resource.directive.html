@@ -2,7 +2,7 @@
   novalidate
   name="mediaForm"
   class="gallery-form"
-  ng-class="{ 'has-error' : newProjectForm.$invalid }"
+  ng-class="{ 'has-error' : mediaForm.$invalid }"
   check-form>
     <label>Sélectionner le type de ressource à ajouter <span class="required">*</span></label>
     <tabset>
@@ -32,7 +32,7 @@
                 e-rows="4">
             </textarea>
 
-            <div class="radio">
+            <div class="radio-block">
                 <p>Auteur de la ressource <span class="required">*</span></p>
                 <div class="row">
                   <div class="col-md-4">
@@ -72,7 +72,7 @@
                 Site web
             </tab-heading>
             <label for="media-url">Ajouter un lien</label>
-            <input id="media-url" type="text" ng-model="newMedia.url" placeholder="http://" />
+            <input id="media-url" type="text" ng-model="newMedia.url" placeholder="http://" ng-change="setUrl(newMedia.url)" />
             <label for="title-document">Titre</label>
             <input id="title-document" type="text" ng-model="newMedia.title" />
 
@@ -91,13 +91,13 @@
                 <div class="row">
                   <div class="col-md-4">
                     <label>
-                        <input type="radio" ng-model="newMedia.isAuthor" ng-value="true" ng-change="newMedia.isAuthor ? newMedia.author = user : newMedia.author = ''" />
+                        <input type="radio" ng-model="newMedia.isAuthor" ng-value="true" ng-change="newMedia.isAuthor ? newMedia.author = user : newMedia.author = newMedia.url" />
                         Vous faite partie des auteurs
                     </label>
                   </div>
                   <div class="col-md-6">
                     <label>
-                        <input type="radio" ng-model="newMedia.isAuthor" ng-value="false" ng-change="newMedia.isAuthor ? newMedia.author = user : newMedia.author = ''" />
+                        <input type="radio" ng-model="newMedia.isAuthor" ng-value="false" ng-change="newMedia.isAuthor ? newMedia.author = user : newMedia.author = newMedia.url" />
                         Vous n'êtes pas auteur et vous recommandez la ressource
                     </label>
                   </div>
@@ -105,7 +105,7 @@
             </div>
 
             <label for="author-document">Nom de l'auteur <span class="required">*</span></label>
-            <input id="author-document" type="text" ng-model="newMedia.author" ng-disabled="newMedia.isAuthor" />
+            <input id="author-document" type="text" ng-model="newMedia.author" disabled />
 
             <div ng-hide="newMedia.isAuthor">
                 <label for="review-document">Avis sur la ressource</label>

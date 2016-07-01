@@ -7,6 +7,9 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
     $scope.coverId = if $scope.projectsheet.cover then $scope.projectsheet.cover.id else null
     GalleryService.setCoverId($scope.coverId)
 
+    $scope.changeTab = (type) ->
+        $scope.newMedia.type = type
+
     $scope.toggleCoverCandidate = (media) ->
         $scope.coverId = GalleryService.setCoverId(media.id)
 
@@ -49,8 +52,14 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, GallerySe
     $scope.user = user.first_name + ' ' + user.last_name
     $scope.newMedia = GalleryService.initMediaResource('document', $scope.user)
 
+    $scope.setUrl = (url) ->
+        if !$scope.newMedia.isAuthor
+            $scope.newMedia.author = url
+
+    $scope.changeTab = (type) ->
+        $scope.newMedia = GalleryService.initMediaResource(type, $scope.user)
+
     $scope.addMedia = (newMedia) ->
-        console.log newMedia
         if $scope.mediaForm.$invalid
             return false
 
