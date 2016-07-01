@@ -20,9 +20,6 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
     $scope.hideControls = false
 
-    $scope.user = $scope.currentMakerScienceProfile
-    
-
     $scope.saveMakerscienceResource = (formIsValid) ->
         if !formIsValid
             console.log(" Form invalid !")

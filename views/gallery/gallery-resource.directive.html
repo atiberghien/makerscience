@@ -37,32 +37,32 @@
                 <div class="row">
                   <div class="col-md-4">
                     <label>
-                        <input type="radio" ng-model="newMedia.isAuthor" value="true" />
+                        <input type="radio" ng-model="newMedia.isAuthor" ng-value="true" ng-change="newMedia.isAuthor ? newMedia.author = user : newMedia.author = ''" />
                         Vous faite partie des auteurs
                     </label>
                   </div>
                   <div class="col-md-6">
                     <label>
-                        <input type="radio" ng-model="newMedia.isAuthor" value="false" />
+                        <input type="radio" ng-model="newMedia.isAuthor" ng-value="false" ng-change="newMedia.isAuthor ? newMedia.author = user : newMedia.author = ''" />
                         Vous n'êtes pas auteur et vous recommandez la ressource
                     </label>
                   </div>
                 </div>
             </div>
 
-            <label for="author-document">Nom de l'auteur <span class="required">*</span></label>
+            <label for="author-document">Nom de l'auteur<span class="required">*</span></label>
             <input id="author-document" type="text" ng-model="newMedia.author" ng-disabled="newMedia.isAuthor" />
 
             <div ng-hide="newMedia.isAuthor">
                 <label for="review-document">Avis sur la ressource</label>
                 <textarea
-                ui-tinymce="tinyMceFullOptions"
-                ng-trim="false"
-                name="review-document"
-                id="review-document"
-                ng-model="newMedia.review"
-                e-rows="4">
-              </textarea>
+                  ui-tinymce="tinyMceFullOptions"
+                  ng-trim="false"
+                  name="review-document"
+                  id="review-document"
+                  ng-model="newMedia.review"
+                  e-rows="4">
+                </textarea>
             </div>
 
         </tab>
@@ -91,13 +91,13 @@
                 <div class="row">
                   <div class="col-md-4">
                     <label>
-                        <input type="radio" ng-model="newMedia.isAuthor" value="true" />
+                        <input type="radio" ng-model="newMedia.isAuthor" ng-value="true" ng-change="newMedia.isAuthor ? newMedia.author = user : newMedia.author = ''" />
                         Vous faite partie des auteurs
                     </label>
                   </div>
                   <div class="col-md-6">
                     <label>
-                        <input type="radio" ng-model="newMedia.isAuthor" value="false" />
+                        <input type="radio" ng-model="newMedia.isAuthor" ng-value="false" ng-change="newMedia.isAuthor ? newMedia.author = user : newMedia.author = ''" />
                         Vous n'êtes pas auteur et vous recommandez la ressource
                     </label>
                   </div>

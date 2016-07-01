@@ -661,6 +661,10 @@ form#search-advanced {
 		background-color: #fff;
 		border: solid 1px $color-light-grey;
 		@include placeholder($color-crumbs-grey);
+
+		&[disabled] {
+			color: $color-crumbs-grey;
+		}
 	}
 	.mce-panel {
 		border: solid 1px $color-light-grey;

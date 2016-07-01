@@ -15,7 +15,6 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
             ProjectSheet.one($scope.projectsheet.id).patch({cover: media.resource_uri})
 
     $scope.addMedia = (newMedia) ->
-        console.log $scope.mediaForm
         if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
             return false
 
@@ -44,37 +43,18 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
                 )
 )
 
-module.controller('GalleryCreationResourceCtrl', ($scope, GalleryService, ProjectSheet) ->
+module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, GalleryService, ProjectSheet, CurrentMakerScienceProfileService) ->
     $scope.config = config
-    $scope.newMedia = GalleryService.initMediaProject('image')
+    $scope.newMedia = GalleryService.initMediaResource('document')
 
-    $scope.coverId = if $scope.projectsheet.cover then $scope.projectsheet.cover.id else null
-    GalleryService.setCoverId($scope.coverId)
-
-    # $scope.newMedia.isAuthor.bind('change', () ->
-    #     console.log $scope.newMedia
-    #   )
-    $scope.$watch('newMedia', () ->
-        if $scope.newMedia.isAuthor
-            $scope.newMedia.author = 'alex'
-        else
-          $scope.newMedia = ''
-      )
-
-    $scope.toggleCoverCandidate = (media) ->
-        $scope.coverId = GalleryService.setCoverId(media.id)
-
-        if $scope.projectsheet.id
-            $scope.projectsheet.cover = media
-            ProjectSheet.one($scope.projectsheet.id).patch({cover: media.resource_uri})
+    user = @$rootScope.authVars.user
+    $scope.user = user.first_name + ' ' + user.last_name
+    $scope.newMedia.author = $scope.user
 
     $scope.addMedia = (newMedia) ->
+        console.log newMedia
         if $scope.mediaForm.$invalid
             return false
-
-        if newMedia.type == 'video'
-            newMedia.videoId = newMedia.url.split('/').pop()
-            newMedia.videoProvider = GalleryService.getVideoProvider(newMedia.url)
 
         $scope.medias.push(newMedia)
         $scope.newMedia = GalleryService.initMediaProject(newMedia.type)
