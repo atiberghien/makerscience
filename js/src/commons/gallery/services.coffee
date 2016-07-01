@@ -23,7 +23,7 @@ module.factory("GalleryService", () ->
             id: uniqueId
             title: ''
             type: type
-            isAuthor: true
+            is_author: true
             author: author
         }
         return media
@@ -60,8 +60,11 @@ module.factory("GalleryService", () ->
       if getVideoProvider(url) != null
         return true
 
+    isUrl = (url) ->
+        pattern = new RegExp(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/)
+        return pattern.test(url)
+
     isTypeImage = (type) ->
-      console.log type
       types = [
         'image/png'
         'image/jpeg'
@@ -93,6 +96,7 @@ module.factory("GalleryService", () ->
         isUrlImage: isUrlImage
         isUrlDocument: isUrlDocument
         isUrlVideo: isUrlVideo
+        isUrl: isUrl
         isTypeImage: isTypeImage
         isTypeDocument: isTypeDocument
         coverId: this.coverId

@@ -1,8 +1,9 @@
 <ng-form
   novalidate
   name="mediaForm"
+  ng-init="submitted=false"
   class="gallery-form"
-  ng-class="{ 'has-error' : mediaForm.$invalid }"
+  ng-class="{ 'has-error' : mediaForm.$invalid || mediaForm.$pristine && submitted }"
   check-form>
     <label>Sélectionner le type de média à ajouter</label>
     <tabset>
@@ -57,11 +58,12 @@
                 Site web
             </tab-heading>
             <label for="media-url">Ajouter un lien</label>
-            <input id="media-url" type="text" ng-model="newMedia.url" placeholder="http://" />
+            <input name="mediaUrl" id="media-url" type="text" ng-model="newMedia.url" placeholder="http://" />
+            <p ng-show="mediaForm.mediaUrl.$error.format" class="help-block">Url non valide, vérifier l'adresse du lien</p>
         </tab>
     </tabset>
 
-    <p ng-show="$scope.mediaForm.$pristine" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
+    <p ng-show="mediaForm.$pristine && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
 
     <div class="row">
         <div class="col-md-10">
@@ -71,7 +73,7 @@
         </div>
 
         <div class="col-md-2" ng-hide="hideControls">
-            <button type="button" class="btn btn-primary item-validate" ng-click="addMedia(newMedia)">Valider</button>
+            <button type="button" class="btn btn-primary item-validate" ng-click="submitted=true;addMedia(newMedia)">Valider</button>
         </div>
     </div>
 </ng-form>

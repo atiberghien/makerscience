@@ -78,7 +78,7 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
     )
 )
 
-module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $modal, ProjectService, TaggedItemService,
+module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $modal, $filter, ProjectService, TaggedItemService,
                                                     MakerScienceResource, MakerScienceResourceLight, MakerScienceResourceTaggedItem, MakerSciencePostLight, TaggedItem,
                                                     Comment, ObjectProfileLink, DataSharing) ->
 
@@ -93,12 +93,16 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
     $scope.editable = false
     $scope.objectId = null
+    $scope.medias = []
 
     MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
         $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0]
         $scope.objectId = $scope.projectsheet.id
         $scope.editable = $scope.projectsheet.can_edit
-        console.log $scope.projectsheet
+
+        $scope.filteredByAuthor = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {is_author: true, type: 'document' || 'link'})
+        $scope.filteredByNotAuthor = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {is_author: false, type: 'document' || 'link'})
+        $scope.filteredByExperience = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {type: 'experience'})
 
         $scope.openGallery = (projectsheet) ->
             modalInstance = $modal.open(

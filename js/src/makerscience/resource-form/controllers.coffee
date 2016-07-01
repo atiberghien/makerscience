@@ -86,7 +86,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
                     ,5000)
                 else
-                    $scope.coverId = GalleryService.coverId
+                    console.log $scope.medias
                     promises = []
 
                     angular.forEach($scope.medias, (media, index) ->

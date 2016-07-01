@@ -95,118 +95,18 @@
 
                 <tabset class="nav-tabs-resource">
                     <tab heading="Expérience">
-                        <!-- <section>
-                            <div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
+                        <section class="medias">
+                            <div class="edit-buttons" ng-click="openGallery(projectsheet.base_projectsheet)" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <h3>A propos de l'expérience</h3>
+                            <h3>Ressources dont je suis l'auteur ({{filteredByAuthor.length}})</h3>
+                            <gallery-list medias="filteredByAuthor"></gallery-list>
 
-                            <p editable-tiny-angular="resourcesheet.parent.description"
-                                blur="ignore"
-                                e-form="DescBtnForm"
-                                e-rows="4"
-                                e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
-                                ng-bind-html="resourcesheet.parent.description">
-                            </p>
-                        </section>
-                        <section ng-repeat="item in resourcesheet.base_projectsheet.question_answers">
-                            <h3>{{item.question.text}}</h3>
-                            <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
-                                <button><span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
-                            <p editable-tiny-angular="item.answer"
-                                blur="ignore"
-                                 e-form="AnswerBtnForm"
-                                 e-rows="4"
-                                 e-ta-toolbar="[['bold','italics', 'underline'], ['ul', 'ol'], ['insertLink']]"
-                                 onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
-                                 ng-bind-html="item.answer">
-                            </p>
-                        </section> -->
+                            <h3>Ressources récupérées que je souhaite partager ({{filteredByNotAuthor.length}})</h3>
+                            <gallery-list medias="filteredByNotAuthor"></gallery-list>
 
-                        <section class="medias">
-                          <div class="edit-buttons" ng-click="openGallery(projectsheet.base_projectsheet)" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
-                              <button><span class="glyphicon glyphicon-pencil"></span></button>
-                          </div>
-                          <h3>Ressources dont je suis l'auteur</h3>
-                            <ul class="gallery-links">
-                              <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files">
-                                <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
-                                <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
-                                <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
-                                  <span class="icon" ng-switch on="media.type">
-                                    <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                                    <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                                  </span>
-                                  <span class="title">{{media.title}}</span>
-                                  <span class="url">{{media.url}}</span>
-                                </a>
-                                <a ng-show="media.url" class="filename" href="{{media.url}}">
-                                  <span class="icon" ng-switch on="media.type">
-                                    <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                                    <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                                  </span>
-                                  <span class="title">{{media.title}}</span>
-                                </a>
-                              </li>
-                            </ul>
-                        </section>
-
-                        <section class="medias">
-                          <div class="edit-buttons" ng-click="openGallery(projectsheet.base_projectsheet)" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
-                              <button><span class="glyphicon glyphicon-pencil"></span></button>
-                          </div>
-                          <h3>Ressources récupérées que je souhaite partager</h3>
-                            <ul class="gallery-links">
-                              <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files">
-                                <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
-                                <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
-                                <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
-                                  <span class="icon" ng-switch on="media.type">
-                                    <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                                    <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                                  </span>
-                                  <span class="title">{{media.title}}</span>
-                                  <span class="url">{{media.url}}</span>
-                                </a>
-                                <a ng-show="media.url" class="filename" href="{{media.url}}">
-                                  <span class="icon" ng-switch on="media.type">
-                                    <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                                    <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                                  </span>
-                                  <span class="title">{{media.title}}</span>
-                                </a>
-                              </li>
-                            </ul>
-                        </section>
-
-                        <section class="medias">
-                          <div class="edit-buttons" ng-click="openGallery(projectsheet.base_projectsheet)" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
-                              <button><span class="glyphicon glyphicon-pencil"></span></button>
-                          </div>
-                          <h3>Mes expériences</h3>
-                            <ul class="gallery-links">
-                              <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files">
-                                <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
-                                <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
-                                <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
-                                  <span class="icon" ng-switch on="media.type">
-                                    <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                                    <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                                  </span>
-                                  <span class="title">{{media.title}}</span>
-                                  <span class="url">{{media.url}}</span>
-                                </a>
-                                <a ng-show="media.url" class="filename" href="{{media.url}}">
-                                  <span class="icon" ng-switch on="media.type">
-                                    <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                                    <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                                  </span>
-                                  <span class="title">{{media.title}}</span>
-                                </a>
-                              </li>
-                            </ul>
+                            <h3>Mes expériences  ({{filteredByExperience.length}})</h3>
+                            <gallery-list medias="filteredByExperience"></gallery-list>
                         </section>
 
                     </tab>

@@ -46,29 +46,41 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
                 )
 )
 
-module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, GalleryService, ProjectSheet, CurrentMakerScienceProfileService) ->
+module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, GalleryService, ProjectSheet, CurrentMakerScienceProfileService) ->
     $scope.config = config
     user = @$rootScope.authVars.user
     $scope.user = user.first_name + ' ' + user.last_name
     $scope.newMedia = GalleryService.initMediaResource('document', $scope.user)
 
-    $scope.setUrl = (url) ->
-        if !$scope.newMedia.isAuthor
-            $scope.newMedia.author = url
+    $scope.getFilterMedias = () ->
+        $scope.mediasToShow = if $scope.projectsheet.bucket then $scope.medias.concat($scope.projectsheet.bucket.files) else $scope.medias
+        $scope.filteredByAuthor = $filter('filter')($scope.mediasToShow, {is_author: true, type: '!experience'})
+        $scope.filteredByNotAuthor = $filter('filter')($scope.mediasToShow, {is_author: false, type: '!experience'})
+        $scope.filteredByExperience = $filter('filter')($scope.mediasToShow, {type: 'experience'})
+    $scope.getFilterMedias()
+
+    $scope.setUrl = () ->
+        if !$scope.newMedia.is_author
+            parser = document.createElement('a')
+            parser.href = $scope.newMedia.url
+            $scope.newMedia.author = parser.hostname
+        else
+            $scope.newMedia.author = $scope.user
 
     $scope.changeTab = (type) ->
         $scope.newMedia = GalleryService.initMediaResource(type, $scope.user)
 
     $scope.addMedia = (newMedia) ->
-        if $scope.mediaForm.$invalid
+        if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
             return false
 
         $scope.medias.push(newMedia)
         $scope.newMedia = GalleryService.initMediaResource(newMedia.type, $scope.user)
-
         $scope.submitted = false
+        $scope.getFilterMedias()
 
     $scope.remove = (media) ->
+        console.log media
         mediaIndex = $scope.medias.indexOf(media)
 
         if mediaIndex != -1
@@ -80,6 +92,8 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, GallerySe
                     fileBucketIndex = $scope.projectsheet.bucket.files.indexOf(media)
                     $scope.projectsheet.bucket.files.splice(fileBucketIndex, 1)
                 )
+
+        $scope.getFilterMedias()
 )
 
 module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, projectsheet, medias, ProjectService, ProjectSheet, BucketFile, GalleryService) ->

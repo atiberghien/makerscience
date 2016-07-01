@@ -21,6 +21,7 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
                 when 'PostalAddress' then PostalAddress.one(resources.resourceId).patch(putData)
 
         uploadMedia: (media, bucketId, projectId) ->
+            console.log media
             return new Promise((resolve, reject) ->
                 formData = new FormData()
                 if media.file
@@ -29,6 +30,12 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
                     formData.append('url', media.url)
                 if media.type == 'video'
                     formData.append('video_id', media.videoId)
+                    formData.append('video_provider', media.videoProvider)
+                if media.description
+                    formData.append('description', media.description)
+                if media.author
+                    formData.append('is_author', media.is_author)
+                    formData.append('author', media.author)
                 formData.append('bucket', bucketId)
                 formData.append('title', media.title)
                 formData.append('type', media.type)
