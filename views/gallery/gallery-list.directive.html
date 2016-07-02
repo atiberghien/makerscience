@@ -1,7 +1,7 @@
 <ul class="gallery-links">
   <li ng-repeat="media in medias">
-    <button ng-show="edit" type="button" class="btn btn-danger btn-xs" ng-click="remove(media)">
-        <span class="glyphicon glyphicon-trash"></span> Supprimer
+    <button ng-show="edit" type="button" class="remove-button" ng-click="remove()(media)">
+        <span class="glyphicon glyphicon-remove"></span>
     </button>
     <a class="filename" ng-href="{{media.url ? media.url : config.media_uri + media.file}}" target="_blank">
       <span class="icon" ng-switch on="media.type">

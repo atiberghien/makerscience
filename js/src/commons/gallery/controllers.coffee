@@ -80,7 +80,6 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
         $scope.getFilterMedias()
 
     $scope.remove = (media) ->
-        console.log media
         mediaIndex = $scope.medias.indexOf(media)
 
         if mediaIndex != -1

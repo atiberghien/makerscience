@@ -807,11 +807,27 @@ ul.gallery-links {
 	margin: 10px 0;
 
 	li {
+		position: relative;
 		display: flex;
 		width: 25%;
 		text-align: center;
 		padding: .5em;
+		.remove-button {
+			position: absolute;
+			z-index: 10;
+			top: .5em;
+			right: .5em;
+			background: $color-red;
+			color: white;
+			border: none;
+			padding: 10px;
+			&:hover {
+				background: $color-dark-red;
+			}
+		}
 		a {
+			position: relative;
+			z-index: 1;
 			display: block;
 			width: 100%;
 			border: solid 2px $color-blue;
