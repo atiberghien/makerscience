@@ -22,7 +22,8 @@
                 </div>
             </div>
             <label for="title-document">Titre <span class="required">*</span></label>
-            <input id="title-document" type="text" ng-model="newMedia.title" />
+            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" required />
+            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
 
             <label for="description-document">Description</label>
             <textarea
@@ -75,8 +76,10 @@
             <input name="mediaUrl" id="media-url" type="text" ng-model="newMedia.url" placeholder="http://" ng-change="setUrl()" />
             <p ng-show="mediaForm.$pristine && submitted" class="help-block">Veuillez insérer un lien</p>
             <p ng-show="mediaForm.mediaUrl.$error.format" class="help-block">Url non valide, vérifier l'adresse du lien</p>
+
             <label for="title-document">Titre <span class="required">*</span></label>
-            <input id="title-document" type="text" ng-model="newMedia.title" />
+            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" required />
+            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
 
             <label for="description-document">Description</label>
             <textarea
@@ -125,37 +128,45 @@
                 Expérience
             </tab-heading>
             <label for="title-experience">Titre <span class="required">*</span></label>
-            <input id="title-experience" type="text" ng-model="newMedia.title" />
+            <input id="title-experience" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" required />
+            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
 
             <label for="date-experience">Date de l'expérience <span class="required">*</span></label>
-            <input id="date-experience" type="date" ng-model="newMedia.experience.date" placeholder="http://" />
+            <input id="date-experience" name="mediaDate" type="date" ng-model="newMedia.experience.date" placeholder="http://" required />
+            <p ng-show="mediaForm.mediaDate.$invalid && submitted" class="help-block">Date de l'expérience requise</p>
 
             <label for="presentation-experience">Présentation de l'expérience <span class="required">*</span></label>
             <textarea
               ng-trim="false"
-              name="presentation-experience"
+              name="presentation_experience"
               id="presentation-experience"
               ng-model="newMedia.experience.presentation"
-              e-rows="4">
+              e-rows="4"
+              required>
             </textarea>
+            <p ng-show="mediaForm.presentation_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
 
             <label for="success-experience">Les points qui ont fait le succès de l'expérience <span class="required">*</span></label>
             <textarea
               ng-trim="false"
-              name="success-experience"
+              name="success_experience"
               id="success-experience"
               ng-model="newMedia.experience.success"
-              e-rows="4">
+              e-rows="4"
+              required>
             </textarea>
+            <p ng-show="mediaForm.success_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
 
             <label for="difficulties-experience">Les difficultés rencontrées ou points à améliorer <span class="required">*</span></label>
             <textarea
               ng-trim="false"
-              name="difficulties-experience"
+              name="difficulties_experience"
               id="difficulties-experience"
               ng-model="newMedia.experience.difficulties"
-              e-rows="4">
+              e-rows="4"
+              required>
             </textarea>
+            <p ng-show="mediaForm.difficulties_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
         </tab>
     </tabset>
 
