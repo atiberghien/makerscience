@@ -7,6 +7,11 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
     $scope.coverId = if $scope.projectsheet.cover then $scope.projectsheet.cover.id else null
     GalleryService.setCoverId($scope.coverId)
 
+    $scope.getMediasToShow = () ->
+        $scope.mediasToShow = if $scope.projectsheet.bucket then $scope.medias.concat($scope.projectsheet.bucket.files) else $scope.medias
+
+    $scope.getMediasToShow()
+
     $scope.changeTab = (type) ->
         $scope.newMedia.type = type
 
@@ -28,6 +33,7 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
         $scope.medias.push(newMedia)
         $scope.newMedia = GalleryService.initMediaProject(newMedia.type)
         $scope.submitted = false
+        $scope.getMediasToShow()
 
     $scope.remove = (media) ->
 
@@ -57,6 +63,7 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
         $scope.filteredByAuthor = $filter('filter')($scope.mediasToShow, {is_author: true, type: '!experience'})
         $scope.filteredByNotAuthor = $filter('filter')($scope.mediasToShow, {is_author: false, type: '!experience'})
         $scope.filteredByExperience = $filter('filter')($scope.mediasToShow, {type: 'experience'})
+
     $scope.getFilterMedias()
 
     $scope.setUrl = () ->
@@ -69,11 +76,14 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
 
     $scope.changeTab = (type) ->
         $scope.newMedia = GalleryService.initMediaResource(type, $scope.user)
+        if type == 'experience'
+            $scope.newMedia.experience = {}
 
     $scope.addMedia = (newMedia) ->
         if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
             return false
 
+        console.log newMedia
         $scope.medias.push(newMedia)
         $scope.newMedia = GalleryService.initMediaResource(newMedia.type, $scope.user)
         $scope.submitted = false

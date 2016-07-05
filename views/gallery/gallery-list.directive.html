@@ -7,8 +7,19 @@
       <span class="icon" ng-switch on="media.type">
         <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
         <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
+        <i class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></i>
+        <i class="glyphicon glyphicon-facetime-video" ng-switch-when="video"></i>
       </span>
-      <span class="title">{{media.title}}</span>
+      <div ng-if="media.type === 'image'">
+          <ng-thumb class="thumbnail" ng-show="media.file && !media.uploaded_on" params="{ file: media.file, height: 100 }"></ng-thumb>
+          <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{ config.media_uri }}{{ media.file }}" alt="{{media.title}}"></div>
+          <div class="thumbnail" ng-show="media.url"><img ng-src="{{media.url}}" /></div>
+      </div>
+      <div ng-if="media.type === 'video'">
+          <div class="thumbnail" ng-if="media.videoProvider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.videoId}}/0.jpg" /></div>
+          <div class="thumbnail" ng-if="media.videoProvider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
+      </div>
+      <span class="title">{{media.title}} {{media.is_author}}</span>
       <span ng-if="media.description" class="description">{{media.description}}</span>
       <span ng-if="media.url" class="url">{{media.url}}</span>
       <span ng-if="media.author" class="author">{{media.author}}</span>

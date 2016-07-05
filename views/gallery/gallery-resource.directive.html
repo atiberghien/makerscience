@@ -34,17 +34,17 @@
             </textarea>
 
             <div class="radio-block">
-                <p>Auteur de la ressource <span class="required">*</span></p>
+                <p>Auteur de la ressource {{newMedia.is_author}}<span class="required">*</span></p>
                 <div class="row">
                   <div class="col-md-4">
                     <label>
-                        <input type="radio" ng-model="newMedia.is_author" ng-value="true" ng-change="newMedia.is_author ? newMedia.author = user : newMedia.author = ''" />
+                        <input type="radio" ng-model="newMedia.is_author" ng-value=true ng-change="newMedia.is_author ? newMedia.author = user : newMedia.author = ''" />
                         Vous faite partie des auteurs
                     </label>
                   </div>
                   <div class="col-md-6">
                     <label>
-                        <input type="radio" ng-model="newMedia.is_author" ng-value="false" ng-change="newMedia.is_author ? newMedia.author = user : newMedia.author = ''" />
+                        <input type="radio" ng-model="newMedia.is_author" ng-value=false ng-change="newMedia.is_author ? newMedia.author = user : newMedia.author = ''" />
                         Vous n'êtes pas auteur et vous recommandez la ressource
                     </label>
                   </div>
@@ -124,8 +124,38 @@
                 <span class="glyphicon glyphicon-list-alt"></span>
                 Expérience
             </tab-heading>
-            <label for="media-experience">Ajouter un lien vers une vidéo</label>
-            <input id="media-experience" type="text" ng-model="newMedia.url" placeholder="http://" />
+            <label for="title-experience">Titre <span class="required">*</span></label>
+            <input id="title-experience" type="text" ng-model="newMedia.title" />
+
+            <label for="date-experience">Date de l'expérience <span class="required">*</span></label>
+            <input id="date-experience" type="date" ng-model="newMedia.experience.date" placeholder="http://" />
+
+            <label for="presentation-experience">Présentation de l'expérience <span class="required">*</span></label>
+            <textarea
+              ng-trim="false"
+              name="presentation-experience"
+              id="presentation-experience"
+              ng-model="newMedia.experience.presentation"
+              e-rows="4">
+            </textarea>
+
+            <label for="success-experience">Les points qui ont fait le succès de l'expérience <span class="required">*</span></label>
+            <textarea
+              ng-trim="false"
+              name="success-experience"
+              id="success-experience"
+              ng-model="newMedia.experience.success"
+              e-rows="4">
+            </textarea>
+
+            <label for="difficulties-experience">Les difficultés rencontrées ou points à améliorer <span class="required">*</span></label>
+            <textarea
+              ng-trim="false"
+              name="difficulties-experience"
+              id="difficulties-experience"
+              ng-model="newMedia.experience.difficulties"
+              e-rows="4">
+            </textarea>
         </tab>
     </tabset>
 
@@ -138,12 +168,12 @@
 <hr>
 
 <div class="resource-form">
-    <h5>Ressources dont je suis l'auteur ({{filteredByAuthor.length}})</h5>
+    <h5 ng-show="filteredByAuthor.length">Ressources dont je suis l'auteur ({{filteredByAuthor.length}})</h5>
     <gallery-list medias="filteredByAuthor" edit="true" remove="remove"></gallery-list>
 
-    <h5>Ressources récupérées que je souhaite partager ({{filteredByNotAuthor.length}})</h5>
+    <h5 ng-show="filteredByNotAuthor.length">Ressources récupérées que je souhaite partager ({{filteredByNotAuthor.length}})</h5>
     <gallery-list medias="filteredByNotAuthor" edit="true" remove="remove"></gallery-list>
 
-    <h5>Mes expériences  ({{filteredByExperience.length}})</h5>
+    <h5 ng-show="filteredByExperience.length">Mes expériences  ({{filteredByExperience.length}})</h5>
     <gallery-list medias="filteredByExperience" edit="true" remove="remove"></gallery-list>
 </div>

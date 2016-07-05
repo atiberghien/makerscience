@@ -100,9 +100,14 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         $scope.objectId = $scope.projectsheet.id
         $scope.editable = $scope.projectsheet.can_edit
 
-        $scope.filteredByAuthor = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {is_author: true, type: 'document' || 'link'})
-        $scope.filteredByNotAuthor = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {is_author: false, type: 'document' || 'link'})
-        $scope.filteredByExperience = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {type: 'experience'})
+        console.log $scope.projectsheet
+        $scope.getFilterMedias = () ->
+            $scope.mediasToShow = $scope.projectsheet.base_projectsheet.bucket.files
+            $scope.filteredByAuthor = $filter('filter')($scope.mediasToShow, {is_author: true, type: '!experience'})
+            $scope.filteredByNotAuthor = $filter('filter')($scope.mediasToShow, {is_author: false, type: '!experience'})
+            $scope.filteredByExperience = $filter('filter')($scope.mediasToShow, {type: 'experience'})
+
+        $scope.getFilterMedias()
 
         $scope.openGallery = (projectsheet) ->
             modalInstance = $modal.open(

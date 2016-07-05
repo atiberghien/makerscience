@@ -78,7 +78,7 @@
     </div>
 </ng-form>
 <hr>
-<ul class="gallery-thumbnails thumbnails">
+<!-- <ul class="gallery-thumbnails thumbnails">
     <li ng-if="media" ng-repeat="media in medias.concat(projectsheet.bucket.files) track by $index" style="float: left;text-align: center;">
         <ng-thumb class="thumbnail" ng-show="media.file && !media.uploaded_on" params="{ file: media.file, height: 100 }"></ng-thumb>
         <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{ config.media_uri }}{{ media.file }}" alt="{{media.title}}"></div>
@@ -99,4 +99,6 @@
             <span class="glyphicon glyphicon-trash"></span> Supprimer
         </button>
     </li>
-</ul>
+</ul> -->
+
+<gallery-list medias="mediasToShow" edit="true" remove="remove"></gallery-list>

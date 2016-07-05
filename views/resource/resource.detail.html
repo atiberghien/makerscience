@@ -99,13 +99,13 @@
                             <div class="edit-buttons" ng-click="openGallery(projectsheet.base_projectsheet)" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
-                            <h3>Ressources dont je suis l'auteur ({{filteredByAuthor.length}})</h3>
+                            <h3 ng-show="filteredByAuthor.length">Ressources dont je suis l'auteur ({{filteredByAuthor.length}})</h3>
                             <gallery-list medias="filteredByAuthor"></gallery-list>
 
-                            <h3>Ressources récupérées que je souhaite partager ({{filteredByNotAuthor.length}})</h3>
+                            <h3 ng-show="filteredByNotAuthor.length">Ressources récupérées que je souhaite partager ({{filteredByNotAuthor.length}})</h3>
                             <gallery-list medias="filteredByNotAuthor"></gallery-list>
 
-                            <h3>Mes expériences  ({{filteredByExperience.length}})</h3>
+                            <h3 ng-show="filteredByExperience.length">Mes expériences ({{filteredByExperience.length}})</h3>
                             <gallery-list medias="filteredByExperience"></gallery-list>
                         </section>
 

@@ -28,6 +28,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         else
             console.log("submitting form")
 
+        console.log $scope.projectsheet
         FormService.save($scope.projectsheet).then((resourcesheetResult) ->
             makerscienceResourceData =
                 parent : resourcesheetResult.project.resource_uri

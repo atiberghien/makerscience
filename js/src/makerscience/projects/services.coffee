@@ -24,22 +24,32 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
             console.log media
             return new Promise((resolve, reject) ->
                 formData = new FormData()
+
+                # Base
+                formData.append('bucket', bucketId)
+                formData.append('title', media.title)
+                formData.append('type', media.type)
+
                 if media.file
                     formData.append('file', media.file)
                 if media.url
                     formData.append('url', media.url)
+
+                # Project
                 if media.type == 'video'
                     formData.append('video_id', media.videoId)
                     formData.append('video_provider', media.videoProvider)
+
+                # Experience
                 if media.description
                     formData.append('description', media.description)
                 if media.author
                     formData.append('is_author', media.is_author)
                     formData.append('author', media.author)
-                formData.append('bucket', bucketId)
-                formData.append('title', media.title)
-                formData.append('type', media.type)
+                # if media.experience
+                    formData.append('experience_detail', JSON.stringify(media.experience))
 
+                console.log formData
                 BucketRestangular.all(projectId)
                   .withHttpConfig({transformRequest: angular.identity})
                   .customPOST(formData, undefined, undefined, { 'Content-Type': undefined }).then((res) ->
