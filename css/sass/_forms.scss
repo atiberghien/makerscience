@@ -803,7 +803,6 @@ form#search-advanced {
 ul.gallery-links {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
 	margin: 10px 0;
 
 	li {
@@ -841,6 +840,17 @@ ul.gallery-links {
 				span.url {
 					text-decoration: underline;
 				}
+			}
+		}
+		.image-preview {
+			> * {
+				border: none;
+			}
+			.thumbnail {
+				margin-bottom: 0;
+			}
+			canvas {
+				max-width: 100%;
 			}
 		}
 		span {

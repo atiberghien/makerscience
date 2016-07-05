@@ -10,7 +10,7 @@
         <i class="glyphicon glyphicon glyphicon-picture" ng-switch-when="image"></i>
         <i class="glyphicon glyphicon-facetime-video" ng-switch-when="video"></i>
       </span>
-      <div ng-if="media.type === 'image'">
+      <div class="image-preview" ng-if="media.type === 'image'">
           <ng-thumb class="thumbnail" ng-show="media.file && !media.uploaded_on" params="{ file: media.file, height: 100 }"></ng-thumb>
           <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{ config.media_uri }}{{ media.file }}" alt="{{media.title}}"></div>
           <div class="thumbnail" ng-show="media.url"><img ng-src="{{media.url}}" /></div>

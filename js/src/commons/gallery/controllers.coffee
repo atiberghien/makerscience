@@ -23,6 +23,7 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
             ProjectSheet.one($scope.projectsheet.id).patch({cover: media.resource_uri})
 
     $scope.addMedia = (newMedia) ->
+        console.log $scope.mediaForm
         if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
             return false
 
@@ -34,6 +35,7 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
         $scope.newMedia = GalleryService.initMediaProject(newMedia.type)
         $scope.submitted = false
         $scope.getMediasToShow()
+        $scope.mediaForm.$setPristine()
 
     $scope.remove = (media) ->
 
@@ -80,10 +82,10 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
             $scope.newMedia.experience = {}
 
     $scope.addMedia = (newMedia) ->
+        console.log $scope.mediaForm
         if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
             return false
 
-        console.log newMedia
         $scope.medias.push(newMedia)
         $scope.newMedia = GalleryService.initMediaResource(newMedia.type, $scope.user)
         $scope.submitted = false
