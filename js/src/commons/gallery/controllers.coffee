@@ -23,7 +23,6 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
             ProjectSheet.one($scope.projectsheet.id).patch({cover: media.resource_uri})
 
     $scope.addMedia = (newMedia) ->
-        console.log $scope.mediaForm
         if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
             return false
 
@@ -54,14 +53,15 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
                 )
 )
 
-module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, GalleryService, ProjectSheet, CurrentMakerScienceProfileService) ->
+module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, GalleryService, ProjectSheet, BucketFile) ->
     $scope.config = config
     user = @$rootScope.authVars.user
     $scope.user = user.first_name + ' ' + user.last_name
     $scope.newMedia = GalleryService.initMediaResource('document', $scope.user)
 
     $scope.getFilterMedias = () ->
-        $scope.mediasToShow = if $scope.projectsheet.bucket then $scope.medias.concat($scope.projectsheet.bucket.files) else $scope.medias
+        medias = if $scope.projectsheet.bucket then $scope.medias.concat($scope.projectsheet.bucket.files) else $scope.medias
+        $scope.mediasToShow = $filter('filter')(medias, {type: '!cover'})
         $scope.filteredByAuthor = $filter('filter')($scope.mediasToShow, {is_author: true, type: '!experience'})
         $scope.filteredByNotAuthor = $filter('filter')($scope.mediasToShow, {is_author: false, type: '!experience'})
         $scope.filteredByExperience = $filter('filter')($scope.mediasToShow, {type: 'experience'})
@@ -82,7 +82,6 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
             $scope.newMedia.experience = {}
 
     $scope.addMedia = (newMedia) ->
-        console.log $scope.mediaForm
         if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
             return false
 
@@ -112,7 +111,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, project
     $scope.projectsheet = projectsheet
     $scope.hideControls = false
     $scope.medias = medias
-
+    console.log $scope.config
     $scope.ok = ->
         if $scope.medias.length
             promises = []

@@ -11,7 +11,8 @@
           setTitle: '&',
           id: '=',
           fileread: '=',
-          label: '='
+          label: '=',
+          changeCover: '&changeCover'
         },
         template: '<input id="{{id}}" class="inputfile" type="file" ng-model="fileread" />\n<label for="{{id}}" class="btn btn-primary">{{label}}</label>',
         link: function(scope, el, attrs) {
@@ -19,7 +20,10 @@
             scope.$apply(function() {
               scope.fileread = changeEvent.target.files[0];
             });
-            return scope.setTitle(scope.fileread.name);
+            if (scope.fileread.name) {
+              scope.setTitle(scope.fileread.name);
+            }
+            return scope.changeCover();
           });
         }
       };

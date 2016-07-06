@@ -29,7 +29,8 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-src="{{projectsheet.base_projectsheet.coverURL}}" alt="Project Image" />
+                        <img ng-show="projectsheet.base_projectsheet.cover.file" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.file }}" alt="{{projectsheet.base_projectsheet.cover.title}}">
+                        <img ng-show="projectsheet.base_projectsheet.cover.url" ng-src="{{ projectsheet.base_projectsheet.cover.url }}" alt="{{projectsheet.base_projectsheet.cover.title}}">
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
                                 <button ng-click="openGallery(projectsheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
@@ -157,8 +158,6 @@
                                         <img ng-show="img.url" ng-src="{{ img.url }}" alt="{{img.title}}">
                                     </slide>
                                 </carousel>
-                                <!-- <button ng-click="currentImg = Math.abs((currentImg - 1) % resourcesheet.base_projectsheet.bucket.files.length)">Préc.</button>
-                                <button ng-click="currentImg = (currentImg + 1) % resourcesheet.base_projectsheet.bucket.files.length">Suiv.</button> -->
                                 <div ng-show="!projectsheet.base_projectsheet.bucket.files.length">
                                     <img src="/img/slides/slide_one.png" alt="Slide One">
                                 </div>
@@ -177,13 +176,7 @@
                                   </slide>
                                 </carousel>
                             </tab>
-                            <tab ng-show="editable" disabled="true" class="editable">
-                                <tab-heading>
-                                    <span ng-click="openGallery(projectsheet.base_projectsheet)" class="glyphicon glyphicon-pencil"></span>
-                                </tab-heading>
-                            </tab>
                         </tabset>
-
 
                         <ul class="gallery-links">
                             <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files | filter: {type: 'document' || 'link'}">
@@ -207,6 +200,9 @@
                             </li>
                         </ul>
 
+                        <button ng-show="editable" class="btn btn-primary btn-edit" ng-click="openGallery(projectsheet.base_projectsheet)">
+                          <span class="glyphicon glyphicon-pencil"></span> Ajouter / supprimer des médias
+                        </button>
                     </tab>
                     <tab heading="Actus ({{projectsheet.news.length}})">
                         <section  ng-show="editable" class="news-form">

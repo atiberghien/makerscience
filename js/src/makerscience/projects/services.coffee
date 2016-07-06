@@ -46,10 +46,9 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
                 if media.author
                     formData.append('is_author', media.is_author)
                     formData.append('author', media.author)
-                # if media.experience
+                if media.experience
                     formData.append('experience_detail', JSON.stringify(media.experience))
 
-                console.log formData
                 BucketRestangular.all(projectId)
                   .withHttpConfig({transformRequest: angular.identity})
                   .customPOST(formData, undefined, undefined, { 'Content-Type': undefined }).then((res) ->

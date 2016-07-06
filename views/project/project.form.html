@@ -207,17 +207,18 @@
                         </div>
                     </div><!-- .row -->
 
-                    <p class="right">
+                    <p ng-hide="hideControls" class="right">
                         <button type="button" class="btn btn-warning btn-lg cancel" ui-sref="project.list">Annuler</button>
-                        <!-- FIXME : set up ctrler to allow 'save as draft'  -->
-                        <!-- <button type="button" class="button">Enregistrer en brouillon</button>
-                        <button type="button" class="button" ng-click="submitted=true">Publier</button>
-                         -->
                         <button type="submit" class="btn btn-primary btn-lg" ng-click="submitted=true;hideControls=true">Enregistrer</button>
                     </p>
-                    <div class="progress" ng-show="hideControls">
-                        <div ng-show="uploader.queue.length > 0" class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
-                        <div ng-show="uploader.queue.length == 0" class="progress-bar" role="progressbar" ng-style="{ 'width': fake_progress + '%' }" style="width: 0%;"></div>
+                    <div ng-show="hideControls" class="loader-form loader-project">
+                        <div class="sk-folding-cube">
+                            <div class="sk-cube1 sk-cube"></div>
+                            <div class="sk-cube2 sk-cube"></div>
+                            <div class="sk-cube4 sk-cube"></div>
+                            <div class="sk-cube3 sk-cube"></div>
+                        </div>
+                        <span>Envoi des données en cours</span>
                     </div>
                 </form>
 

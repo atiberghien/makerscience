@@ -102,7 +102,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
         console.log $scope.projectsheet
         $scope.getFilterMedias = () ->
-            $scope.mediasToShow = $scope.projectsheet.base_projectsheet.bucket.files
+            $scope.mediasToShow = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {type: '!cover'})
             $scope.filteredByAuthor = $filter('filter')($scope.mediasToShow, {is_author: true, type: '!experience'})
             $scope.filteredByNotAuthor = $filter('filter')($scope.mediasToShow, {is_author: false, type: '!experience'})
             $scope.filteredByExperience = $filter('filter')($scope.mediasToShow, {type: 'experience'})
@@ -126,6 +126,22 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
                 $scope.$emit('cover-updated')
                 $scope.medias = []
             )
+
+        $scope.openCover = (projectsheet) ->
+            modalInstance = $modal.open(
+                templateUrl: '/views/modal/cover-modal.html'
+                controller: 'CoverResourceSheetCtrl'
+                size: 'lg'
+                backdrop : 'static'
+                keyboard : false
+                resolve:
+                    base_projectsheet: ->
+                        return $scope.projectsheet.base_projectsheet
+            )
+            modalInstance.result.then((result)->
+                $scope.projectsheet.base_projectsheet.cover = result
+            )
+
 
         $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
             resources = {
@@ -199,4 +215,23 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         putData[fieldName] = data
         switch resourceName
             when 'MakerScienceResource' then MakerScienceResource.one(resourceId).patch(putData)
+)
+
+module.controller("CoverResourceSheetCtrl", ($scope, $modalInstance, ProjectService, ProjectSheet, base_projectsheet, GalleryService) ->
+        $scope.resourceCover = {type: 'cover'}
+        $scope.ok = (cover) ->
+            if $scope.resourceCover
+                ProjectService.uploadMedia($scope.resourceCover, base_projectsheet.bucket.id, base_projectsheet.id).then((res) ->
+                    ProjectSheet.one(base_projectsheet.id).patch({cover: res.resource_uri})
+                    $modalInstance.close(res)
+                  )
+
+        $scope.close = ->
+            $modalInstance.dismiss('cancel')
+
+        $scope.change = () ->
+            console.log $scope
+            scope.$apply ->
+                scope.coverForm.$setValidity('imageFileFormat', GalleryService.isTypeImage(scope.newMedia.file.type))
+
 )

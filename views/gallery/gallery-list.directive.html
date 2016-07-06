@@ -3,6 +3,7 @@
     <button ng-show="edit" type="button" class="remove-button" ng-click="remove()(media)">
         <span class="glyphicon glyphicon-remove"></span>
     </button>
+    <cover-button class="cover-button" ng-if="media.type === 'image'" toggle="cover()(media)" cover-id="coverId" media="media"></cover-button>
     <a class="filename" ng-href="{{media.url ? media.url : config.media_uri + media.file}}" target="_blank">
       <span class="icon" ng-switch on="media.type">
         <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
@@ -12,14 +13,14 @@
       </span>
       <div class="image-preview" ng-if="media.type === 'image'">
           <ng-thumb class="thumbnail" ng-show="media.file && !media.uploaded_on" params="{ file: media.file, height: 100 }"></ng-thumb>
-          <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{ config.media_uri }}{{ media.file }}" alt="{{media.title}}"></div>
+          <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{config.media_uri}}{{media.file}}" alt="{{media.title}}"></div>
           <div class="thumbnail" ng-show="media.url"><img ng-src="{{media.url}}" /></div>
       </div>
       <div ng-if="media.type === 'video'">
           <div class="thumbnail" ng-if="media.videoProvider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.videoId}}/0.jpg" /></div>
           <div class="thumbnail" ng-if="media.videoProvider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
       </div>
-      <span class="title">{{media.title}} {{media.is_author}}</span>
+      <span class="title">{{media.title}}</span>
       <span ng-if="media.description" class="description">{{media.description}}</span>
       <span ng-if="media.url" class="url">{{media.url}}</span>
       <span ng-if="media.author" class="author">{{media.author}}</span>

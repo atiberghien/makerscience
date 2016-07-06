@@ -8,6 +8,7 @@ module.directive('inputfile', [ ->
         id: '='
         fileread: '='
         label: '='
+        changeCover: '&changeCover'
       }
       template: '''
         <input id="{{id}}" class="inputfile" type="file" ng-model="fileread" />
@@ -18,7 +19,9 @@ module.directive('inputfile', [ ->
               scope.$apply ->
                   scope.fileread = changeEvent.target.files[0]
                   return
-              scope.setTitle(scope.fileread.name)
+              if scope.fileread.name
+                  scope.setTitle(scope.fileread.name)
+              scope.changeCover()
     }
 
 ])

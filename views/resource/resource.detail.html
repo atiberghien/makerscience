@@ -29,10 +29,11 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-src="{{resourcesheet.base_projectsheet.coverURL}}" alt="Experience Image" />
+                        <img ng-show="resourcesheet.base_projectsheet.cover.file" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.file }}" alt="{{resourcesheet.base_projectsheet.cover.title}}">
+                        <img ng-show="resourcesheet.base_projectsheet.cover.url" ng-src="{{ resourcesheet.base_projectsheet.cover.url }}" alt="{{resourcesheet.base_projectsheet.cover.title}}">
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
-                                <button ng-click="openGallery(resourcesheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
+                                <button ng-click="openCover(resourcesheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
                             </div>
                         </div>
                     </div>
@@ -106,9 +107,12 @@
                             <gallery-list medias="filteredByNotAuthor"></gallery-list>
 
                             <h3 ng-show="filteredByExperience.length">Mes expériences ({{filteredByExperience.length}})</h3>
-                            <gallery-list medias="filteredByExperience"></gallery-list>
+                            <gallery-experiences-list medias="filteredByExperience"></gallery-experiences-list>
                         </section>
 
+                        <button ng-show="editable" class="btn btn-primary btn-edit" ng-click="openGallery(projectsheet.base_projectsheet)">
+                          <span class="glyphicon glyphicon-pencil"></span> Ajouter / supprimer des médias
+                        </button>
                     </tab>
                     <tab heading="Discussions ({{resourcesheet.linked_makersciencepost.length}})">
                         <section>

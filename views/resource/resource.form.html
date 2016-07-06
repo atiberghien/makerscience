@@ -21,7 +21,7 @@
                       novalidate
                       ng-init="submitted=false"
                       ng-submit="saveMakerscienceResource(newResourceForm.$valid)"
-                      ng-class="{ 'has-error' : newResourceForm.$invalid && submitted }"
+                      ng-class="{ 'has-error' : newResourceForm.$invalid }"
                       class="resource-form">
                     <div class="row">
                         <div class="col-md-12">
@@ -60,6 +60,18 @@
                                     <label>Formats</label>
                                     <tag-auto-complete model="formatsTags" placeholder="Mot-clé"></tag-auto-complete>
                                     <p ng-show="newResourceForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
+
+                                    <label>Image en une</label>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <ng-thumb class="thumbnail" ng-if="resourceCover.file" params="{ file: resourceCover.file, height: 100 }"></ng-thumb>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <inputfile change-cover="changeCover()" id="resourceCover-image" fileread="resourceCover.file" label="resourceCover.file.name || 'Parcourir...'"></inputfile>
+                                            <p ng-show="newResourceForm.$error.imageFileFormat" class="help-block">Format non valide, vérifiez le format de l'image.</p>
+                                        </div>
+                                    </div>
+
                                </fieldset>
                             </accordion-group>
 
@@ -84,15 +96,16 @@
 
                     <p class="right" ng-hide="hideControls">
                         <button type="button" class="btn btn-warning btn-lg cancel" ui-sref="resource.list">Annuler</button>
-                        <!-- FIXME : set up ctrler to allow 'save as draft'  -->
-                        <!-- <button type="button" class="button">Enregistrer en brouillon</button>
-                        <button type="button" class="button" ng-click="submitted=true">Publier</button>
-                         -->
                         <button type="submit" class="btn btn-primary btn-lg" ng-click="submitted=true;hideControls=true">Enregistrer</button>
                     </p>
-                    <div class="progress" ng-show="hideControls">
-                        <div ng-show="uploader.queue.length > 0" class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }" style="width: 0%;"></div>
-                        <div ng-show="uploader.queue.length == 0" class="progress-bar" role="progressbar" ng-style="{ 'width': fake_progress + '%' }" style="width: 0%;"></div>
+                    <div ng-show="hideControls" class="loader-form loader-resource">
+                        <div class="sk-folding-cube">
+                            <div class="sk-cube1 sk-cube"></div>
+                            <div class="sk-cube2 sk-cube"></div>
+                            <div class="sk-cube4 sk-cube"></div>
+                            <div class="sk-cube3 sk-cube"></div>
+                        </div>
+                        <span>Envoi des données en cours</span>
                     </div>
                 </form>
 
@@ -102,3 +115,4 @@
 
     </div><!-- .row .container -->
 </div>
+<div class="loader-form loader-resource"></div>

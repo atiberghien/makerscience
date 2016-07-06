@@ -3,7 +3,7 @@ module = angular.module("makerscience.projects.controllers")
 module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $modal, $filter, $timeout, ProjectService, GalleryService,
                                                         ProjectProgress, ProjectSheet, FormService, ProjectSheetQuestionAnswer, Project,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
-                                                        ObjectProfileLink, BucketRestangular) ->
+                                                        ObjectProfileLink) ->
 
 
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
@@ -36,7 +36,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
 
     $scope.openInfosLink = (projectsheet) ->
         modalInstance = $modal.open(
-            templateUrl: '/views/infolink/infolink-modal.html'
+            templateUrl: '/views/modal/infolink-modal.html'
             controller: 'InfoLinkCtrl'
             size: 'lg'
             backdrop : 'static'

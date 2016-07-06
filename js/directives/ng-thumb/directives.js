@@ -7,15 +7,7 @@
     '$window', function($window) {
       var helper;
       helper = {
-        support: !!($window.FileReader && $window.CanvasRenderingContext2D),
-        isFile: function(item) {
-          return angular.isObject(item) && item instanceof $window.File;
-        },
-        isImage: function(file) {
-          var type;
-          type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
-          return '|jpeg|jpg|png|jpeg|bmp|gif|'.indexOf(type) > -1;
-        }
+        support: !!($window.FileReader && $window.CanvasRenderingContext2D)
       };
       return {
         restrict: 'E',
@@ -26,12 +18,6 @@
         link: function(scope, element, attributes) {
           var canvas, reader;
           if (!helper.support) {
-            return;
-          }
-          if (!helper.isFile(scope.params.file)) {
-            return;
-          }
-          if (!helper.isImage(scope.params.file)) {
             return;
           }
           canvas = element.find('canvas');

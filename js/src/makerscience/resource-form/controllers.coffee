@@ -5,7 +5,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
 
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
-    $scope.projectsheet = { medias: [] }
+    $scope.projectsheet = {}
     $scope.QAItems = []
 
     FormService.init('experience-makerscience').then((response) ->
@@ -13,6 +13,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
         $scope.projectsheet = response.projectsheet
     )
 
+    $scope.resourceCover = {type: 'cover', title: 'cover'}
     $scope.themesTags = []
     $scope.targetsTags = []
     $scope.formatsTags = []
@@ -20,7 +21,21 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
     $scope.hideControls = false
 
+    # $scope.$watch('resourceCover', () ->
+    #     if $scope.resourceCover.file
+    #         $scope.newResourceForm.$setValidity('imageFileFormat', GalleryService.isTypeImage($scope.resourceCover.file.type))
+    # )
+    $scope.changeCover = () ->
+        $scope.$apply(() ->
+            $scope.newResourceForm.$setValidity('imageFileFormat', true)
+            console.log $scope.resourceCover.file
+            if $scope.resourceCover.file
+                $scope.newResourceForm.$setValidity('imageFileFormat', GalleryService.isTypeImage($scope.resourceCover.file.type))
+                console.log $scope.newResourceForm
+        )
+
     $scope.saveMakerscienceResource = (formIsValid) ->
+        console.log $scope.newResourceForm
         if !formIsValid
             console.log(" Form invalid !")
             $scope.hideControls = false
@@ -76,6 +91,11 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
                 )
 
+                if $scope.resourceCover
+                    ProjectService.uploadMedia($scope.resourceCover, resourcesheetResult.bucket.id, resourcesheetResult.id).then((res) ->
+                        ProjectSheet.one(resourcesheetResult.id).patch({cover: res.resource_uri})
+                      )
+
                 # if no photos to upload, directly go to new project sheet
                 if _.size($scope.medias) == 0
                     $scope.fake_progress = 0
@@ -87,7 +107,6 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
                     ,5000)
                 else
-                    console.log $scope.medias
                     promises = []
 
                     angular.forEach($scope.medias, (media, index) ->

@@ -22,8 +22,8 @@
                 </div>
             </div>
             <label for="title-document">Titre <span class="required">*</span></label>
-            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" required />
-            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
+            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" />
+            <p ng-show="mediaForm.mediaTitle.$pristine && submitted" class="help-block">Titre requis</p>
 
             <label for="description-document">Description</label>
             <textarea
@@ -78,8 +78,8 @@
             <p ng-show="mediaForm.mediaUrl.$error.format" class="help-block">Url non valide, vérifier l'adresse du lien</p>
 
             <label for="title-document">Titre <span class="required">*</span></label>
-            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" required />
-            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
+            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" />
+            <p ng-show="mediaForm.mediaTitle.$pristine && submitted" class="help-block">Titre requis</p>
 
             <label for="description-document">Description</label>
             <textarea
@@ -128,11 +128,11 @@
                 Expérience
             </tab-heading>
             <label for="title-experience">Titre <span class="required">*</span></label>
-            <input id="title-experience" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" required />
-            <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
+            <input id="title-experience" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" />
+            <p ng-show="mediaForm.mediaTitle.$pristine && submitted" class="help-block">Titre requis</p>
 
             <label for="date-experience">Date de l'expérience <span class="required">*</span></label>
-            <input id="date-experience" name="mediaDate" type="date" ng-model="newMedia.experience.date" placeholder="http://" required />
+            <input id="date-experience" name="mediaDate" type="date" ng-model="newMedia.experience.date" placeholder="http://" ng-required="newMedia.type === 'experience'" />
             <p ng-show="mediaForm.mediaDate.$invalid && submitted" class="help-block">Date de l'expérience requise</p>
 
             <label for="presentation-experience">Présentation de l'expérience <span class="required">*</span></label>
@@ -142,7 +142,7 @@
               id="presentation-experience"
               ng-model="newMedia.experience.presentation"
               e-rows="4"
-              required>
+              ng-required="newMedia.type === 'experience'">
             </textarea>
             <p ng-show="mediaForm.presentation_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
 
@@ -153,7 +153,7 @@
               id="success-experience"
               ng-model="newMedia.experience.success"
               e-rows="4"
-              required>
+              ng-required="newMedia.type === 'experience'">
             </textarea>
             <p ng-show="mediaForm.success_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
 
@@ -164,7 +164,7 @@
               id="difficulties-experience"
               ng-model="newMedia.experience.difficulties"
               e-rows="4"
-              required>
+              ng-required="newMedia.type === 'experience'">
             </textarea>
             <p ng-show="mediaForm.difficulties_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
         </tab>
@@ -186,5 +186,5 @@
     <gallery-list medias="filteredByNotAuthor" edit="true" remove="remove"></gallery-list>
 
     <h5 ng-show="filteredByExperience.length">Mes expériences  ({{filteredByExperience.length}})</h5>
-    <gallery-list medias="filteredByExperience" edit="true" remove="remove"></gallery-list>
+    <gallery-experiences-list medias="filteredByExperience" edit="true" remove="remove"></gallery-experiences-list>
 </div>
