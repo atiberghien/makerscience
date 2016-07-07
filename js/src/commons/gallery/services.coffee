@@ -85,6 +85,9 @@ module.factory("GalleryService", () ->
         'text/plain'
         'application/vnd.openxmlformats-officedocument.presentationml.presentation'
         'application/vnd.ms-powerpointtd'
+        'image/png'
+        'image/jpeg'
+        'image/gif'
       ]
       return types.indexOf(type) > -1
 
