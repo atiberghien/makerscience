@@ -284,6 +284,7 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
         toolbar_items_size: 'small',
         language_url: "/js/tinymce_fr_FR.js",
         language: "fr_FR",
+        content_style: "p {color: #535353; font-size: 1.2em}",
     }
 
     $rootScope.tinyMceFullOptions = {
@@ -294,6 +295,7 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
         toolbar_items_size: 'small',
         language_url: "/js/tinymce_fr_FR.js",
         language: "fr_FR",
+        content_style: "p {color: #535353; font-size: 1.2em}",
         style_formats: [
             {title: "Titre", items: [
                 {title: "Titre 1", format: "h1"},

@@ -1,13 +1,12 @@
 module = angular.module('commons.directives.thumb', [])
 
-module.directive('ngThumb', ['$window', ($window) ->
+module.directive('ngThumb', ['$window', 'GalleryService', ($window, GalleryService) ->
     helper = {
         support: !!($window.FileReader && $window.CanvasRenderingContext2D),
-        # isFile: (item) ->
-        #     return angular.isObject(item) && item instanceof $window.File
-        # isImage: (file) ->
-        #     type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|'
-        #     return '|jpeg|jpg|png|jpeg|bmp|gif|'.indexOf(type) > -1
+        isFile: (item) ->
+            return angular.isObject(item) && item instanceof $window.File
+        isImage: (file) ->
+            return GalleryService.isTypeImage(file.type)
     }
 
     return {
@@ -19,11 +18,6 @@ module.directive('ngThumb', ['$window', ($window) ->
         link: (scope, element, attributes) ->
             if !helper.support
                 return
-
-            # if !helper.isFile(scope.params.file)
-            #     return
-            # if !helper.isImage(scope.params.file)
-            #     return
 
             canvas = element.find('canvas')
             reader = new FileReader()
@@ -38,10 +32,18 @@ module.directive('ngThumb', ['$window', ($window) ->
                 img.src = event.target.result
 
             scope.$watch('params', () ->
+                if !helper.isFile(scope.params.file)
+                    return
+                if !helper.isImage(scope.params.file)
+                    return
                 reader.readAsDataURL(scope.params.file)
             )
 
             element.bind('change', (changeEvent) ->
+                if !helper.isFile(scope.params.file)
+                    return
+                if !helper.isImage(scope.params.file)
+                    return
                 reader.readAsDataURL(scope.params.file)
             )
     }

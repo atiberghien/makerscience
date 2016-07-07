@@ -8,9 +8,12 @@ module.directive('galleryList', () ->
         coverId: '='
         remove: '&remove'
         cover: '&cover'
+        uri: '='
       }
       restrict: 'E'
       templateUrl: 'views/gallery/gallery-list.directive.html'
+      link: (scope) ->
+          console.log scope
     }
 )
 

@@ -1,6 +1,6 @@
 module = angular.module("makerscience.projects.controllers")
 
-module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $controller, $modal, $filter, $timeout, ProjectService, GalleryService,
+module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state, $controller, $modal, $filter, $timeout, ProjectService, GalleryService,
                                                         ProjectProgress, ProjectSheet, FormService, ProjectSheetQuestionAnswer, Project,
                                                         MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerScienceProjectTaggedItem,
                                                         ObjectProfileLink) ->
@@ -34,19 +34,20 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         $scope.progressRange = [{ value : progress.resource_uri, text : progress.label } for progress in $filter('orderBy')(progressRangeResult, 'order')][0]
     )
 
-    $scope.openInfosLink = (projectsheet) ->
+    $scope.openInfosLink = (projectsheet, QAItems) ->
         modalInstance = $modal.open(
             templateUrl: '/views/modal/infolink-modal.html'
             controller: 'InfoLinkCtrl'
             size: 'lg'
             backdrop : 'static'
             keyboard : false
-            resolve:
-                projectsheet: ->
-                    return projectsheet
         )
         modalInstance.result.then((result)->
-            $scope.$emit('cover-updated')
+            if !$scope.projectsheet.project
+                $scope.projectsheet.project = {}
+            $scope.projectsheet.project.title = result.title
+            $scope.QAItems[0].answer = result.description
+            $window.tinymce.editors[0].setContent(result.description)
         )
 
     $scope.addNeed = (need) ->
@@ -135,6 +136,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
                     ,5000)
                 else
                     $scope.coverId = GalleryService.coverId
+
                     promises = []
 
                     angular.forEach($scope.medias, (media, index) ->
@@ -156,9 +158,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($scope, $state, $contro
         )
 )
 
-module.controller("InfoLinkCtrl", ($scope, $modalInstance, MediaRestangular, projectsheet) ->
-
-    $scope.projectsheet = projectsheet
+module.controller("InfoLinkCtrl", ($scope, $modalInstance, MediaRestangular) ->
 
     $scope.close = ->
         $modalInstance.dismiss('close')
@@ -169,11 +169,7 @@ module.controller("InfoLinkCtrl", ($scope, $modalInstance, MediaRestangular, pro
 
         MediaRestangular.one('geturl').get({'url': link.$modelValue})
           .then((res) ->
-              if !$scope.projectsheet.project
-                  $scope.projectsheet.project = {}
-              $scope.projectsheet.project.title = res.title
-              $scope.projectsheet.project.baseline = res.description
-              $modalInstance.dismiss()
+              $modalInstance.close(res)
           )
           .catch((err) ->
               console.error err

@@ -9,11 +9,11 @@
         class="cover-form"
         ng-class="{ 'has-error' : resourceCover.$invalid && submitted }">
         <fieldset>
-            <div class="row">
-                <div class="col-md-3">
+            <div class="cover-image">
+                <div class="thumbnail-container">
                     <ng-thumb class="thumbnail" ng-if="resourceCover.file" params="{ file: resourceCover.file, height: 100 }"></ng-thumb>
                 </div>
-                <div class="col-md-4">
+                <div class="inputfile-container">
                     <inputfile id="resourceCover-image" fileread="resourceCover.file" label="resourceCover.name || 'Parcourir...'"></inputfile>
                     <p ng-show="coverForm.$error.imageFileFormat" class="help-block">Format non valide, vérifiez le format de l'image.</p>
                 </div>

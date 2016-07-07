@@ -34,7 +34,7 @@
                                                 <span class="title">Caractéristiques du projet</span>
                                             </div>
                                             <div class="col-md-4 right">
-                                                <button class="btn btn-primary" ng-click="openInfosLink(projectsheet)">
+                                                <button class="btn btn-primary" ng-click="openInfosLink(projectsheet, QAItems)">
                                                   <span class="glyphicon glyphicon-cloud-download"></span>
                                                   Ajouter des infos depuis un lien
                                                 </button>
@@ -58,7 +58,7 @@
                                             ng-model="projectsheet.project.baseline"
                                             maxlength="100"
                                             required/>
-                                        <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Sous-titre du projet requise</p>
+                                        <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Sous-titre du projet requis</p>
                                         <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Résumez en une courte phrase votre projet</p>
 
                                         <label for="question_0">{{QAItems[0].questionLabel}}</label>

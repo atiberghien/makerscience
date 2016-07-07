@@ -141,7 +141,7 @@
               name="presentation_experience"
               id="presentation-experience"
               ng-model="newMedia.experience.presentation"
-              e-rows="4"
+              e-rows="5"
               ng-required="newMedia.type === 'experience'">
             </textarea>
             <p ng-show="mediaForm.presentation_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
@@ -152,7 +152,7 @@
               name="success_experience"
               id="success-experience"
               ng-model="newMedia.experience.success"
-              e-rows="4"
+              e-rows="5"
               ng-required="newMedia.type === 'experience'">
             </textarea>
             <p ng-show="mediaForm.success_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
@@ -163,7 +163,7 @@
               name="difficulties_experience"
               id="difficulties-experience"
               ng-model="newMedia.experience.difficulties"
-              e-rows="4"
+              e-rows="5"
               ng-required="newMedia.type === 'experience'">
             </textarea>
             <p ng-show="mediaForm.difficulties_experience.$invalid && submitted" class="help-block">Ce champs est requis</p>
@@ -180,10 +180,10 @@
 
 <div class="resource-form">
     <h5 ng-show="filteredByAuthor.length">Ressources dont je suis l'auteur ({{filteredByAuthor.length}})</h5>
-    <gallery-list medias="filteredByAuthor" edit="true" remove="remove"></gallery-list>
+    <gallery-list uri="config.media_uri" medias="filteredByAuthor" edit="true" remove="remove"></gallery-list>
 
     <h5 ng-show="filteredByNotAuthor.length">Ressources récupérées que je souhaite partager ({{filteredByNotAuthor.length}})</h5>
-    <gallery-list medias="filteredByNotAuthor" edit="true" remove="remove"></gallery-list>
+    <gallery-list uri="config.media_uri" medias="filteredByNotAuthor" edit="true" remove="remove"></gallery-list>
 
     <h5 ng-show="filteredByExperience.length">Mes expériences  ({{filteredByExperience.length}})</h5>
     <gallery-experiences-list medias="filteredByExperience" edit="true" remove="remove"></gallery-experiences-list>

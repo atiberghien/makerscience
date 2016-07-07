@@ -116,7 +116,7 @@ module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInsta
         $modalInstance.dismiss('cancel')
 )
 
-module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter, $window, $modal, ProjectService, TaggedItemService,
+module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter, $window, $modal, ProjectService, TaggedItemService, GalleryService,
                                                     MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePostLight,
                                                     MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress, ProjectNews
                                                     Comment, ObjectProfileLink, DataSharing) ->
@@ -172,10 +172,13 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
             }
             ProjectService.updateProjectSheet(resources, $scope.projectsheet)
 
-        ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet)
+        coverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
+        $scope.coverURL = ProjectService.fetchCoverURL(coverId)
 
         $scope.$on('cover-updated', ()->
-            ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet)
+            newCoverId = GalleryService.coverId
+            if newCoverId != coverId
+                $scope.coverURL = ProjectService.fetchCoverURL(newCoverId)
             MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
                 $scope.projectsheet = makerScienceProjectResult.objects[0]
             )

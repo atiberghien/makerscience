@@ -4,7 +4,7 @@
         <span class="glyphicon glyphicon-remove"></span>
     </button>
     <cover-button class="cover-button" ng-if="media.type === 'image'" toggle="cover()(media)" cover-id="coverId" media="media"></cover-button>
-    <a class="filename" ng-href="{{media.url ? media.url : config.media_uri + media.file}}" target="_blank">
+    <a class="filename" ng-href="{{media.url ? media.url : uri + media.file}}" target="_blank">
       <span class="icon" ng-switch on="media.type">
         <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
         <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
@@ -13,7 +13,7 @@
       </span>
       <div class="image-preview" ng-if="media.type === 'image'">
           <ng-thumb class="thumbnail" ng-show="media.file && !media.uploaded_on" params="{ file: media.file, height: 100 }"></ng-thumb>
-          <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{config.media_uri}}{{media.file}}" alt="{{media.title}}"></div>
+          <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{uri}}{{media.file}}" alt="{{media.title}}"></div>
           <div class="thumbnail" ng-show="media.url"><img ng-src="{{media.url}}" /></div>
       </div>
       <div ng-if="media.type === 'video'">

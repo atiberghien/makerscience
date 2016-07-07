@@ -4,10 +4,16 @@
   module = angular.module('commons.directives.thumb', []);
 
   module.directive('ngThumb', [
-    '$window', function($window) {
+    '$window', 'GalleryService', function($window, GalleryService) {
       var helper;
       helper = {
-        support: !!($window.FileReader && $window.CanvasRenderingContext2D)
+        support: !!($window.FileReader && $window.CanvasRenderingContext2D),
+        isFile: function(item) {
+          return angular.isObject(item) && item instanceof $window.File;
+        },
+        isImage: function(file) {
+          return GalleryService.isTypeImage(file.type);
+        }
       };
       return {
         restrict: 'E',
@@ -38,9 +44,21 @@
             return img.src = event.target.result;
           };
           scope.$watch('params', function() {
+            if (!helper.isFile(scope.params.file)) {
+              return;
+            }
+            if (!helper.isImage(scope.params.file)) {
+              return;
+            }
             return reader.readAsDataURL(scope.params.file);
           });
           return element.bind('change', function(changeEvent) {
+            if (!helper.isFile(scope.params.file)) {
+              return;
+            }
+            if (!helper.isImage(scope.params.file)) {
+              return;
+            }
             return reader.readAsDataURL(scope.params.file);
           });
         }

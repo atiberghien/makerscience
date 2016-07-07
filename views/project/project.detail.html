@@ -29,8 +29,7 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-show="projectsheet.base_projectsheet.cover.file" ng-src="{{ config.media_uri }}{{ projectsheet.base_projectsheet.cover.file }}" alt="{{projectsheet.base_projectsheet.cover.title}}">
-                        <img ng-show="projectsheet.base_projectsheet.cover.url" ng-src="{{ projectsheet.base_projectsheet.cover.url }}" alt="{{projectsheet.base_projectsheet.cover.title}}">
+                        <img ng-src="{{coverURL}}" alt="Projet image">
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
                                 <button ng-click="openGallery(projectsheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
@@ -42,23 +41,6 @@
 
                         <div class="side-header">
                             <ng-include src="'/views/block/project_tags_widget.html'"></ng-include>
-
-                            <div class="editable">
-                                <div class="edit-buttons" ng-show="editable">
-                                    <button ng-click="WIPBtnForm.$show()" ng-hide="WIPBtnForm.$visible">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </div>
-                                <p editable-select="projectsheet.parent.progress.resource_uri"
-                                e-ng-options="progress.value as progress.text for progress in progressRange"
-                                    e-form="WIPBtnForm"
-                                    onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'progress', $data);">
-                                    <span ng-if="projectsheet.parent.progress">
-                                        <span class="fa fa-flag-checkered"></span>
-                                        État d'avancement : {{showProjectProgress()}}
-                                    </span>
-                                </p>
-                            </div>
 
                             <div class="editable">
                                 <div class="edit-buttons" ng-show="editable">
@@ -266,7 +248,7 @@
                 <community-project object-type-name="makerscienceproject" object-id="objectId" ng-if="objectId"></community-project>
                 <comments object-type-name="makerscienceproject" object-id="objectId" ng-if="objectId"></comments>
                 <ng-include src="'/views/block/popularity.html'"></ng-include>
-                <report-abuse></report-abuse>
+                <report-abuse-button></report-abuse-button>
             </div><!-- #sidebar -->
 
         </div><!-- .col-md-4 -->

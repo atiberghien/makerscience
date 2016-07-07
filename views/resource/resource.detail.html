@@ -29,8 +29,7 @@
 
                 <div class="row">
                     <div class="col-md-8" >
-                        <img ng-show="resourcesheet.base_projectsheet.cover.file" ng-src="{{ config.media_uri }}{{ resourcesheet.base_projectsheet.cover.file }}" alt="{{resourcesheet.base_projectsheet.cover.title}}">
-                        <img ng-show="resourcesheet.base_projectsheet.cover.url" ng-src="{{ resourcesheet.base_projectsheet.cover.url }}" alt="{{resourcesheet.base_projectsheet.cover.title}}">
+                        <img ng-src="{{coverURL}}" alt="Ressources image" />
                         <div class="editable" ng-show="editable" style="padding-top:inherit">
                             <div class="edit-buttons edit-cover-image">
                                 <button ng-click="openCover(resourcesheet.base_projectsheet)"><span class="glyphicon glyphicon-camera"></span></button>
@@ -43,35 +42,6 @@
                         <div class="side-header">
                             <ng-include src="'/views/block/resource_tags_widget.html'"></ng-include>
 
-                            <div class="editable">
-                                <div class="edit-buttons" ng-show="editable">
-                                    <button ng-click="DurationBtnForm.$show()" ng-hide="DurationBtnForm.$visible">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </div>
-                                <p editable-text="resourcesheet.duration"
-                                    e-form="DurationBtnForm"
-                                    onbeforesave="updateMakerScienceResourceSheet('MakerScienceResource', resourcesheet.id , 'duration', $data)">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                    <span ng-if="resourcesheet.duration">Durée de mise en oeuvre : {{projectsheet.duration}}</span>
-                                    <span ng-if="!resourcesheet.duration">Durée de mise en oeuvre non renseignée</span>
-                                </p>
-                            </div>
-
-                            <div class="editable">
-                                <div class="edit-buttons" ng-show="editable">
-                                    <button ng-click="WebsiteBtnForm.$show()" ng-hide="WebsiteBtnForm.$visible">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                </div>
-                                <p editable-text="resourcesheet.parent.website"
-                                    e-form="WebsiteBtnForm"
-                                    onbeforesave="updateProjectSheet('Project', resourcesheet.parent.id , 'website', $data)">
-                                    <span class="glyphicon glyphicon-globe"></span>
-                                    <a ng-if="resourcesheet.parent.website" href="{{resourcesheet.parent.website}}" target="_blank">{{resourcesheet.parent.website}}</a>
-                                    <span ng-if="!resourcesheet.parent.website">Site web non renseignée</span>
-                                </p>
-                            </div>
                             <div class="since">
                                 <span>Crée le {{resourcesheet.parent.created_on | date:'dd/MM/yyyy'}}<span> /
                                 <span>Mis à jour le {{resourcesheet.modified | date:'dd/MM/yyyy'}}<span>
@@ -95,7 +65,7 @@
             <div id="content">
 
                 <tabset class="nav-tabs-resource">
-                    <tab heading="Expérience">
+                    <tab heading="Ressources">
                         <section class="medias">
                             <div class="edit-buttons" ng-click="openGallery(projectsheet.base_projectsheet)" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
@@ -111,10 +81,10 @@
                         </section>
 
                         <button ng-show="editable" class="btn btn-primary btn-edit" ng-click="openGallery(projectsheet.base_projectsheet)">
-                          <span class="glyphicon glyphicon-pencil"></span> Ajouter / supprimer des médias
+                          <span class="glyphicon glyphicon-pencil"></span> Ajouter / supprimer des ressources
                         </button>
                     </tab>
-                    <tab heading="Discussions ({{resourcesheet.linked_makersciencepost.length}})">
+                    <tab ng-show="{{resourcesheet.linked_makersciencepost.length}}" heading="Discussions ({{resourcesheet.linked_makersciencepost.length}})">
                         <section>
                             <div ng-repeat="post in resourcesheet.linked_makersciencepost">
                                 <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
@@ -131,7 +101,7 @@
                 <community-resource object-type-name="makerscienceresource" object-id="objectId" ng-if="objectId"></community-resource>
                 <comments object-type-name="makerscienceresource" object-id="objectId" ng-if="objectId"></comments>
                 <ng-include src="'/views/block/popularity.html'"></ng-include>
-                <report-abuse></report-abuse>
+                <report-abuse-button></report-abuse-button>
 
             </div><!-- #sidebar -->
 

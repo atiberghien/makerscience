@@ -96,6 +96,7 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                         ProjectSheet.one(resourcesheetResult.id).patch({cover: res.resource_uri})
                       )
 
+
                 # if no photos to upload, directly go to new project sheet
                 if _.size($scope.medias) == 0
                     $scope.fake_progress = 0

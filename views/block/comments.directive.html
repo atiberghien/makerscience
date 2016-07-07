@@ -24,8 +24,8 @@
                         <ul class="dropdown-menu" role="menu">
                             <!-- <li><a href="">Modifier</a></li> -->
                             <li ng-if="isCommentAuthor(comment)"><a href="" ng-click="removeComment($index)">Supprimer</a></li>
-                            <li ng-controller="ReportAbuseCtrl">
-                                <a href="" ng-click="showReportAbusePopup(location.protocol() + '://' + location.host() + '' + location.path())">Signaler un abus</a>
+                            <li>
+                                <a report-abuse href="" ng-click="showReportAbusePopup(location.protocol() + '://' + location.host() + '' + location.path())">Signaler un abus</a>
                             </li>
                         </ul>
                     </div>

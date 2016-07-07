@@ -1,19 +1,23 @@
 module = angular.module('commons.gallery.controllers', [])
 
-module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, ProjectSheet, BucketFile) ->
+module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, ProjectSheet, BucketFile, ProjectService) ->
     $scope.config = config
     $scope.newMedia = GalleryService.initMediaProject('image')
 
     $scope.coverId = if $scope.projectsheet.cover then $scope.projectsheet.cover.id else null
     GalleryService.setCoverId($scope.coverId)
+    console.log $scope.coverId
 
     $scope.getMediasToShow = () ->
+        console.log 'getMediasToShow'
         $scope.mediasToShow = if $scope.projectsheet.bucket then $scope.medias.concat($scope.projectsheet.bucket.files) else $scope.medias
 
     $scope.getMediasToShow()
 
     $scope.changeTab = (type) ->
         $scope.newMedia.type = type
+        $scope.newMedia.file = null
+        $scope.newMedia.url = null
 
     $scope.toggleCoverCandidate = (media) ->
         $scope.coverId = GalleryService.setCoverId(media.id)
@@ -37,19 +41,21 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
         $scope.mediaForm.$setPristine()
 
     $scope.remove = (media) ->
-
         mediaIndex = $scope.medias.indexOf(media)
+
         if $scope.coverId == media.id
             GalleryService.setCoverId(null)
 
         if mediaIndex != -1
             $scope.medias.splice(mediaIndex, 1)
+            $scope.getMediasToShow()
 
         else
             if $scope.projectsheet.bucket
                 BucketFile.one(media.id).remove().then(->
                     fileBucketIndex = $scope.projectsheet.bucket.files.indexOf(media)
                     $scope.projectsheet.bucket.files.splice(fileBucketIndex, 1)
+                    $scope.getMediasToShow()
                 )
 )
 
@@ -95,12 +101,14 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
 
         if mediaIndex != -1
             $scope.medias.splice(mediaIndex, 1)
+            $scope.getFilterMedias()
 
         else
             if $scope.projectsheet.bucket
                 BucketFile.one(media.id).remove().then(->
                     fileBucketIndex = $scope.projectsheet.bucket.files.indexOf(media)
                     $scope.projectsheet.bucket.files.splice(fileBucketIndex, 1)
+                    $scope.getFilterMedias()
                 )
 
         $scope.getFilterMedias()
@@ -111,7 +119,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, project
     $scope.projectsheet = projectsheet
     $scope.hideControls = false
     $scope.medias = medias
-    console.log $scope.config
+
     $scope.ok = ->
         if $scope.medias.length
             promises = []
@@ -121,7 +129,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, project
                 promises.push(promise)
 
                 promise.then((res) ->
-                    if $scope.coverId != null
+                    if $scope.coverId == media.id
                         ProjectSheet.one($scope.projectsheet.id).patch({cover: res.resource_uri})
                   )
             )
@@ -132,7 +140,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, project
                 console.error err
             )
         else
-            $modalInstance.dismiss()
+            $modalInstance.close($scope.projectsheet)
 
     $scope.cancel = ->
         $modalInstance.dismiss('cancel')

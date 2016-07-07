@@ -61,15 +61,15 @@
                                     <tag-auto-complete model="formatsTags" placeholder="Mot-clé"></tag-auto-complete>
                                     <p ng-show="newResourceForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
 
-                                    <label>Image en une</label>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <ng-thumb class="thumbnail" ng-if="resourceCover.file" params="{ file: resourceCover.file, height: 100 }"></ng-thumb>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <inputfile change-cover="changeCover()" id="resourceCover-image" fileread="resourceCover.file" label="resourceCover.file.name || 'Parcourir...'"></inputfile>
-                                            <p ng-show="newResourceForm.$error.imageFileFormat" class="help-block">Format non valide, vérifiez le format de l'image.</p>
-                                        </div>
+                                    <label>Image en une (taille conseillée : 710px x 393px)</label>
+                                    <div class="cover-image">
+                                      <div class="thumbnail-container">
+                                          <ng-thumb class="thumbnail" ng-if="resourceCover.file" params="{ file: resourceCover.file, height: 100 }"></ng-thumb>
+                                      </div>
+                                      <div class="inputfile-container">
+                                          <inputfile change-cover="changeCover()" id="resourceCover-image" fileread="resourceCover.file" label="resourceCover.file.name || 'Parcourir...'"></inputfile>
+                                          <p ng-show="newResourceForm.$error.imageFileFormat" class="help-block">Format non valide, vérifiez le format de l'image.</p>
+                                      </div>
                                     </div>
 
                                </fieldset>

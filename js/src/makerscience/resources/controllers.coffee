@@ -143,6 +143,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
             )
 
 
+
         $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
             resources = {
               resourceName: resourceName
@@ -152,9 +153,13 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
             }
             ProjectService.updateProjectSheet(resources, $scope.projectsheet)
 
-        ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet)
+        coverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
+        $scope.coverURL = ProjectService.fetchCoverURL(coverId)
+
         $scope.$on('cover-updated', ()->
-            ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet)
+            newCoverId = GalleryService.coverId
+            if newCoverId != coverId
+                $scope.coverURL = ProjectService.fetchCoverURL(newCoverId)
         )
 
         $scope.similars = []

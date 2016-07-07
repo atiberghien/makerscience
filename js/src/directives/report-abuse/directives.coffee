@@ -1,6 +1,6 @@
 module = angular.module('commons.directives.reportabuse', [])
 
-module.directive('reportAbuse', ($modal) ->
+module.directive('reportAbuseButton', ($modal) ->
     return {
       restrict: 'E'
       scope: true
@@ -9,6 +9,24 @@ module.directive('reportAbuse', ($modal) ->
             <i class="fa fa-exclamation-circle"></i> Signaler un contenu abusif
         </a>
       '''
+      link: (scope, element, attributes) ->
+          scope.showReportAbusePopup = (currentLocation) ->
+            modalInstance = $modal.open(
+                templateUrl: '/views/base/abuse.html'
+                controller: 'ReportAbuseFormInstanceCtrl'
+                resolve:
+                    currentLocation : () ->
+                        return currentLocation
+            )
+
+    }
+
+)
+
+module.directive('reportAbuse', ($modal) ->
+    return {
+      restrict: 'A'
+      scope: true
       link: (scope, element, attributes) ->
           scope.showReportAbusePopup = (currentLocation) ->
             modalInstance = $modal.open(
