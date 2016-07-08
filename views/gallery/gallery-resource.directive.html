@@ -7,7 +7,7 @@
   check-form>
     <label>Sélectionner le type de ressource à ajouter <span class="required">*</span></label>
     <tabset>
-        <tab select="newMedia.type = 'document'">
+        <tab select="changeTab('document')">
             <tab-heading>
                 <span class="glyphicon glyphicon-file"></span>
                 Document
@@ -22,8 +22,8 @@
                 </div>
             </div>
             <label for="title-document">Titre <span class="required">*</span></label>
-            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" />
-            <p ng-show="mediaForm.mediaTitle.$pristine && submitted" class="help-block">Titre requis</p>
+            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" ng-required="newMedia.type === 'document'" />
+            <p ng-show="mediaForm.mediaTitle.$pristine && submitted && newMedia.type === 'document'" class="help-block">Titre requis</p>
 
             <label for="description-document">Description</label>
             <textarea
@@ -67,7 +67,7 @@
             </div>
 
         </tab>
-        <tab select="newMedia.type = 'link'">
+        <tab select="changeTab('link')">
             <tab-heading>
                 <span class="glyphicon glyphicon-link"></span>
                 Site web
@@ -78,8 +78,8 @@
             <p ng-show="mediaForm.mediaUrl.$error.format" class="help-block">Url non valide, vérifier l'adresse du lien</p>
 
             <label for="title-document">Titre <span class="required">*</span></label>
-            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" />
-            <p ng-show="mediaForm.mediaTitle.$pristine && submitted" class="help-block">Titre requis</p>
+            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" ng-required="newMedia.type === 'link'" />
+            <p ng-show="mediaForm.mediaTitle.$pristine && submitted && newMedia.type === 'link'" class="help-block">Titre requis</p>
 
             <label for="description-document">Description</label>
             <textarea
@@ -122,7 +122,7 @@
                 </textarea>
             </div>
         </tab>
-        <tab select="newMedia.type = 'experience'">
+        <tab select="changeTab('experience')">
             <tab-heading>
                 <span class="glyphicon glyphicon-list-alt"></span>
                 Expérience

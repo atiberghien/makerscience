@@ -138,12 +138,20 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.projectsheet = makerScienceProjectResult.objects[0]
         $scope.editable = $scope.projectsheet.can_edit
         $scope.objectId = $scope.projectsheet.id
-        console.log $scope.projectsheet
         hasPictures = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'image'})
         hasVideos = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'video'})
 
         $scope.hasPictures = if hasPictures == -1 then false else true
         $scope.hasVideos = if hasVideos == -1 then false else true
+
+        $scope.setMediasToShow = () ->
+            $scope.mediasToShow = []
+            angular.forEach($scope.projectsheet.base_projectsheet.bucket.files, (media, index) ->
+                if media.type == 'document' || media.type == 'link'
+                    $scope.mediasToShow.push(media)
+              )
+
+        $scope.setMediasToShow()
 
         $scope.openGallery = (projectsheet) ->
             modalInstance = $modal.open(
@@ -172,15 +180,18 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
             }
             ProjectService.updateProjectSheet(resources, $scope.projectsheet)
 
-        coverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
-        $scope.coverURL = ProjectService.fetchCoverURL(coverId)
+        $scope.coverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
+        $scope.coverURL = ProjectService.fetchCoverURL($scope.coverId)
 
         $scope.$on('cover-updated', ()->
-            newCoverId = GalleryService.coverId
-            if newCoverId != coverId
-                $scope.coverURL = ProjectService.fetchCoverURL(newCoverId)
             MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
                 $scope.projectsheet = makerScienceProjectResult.objects[0]
+
+                newCoverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
+
+                if newCoverId != GalleryService.coverId
+                  $scope.coverURL = ProjectService.fetchCoverURL(newCoverId)
+                $scope.setMediasToShow()
             )
         )
 

@@ -21,10 +21,6 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
 
     $scope.hideControls = false
 
-    # $scope.$watch('resourceCover', () ->
-    #     if $scope.resourceCover.file
-    #         $scope.newResourceForm.$setValidity('imageFileFormat', GalleryService.isTypeImage($scope.resourceCover.file.type))
-    # )
     $scope.changeCover = () ->
         $scope.$apply(() ->
             $scope.newResourceForm.$setValidity('imageFileFormat', true)
@@ -34,16 +30,15 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                 console.log $scope.newResourceForm
         )
 
-    $scope.saveMakerscienceResource = (formIsValid) ->
-        console.log $scope.newResourceForm
-        if !formIsValid
+    $scope.saveMakerscienceResource = (newResourceForm) ->
+        isValid = !newResourceForm.resourceName.$error.required && !newResourceForm.projectBaseline.$error.required
+        if !isValid
             console.log(" Form invalid !")
             $scope.hideControls = false
             return false
         else
             console.log("submitting form")
 
-        console.log $scope.projectsheet
         FormService.save($scope.projectsheet).then((resourcesheetResult) ->
             makerscienceResourceData =
                 parent : resourcesheetResult.project.resource_uri

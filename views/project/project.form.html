@@ -20,7 +20,7 @@
                 <form name="newProjectForm"
                       novalidate
                       ng-init="submitted=false"
-                      ng-submit="saveMakerscienceProject(newProjectForm.$valid)"
+                      ng-submit="saveMakerscienceProject(newProjectForm)"
                       ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }"
                       class="project-form">
                     <div class="row">
@@ -71,7 +71,7 @@
                                             e-rows="4">
                                         </textarea>
 
-                                        <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet  <span class="required">*</span></label>
+                                        <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet</label>
                                         <input type="date" ng-model="projectsheet.project.end_date" />
 
                                         <label>Localisation <span class="required">*</span></label>
@@ -81,15 +81,15 @@
                                                required/>
                                         <p ng-show="newProjectForm.localisation.$invalid && submitted" class="help-block">Localisation requise</p>
 
-                                        <label>Thématiques <span class="required">*</span></label>
+                                        <label>Thématiques</label>
                                         <tag-auto-complete model="themesTags" placeholder="Mot-clé"></tag-auto-complete>
                                         <p ng-show="newProjectForm.thematiques.$invalid && submitted" class="help-block">Thematiques requise</p>
 
-                                        <label>Publics visés <span class="required">*</span></label>
+                                        <label>Publics visés</label>
                                         <tag-auto-complete model="targetsTags" placeholder="Mot-clé"></tag-auto-complete>
                                         <p ng-show="newProjectForm.target.$invalid && submitted" class="help-block">Publics visés requis</p>
 
-                                        <label>Formats <span class="required">*</span></label>
+                                        <label>Formats</label>
                                         <tag-auto-complete model="formatsTags" placeholder="Mot-clé"></tag-auto-complete>
                                         <p ng-show="newProjectForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
                                    </fieldset>

@@ -160,27 +160,8 @@
                             </tab>
                         </tabset>
 
-                        <ul class="gallery-links">
-                            <li ng-repeat="media in projectsheet.base_projectsheet.bucket.files | filter: {type: 'document' || 'link'}">
-                                <!-- <div class="thumbnail" ng-show="media.bucket" ng-thumb="{ file: media.file, height: 100 }"></div>
-                                <div class="thumbnail" ng-show="media.type === 'image' && !media.bucket"><img ng-src="{{media.url}}" /></div> -->
-                                <a ng-show="media.file" class="filename" href="{{ config.media_uri }}{{ media.file }}" title="{{media.title}}" target="_blank">
-                                  <span class="icon" ng-switch on="media.type">
-                                      <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                                      <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                                  </span>
-                                  <span class="title">{{media.title}}</span>
-                                  <span class="url">{{media.url}}</span>
-                                </a>
-                                <a ng-show="media.url" class="filename" href="{{media.url}}">
-                                  <span class="icon" ng-switch on="media.type">
-                                      <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
-                                      <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
-                                  </span>
-                                  {{media.title}}
-                                </a>
-                            </li>
-                        </ul>
+                        <gallery-list uri="config.media_uri" medias="mediasToShow"></gallery-list>
+
 
                         <button ng-show="editable" class="btn btn-primary btn-edit" ng-click="openGallery(projectsheet.base_projectsheet)">
                           <span class="glyphicon glyphicon-pencil"></span> Ajouter / supprimer des médias

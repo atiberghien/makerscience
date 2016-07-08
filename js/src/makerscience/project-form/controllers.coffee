@@ -57,13 +57,17 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state
     $scope.delNeed = (index) ->
         $scope.needs.splice(index, 1)
 
-    $scope.saveMakerscienceProject = (formIsValid) ->
-        if !formIsValid
-            console.log(" Form invalid !")
-            $scope.hideControls = false
-            return false
-        else
-            console.log("submitting form")
+    $scope.saveMakerscienceProject = (form) ->
+        requiredFields = [
+          'projectName'
+          'projectBaseline'
+          'localisation'
+        ]
+
+        for field in requiredFields
+            if form[field].$error.required
+                $scope.hideControls = false
+                return false
 
         FormService.save($scope.projectsheet).then((projectsheetResult) ->
             angular.forEach($scope.QAItems, (q_a) ->

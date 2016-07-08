@@ -71,10 +71,10 @@
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
                             <h3 ng-show="filteredByAuthor.length">Ressources dont je suis l'auteur ({{filteredByAuthor.length}})</h3>
-                            <gallery-list medias="filteredByAuthor"></gallery-list>
+                            <gallery-list medias="filteredByAuthor" uri="config.media_uri"></gallery-list>
 
                             <h3 ng-show="filteredByNotAuthor.length">Ressources récupérées que je souhaite partager ({{filteredByNotAuthor.length}})</h3>
-                            <gallery-list medias="filteredByNotAuthor"></gallery-list>
+                            <gallery-list medias="filteredByNotAuthor" uri="config.media_uri"></gallery-list>
 
                             <h3 ng-show="filteredByExperience.length">Mes expériences ({{filteredByExperience.length}})</h3>
                             <gallery-experiences-list medias="filteredByExperience"></gallery-experiences-list>

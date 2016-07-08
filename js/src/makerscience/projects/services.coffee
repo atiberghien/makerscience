@@ -4,6 +4,7 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
     return {
 
         fetchCoverURL: (coverId) ->
+            console.log coverId
             if coverId
                 return config.media_uri + '/bucket/file/' + coverId + '/thumbnail/?dim=710x390&border=true'
             return "/img/default_project.jpg"

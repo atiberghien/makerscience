@@ -6,10 +6,8 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
 
     $scope.coverId = if $scope.projectsheet.cover then $scope.projectsheet.cover.id else null
     GalleryService.setCoverId($scope.coverId)
-    console.log $scope.coverId
 
     $scope.getMediasToShow = () ->
-        console.log 'getMediasToShow'
         $scope.mediasToShow = if $scope.projectsheet.bucket then $scope.medias.concat($scope.projectsheet.bucket.files) else $scope.medias
 
     $scope.getMediasToShow()
@@ -84,6 +82,7 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
 
     $scope.changeTab = (type) ->
         $scope.newMedia = GalleryService.initMediaResource(type, $scope.user)
+        $scope.submitted = false
         if type == 'experience'
             $scope.newMedia.experience = {}
 

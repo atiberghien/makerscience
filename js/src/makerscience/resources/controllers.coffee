@@ -140,9 +140,9 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
             )
             modalInstance.result.then((result)->
                 $scope.projectsheet.base_projectsheet.cover = result
+                coverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
+                $scope.coverURL = ProjectService.fetchCoverURL(coverId)
             )
-
-
 
         $scope.updateProjectSheet = (resourceName, resourceId, fieldName, data) ->
             resources = {
@@ -225,11 +225,13 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 module.controller("CoverResourceSheetCtrl", ($scope, $modalInstance, ProjectService, ProjectSheet, base_projectsheet, GalleryService) ->
         $scope.resourceCover = {type: 'cover'}
         $scope.ok = (cover) ->
-            if $scope.resourceCover
+            if $scope.resourceCover.file
                 ProjectService.uploadMedia($scope.resourceCover, base_projectsheet.bucket.id, base_projectsheet.id).then((res) ->
                     ProjectSheet.one(base_projectsheet.id).patch({cover: res.resource_uri})
                     $modalInstance.close(res)
                   )
+            else
+                $modalInstance.close(null)
 
         $scope.close = ->
             $modalInstance.dismiss('cancel')
