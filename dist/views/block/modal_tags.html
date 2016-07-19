@@ -1,0 +1,22 @@
+<div class="modal-header">
+    <h3 class="modal-title">Tous les tags</h3>
+</div>
+<div class="modal-body modal-gallery">
+    <div ng-show="editableTag==true" ng-controller="TagAutoCompleteCtrl">
+        <tags-input ng-model="preparedTags"
+                    placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)"
+                    on-tag-added="$parent.addTag(tagType, $tag)"
+                    on-tag-removed="$parent.removeTag($tag)">
+                    <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
+        </tags-input>
+    </div>
+    <div ng-show="editableTag==false">
+        <ul class="tags tags-project">
+            <li ng-repeat="tag in preparedTags"><a ui-sref="tag({slug:tag.slug})">{{tag.text}}</a></li>
+        </ul>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

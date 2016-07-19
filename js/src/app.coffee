@@ -1,16 +1,21 @@
-angular.module('commons.catalog', ['commons.catalog.controllers', 'commons.catalog.services'])
 angular.module('commons.accounts', ['commons.accounts.services', 'commons.accounts.controllers'])
-angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services'])
+angular.module('commons.ucomment', ['commons.ucomment.controllers', 'commons.ucomment.services', 'commons.ucomment.directives'])
 angular.module('commons.megafon', ['commons.megafon.controllers', 'commons.megafon.services'])
 angular.module('commons.starlet', ['commons.starlet.controllers', 'commons.starlet.services'])
 angular.module('commons.scout', ['commons.scout.services'])
-angular.module('makerscience.catalog', ['makerscience.catalog.controllers.project', 'makerscience.catalog.controllers.resource', 'makerscience.catalog.services', 'makerscience.catalog.directives'])
+angular.module('commons.form', ['commons.form.services'])
+angular.module('commons.community', ['commons.community.controllers', 'commons.community.directives'])
+angular.module('commons.gallery', ['commons.gallery.services', 'commons.gallery.controllers', 'commons.gallery.directives'])
+angular.module('commons.tags', ['commons.tags.directives', 'commons.tags.controllers', 'commons.tags.services'])
+angular.module('commons.directives', ['commons.directives.reportabuse' ,'commons.directives.inputfile', 'commons.directives.thumb', 'commons.directives.socialshare', 'commons.directives.cover'])
+angular.module('makerscience.projects', ['makerscience.projects.controllers', 'makerscience.projects.services'])
+angular.module('makerscience.resources', ['makerscience.resources.controllers'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services'])
-
-angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.scout', 'commons.ucomment', 'makerscience.catalog', 'makerscience.profile', "makerscience.forum",
+angular.module('makerscience', ['commons.accounts', 'commons.community', 'commons.gallery', 'commons.tags', 'commons.scout', 'commons.ucomment', 'commons.directives', 'commons.form',
+                                'makerscience.projects', 'makerscience.resources', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'ui.unique', 'xeditable', 'angularFileUpload',
                                 'ngSanitize', 'ngTagsInput', 'angularMoment', 'leaflet-directive', "angucomplete-alt", "videosharing-embed"
@@ -18,6 +23,8 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
                                 'sticky', 'mentio', 'ui.tinymce', 'ngImgCrop', 'vcRecaptcha', 'infinite-scroll', 'angular-confirm'])
 
 # CORS
+
+.constant('Config', config)
 .config(($httpProvider) ->
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common["X-Requested-With"];
@@ -27,6 +34,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         RestangularProvider.setBaseUrl(config.rest_uri)
         RestangularProvider.setRequestSuffix('?format=json');
         # Tastypie patch
+        RestangularProvider.setMethodOverriders(["put", "patch"]);
         RestangularProvider.setResponseExtractor((response, operation, what, url) ->
                 newResponse = null;
 
@@ -83,29 +91,29 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('project',
                 url: '/p/'
                 abstract: true,
-                templateUrl : '/views/catalog/project.html'
+                templateUrl : '/views/project/project.html'
                 ncyBreadcrumb:
                     parent: 'home'
         )
         .state('project.list',
                 url: 'list',
-                templateUrl: '/views/catalog/project.list.html',
+                templateUrl: '/views/project/project.list.html',
                 controller : 'MakerScienceProjectListCtrl'
                 ncyBreadcrumb:
                     label: 'Projets'
         )
-        .state('project.new',
+        .state('project.form',
                 url: 'new',
-                templateUrl: '/views/catalog/project.new.html',
+                templateUrl: '/views/project/project.form.html',
+                controller : 'MakerScienceProjectSheetCreateCtrl'
                 ncyBreadcrumb:
                     label: 'Nouveau projet'
                     parent : 'project.list'
-                loginRequired : true
-
+                loginRequired : false
         )
         .state('project.detail',
                 url: ':slug',
-                templateUrl: '/views/catalog/project.detail.html',
+                templateUrl: '/views/project/project.detail.html',
                 controller : 'MakerScienceProjectSheetCtrl'
                 ncyBreadcrumb:
                     label: '{{projectsheet.parent.title}}'
@@ -114,20 +122,21 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         .state('resource',
                 url : '/r/',
                 abstract : true,
-                templateUrl : '/views/catalog/resource.html'
+                templateUrl : '/views/resource/resource.html'
                 controller : 'MakerScienceResourceListCtrl'
                 ncyBreadcrumb:
                     parent: 'home'
         )
         .state('resource.list',
                 url: 'list',
-                templateUrl: '/views/catalog/resource.list.html'
+                templateUrl: '/views/resource/resource.list.html'
                 ncyBreadcrumb:
                     label: 'Expériences'
         )
-        .state('resource.new',
+        .state('resource.form',
                 url: 'new',
-                templateUrl: '/views/catalog/resource.new.html'
+                templateUrl: '/views/resource/resource.form.html'
+                controller : 'MakerScienceResourceSheetCreateCtrl'
                 ncyBreadcrumb:
                     label: 'Nouvelle expérience'
                     parent : 'resource.list'
@@ -135,7 +144,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         )
         .state('resource.detail',
                 url: ':slug',
-                templateUrl: '/views/catalog/resource.detail.html'
+                templateUrl: '/views/resource/resource.detail.html'
                 controller: 'MakerScienceResourceSheetCtrl'
                 ncyBreadcrumb:
                     label: '{{projectsheet.parent.title}}'
@@ -275,6 +284,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         toolbar_items_size: 'small',
         language_url: "/js/tinymce_fr_FR.js",
         language: "fr_FR",
+        content_style: "p {color: #535353; font-size: 1.2em}",
     }
 
     $rootScope.tinyMceFullOptions = {
@@ -285,6 +295,7 @@ angular.module('makerscience', ['commons.catalog', 'commons.accounts', 'commons.
         toolbar_items_size: 'small',
         language_url: "/js/tinymce_fr_FR.js",
         language: "fr_FR",
+        content_style: "p {color: #535353; font-size: 1.2em}",
         style_formats: [
             {title: "Titre", items: [
                 {title: "Titre 1", format: "h1"},

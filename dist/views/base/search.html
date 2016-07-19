@@ -1,0 +1,11 @@
+<div ng-controller="MakerScienceSearchEveryWhereCtrl">
+    <input type="text" name="search" ng-model="globalQuery"  placeholder="Rechercher" ng-change="runAutoCompleteSearch()"/>
+    <button type="button" ui-sref="search({q:globalQuery})" ><span class="glyphicon glyphicon-search"></span></button>
+    <div class="search-results-dropdown" ng-show="globalProjects.length > 0 || globalResources.length > 0 || globalProfiles.length  > 0 || globalThreads.length > 0">
+        <ng-include src="'views/base/multiple_object_autocomplete_results.html'"></ng-include>
+        <h2 class="more clear">
+            <span class="glyphicon glyphicon-search"></span>
+            <a ui-sref="search({q:globalQuery})">Voir tout</a>
+        </h2>
+    </div>
+</div>

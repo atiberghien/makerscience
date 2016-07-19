@@ -1,0 +1,42 @@
+<section class="popularity popularity-{{parentColor}}">
+    <h3 ng-show="!enableVote">Popularité</h3>
+    <h3 ng-show="enableVote">Voter le projet</h3>
+
+    <ul class="actions">
+        <li><a href="" ng-click="enableVote=!enableVote" ng-show="!enableVote"><span class="glyphicon glyphicon-star-empty"></span>Voter</a></li>
+        <li><button class="solo" ng-click="enableVote = false" ng-show="enableVote">OK</button></li>
+    </ul>
+
+    <table ng-show="!enableVote" >
+        <tbody>
+            <tr ng-repeat="n in [1, 2, 3]">
+                <td>{{voteItems[objectTypeName+'_vote_'+n].name}}</td>
+                <td class="percent">
+                    <span ng-if="voteItems[objectTypeName+'_vote_'+n].votersCount == 0">
+                        <span style="width: 0%"></span>
+                    </span>
+                    <span ng-if="voteItems[objectTypeName+'_vote_'+n].votersCount > 0">
+                        <span style="width: {{(voteItems[objectTypeName+'_vote_'+n].score/(voteItems[objectTypeName+'_vote_'+n].votersCount*5))*100}}%"></span>
+                    </span>
+                </td>
+                <td>
+                    {{voteItems[objectTypeName+'_vote_'+n].score}} <small>pt</small>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div ng-show="enableVote">
+        <div ng-repeat="n in [1, 2, 3]">
+            <label for="rating-original">{{voteItems[objectTypeName+'_vote_'+n].name}}</label>
+            <rating ng-show="savedProfileVotes[objectTypeName+'_vote_'+n] == null" id="rating-original" ng-model="currentScore[objectTypeName+'_vote_'+n]"
+                                         max="5"
+                                         on-leave="overStar = null"
+                                         ng-click="saveMakerScienceProjectVote(objectTypeName+'_vote_'+n ,currentScore[objectTypeName+'_vote_'+n])"></rating>
+            <rating ng-show="savedProfileVotes[objectTypeName+'_vote_'+n] != null" id="rating-original" ng-model="savedProfileVotes[objectTypeName+'_vote_'+n].score"
+                                      max="5"
+                                      on-leave="overStar = null"
+                                      ng-click="updateVote(objectTypeName+'_vote_'+n)"></rating>
+        </div>
+    </div>
+</section>

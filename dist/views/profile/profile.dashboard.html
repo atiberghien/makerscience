@@ -1,0 +1,128 @@
+<div id="intro" class="intro-dashboard">
+    <div class="container">
+        <div class="intro">
+            <div class="row">
+
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="user">
+                        <ng-include src="'/views/profile/block/avatar.html'"></ng-include>
+                        <h4>{{profile.full_name}}</h4>
+                        <p><span class="glyphicon glyphicon-lock"></span> Espace personel</p>
+
+                    </div>
+
+                </div>
+            </div><!-- .row -->
+        </div><!-- .intro -->
+    </div><!-- .container -->
+</div><!-- #intro -->
+
+<div class="row container">
+
+    <div class="col-md-12">
+
+        <div id="content" class="content-dashboard">
+
+            <tabset class="nav-tabs-project">
+                <tab heading="Mes notifications">
+                    <ul class="activity" infinite-scroll="addMoreNotifications()">
+                        <li class="notification" ng-class="{'notification-new': notif.unread == true}" ng-repeat="notif in infiniteScrollNotifications">
+                            <span class="glyphicon glyphicon-bell"></span>
+                            <p ng-bind-html="trustAsHtml(notif.description)"></p>
+                            <span am-time-ago="notif.timestamp"></span>
+                        </li>
+                    </ul>
+                </tab>
+                <tab heading="Activités de mon réseau">
+                    <ul class="activity" infinite-scroll="addMoreActivities()" >
+                        <li class="activity-member" ng-repeat="activity in infiniteScrollActivities | orderBy:'-created_on'">
+                            <p ng-bind-html="trustAsHtml(activity.description)"></p>
+                            <span am-time-ago="activity.created_on"></span>
+                        </li>
+                    </ul>
+                </tab>
+                <tab heading="Mes paramètres">
+
+                    <h2>Mon compte</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <label for="name">Nom</label>
+                            <input type="text" name="fullname" id="name" ng-model="user.last_name"/>
+
+                            <label for="name">Prénom</label>
+                            <input type="text" name="fullname" id="name" ng-model="user.first_name"/>
+
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" ng-model="user.email"/>
+
+                            <button class="button delete-account" ng-click="updateMakerScienceUserInfo()">Enregistrer</button>
+
+                            <fieldset class="notifications">
+                                <h3><span class="fa fa-inbox"></span>Notifications mail</h3>
+                                <p>Souhaitez-vous recevoir un résumé de vos notifications par email :</p>
+
+                                <label><input type="radio" ng-model="user.notifFreq" value="NONE" ng-change="updateNotifFrequency('NONE')"/>Jamais</label>
+                                <label><input type="radio" ng-model="user.notifFreq" value="DAILY" ng-change="updateNotifFrequency('DAILY')" />1 fois par jour</label>
+                                <label><input type="radio" ng-model="user.notifFreq" value="WEEKLY" ng-change="updateNotifFrequency('WEEKLY')"/>1 fois par semaine</label>
+                            </fieldset>
+
+                            <fieldset class="notifications">
+                                <h3><span class="fa fa-envelope"></span>Qui peut me joindre ?</h3>
+                                <!-- <p>Souhaitez-vous recevoir un résumé de vos notifications par email :</p> -->
+
+                                <label><input type="radio" ng-model="user.authorizedContact" value="NONE" ng-change="updateAuthorizedContact('NONE')"/>Personne</label>
+                                <label><input type="radio" ng-model="user.authorizedContact" value="ALL" ng-change="updateAuthorizedContact('ALL')" />Tout le monde</label>
+                                <label><input type="radio" ng-model="user.authorizedContact" value="FOLLOWED" ng-change="updateAuthorizedContact('FOLLOWED')"/>Les membres que je suis</label>
+                            </fieldset>
+
+                        </div>
+                        <div class="col-md-6">
+                            <fieldset class="delete-account">
+                                <h3><i class="fa fa-exclamation-circle"></i> La suppression du compte est irréversible</h3>
+                                <button class="button delete-account"
+                                        ng-click="deleteProfile()"
+                                        confirm="{{profile.full_name}}, êtes vous sûr de vouloir supprimer votre compte ?"
+                                        confirm-settings="{size: 'sm'}">Supprimer mon compte</button>
+                            </fieldset>
+                            <fieldset class="change-password">
+                                <h3>Changement de mot de passe</h3>
+                                <label for="password">Votre mot de passe</label>
+                                <input type="password" name="password" id="password" ng-model="user.passwordReset"/>
+
+                                <label for="passwordconfirmation">Confirmation de votre mot de passe</label>
+                                <input type="password" name="passwordconfirmation" id="passwordconfirmation" ng-model="user.passwordReset2"/>
+
+                                <span ng-show="passwordResetFail">Les deux mots de passe doivent être identiques.</span>
+                                <span ng-show="passwordResetsuccess">Votre mot de passe a bien été ré-initialisé</span>
+
+                                <button class="button delete-account" ng-click="changeMakerScienceProfilePassword()">Enregistrer le nouveau mot de passe</button>
+                            </fieldset>
+                            <!-- <h3 class="confidentiality">Confidentialité</h3>
+                            <ul class="confidentiality">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                                <li>Mauris vel semper nisi, ullamcorper condimentum metus.</li>
+                                <li>Ut sagittis fermentum tellus in consectetur.</li>
+                            </ul> -->
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+
+        </div><!-- .content-member -->
+
+    </div><!-- .col-md-12 -->
+
+</div><!-- .row .container -->
+
+<!-- <div class="row container">
+    <div class="col-md-8">
+        <div class="badges">
+            <h3>Mes Badges</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="bloc bloc-solo">
+        </div>
+    </div>
+</div> -->

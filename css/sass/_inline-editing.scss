@@ -203,6 +203,15 @@ div.edit-buttons {
 	}
 }
 
+.btn-edit {
+	background: $color-dark-grey;
+	border-color: $color-dark-grey;
+	&:hover {
+		background-color: $color-red;
+		border-color: $color-red;
+	}
+}
+
 div.editable-controls {
 	textarea {
 		display: block;
@@ -252,7 +261,7 @@ div.editable-controls {
 			text-align: justify;
 			ul {
 				list-style : initial ;
-				margin-left: 15px;	
+				margin-left: 15px;
 			}
 			ol {
 				list-style-type: decimal;

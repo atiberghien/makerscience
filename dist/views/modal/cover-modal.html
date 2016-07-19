@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">Changer l'image à la une</h3>
+</div>
+<div class="modal-body modal-gallery">
+    <ng-form
+        novalidate
+        ng-init="submitted=false"
+        name="coverForm"
+        class="cover-form"
+        ng-class="{ 'has-error' : resourceCover.$invalid && submitted }">
+        <fieldset>
+            <div class="cover-image">
+                <div class="thumbnail-container">
+                    <ng-thumb class="thumbnail" ng-if="resourceCover.file" params="{ file: resourceCover.file, height: 100 }"></ng-thumb>
+                </div>
+                <div class="inputfile-container">
+                    <inputfile id="resourceCover-image" fileread="resourceCover.file" label="resourceCover.name || 'Parcourir...'"></inputfile>
+                    <p ng-show="coverForm.$error.imageFileFormat" class="help-block">Format non valide, vérifiez le format de l'image.</p>
+                </div>
+            </div>
+        </fieldset>
+    </ng-form>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-warning btn-lg" ng-click="close()">Fermer</button>
+    <button class="btn btn-primary btn-lg" ng-click="submitted=true;ok(coverForm.resourceCover)">Valider</button>
+</div>

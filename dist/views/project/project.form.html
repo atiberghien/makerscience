@@ -1,0 +1,230 @@
+<div class="admin">
+
+    <div id="intro" class="intro-project-create">
+        <h1>Créez une page</h1>
+        <h2>pour votre projet</h2>
+    </div><!-- #intro -->
+
+    <div class="row container">
+
+        <div class="col-md-12">
+
+            <div id="content" class="new-project">
+
+                <h2>Créer un projet</h2>
+                <div class="introduction">
+                  <p>Ce formulaire vous permet de décrire en détails votre projet. Plus vous détaillerez, plus vous donnerez envie aux membres de s'investir dans votre projet et le relayer.</p>
+                  <p>Pour toute question <a href="">contacter l'équipe de Makerscience</a></p>
+                </div>
+
+                <form name="newProjectForm"
+                      novalidate
+                      ng-init="submitted=false"
+                      ng-submit="saveMakerscienceProject(newProjectForm)"
+                      ng-class="{ 'has-error' : newProjectForm.$invalid && submitted }"
+                      class="project-form">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <accordion close-others="false">
+                                <accordion-group is-open="true" is-disabled="true">
+                                    <accordion-heading>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="title">Caractéristiques du projet</span>
+                                            </div>
+                                            <div class="col-md-4 right">
+                                                <button class="btn btn-primary" ng-click="openInfosLink(projectsheet, QAItems)">
+                                                  <span class="glyphicon glyphicon-cloud-download"></span>
+                                                  Ajouter des infos depuis un lien
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </accordion-heading>
+                                    <fieldset>
+                                        <label for="title">Titre du projet <span class="required">*</span></label>
+                                        <input type="text"
+                                            id="title"
+                                            name="projectName"
+                                            ng-model="projectsheet.project.title"
+                                            maxlength="50"
+                                            required/>
+                                        <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Titre du projet requis</p>
+
+                                        <label for="baseline">Sous-titre du projet <span class="required">*</span></label>
+                                        <input type="text"
+                                            id="baseline"
+                                            name="projectBaseline"
+                                            ng-model="projectsheet.project.baseline"
+                                            maxlength="100"
+                                            required/>
+                                        <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Sous-titre du projet requis</p>
+                                        <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Résumez en une courte phrase votre projet</p>
+
+                                        <label for="question_0">{{QAItems[0].questionLabel}}</label>
+                                        <textarea
+                                            ui-tinymce="tinyMceFullOptions"
+                                            ng-trim="false"
+                                            name="question_0"
+                                            id="question_0"
+                                            ng-model="QAItems[0].answer"
+                                            e-rows="4">
+                                        </textarea>
+
+                                        <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet</label>
+                                        <input type="date" ng-model="projectsheet.project.end_date" />
+
+                                        <label>Localisation <span class="required">*</span></label>
+                                        <input type="text"
+                                               name="localisation"
+                                               ng-model="projectsheet.project.location.address.address_locality"
+                                               required/>
+                                        <p ng-show="newProjectForm.localisation.$invalid && submitted" class="help-block">Localisation requise</p>
+
+                                        <label>Thématiques</label>
+                                        <tag-auto-complete model="themesTags" placeholder="Mot-clé"></tag-auto-complete>
+                                        <p ng-show="newProjectForm.thematiques.$invalid && submitted" class="help-block">Thematiques requise</p>
+
+                                        <label>Publics visés</label>
+                                        <tag-auto-complete model="targetsTags" placeholder="Mot-clé"></tag-auto-complete>
+                                        <p ng-show="newProjectForm.target.$invalid && submitted" class="help-block">Publics visés requis</p>
+
+                                        <label>Formats</label>
+                                        <tag-auto-complete model="formatsTags" placeholder="Mot-clé"></tag-auto-complete>
+                                        <p ng-show="newProjectForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
+                                   </fieldset>
+                                </accordion-group>
+
+                                <accordion-group is-open="status1.open">
+                                    <accordion-heading>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <span class="title">Médias</span>
+                                            </div>
+                                            <div class="col-md-3 right">
+                                                <button class="btn btn-primary toggle-button" ng-class="{'disabled': status1.open}"><span class="glyphicon glyphicon-plus"></span> Ajouter un média</button>
+                                            </div>
+                                        </div>
+                                    </accordion-heading>
+                                    <fieldset class="addPhotosVideos">
+                                        <h5>Nouveau média</h5>
+                                        <gallery-project></gallery-project>
+                                    </fieldset>
+                                </accordion-group>
+
+                                <accordion-group is-open="status2.open">
+                                    <accordion-heading>
+                                        <p>Contacts <i class="pull-right glyphicon glyphicon-chevron-down" ng-class="{'right': !status2.open}"></i></p>
+                                    </accordion-heading>
+                                    <fieldset class="fake-placeholder">
+                                      <label><span class="glyphicon glyphicon-globe"></span> Site web</label>
+                                      <input type="text" ng-model="projectsheet.project.website" />
+
+                                      <label for="question_1">{{QAItems[1].questionLabel}}</label>
+                                      <textarea
+                                          ui-tinymce="tinyMceFullOptions"
+                                          ng-trim="false"
+                                          name="question_1"
+                                          id="question_1"
+                                          ng-model="QAItems[1].answer"
+                                          e-rows="4">
+                                      </textarea>
+
+                                      <label for="question_2">{{QAItems[2].questionLabel}}</label>
+                                      <textarea
+                                          ui-tinymce="tinyMceFullOptions"
+                                          ng-trim="false"
+                                          name="question_2"
+                                          id="question_2"
+                                          ng-model="QAItems[2].answer"
+                                          e-rows="4">
+                                      </textarea>
+
+                                    </fieldset>
+                                </accordion-group>
+
+                                <accordion-group is-open="status3.open">
+                                    <accordion-heading>
+                                      <div class="row">
+                                          <div class="col-md-9">
+                                              <span class="title">Besoins</span>
+                                              <p class="small subtitle">Créez une discussion précisant vos besoins (idées, matériel, financement, testeurs, relais…). Elle sera affichée sur votre projet et sur le forum de discussions.</p>
+                                          </div>
+                                          <div class="col-md-3 right">
+                                              <button class="btn btn-primary toggle-button" ng-class="{'disabled': status3.open}"><span class="glyphicon glyphicon-plus"></span> Ajouter un besoin</button>
+                                          </div>
+                                      </div>
+                                    </accordion-heading>
+                                    <fieldset class="needs needs-select">
+                                        <h5>Créer une discussion pour votre besoin</h5>
+
+                                        <label for="new-need">Titre du besoin <span class="required">*</span></label>
+                                        <input type="text" id="new-need" ng-model="newNeed.title" />
+                                        <p ng-show="newNeed.title.$invalid && submitted" class="help-block">Titre du besoin requis</p>
+                                        <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Ce titre apparaitra comme titre de discussion sur le forum</p>
+
+                                        <label for="">Précisions sur le besoin</label>
+                                        <textarea ui-tinymce="tinyMceFullOptions"
+                                          ng-trim="false"
+                                          ng-model="newNeed.text"
+                                          name="project-need"
+                                          placeholder="Décrivez votre besoin le plus précisement possible."
+                                          rows="3">
+                                        </textarea>
+
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="need-keywords">
+                                                  <label>Mots-clés</label>
+                                                  <tag-auto-complete model="questionTags" placeholder="Mot-clé"></tag-auto-complete>
+                                              </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <p class="item-validate" ng-hide="hideControls">
+                                                  <button type="button" class="btn btn-warning cancel" ng-click="status3.open = !status3.open">Annuler</button>
+                                                  <button type="button" class="btn btn-primary" ng-click="addNeed(newNeed);questionTags=null">Valider</button>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <ul class="list-group">
+                                            <li ng-repeat="(index, need) in needs">
+                                                <div class="row">
+                                                  <div class="col-md-10">
+                                                    <p><strong ng-bind-html="need.title"></strong></p>
+                                                    <p ng-bind-html="need.text"></p>
+                                                  </div>
+                                                  <div class="col-md-2">
+                                                    <button type="button" class="btn btn-xs btn-danger" ng-click="delNeed(index)"><span class="glyphicon glyphicon-trash"></span> Supprimer</button>
+                                                  </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                </accordion-group>
+                            </accordion>
+                        </div>
+                    </div><!-- .row -->
+
+                    <p ng-hide="hideControls" class="right">
+                        <button type="button" class="btn btn-warning btn-lg cancel" ui-sref="project.list">Annuler</button>
+                        <button type="submit" class="btn btn-primary btn-lg" ng-click="submitted=true;hideControls=true">Enregistrer</button>
+                    </p>
+                    <div ng-show="hideControls" class="loader-form loader-project">
+                        <div class="sk-folding-cube">
+                            <div class="sk-cube1 sk-cube"></div>
+                            <div class="sk-cube2 sk-cube"></div>
+                            <div class="sk-cube4 sk-cube"></div>
+                            <div class="sk-cube3 sk-cube"></div>
+                        </div>
+                        <span>Envoi des données en cours</span>
+                    </div>
+                </form>
+
+            </div><!-- #content -->
+
+        </div><!-- .row -->
+
+    </div><!-- .row .container -->
+</div>

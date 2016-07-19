@@ -1,5 +1,6 @@
 /css/*.css
 /js/*.js
+!/js/tinymce_fr_FR.js
 /js/commons/
 /js/makerscience/
 /js/vendor/
@@ -7,8 +8,11 @@
 /node_modules/
 /bower_components/
 /.sass-cache/
-/dist/
 /css_imports.css
 /js_imports.css
 /js/src/config_prod.coffee
 /js/src/config_staging.coffee
+/corpus-frontendapp/
+/node_env.sh
+
+
