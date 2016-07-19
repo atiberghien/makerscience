@@ -109,7 +109,7 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
                 ncyBreadcrumb:
                     label: 'Nouveau projet'
                     parent : 'project.list'
-                loginRequired : false
+                loginRequired : true
         )
         .state('project.detail',
                 url: ':slug',

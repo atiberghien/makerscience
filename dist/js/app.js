@@ -97,7 +97,7 @@
           label: 'Nouveau projet',
           parent: 'project.list'
         },
-        loginRequired: false
+        loginRequired: true
       }).state('project.detail', {
         url: ':slug',
         templateUrl: '/views/project/project.detail.html',
