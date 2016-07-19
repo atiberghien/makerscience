@@ -27,11 +27,11 @@
       this.config = {
         templateBaseUrl: '/views/',
         useHtml5Mode: true,
-        bucket_uri: 'http://10.0.3.150:8000/bucket/upload/',
-        loginBaseUrl: 'http://10.0.3.150:8000/api/v0',
-        oauthBaseUrl: 'http://10.0.3.150:8000',
-        media_uri: 'http://10.0.3.150:8000',
-        rest_uri: "http://10.0.3.150:8000/api/v0",
+        bucket_uri: 'http://makerscience-server.makina-corpus.net/bucket/upload/',
+        loginBaseUrl: 'http://makerscience-server.makina-corpus.net/api/v0',
+        oauthBaseUrl: 'http://makerscience-server.makina-corpus.net',
+        media_uri: 'http://makerscience-server.makina-corpus.net',
+        rest_uri: "http://makerscience-server.makina-corpus.net/api/v0",
         facebook: {
           clientId: '724284684343376'
         },
