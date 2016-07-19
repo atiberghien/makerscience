@@ -31,7 +31,7 @@
     return $scope.openTagPopup = function(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback) {
       var modalInstance;
       return modalInstance = $modal.open({
-        templateUrl: '/views/catalog/block/modal_tags.html',
+        templateUrl: '/views/block/modal_tags.html',
         controller: 'TagPopupCtrl',
         size: 'lg',
         resolve: {
