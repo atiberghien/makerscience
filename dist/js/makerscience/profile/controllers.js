@@ -1,7 +1,7 @@
 (function() {
   var module;
 
-  module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'makerscience.base.services', 'commons.accounts.services', 'makerscience.base.controllers']);
+  module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'makerscience.base.services', 'commons.tags.services', 'commons.accounts.services', 'makerscience.base.controllers']);
 
   module.controller("MakerScienceProfileListCtrl", function($scope, $controller, MakerScienceProfileLight, MakerScienceProfileTaggedItem) {
     angular.extend(this, $controller('MakerScienceAbstractListCtrl', {
@@ -151,16 +151,16 @@
     };
   });
 
-  module.controller("MakerScienceProfileCtrl", function($scope, $rootScope, $controller, $stateParams, $state, $modal, MakerScienceProfile, MakerScienceProfileLight, MakerScienceProjectLight, MakerScienceResourceLight, MakerSciencePost, MakerSciencePostLight, MakerScienceProfileTaggedItem, TaggedItem, Tag, Post, ObjectProfileLink, PostalAddress) {
+  module.controller("MakerScienceProfileCtrl", function($scope, $rootScope, $controller, $stateParams, $state, $modal, TaggedItemService, MakerScienceProfile, MakerScienceProfileLight, MakerScienceProjectLight, MakerScienceResourceLight, MakerSciencePost, MakerSciencePostLight, MakerScienceProfileTaggedItem, TaggedItem, Tag, Post, ObjectProfileLink, PostalAddress) {
     angular.extend(this, $controller('MakerScienceObjectGetter', {
-      $scope: $scope
-    }));
-    angular.extend(this, $controller('TaggedItemCtrl', {
       $scope: $scope
     }));
     angular.extend(this, $controller('PostCtrl', {
       $scope: $scope
     }));
+    $scope.openTagPopup = function(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback) {
+      return TaggedItemService.openTagPopup(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback);
+    };
     return MakerScienceProfile.one($stateParams.slug).get().then(function(makerscienceProfileResult) {
       $scope.profile = makerscienceProfileResult;
       $scope.editable = $scope.profile.can_edit;

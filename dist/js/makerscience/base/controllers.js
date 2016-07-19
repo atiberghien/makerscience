@@ -1,7 +1,7 @@
 (function() {
   var module;
 
-  module = angular.module("makerscience.base.controllers", ['makerscience.base.services', 'makerscience.profile.controllers', 'makerscience.catalog.controllers.project', 'makerscience.catalog.controllers.resource', 'commons.accounts.controllers', 'commons.graffiti.services']);
+  module = angular.module("makerscience.base.controllers", ['makerscience.base.services', 'commons.accounts.controllers']);
 
   module.controller("MakerScienceAbstractListCtrl", function($scope, FilterService) {
     "Abstract controller that initialize some list filtering parameters and\nwatch for changes in filterParams from FilterService\nControllers using it need to implement a refreshList() method calling adequate [Object]Service";
@@ -460,21 +460,6 @@
           return console.log("RECAPTCHA ERROR", response);
         });
       }
-    };
-  });
-
-  module.controller("ReportAbuseCtrl", function($scope, $modal) {
-    return $scope.showReportAbusePopup = function(currentLocation) {
-      var modalInstance;
-      return modalInstance = $modal.open({
-        templateUrl: '/views/base/abuse.html',
-        controller: 'ReportAbuseFormInstanceCtrl',
-        resolve: {
-          currentLocation: function() {
-            return currentLocation;
-          }
-        }
-      });
     };
   });
 

@@ -13,7 +13,6 @@ angular.module('ui.tinymce', [])
 
     return {
       require: ['ngModel', '^?form'],
-      priority: 599,
       link: function(scope, element, attrs, ctrls) {
         if (!$window.tinymce) {
           return;
@@ -22,34 +21,16 @@ angular.module('ui.tinymce', [])
         var ngModel = ctrls[0],
           form = ctrls[1] || null;
 
-        var expression, options = {
-          debounce: true
-        }, tinyInstance,
+        var expression, options, tinyInstance,
           updateView = function(editor) {
             var content = editor.getContent({format: options.format}).trim();
             content = $sce.trustAsHtml(content);
 
             ngModel.$setViewValue(content);
             if (!$rootScope.$$phase) {
-              scope.$digest();
+              scope.$apply();
             }
           };
-
-        function toggleDisable(disabled) {
-          if (disabled) {
-            ensureInstance();
-
-            if (tinyInstance) {
-              tinyInstance.getBody().setAttribute('contenteditable', false);
-            }
-          } else {
-            ensureInstance();
-
-            if (tinyInstance && !tinyInstance.settings.readonly) {
-              tinyInstance.getBody().setAttribute('contenteditable', true);
-            }
-          }
-        }
 
         // generate an ID
         attrs.$set('id', ID_ATTR + '-' + generatedIds++);
@@ -58,66 +39,43 @@ angular.module('ui.tinymce', [])
 
         angular.extend(expression, scope.$eval(attrs.uiTinymce));
 
-        //Debounce update and save action
-        var debouncedUpdate = (function(debouncedUpdateDelay) {
-          var debouncedUpdateTimer;
-          return function(ed) {
-	        $timeout.cancel(debouncedUpdateTimer);
-	         debouncedUpdateTimer = $timeout(function() {
-              return (function(ed) {
-                if (ed.isDirty()) {
-                  ed.save();
-                  updateView(ed);
-                }
-              })(ed);
-            }, debouncedUpdateDelay);
-          };
-        })(400);
-
-        var setupOptions = {
+        options = {
           // Update model when calling setContent
           // (such as from the source editor popup)
           setup: function(ed) {
             ed.on('init', function() {
               ngModel.$render();
               ngModel.$setPristine();
-                ngModel.$setUntouched();
               if (form) {
                 form.$setPristine();
               }
             });
 
-            // Update model when:
-            // - a button has been clicked [ExecCommand]
-            // - the editor content has been modified [change]
-            // - the node has changed [NodeChange]
-            // - an object has been resized (table, image) [ObjectResized]
-            ed.on('ExecCommand change NodeChange ObjectResized', function() {
-              if (!options.debounce) {
-                ed.save();
-                updateView(ed);
-              	return;
-              }
-              debouncedUpdate(ed);
+            // Update model on button click
+            ed.on('ExecCommand', function() {
+              ed.save();
+              updateView(ed);
+            });
+
+            // Update model on change
+            ed.on('change', function(e) {
+              ed.save();
+              updateView(ed);
             });
 
             ed.on('blur', function() {
               element[0].blur();
-              ngModel.$setTouched();
-              if (!$rootScope.$$phase) {
-                scope.$digest();
-              }
+            });
+
+            // Update model when an object has been resized (table, image)
+            ed.on('ObjectResized', function() {
+              ed.save();
+              updateView(ed);
             });
 
             ed.on('remove', function() {
               element.remove();
             });
-
-            if (uiTinymceConfig.setup) {
-              uiTinymceConfig.setup(ed, {
-                updateView: updateView
-              });
-            }
 
             if (expression.setup) {
               expression.setup(ed, {
@@ -125,21 +83,17 @@ angular.module('ui.tinymce', [])
               });
             }
           },
-          format: expression.format || 'html',
+          format: 'raw',
           selector: '#' + attrs.id
         };
         // extend options with initial uiTinymceConfig and
         // options from directive attribute value
-        angular.extend(options, uiTinymceConfig, expression, setupOptions);
+        angular.extend(options, uiTinymceConfig, expression);
         // Wrapped in $timeout due to $tinymce:refresh implementation, requires
         // element to be present in DOM before instantiating editor when
         // re-rendering directive
         $timeout(function() {
-          if (options.baseURL){
-            tinymce.baseURL = options.baseURL;
-          }
           tinymce.init(options);
-          toggleDisable(scope.$eval(attrs.ngDisabled));
         });
 
         ngModel.$formatters.unshift(function(modelValue) {
@@ -162,13 +116,25 @@ angular.module('ui.tinymce', [])
             tinyInstance.getDoc()
           ) {
             tinyInstance.setContent(viewValue);
-            // Triggering change event due to TinyMCE not firing event &
-            // becoming out of sync for change callbacks
             tinyInstance.fire('change');
           }
         };
 
-        attrs.$observe('disabled', toggleDisable);
+        attrs.$observe('disabled', function(disabled) {
+          if (disabled) {
+            ensureInstance();
+
+            if (tinyInstance) {
+              tinyInstance.getBody().setAttribute('contenteditable', false);
+            }
+          } else {
+            ensureInstance();
+
+            if (tinyInstance) {
+              tinyInstance.getBody().setAttribute('contenteditable', true);
+            }
+          }
+        });
 
         // This block is because of TinyMCE not playing well with removal and
         // recreation of instances, requiring instances to have different

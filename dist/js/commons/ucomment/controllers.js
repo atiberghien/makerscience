@@ -8,15 +8,9 @@
     $scope.newcommentForm = {
       text: ""
     };
-    $scope.initCommentCtrl = function(objectTypeName, objectID) {
-      $scope.commentedObjectTypeName = objectTypeName;
-      $scope.commentedObjectID = objectID;
-      console.log($scope.commentedObjectTypeName, $scope.commentedObjectID);
-      return $scope.refreshComments();
-    };
-    $scope.refreshComments = function(objectTypeName, objectId) {
-      return $scope.comments = Comment.one().customGETLIST($scope.commentedObjectTypeName + '/' + $scope.commentedObjectID).$object;
-    };
+    $scope.commentedObjectTypeName = $scope.objectTypeName;
+    $scope.commentedObjectID = $scope.objectId;
+    $scope.comments = Comment.one().customGETLIST($scope.commentedObjectTypeName + '/' + $scope.commentedObjectID).$object;
     $scope.isCommentAuthor = function(comment) {
       "To check wether connected user is comment's author";
       return $rootScope.authVars.username === comment.user.username;

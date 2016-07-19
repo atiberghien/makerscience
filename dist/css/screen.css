@@ -1,4 +1,20 @@
 @charset "UTF-8";
+/* MakerScience colors */
+/* menu */
+/* green */
+/* red */
+/* Sections colors */
+/* Body */
+/* Side Nav */
+/* Header */
+/* Menu */
+/* Intro */
+/* Base */
+/* Toolbar */
+/* Content */
+/* Forms */
+/* Sidebar */
+/* Footer */
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -1737,12 +1753,12 @@ textarea {
 
 /* line 48, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss */
 a {
-  color: #337ab7;
+  color: #2497d0;
   text-decoration: none;
 }
 /* line 52, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss */
 a:hover, a:focus {
-  color: #23527c;
+  color: #19688f;
   text-decoration: underline;
 }
 /* line 58, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -2006,13 +2022,13 @@ mark,
 
 /* line 5, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 .text-primary {
-  color: #337ab7;
+  color: #2497d0;
 }
 
 /* line 8, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 a.text-primary:hover,
 a.text-primary:focus {
-  color: #286090;
+  color: #1c77a5;
 }
 
 /* line 5, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
@@ -2066,13 +2082,13 @@ a.text-danger:focus {
 
 /* line 5, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 .bg-primary {
-  background-color: #337ab7;
+  background-color: #2497d0;
 }
 
 /* line 8, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 a.bg-primary:hover,
 a.bg-primary:focus {
-  background-color: #286090;
+  background-color: #1c77a5;
 }
 
 /* line 5, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
@@ -4420,7 +4436,7 @@ select[multiple].input-lg,
 .btn {
   display: inline-block;
   margin-bottom: 0;
-  font-weight: normal;
+  font-weight: bold;
   text-align: center;
   vertical-align: middle;
   touch-action: manipulation;
@@ -4431,7 +4447,7 @@ select[multiple].input-lg,
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857;
-  border-radius: 4px;
+  border-radius: 0;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -4445,7 +4461,7 @@ select[multiple].input-lg,
 }
 /* line 32, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn:hover, .btn:focus, .btn.focus {
-  color: #333;
+  color: #2497d0;
   text-decoration: none;
 }
 /* line 39, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4471,33 +4487,33 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 /* line 68, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-default {
-  color: #333;
-  background-color: #fff;
-  border-color: #ccc;
+  color: #2497d0;
+  background-color: white;
+  border-color: white;
 }
 /* line 11, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-default:focus, .btn-default.focus {
-  color: #333;
+  color: #2497d0;
   background-color: #e6e6e6;
-  border-color: #8c8c8c;
+  border-color: #bfbfbf;
 }
 /* line 17, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-default:hover {
-  color: #333;
+  color: #2497d0;
   background-color: #e6e6e6;
-  border-color: #adadad;
+  border-color: #e0e0e0;
 }
 /* line 22, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
-  color: #333;
+  color: #2497d0;
   background-color: #e6e6e6;
-  border-color: #adadad;
+  border-color: #e0e0e0;
 }
 /* line 29, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-default:active:hover, .btn-default:active:focus, .btn-default:active.focus, .btn-default.active:hover, .btn-default.active:focus, .btn-default.active.focus, .open > .btn-default.dropdown-toggle:hover, .open > .btn-default.dropdown-toggle:focus, .open > .btn-default.dropdown-toggle.focus {
-  color: #333;
+  color: #2497d0;
   background-color: #d4d4d4;
-  border-color: #8c8c8c;
+  border-color: #bfbfbf;
 }
 /* line 37, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-default:active, .btn-default.active, .open > .btn-default.dropdown-toggle {
@@ -4505,44 +4521,44 @@ a.btn.disabled, fieldset[disabled] a.btn {
 }
 /* line 45, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled.focus, .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled].focus, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default.focus {
-  background-color: #fff;
-  border-color: #ccc;
+  background-color: white;
+  border-color: white;
 }
 /* line 53, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-default .badge {
-  color: #fff;
-  background-color: #333;
+  color: white;
+  background-color: #2497d0;
 }
 
 /* line 71, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-primary {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #2087ba;
+  border-color: #2087ba;
 }
 /* line 11, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:focus, .btn-primary.focus {
   color: #fff;
-  background-color: #286090;
-  border-color: #122b40;
+  background-color: #19688f;
+  border-color: #0d384e;
 }
 /* line 17, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:hover {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #19688f;
+  border-color: #176186;
 }
 /* line 22, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #286090;
-  border-color: #204d74;
+  background-color: #19688f;
+  border-color: #176186;
 }
 /* line 29, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:hover, .btn-primary.active:focus, .btn-primary.active.focus, .open > .btn-primary.dropdown-toggle:hover, .open > .btn-primary.dropdown-toggle:focus, .open > .btn-primary.dropdown-toggle.focus {
   color: #fff;
-  background-color: #204d74;
-  border-color: #122b40;
+  background-color: #135270;
+  border-color: #0d384e;
 }
 /* line 37, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
@@ -4550,12 +4566,12 @@ a.btn.disabled, fieldset[disabled] a.btn {
 }
 /* line 45, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus {
-  background-color: #337ab7;
-  border-color: #2e6da4;
+  background-color: #2087ba;
+  border-color: #2087ba;
 }
 /* line 53, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary .badge {
-  color: #337ab7;
+  color: #2087ba;
   background-color: #fff;
 }
 
@@ -4651,33 +4667,33 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 /* line 83, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-warning {
-  color: #fff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  color: #2497d0;
+  background-color: transparent;
+  border-color: transparent;
 }
 /* line 11, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-warning:focus, .btn-warning.focus {
-  color: #fff;
-  background-color: #ec971f;
-  border-color: #985f0d;
+  color: #2497d0;
+  background-color: transparent;
+  border-color: transparent;
 }
 /* line 17, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-warning:hover {
-  color: #fff;
-  background-color: #ec971f;
-  border-color: #d58512;
+  color: #2497d0;
+  background-color: transparent;
+  border-color: transparent;
 }
 /* line 22, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-warning:active, .btn-warning.active, .open > .btn-warning.dropdown-toggle {
-  color: #fff;
-  background-color: #ec971f;
-  border-color: #d58512;
+  color: #2497d0;
+  background-color: transparent;
+  border-color: transparent;
 }
 /* line 29, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-warning:active:hover, .btn-warning:active:focus, .btn-warning:active.focus, .btn-warning.active:hover, .btn-warning.active:focus, .btn-warning.active.focus, .open > .btn-warning.dropdown-toggle:hover, .open > .btn-warning.dropdown-toggle:focus, .open > .btn-warning.dropdown-toggle.focus {
-  color: #fff;
-  background-color: #d58512;
-  border-color: #985f0d;
+  color: #2497d0;
+  background-color: transparent;
+  border-color: transparent;
 }
 /* line 37, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-warning:active, .btn-warning.active, .open > .btn-warning.dropdown-toggle {
@@ -4685,44 +4701,44 @@ a.btn.disabled, fieldset[disabled] a.btn {
 }
 /* line 45, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-warning.disabled:hover, .btn-warning.disabled:focus, .btn-warning.disabled.focus, .btn-warning[disabled]:hover, .btn-warning[disabled]:focus, .btn-warning[disabled].focus, fieldset[disabled] .btn-warning:hover, fieldset[disabled] .btn-warning:focus, fieldset[disabled] .btn-warning.focus {
-  background-color: #f0ad4e;
-  border-color: #eea236;
+  background-color: transparent;
+  border-color: transparent;
 }
 /* line 53, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-warning .badge {
-  color: #f0ad4e;
-  background-color: #fff;
+  color: transparent;
+  background-color: #2497d0;
 }
 
 /* line 87, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-danger {
   color: #fff;
   background-color: #d9534f;
-  border-color: #d43f3a;
+  border-color: #d9534f;
 }
 /* line 11, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger:focus, .btn-danger.focus {
   color: #fff;
   background-color: #c9302c;
-  border-color: #761c19;
+  border-color: #8b211e;
 }
 /* line 17, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger:hover {
   color: #fff;
   background-color: #c9302c;
-  border-color: #ac2925;
+  border-color: #c12e2a;
 }
 /* line 22, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
   color: #fff;
   background-color: #c9302c;
-  border-color: #ac2925;
+  border-color: #c12e2a;
 }
 /* line 29, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger:active:hover, .btn-danger:active:focus, .btn-danger:active.focus, .btn-danger.active:hover, .btn-danger.active:focus, .btn-danger.active.focus, .open > .btn-danger.dropdown-toggle:hover, .open > .btn-danger.dropdown-toggle:focus, .open > .btn-danger.dropdown-toggle.focus {
   color: #fff;
   background-color: #ac2925;
-  border-color: #761c19;
+  border-color: #8b211e;
 }
 /* line 37, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger:active, .btn-danger.active, .open > .btn-danger.dropdown-toggle {
@@ -4731,7 +4747,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 /* line 45, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger.disabled:hover, .btn-danger.disabled:focus, .btn-danger.disabled.focus, .btn-danger[disabled]:hover, .btn-danger[disabled]:focus, .btn-danger[disabled].focus, fieldset[disabled] .btn-danger:hover, fieldset[disabled] .btn-danger:focus, fieldset[disabled] .btn-danger.focus {
   background-color: #d9534f;
-  border-color: #d43f3a;
+  border-color: #d9534f;
 }
 /* line 53, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-danger .badge {
@@ -4741,7 +4757,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 
 /* line 96, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link {
-  color: #337ab7;
+  color: #2497d0;
   font-weight: normal;
   border-radius: 0;
 }
@@ -4757,7 +4773,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
 }
 /* line 115, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link:hover, .btn-link:focus {
-  color: #23527c;
+  color: #19688f;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4772,7 +4788,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33333;
-  border-radius: 6px;
+  border-radius: 0;
 }
 
 /* line 139, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4780,7 +4796,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 /* line 143, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4788,7 +4804,7 @@ a.btn.disabled, fieldset[disabled] a.btn {
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px;
+  border-radius: 0;
 }
 
 /* line 151, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4934,7 +4950,7 @@ tbody.collapse.in {
   color: #fff;
   text-decoration: none;
   outline: 0;
-  background-color: #337ab7;
+  background-color: #2497d0;
 }
 
 /* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_dropdowns.scss */
@@ -5208,8 +5224,8 @@ tbody.collapse.in {
 }
 /* line 175, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn:first-child:not(:last-child) {
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -5217,8 +5233,8 @@ tbody.collapse.in {
 .btn-group-vertical > .btn:last-child:not(:first-child) {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 /* line 184, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_button-groups.scss */
@@ -5461,7 +5477,7 @@ tbody.collapse.in {
 /* line 46, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_navs.scss */
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: #eeeeee;
-  border-color: #337ab7;
+  border-color: #2497d0;
 }
 /* line 59, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_navs.scss */
 .nav .nav-divider {
@@ -5519,7 +5535,7 @@ tbody.collapse.in {
 /* line 131, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_navs.scss */
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #337ab7;
+  background-color: #2497d0;
 }
 
 /* line 144, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_navs.scss */
@@ -6291,7 +6307,7 @@ tbody.collapse.in {
   padding: 6px 12px;
   line-height: 1.42857;
   text-decoration: none;
-  color: #337ab7;
+  color: #2497d0;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: -1px;
@@ -6314,7 +6330,7 @@ tbody.collapse.in {
 .pagination > li > span:hover,
 .pagination > li > span:focus {
   z-index: 2;
-  color: #23527c;
+  color: #19688f;
   background-color: #eeeeee;
   border-color: #ddd;
 }
@@ -6325,8 +6341,8 @@ tbody.collapse.in {
 .pagination > .active > span:focus {
   z-index: 3;
   color: #fff;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #2497d0;
+  border-color: #2497d0;
   cursor: default;
 }
 /* line 64, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_pagination.scss */
@@ -6478,11 +6494,11 @@ a.label:hover, a.label:focus {
 
 /* line 48, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_labels.scss */
 .label-primary {
-  background-color: #337ab7;
+  background-color: #2497d0;
 }
 /* line 7, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_labels.scss */
 .label-primary[href]:hover, .label-primary[href]:focus {
-  background-color: #286090;
+  background-color: #1c77a5;
 }
 
 /* line 52, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_labels.scss */
@@ -6552,7 +6568,7 @@ a.label:hover, a.label:focus {
 }
 /* line 41, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_badges.scss */
 .list-group-item.active > .badge, .nav-pills > .active > a > .badge {
-  color: #337ab7;
+  color: #2497d0;
   background-color: #fff;
 }
 /* line 47, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_badges.scss */
@@ -6658,7 +6674,7 @@ a.badge:hover, a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #337ab7;
+  border-color: #2497d0;
 }
 
 /* line 9, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_alerts.scss */
@@ -6797,7 +6813,7 @@ a.thumbnail.active {
   line-height: 20px;
   color: #fff;
   text-align: center;
-  background-color: #337ab7;
+  background-color: #2497d0;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
@@ -7008,8 +7024,8 @@ button.list-group-item {
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   z-index: 2;
   color: #fff;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #2497d0;
+  border-color: #2497d0;
 }
 /* line 96, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item.active .list-group-item-heading,
@@ -7023,7 +7039,7 @@ button.list-group-item {
 }
 /* line 101, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item.active .list-group-item-text, .list-group-item.active:hover .list-group-item-text, .list-group-item.active:focus .list-group-item-text {
-  color: #c7ddef;
+  color: #cae7f6;
 }
 
 /* line 4, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_list-group.scss */
@@ -7489,26 +7505,26 @@ button.list-group-item-danger.active:focus {
 
 /* line 257, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_panels.scss */
 .panel-primary {
-  border-color: #337ab7;
+  border-color: #2497d0;
 }
 /* line 6, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-heading {
   color: #fff;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #2497d0;
+  border-color: #2497d0;
 }
 /* line 11, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #337ab7;
+  border-top-color: #2497d0;
 }
 /* line 14, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-heading .badge {
-  color: #337ab7;
+  color: #2497d0;
   background-color: #fff;
 }
 /* line 20, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #337ab7;
+  border-bottom-color: #2497d0;
 }
 
 /* line 260, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_panels.scss */
@@ -8792,7 +8808,7 @@ button.close {
     display: none !important;
   }
 }
-/* line 5, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 5, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -8814,65 +8830,49 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-/* line 22, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 22, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html {
   line-height: 1;
 }
 
-/* line 24, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 24, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
-/* line 26, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 26, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-/* line 28, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 28, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
-/* line 30, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 30, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: none;
 }
-/* line 103, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 103, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
   content: none;
 }
 
-/* line 32, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 32, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
-/* line 116, ../../../../../var/lib/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+/* line 116, ../../../../.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
 
-/* MakerScience colors */
-/* menu */
-/* green */
-/* red */
-/* Sections colors */
-/* Body */
-/* Side Nav */
-/* Header */
-/* Menu */
-/* Intro */
-/* Base */
-/* Toolbar */
-/* Content */
-/* Forms */
-/* Sidebar */
-/* Footer */
 /* line 18, sass/_base.scss */
 body {
   font: 0.85em/1.5em latoregular, sans-serif;
@@ -8956,12 +8956,20 @@ button.button {
 button.button:hover {
   background-color: #126d9a;
 }
-/* line 74, sass/_base.scss */
-button.button.button-resource {
+
+/* line 76, sass/_base.scss */
+.button-resource {
   background-color: #30c9ad;
+  border-color: #30c9ad;
 }
 
-/* line 79, sass/_base.scss */
+/* line 81, sass/_base.scss */
+.btn-warning:hover {
+  border-color: transparent;
+  color: #c30;
+}
+
+/* line 86, sass/_base.scss */
 h2.boxed {
   margin-top: 30px;
   padding: 1.25em;
@@ -8971,22 +8979,22 @@ h2.boxed {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 87, sass/_base.scss */
+/* line 94, sass/_base.scss */
 h2.boxed span {
   margin: 0 1em 0 0.25em;
   font-size: 2em;
   vertical-align: middle;
 }
-/* line 92, sass/_base.scss */
+/* line 99, sass/_base.scss */
 h2.boxed.boxed-project {
   background-color: #2497d0;
 }
-/* line 95, sass/_base.scss */
+/* line 102, sass/_base.scss */
 h2.boxed.boxed-resource {
   background-color: #30c9ad;
 }
 
-/* line 99, sass/_base.scss */
+/* line 106, sass/_base.scss */
 h2.default, h2.projects, h2.resources, h2.members, h2.tags, h2.forum {
   padding: 0.75em;
   font-size: 1.25em;
@@ -8994,37 +9002,37 @@ h2.default, h2.projects, h2.resources, h2.members, h2.tags, h2.forum {
   background-color: #2f2f2f;
   text-transform: uppercase;
 }
-/* line 105, sass/_base.scss */
+/* line 112, sass/_base.scss */
 h2.default span, h2.projects span, h2.resources span, h2.members span, h2.tags span, h2.forum span {
   margin-right: 0.5em;
 }
 
-/* line 109, sass/_base.scss */
+/* line 116, sass/_base.scss */
 h2.projects {
   background-color: #2497d0;
 }
 
-/* line 110, sass/_base.scss */
+/* line 117, sass/_base.scss */
 h2.resources {
   background-color: #30c9ad;
 }
 
-/* line 111, sass/_base.scss */
+/* line 118, sass/_base.scss */
 h2.members {
   background-color: #ff5353;
 }
 
-/* line 112, sass/_base.scss */
+/* line 119, sass/_base.scss */
 h2.tags {
   background-color: #c30;
 }
 
-/* line 113, sass/_base.scss */
+/* line 120, sass/_base.scss */
 h2.forum {
   background-color: #5a4b84;
 }
 
-/* line 115, sass/_base.scss */
+/* line 122, sass/_base.scss */
 h3.category {
   z-index: 200;
   position: absolute;
@@ -9034,7 +9042,7 @@ h3.category {
   font-size: 1.1em;
   background: transparent url("../img/fiche-project.png") top left no-repeat;
 }
-/* line 123, sass/_base.scss */
+/* line 130, sass/_base.scss */
 h3.category span {
   display: block;
   padding: 0.75em 1.25em;
@@ -9050,38 +9058,37 @@ h3.category span {
 /*
 	Actions found in the sidebar, but also in the content
 */
-/* line 137, sass/_base.scss */
+/* line 144, sass/_base.scss */
 ul.actions {
   position: absolute;
   top: 0;
   right: 0;
 }
-/* line 141, sass/_base.scss */
+/* line 148, sass/_base.scss */
 ul.actions li {
   float: right;
 }
-/* line 144, sass/_base.scss */
+/* line 151, sass/_base.scss */
 ul.actions a, ul.actions button {
   display: inline-block;
-  padding: 1.25em 1em 0.25em 1em;
-  font-size: 0.7em;
-  line-height: 3em;
+  padding: 1em 0.75em 0 0.75em;
+  font-size: 0.9em;
+  line-height: 2.5em;
   color: #fff;
   background-color: #333;
   text-align: center;
-  text-transform: uppercase;
   border: none;
 }
-/* line 154, sass/_base.scss */
+/* line 161, sass/_base.scss */
 ul.actions a span, ul.actions button span {
   display: block;
-  font-size: 2em;
+  font-size: 1.75em;
 }
-/* line 158, sass/_base.scss */
+/* line 165, sass/_base.scss */
 ul.actions a .solo, ul.actions button .solo {
   font-size: 2em !important;
 }
-/* line 161, sass/_base.scss */
+/* line 168, sass/_base.scss */
 ul.actions a:hover, ul.actions button:hover {
   text-decoration: none;
   background-color: #c30;
@@ -9090,15 +9097,15 @@ ul.actions a:hover, ul.actions button:hover {
 /*
 	Tags - Found in header & content
 */
-/* line 171, sass/_base.scss */
+/* line 178, sass/_base.scss */
 ul.tags {
   margin: 0 0 1em;
 }
-/* line 173, sass/_base.scss */
+/* line 180, sass/_base.scss */
 ul.tags li {
   display: inline-block;
 }
-/* line 176, sass/_base.scss */
+/* line 183, sass/_base.scss */
 ul.tags a, ul.tags button {
   display: inline-block;
   margin: 0 0.25em 0.5em 0;
@@ -9109,29 +9116,29 @@ ul.tags a, ul.tags button {
   -webkit-border-radius: 1px;
   border-radius: 1px;
 }
-/* line 184, sass/_base.scss */
+/* line 191, sass/_base.scss */
 ul.tags.tags-resource a {
   background-color: #30c9ad;
 }
-/* line 186, sass/_base.scss */
+/* line 193, sass/_base.scss */
 ul.tags.tags-resource a:hover {
   background-color: #5a4b84;
 }
-/* line 190, sass/_base.scss */
+/* line 197, sass/_base.scss */
 ul.tags.tags-project a {
   background-color: #2497d0;
 }
-/* line 193, sass/_base.scss */
+/* line 200, sass/_base.scss */
 ul.tags.tags-profile a {
   background-color: #ff5353;
 }
-/* line 196, sass/_base.scss */
+/* line 203, sass/_base.scss */
 ul.tags a:hover {
   text-decoration: none;
   background-color: #c30;
 }
 
-/* line 202, sass/_base.scss */
+/* line 209, sass/_base.scss */
 button, a {
   position: relative;
   -moz-transition: all 0.2s ease;
@@ -9139,7 +9146,7 @@ button, a {
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
-/* line 205, sass/_base.scss */
+/* line 212, sass/_base.scss */
 button.large, a.large {
   display: block;
   width: 100%;
@@ -9149,45 +9156,45 @@ button.large, a.large {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 213, sass/_base.scss */
+/* line 220, sass/_base.scss */
 button.large.large-orange, button.large.large-red, button.large.large-purple, button.large.large-pink, a.large.large-orange, a.large.large-red, a.large.large-purple, a.large.large-pink {
   color: #fff;
   border: none;
   background-repeat: no-repeat;
   background-image: url("/img/bg/box.png");
 }
-/* line 219, sass/_base.scss */
+/* line 226, sass/_base.scss */
 button.large.large-orange, a.large.large-orange {
   background-color: #fa920b;
 }
-/* line 222, sass/_base.scss */
+/* line 229, sass/_base.scss */
 button.large.large-red, a.large.large-red {
   background-color: #c30;
 }
-/* line 225, sass/_base.scss */
+/* line 232, sass/_base.scss */
 button.large.large-purple, a.large.large-purple {
   background-color: #5a4b84;
 }
-/* line 228, sass/_base.scss */
+/* line 235, sass/_base.scss */
 button.large.large-pink, a.large.large-pink {
   background-color: #ff5353;
 }
-/* line 231, sass/_base.scss */
+/* line 238, sass/_base.scss */
 button.large:hover, a.large:hover {
   text-decoration: none;
 }
-/* line 235, sass/_base.scss */
+/* line 242, sass/_base.scss */
 button img.smiley, a img.smiley {
   position: absolute;
   top: -10px;
 }
 
-/* line 241, sass/_base.scss */
+/* line 248, sass/_base.scss */
 form.share {
   margin-bottom: 1em;
   text-align: right;
 }
-/* line 244, sass/_base.scss */
+/* line 251, sass/_base.scss */
 form.share button {
   width: 36px;
   height: 36px;
@@ -9198,36 +9205,36 @@ form.share button {
   background-repeat: no-repeat;
   border: none;
 }
-/* line 254, sass/_base.scss */
+/* line 261, sass/_base.scss */
 form.share button.share-email {
   margin-left: 1.5em;
   background-image: url("../img/icons/share/share-email.png");
 }
-/* line 258, sass/_base.scss */
+/* line 265, sass/_base.scss */
 form.share button.share-facebook {
   background-image: url("../img/icons/share/share-facebook.png");
 }
-/* line 261, sass/_base.scss */
+/* line 268, sass/_base.scss */
 form.share button.share-google {
   background-image: url("../img/icons/share/share-google.png");
 }
-/* line 264, sass/_base.scss */
+/* line 271, sass/_base.scss */
 form.share button.share-twitter {
   background-image: url("../img/icons/share/share-twitter.png");
 }
 
-/* line 269, sass/_base.scss */
+/* line 276, sass/_base.scss */
 ul.pagination {
   margin: 0;
   /* Overwrite bootstrap's style */
 }
-/* line 271, sass/_base.scss */
+/* line 278, sass/_base.scss */
 ul.pagination li:first-child a, ul.pagination li:last-child a {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 274, sass/_base.scss */
+/* line 281, sass/_base.scss */
 ul.pagination a {
   margin: 0 0.1em;
   font-size: 1.25em;
@@ -9236,105 +9243,127 @@ ul.pagination a {
   font-weight: bold;
   border: 2px solid #ff5353;
 }
-/* line 282, sass/_base.scss */
+/* line 289, sass/_base.scss */
 ul.pagination li.active a {
   color: #fff;
   background-color: #ff5353;
   border-color: #ff5353;
 }
-/* line 287, sass/_base.scss */
+/* line 294, sass/_base.scss */
 ul.pagination li.disabled a {
   color: #d3d7da;
   border-color: #d3d7da;
 }
-/* line 291, sass/_base.scss */
+/* line 298, sass/_base.scss */
 ul.pagination a:hover {
   color: #fff;
   background-color: #ff5353;
   border-color: #ff5353;
 }
-/* line 297, sass/_base.scss */
+/* line 304, sass/_base.scss */
 ul.pagination.pagination-projects a {
   color: #2497d0;
   border-color: #2497d0;
 }
-/* line 300, sass/_base.scss */
+/* line 307, sass/_base.scss */
 ul.pagination.pagination-projects a:hover {
   color: #fff;
   background-color: #2497d0;
 }
-/* line 305, sass/_base.scss */
+/* line 312, sass/_base.scss */
 ul.pagination.pagination-projects li.active a {
   background-color: #2497d0;
   border-color: #2497d0;
 }
-/* line 311, sass/_base.scss */
+/* line 318, sass/_base.scss */
 ul.pagination.pagination-profiles a {
   color: #ff5353;
   border-color: #ff5353;
 }
-/* line 314, sass/_base.scss */
+/* line 321, sass/_base.scss */
 ul.pagination.pagination-profiles a:hover {
   color: #fff;
   background-color: #ff5353;
 }
-/* line 319, sass/_base.scss */
+/* line 326, sass/_base.scss */
 ul.pagination.pagination-profiles li.active a {
   background-color: #ff5353;
   border-color: #ff5353;
 }
-/* line 325, sass/_base.scss */
+/* line 332, sass/_base.scss */
 ul.pagination.pagination-resources a {
   color: #30c9ad;
   border-color: #30c9ad;
 }
-/* line 328, sass/_base.scss */
+/* line 335, sass/_base.scss */
 ul.pagination.pagination-resources a:hover {
   color: #fff;
   background-color: #30c9ad;
 }
-/* line 333, sass/_base.scss */
+/* line 340, sass/_base.scss */
 ul.pagination.pagination-resources li.active a {
   background-color: #30c9ad;
   border-color: #30c9ad;
 }
-/* line 339, sass/_base.scss */
+/* line 346, sass/_base.scss */
 ul.pagination.pagination-forum a {
   color: #5a4b84;
   border-color: #5a4b84;
 }
-/* line 342, sass/_base.scss */
+/* line 349, sass/_base.scss */
 ul.pagination.pagination-forum a:hover {
   color: #fff;
   background-color: #5a4b84;
 }
-/* line 347, sass/_base.scss */
+/* line 354, sass/_base.scss */
 ul.pagination.pagination-forum li.active a {
   background-color: #5a4b84;
   border-color: #5a4b84;
 }
-/* line 353, sass/_base.scss */
+/* line 360, sass/_base.scss */
 ul.pagination.pagination-sm li a {
   padding: 0.2em 0.6em 0.1em;
 }
 
-/* line 358, sass/_base.scss */
-#socialshare {
+/* line 365, sass/_base.scss */
+.socialshare {
   position: fixed;
   top: 14em;
   left: 50%;
-  font-size: 3em;
-}
-/* line 363, sass/_base.scss */
-#socialshare ul {
   margin-left: -600px;
+  font-size: 3em;
+  display: block;
+  overflow: hidden;
+}
+/* line 373, sass/_base.scss */
+.socialshare li {
+  background-color: white !important;
+  border-radius: 11px !important;
+  margin-bottom: 8px !important;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  line-height: 40px;
+}
+/* line 382, sass/_base.scss */
+.socialshare li a {
+  display: block;
+}
+/* line 385, sass/_base.scss */
+.socialshare li .fa-google-plus {
+  font-size: 20px;
+  vertical-align: middle;
+  display: inline-block;
+  height: 40px;
+  line-height: 35px;
 }
 
-/* line 369, sass/_base.scss */
+/* line 397, sass/_base.scss */
 .ta-editor div ul, .ta-editor div ol {
   margin-left: 1.25em;
 }
-/* line 372, sass/_base.scss */
+/* line 400, sass/_base.scss */
 .ta-editor div ol {
   list-style-type: decimal;
 }
@@ -9343,7 +9372,7 @@ ul.pagination.pagination-sm li a {
 	Add a layer to show work in progress or future features
 	!!! Parent must have position: relative
 */
-/* line 381, sass/_base.scss */
+/* line 409, sass/_base.scss */
 .preview {
   z-index: 1000;
   position: absolute;
@@ -11178,7 +11207,7 @@ div.toolbar.toolbar-profile form button {
 }
 /* line 183, sass/_content.scss */
 #content div.tab-content h3 {
-  font-size: 1em;
+  font-size: 1.2em;
 }
 /* line 186, sass/_content.scss */
 #content div.tab-content h4 {
@@ -11337,12 +11366,43 @@ div.toolbar.toolbar-profile form button {
   margin-top: 30px;
   padding: 0;
 }
-/* line 319, sass/_content.scss */
+/* line 320, sass/_content.scss */
+#content ul.experiences li, .admin #content ul.experiences li {
+  overflow: hidden;
+  margin-bottom: 0;
+}
+/* line 324, sass/_content.scss */
+#content ul.experiences h4, .admin #content ul.experiences h4 {
+  font-size: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+/* line 329, sass/_content.scss */
+#content ul.experiences h4 i, .admin #content ul.experiences h4 i {
+  color: #30c9ad;
+  margin-right: 4px;
+}
+/* line 334, sass/_content.scss */
+#content ul.experiences h5, .admin #content ul.experiences h5 {
+  font-size: 1em;
+  margin-bottom: .5em;
+  color: #2f2f2f;
+}
+/* line 339, sass/_content.scss */
+#content ul.experiences .date {
+  padding-left: 25px;
+  padding-bottom: 0;
+  font-size: .9em;
+  font-style: italic;
+  color: #878586;
+}
+/* line 347, sass/_content.scss */
 #content ul.nav-tabs {
   margin-bottom: 30px;
   border: none;
 }
-/* line 323, sass/_content.scss */
+/* line 351, sass/_content.scss */
 #content ul.nav-tabs > li a {
   font-size: 1.4em;
   font-weight: bold;
@@ -11350,25 +11410,25 @@ div.toolbar.toolbar-profile form button {
   background-color: #fff;
   border-color: #e8e8e8;
 }
-/* line 336, sass/_content.scss */
+/* line 364, sass/_content.scss */
 #content .tab-pane h1.thematic {
   margin-bottom: 30px;
 }
-/* line 341, sass/_content.scss */
+/* line 369, sass/_content.scss */
 #content .nav-tabs-listing ul.nav-tabs,
 #content .nav-tabs-slide ul.nav-tabs,
 #content .nav-tabs-seance ul.nav-tabs {
   margin: 0;
 }
-/* line 346, sass/_content.scss */
+/* line 374, sass/_content.scss */
 #content .nav-tabs-listing ul.nav-tabs a {
   border: 2px solid transparent;
 }
-/* line 349, sass/_content.scss */
+/* line 377, sass/_content.scss */
 #content .nav-tabs-listing ul.nav-tabs {
   margin-bottom: 3em;
 }
-/* line 351, sass/_content.scss */
+/* line 379, sass/_content.scss */
 #content .nav-tabs-listing ul.nav-tabs > li.active a, #content .nav-tabs-listing ul.nav-tabs > li a:hover {
   color: #fff;
   background-color: #2497d0;
@@ -11378,7 +11438,7 @@ div.toolbar.toolbar-profile form button {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-/* line 360, sass/_content.scss */
+/* line 388, sass/_content.scss */
 #content .nav-tabs-default ul.nav-tabs > li.active a, #content .nav-tabs-default ul.nav-tabs > li a:hover,
 #content .nav-tabs-project ul.nav-tabs > li.active a,
 #content .nav-tabs-project ul.nav-tabs > li a:hover {
@@ -11390,7 +11450,7 @@ div.toolbar.toolbar-profile form button {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-/* line 368, sass/_content.scss */
+/* line 396, sass/_content.scss */
 #content .nav-tabs-resource ul.nav-tabs > li.active a, #content .nav-tabs-resource ul.nav-tabs > li a:hover {
   color: #fff;
   background-color: #30c9ad;
@@ -11400,7 +11460,7 @@ div.toolbar.toolbar-profile form button {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-/* line 376, sass/_content.scss */
+/* line 404, sass/_content.scss */
 #content .nav-tabs-profile ul.nav-tabs > li.active a, #content .nav-tabs-profile ul.nav-tabs > li a:hover {
   color: #fff;
   background-color: #ff5353;
@@ -11410,17 +11470,17 @@ div.toolbar.toolbar-profile form button {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-/* line 383, sass/_content.scss */
+/* line 411, sass/_content.scss */
 #content .nav-tabs-forum ul.nav-tabs {
   margin-bottom: 15px;
 }
-/* line 385, sass/_content.scss */
+/* line 413, sass/_content.scss */
 #content .nav-tabs-forum ul.nav-tabs li a {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 388, sass/_content.scss */
+/* line 416, sass/_content.scss */
 #content .nav-tabs-forum ul.nav-tabs > li.active a, #content .nav-tabs-forum ul.nav-tabs > li a:hover {
   color: #fff;
   background-color: #5a4b84;
@@ -11430,48 +11490,99 @@ div.toolbar.toolbar-profile form button {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-/* line 396, sass/_content.scss */
-#content .nav-tabs-slide ul.nav-tabs {
-  font-size: 1.3em;
+/* line 426, sass/_content.scss */
+#content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li.active a, #content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li.active a:active, #content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li.active a:focus {
+  background: #2497d0;
+  color: #f5f4f2;
 }
-/* line 398, sass/_content.scss */
-#content .nav-tabs-slide ul.nav-tabs > li a {
-  color: #fff;
-  background-color: #2f2f2f;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
+/* line 429, sass/_content.scss */
+#content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li.active a span, #content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li.active a:active span, #content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li.active a:focus span {
+  background-color: #f5f4f2;
+  color: #2497d0;
 }
-/* line 403, sass/_content.scss */
-#content .nav-tabs-slide ul.nav-tabs > li.active a {
-  border: 2px solid #fff;
+/* line 434, sass/_content.scss */
+#content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li:not(.active) a:hover {
+  border: none;
+  color: #2497d0;
+  background-color: #f2f2f2;
 }
-/* line 409, sass/_content.scss */
-#content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li.active a {
+/* line 438, sass/_content.scss */
+#content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li:not(.active) a:hover span {
   background-color: #2497d0;
 }
-/* line 416, sass/_content.scss */
+/* line 444, sass/_content.scss */
+#content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li a:active span, #content .nav-tabs-slide.nav-tabs-slide-project ul.nav-tabs > li a:focus span {
+  color: white;
+}
+/* line 451, sass/_content.scss */
 #content .nav-tabs-slide.nav-tabs-slide-resource ul.nav-tabs > li.active a {
+  background: #f5f4f2;
+  color: #30c9ad;
+}
+/* line 454, sass/_content.scss */
+#content .nav-tabs-slide.nav-tabs-slide-resource ul.nav-tabs > li.active a span {
   background-color: #30c9ad;
 }
-/* line 421, sass/_content.scss */
+/* line 458, sass/_content.scss */
+#content .nav-tabs-slide.nav-tabs-slide-resource ul.nav-tabs > li a:hover {
+  border: none;
+  color: #30c9ad;
+  background-color: #f2f2f2;
+}
+/* line 462, sass/_content.scss */
+#content .nav-tabs-slide.nav-tabs-slide-resource ul.nav-tabs > li a:hover span {
+  background-color: #30c9ad;
+}
+/* line 467, sass/_content.scss */
 #content .nav-tabs-slide .carousel-inner .item img {
   width: 100%;
 }
-/* line 425, sass/_content.scss */
+/* line 471, sass/_content.scss */
+#content .nav-tabs-slide ul.nav-tabs > li a {
+  padding-right: 2em;
+  color: #333;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  -moz-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+/* line 480, sass/_content.scss */
+#content .nav-tabs-slide ul.nav-tabs > li a span {
+  -moz-transition: background-color 0.2s ease-in-out;
+  -o-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  margin-right: 0.25em;
+  margin-bottom: 0.25em;
+  padding: 0.5em;
+  font-size: 1.5em;
+  border-radius: 1em;
+  background: #333;
+  color: white;
+}
+/* line 490, sass/_content.scss */
+#content .nav-tabs-slide ul.nav-tabs > li a:focus {
+  border: none;
+}
+/* line 495, sass/_content.scss */
 #content .nav-tabs-seance ul.nav-tabs {
   font-size: 0.8em;
   text-transform: uppercase;
 }
-/* line 428, sass/_content.scss */
+/* line 498, sass/_content.scss */
 #content .nav-tabs-seance ul.nav-tabs > li.active a {
   background-color: #5a4b84;
 }
-/* line 436, sass/_content.scss */
+/* line 506, sass/_content.scss */
 #content .nav-tabs-slide .tab-content {
   position: relative;
 }
-/* line 438, sass/_content.scss */
+/* line 508, sass/_content.scss */
 #content .nav-tabs-slide .tab-content button {
   position: absolute;
   top: 0;
@@ -11486,19 +11597,19 @@ div.toolbar.toolbar-profile form button {
   outline: none;
   /* remove outline on Chrome */
 }
-/* line 450, sass/_content.scss */
+/* line 520, sass/_content.scss */
 #content .nav-tabs-slide .tab-content button:first-child {
   left: 0;
 }
-/* line 452, sass/_content.scss */
+/* line 522, sass/_content.scss */
 #content .nav-tabs-slide .tab-content button:first-child + button {
   right: 0;
 }
-/* line 456, sass/_content.scss */
+/* line 526, sass/_content.scss */
 #content .nav-tabs-slide .tab-content button:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
-/* line 461, sass/_content.scss */
+/* line 531, sass/_content.scss */
 #content .nav-tabs-slide .tab-content .tab-pane div.animate-hide {
   position: absolute;
   top: 0;
@@ -11509,15 +11620,15 @@ div.toolbar.toolbar-profile form button {
   -webkit-transition: all 1s ease-in-out;
   transition: all 1s ease-in-out;
 }
-/* line 468, sass/_content.scss */
+/* line 538, sass/_content.scss */
 #content .nav-tabs-slide .tab-content .tab-pane div.animate-hide.ng-hide {
   opacity: 0;
 }
-/* line 471, sass/_content.scss */
+/* line 541, sass/_content.scss */
 #content .nav-tabs-slide .tab-content .tab-pane > div {
   background-color: black;
 }
-/* line 473, sass/_content.scss */
+/* line 543, sass/_content.scss */
 #content .nav-tabs-slide .tab-content .tab-pane > div img {
   display: block;
   max-width: 683px;
@@ -11525,25 +11636,25 @@ div.toolbar.toolbar-profile form button {
   margin: 0 auto;
   /* center the image */
 }
-/* line 486, sass/_content.scss */
+/* line 556, sass/_content.scss */
 #content .tab-content-listing {
   padding: 0;
 }
-/* line 488, sass/_content.scss */
+/* line 558, sass/_content.scss */
 #content .tab-content-listing .boxes-listing {
   margin: 0;
   padding: 0;
 }
-/* line 493, sass/_content.scss */
+/* line 563, sass/_content.scss */
 #content .tab-content-profile {
   padding: 0;
 }
-/* line 495, sass/_content.scss */
+/* line 565, sass/_content.scss */
 #content .tab-content-profile .boxes-profiles {
   margin: 0;
   padding: 0;
 }
-/* line 500, sass/_content.scss */
+/* line 570, sass/_content.scss */
 #content section {
   position: relative;
   margin-bottom: 30px;
@@ -11551,21 +11662,26 @@ div.toolbar.toolbar-profile form button {
   color: #333;
   background-color: #fff;
 }
-/* line 506, sass/_content.scss */
+/* line 576, sass/_content.scss */
 #content section h3 {
   margin-bottom: 1em;
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 511, sass/_content.scss */
+/* line 581, sass/_content.scss */
 #content section p:last-child {
   padding-bottom: 2em;
 }
-/* line 515, sass/_content.scss */
+/* line 585, sass/_content.scss */
 #content section:nth-child(even) {
   background-color: #e8e8e8;
 }
-/* line 519, sass/_content.scss */
+/* line 589, sass/_content.scss */
+#content section.medias {
+  background-color: white;
+  padding-bottom: 10px;
+}
+/* line 594, sass/_content.scss */
 #content section.linked {
   position: relative;
   height: 20em;
@@ -11574,59 +11690,59 @@ div.toolbar.toolbar-profile form button {
   background-repeat: no-repeat;
   background-size: cover;
 }
-/* line 526, sass/_content.scss */
+/* line 601, sass/_content.scss */
 #content section.linked .carousel-inner {
   height: 20em;
 }
-/* line 529, sass/_content.scss */
+/* line 604, sass/_content.scss */
 #content section.linked a.carousel-control {
   width: 10%;
 }
-/* line 531, sass/_content.scss */
+/* line 606, sass/_content.scss */
 #content section.linked a.carousel-control span {
   top: 8em;
   /* placed at the bottom to allow for long content */
   font-weight: bold;
 }
-/* line 536, sass/_content.scss */
+/* line 611, sass/_content.scss */
 #content section.linked h3 {
   margin: 0;
 }
-/* line 539, sass/_content.scss */
+/* line 614, sass/_content.scss */
 #content section.linked h3, #content section.linked h4, #content section.linked h5 {
   z-index: 10;
   position: relative;
   text-transform: uppercase;
 }
-/* line 544, sass/_content.scss */
+/* line 619, sass/_content.scss */
 #content section.linked h3 a, #content section.linked h4 a, #content section.linked h5 a {
   display: inline-block;
   color: #fff;
 }
-/* line 547, sass/_content.scss */
+/* line 622, sass/_content.scss */
 #content section.linked h3 a:hover, #content section.linked h4 a:hover, #content section.linked h5 a:hover {
   text-decoration: none;
 }
-/* line 551, sass/_content.scss */
+/* line 626, sass/_content.scss */
 #content section.linked h3 a {
   padding: 1em;
 }
-/* line 554, sass/_content.scss */
+/* line 629, sass/_content.scss */
 #content section.linked.linked-project h3 a {
   background-color: #2497d0;
 }
-/* line 557, sass/_content.scss */
+/* line 632, sass/_content.scss */
 #content section.linked.linked-resource h3 a {
   background-color: #30c9ad;
 }
-/* line 560, sass/_content.scss */
+/* line 635, sass/_content.scss */
 #content section.linked h4 a, #content section.linked h5 a {
   padding: 0.5em 1em;
   background-color: #333;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   opacity: 0.8;
 }
-/* line 565, sass/_content.scss */
+/* line 640, sass/_content.scss */
 #content section.linked img {
   position: absolute;
   top: 0;
@@ -11634,99 +11750,99 @@ div.toolbar.toolbar-profile form button {
   height: 20em;
   width: 100%;
 }
-/* line 572, sass/_content.scss */
+/* line 647, sass/_content.scss */
 #content section.linked ul.nav {
   width: 100%;
 }
-/* line 574, sass/_content.scss */
+/* line 649, sass/_content.scss */
 #content section.linked ul.nav li {
   position: absolute;
   bottom: 0.5em;
 }
-/* line 578, sass/_content.scss */
+/* line 653, sass/_content.scss */
 #content section.linked ul.nav li:first-child {
   left: 1em;
 }
-/* line 581, sass/_content.scss */
+/* line 656, sass/_content.scss */
 #content section.linked ul.nav li:last-child {
   right: 1em;
 }
-/* line 584, sass/_content.scss */
+/* line 659, sass/_content.scss */
 #content section.linked ul.nav a {
   font-size: 0.9em;
   font-weight: bold;
   color: #fff;
   text-decoration: underline;
 }
-/* line 589, sass/_content.scss */
+/* line 664, sass/_content.scss */
 #content section.linked ul.nav a:hover {
   background-color: transparent;
 }
-/* line 596, sass/_content.scss */
+/* line 671, sass/_content.scss */
 #content .needs, #content .interested {
   height: 220px;
   margin-bottom: 2em;
   padding: 2em;
 }
-/* line 600, sass/_content.scss */
+/* line 675, sass/_content.scss */
 #content .needs h3, #content .interested h3 {
   color: #fff;
   font-size: 1.5em;
   font-weight: bold;
 }
-/* line 606, sass/_content.scss */
+/* line 681, sass/_content.scss */
 #content .needs h4, #content .interested h4 {
   font-size: 1.4em;
 }
-/* line 609, sass/_content.scss */
+/* line 684, sass/_content.scss */
 #content .needs h3, #content .needs h4, #content .interested h3, #content .interested h4 {
   text-transform: uppercase;
 }
-/* line 613, sass/_content.scss */
+/* line 688, sass/_content.scss */
 #content .needs {
   position: relative;
   color: #333;
   background: #2695cd url("../img/bg/content-blue-bg.png") center left no-repeat;
 }
-/* line 618, sass/_content.scss */
+/* line 693, sass/_content.scss */
 #content .needs #carousel-needs div.carousel-inner {
   padding-bottom: 3em;
 }
-/* line 621, sass/_content.scss */
+/* line 696, sass/_content.scss */
 #content .needs #carousel-needs a.carousel-control {
   color: #fff;
   background-image: none;
 }
-/* line 624, sass/_content.scss */
+/* line 699, sass/_content.scss */
 #content .needs #carousel-needs a.carousel-control.right {
   right: -2em;
   margin-right: -20px;
 }
-/* line 628, sass/_content.scss */
+/* line 703, sass/_content.scss */
 #content .needs #carousel-needs a.carousel-control.left {
   left: -2em;
   margin-left: -20px;
 }
-/* line 633, sass/_content.scss */
+/* line 708, sass/_content.scss */
 #content .needs #carousel-needs .text-center {
   text-align: left;
 }
-/* line 637, sass/_content.scss */
+/* line 712, sass/_content.scss */
 #content .needs #carousel-needs .actions a {
   padding: 0.20em 1em 0.25em 1em;
 }
-/* line 641, sass/_content.scss */
+/* line 716, sass/_content.scss */
 #content .needs #carousel-needs .actions span.glyphicon {
   display: initial;
   font-size: 2em;
   margin-right: 5px;
   vertical-align: middle;
 }
-/* line 648, sass/_content.scss */
+/* line 723, sass/_content.scss */
 #content .needs #carousel-needs ul.tags {
   margin-top: 1em;
 }
-/* line 652, sass/_content.scss */
+/* line 727, sass/_content.scss */
 #content .needs .item {
   min-height: 100px;
   margin: 1em 0;
@@ -11734,11 +11850,11 @@ div.toolbar.toolbar-profile form button {
   line-height: 1.25em;
   color: #fff;
 }
-/* line 659, sass/_content.scss */
+/* line 734, sass/_content.scss */
 #content .needs .item h4 {
   padding: 0.5em 0 0.25em;
 }
-/* line 663, sass/_content.scss */
+/* line 738, sass/_content.scss */
 #content .needs .needs-idea,
 #content .needs .needs-financing,
 #content .needs .needs-hardware,
@@ -11746,7 +11862,7 @@ div.toolbar.toolbar-profile form button {
   background-position: 0 1.25em;
   background-repeat: no-repeat;
 }
-/* line 676, sass/_content.scss */
+/* line 751, sass/_content.scss */
 #content .interested {
   display: table;
   width: 100%;
@@ -11755,130 +11871,130 @@ div.toolbar.toolbar-profile form button {
   background-color: #c30;
   border: 2px solid #fff;
 }
-/* line 683, sass/_content.scss */
+/* line 758, sass/_content.scss */
 #content .interested h3 {
   display: table-cell;
   height: 100%;
   font-size: 2em;
   vertical-align: middle;
 }
-/* line 689, sass/_content.scss */
+/* line 764, sass/_content.scss */
 #content .interested h3 a {
   color: #fff;
 }
-/* line 693, sass/_content.scss */
+/* line 768, sass/_content.scss */
 #content .bloc {
   overflow: hidden;
   height: 300px;
   margin: 3em 0;
 }
-/* line 697, sass/_content.scss */
+/* line 772, sass/_content.scss */
 #content .bloc h3, #content .bloc p, #content .bloc ul {
   padding-right: 1em;
   padding-left: 1em;
 }
-/* line 701, sass/_content.scss */
+/* line 776, sass/_content.scss */
 #content .bloc h3 {
   padding-top: 1em;
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 707, sass/_content.scss */
+/* line 782, sass/_content.scss */
 #content .bloc-methodology {
   padding: 170px 0 0 0;
   text-align: center;
   color: #fff;
   background: #30c9ad url("../img/icons/methodology.png") 50% 35% no-repeat;
 }
-/* line 712, sass/_content.scss */
+/* line 787, sass/_content.scss */
 #content .bloc-methodology h3 {
   font-size: 2em;
   vertical-align: middle;
   text-align: center;
   font-weight: bold;
 }
-/* line 717, sass/_content.scss */
+/* line 792, sass/_content.scss */
 #content .bloc-methodology h3 img {
   display: inline-block;
 }
-/* line 722, sass/_content.scss */
+/* line 797, sass/_content.scss */
 #content .bloc-warning {
   color: #fff;
   background: #5a4b84 url("../img/icons/warning.png") 50% 15% no-repeat;
 }
-/* line 725, sass/_content.scss */
+/* line 800, sass/_content.scss */
 #content .bloc-warning h3 {
   padding-top: 120px;
   padding-bottom: 1em;
   font-weight: bold;
 }
-/* line 730, sass/_content.scss */
+/* line 805, sass/_content.scss */
 #content .bloc-warning p, #content .bloc-warning ul {
   font-size: 0.9em;
   line-height: 1.5em;
 }
-/* line 734, sass/_content.scss */
+/* line 809, sass/_content.scss */
 #content .bloc-warning li:before {
   content: "> ";
 }
-/* line 738, sass/_content.scss */
+/* line 813, sass/_content.scss */
 #content .bloc-links, #content .bloc-about {
   position: relative;
 }
-/* line 740, sass/_content.scss */
+/* line 815, sass/_content.scss */
 #content .bloc-links h3, #content .bloc-links p, #content .bloc-links ul, #content .bloc-about h3, #content .bloc-about p, #content .bloc-about ul {
   padding-right: 2em;
   padding-left: 2em;
 }
-/* line 744, sass/_content.scss */
+/* line 819, sass/_content.scss */
 #content .bloc-links h3, #content .bloc-about h3 {
   padding: 2em 2em 1em 2em;
 }
-/* line 748, sass/_content.scss */
+/* line 823, sass/_content.scss */
 #content .bloc-links {
   background-color: #e8e8e8;
 }
-/* line 750, sass/_content.scss */
+/* line 825, sass/_content.scss */
 #content .bloc-links.bloc-links-project {
   background-color: #fff;
 }
-/* line 753, sass/_content.scss */
+/* line 828, sass/_content.scss */
 #content .bloc-links a, #content .bloc-links a:visited {
   color: #333;
   text-decoration: underline;
 }
-/* line 758, sass/_content.scss */
+/* line 833, sass/_content.scss */
 #content .bloc-about {
   color: #fff;
   background-color: #30c9ad;
 }
-/* line 761, sass/_content.scss */
+/* line 836, sass/_content.scss */
 #content .bloc-about.bloc-about-project {
   background-color: #2497d0;
 }
-/* line 764, sass/_content.scss */
+/* line 839, sass/_content.scss */
 #content .bloc-about img {
   display: block;
   margin: 1em auto 2em;
 }
-/* line 768, sass/_content.scss */
+/* line 843, sass/_content.scss */
 #content .bloc-about p {
   font-weight: bold;
 }
-/* line 771, sass/_content.scss */
+/* line 846, sass/_content.scss */
 #content .bloc-about em {
   display: block;
   font-size: 0.9em;
   font-weight: normal;
 }
 
-/* line 781, sass/_content.scss */
+/* line 856, sass/_content.scss */
 .boxes {
   margin-right: -30px;
   /* Extra div to vertically center text no matter how many lines we have */
   /* FIXME Need to merge this with normal boxes if we can agree on a standard way to "link" boxes */
 }
-/* line 785, sass/_content.scss */
+/* line 860, sass/_content.scss */
 .boxes .box {
   overflow: hidden;
   display: inline-block;
@@ -11891,11 +12007,11 @@ div.toolbar.toolbar-profile form button {
   vertical-align: top;
   /* Temporarily hide the project date */
 }
-/* line 796, sass/_content.scss */
+/* line 871, sass/_content.scss */
 .boxes .box h3:first-child {
   display: none;
 }
-/* line 799, sass/_content.scss */
+/* line 874, sass/_content.scss */
 .boxes .box h3, .boxes .box h4, .boxes .box h5 {
   z-index: 10;
   position: relative;
@@ -11903,7 +12019,7 @@ div.toolbar.toolbar-profile form button {
   font-weight: bold;
   white-space: nowrap;
 }
-/* line 806, sass/_content.scss */
+/* line 881, sass/_content.scss */
 .boxes .box h3 {
   z-index: 1;
   position: absolute;
@@ -11916,7 +12032,7 @@ div.toolbar.toolbar-profile form button {
   text-transform: uppercase;
   background-color: #333;
 }
-/* line 817, sass/_content.scss */
+/* line 892, sass/_content.scss */
 .boxes .box h4, .boxes .box h5 {
   padding: 0.2em 15px;
   line-height: 1.5em;
@@ -11924,76 +12040,76 @@ div.toolbar.toolbar-profile form button {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   opacity: 0.8;
 }
-/* line 823, sass/_content.scss */
+/* line 898, sass/_content.scss */
 .boxes .box h4 a, .boxes .box h5 a {
   text-decoration: none;
 }
-/* line 826, sass/_content.scss */
+/* line 901, sass/_content.scss */
 .boxes .box h4 a:hover, .boxes .box h5 a:hover {
   text-decoration: underline;
 }
-/* line 829, sass/_content.scss */
+/* line 904, sass/_content.scss */
 .boxes .box h4 {
   padding-top: 0.75em;
   padding-bottom: 0;
   text-transform: uppercase;
 }
-/* line 834, sass/_content.scss */
+/* line 909, sass/_content.scss */
 .boxes .box h5 {
   padding-top: 0;
   padding-bottom: 0.75em;
   color: #e8e8e8;
 }
-/* line 839, sass/_content.scss */
+/* line 914, sass/_content.scss */
 .boxes .box a {
   display: inline-block;
   color: #fff;
 }
-/* line 842, sass/_content.scss */
+/* line 917, sass/_content.scss */
 .boxes .box a span.link {
   text-decoration: underline;
 }
-/* line 846, sass/_content.scss */
+/* line 921, sass/_content.scss */
 .boxes .box h3 img {
   margin-left: 0.5em;
   padding: 0.25em 0 0.25em 0.25em;
   border-left: 1px solid #444;
   vertical-align: middle;
 }
-/* line 852, sass/_content.scss */
+/* line 927, sass/_content.scss */
 .boxes .box h3 + a {
   display: block;
   height: 100%;
   width: 100%;
 }
-/* line 856, sass/_content.scss */
+/* line 931, sass/_content.scss */
 .boxes .box h3 + a img {
   height: 100%;
   width: 100%;
 }
-/* line 861, sass/_content.scss */
+/* line 936, sass/_content.scss */
 .boxes .box div.description {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
 }
-/* line 866, sass/_content.scss */
+/* line 941, sass/_content.scss */
 .boxes .box div.description h4, .boxes .box div.description h5 {
   display: block;
   background-color: #2f2f2f;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
   opacity: 0.95;
 }
-/* line 871, sass/_content.scss */
+/* line 946, sass/_content.scss */
 .boxes .box div.description h4 a, .boxes .box div.description h5 a {
   display: inline;
 }
-/* line 874, sass/_content.scss */
+/* line 949, sass/_content.scss */
 .boxes .box div.description h5 a {
   text-decoration: underline;
 }
-/* line 878, sass/_content.scss */
+/* line 953, sass/_content.scss */
 .boxes .box p.baseline a {
   opacity: 0;
   position: absolute;
@@ -12009,40 +12125,40 @@ div.toolbar.toolbar-profile form button {
   -webkit-transition: opacity, background-color 0.2s ease-in-out;
   transition: opacity, background-color 0.2s ease-in-out;
 }
-/* line 890, sass/_content.scss */
+/* line 965, sass/_content.scss */
 .boxes .box:hover p.baseline a {
   opacity: 1;
   background-color: rgba(255, 255, 255, 0.85);
 }
-/* line 893, sass/_content.scss */
+/* line 968, sass/_content.scss */
 .boxes .box:hover p.baseline a:hover {
   text-decoration: none;
 }
-/* line 897, sass/_content.scss */
+/* line 972, sass/_content.scss */
 .boxes .box.box-blue {
   background-color: #2497d0;
 }
-/* line 898, sass/_content.scss */
+/* line 973, sass/_content.scss */
 .boxes .box.box-green {
   background-color: #30c9ad;
 }
-/* line 899, sass/_content.scss */
+/* line 974, sass/_content.scss */
 .boxes .box.box-orange {
   background-color: #fa920b;
 }
-/* line 900, sass/_content.scss */
+/* line 975, sass/_content.scss */
 .boxes .box.box-purple {
   background-color: #5a4b84;
 }
-/* line 901, sass/_content.scss */
+/* line 976, sass/_content.scss */
 .boxes .box.box-red {
   background-color: #c30;
 }
-/* line 902, sass/_content.scss */
+/* line 977, sass/_content.scss */
 .boxes .box.box-pink {
   background-color: #ff5353 !important;
 }
-/* line 904, sass/_content.scss */
+/* line 979, sass/_content.scss */
 .boxes .box.box-solo a {
   height: 100%;
   padding: 1em;
@@ -12055,28 +12171,28 @@ div.toolbar.toolbar-profile form button {
   background: transparent url("../img/bg/box.png") top left no-repeat;
   vertical-align: middle;
 }
-/* line 915, sass/_content.scss */
+/* line 990, sass/_content.scss */
 .boxes .box.box-solo a span {
   font-size: 0.9em;
   font-weight: lighter;
 }
-/* line 918, sass/_content.scss */
+/* line 993, sass/_content.scss */
 .boxes .box.box-solo a span.count {
   font-size: 1em;
 }
-/* line 922, sass/_content.scss */
+/* line 997, sass/_content.scss */
 .boxes .box.box-solo a:hover {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.25);
 }
-/* line 932, sass/_content.scss */
+/* line 1007, sass/_content.scss */
 .boxes .box-solo div {
   display: table;
   height: 100%;
   width: 100%;
   vertical-align: top;
 }
-/* line 937, sass/_content.scss */
+/* line 1012, sass/_content.scss */
 .boxes .box-solo div a {
   display: table-cell;
   padding: 0 1em;
@@ -12090,33 +12206,33 @@ div.toolbar.toolbar-profile form button {
   -webkit-transition: all 0.1s ease;
   transition: all 0.1s ease;
 }
-/* line 946, sass/_content.scss */
+/* line 1021, sass/_content.scss */
 .boxes .box-solo div a:hover {
   text-decoration: none;
 }
-/* line 954, sass/_content.scss */
+/* line 1029, sass/_content.scss */
 .boxes.boxes-listing .box {
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
-/* line 959, sass/_content.scss */
+/* line 1034, sass/_content.scss */
 .boxes.boxes-spaced {
   margin-top: 30px;
   margin-bottom: 30px;
 }
-/* line 967, sass/_content.scss */
+/* line 1042, sass/_content.scss */
 .boxes.boxes-medium .box h4, .boxes.boxes-medium .box h5 {
   font-size: 1.1em;
   text-transform: uppercase;
 }
-/* line 971, sass/_content.scss */
+/* line 1046, sass/_content.scss */
 .boxes.boxes-medium .box > a {
   position: relative;
   display: block;
   height: 237.5px;
 }
-/* line 975, sass/_content.scss */
+/* line 1050, sass/_content.scss */
 .boxes.boxes-medium .box > a h3, .boxes.boxes-medium .box > a h4, .boxes.boxes-medium .box > a h5 {
   float: left;
   clear: left;
@@ -12124,11 +12240,11 @@ div.toolbar.toolbar-profile form button {
   padding: 0.5em 10px;
   background-color: #333;
 }
-/* line 982, sass/_content.scss */
+/* line 1057, sass/_content.scss */
 .boxes.boxes-medium .box > a h3 {
   padding: 0 10px;
 }
-/* line 985, sass/_content.scss */
+/* line 1060, sass/_content.scss */
 .boxes.boxes-medium .box > a > img {
   position: absolute;
   top: 0;
@@ -12138,50 +12254,50 @@ div.toolbar.toolbar-profile form button {
   height: 100%;
   width: 100%;
 }
-/* line 996, sass/_content.scss */
+/* line 1071, sass/_content.scss */
 .boxes.boxes-medium .box > a:hover, .boxes.boxes-medium .box > div > a:hover {
   opacity: 0.8;
 }
-/* line 1001, sass/_content.scss */
+/* line 1076, sass/_content.scss */
 .boxes.boxes-medium .box.box-solo a {
   font-size: 1.75em;
   font-family: "LatoLight";
 }
-/* line 1011, sass/_content.scss */
+/* line 1086, sass/_content.scss */
 .boxes.boxes-profiles .box.box-solo a {
   color: #fff;
   font-size: 1.75em;
   font-family: "LatoLight";
 }
-/* line 1020, sass/_content.scss */
+/* line 1095, sass/_content.scss */
 .boxes.boxes-small {
   font-size: 0.85em;
 }
-/* line 1022, sass/_content.scss */
+/* line 1097, sass/_content.scss */
 .boxes.boxes-small .box {
   height: 196px;
   width: 196px;
   margin-right: 15px;
 }
-/* line 1026, sass/_content.scss */
+/* line 1101, sass/_content.scss */
 .boxes.boxes-small .box div.description {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
 }
-/* line 1032, sass/_content.scss */
+/* line 1107, sass/_content.scss */
 .boxes.boxes-small .box.box-solo a {
   font-size: 1.5em;
   line-height: 1.5em;
   font-family: "LatoLight";
 }
-/* line 1040, sass/_content.scss */
+/* line 1115, sass/_content.scss */
 .boxes.boxes-small-home {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-/* line 1043, sass/_content.scss */
+/* line 1118, sass/_content.scss */
 .boxes.boxes-small-home .box {
   width: 158.33333px !important;
   /* Need to overide the member's style */
@@ -12191,20 +12307,20 @@ div.toolbar.toolbar-profile form button {
   margin-bottom: 15px;
   /* Need to overide the member's style */
 }
-/* line 1048, sass/_content.scss */
+/* line 1123, sass/_content.scss */
 .boxes.boxes-small-home .box > img {
   width: inherit;
   height: inherit;
 }
-/* line 1053, sass/_content.scss */
+/* line 1128, sass/_content.scss */
 .boxes.boxes-small-home .box-solo a {
   font-size: 2.1em;
 }
-/* line 1058, sass/_content.scss */
+/* line 1133, sass/_content.scss */
 .boxes.boxes-profiles {
   margin-right: -30px;
 }
-/* line 1062, sass/_content.scss */
+/* line 1137, sass/_content.scss */
 .boxes.boxes-profiles div.box {
   display: inline-block;
   position: relative;
@@ -12219,11 +12335,11 @@ div.toolbar.toolbar-profile form button {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
-/* line 1073, sass/_content.scss */
+/* line 1148, sass/_content.scss */
 .boxes.boxes-profiles div.box.member-added {
   background-color: #fa920b;
 }
-/* line 1076, sass/_content.scss */
+/* line 1151, sass/_content.scss */
 .boxes.boxes-profiles div.box button {
   position: absolute;
   top: 0;
@@ -12233,28 +12349,28 @@ div.toolbar.toolbar-profile form button {
   background-color: #2f2f2f;
   border: none;
 }
-/* line 1084, sass/_content.scss */
+/* line 1159, sass/_content.scss */
 .boxes.boxes-profiles div.box button:hover {
   background-color: #ff5353;
 }
-/* line 1088, sass/_content.scss */
+/* line 1163, sass/_content.scss */
 .boxes.boxes-profiles div.box img {
   width: 140px;
   height: 140px;
   margin: 1em 0 0.25em;
 }
-/* line 1093, sass/_content.scss */
+/* line 1168, sass/_content.scss */
 .boxes.boxes-profiles div.box a {
   height: 100%;
   width: 100%;
   color: #2f2f2f;
 }
-/* line 1098, sass/_content.scss */
+/* line 1173, sass/_content.scss */
 .boxes.boxes-profiles div.box h3, .boxes.boxes-profiles div.box h4, .boxes.boxes-profiles div.box h5 {
   line-height: 1em;
   width: 100%;
 }
-/* line 1102, sass/_content.scss */
+/* line 1177, sass/_content.scss */
 .boxes.boxes-profiles div.box h3 {
   position: relative;
   padding: 0;
@@ -12262,11 +12378,11 @@ div.toolbar.toolbar-profile form button {
   text-transform: uppercase;
   font-weight: 400;
 }
-/* line 1108, sass/_content.scss */
+/* line 1183, sass/_content.scss */
 .boxes.boxes-profiles div.box h3 strong {
   font-weight: bold;
 }
-/* line 1112, sass/_content.scss */
+/* line 1187, sass/_content.scss */
 .boxes.boxes-profiles div.box h4 {
   margin-bottom: 1em;
   padding: 0;
@@ -12275,7 +12391,7 @@ div.toolbar.toolbar-profile form button {
   background-color: transparent;
   text-transform: none;
 }
-/* line 1120, sass/_content.scss */
+/* line 1195, sass/_content.scss */
 .boxes.boxes-profiles div.box h5 {
   position: absolute;
   right: 0;
@@ -12286,18 +12402,18 @@ div.toolbar.toolbar-profile form button {
   background-color: #2f2f2f;
   text-transform: uppercase;
 }
-/* line 1129, sass/_content.scss */
+/* line 1204, sass/_content.scss */
 .boxes.boxes-profiles div.box h5 span {
   margin-right: 0.5em;
   margin-bottom: 0.25em;
   font-size: 1.75em;
   vertical-align: middle;
 }
-/* line 1136, sass/_content.scss */
+/* line 1211, sass/_content.scss */
 .boxes.boxes-profiles div.box.selected {
   background-color: #ff5353;
 }
-/* line 1139, sass/_content.scss */
+/* line 1214, sass/_content.scss */
 .boxes.boxes-profiles div.box div.member-buttons {
   display: none;
   z-index: 100;
@@ -12305,41 +12421,41 @@ div.toolbar.toolbar-profile form button {
   top: 0;
   right: 0;
 }
-/* line 1145, sass/_content.scss */
+/* line 1220, sass/_content.scss */
 .boxes.boxes-profiles div.box div.member-buttons button {
   position: relative;
   float: right;
 }
-/* line 1151, sass/_content.scss */
+/* line 1226, sass/_content.scss */
 .boxes.boxes-profiles div.box:hover div.member-buttons {
   display: block;
 }
-/* line 1157, sass/_content.scss */
+/* line 1232, sass/_content.scss */
 .boxes.boxes-profiles.boxes-small {
   margin-right: 0;
 }
-/* line 1159, sass/_content.scss */
+/* line 1234, sass/_content.scss */
 .boxes.boxes-profiles.boxes-small div {
   position: relative;
   #margin-right: 30px;
   #margin-bottom: 15px;
   background-color: #fff;
 }
-/* line 1164, sass/_content.scss */
+/* line 1239, sass/_content.scss */
 .boxes.boxes-profiles.boxes-small div:hover {
   background-color: #e8e8e8;
 }
-/* line 1167, sass/_content.scss */
+/* line 1242, sass/_content.scss */
 .boxes.boxes-profiles.boxes-small div h3 {
   margin-bottom: 0.1em;
   font-size: 0.85em;
   color: #2f2f2f;
 }
-/* line 1172, sass/_content.scss */
+/* line 1247, sass/_content.scss */
 .boxes.boxes-profiles.boxes-small div h4 {
   font-size: 0.75em;
 }
-/* line 1175, sass/_content.scss */
+/* line 1250, sass/_content.scss */
 .boxes.boxes-profiles.boxes-small div h5 {
   position: absolute;
   bottom: 0;
@@ -12347,31 +12463,31 @@ div.toolbar.toolbar-profile form button {
   right: 0;
   font-size: 0.7em;
 }
-/* line 1182, sass/_content.scss */
+/* line 1257, sass/_content.scss */
 .boxes.boxes-profiles.boxes-small div img {
   width: 85px;
   height: 85px;
   margin-top: 0.75em;
 }
 
-/* line 1193, sass/_content.scss */
+/* line 1268, sass/_content.scss */
 div.badges {
   margin-bottom: 4em;
   padding: 2em;
   background-color: #e8e8e8;
 }
-/* line 1197, sass/_content.scss */
+/* line 1272, sass/_content.scss */
 div.badges h3 {
   font-weight: bold;
   text-transform: uppercase;
 }
 
-/* line 1204, sass/_content.scss */
+/* line 1279, sass/_content.scss */
 ul.user-search li.list-group-item {
   min-height: 60px;
   overflow: hidden;
 }
-/* line 1207, sass/_content.scss */
+/* line 1282, sass/_content.scss */
 ul.user-search li.list-group-item img {
   height: 40px;
   /* height of the img */
@@ -12389,11 +12505,15 @@ ul.user-search li.list-group-item img {
   /* Resources */
 }
 /* line 10, sass/_forms.scss */
+.admin #content .introduction {
+  margin-bottom: 30px;
+}
+/* line 18, sass/_forms.scss */
 .admin #content h2, .admin #content h3 {
   font-size: 1.5em;
   text-transform: uppercase;
 }
-/* line 14, sass/_forms.scss */
+/* line 22, sass/_forms.scss */
 .admin #content h2 {
   margin-top: -30px;
   margin-right: -30px;
@@ -12403,92 +12523,111 @@ ul.user-search li.list-group-item img {
   color: #fff;
   font-weight: bold;
 }
-/* line 24, sass/_forms.scss */
+/* line 32, sass/_forms.scss */
 .admin #content h3 {
   margin: 1em 0;
   color: #656565;
 }
-/* line 31, sass/_forms.scss */
-.admin #content form fieldset {
-  margin-bottom: 0.75em;
-  padding: 1em;
-  background-color: #e8e8e8;
+/* line 38, sass/_forms.scss */
+.admin #content form .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  margin-top: 20px;
 }
-/* line 35, sass/_forms.scss */
-.admin #content form fieldset.needs-idea, .admin #content form fieldset.needs-select, .admin #content form fieldset.linked-idea, .admin #content form fieldset.fixme {
-  height: 15em;
-  height: 180px;
-  height: auto;
-  /* FIXME */
-  margin-top: 30px;
-  padding: 1.5em 1.5em 2.5em;
-  background-color: #e8e8e8;
-  background-position: 1.5em 4em;
-  background-repeat: no-repeat;
-}
-/* line 44, sass/_forms.scss */
-.admin #content form fieldset.needs-idea h4, .admin #content form fieldset.needs-select h4, .admin #content form fieldset.linked-idea h4, .admin #content form fieldset.fixme h4 {
-  font-size: 1.2em;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-/* line 49, sass/_forms.scss */
-.admin #content form fieldset.needs-idea h5, .admin #content form fieldset.needs-select h5, .admin #content form fieldset.linked-idea h5, .admin #content form fieldset.fixme h5 {
-  margin-top: 0.5em;
-  margin-left: 25%;
-  font-size: 1.5em;
-  text-transform: uppercase;
-}
-/* line 55, sass/_forms.scss */
-.admin #content form fieldset.needs-idea p, .admin #content form fieldset.needs-select p, .admin #content form fieldset.linked-idea p, .admin #content form fieldset.fixme p {
-  margin-bottom: 1em;
+/* line 47, sass/_forms.scss */
+.admin #content form .inputfile + label {
+  display: block;
+  margin-right: 50px;
+  text-align: center;
+  margin-top: 20px;
+  padding: .75em 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* line 57, sass/_forms.scss */
-.admin #content form fieldset.needs-idea p:last-child, .admin #content form fieldset.needs-select p:last-child, .admin #content form fieldset.linked-idea p:last-child, .admin #content form fieldset.fixme p:last-child {
-  margin-bottom: 0;
+.admin #content form .panel h4 {
+  font-size: 1.3em;
+  font-weight: bold;
 }
 /* line 61, sass/_forms.scss */
-.admin #content form fieldset.needs-idea textarea, .admin #content form fieldset.needs-select textarea, .admin #content form fieldset.linked-idea textarea, .admin #content form fieldset.fixme textarea {
+.admin #content form .panel h5 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-top: .75em;
+  color: #878586;
+}
+/* line 68, sass/_forms.scss */
+.admin #content form .panel .accordion-toggle .title {
+  vertical-align: middle;
+}
+/* line 71, sass/_forms.scss */
+.admin #content form .panel .accordion-toggle:hover {
+  text-decoration: none;
+}
+/* line 75, sass/_forms.scss */
+.admin #content form .panel .subtitle {
+  line-height: 1.2em;
+  padding-right: 1em;
+  padding-top: 8px;
+}
+/* line 80, sass/_forms.scss */
+.admin #content form .panel .glyphicon-chevron-down {
+  transition: transform .2s;
+}
+/* line 82, sass/_forms.scss */
+.admin #content form .panel .glyphicon-chevron-down.right {
+  transform: rotate(-90deg);
+}
+/* line 86, sass/_forms.scss */
+.admin #content form .panel .panel-body {
+  padding-top: .25em;
+}
+/* line 91, sass/_forms.scss */
+.admin #content form .panel-heading {
+  overflow: hidden;
+}
+/* line 95, sass/_forms.scss */
+.admin #content form fieldset {
+  margin: 0;
+  padding: 0;
+}
+/* line 98, sass/_forms.scss */
+.admin #content form fieldset.needs-idea, .admin #content form fieldset.needs-select, .admin #content form fieldset.linked-idea {
+  background-color: transparent;
+}
+/* line 100, sass/_forms.scss */
+.admin #content form fieldset.needs-idea textarea, .admin #content form fieldset.needs-select textarea, .admin #content form fieldset.linked-idea textarea {
   width: 75%;
   margin-left: 25%;
   padding: 0;
   background-color: transparent;
 }
-/* line 67, sass/_forms.scss */
-.admin #content form fieldset.needs-idea button.right, .admin #content form fieldset.needs-select button.right, .admin #content form fieldset.linked-idea button.right, .admin #content form fieldset.fixme button.right {
+/* line 106, sass/_forms.scss */
+.admin #content form fieldset.needs-idea button.right, .admin #content form fieldset.needs-select button.right, .admin #content form fieldset.linked-idea button.right {
   float: right;
   padding: 0;
   font-size: 0.85em;
   background-color: transparent;
   border: none;
 }
-/* line 75, sass/_forms.scss */
+/* line 114, sass/_forms.scss */
 .admin #content form fieldset.needs-idea {
   background-image: url("../img/needs/needs-idea.png");
 }
-/* line 79, sass/_forms.scss */
+/* line 118, sass/_forms.scss */
 .admin #content form fieldset.needs.needs-select, .admin #content form fieldset.needs.needs-save {
   height: auto;
   background-image: none;
 }
-/* line 85, sass/_forms.scss */
+/* line 124, sass/_forms.scss */
 .admin #content form fieldset.needs.needs-select button.dropdown-toggle .caret {
   margin-left: 1em;
 }
-/* line 89, sass/_forms.scss */
-.admin #content form fieldset.needs.needs-select p {
-  margin: 0.5em;
-}
-/* line 91, sass/_forms.scss */
-.admin #content form fieldset.needs.needs-select p.right {
-  margin-top: 1em;
-}
-/* line 93, sass/_forms.scss */
-.admin #content form fieldset.needs.needs-select p.right button {
-  display: inline-block;
-  padding: 0.5em 1em;
-}
-/* line 99, sass/_forms.scss */
+/* line 128, sass/_forms.scss */
 .admin #content form fieldset.needs.needs-select textarea {
   width: 100%;
   margin: 0;
@@ -12499,43 +12638,22 @@ ul.user-search li.list-group-item img {
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
-/* line 108, sass/_forms.scss */
-.admin #content form fieldset.needs.needs-select .need-keywords div.tags {
-  box-shadow: none;
-}
-/* line 110, sass/_forms.scss */
-.admin #content form fieldset.needs.needs-select .need-keywords div.tags li.tag-item {
-  background-color: #2497d0;
-  -moz-border-radius: 0;
-  -webkit-border-radius: 0;
-  border-radius: 0;
-}
-/* line 114, sass/_forms.scss */
-.admin #content form fieldset.needs.needs-select .need-keywords div.tags input.input {
-  background-color: white !important;
-  padding: 0.25em !important;
-  border: 1px solid #d3d7da;
-}
-/* line 119, sass/_forms.scss */
-.admin #content form fieldset.needs.needs-select .need-keywords div.tags ul.tag-list {
-  margin-right: 30px;
-}
-/* line 124, sass/_forms.scss */
+/* line 136, sass/_forms.scss */
 .admin #content form fieldset.needs.needs-select button.button {
   position: relative;
   float: right;
 }
-/* line 130, sass/_forms.scss */
+/* line 142, sass/_forms.scss */
 .admin #content form fieldset.needs.needs-save {
   padding-bottom: 15px;
   background: #e8e8e8 url("../img/needs/needs-idea.png") 5% 50% no-repeat;
 }
-/* line 133, sass/_forms.scss */
+/* line 145, sass/_forms.scss */
 .admin #content form fieldset.needs.needs-save h5 {
   margin-left: 0;
   font-weight: bold;
 }
-/* line 137, sass/_forms.scss */
+/* line 149, sass/_forms.scss */
 .admin #content form fieldset.needs.needs-save textarea {
   display: inline;
   margin: 15px 0;
@@ -12546,140 +12664,66 @@ ul.user-search li.list-group-item img {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 145, sass/_forms.scss */
+/* line 157, sass/_forms.scss */
 .admin #content form fieldset.needs.needs-save button {
   padding-top: 0.3em;
   padding-bottom: 0.4em;
   font-size: 1.1em;
 }
-/* line 152, sass/_forms.scss */
+/* line 164, sass/_forms.scss */
 .admin #content form fieldset.needs-select, .admin #content form fieldset.linked-idea {
   padding-bottom: 0.25em;
 }
-/* line 154, sass/_forms.scss */
+/* line 166, sass/_forms.scss */
 .admin #content form fieldset.needs-select ul.list-group, .admin #content form fieldset.linked-idea ul.list-group {
   margin: 15px 0;
 }
-/* line 156, sass/_forms.scss */
+/* line 168, sass/_forms.scss */
 .admin #content form fieldset.needs-select ul.list-group li, .admin #content form fieldset.linked-idea ul.list-group li {
   padding: 15px 0;
   border-bottom: 1px solid #d3d7da;
 }
-/* line 159, sass/_forms.scss */
+/* line 171, sass/_forms.scss */
 .admin #content form fieldset.needs-select ul.list-group li div div:last-child, .admin #content form fieldset.linked-idea ul.list-group li div div:last-child {
   text-align: right;
 }
-/* line 162, sass/_forms.scss */
+/* line 174, sass/_forms.scss */
 .admin #content form fieldset.needs-select ul.list-group li:last-child, .admin #content form fieldset.linked-idea ul.list-group li:last-child {
   border-bottom: none;
 }
-/* line 166, sass/_forms.scss */
+/* line 178, sass/_forms.scss */
 .admin #content form fieldset.needs-select ul.list-group label, .admin #content form fieldset.linked-idea ul.list-group label {
   font-weight: bold;
 }
-/* line 169, sass/_forms.scss */
+/* line 181, sass/_forms.scss */
 .admin #content form fieldset.needs-select ul.list-group button span, .admin #content form fieldset.linked-idea ul.list-group button span {
   margin-right: 0.5em;
 }
-/* line 174, sass/_forms.scss */
+/* line 186, sass/_forms.scss */
 .admin #content form fieldset.linked-idea {
   margin-bottom: 30px;
 }
-/* line 176, sass/_forms.scss */
+/* line 188, sass/_forms.scss */
 .admin #content form fieldset.linked-idea input {
   background-color: #fff;
 }
-/* line 180, sass/_forms.scss */
+/* line 192, sass/_forms.scss */
 .admin #content form fieldset.linked-idea p.right button {
   padding: 0.5em 1em;
 }
-/* line 185, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos {
-  text-align: right;
-  padding: 0;
-}
-/* line 188, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos label {
-  float: left;
-  padding: 15px 20px 0;
-}
-/* line 193, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos button.addPhotos, .admin #content form fieldset.addPhotosVideos button.addVideos {
-  display: inline-block;
-  margin: 0;
-  padding: 10px 15px;
-  color: #fff;
-  font-size: 2em;
-  border: none;
-}
-/* line 201, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos button.addPhotos {
-  background-color: #2497d0;
-}
-/* line 204, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos button.addVideos {
-  background-color: #126d9a;
-}
-/* line 208, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos input.video-youtube,
-.admin #content form fieldset.addPhotosVideos input.video-vimeo {
-  margin: 0;
-  padding: 20px;
-  padding-left: 75px;
-  color: #fff;
-  font-size: 1.1em;
-  background-repeat: no-repeat;
-  background-position: 1% 50%;
-}
-/* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
-.admin #content form fieldset.addPhotosVideos input.video-youtube::-moz-placeholder,
-.admin #content form fieldset.addPhotosVideos input.video-vimeo::-moz-placeholder {
-  color: #e8e8e8;
-  opacity: 1;
-}
-/* line 107, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
-.admin #content form fieldset.addPhotosVideos input.video-youtube:-ms-input-placeholder,
-.admin #content form fieldset.addPhotosVideos input.video-vimeo:-ms-input-placeholder {
-  color: #e8e8e8;
-}
-/* line 108, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
-.admin #content form fieldset.addPhotosVideos input.video-youtube::-webkit-input-placeholder,
-.admin #content form fieldset.addPhotosVideos input.video-vimeo::-webkit-input-placeholder {
-  color: #e8e8e8;
-}
-/* line 219, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos input.video-youtube {
-  background-color: #cb2824;
-  background-image: url("../img/icons/buttons/video-youtube.png");
-}
-/* line 223, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos input.video-vimeo {
-  background-color: #1aa777;
-  background-image: url("../img/icons/buttons/video-vimeo.png");
-}
-/* line 227, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos > div {
-  text-align: right;
-  border-top: 1px solid #fff;
-  background-color: #d3d7da;
-}
-/* line 231, sass/_forms.scss */
-.admin #content form fieldset.addPhotosVideos > div button {
-  margin-top: 0.5em;
-}
-/* line 236, sass/_forms.scss */
+/* line 197, sass/_forms.scss */
 .admin #content form fieldset.compact {
   padding: 0;
 }
-/* line 238, sass/_forms.scss */
+/* line 199, sass/_forms.scss */
 .admin #content form fieldset.compact input {
   margin: 0;
 }
-/* line 242, sass/_forms.scss */
+/* line 203, sass/_forms.scss */
 .admin #content form fieldset.phases, .admin #content form fieldset.levels {
   margin-bottom: 1em;
 }
-/* line 244, sass/_forms.scss */
+/* line 205, sass/_forms.scss */
 .admin #content form fieldset.phases label, .admin #content form fieldset.levels label {
   display: inline-block;
   padding-top: 50px;
@@ -12689,77 +12733,61 @@ ul.user-search li.list-group-item img {
   font-size: 0.9em;
   cursor: pointer;
 }
-/* line 253, sass/_forms.scss */
+/* line 214, sass/_forms.scss */
 .admin #content form fieldset.phases label > input, .admin #content form fieldset.levels label > input {
   display: none;
 }
-/* line 258, sass/_forms.scss */
+/* line 219, sass/_forms.scss */
 .admin #content form fieldset.phases label {
   background: url("../img/icons/project/project-grey.png") top center no-repeat;
 }
-/* line 261, sass/_forms.scss */
+/* line 222, sass/_forms.scss */
 .admin #content form fieldset.phases label.phase1.selected, .admin #content form fieldset.phases label.phase1:hover {
   background-image: url("../img/icons/project/project-white.png");
 }
-/* line 266, sass/_forms.scss */
+/* line 227, sass/_forms.scss */
 .admin #content form fieldset.phases label.phase2.selected, .admin #content form fieldset.phases label.phase2:hover {
   background-image: url("../img/icons/project/project-red.png");
 }
-/* line 271, sass/_forms.scss */
+/* line 232, sass/_forms.scss */
 .admin #content form fieldset.phases label.phase3.selected, .admin #content form fieldset.phases label.phase3:hover {
   background-image: url("../img/icons/project/project-orange.png");
 }
-/* line 276, sass/_forms.scss */
+/* line 237, sass/_forms.scss */
 .admin #content form fieldset.phases label.phase4.selected, .admin #content form fieldset.phases label.phase4:hover {
   background-image: url("../img/icons/project/project-green.png");
 }
-/* line 283, sass/_forms.scss */
+/* line 244, sass/_forms.scss */
 .admin #content form fieldset.levels label {
   margin-right: 1em;
   background: url("../img/icons/resource/resource-level-default.png") top center no-repeat;
 }
-/* line 287, sass/_forms.scss */
+/* line 248, sass/_forms.scss */
 .admin #content form fieldset.levels label.level1.selected, .admin #content form fieldset.levels label.level1:hover {
   background-image: url("../img/icons/resource/resource-level-easy.png");
 }
-/* line 292, sass/_forms.scss */
+/* line 253, sass/_forms.scss */
 .admin #content form fieldset.levels label.level2.selected, .admin #content form fieldset.levels label.level2:hover {
   background-image: url("../img/icons/resource/resource-level-medium.png");
 }
-/* line 297, sass/_forms.scss */
+/* line 258, sass/_forms.scss */
 .admin #content form fieldset.levels label.level3.selected, .admin #content form fieldset.levels label.level3:hover {
   background-image: url("../img/icons/resource/resource-level-hard.png");
 }
-/* line 304, sass/_forms.scss */
+/* line 265, sass/_forms.scss */
 .admin #content form fieldset.new-project h4 {
   margin-bottom: 0.5em;
   color: #656565;
   font-weight: bold;
 }
-/* line 309, sass/_forms.scss */
+/* line 270, sass/_forms.scss */
 .admin #content form fieldset.new-project textarea {
   padding: 0;
   margin: 0;
 }
-/* line 313, sass/_forms.scss */
+/* line 274, sass/_forms.scss */
 .admin #content form fieldset.new-project .ta-scroll-window > .ta-bind {
   padding: 1em;
-}
-/* line 318, sass/_forms.scss */
-.admin #content form fieldset.fake-placeholder input, .admin #content form fieldset.fake-placeholder textarea {
-  margin-bottom: 0;
-  padding-left: 0;
-  padding-bottom: 0;
-}
-/* line 323, sass/_forms.scss */
-.admin #content form fieldset.fake-placeholder h4 {
-  margin-bottom: 0.5em;
-}
-/* line 326, sass/_forms.scss */
-.admin #content form fieldset.fake-placeholder input {
-  padding: 0.25em !important;
-  background-color: #fff !important;
-  border: 1px solid #d3d7da;
 }
 /* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
 .admin #content form fieldset.fake-placeholder input::-moz-placeholder {
@@ -12774,63 +12802,127 @@ ul.user-search li.list-group-item img {
 .admin #content form fieldset.fake-placeholder input::-webkit-input-placeholder {
   color: #535353 !important;
 }
-/* line 334, sass/_forms.scss */
+/* line 284, sass/_forms.scss */
+.admin #content form label {
+  padding-bottom: .5em;
+  padding-top: 1em;
+}
+/* line 288, sass/_forms.scss */
 .admin #content form input, .admin #content form textarea {
   width: 100%;
-  margin-bottom: 0.75em;
-  padding: 1em;
+  padding: 0.75em;
   color: #535353;
-  background-color: #e8e8e8;
   background-color: #fff;
-  border: none;
+  border: solid 1px #e8e8e8;
 }
 /* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
 .admin #content form input::-moz-placeholder, .admin #content form textarea::-moz-placeholder {
-  color: #535353;
+  color: #878586;
   opacity: 1;
 }
 /* line 107, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
 .admin #content form input:-ms-input-placeholder, .admin #content form textarea:-ms-input-placeholder {
-  color: #535353;
+  color: #878586;
 }
 /* line 108, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
 .admin #content form input::-webkit-input-placeholder, .admin #content form textarea::-webkit-input-placeholder {
+  color: #878586;
+}
+/* line 296, sass/_forms.scss */
+.admin #content form .mce-content-body {
+  font-size: 1em;
   color: #535353;
 }
-/* line 344, sass/_forms.scss */
+/* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+.admin #content form .mce-content-body::-moz-placeholder {
+  color: #878586;
+  opacity: 1;
+}
+/* line 107, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+.admin #content form .mce-content-body:-ms-input-placeholder {
+  color: #878586;
+}
+/* line 108, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+.admin #content form .mce-content-body::-webkit-input-placeholder {
+  color: #878586;
+}
+/* line 301, sass/_forms.scss */
 .admin #content form textarea {
   display: block;
 }
-/* line 347, sass/_forms.scss */
+/* line 304, sass/_forms.scss */
+.admin #content form select {
+  display: block;
+  margin-bottom: 1em;
+}
+/* line 308, sass/_forms.scss */
+.admin #content form .radio-block {
+  padding-top: 1em;
+}
+/* line 310, sass/_forms.scss */
+.admin #content form .radio-block label {
+  padding: 0;
+  margin: 0;
+}
+/* line 315, sass/_forms.scss */
+.admin #content form .radio-block input {
+  margin: 4px;
+  float: left;
+  width: auto;
+}
+/* line 321, sass/_forms.scss */
+.admin #content form .mce-panel {
+  border: solid 1px #e8e8e8;
+}
+/* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+.admin #content form .mce-panel::-moz-placeholder {
+  color: #878586;
+  opacity: 1;
+}
+/* line 107, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+.admin #content form .mce-panel:-ms-input-placeholder {
+  color: #878586;
+}
+/* line 108, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+.admin #content form .mce-panel::-webkit-input-placeholder {
+  color: #878586;
+}
+/* line 325, sass/_forms.scss */
+.admin #content form .help {
+  margin-top: 0.25em;
+  font-style: italic;
+  color: #878586;
+}
+/* line 330, sass/_forms.scss */
 .admin #content form ul.phases {
   margin: 1em 0 0;
 }
-/* line 349, sass/_forms.scss */
+/* line 332, sass/_forms.scss */
 .admin #content form ul.phases li {
   display: inline-block;
 }
-/* line 352, sass/_forms.scss */
+/* line 335, sass/_forms.scss */
 .admin #content form ul.phases button {
   font-size: 0.9em;
   text-align: center;
   border: none;
   background-color: transparent;
 }
-/* line 357, sass/_forms.scss */
+/* line 340, sass/_forms.scss */
 .admin #content form ul.phases button img {
   display: block;
   margin: 0 auto 1em;
 }
-/* line 363, sass/_forms.scss */
+/* line 346, sass/_forms.scss */
 .admin #content form button.button {
   padding: 1em;
   color: #fff;
 }
-/* line 366, sass/_forms.scss */
+/* line 349, sass/_forms.scss */
 .admin #content form button.button[type="submit"] {
   padding: 0.7em 1em;
 }
-/* line 369, sass/_forms.scss */
+/* line 352, sass/_forms.scss */
 .admin #content form button.button.button-geolocalisation, .admin #content form button.button.button-photo-upload, .admin #content form button.button.button-add {
   width: 100%;
   margin-bottom: 0.75em;
@@ -12841,36 +12933,32 @@ ul.user-search li.list-group-item img {
   text-align: left;
   border: none !important;
 }
-/* line 379, sass/_forms.scss */
+/* line 362, sass/_forms.scss */
 .admin #content form button.button.button-geolocalisation {
   padding-left: 65px;
   background-image: url("../img/icons/buttons/icon-geolocalisation.png");
 }
-/* line 383, sass/_forms.scss */
+/* line 366, sass/_forms.scss */
 .admin #content form button.button.button-photo-upload {
   padding-left: 65px;
   background-image: url("../img/icons/buttons/icon-photo.png");
 }
-/* line 387, sass/_forms.scss */
+/* line 370, sass/_forms.scss */
 .admin #content form button.button.button-add {
   background-position: 100% 50%;
 }
-/* line 391, sass/_forms.scss */
+/* line 374, sass/_forms.scss */
 .admin #content form button.fullwidth {
   width: 100%;
 }
-/* line 394, sass/_forms.scss */
+/* line 377, sass/_forms.scss */
 .admin #content form p.right button {
   margin-left: 0.75em;
 }
-/* line 402, sass/_forms.scss */
+/* line 385, sass/_forms.scss */
 .admin #content.new-project h2 {
   margin-bottom: 30px;
   background-color: #2497d0;
-}
-/* line 406, sass/_forms.scss */
-.admin #content.new-project h2 + p {
-  margin-bottom: 30px;
 }
 /* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
 .admin #content.new-project form fieldset.fake-placeholder input::-moz-placeholder, .admin #content.new-project form fieldset.fake-placeholder textarea::-moz-placeholder {
@@ -12885,29 +12973,30 @@ ul.user-search li.list-group-item img {
 .admin #content.new-project form fieldset.fake-placeholder input::-webkit-input-placeholder, .admin #content.new-project form fieldset.fake-placeholder textarea::-webkit-input-placeholder {
   color: #2497d0;
 }
-/* line 415, sass/_forms.scss */
+/* line 395, sass/_forms.scss */
 .admin #content.new-project form button.button {
   background-color: #2497d0;
   border: 2px solid #2497d0;
   border-right: 2px solid #126d9a;
   border-bottom: 2px solid #126d9a;
 }
-/* line 420, sass/_forms.scss */
+/* line 400, sass/_forms.scss */
 .admin #content.new-project form button.button.cancel {
   color: #126d9a;
   background-color: transparent;
   border-color: #126d9a;
 }
-/* line 425, sass/_forms.scss */
+/* line 405, sass/_forms.scss */
 .admin #content.new-project form button.button.button-photo-upload {
   background-image: url("../img/icons/buttons/icon-photo-project.png");
 }
-/* line 428, sass/_forms.scss */
+/* line 408, sass/_forms.scss */
 .admin #content.new-project form button.button.button-add {
   background-image: url("../img/icons/buttons/icon-add-project.png");
 }
-/* line 437, sass/_forms.scss */
+/* line 417, sass/_forms.scss */
 .admin #content.new-resource h2 {
+  margin-bottom: 30px;
   background-color: #30c9ad;
 }
 /* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
@@ -12923,55 +13012,75 @@ ul.user-search li.list-group-item img {
 .admin #content.new-resource form fieldset.fake-placeholder input::-webkit-input-placeholder, .admin #content.new-resource form fieldset.fake-placeholder textarea::-webkit-input-placeholder {
   color: #30c9ad;
 }
-/* line 446, sass/_forms.scss */
+/* line 427, sass/_forms.scss */
 .admin #content.new-resource form button.button {
   background-color: #30c9ad;
   border: 2px solid #30c9ad;
   border-right: 2px solid #1a814e;
   border-bottom: 2px solid #1a814e;
 }
-/* line 451, sass/_forms.scss */
+/* line 432, sass/_forms.scss */
 .admin #content.new-resource form button.button.cancel {
   color: #1a814e;
   background-color: transparent;
   border-color: #1a814e;
 }
-/* line 456, sass/_forms.scss */
+/* line 437, sass/_forms.scss */
 .admin #content.new-resource form button.button.button-photo-upload {
   background-image: url("../img/icons/buttons/icon-photo-resource.png");
 }
-/* line 459, sass/_forms.scss */
+/* line 440, sass/_forms.scss */
 .admin #content.new-resource form button.button.button-add {
   background-image: url("../img/icons/buttons/icon-add-resource.png");
 }
-/* line 468, sass/_forms.scss */
+/* line 449, sass/_forms.scss */
 .admin tags-input div.tags {
   border: none;
   background-color: transparent;
   box-shadow: none;
 }
-/* line 472, sass/_forms.scss */
+/* line 453, sass/_forms.scss */
 .admin tags-input div.tags input {
-  padding: 0 !important;
+  padding: 0.75em;
+  margin: 0;
+  height: auto;
   background-color: transparent !important;
+  width: 100% !important;
 }
-/* line 476, sass/_forms.scss */
+/* line 460, sass/_forms.scss */
 .admin tags-input div.tags li.tag-item {
   background-color: #2497d0 !important;
   -moz-border-radius: 1px;
   -webkit-border-radius: 1px;
   border-radius: 1px;
 }
-/* line 479, sass/_forms.scss */
+/* line 463, sass/_forms.scss */
 .admin tags-input div.tags li.tag-item a, .admin tags-input div.tags li.tag-item a.remove-button {
   background-color: #2497d0 !important;
 }
+/* line 467, sass/_forms.scss */
+.admin tags-input div.tags .tag-list {
+  overflow: hidden;
+}
+/* line 470, sass/_forms.scss */
+.admin tags-input div.tags .tag-item {
+  margin-top: 0;
+  margin-bottom: .25em;
+}
+/* line 473, sass/_forms.scss */
+.admin tags-input div.tags .tag-item:first-child {
+  margin-left: 0;
+}
+/* line 476, sass/_forms.scss */
+.admin tags-input div.tags .tag-item .remove-button {
+  color: white;
+}
 
-/* line 489, sass/_forms.scss */
+/* line 486, sass/_forms.scss */
 fieldset.phases p {
   margin-bottom: 0.5em;
 }
-/* line 492, sass/_forms.scss */
+/* line 489, sass/_forms.scss */
 fieldset.phases label {
   width: auto;
   margin-bottom: 1em;
@@ -12981,29 +13090,29 @@ fieldset.phases label {
   background-position: top center;
 }
 
-/* line 502, sass/_forms.scss */
+/* line 499, sass/_forms.scss */
 form.login, div.login {
   padding: 30px;
   text-align: center;
   background: #ff5353 url("../img/bg/shape-top-bg.png") no-repeat scroll center -100px;
 }
-/* line 506, sass/_forms.scss */
+/* line 503, sass/_forms.scss */
 form.login h3, form.login p, div.login h3, div.login p {
   color: #fff;
 }
-/* line 509, sass/_forms.scss */
+/* line 506, sass/_forms.scss */
 form.login h3, div.login h3 {
   font-size: 1.1em;
 }
-/* line 512, sass/_forms.scss */
+/* line 509, sass/_forms.scss */
 form.login ul, div.login ul {
   margin: 1em 0 0.75em;
 }
-/* line 514, sass/_forms.scss */
+/* line 511, sass/_forms.scss */
 form.login ul li, div.login ul li {
   display: inline;
 }
-/* line 516, sass/_forms.scss */
+/* line 513, sass/_forms.scss */
 form.login ul li button, div.login ul li button {
   width: 49px;
   height: 49px;
@@ -13015,40 +13124,40 @@ form.login ul li button, div.login ul li button {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-/* line 523, sass/_forms.scss */
+/* line 520, sass/_forms.scss */
 form.login ul li button.connect-with-facebook, div.login ul li button.connect-with-facebook {
   background: transparent url("../img/home/home-share-facebook.png") center center no-repeat;
 }
-/* line 525, sass/_forms.scss */
+/* line 522, sass/_forms.scss */
 form.login ul li button.connect-with-facebook:hover, div.login ul li button.connect-with-facebook:hover {
   background-image: url("../img/home/home-share-facebook-hover.png");
 }
-/* line 529, sass/_forms.scss */
+/* line 526, sass/_forms.scss */
 form.login ul li button.connect-with-twitter, div.login ul li button.connect-with-twitter {
   background: transparent url("../img/home/home-share-twitter.png") center center no-repeat;
 }
-/* line 531, sass/_forms.scss */
+/* line 528, sass/_forms.scss */
 form.login ul li button.connect-with-twitter:hover, div.login ul li button.connect-with-twitter:hover {
   background-image: url("../img/home/home-share-twitter-hover.png");
 }
-/* line 535, sass/_forms.scss */
+/* line 532, sass/_forms.scss */
 form.login ul li button.connect-with-google, div.login ul li button.connect-with-google {
   background: transparent url("../img/home/home-share-google.png") center center no-repeat;
 }
-/* line 537, sass/_forms.scss */
+/* line 534, sass/_forms.scss */
 form.login ul li button.connect-with-google:hover, div.login ul li button.connect-with-google:hover {
   background-image: url("../img/home/home-share-google-hover.png");
 }
-/* line 544, sass/_forms.scss */
+/* line 541, sass/_forms.scss */
 form.login p.or, div.login p.or {
   margin: 30px 0;
   text-transform: uppercase;
 }
-/* line 548, sass/_forms.scss */
+/* line 545, sass/_forms.scss */
 form.login fieldset, div.login fieldset {
   margin-top: 1em;
 }
-/* line 551, sass/_forms.scss */
+/* line 548, sass/_forms.scss */
 form.login input, div.login input {
   width: 100%;
   margin-bottom: 1em;
@@ -13056,7 +13165,7 @@ form.login input, div.login input {
   font-size: 0.9em;
   border: none;
 }
-/* line 558, sass/_forms.scss */
+/* line 555, sass/_forms.scss */
 form.login button[type=submit], div.login button[type=submit] {
   padding: 0.25em 2.5em;
   font-size: 0.85em;
@@ -13064,38 +13173,38 @@ form.login button[type=submit], div.login button[type=submit] {
   background-color: #fff;
   border: none;
 }
-/* line 564, sass/_forms.scss */
+/* line 561, sass/_forms.scss */
 form.login button[type=submit]:hover, div.login button[type=submit]:hover {
   color: #fff;
   background-color: #2497d0;
 }
-/* line 569, sass/_forms.scss */
+/* line 566, sass/_forms.scss */
 form.login span.error, div.login span.error {
   display: block;
   padding-top: 0.75em;
   color: #fff;
   font-weight: bold;
 }
-/* line 575, sass/_forms.scss */
+/* line 572, sass/_forms.scss */
 form.login div.checkbox, div.login div.checkbox {
   color: #fff;
 }
-/* line 577, sass/_forms.scss */
+/* line 574, sass/_forms.scss */
 form.login div.checkbox a, div.login div.checkbox a {
   color: #fff;
   text-decoration: underline;
 }
-/* line 581, sass/_forms.scss */
+/* line 578, sass/_forms.scss */
 form.login div.checkbox input, div.login div.checkbox input {
   width: auto;
 }
 
-/* line 588, sass/_forms.scss */
+/* line 585, sass/_forms.scss */
 .home-slide form.login {
   background: transparent;
 }
 
-/* line 593, sass/_forms.scss */
+/* line 590, sass/_forms.scss */
 button.close-login {
   position: absolute;
   right: 30px;
@@ -13106,18 +13215,18 @@ button.close-login {
   background-color: transparent;
   opacity: 0.9;
 }
-/* line 602, sass/_forms.scss */
+/* line 599, sass/_forms.scss */
 button.close-login:hover {
   opacity: 1;
 }
 
-/* line 607, sass/_forms.scss */
+/* line 604, sass/_forms.scss */
 form.mapsearch {
   padding: 1.25em;
   text-align: center;
   background-color: #fff;
 }
-/* line 611, sass/_forms.scss */
+/* line 608, sass/_forms.scss */
 form.mapsearch label {
   margin-right: 1em;
   vertical-align: middle;
@@ -13125,104 +13234,794 @@ form.mapsearch label {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 618, sass/_forms.scss */
+/* line 615, sass/_forms.scss */
 form.mapsearch input {
   width: 90% !important;
   /* override bootstrap's style */
 }
-/* line 621, sass/_forms.scss */
+/* line 618, sass/_forms.scss */
 form.mapsearch button {
   color: #fff;
   background-color: #ff5353;
 }
-/* line 624, sass/_forms.scss */
+/* line 621, sass/_forms.scss */
 form.mapsearch button:hover {
   color: #fff;
   background-color: #2497d0;
 }
 
-/* line 631, sass/_forms.scss */
+/* line 628, sass/_forms.scss */
 section.video form p:first-child {
   margin: 15px 0;
 }
 
-/* line 635, sass/_forms.scss */
+/* line 632, sass/_forms.scss */
 button.search-advanced {
   padding: 1em;
   font-size: 1.25em;
   text-transform: uppercase;
 }
 
-/* line 640, sass/_forms.scss */
+/* line 637, sass/_forms.scss */
 form#search-advanced {
   margin-bottom: 30px;
   padding: 30px;
   background-color: #fff;
 }
-/* line 644, sass/_forms.scss */
+/* line 641, sass/_forms.scss */
 form#search-advanced label {
   width: 20em;
   margin-bottom: 30px;
 }
-/* line 648, sass/_forms.scss */
+/* line 645, sass/_forms.scss */
 form#search-advanced input[type="text"] {
   width: 50em;
   padding: 0.5em;
   border: 1px solid #f2f2f2;
   background-color: #f2f2f2;
 }
-/* line 654, sass/_forms.scss */
+/* line 651, sass/_forms.scss */
 form#search-advanced input + label {
   width: auto;
   margin-left: 0.5em;
   margin-right: 2em;
 }
-/* line 659, sass/_forms.scss */
+/* line 656, sass/_forms.scss */
 form#search-advanced button[type="submit"] {
   margin-left: 20.25em;
   padding: 0.5em 1em;
 }
 
-/* line 1, sass/_sidebar.scss */
-#sidebar,
-div.forum-sidebar {
-  font-size: 0.9em;
+/* line 662, sass/_forms.scss */
+#content .news-form {
+  overflow: hidden;
+  clear: both;
+}
+/* line 665, sass/_forms.scss */
+#content .news-form .btn {
+  margin: 1em 0;
+  float: right;
+}
+
+/* line 671, sass/_forms.scss */
+.item-validate {
+  margin-top: 40px;
+  width: 100%;
+  padding: .75em 1em;
+}
+
+/* line 677, sass/_forms.scss */
+.needs .item-validate {
+  text-align: right;
+}
+
+/* line 682, sass/_forms.scss */
+#content .gallery-form label, .gallery-form label, .info-link-form label, .news-form label {
+  padding-bottom: .5em;
+  padding-top: 1em;
+}
+/* line 686, sass/_forms.scss */
+#content .gallery-form input, #content .gallery-form textarea, .gallery-form input, .gallery-form textarea, .info-link-form input, .info-link-form textarea, .news-form input, .news-form textarea {
+  width: 100%;
+  padding: 0.75em;
+  color: #535353;
+  background-color: #fff;
+  border: solid 1px #e8e8e8;
+}
+/* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form input::-moz-placeholder, #content .gallery-form textarea::-moz-placeholder, .gallery-form input::-moz-placeholder, .gallery-form textarea::-moz-placeholder, .info-link-form input::-moz-placeholder, .info-link-form textarea::-moz-placeholder, .news-form input::-moz-placeholder, .news-form textarea::-moz-placeholder {
+  color: #878586;
+  opacity: 1;
+}
+/* line 107, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form input:-ms-input-placeholder, #content .gallery-form textarea:-ms-input-placeholder, .gallery-form input:-ms-input-placeholder, .gallery-form textarea:-ms-input-placeholder, .info-link-form input:-ms-input-placeholder, .info-link-form textarea:-ms-input-placeholder, .news-form input:-ms-input-placeholder, .news-form textarea:-ms-input-placeholder {
+  color: #878586;
+}
+/* line 108, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form input::-webkit-input-placeholder, #content .gallery-form textarea::-webkit-input-placeholder, .gallery-form input::-webkit-input-placeholder, .gallery-form textarea::-webkit-input-placeholder, .info-link-form input::-webkit-input-placeholder, .info-link-form textarea::-webkit-input-placeholder, .news-form input::-webkit-input-placeholder, .news-form textarea::-webkit-input-placeholder {
+  color: #878586;
+}
+/* line 694, sass/_forms.scss */
+#content .gallery-form input[disabled], #content .gallery-form textarea[disabled], .gallery-form input[disabled], .gallery-form textarea[disabled], .info-link-form input[disabled], .info-link-form textarea[disabled], .news-form input[disabled], .news-form textarea[disabled] {
+  color: #878586;
+}
+/* line 698, sass/_forms.scss */
+#content .gallery-form .mce-panel, .gallery-form .mce-panel, .info-link-form .mce-panel, .news-form .mce-panel {
+  border: solid 1px #e8e8e8;
+}
+/* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form .mce-panel::-moz-placeholder, .gallery-form .mce-panel::-moz-placeholder, .info-link-form .mce-panel::-moz-placeholder, .news-form .mce-panel::-moz-placeholder {
+  color: #878586;
+  opacity: 1;
+}
+/* line 107, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form .mce-panel:-ms-input-placeholder, .gallery-form .mce-panel:-ms-input-placeholder, .info-link-form .mce-panel:-ms-input-placeholder, .news-form .mce-panel:-ms-input-placeholder {
+  color: #878586;
+}
+/* line 108, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form .mce-panel::-webkit-input-placeholder, .gallery-form .mce-panel::-webkit-input-placeholder, .info-link-form .mce-panel::-webkit-input-placeholder, .news-form .mce-panel::-webkit-input-placeholder {
+  color: #878586;
+}
+/* line 702, sass/_forms.scss */
+#content .gallery-form .radio-block, .gallery-form .radio-block, .info-link-form .radio-block, .news-form .radio-block {
+  padding-top: 1em;
+}
+/* line 704, sass/_forms.scss */
+#content .gallery-form .radio-block label, .gallery-form .radio-block label, .info-link-form .radio-block label, .news-form .radio-block label {
+  padding: 0;
+  margin: 0;
+}
+/* line 709, sass/_forms.scss */
+#content .gallery-form .radio-block input, .gallery-form .radio-block input, .info-link-form .radio-block input, .news-form .radio-block input {
+  width: auto;
+  float: left;
+  margin: 4px;
+}
+/* line 715, sass/_forms.scss */
+#content .gallery-form p, .gallery-form p, .info-link-form p, .news-form p {
+  margin-bottom: 1em;
+  white-space: normal;
+}
+/* line 719, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs, .gallery-form ul.nav-tabs, .info-link-form ul.nav-tabs, .news-form ul.nav-tabs {
+  margin: 10px 0;
+  border: none;
+}
+/* line 722, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs > li, .gallery-form ul.nav-tabs > li, .info-link-form ul.nav-tabs > li, .news-form ul.nav-tabs > li {
+  border: none;
+  margin-right: 6px;
+}
+/* line 726, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs > li.active a, .gallery-form ul.nav-tabs > li.active a, .info-link-form ul.nav-tabs > li.active a, .news-form ul.nav-tabs > li.active a {
+  background: #f5f4f2;
+  color: #333;
+}
+/* line 729, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs > li.active a span, .gallery-form ul.nav-tabs > li.active a span, .info-link-form ul.nav-tabs > li.active a span, .news-form ul.nav-tabs > li.active a span {
+  background-color: #333;
+}
+/* line 734, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs > li a, .gallery-form ul.nav-tabs > li a, .info-link-form ul.nav-tabs > li a, .news-form ul.nav-tabs > li a {
+  padding-right: 2em;
+  color: #d3d7da;
+  font-size: 1.1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 0;
+  -moz-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+/* line 742, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs > li a span, .gallery-form ul.nav-tabs > li a span, .info-link-form ul.nav-tabs > li a span, .news-form ul.nav-tabs > li a span {
+  -moz-transition: background-color 0.2s ease-in-out;
+  -o-transition: background-color 0.2s ease-in-out;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  margin-right: 0.25em;
+  margin-bottom: 0.25em;
+  padding: 0.5em;
+  font-size: 1.5em;
+  border-radius: 1em;
+  background: #d3d7da;
+  color: white;
+}
+/* line 752, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs > li a:hover, .gallery-form ul.nav-tabs > li a:hover, .info-link-form ul.nav-tabs > li a:hover, .news-form ul.nav-tabs > li a:hover {
+  border: none;
+  color: #333;
+  background-color: #f2f2f2;
+}
+/* line 756, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs > li a:hover span, .gallery-form ul.nav-tabs > li a:hover span, .info-link-form ul.nav-tabs > li a:hover span, .news-form ul.nav-tabs > li a:hover span {
+  background-color: #333;
+}
+/* line 760, sass/_forms.scss */
+#content .gallery-form ul.nav-tabs > li a:focus, .gallery-form ul.nav-tabs > li a:focus, .info-link-form ul.nav-tabs > li a:focus, .news-form ul.nav-tabs > li a:focus {
+  border: none;
+}
+/* line 766, sass/_forms.scss */
+#content .gallery-form .parcourir, .gallery-form .parcourir, .info-link-form .parcourir, .news-form .parcourir {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  text-align: center;
+  width: 50px;
+}
+/* line 773, sass/_forms.scss */
+#content .gallery-form .inputfile, .gallery-form .inputfile, .info-link-form .inputfile, .news-form .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  margin-top: 20px;
+}
+/* line 782, sass/_forms.scss */
+#content .gallery-form .inputfile + label, .gallery-form .inputfile + label, .info-link-form .inputfile + label, .news-form .inputfile + label {
+  display: block;
+  margin-right: 50px;
+  text-align: center;
+  margin-top: 20px;
+  padding: .75em 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* line 791, sass/_forms.scss */
+#content .gallery-form input.video-youtube,
+#content .gallery-form input.video-vimeo, .gallery-form input.video-youtube,
+.gallery-form input.video-vimeo, .info-link-form input.video-youtube,
+.info-link-form input.video-vimeo, .news-form input.video-youtube,
+.news-form input.video-vimeo {
+  margin: 0;
+  padding: 20px;
+  padding-left: 75px;
+  color: #fff;
+  font-size: 1.1em;
+  background-repeat: no-repeat;
+  background-position: 1% 50%;
+}
+/* line 103, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form input.video-youtube::-moz-placeholder,
+#content .gallery-form input.video-vimeo::-moz-placeholder, .gallery-form input.video-youtube::-moz-placeholder,
+.gallery-form input.video-vimeo::-moz-placeholder, .info-link-form input.video-youtube::-moz-placeholder,
+.info-link-form input.video-vimeo::-moz-placeholder, .news-form input.video-youtube::-moz-placeholder,
+.news-form input.video-vimeo::-moz-placeholder {
+  color: #e8e8e8;
+  opacity: 1;
+}
+/* line 107, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form input.video-youtube:-ms-input-placeholder,
+#content .gallery-form input.video-vimeo:-ms-input-placeholder, .gallery-form input.video-youtube:-ms-input-placeholder,
+.gallery-form input.video-vimeo:-ms-input-placeholder, .info-link-form input.video-youtube:-ms-input-placeholder,
+.info-link-form input.video-vimeo:-ms-input-placeholder, .news-form input.video-youtube:-ms-input-placeholder,
+.news-form input.video-vimeo:-ms-input-placeholder {
+  color: #e8e8e8;
+}
+/* line 108, ../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
+#content .gallery-form input.video-youtube::-webkit-input-placeholder,
+#content .gallery-form input.video-vimeo::-webkit-input-placeholder, .gallery-form input.video-youtube::-webkit-input-placeholder,
+.gallery-form input.video-vimeo::-webkit-input-placeholder, .info-link-form input.video-youtube::-webkit-input-placeholder,
+.info-link-form input.video-vimeo::-webkit-input-placeholder, .news-form input.video-youtube::-webkit-input-placeholder,
+.news-form input.video-vimeo::-webkit-input-placeholder {
+  color: #e8e8e8;
+}
+/* line 802, sass/_forms.scss */
+#content .gallery-form input.video-youtube, .gallery-form input.video-youtube, .info-link-form input.video-youtube, .news-form input.video-youtube {
+  background-color: #cb2824;
+  background-image: url("../img/icons/buttons/video-youtube.png");
+}
+/* line 806, sass/_forms.scss */
+#content .gallery-form input.video-vimeo, .gallery-form input.video-vimeo, .info-link-form input.video-vimeo, .news-form input.video-vimeo {
+  background-color: #1aa777;
+  background-image: url("../img/icons/buttons/video-vimeo.png");
+}
+
+/* line 813, sass/_forms.scss */
+#content .project-form .gallery-form .inputfile, #content .project-form .gallery-form .inputfile + label {
+  margin-top: 40px;
+}
+
+/* line 819, sass/_forms.scss */
+#content .resource-form .inputfile + label {
+  width: 100%;
+}
+/* line 823, sass/_forms.scss */
+#content .resource-form .file-errors p {
+  margin-top: 28px;
+}
+
+/* line 829, sass/_forms.scss */
+#content .resource-form .btn-primary {
+  background-color: #2bb49b;
+  border-color: #2bb49b;
+}
+/* line 833, sass/_forms.scss */
+#content .resource-form .btn-primary:hover, #content .resource-form .btn-primary:active {
+  background-color: #1c7766;
+  border-color: #1c7766;
+}
+/* line 838, sass/_forms.scss */
+#content .resource-form .btn-warning {
+  color: #2bb49b;
+}
+
+/* line 843, sass/_forms.scss */
+ul.experiences li, .admin #content ul.experiences li {
+  overflow: hidden;
+  border-bottom: solid 1px #e8e8e8;
+}
+/* line 846, sass/_forms.scss */
+ul.experiences li:last-child, .admin #content ul.experiences li:last-child {
+  border-bottom-color: transparent;
+}
+/* line 850, sass/_forms.scss */
+ul.experiences p:last-child, .admin #content ul.experiences p:last-child {
+  padding-bottom: 2em;
+}
+/* line 853, sass/_forms.scss */
+ul.experiences h4, .admin #content ul.experiences h4 {
+  font-size: 1.2em;
+  margin-top: 1em;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+/* line 858, sass/_forms.scss */
+ul.experiences h4 i, .admin #content ul.experiences h4 i {
+  color: #30c9ad;
+  margin-right: 4px;
+}
+/* line 863, sass/_forms.scss */
+ul.experiences h5, .admin #content ul.experiences h5 {
+  color: #2f2f2f;
+  font-size: 1em;
+  margin-bottom: .5em;
+}
+/* line 868, sass/_forms.scss */
+ul.experiences .remove-button, .admin #content ul.experiences .remove-button {
+  margin-top: 1em;
+  display: block;
+  float: right;
+  background: #c30;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+/* line 876, sass/_forms.scss */
+ul.experiences .remove-button:hover, .admin #content ul.experiences .remove-button:hover {
+  background: #a13535;
+}
+/* line 880, sass/_forms.scss */
+ul.experiences p.date, .admin #content ul.experiences p.date {
+  padding-left: 25px;
+  padding-bottom: 0;
+  font-size: .9em;
+  font-style: italic;
+  color: #878586;
+}
+
+/* line 889, sass/_forms.scss */
+#content div.tab-content ul.gallery-links,
+#content ul.gallery-links,
+ul.gallery-links {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+/* line 896, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li,
+#content ul.gallery-links li,
+ul.gallery-links li {
+  position: relative;
+  display: flex;
+  width: 25%;
+  text-align: center;
+  padding: .5em;
+  margin-bottom: 12px;
+}
+/* line 903, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li .remove-button,
+#content ul.gallery-links li .remove-button,
+ul.gallery-links li .remove-button {
+  position: absolute;
+  z-index: 10;
+  top: .5em;
+  right: .5em;
+  background: #c30;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+/* line 912, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li .remove-button:hover,
+#content ul.gallery-links li .remove-button:hover,
+ul.gallery-links li .remove-button:hover {
+  background: #a13535;
+}
+/* line 916, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li .cover-button,
+#content ul.gallery-links li .cover-button,
+ul.gallery-links li .cover-button {
+  position: absolute;
+  z-index: 10;
+  bottom: -5px;
+  left: 50%;
+  margin-left: -75px;
+  width: 150px;
+}
+/* line 923, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li .cover-button:hover,
+#content ul.gallery-links li .cover-button:hover,
+ul.gallery-links li .cover-button:hover {
+  background: none;
+}
+/* line 927, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a,
+#content ul.gallery-links li a,
+ul.gallery-links li a {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  border: solid 2px #2497d0;
+  padding: 10px 10px 18px 10px;
+}
+/* line 934, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a:hover,
+#content ul.gallery-links li a:hover,
+ul.gallery-links li a:hover {
+  text-decoration: none;
+  border-color: #19688f;
+}
+/* line 937, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a:hover span.icon,
+#content ul.gallery-links li a:hover span.icon,
+ul.gallery-links li a:hover span.icon {
+  color: #19688f;
+}
+/* line 940, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a:hover span.url,
+#content ul.gallery-links li a:hover span.url,
+ul.gallery-links li a:hover span.url {
+  text-decoration: underline;
+}
+/* line 945, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span,
+#content ul.gallery-links li a span,
+ul.gallery-links li a span {
+  display: block;
+}
+/* line 947, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.title,
+#content ul.gallery-links li a span.title,
+ul.gallery-links li a span.title {
+  color: #333333;
+  font-size: 1em;
+  font-weight: bold;
+}
+/* line 952, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.description,
+#content ul.gallery-links li a span.description,
+ul.gallery-links li a span.description {
+  color: #333333;
+  padding: .5em 0 1em 0;
+  margin-bottom: .5em;
+  border-bottom: solid 1px #e8e8e8;
+}
+/* line 958, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.author,
+#content ul.gallery-links li a span.author,
+ul.gallery-links li a span.author {
+  margin-bottom: 1em;
+  color: #878586;
+  font-style: italic;
+}
+/* line 963, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.icon,
+#content ul.gallery-links li a span.icon,
+ul.gallery-links li a span.icon {
+  color: #2497d0;
+  font-size: 1.6em;
+  padding: .5em;
+}
+/* line 968, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.url,
+#content ul.gallery-links li a span.url,
+ul.gallery-links li a span.url {
+  margin-bottom: 1em;
+  color: #19688f;
+  font-size: .8em;
+  line-height: 1.4em;
+}
+/* line 977, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li .image-preview > *,
+#content ul.gallery-links li .image-preview > *,
+ul.gallery-links li .image-preview > * {
+  border: none;
+}
+/* line 980, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li .image-preview .thumbnail,
+#content ul.gallery-links li .image-preview .thumbnail,
+ul.gallery-links li .image-preview .thumbnail {
+  margin-bottom: 0;
+}
+/* line 983, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li .image-preview canvas,
+#content ul.gallery-links li .image-preview canvas,
+ul.gallery-links li .image-preview canvas {
+  max-width: 100%;
+}
+
+/* line 992, sass/_forms.scss */
+#content .nav-tabs-resource div.tab-content ul.gallery-links li,
+#content .resource-form ul.gallery-links li,
+.resource-form ul.gallery-links li {
+  width: 50%;
+}
+/* line 994, sass/_forms.scss */
+#content .nav-tabs-resource div.tab-content ul.gallery-links li a,
+#content .resource-form ul.gallery-links li a,
+.resource-form ul.gallery-links li a {
+  border-color: #30c9ad;
+}
+/* line 996, sass/_forms.scss */
+#content .nav-tabs-resource div.tab-content ul.gallery-links li a:hover,
+#content .resource-form ul.gallery-links li a:hover,
+.resource-form ul.gallery-links li a:hover {
+  border-color: #218b78;
+}
+/* line 998, sass/_forms.scss */
+#content .nav-tabs-resource div.tab-content ul.gallery-links li a:hover span.icon,
+#content .resource-form ul.gallery-links li a:hover span.icon,
+.resource-form ul.gallery-links li a:hover span.icon {
+  color: #218b78;
+}
+/* line 1003, sass/_forms.scss */
+#content .nav-tabs-resource div.tab-content ul.gallery-links li span.icon,
+#content .resource-form ul.gallery-links li span.icon,
+.resource-form ul.gallery-links li span.icon {
+  color: #30c9ad;
+}
+/* line 1006, sass/_forms.scss */
+#content .nav-tabs-resource div.tab-content ul.gallery-links li span.url,
+#content .resource-form ul.gallery-links li span.url,
+.resource-form ul.gallery-links li span.url {
+  color: #218b78;
+}
+
+/* line 1013, sass/_forms.scss */
+.admin #content form .thumbnail, .cover-image .thumbnail {
+  border-color: transparent;
+}
+/* line 1016, sass/_forms.scss */
+.admin #content form .thumbnail-container, .cover-image .thumbnail-container {
+  border: solid 1px #e8e8e8;
+  width: 355px;
+  height: 196px;
+  float: left;
+}
+/* line 1022, sass/_forms.scss */
+.admin #content form .inputfile-container, .cover-image .inputfile-container {
+  float: left;
+  width: 280px;
+  margin-left: 20px;
+}
+/* line 1026, sass/_forms.scss */
+.admin #content form .inputfile-container .inputfile, .admin #content form .inputfile-container .inputfile + label, .cover-image .inputfile-container .inputfile, .cover-image .inputfile-container .inputfile + label {
+  margin-top: 0;
+}
+
+/* line 1034, sass/_forms.scss */
+.modal-content h5 {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-top: .75em;
+  color: #878586;
+}
+/* line 1040, sass/_forms.scss */
+.modal-content .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  margin-top: 20px;
+}
+/* line 1049, sass/_forms.scss */
+.modal-content .inputfile + label {
+  display: block;
+  margin-right: 50px;
+  text-align: center;
+  margin-top: 20px;
+  padding: .75em 1em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* line 1060, sass/_forms.scss */
+.required {
+  color: #c30;
+}
+
+/* line 1064, sass/_forms.scss */
+.loader-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin: 0 auto;
+}
+/* line 1070, sass/_forms.scss */
+.loader-form > span {
+  font-weight: bold;
+  font-style: italic;
+  flex: 1;
+  font-size: 1.2em;
+  text-align: center;
+}
+/* line 1079, sass/_forms.scss */
+.loader-form.loader-project > span {
+  color: #2497d0;
+}
+/* line 1082, sass/_forms.scss */
+.loader-form.loader-project .sk-folding-cube .sk-cube:before {
+  background-color: #2497d0;
+}
+/* line 1087, sass/_forms.scss */
+.loader-form.loader-resource > span {
+  color: #2bb49b;
+}
+/* line 1090, sass/_forms.scss */
+.loader-form.loader-resource .sk-folding-cube .sk-cube:before {
+  background-color: #30c9ad;
+}
+
+/* line 1096, sass/_forms.scss */
+.sk-folding-cube {
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  -webkit-transform: rotateZ(45deg);
+  transform: rotateZ(45deg);
+}
+
+/* line 1105, sass/_forms.scss */
+.sk-folding-cube .sk-cube {
+  float: left;
+  width: 50%;
+  height: 50%;
+  position: relative;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+/* line 1114, sass/_forms.scss */
+.sk-folding-cube .sk-cube:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
+  animation: sk-foldCubeAngle 2.4s infinite linear both;
+  -webkit-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+}
+
+/* line 1128, sass/_forms.scss */
+.sk-folding-cube .sk-cube2 {
+  -webkit-transform: scale(1.1) rotateZ(90deg);
+  transform: scale(1.1) rotateZ(90deg);
+}
+
+/* line 1132, sass/_forms.scss */
+.sk-folding-cube .sk-cube3 {
+  -webkit-transform: scale(1.1) rotateZ(180deg);
+  transform: scale(1.1) rotateZ(180deg);
+}
+
+/* line 1136, sass/_forms.scss */
+.sk-folding-cube .sk-cube4 {
+  -webkit-transform: scale(1.1) rotateZ(270deg);
+  transform: scale(1.1) rotateZ(270deg);
+}
+
+/* line 1140, sass/_forms.scss */
+.sk-folding-cube .sk-cube2:before {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+/* line 1144, sass/_forms.scss */
+.sk-folding-cube .sk-cube3:before {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+/* line 1148, sass/_forms.scss */
+.sk-folding-cube .sk-cube4:before {
+  -webkit-animation-delay: 0.9s;
+  animation-delay: 0.9s;
+}
+
+@-webkit-keyframes sk-foldCubeAngle {
+  0%, 10% {
+    -webkit-transform: perspective(140px) rotateX(-180deg);
+    transform: perspective(140px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%, 75% {
+    -webkit-transform: perspective(140px) rotateX(0deg);
+    transform: perspective(140px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%, 100% {
+    -webkit-transform: perspective(140px) rotateY(180deg);
+    transform: perspective(140px) rotateY(180deg);
+    opacity: 0;
+  }
+}
+@keyframes sk-foldCubeAngle {
+  0%, 10% {
+    -webkit-transform: perspective(140px) rotateX(-180deg);
+    transform: perspective(140px) rotateX(-180deg);
+    opacity: 0;
+  }
+  25%, 75% {
+    -webkit-transform: perspective(140px) rotateX(0deg);
+    transform: perspective(140px) rotateX(0deg);
+    opacity: 1;
+  }
+  90%, 100% {
+    -webkit-transform: perspective(140px) rotateY(180deg);
+    transform: perspective(140px) rotateY(180deg);
+    opacity: 0;
+  }
 }
 /* line 5, sass/_sidebar.scss */
-#sidebar section,
-div.forum-sidebar section {
-  margin-bottom: 30px;
-}
-/* line 7, sass/_sidebar.scss */
 #sidebar section h3,
 div.forum-sidebar section h3 {
   padding: 30px;
   font-weight: bold;
-  text-transform: uppercase;
+  font-size: 1.2em;
 }
-/* line 14, sass/_sidebar.scss */
+/* line 13, sass/_sidebar.scss */
 #sidebar section.community,
 div.forum-sidebar section.community {
   position: relative;
   padding-bottom: 0.5em;
   color: #fff;
 }
-/* line 20, sass/_sidebar.scss */
+/* line 19, sass/_sidebar.scss */
 #sidebar section.community.community-project,
 div.forum-sidebar section.community.community-project {
   background: #2497d0 url("../img/bg/shape-right-bg.png") 175px -110px no-repeat;
 }
-/* line 23, sass/_sidebar.scss */
+/* line 22, sass/_sidebar.scss */
 #sidebar section.community.community-resource,
 div.forum-sidebar section.community.community-resource {
   background: #30c9ad url("../img/bg/shape-right-bg.png") 175px -110px no-repeat;
 }
-/* line 26, sass/_sidebar.scss */
+/* line 25, sass/_sidebar.scss */
 #sidebar section.community.community-forum,
 div.forum-sidebar section.community.community-forum {
   background: #5a4b84 url("../img/bg/shape-right-bg.png") 175px -110px no-repeat;
 }
-/* line 30, sass/_sidebar.scss */
+/* line 29, sass/_sidebar.scss */
+#sidebar section.community .tab-content,
+div.forum-sidebar section.community .tab-content {
+  font-size: 0.9em;
+}
+/* line 33, sass/_sidebar.scss */
 #sidebar section.community ul.submenu, #sidebar section.community ul.nav-tabs,
 div.forum-sidebar section.community ul.submenu,
 div.forum-sidebar section.community ul.nav-tabs {
@@ -13232,7 +14031,7 @@ div.forum-sidebar section.community ul.nav-tabs {
   padding: 2em 0;
   border-bottom: none;
 }
-/* line 36, sass/_sidebar.scss */
+/* line 39, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li, #sidebar section.community ul.nav-tabs li,
 div.forum-sidebar section.community ul.submenu li,
 div.forum-sidebar section.community ul.nav-tabs li {
@@ -13241,78 +14040,77 @@ div.forum-sidebar section.community ul.nav-tabs li {
   border-right: 1px solid #cbdfde;
   background-color: transparent;
 }
-/* line 41, sass/_sidebar.scss */
+/* line 44, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li:last-child, #sidebar section.community ul.nav-tabs li:last-child,
 div.forum-sidebar section.community ul.submenu li:last-child,
 div.forum-sidebar section.community ul.nav-tabs li:last-child {
   border: none;
 }
-/* line 44, sass/_sidebar.scss */
+/* line 47, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li > a, #sidebar section.community ul.nav-tabs li > a,
 div.forum-sidebar section.community ul.submenu li > a,
 div.forum-sidebar section.community ul.nav-tabs li > a {
   margin: 0;
   padding: 1em 0.75em;
-  font-size: 0.8em;
+  background: rgba(48, 70, 81, 0.5);
   color: #fff;
-  text-transform: uppercase;
-  line-height: 1.2em;
+  line-height: 1.4em;
   border: none;
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 53, sass/_sidebar.scss */
+/* line 55, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li > a span, #sidebar section.community ul.nav-tabs li > a span,
 div.forum-sidebar section.community ul.submenu li > a span,
 div.forum-sidebar section.community ul.nav-tabs li > a span {
   display: block;
 }
-/* line 56, sass/_sidebar.scss */
+/* line 58, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li > a.selected, #sidebar section.community ul.nav-tabs li > a.selected,
 div.forum-sidebar section.community ul.submenu li > a.selected,
 div.forum-sidebar section.community ul.nav-tabs li > a.selected {
   background-color: #304651;
 }
-/* line 59, sass/_sidebar.scss */
+/* line 61, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li > a:hover, #sidebar section.community ul.nav-tabs li > a:hover,
 div.forum-sidebar section.community ul.submenu li > a:hover,
 div.forum-sidebar section.community ul.nav-tabs li > a:hover {
   background-color: #304651;
   text-decoration: none;
 }
-/* line 67, sass/_sidebar.scss */
+/* line 69, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li.active a, #sidebar section.community ul.nav-tabs li.active a,
 div.forum-sidebar section.community ul.submenu li.active a,
 div.forum-sidebar section.community ul.nav-tabs li.active a {
   background-color: #304651;
 }
-/* line 71, sass/_sidebar.scss */
+/* line 73, sass/_sidebar.scss */
 #sidebar section.community ul.nav-tabs,
 div.forum-sidebar section.community ul.nav-tabs {
   padding: 0;
   margin-bottom: 0.2em;
 }
-/* line 75, sass/_sidebar.scss */
+/* line 77, sass/_sidebar.scss */
 #sidebar section.community div.add-member,
 div.forum-sidebar section.community div.add-member {
   padding: 10px;
 }
-/* line 77, sass/_sidebar.scss */
+/* line 79, sass/_sidebar.scss */
 #sidebar section.community div.add-member input, #sidebar section.community div.add-member button.btn,
 div.forum-sidebar section.community div.add-member input,
 div.forum-sidebar section.community div.add-member button.btn {
   width: 100%;
   margin-bottom: 0.2em;
 }
-/* line 81, sass/_sidebar.scss */
+/* line 83, sass/_sidebar.scss */
 #sidebar section.community div.add-member input,
 div.forum-sidebar section.community div.add-member input {
   margin: 0.2em 0;
   padding: 0.2em;
   color: #333;
 }
-/* line 87, sass/_sidebar.scss */
+/* line 89, sass/_sidebar.scss */
 #sidebar section.community div.member-forum,
 div.forum-sidebar section.community div.member-forum {
   position: relative;
@@ -13320,7 +14118,7 @@ div.forum-sidebar section.community div.member-forum {
   padding: 0.5em 0.2em 0.3em 0.2em;
   min-height: 50px;
 }
-/* line 92, sass/_sidebar.scss */
+/* line 94, sass/_sidebar.scss */
 #sidebar section.community div.member-forum a.member-details,
 div.forum-sidebar section.community div.member-forum a.member-details {
   font-size: 1.25em;
@@ -13329,7 +14127,7 @@ div.forum-sidebar section.community div.member-forum a.member-details {
   display: block;
   color: #fff;
 }
-/* line 100, sass/_sidebar.scss */
+/* line 102, sass/_sidebar.scss */
 #sidebar section.community div.member,
 div.forum-sidebar section.community div.member {
   #min-height: 5em;
@@ -13338,17 +14136,22 @@ div.forum-sidebar section.community div.member {
   padding: 0.5em 0.2em 0.3em 0.2em;
   #border-bottom: 1px solid #7fb3c9;
 }
-/* line 106, sass/_sidebar.scss */
+/* line 108, sass/_sidebar.scss */
+#sidebar section.community div.member a,
+div.forum-sidebar section.community div.member a {
+  color: white;
+}
+/* line 111, sass/_sidebar.scss */
 #sidebar section.community div.member:last-child,
 div.forum-sidebar section.community div.member:last-child {
   border: none;
 }
-/* line 109, sass/_sidebar.scss */
+/* line 114, sass/_sidebar.scss */
 #sidebar section.community div.member img,
 div.forum-sidebar section.community div.member img {
   display: inline-block;
 }
-/* line 112, sass/_sidebar.scss */
+/* line 117, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details, #sidebar section.community div.member div.member-name,
 div.forum-sidebar section.community div.member div.member-details,
 div.forum-sidebar section.community div.member div.member-name {
@@ -13356,7 +14159,7 @@ div.forum-sidebar section.community div.member div.member-name {
   width: 63%;
   vertical-align: top;
 }
-/* line 116, sass/_sidebar.scss */
+/* line 121, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details p, #sidebar section.community div.member div.member-name p,
 div.forum-sidebar section.community div.member div.member-details p,
 div.forum-sidebar section.community div.member div.member-name p {
@@ -13366,36 +14169,36 @@ div.forum-sidebar section.community div.member div.member-name p {
   vertical-align: top;
   font-weight: bold;
 }
-/* line 122, sass/_sidebar.scss */
+/* line 127, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details p a, #sidebar section.community div.member div.member-name p a,
 div.forum-sidebar section.community div.member div.member-details p a,
 div.forum-sidebar section.community div.member div.member-name p a {
   font-size: 1.25em;
   color: #fff;
 }
-/* line 129, sass/_sidebar.scss */
+/* line 134, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details div.edit-buttons,
 div.forum-sidebar section.community div.member div.member-details div.edit-buttons {
   top: -15px;
   right: -20px;
 }
-/* line 132, sass/_sidebar.scss */
+/* line 137, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details div.edit-buttons button,
 div.forum-sidebar section.community div.member div.member-details div.edit-buttons button {
   background-color: transparent;
 }
-/* line 134, sass/_sidebar.scss */
+/* line 139, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details div.edit-buttons button:hover,
 div.forum-sidebar section.community div.member div.member-details div.edit-buttons button:hover {
   color: #2f2f2f;
 }
-/* line 140, sass/_sidebar.scss */
+/* line 145, sass/_sidebar.scss */
 #sidebar section.community div.member div.contact,
 div.forum-sidebar section.community div.member div.contact {
   float: right;
   display: inline-block;
 }
-/* line 143, sass/_sidebar.scss */
+/* line 148, sass/_sidebar.scss */
 #sidebar section.community div.member div.contact button,
 div.forum-sidebar section.community div.member div.contact button {
   margin-top: 0.4em;
@@ -13403,12 +14206,12 @@ div.forum-sidebar section.community div.member div.contact button {
   border: none;
   background-color: transparent;
 }
-/* line 148, sass/_sidebar.scss */
+/* line 153, sass/_sidebar.scss */
 #sidebar section.community div.member div.contact button:hover,
 div.forum-sidebar section.community div.member div.contact button:hover {
   color: #2f2f2f;
 }
-/* line 153, sass/_sidebar.scss */
+/* line 158, sass/_sidebar.scss */
 #sidebar section.community div.member em,
 div.forum-sidebar section.community div.member em {
   display: block;
@@ -13416,13 +14219,13 @@ div.forum-sidebar section.community div.member em {
   font-weight: normal;
   font-size: 0.8em;
 }
-/* line 163, sass/_sidebar.scss */
+/* line 168, sass/_sidebar.scss */
 #sidebar section.solo,
 div.forum-sidebar section.solo {
   color: white;
   background-color: #5a4b84;
 }
-/* line 166, sass/_sidebar.scss */
+/* line 171, sass/_sidebar.scss */
 #sidebar section.solo h3,
 div.forum-sidebar section.solo h3 {
   padding: 5em 0;
@@ -13431,7 +14234,7 @@ div.forum-sidebar section.solo h3 {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 175, sass/_sidebar.scss */
+/* line 180, sass/_sidebar.scss */
 #sidebar section.comments,
 div.forum-sidebar section.comments {
   position: relative;
@@ -13440,13 +14243,20 @@ div.forum-sidebar section.comments {
   /* Top paragraph under the heading */
   /* Voir plus link at the bottom */
 }
-/* line 181, sass/_sidebar.scss */
+/* line 186, sass/_sidebar.scss */
+#sidebar section.comments.comments-container,
+div.forum-sidebar section.comments.comments-container {
+  padding-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+/* line 192, sass/_sidebar.scss */
 #sidebar section.comments div.comment,
 div.forum-sidebar section.comments div.comment {
   position: relative;
-  margin-bottom: 1.5em;
+  margin-top: 0.5em;
 }
-/* line 184, sass/_sidebar.scss */
+/* line 195, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-gravatar,
 #sidebar section.comments div.comment div.comment-content,
 #sidebar section.comments div.comment div.comment-date,
@@ -13456,17 +14266,17 @@ div.forum-sidebar section.comments div.comment div.comment-date {
   display: inline-block;
   vertical-align: top;
 }
-/* line 190, sass/_sidebar.scss */
+/* line 201, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-gravatar,
 div.forum-sidebar section.comments div.comment div.comment-gravatar {
   width: 15%;
   margin-top: 1%;
   margin-left: 3%;
 }
-/* line 195, sass/_sidebar.scss */
+/* line 206, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-content,
 div.forum-sidebar section.comments div.comment div.comment-content {
-  width: 65%;
+  width: 74%;
   padding: 0.5em 0.75em;
   background-color: #f5f4f2;
   -moz-border-radius-topright: 5px;
@@ -13482,31 +14292,30 @@ div.forum-sidebar section.comments div.comment div.comment-content {
   -webkit-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-/* line 201, sass/_sidebar.scss */
+/* line 212, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-content p.comment-author,
 div.forum-sidebar section.comments div.comment div.comment-content p.comment-author {
   margin-top: 0.25em;
   margin-bottom: 0.5em;
   font-size: 1.05em;
 }
-/* line 207, sass/_sidebar.scss */
+/* line 218, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-date,
 div.forum-sidebar section.comments div.comment div.comment-date {
   margin-top: 1%;
-  margin-left: 2%;
+  margin-left: 19%;
+  font-size: 0.9em;
   color: #666;
 }
-/* line 214, sass/_sidebar.scss */
+/* line 226, sass/_sidebar.scss */
 #sidebar section.comments h3 + p,
 div.forum-sidebar section.comments h3 + p {
-  margin: 0 30px 15px;
-  padding-bottom: 30px;
+  margin: 0 30px;
   font-family: "LatoLight";
   font-size: 1.25em;
-  line-height: 1.75em;
-  text-transform: uppercase;
+  line-height: 1.5em;
 }
-/* line 224, sass/_sidebar.scss */
+/* line 234, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child a,
 div.forum-sidebar section.comments > p:last-child a {
   display: block;
@@ -13517,78 +14326,84 @@ div.forum-sidebar section.comments > p:last-child a {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 233, sass/_sidebar.scss */
+/* line 243, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child.project a,
 div.forum-sidebar section.comments > p:last-child.project a {
   color: #2497d0;
 }
-/* line 235, sass/_sidebar.scss */
+/* line 245, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child.project a:hover,
 div.forum-sidebar section.comments > p:last-child.project a:hover {
   color: #fff;
   background-color: #2497d0;
 }
-/* line 240, sass/_sidebar.scss */
+/* line 250, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child.resource a,
 div.forum-sidebar section.comments > p:last-child.resource a {
   color: #30c9ad;
 }
-/* line 242, sass/_sidebar.scss */
+/* line 252, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child.resource a:hover,
 div.forum-sidebar section.comments > p:last-child.resource a:hover {
   color: #fff;
   background-color: #30c9ad;
 }
-/* line 250, sass/_sidebar.scss */
+/* line 259, sass/_sidebar.scss */
+#sidebar section.comments.comments-add,
+div.forum-sidebar section.comments.comments-add {
+  padding-top: 1.5em;
+}
+/* line 261, sass/_sidebar.scss */
 #sidebar section.comments.comments-add .comment,
 div.forum-sidebar section.comments.comments-add .comment {
   border-bottom: none;
 }
-/* line 254, sass/_sidebar.scss */
+/* line 265, sass/_sidebar.scss */
 #sidebar section.comments.comments-add .author img,
 div.forum-sidebar section.comments.comments-add .author img {
   display: inline-block;
   margin-left: 30px;
   margin-right: 15px;
 }
-/* line 259, sass/_sidebar.scss */
+/* line 270, sass/_sidebar.scss */
 #sidebar section.comments.comments-add .author p,
 div.forum-sidebar section.comments.comments-add .author p {
   display: inline-block;
   margin-top: 0.5em;
   vertical-align: top;
 }
-/* line 263, sass/_sidebar.scss */
+/* line 274, sass/_sidebar.scss */
 #sidebar section.comments.comments-add .author p strong,
 div.forum-sidebar section.comments.comments-add .author p strong {
   font-size: 1.1em;
 }
-/* line 268, sass/_sidebar.scss */
+/* line 279, sass/_sidebar.scss */
 #sidebar section.comments.comments-add fieldset,
 div.forum-sidebar section.comments.comments-add fieldset {
   padding: 0 2em;
 }
-/* line 271, sass/_sidebar.scss */
+/* line 282, sass/_sidebar.scss */
 #sidebar section.comments.comments-add textarea,
 div.forum-sidebar section.comments.comments-add textarea {
   width: 100%;
   height: 15em;
   padding: 1em;
 }
-/* line 276, sass/_sidebar.scss */
+/* line 287, sass/_sidebar.scss */
 #sidebar section.comments.comments-add button,
 div.forum-sidebar section.comments.comments-add button {
-  margin: 15px 0 0;
   width: 100%;
-  padding: 0.5em;
-  font-size: 1.25em;
   font-weight: bold;
-  text-transform: uppercase;
   -moz-border-radius: 1px;
   -webkit-border-radius: 1px;
   border-radius: 1px;
 }
-/* line 290, sass/_sidebar.scss */
+/* line 291, sass/_sidebar.scss */
+#sidebar section.comments.comments-add button:not(:first-child),
+div.forum-sidebar section.comments.comments-add button:not(:first-child) {
+  margin: .5em 0 .25em 0;
+}
+/* line 300, sass/_sidebar.scss */
 #sidebar section.button a,
 div.forum-sidebar section.button a {
   display: block;
@@ -13601,12 +14416,12 @@ div.forum-sidebar section.button a {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 300, sass/_sidebar.scss */
+/* line 310, sass/_sidebar.scss */
 #sidebar section.button a:hover,
 div.forum-sidebar section.button a:hover {
   background-color: #2497d0;
 }
-/* line 306, sass/_sidebar.scss */
+/* line 316, sass/_sidebar.scss */
 #sidebar section.popularity,
 div.forum-sidebar section.popularity {
   position: relative;
@@ -13614,39 +14429,39 @@ div.forum-sidebar section.popularity {
   color: #fff;
   /* Rating widget */
 }
-/* line 312, sass/_sidebar.scss */
+/* line 322, sass/_sidebar.scss */
 #sidebar section.popularity.popularity-project,
 div.forum-sidebar section.popularity.popularity-project {
   background: #2497d0 url("../img/bg/sidebar-blue-bg.png") 175px -110px no-repeat;
 }
-/* line 315, sass/_sidebar.scss */
+/* line 325, sass/_sidebar.scss */
 #sidebar section.popularity.popularity-resource,
 div.forum-sidebar section.popularity.popularity-resource {
   background: #30c9ad url("../img/bg/sidebar-green-bg.png") top left no-repeat;
 }
-/* line 319, sass/_sidebar.scss */
+/* line 329, sass/_sidebar.scss */
 #sidebar section.popularity table,
 div.forum-sidebar section.popularity table {
   margin: 2em 2em;
   width: 85%;
 }
-/* line 322, sass/_sidebar.scss */
+/* line 332, sass/_sidebar.scss */
 #sidebar section.popularity table td,
 div.forum-sidebar section.popularity table td {
   line-height: 2em;
   text-transform: uppercase;
 }
-/* line 325, sass/_sidebar.scss */
+/* line 335, sass/_sidebar.scss */
 #sidebar section.popularity table td small,
 div.forum-sidebar section.popularity table td small {
   font-size: 0.65em;
 }
-/* line 329, sass/_sidebar.scss */
+/* line 339, sass/_sidebar.scss */
 #sidebar section.popularity table td.percent,
 div.forum-sidebar section.popularity table td.percent {
   width: 50%;
 }
-/* line 332, sass/_sidebar.scss */
+/* line 342, sass/_sidebar.scss */
 #sidebar section.popularity table td.percent span,
 div.forum-sidebar section.popularity table td.percent span {
   display: block;
@@ -13657,12 +14472,12 @@ div.forum-sidebar section.popularity table td.percent span {
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
-/* line 338, sass/_sidebar.scss */
+/* line 348, sass/_sidebar.scss */
 #sidebar section.popularity table td.percent span span,
 div.forum-sidebar section.popularity table td.percent span span {
   background-color: #fff;
 }
-/* line 345, sass/_sidebar.scss */
+/* line 355, sass/_sidebar.scss */
 #sidebar section.popularity label,
 div.forum-sidebar section.popularity label {
   display: inline-block;
@@ -13670,13 +14485,13 @@ div.forum-sidebar section.popularity label {
   margin: 0 0 1em 2em;
   text-transform: uppercase;
 }
-/* line 351, sass/_sidebar.scss */
+/* line 361, sass/_sidebar.scss */
 #sidebar section.popularity span i,
 div.forum-sidebar section.popularity span i {
   font-size: 2em;
   vertical-align: middle;
 }
-/* line 355, sass/_sidebar.scss */
+/* line 365, sass/_sidebar.scss */
 #sidebar section.popularity button.solo,
 div.forum-sidebar section.popularity button.solo {
   padding: 0.25em 1.25em;
@@ -13684,39 +14499,62 @@ div.forum-sidebar section.popularity button.solo {
   font-weight: bold;
 }
 
-/* line 365, sass/_sidebar.scss */
+/* line 375, sass/_sidebar.scss */
 .sidebar-filters {
   margin: 30px 0;
 }
-/* line 367, sass/_sidebar.scss */
+/* line 377, sass/_sidebar.scss */
 .sidebar-filters h4 {
   margin-bottom: 0.5em;
 }
-/* line 370, sass/_sidebar.scss */
+/* line 380, sass/_sidebar.scss */
 .sidebar-filters .input-group {
   margin-bottom: 1em;
 }
-/* line 373, sass/_sidebar.scss */
+/* line 383, sass/_sidebar.scss */
 .sidebar-filters .panel-body {
   padding: 0;
 }
-/* line 375, sass/_sidebar.scss */
+/* line 385, sass/_sidebar.scss */
 .sidebar-filters .panel-body ul a {
   display: block;
   padding: 0.5em 1em;
 }
-/* line 378, sass/_sidebar.scss */
+/* line 388, sass/_sidebar.scss */
 .sidebar-filters .panel-body ul a:hover {
   color: #fff;
   text-decoration: none;
 }
-/* line 386, sass/_sidebar.scss */
+/* line 396, sass/_sidebar.scss */
 .sidebar-filters.sidebar-profiles .panel-body ul a:hover {
   background-color: #ff5353;
 }
-/* line 392, sass/_sidebar.scss */
+/* line 402, sass/_sidebar.scss */
 .sidebar-filters.sidebar-projects .panel-body ul a:hover {
   background-color: #2497d0;
+}
+
+/* line 409, sass/_sidebar.scss */
+.report-abuse {
+  background: white;
+  display: block;
+  text-align: center;
+  color: #a13535;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 1em;
+  margin-top: 30px;
+}
+/* line 418, sass/_sidebar.scss */
+.report-abuse .fa {
+  font-size: 20px;
+  margin-right: 5px;
+}
+/* line 422, sass/_sidebar.scss */
+.report-abuse:hover {
+  background: #a13535;
+  color: white;
+  text-decoration: none;
 }
 
 /* line 1, sass/_footer.scss */
@@ -14147,7 +14985,18 @@ div.edit-buttons button:hover {
   background-color: #c30;
 }
 
-/* line 207, sass/_inline-editing.scss */
+/* line 206, sass/_inline-editing.scss */
+.btn-edit {
+  background: #2f2f2f;
+  border-color: #2f2f2f;
+}
+/* line 209, sass/_inline-editing.scss */
+.btn-edit:hover {
+  background-color: #c30;
+  border-color: #c30;
+}
+
+/* line 216, sass/_inline-editing.scss */
 div.editable-controls textarea {
   display: block;
   width: 100%;
@@ -14156,30 +15005,30 @@ div.editable-controls textarea {
   border: 2px solid #2f2f2f;
 }
 
-/* line 218, sass/_inline-editing.scss */
+/* line 227, sass/_inline-editing.scss */
 #content section form.editable-wrap {
   width: 100%;
 }
-/* line 220, sass/_inline-editing.scss */
+/* line 229, sass/_inline-editing.scss */
 #content section form.editable-wrap div.editable-controls {
   width: 100%;
 }
-/* line 222, sass/_inline-editing.scss */
+/* line 231, sass/_inline-editing.scss */
 #content section form.editable-wrap div.editable-controls .editable-buttons {
   display: block;
 }
-/* line 224, sass/_inline-editing.scss */
+/* line 233, sass/_inline-editing.scss */
 #content section form.editable-wrap div.editable-controls .editable-buttons button {
   float: right;
 }
-/* line 228, sass/_inline-editing.scss */
+/* line 237, sass/_inline-editing.scss */
 #content section form.editable-wrap div.editable-controls .ta-scroll-window > .ta-bind {
   padding: 1em;
   white-space: pre-line;
   word-wrap: break-word;
   text-align: justify;
 }
-/* line 234, sass/_inline-editing.scss */
+/* line 243, sass/_inline-editing.scss */
 #content section form.editable-wrap div.editable-controls textarea, #content section form.editable-wrap div.editable-controls div.editable-input {
   display: block;
   width: 100%;
@@ -14187,45 +15036,45 @@ div.editable-controls textarea {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 238, sass/_inline-editing.scss */
+/* line 247, sass/_inline-editing.scss */
 #content section form.editable-wrap div.editable-controls textarea .ta-text, #content section form.editable-wrap div.editable-controls div.editable-input .ta-text {
   margin: 0.5em 0;
   width: 100%;
 }
-/* line 242, sass/_inline-editing.scss */
+/* line 251, sass/_inline-editing.scss */
 #content section form.editable-wrap div.editable-controls textarea:focus, #content section form.editable-wrap div.editable-controls div.editable-input:focus {
   border-color: #2f2f2f;
   box-shadow: none;
 }
-/* line 249, sass/_inline-editing.scss */
+/* line 258, sass/_inline-editing.scss */
 #content section p.editable {
   white-space: pre-line;
   word-wrap: break-word;
   text-align: justify;
 }
-/* line 253, sass/_inline-editing.scss */
+/* line 262, sass/_inline-editing.scss */
 #content section p.editable ul {
   list-style: initial;
   margin-left: 15px;
 }
-/* line 257, sass/_inline-editing.scss */
+/* line 266, sass/_inline-editing.scss */
 #content section p.editable ol {
   list-style-type: decimal;
   margin-left: 15px;
 }
-/* line 261, sass/_inline-editing.scss */
+/* line 270, sass/_inline-editing.scss */
 #content section p.editable em {
   font-style: italic;
 }
-/* line 267, sass/_inline-editing.scss */
+/* line 276, sass/_inline-editing.scss */
 #content section.linked .carousel .edit-buttons {
   top: 34px;
 }
-/* line 271, sass/_inline-editing.scss */
+/* line 280, sass/_inline-editing.scss */
 #content section.linked button.nomargin {
   margin: 0;
 }
-/* line 275, sass/_inline-editing.scss */
+/* line 284, sass/_inline-editing.scss */
 #content section.linked div.angucomplete-holder input#linked-idea_value {
   width: 20em;
   padding: 0.36em;
@@ -14233,7 +15082,7 @@ div.editable-controls textarea {
   right: 2.7em;
 }
 
-/* line 287, sass/_inline-editing.scss */
+/* line 296, sass/_inline-editing.scss */
 #content .edit button.dark, .edit button.dark {
   margin-left: 0.25em;
   padding: 0.25em 1em;
@@ -14241,72 +15090,72 @@ div.editable-controls textarea {
   background-color: #2f2f2f;
   border: 2px solid #2f2f2f;
 }
-/* line 293, sass/_inline-editing.scss */
+/* line 302, sass/_inline-editing.scss */
 #content .edit button.dark.cancel, .edit button.dark.cancel {
   color: #2f2f2f;
   background-color: #fff;
 }
-/* line 297, sass/_inline-editing.scss */
+/* line 306, sass/_inline-editing.scss */
 #content .edit button.dark:hover, .edit button.dark:hover {
   color: #fff;
   background-color: #c30;
   border-color: #c30;
 }
-/* line 303, sass/_inline-editing.scss */
+/* line 312, sass/_inline-editing.scss */
 #content .edit section, .edit section {
   padding: 0;
 }
-/* line 305, sass/_inline-editing.scss */
+/* line 314, sass/_inline-editing.scss */
 #content .edit section textarea, #content .edit section button, .edit section textarea, .edit section button {
   display: block;
 }
-/* line 308, sass/_inline-editing.scss */
+/* line 317, sass/_inline-editing.scss */
 #content .edit section h3, .edit section h3 {
   margin: 0;
   padding: 1em 1em 0.5em 1em;
 }
-/* line 312, sass/_inline-editing.scss */
+/* line 321, sass/_inline-editing.scss */
 #content .edit section p, .edit section p {
   padding: 0 1em 1em 1em;
 }
-/* line 316, sass/_inline-editing.scss */
+/* line 325, sass/_inline-editing.scss */
 #content .edit div.editable, .edit div.editable {
   position: relative;
 }
-/* line 319, sass/_inline-editing.scss */
+/* line 328, sass/_inline-editing.scss */
 #content .edit .tab-content p.right, .edit .tab-content p.right {
   margin-top: -0.5em;
   margin-bottom: 1.5em;
 }
-/* line 323, sass/_inline-editing.scss */
+/* line 332, sass/_inline-editing.scss */
 #content .edit #intro.intro-project h3 span, .edit #intro.intro-project h3 span {
   background-color: #2f2f2f;
 }
-/* line 327, sass/_inline-editing.scss */
+/* line 336, sass/_inline-editing.scss */
 #content .edit .intro ul.tags, .edit .intro ul.tags {
   margin-top: 2.5em;
   /* make space for the edit buttons at the top */
 }
-/* line 329, sass/_inline-editing.scss */
+/* line 338, sass/_inline-editing.scss */
 #content .edit .intro ul.tags.tags-edit, .edit .intro ul.tags.tags-edit {
   margin: 0.75em;
   margin-bottom: 4em;
 }
-/* line 332, sass/_inline-editing.scss */
+/* line 341, sass/_inline-editing.scss */
 #content .edit .intro ul.tags.tags-edit button, .edit .intro ul.tags.tags-edit button {
   font-size: 0.8em;
   background-color: #5a4b84;
   border: none;
 }
-/* line 336, sass/_inline-editing.scss */
+/* line 345, sass/_inline-editing.scss */
 #content .edit .intro ul.tags.tags-edit button span, .edit .intro ul.tags.tags-edit button span {
   font-size: 0.85em;
 }
-/* line 339, sass/_inline-editing.scss */
+/* line 348, sass/_inline-editing.scss */
 #content .edit .intro ul.tags.tags-edit button:hover, .edit .intro ul.tags.tags-edit button:hover {
   background-color: #c30 !important;
 }
-/* line 342, sass/_inline-editing.scss */
+/* line 351, sass/_inline-editing.scss */
 #content .edit .intro ul.tags.tags-edit button div.member button.remove, .edit .intro ul.tags.tags-edit button div.member button.remove {
   position: absolute;
   top: 0;
@@ -14321,39 +15170,39 @@ div.editable-controls textarea {
   -webkit-border-radius: 12px;
   border-radius: 12px;
 }
-/* line 353, sass/_inline-editing.scss */
+/* line 362, sass/_inline-editing.scss */
 #content .edit .intro ul.tags.tags-edit button div.member button.remove:hover, .edit .intro ul.tags.tags-edit button div.member button.remove:hover {
   background-color: #c30;
 }
 
-/* line 365, sass/_inline-editing.scss */
+/* line 374, sass/_inline-editing.scss */
 #content {
   /* prevent cursor change on this fake tab */
 }
-/* line 367, sass/_inline-editing.scss */
+/* line 376, sass/_inline-editing.scss */
 #content .bloc-links {
   height: auto;
   margin-bottom: 0.25em;
 }
-/* line 370, sass/_inline-editing.scss */
+/* line 379, sass/_inline-editing.scss */
 #content .bloc-links input {
   margin: 0;
   padding: 0 1em;
   background-color: transparent;
 }
-/* line 375, sass/_inline-editing.scss */
+/* line 384, sass/_inline-editing.scss */
 #content .bloc-links fieldset {
   margin-bottom: 1px;
 }
-/* line 377, sass/_inline-editing.scss */
+/* line 386, sass/_inline-editing.scss */
 #content .bloc-links fieldset input:first-child {
   font-weight: bold;
 }
-/* line 384, sass/_inline-editing.scss */
+/* line 393, sass/_inline-editing.scss */
 #content ul.nav.nav-tabs li.editable:hover * {
   cursor: pointer !important;
 }
-/* line 388, sass/_inline-editing.scss */
+/* line 397, sass/_inline-editing.scss */
 #content div.editable-gallery {
   margin-top: 1px;
   padding: 90px 30px;
@@ -14361,7 +15210,7 @@ div.editable-controls textarea {
   background-color: #e8e8e8;
 }
 
-/* line 400, sass/_inline-editing.scss */
+/* line 409, sass/_inline-editing.scss */
 #sidebar div.member-edit button.remove {
   position: absolute;
   top: 0;
@@ -14376,57 +15225,57 @@ div.editable-controls textarea {
   -webkit-border-radius: 12px;
   border-radius: 12px;
 }
-/* line 411, sass/_inline-editing.scss */
+/* line 420, sass/_inline-editing.scss */
 #sidebar div.member-edit button.remove:hover {
   background-color: #c30;
 }
-/* line 415, sass/_inline-editing.scss */
+/* line 424, sass/_inline-editing.scss */
 #sidebar div.member-edit button.valid-button {
   margin-top: 5px;
   font-size: 1em;
   padding: 0.4em;
   margin-left: 1em;
 }
-/* line 423, sass/_inline-editing.scss */
+/* line 432, sass/_inline-editing.scss */
 #sidebar div.member-details form {
   margin: 0.5em 0 0.5em 0.5em;
 }
-/* line 425, sass/_inline-editing.scss */
+/* line 434, sass/_inline-editing.scss */
 #sidebar div.member-details form input {
   display: block;
   width: 100%;
 }
-/* line 429, sass/_inline-editing.scss */
+/* line 438, sass/_inline-editing.scss */
 #sidebar div.member-details form .editable-controls {
   display: block;
 }
-/* line 433, sass/_inline-editing.scss */
+/* line 442, sass/_inline-editing.scss */
 #sidebar div.member-details .editable-buttons {
   display: block;
 }
-/* line 435, sass/_inline-editing.scss */
+/* line 444, sass/_inline-editing.scss */
 #sidebar div.member-details .editable-buttons button {
   display: inline-block;
   width: auto;
   margin-top: 0.25em;
   margin-left: 0;
 }
-/* line 440, sass/_inline-editing.scss */
+/* line 449, sass/_inline-editing.scss */
 #sidebar div.member-details .editable-buttons button:last-child {
   margin-left: 4px;
 }
-/* line 448, sass/_inline-editing.scss */
+/* line 457, sass/_inline-editing.scss */
 #sidebar div.comment div.comment-content {
   position: relative;
 }
-/* line 451, sass/_inline-editing.scss */
+/* line 460, sass/_inline-editing.scss */
 #sidebar div.comment div.btn-group {
   position: absolute;
   top: 0;
   right: 0;
   /* Open dropdown menu on the left, instead of right */
 }
-/* line 455, sass/_inline-editing.scss */
+/* line 464, sass/_inline-editing.scss */
 #sidebar div.comment div.btn-group button {
   padding-right: 0.5em;
   padding-left: 0.5em;
@@ -14436,14 +15285,14 @@ div.editable-controls textarea {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 463, sass/_inline-editing.scss */
+/* line 472, sass/_inline-editing.scss */
 #sidebar div.comment div.btn-group ul.dropdown-menu {
   left: auto;
   right: 0;
 }
 
 /* Restore lists in editing */
-/* line 473, sass/_inline-editing.scss */
+/* line 482, sass/_inline-editing.scss */
 .ta-editor ul {
   list-style-type: disc;
 }
@@ -14493,55 +15342,73 @@ div.projectToggleOff, div.resourceToggleOff {
   opacity: 0;
 }
 
-/* line 2, sass/_gallery.scss */
-.modal-gallery input[type=file] {
-  margin: 1em 0;
+/* line 1, sass/_gallery.scss */
+.modal-title {
+  font-size: 1.3em;
+  font-weight: bold;
 }
-/* line 5, sass/_gallery.scss */
-.modal-gallery ul.thumbnails {
+
+/* line 6, sass/_gallery.scss */
+.gallery-thumbnails {
   overflow: hidden;
   /* restore block size */
   margin: 1em 0;
+  display: flex;
+  flex-wrap: wrap;
 }
-/* line 8, sass/_gallery.scss */
-.modal-gallery ul.thumbnails li {
+/* line 11, sass/_gallery.scss */
+.gallery-thumbnails li {
   position: relative;
   margin-right: 0.5em;
   margin: 0 15px 15px 0;
   padding: 15px;
-  background-color: #f5f4f2;
-  border: 2px solid #e8e8e8;
+  width: 170px;
 }
-/* line 15, sass/_gallery.scss */
-.modal-gallery ul.thumbnails li > span {
+/* line 19, sass/_gallery.scss */
+.gallery-thumbnails li .thumbnail {
+  border: none;
+  overflow: hidden;
+  height: 100px;
+  line-height: 80px;
+  margin-bottom: 6px;
+}
+/* line 26, sass/_gallery.scss */
+.gallery-thumbnails li canvas, .gallery-thumbnails li img {
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+/* line 31, sass/_gallery.scss */
+.gallery-thumbnails li > span {
   position: absolute;
   top: 5px;
   right: 5px;
   font-size: 1.25em;
   cursor: pointer;
 }
-/* line 21, sass/_gallery.scss */
-.modal-gallery ul.thumbnails li > span:hover {
+/* line 37, sass/_gallery.scss */
+.gallery-thumbnails li > span:hover {
   color: #ff5353;
 }
-/* line 25, sass/_gallery.scss */
-.modal-gallery ul.thumbnails li button {
+/* line 41, sass/_gallery.scss */
+.gallery-thumbnails li button {
   margin-top: 0.5em;
 }
-/* line 28, sass/_gallery.scss */
-.modal-gallery ul.thumbnails li:hover {
+/* line 44, sass/_gallery.scss */
+.gallery-thumbnails li:hover {
   border-color: #d3d7da;
 }
-/* line 34, sass/_gallery.scss */
-.modal-gallery section.video form {
+
+/* line 50, sass/_gallery.scss */
+section.video form {
   margin: 1em 0;
 }
-/* line 36, sass/_gallery.scss */
-.modal-gallery section.video form input {
+/* line 52, sass/_gallery.scss */
+section.video form input {
   width: 50%;
 }
-/* line 42, sass/_gallery.scss */
-.modal-gallery section.video ul.links li button.transparent {
+/* line 58, sass/_gallery.scss */
+section.video ul.links li button.transparent {
   opacity: 0.1;
   width: auto;
   height: auto;
@@ -14550,8 +15417,8 @@ div.projectToggleOff, div.resourceToggleOff {
   background-color: transparent;
   cursor: pointer;
 }
-/* line 50, sass/_gallery.scss */
-.modal-gallery section.video ul.links li button.transparent:hover {
+/* line 66, sass/_gallery.scss */
+section.video ul.links li button.transparent:hover {
   opacity: 1;
   color: #c30;
 }
