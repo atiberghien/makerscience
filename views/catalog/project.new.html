@@ -42,65 +42,65 @@
                                         </div>
                                     </accordion-heading>
                                     <fieldset>
-                                        <label>Titre du projet <span class="required">*</span></label>
-                                        <input type="text"
-                                               name="projectName"
-                                               ng-model="projectsheet.project.title"
-                                               maxlength="50"
-                                               required/>
-                                        <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Titre du projet requis</p>
+                                      <label>Titre du projet <span class="required">*</span></label>
+                                      <input type="text"
+                                          name="projectName"
+                                          ng-model="projectsheet.project.title"
+                                          maxlength="50"
+                                          required/>
+                                      <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Titre du projet requis</p>
 
-                                        <label>Sous-titre du projet <span class="required">*</span></label>
-                                        <input type="text"
-                                                    name="projectBaseline"
-                                                    ng-model="projectsheet.project.baseline"
-                                                    maxlength="100"
-                                                    required/>
-                                        <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Sous-titre du projet requise</p>
-                                        <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Résumez en une courte phrase votre projet</p>
+                                      <label>Sous-titre du projet <span class="required">*</span></label>
+                                      <input type="text"
+                                          name="projectBaseline"
+                                          ng-model="projectsheet.project.baseline"
+                                          maxlength="100"
+                                          required/>
+                                      <p ng-show="newProjectForm.projectBaseline.$invalid && submitted" class="help-block">Sous-titre du projet requise</p>
+                                      <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Résumez en une courte phrase votre projet</p>
 
-                                        <label>Présentation du projet</label>
-                                        <textarea ui-tinymce="tinyMceFullOptions"
-                                            ng-trim="false"
-                                            name="project-about"
-                                            ng-model="projectsheet.project.description"
-                                            rows="4">
-                                        </textarea>
+                                      <label>Présentation du projet</label>
+                                      <textarea ui-tinymce="tinyMceFullOptions"
+                                          ng-trim="false"
+                                          name="project-about"
+                                          ng-model="projectsheet.project.description"
+                                          rows="4">
+                                      </textarea>
 
-                                        <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet  <span class="required">*</span></label>
-                                        <input type="text" ng-model="projectsheet.project.end_date" />
-                                        </select>
+                                      <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet  <span class="required">*</span></label>
+                                      <input type="date" ng-model="projectsheet.project.end_date" />
 
-                                        <label>Localisation <span class="required">*</span></label>
-                                        <input type="text"
-                                               name="projectName"
-                                               ng-model="projectsheet.project.title"
-                                               maxlength="50"
-                                               required/>
-                                        <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Localisation requise</p>
+                                      <label>Localisation <span class="required">*</span></label>
+                                      <input type="text"
+                                             name="localisation"
+                                             ng-model="projectsheet.project.localisation"
+                                             maxlength="50"
+                                             required/>
+                                      <p ng-show="newProjectForm.localisation.$invalid && submitted" class="help-block">Localisation requise</p>
 
-                                        <label>Thématiques <span class="required">*</span></label>
-                                        <input type="text"
-                                            name="projectBaseline"
-                                            ng-model="projectsheet.project.baseline"
-                                            maxlength="100"
-                                            required/>
+                                      <label>Thématiques <span class="required">*</span></label>
+                                      <input type="text"
+                                          name="thematiques"
+                                          ng-model="projectsheet.project.thematiques"
+                                          maxlength="100"
+                                          required/>
+                                      <p ng-show="newProjectForm.thematiques.$invalid && submitted" class="help-block">Thematiques requise</p>
 
-                                        <label>Publics visés <span class="required">*</span></label>
-                                        <input type="text"
-                                               name="projectName"
-                                               ng-model="projectsheet.project.title"
-                                               maxlength="50"
-                                               required/>
-                                        <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Publics visés requis</p>
+                                      <label>Publics visés <span class="required">*</span></label>
+                                      <input type="text"
+                                             name="target"
+                                             ng-model="projectsheet.project.target"
+                                             maxlength="50"
+                                             required/>
+                                      <p ng-show="newProjectForm.target.$invalid && submitted" class="help-block">Publics visés requis</p>
 
-                                        <label>Formats <span class="required">*</span></label>
-                                        <input type="text"
-                                               name="projectName"
-                                               ng-model="projectsheet.project.title"
-                                               maxlength="50"
-                                               required/>
-                                        <p ng-show="newProjectForm.projectName.$invalid && submitted" class="help-block">Formats requis</p>
+                                      <label>Formats <span class="required">*</span></label>
+                                      <input type="text"
+                                             name="formats"
+                                             ng-model="projectsheet.project.formats"
+                                             maxlength="50"
+                                             required/>
+                                      <p ng-show="newProjectForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
                                    </fieldset>
                                 </accordion-group>
 
@@ -173,7 +173,7 @@
                                             <div class="row">
                                                 <div class="col-md-8">
                                                     <label for="media-title">Titre  <span class="required">*</span></label>
-                                                    <input type="text" id="media-title" ng-model="newMedia.title" required />
+                                                    <input type="text" id="media-title" ng-model="newMedia.title" ng-required="newMedia.link || newMedia.file" />
                                                 </div>
 
                                                 <div class="col-md-4">

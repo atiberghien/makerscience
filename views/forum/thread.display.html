@@ -133,7 +133,7 @@
                             <h3>Projets associés</h3>
                             <div class="boxes boxes-sidebar">
                                 <div class="box" ng-repeat="project in post.linked_projects">
-                                    <ng-include src="'/views/catalog/block/project_thumb_light.html'" ng-init="project=project"></ng-include>
+                                    <ng-include src="'/views/block/project_thumb_light.html'" ng-init="project=project"></ng-include>
                                 </div>
                             </div>
                             <p class="scroll-buttons" ng-show="post.linked_projects.length > 1">
@@ -145,7 +145,7 @@
                             <h3>Expériences associées</h3>
                             <div class="boxes boxes-sidebar">
                                 <div class="box" ng-repeat="resource in post.linked_resources">
-                                    <ng-include src="'/views/catalog/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
+                                    <ng-include src="'/views/block/resource_thumb_light.html'" ng-init="resource=resource"></ng-include>
                                 </div>
                             </div>
                             <p class="scroll-buttons" ng-show="post.linked_resources.length > 1">

@@ -1,6 +1,5 @@
-module = angular.module("makerscience.base.controllers", ['makerscience.base.services', 'makerscience.profile.controllers',
-                                                          'makerscience.catalog.controllers.project', 'makerscience.catalog.controllers.resource',
-                                                          'commons.accounts.controllers', 'commons.graffiti.services'])
+module = angular.module("makerscience.base.controllers", ['makerscience.base.services',
+                                                          'commons.accounts.controllers'])
 
 module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
     """
@@ -366,8 +365,6 @@ module.controller("NotificationCtrl", ($scope, $rootScope, $controller, $timeout
                 $scope.updateNotifications(false)
             , 30000)
     )
-
-
 )
 
 module.controller('ReportAbuseFormInstanceCtrl' , ($scope, $modalInstance, $timeout, User, vcRecaptchaService, currentLocation) ->
@@ -392,18 +389,6 @@ module.controller('ReportAbuseFormInstanceCtrl' , ($scope, $modalInstance, $time
             , (response) ->
                 console.log("RECAPTCHA ERROR", response)
             )
-)
-
-module.controller("ReportAbuseCtrl", ($scope, $modal) ->
-
-    $scope.showReportAbusePopup = (currentLocation) ->
-        modalInstance = $modal.open(
-            templateUrl: '/views/base/abuse.html'
-            controller: 'ReportAbuseFormInstanceCtrl'
-            resolve:
-                currentLocation : () ->
-                    return currentLocation
-        )
 )
 
 module.controller('BasicModalInstanceCtrl', ($scope, $modalInstance, content) ->

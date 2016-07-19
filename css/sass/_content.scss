@@ -181,7 +181,7 @@ div.toolbar {
             font-size: 1.25em;
         }
         h3 {
-            font-size: 1em;
+            font-size: 1.2em;
         }
         h4 {
             font-size: .75em;
@@ -316,6 +316,34 @@ div.toolbar {
         margin-top: $grid-gutter-width;
         padding: 0;
     }
+    ul.experiences {
+      li {
+        overflow: hidden;
+        margin-bottom: 0;
+      }
+      h4 {
+        font-size: 1.2em;
+        margin-top: 1em;
+        margin-bottom: 0;
+        font-weight: normal;
+        i {
+          color: $color-green;
+          margin-right: 4px;
+        }
+      }
+      h5 {
+        font-size: 1em;
+        margin-bottom: .5em;
+        color: $color-dark-grey;
+      }
+      .date {
+        padding-left: 25px;
+        padding-bottom: 0;
+        font-size: .9em;
+        font-style: italic;
+        color: $color-crumbs-grey;
+      }
+    }
     ul.nav-tabs {
         margin-bottom: $grid-gutter-width;
         border: none;
@@ -393,34 +421,76 @@ div.toolbar {
         }
     }
     .nav-tabs-slide {
-        ul.nav-tabs {
-            font-size: 1.3em;
-            &>li a {
-                color: $color-content-tab-slide;
-                background-color: $color-content-tab-slide-bg;
-                @include border-radius(0);
-            }
-            &>li.active a {
-                border: 2px solid $color-content-tab-active;
-            }
-        }
         &.nav-tabs-slide-project {
             ul.nav-tabs {
-                &>li.active a {
+                & > li.active a, & > li.active a:active, & > li.active a:focus {
+                    background: $color-blue;
+                    color: $color-light-cream;
+                    span {
+                        background-color: $color-light-cream;
+                        color: $color-blue;
+                    }
+                }
+                & > li:not(.active) a:hover {
+                  border: none;
+                  color: $color-blue;
+                  background-color: $color-bg;
+                  span {
                     background-color: $color-blue;
+                  }
+                }
+
+                & > li a:active, & > li a:focus {
+                  span {
+                    color: white;
+                  }
                 }
             }
         }
         &.nav-tabs-slide-resource {
-            ul.nav-tabs {
-                &>li.active a {
-                    background-color: $color-green;
-                }
+            ul.nav-tabs > li.active a {
+              background: $color-light-cream;
+              color: $color-green;
+              span {
+                background-color: $color-green;
+              }
+            }
+            ul.nav-tabs > li a:hover {
+              border: none;
+              color: $color-green;
+              background-color: $color-bg;
+              span {
+                background-color: $color-green;
+              }
             }
         }
         .carousel-inner .item img {
             width: 100%;
         }
+
+        ul.nav-tabs > li a {
+  				padding-right: 2em;
+  				color: $color-text;
+  				font-size: 1.1em;
+  				font-weight: bold;
+  				border: none;
+  				border-radius: 0;
+          background: transparent;
+  				@include transition(color .2s ease-in-out);
+  				span {
+  						@include transition(background-color .2s ease-in-out);
+  						margin-right: 0.25em;
+  						margin-bottom: 0.25em;
+  						padding: 0.5em;
+  						font-size: 1.5em;
+  						border-radius: 1em;
+  						background: $color-text;
+  						color: white;
+  				}
+  				&:focus {
+  					border: none;
+  				}
+  			}
     }
     .nav-tabs-seance ul.nav-tabs {
         font-size: 0.8em;
@@ -514,6 +584,11 @@ div.toolbar {
     }
     section:nth-child(even) {
         background-color: $color-content-section-bg-even;
+    }
+
+    section.medias {
+      background-color: white;
+      padding-bottom: 10px;
     }
 
     section.linked {

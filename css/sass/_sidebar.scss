@@ -1,13 +1,12 @@
 #sidebar,
 div.forum-sidebar {
-	font-size: 0.9em;
-
 	section {
-		margin-bottom: $grid-gutter-width;
+
 		h3 {
 			padding: $grid-gutter-width;
 			font-weight: bold;
-			text-transform: uppercase;
+			font-size: 1.2em;
+			// text-transform: uppercase;
 		}
 	}
 
@@ -27,6 +26,10 @@ div.forum-sidebar {
 			background: $color-forum url('../img/bg/shape-right-bg.png') 175px -110px no-repeat;
 		}
 
+		.tab-content {
+			font-size: 0.9em;
+		}
+
 		ul.submenu, ul.nav-tabs {
 			clear: both;
 			display: table;
@@ -44,10 +47,9 @@ div.forum-sidebar {
 				&> a {
 					margin: 0;
 					padding: 1em 0.75em;
-					font-size: 0.8em;
+					background: rgba(48, 70, 81, .5);
 					color: $color-sidebar-submenu;
-					text-transform: uppercase;
-					line-height: 1.2em;
+					line-height: 1.4em;
 					border: none;
 					@include border-radius(0);
 					span {
@@ -86,8 +88,8 @@ div.forum-sidebar {
 		}
 		div.member-forum {
 			position: relative;
-                        margin: 0 ($grid-gutter-width / 3) ($grid-gutter-width / 2) $grid-gutter-width;
-                        padding: 0.5em 0.2em 0.3em 0.2em;
+      margin: 0 ($grid-gutter-width / 3) ($grid-gutter-width / 2) $grid-gutter-width;
+      padding: 0.5em 0.2em 0.3em 0.2em;
 			min-height: 50px;
 			a.member-details {
 				font-size: 1.25em;
@@ -103,6 +105,9 @@ div.forum-sidebar {
 			margin: 0 ($grid-gutter-width / 3) ($grid-gutter-width / 2) $grid-gutter-width;
 			padding: 0.5em 0.2em 0.3em 0.2em;
 			#border-bottom: 1px solid $color-sidebar-community-member-border;
+			a {
+				color: white;
+			}
 			&:last-child {
 				border: none;
 			}
@@ -178,9 +183,15 @@ div.forum-sidebar {
 		color: $color-sidebar-comments;
 		background-color: $color-sidebar-comments-bg;
 
+		&.comments-container {
+				padding-bottom: $grid-gutter-width;
+				margin-top: $grid-gutter-width;
+				margin-bottom: $grid-gutter-width;
+		}
+
 		div.comment {
 			position: relative;
-			margin-bottom: 1.5em;
+			margin-top: 0.5em;
 			div.comment-gravatar,
 			div.comment-content,
 			div.comment-date {
@@ -193,7 +204,7 @@ div.forum-sidebar {
 				margin-left: 3%;
 			}
 			div.comment-content {
-				width: 65%;
+				width: 74%;
 				padding: 0.5em 0.75em;
 				background-color: $color-light-cream;
 				@include border-right-radius(5px);
@@ -206,18 +217,17 @@ div.forum-sidebar {
 			}
 			div.comment-date {
 				margin-top: 1%;
-				margin-left: 2%;
+				margin-left: 19%;
+				font-size: 0.9em;
 				color: $color-grey;
 			}
 		}
 		/* Top paragraph under the heading */
 		h3 + p {
-			margin: 0 $grid-gutter-width $grid-gutter-width / 2;
-			padding-bottom: $grid-gutter-width;
+			margin: 0 $grid-gutter-width;
 			font-family: "LatoLight";
 			font-size: 1.25em;
-			line-height: 1.75em;
-			text-transform: uppercase;
+			line-height: 1.5em;
 		}
 		/* Voir plus link at the bottom */
 		> p:last-child {
@@ -247,6 +257,7 @@ div.forum-sidebar {
 		}
 
 		&.comments-add {
+			padding-top: 1.5em;
 			.comment {
 				border-bottom: none;
 			}
@@ -274,13 +285,12 @@ div.forum-sidebar {
 				padding: 1em;
 			}
 			button {
-				margin: $grid-gutter-width / 2 0 0;
 				width: 100%;
-				padding: 0.5em;
-				font-size: 1.25em;
 				font-weight: bold;
-				text-transform: uppercase;
 				@include border-radius(1px);
+				&:not(:first-child) {
+					margin: .5em 0 .25em 0;
+				}
 			}
 		}
 
@@ -394,4 +404,24 @@ div.forum-sidebar {
 		}
 	}
 
+}
+
+.report-abuse {
+	background: white;
+	display: block;
+	text-align: center;
+	color: $color-dark-red;
+	font-weight: bold;
+	font-size: 1.2em;
+	padding: 1em;
+  margin-top: 30px;
+	.fa {
+		font-size: 20px;
+		margin-right: 5px;
+	}
+	&:hover {
+		background: $color-dark-red;
+		color: white;
+		text-decoration: none;
+	}
 }
