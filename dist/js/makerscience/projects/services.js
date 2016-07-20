@@ -6,16 +6,15 @@
   module.factory("ProjectService", function(ProjectSheetTemplate, ProjectSheet, Project, ProjectSheetQuestionAnswer, PostalAddress, BucketRestangular) {
     return {
       fetchCoverURL: function(coverId) {
-        console.log(coverId);
         if (coverId) {
           return config.media_uri + '/bucket/file/' + coverId + '/thumbnail/?dim=710x390&border=true';
         }
         return "/img/default_project.jpg";
       },
-      updateProjectSheet: function(resources, projectsheet, fieldName, data) {
+      updateProjectSheet: function(resources, projectsheet) {
         var putData;
         putData = {};
-        putData[fieldName] = resources.data;
+        putData[resources.fieldName] = resources.data;
         switch (resources.resourceName) {
           case 'Project':
             return Project.one(resources.resourceId).patch(putData).then(function(projectResult) {
