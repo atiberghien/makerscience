@@ -37,8 +37,8 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
 
                 # Project
                 if media.type == 'video'
-                    formData.append('video_id', media.videoId)
-                    formData.append('video_provider', media.videoProvider)
+                    formData.append('video_id', media.video_id)
+                    formData.append('video_provider', media.video_provider)
 
                 # Experience
                 if media.description

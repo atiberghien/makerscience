@@ -44,8 +44,8 @@
             formData.append('url', media.url);
           }
           if (media.type === 'video') {
-            formData.append('video_id', media.videoId);
-            formData.append('video_provider', media.videoProvider);
+            formData.append('video_id', media.video_id);
+            formData.append('video_provider', media.video_provider);
           }
           if (media.description) {
             formData.append('description', media.description);

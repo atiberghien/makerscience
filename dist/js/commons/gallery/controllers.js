@@ -31,8 +31,8 @@
         return false;
       }
       if (newMedia.type === 'video') {
-        newMedia.videoId = newMedia.url.split('/').pop();
-        newMedia.videoProvider = GalleryService.getVideoProvider(newMedia.url);
+        newMedia.video_id = newMedia.url.split('/').pop();
+        newMedia.video_provider = GalleryService.getVideoProvider(newMedia.url);
       }
       $scope.medias.push(newMedia);
       $scope.newMedia = GalleryService.initMediaProject(newMedia.type);

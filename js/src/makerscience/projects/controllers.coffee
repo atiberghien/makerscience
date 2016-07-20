@@ -138,11 +138,15 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.projectsheet = makerScienceProjectResult.objects[0]
         $scope.editable = $scope.projectsheet.can_edit
         $scope.objectId = $scope.projectsheet.id
-        hasPictures = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'image'})
-        hasVideos = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'video'})
+        $scope.hasPictures = false
+        $scope.hasVideos = false
 
-        $scope.hasPictures = if hasPictures == -1 then false else true
-        $scope.hasVideos = if hasVideos == -1 then false else true
+        $scope.checkFiles = () ->
+            hasPictures = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'image'})
+            hasVideos = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'video'})
+
+            $scope.hasPictures = if hasPictures == -1 then false else true
+            $scope.hasVideos = if hasVideos == -1 then false else true
 
         $scope.setMediasToShow = () ->
             $scope.mediasToShow = []
@@ -151,6 +155,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                     $scope.mediasToShow.push(media)
               )
 
+        $scope.checkFiles()
         $scope.setMediasToShow()
 
         $scope.openGallery = (projectsheet) ->
@@ -190,6 +195,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 if newCoverId != coverId
                   $scope.coverURL = ProjectService.fetchCoverURL(newCoverId)
                 $scope.setMediasToShow()
+                $scope.checkFiles()
             )
         )
 

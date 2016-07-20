@@ -140,18 +140,23 @@
     MakerScienceProject.one().get({
       'parent__slug': $stateParams.slug
     }).then(function(makerScienceProjectResult) {
-      var coverId, hasPictures, hasVideos;
+      var coverId;
       $scope.projectsheet = makerScienceProjectResult.objects[0];
       $scope.editable = $scope.projectsheet.can_edit;
       $scope.objectId = $scope.projectsheet.id;
-      hasPictures = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {
-        'type': 'image'
-      });
-      hasVideos = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {
-        'type': 'video'
-      });
-      $scope.hasPictures = hasPictures === -1 ? false : true;
-      $scope.hasVideos = hasVideos === -1 ? false : true;
+      $scope.hasPictures = false;
+      $scope.hasVideos = false;
+      $scope.checkFiles = function() {
+        var hasPictures, hasVideos;
+        hasPictures = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {
+          'type': 'image'
+        });
+        hasVideos = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {
+          'type': 'video'
+        });
+        $scope.hasPictures = hasPictures === -1 ? false : true;
+        return $scope.hasVideos = hasVideos === -1 ? false : true;
+      };
       $scope.setMediasToShow = function() {
         $scope.mediasToShow = [];
         return angular.forEach($scope.projectsheet.base_projectsheet.bucket.files, function(media, index) {
@@ -160,6 +165,7 @@
           }
         });
       };
+      $scope.checkFiles();
       $scope.setMediasToShow();
       $scope.openGallery = function(projectsheet) {
         var modalInstance;
@@ -205,7 +211,8 @@
           if (newCoverId !== coverId) {
             $scope.coverURL = ProjectService.fetchCoverURL(newCoverId);
           }
-          return $scope.setMediasToShow();
+          $scope.setMediasToShow();
+          return $scope.checkFiles();
         });
       });
       $scope.similars = [];

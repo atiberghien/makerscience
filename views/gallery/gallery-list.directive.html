@@ -17,8 +17,8 @@
           <div class="thumbnail" ng-show="media.url"><img ng-src="{{media.url}}" /></div>
       </div>
       <div ng-if="media.type === 'video'">
-          <div class="thumbnail" ng-if="media.videoProvider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.videoId}}/0.jpg" /></div>
-          <div class="thumbnail" ng-if="media.videoProvider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
+          <div class="thumbnail" ng-if="media.video_provider === 'youtube'"><img ng-src="http://img.youtube.com/vi/{{media.video_id}}/0.jpg" /></div>
+          <div class="thumbnail" ng-if="media.video_provider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
       </div>
       <span class="title">{{media.title}}</span>
       <span ng-if="media.description" class="description">{{media.description}}</span>
