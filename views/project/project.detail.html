@@ -136,7 +136,7 @@
                                 </tab-heading>
                                 <carousel>
                                     <slide ng-repeat="img in projectsheet.base_projectsheet.bucket.files | filter: {type: 'image'}">
-                                        <img ng-show="img.file" ng-src="{{ config.media_uri }}{{ img.file }}" alt="{{img.title}}">
+                                        <img ng-show="img.file" ng-src="{{ config.media_uri }}/bucket/file/{{img.id}}/thumbnail/?dim=710x390&border=true" alt="{{img.title}}">
                                         <img ng-show="img.url" ng-src="{{ img.url }}" alt="{{img.title}}">
                                     </slide>
                                 </carousel>

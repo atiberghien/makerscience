@@ -13,7 +13,7 @@
       </span>
       <div class="image-preview" ng-if="media.type === 'image'">
           <ng-thumb class="thumbnail" ng-show="media.file && !media.uploaded_on" params="{ file: media.file, height: 100 }"></ng-thumb>
-          <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{uri}}{{media.file}}" alt="{{media.title}}"></div>
+          <div class="thumbnail" ng-show="media.file && media.uploaded_on"><img ng-src="{{uri}}/bucket/file/{{media.id}}/thumbnail/?dim=170x100&border=true" alt="{{media.title}}"></div>
           <div class="thumbnail" ng-show="media.url"><img ng-src="{{media.url}}" /></div>
       </div>
       <div ng-if="media.type === 'video'">
