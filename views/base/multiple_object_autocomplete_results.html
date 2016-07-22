@@ -3,7 +3,7 @@
     <a ui-sref="project.detail({slug:project.slug})">{{project.title}}</a>
 </div>
 
-<h2 class="resources clear" ng-show="globalResources.length > 0"><span class="glyphicon glyphicon-book"></span> Expériences</h2>
+<h2 class="resources clear" ng-show="globalResources.length > 0"><span class="glyphicon glyphicon-book"></span> Ressources</h2>
 <div ng-repeat="resource in globalResources">
     <a ui-sref="resource.detail({slug:resource.slug})">{{resource.title}}</a>
 </div>

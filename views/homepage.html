@@ -29,7 +29,7 @@
                         </div>
                     </slide>
                     <slide ng-repeat="resource in featuredResources">
-                        <h3 class="category"><span>Expérience</span></h3>
+                        <h3 class="category"><span>Ressource</span></h3>
                         <img ng-if="resource.cover" ng-src="{{ $root.config.media_uri }}{{ resource.cover+'?dim=710x390&border=true'}}" alt="Loading slide one..." />
                         <img ng-if="!resource.cover" src="/img/uploads/home-slide-one.jpg" alt="Loading slide one..." />
                         <div class="description">
@@ -141,7 +141,7 @@
                 </div><!-- .boxes -->
             </div><!-- .col-md-4 -->
             <div class="col-md-4">
-                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Expériences partagées</h2>
+                <h2 class="resources"><span class="glyphicon glyphicon-book"></span> Ressources partagées</h2>
                 <div class="boxes boxes-small boxes-small-home boxes-resources">
                     <!-- boxes tag need to be attached to each other // any space will show up in the rendered html -->
                     <div class="box" ng-repeat="resource in resources| orderBy : '-parent.created_on'| limitTo : 3">

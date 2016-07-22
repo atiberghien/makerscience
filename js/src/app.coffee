@@ -131,7 +131,7 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
                 url: 'list',
                 templateUrl: '/views/resource/resource.list.html'
                 ncyBreadcrumb:
-                    label: 'Expériences'
+                    label: 'Ressources'
         )
         .state('resource.form',
                 url: 'new',

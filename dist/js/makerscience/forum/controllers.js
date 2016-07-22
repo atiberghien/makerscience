@@ -42,7 +42,7 @@
       return angular.forEach(resourceResults, function(resource) {
         return $scope.allAvailableItems.push({
           fullObject: resource,
-          title: "[Expérience] " + resource.title,
+          title: "[Ressource] " + resource.title,
           type: 'resource'
         });
       });
