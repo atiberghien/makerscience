@@ -112,9 +112,41 @@
             <div id="content">
 
                 <tabset class="nav-tabs-project">
-                    <tab heading="Projet">
-                        <section ng-repeat="item in projectsheet.base_projectsheet.question_answers">
-                            <h3>{{item.question.text}}</h3>
+                    <tab heading="Projet" active="tabs[0]">
+                        <section class="bloc-actus">
+                            <h3>Actualités</h3>
+                            <div class="row">
+                                <div class="col-md-4 actu-item" ng-repeat="news in projectsheet.news track by $index" ng-if="$index < 3">
+                                    <h4>{{news.title}}</h4>
+                                    <div class="content">{{news.summary}}</div>
+                                    <p class="infos">
+                                      Posté par <a ui-sref="profile.detail({slug:news.author.id})">{{news.author.user.first_name}} {{news.author.user.last_name}}</a>
+                                      <span am-time-ago="news.timestamp"></span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-info" ng-click="tabs[1].active = true">Voir toutes les actus du projet</button>
+                        </section>
+
+                        <section class="bloc-presentation" ng-repeat="item in projectsheet.base_projectsheet.question_answers track by $index" ng-if="$index === 0">
+                            <h4>{{item.question.text}}</h4>
+                            <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
+                                <button><span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
+                            <p editable-tiny-angular="item.answer"
+                                blur="ignore"
+                                 e-form="AnswerBtnForm"
+                                 e-rows="4"
+                                 onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
+                                 ng-bind-html="trustAsHtml(item.answer)">
+                            </p>
+                            <a ng-if="projectsheet.parent.website.length" href="{{projectsheet.parent.website}}" target="_blank" class="btn btn-primary">Visitez notre site web</a>
+                        </section>
+
+                        <h3>Contacts</h3>
+                        <section ng-repeat="item in projectsheet.base_projectsheet.question_answers track by $index" ng-if="$index !== 0">
+                            <h4>{{item.question.text}}</h4>
                             <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
                                 <button><span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
@@ -128,6 +160,8 @@
                         </section>
 
                         <!-- Angular UI Tabs -->
+
+                        <h3>Médias</h3>
                         <tabset class="nav-tabs-slide nav-tabs-slide-project" ng-show="hasPictures || hasVideos">
                             <tab ng-init="currentImg=0" ng-if="hasPictures">
                                 <tab-heading>
@@ -167,7 +201,7 @@
                           <span class="glyphicon glyphicon-pencil"></span> Ajouter / supprimer des médias
                         </button>
                     </tab>
-                    <tab heading="Actus ({{projectsheet.news.length}})">
+                    <tab heading="Actus ({{projectsheet.news.length}})" active="tabs[1]">
                         <section  ng-show="editable" class="news-form">
                             <h3>Nouvelle actu</h3>
                             <form novalidate>
@@ -186,7 +220,7 @@
                                 <button type="submit" class="btn btn-primary" ng-click="publishNews()">Publier</button>
                             </form>
                         </section>
-                        <section ng-repeat="news in projectsheet.news" ng-init="showEditor=false">
+                        <section class="actu-item" ng-repeat="news in projectsheet.news" ng-init="showEditor=false">
                             <h3>{{news.title}}</h3>
                             <div class="edit-buttons" ng-show="editable">
                                 <button ng-click="deleteNews(news)">
@@ -207,8 +241,10 @@
                                 </textarea>
                                 <button type="submit" ng-click="updateNews(news);showEditor=false">Mettre à jour</button>
                             </div>
-                            Posté par <a ui-sref="profile.detail({slug:news.author.id})">{{news.author.user.first_name}} {{news.author.user.last_name}}</a>
-                            <span am-time-ago="news.timestamp"></span>
+                            <p class="infos">
+                              Posté par <a ui-sref="profile.detail({slug:news.author.id})">{{news.author.user.first_name}} {{news.author.user.last_name}}</a>
+                              <span am-time-ago="news.timestamp"></span>
+                            </p>
                         </section>
 
                     </tab>

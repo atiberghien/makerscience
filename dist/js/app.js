@@ -25,7 +25,7 @@
 
   angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services']);
 
-  angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services']);
+  angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services', 'makerscience.base.filters']);
 
   angular.module('makerscience.map', ['makerscience.map.controllers']);
 

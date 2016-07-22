@@ -184,7 +184,7 @@ div.toolbar {
             font-size: 1.2em;
         }
         h4 {
-            font-size: .75em;
+            font-size: 1em;
         }
         h5 {
             font-size: .5em;
@@ -426,10 +426,6 @@ div.toolbar {
                 & > li.active a, & > li.active a:active, & > li.active a:focus {
                     background: $color-blue;
                     color: $color-light-cream;
-                    span {
-                        background-color: $color-light-cream;
-                        color: $color-blue;
-                    }
                 }
                 & > li:not(.active) a:hover {
                   border: none;
@@ -469,7 +465,7 @@ div.toolbar {
         }
 
         ul.nav-tabs > li a {
-  				padding-right: 2em;
+  				padding-right: 1.5em;
   				color: $color-text;
   				font-size: 1.1em;
   				font-weight: bold;
@@ -481,10 +477,9 @@ div.toolbar {
   						@include transition(background-color .2s ease-in-out);
   						margin-right: 0.25em;
   						margin-bottom: 0.25em;
-  						padding: 0.5em;
   						font-size: 1.5em;
-  						border-radius: 1em;
-  						background: $color-text;
+              line-height: 25px;
+              vertical-align: middle;
   						color: white;
   				}
   				&:focus {
@@ -569,7 +564,7 @@ div.toolbar {
     }
     section {
         position: relative;
-        margin-bottom: $grid-gutter-width;
+        margin-bottom: 20px;
         padding: 1em 1em 0;
         color: $color-content-section;
         background-color: $color-content-section-bg;
@@ -579,7 +574,28 @@ div.toolbar {
             text-transform: uppercase;
         }
         p:last-child {
-            padding-bottom: 2em;
+            padding-bottom: 1em;
+        }
+
+        &.actu-item {
+          padding-bottom: 1em;
+          p.infos, p.infos a {
+            color: $color-crumbs-grey;
+          }
+        }
+
+        &.actu-item, .actu-item {
+          h4 {
+            margin-bottom: 0;
+          }
+          p.infos {
+            font-style: italic;
+            margin-bottom: .5em;
+            font-size: .95em;
+          }
+          p:last-child {
+            padding-bottom: 0;
+          }
         }
     }
     section:nth-child(even) {
@@ -589,6 +605,45 @@ div.toolbar {
     section.medias {
       background-color: white;
       padding-bottom: 10px;
+    }
+
+    section.bloc-actus {
+      background: $color-blue;
+      color: white;
+      padding-bottom: 1em;
+
+      h3 {
+        text-align: center;
+        padding: .25em;
+      }
+
+      .btn {
+        display: block;
+        margin: .5em auto;
+      }
+
+      a {
+        color: $color-light-grey;
+        font-weight: bold;
+      }
+
+      .actu-item {
+        .content {
+          margin-bottom: 1em;
+        }
+        p.infos {
+          color: $color-light-grey;
+        }
+      }
+    }
+
+    section.bloc-presentation {
+      overflow: hidden;
+      .btn {
+        display: block;
+        margin: 0 auto 1.5em auto;
+        width: 170px;
+      }
     }
 
     section.linked {

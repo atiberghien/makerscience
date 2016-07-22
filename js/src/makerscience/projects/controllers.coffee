@@ -141,6 +141,10 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.hasPictures = false
         $scope.hasVideos = false
 
+        angular.forEach($scope.projectsheet.news, (news, index) ->
+            news.summary = $filter('getSummary')(news.text)
+          )
+
         $scope.checkFiles = () ->
             hasPictures = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'image'})
             hasVideos = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {'type': 'video'})

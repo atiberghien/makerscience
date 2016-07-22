@@ -146,6 +146,9 @@
       $scope.objectId = $scope.projectsheet.id;
       $scope.hasPictures = false;
       $scope.hasVideos = false;
+      angular.forEach($scope.projectsheet.news, function(news, index) {
+        return news.summary = $filter('getSummary')(news.text);
+      });
       $scope.checkFiles = function() {
         var hasPictures, hasVideos;
         hasPictures = _.findIndex($scope.projectsheet.base_projectsheet.bucket.files, {

@@ -11,7 +11,7 @@ angular.module('commons.directives', ['commons.directives.reportabuse' ,'commons
 angular.module('makerscience.projects', ['makerscience.projects.controllers', 'makerscience.projects.services'])
 angular.module('makerscience.resources', ['makerscience.resources.controllers'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
-angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services'])
+angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services', 'makerscience.base.filters'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
 angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services'])
 angular.module('makerscience', ['commons.accounts', 'commons.community', 'commons.gallery', 'commons.tags', 'commons.scout', 'commons.ucomment', 'commons.directives', 'commons.form',
