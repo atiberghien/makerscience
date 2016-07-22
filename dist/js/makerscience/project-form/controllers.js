@@ -11,6 +11,8 @@
       medias: []
     };
     $scope.QAItems = [];
+    $scope.status2 = {};
+    $scope.status2.open = false;
     FormService.init('projet-makerscience-2016').then(function(response) {
       $scope.QAItems = response.QAItems;
       return $scope.projectsheet = response.projectsheet;
@@ -56,6 +58,8 @@
           $scope.projectsheet.project = {};
         }
         $scope.projectsheet.project.title = result.title;
+        $scope.projectsheet.project.website = result.url;
+        $scope.status2.open = true;
         $scope.QAItems[0].answer = result.description;
         return $window.tinymce.editors[0].setContent(result.description);
       });

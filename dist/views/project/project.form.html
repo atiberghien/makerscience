@@ -78,21 +78,16 @@
                                         <label>Localisation <span class="required">*</span></label>
                                         <input type="text"
                                                name="localisation"
-                                               ng-model="projectsheet.project.location.address.address_locality"
-                                               required/>
-                                        <p ng-show="newProjectForm.localisation.$invalid && submitted" class="help-block">Localisation requise</p>
+                                               ng-model="projectsheet.project.location.address.address_locality"/>
 
                                         <label>Thématiques</label>
                                         <tag-auto-complete model="themesTags" placeholder="Mot-clé"></tag-auto-complete>
-                                        <p ng-show="newProjectForm.thematiques.$invalid && submitted" class="help-block">Thematiques requise</p>
 
                                         <label>Publics visés</label>
                                         <tag-auto-complete model="targetsTags" placeholder="Mot-clé"></tag-auto-complete>
-                                        <p ng-show="newProjectForm.target.$invalid && submitted" class="help-block">Publics visés requis</p>
 
                                         <label>Formats</label>
                                         <tag-auto-complete model="formatsTags" placeholder="Mot-clé"></tag-auto-complete>
-                                        <p ng-show="newProjectForm.formats.$invalid && submitted" class="help-block">Formats requis</p>
                                    </fieldset>
                                 </accordion-group>
 

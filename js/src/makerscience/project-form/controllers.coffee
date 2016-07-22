@@ -9,6 +9,8 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state
     angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     $scope.projectsheet = { medias: [] }
     $scope.QAItems = []
+    $scope.status2 = {}
+    $scope.status2.open = false;
 
     FormService.init('projet-makerscience-2016').then((response) ->
         $scope.QAItems = response.QAItems
@@ -46,6 +48,8 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state
             if !$scope.projectsheet.project
                 $scope.projectsheet.project = {}
             $scope.projectsheet.project.title = result.title
+            $scope.projectsheet.project.website = result.url
+            $scope.status2.open = true;
             $scope.QAItems[0].answer = result.description
             $window.tinymce.editors[0].setContent(result.description)
         )
