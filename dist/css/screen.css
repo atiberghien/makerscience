@@ -14188,7 +14188,7 @@ div.forum-sidebar section.community div.member {
   #min-height: 5em;
   position: relative;
   margin: 0 10px 15px 30px;
-  padding: 0.5em 0.2em 0.3em 0.2em;
+  padding: 1em 0.2em 0.3em 0.2em;
   #border-bottom: 1px solid #7fb3c9;
 }
 /* line 108, sass/_sidebar.scss */
