@@ -63,11 +63,11 @@
         </tab>
     </tabset>
 
-    <p ng-show="mediaForm.$pristine && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
+    <p ng-show="(mediaForm.$error.mediaDefine || mediaForm.$pristine) && submitted" class="help-block">Veuillez sélectionner un fichier ou insérer un lien</p>
 
     <div class="row">
         <div class="col-md-10">
-            <label for="media-title">Titre  <span class="required">*</span></label>
+            <label for="media-title">Titre <span class="required">*</span></label>
             <input type="text" name="mediaTitle" id="media-title" ng-model="newMedia.title" maxlength="50" required />
             <p ng-show="mediaForm.mediaTitle.$invalid && submitted" class="help-block">Titre requis</p>
         </div>

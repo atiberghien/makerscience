@@ -25,6 +25,7 @@ module.directive('checkForm', (GalleryService) ->
         link: (scope, el) ->
             check = () ->
                 if scope.newMedia.url
+                    scope.mediaForm.$setValidity('mediaDefine', true);
                     if scope.mediaForm.imageUrl then scope.mediaForm.imageUrl.$setValidity('format', true)
                     if scope.mediaForm.documentUrl then scope.mediaForm.documentUrl.$setValidity('format', true)
                     if scope.mediaForm.videoUrl then scope.mediaForm.videoUrl.$setValidity('format', true)
@@ -38,16 +39,20 @@ module.directive('checkForm', (GalleryService) ->
                             scope.mediaForm.videoUrl.$setValidity('format', GalleryService.isUrlVideo(scope.newMedia.url))
                         when 'link'
                             scope.mediaForm.mediaUrl.$setValidity('format', GalleryService.isUrl(scope.newMedia.url))
-                else
-                    if scope.newMedia.file
-                        scope.mediaForm.$setValidity('imageFileFormat', true)
-                        scope.mediaForm.$setValidity('documentFileFormat', true)
-                        switch scope.newMedia.type
-                          when 'image'
-                              scope.mediaForm.$setValidity('imageFileFormat', GalleryService.isTypeImage(scope.newMedia.file.type))
-                          when 'document'
-                              scope.mediaForm.$setValidity('documentFileFormat', GalleryService.isTypeDocument(scope.newMedia.file.type))
+                else if scope.newMedia.file
+                    scope.mediaForm.$setValidity('mediaDefine', true);
+                    scope.mediaForm.$setValidity('imageFileFormat', true)
+                    scope.mediaForm.$setValidity('documentFileFormat', true)
+                    switch scope.newMedia.type
+                      when 'image'
+                          scope.mediaForm.$setValidity('imageFileFormat', GalleryService.isTypeImage(scope.newMedia.file.type))
+                      when 'document'
+                          scope.mediaForm.$setValidity('documentFileFormat', GalleryService.isTypeDocument(scope.newMedia.file.type))
 
+                else
+                    scope.mediaForm.$setValidity('mediaDefine', false);
+
+            scope.mediaForm.$setValidity('mediaDefine', false);
 
             el.bind('change', () ->
                 scope.$apply ->

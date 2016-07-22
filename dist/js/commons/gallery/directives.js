@@ -29,6 +29,7 @@
         var check;
         check = function() {
           if (scope.newMedia.url) {
+            scope.mediaForm.$setValidity('mediaDefine', true);
             if (scope.mediaForm.imageUrl) {
               scope.mediaForm.imageUrl.$setValidity('format', true);
             }
@@ -48,19 +49,21 @@
               case 'link':
                 return scope.mediaForm.mediaUrl.$setValidity('format', GalleryService.isUrl(scope.newMedia.url));
             }
-          } else {
-            if (scope.newMedia.file) {
-              scope.mediaForm.$setValidity('imageFileFormat', true);
-              scope.mediaForm.$setValidity('documentFileFormat', true);
-              switch (scope.newMedia.type) {
-                case 'image':
-                  return scope.mediaForm.$setValidity('imageFileFormat', GalleryService.isTypeImage(scope.newMedia.file.type));
-                case 'document':
-                  return scope.mediaForm.$setValidity('documentFileFormat', GalleryService.isTypeDocument(scope.newMedia.file.type));
-              }
+          } else if (scope.newMedia.file) {
+            scope.mediaForm.$setValidity('mediaDefine', true);
+            scope.mediaForm.$setValidity('imageFileFormat', true);
+            scope.mediaForm.$setValidity('documentFileFormat', true);
+            switch (scope.newMedia.type) {
+              case 'image':
+                return scope.mediaForm.$setValidity('imageFileFormat', GalleryService.isTypeImage(scope.newMedia.file.type));
+              case 'document':
+                return scope.mediaForm.$setValidity('documentFileFormat', GalleryService.isTypeDocument(scope.newMedia.file.type));
             }
+          } else {
+            return scope.mediaForm.$setValidity('mediaDefine', false);
           }
         };
+        scope.mediaForm.$setValidity('mediaDefine', false);
         el.bind('change', function() {
           return scope.$apply(function() {
             return check();
