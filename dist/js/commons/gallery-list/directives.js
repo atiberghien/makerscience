@@ -14,10 +14,7 @@
         uri: '='
       },
       restrict: 'E',
-      templateUrl: 'views/gallery/gallery-list.directive.html',
-      link: function(scope) {
-        return console.log(scope);
-      }
+      templateUrl: 'views/gallery/gallery-list.directive.html'
     };
   });
 

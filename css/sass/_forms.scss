@@ -951,22 +951,41 @@ ul.gallery-links {
 				}
 				&.description {
 					color: $text-color;
-					padding: .5em 0 1em 0;
+					padding: 0 0 1em 0;
 					margin-bottom: .5em;
 					border-bottom: solid 1px $color-light-grey;
 				}
 				&.author {
-					margin-bottom: 1em;
 					color: $color-crumbs-grey;
 					font-style: italic;
+				}
+				&.review-title {
+					color: $color-dark-grey;
+					margin-top: .5em;
+					font-weight: bold;
+				}
+				&.review {
+					color: $color-dark-grey;
+					font-style: italic;
+					&::before {
+						font-weight: bold;
+						content: '« ';
+						font-size: 1.2em;
+					}
+					&::after {
+						font-weight: bold;
+						content: ' »';
+						font-size: 1.2em;
+					}
 				}
 				&.icon {
 					color: $color-blue;
 					font-size: 1.6em;
-					padding: .5em;
+					padding: .15em 0 .5em 0;
 				}
 				&.url {
-					margin-bottom: 1em;
+					display: block;
+					margin-bottom: .25em;
 					color: darken($color-blue, 15);
 					font-size: .8em;
 					line-height: 1.4em;

@@ -157,9 +157,10 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         $scope.coverURL = ProjectService.fetchCoverURL(coverId)
 
         $scope.$on('cover-updated', ()->
-            newCoverId = GalleryService.coverId
-            if newCoverId != coverId
-                $scope.coverURL = ProjectService.fetchCoverURL(newCoverId)
+            MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
+                $scope.projectsheet = makerScienceResourceResult.objects[0]
+                $scope.getFilterMedias()
+            )
         )
 
         $scope.similars = []

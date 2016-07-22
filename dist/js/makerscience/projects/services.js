@@ -30,7 +30,6 @@
         }
       },
       uploadMedia: function(media, bucketId, projectId) {
-        console.log(media);
         return new Promise(function(resolve, reject) {
           var formData;
           formData = new FormData();
@@ -56,6 +55,9 @@
           }
           if (media.experience) {
             formData.append('experience_detail', JSON.stringify(media.experience));
+          }
+          if (media.review) {
+            formData.append('review', media.review);
           }
           return BucketRestangular.all(projectId).withHttpConfig({
             transformRequest: angular.identity

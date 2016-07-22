@@ -21,7 +21,7 @@
     };
   });
 
-  module.directive('checkForm', function(GalleryService) {
+  module.directive('checkForm', function(GalleryService, MediaRestangular) {
     return {
       require: "form",
       restrict: 'A',
@@ -65,9 +65,19 @@
         };
         scope.mediaForm.$setValidity('mediaDefine', false);
         el.bind('change', function() {
-          return scope.$apply(function() {
+          scope.$apply(function() {
             return check();
           });
+          if (scope.newMedia.url) {
+            return MediaRestangular.one('geturl').get({
+              'url': scope.newMedia.url
+            }).then(function(res) {
+              scope.newMedia.title = res.title;
+              return scope.newMedia.description = res.description;
+            })["catch"](function(err) {
+              return console.error(err);
+            });
+          }
         });
         return scope.setTitle = function(title) {
           return scope.$apply(function() {

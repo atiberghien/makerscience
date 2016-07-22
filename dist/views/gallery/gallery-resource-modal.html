@@ -3,8 +3,14 @@
 </div>
 <div class="modal-body modal-gallery">
     <gallery-resource></gallery-resource>
-    <div class="progress" ng-show="hideControls">
-      <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+    <div ng-show="hideControls" class="loader-form loader-resource">
+        <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>
+        <span>Envoi des données en cours</span>
     </div>
 </div>
 

@@ -180,11 +180,12 @@
       coverId = $scope.projectsheet.base_projectsheet.cover ? $scope.projectsheet.base_projectsheet.cover.id : null;
       $scope.coverURL = ProjectService.fetchCoverURL(coverId);
       $scope.$on('cover-updated', function() {
-        var newCoverId;
-        newCoverId = GalleryService.coverId;
-        if (newCoverId !== coverId) {
-          return $scope.coverURL = ProjectService.fetchCoverURL(newCoverId);
-        }
+        return MakerScienceResource.one().get({
+          'parent__slug': $stateParams.slug
+        }).then(function(makerScienceResourceResult) {
+          $scope.projectsheet = makerScienceResourceResult.objects[0];
+          return $scope.getFilterMedias();
+        });
       });
       $scope.similars = [];
       TaggedItem.one().customGET("makerscienceresource/" + $scope.resourcesheet.id + "/similars").then(function(similarResults) {

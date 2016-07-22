@@ -13762,7 +13762,7 @@ ul.gallery-links li a span.title {
 #content ul.gallery-links li a span.description,
 ul.gallery-links li a span.description {
   color: #333333;
-  padding: .5em 0 1em 0;
+  padding: 0 0 1em 0;
   margin-bottom: .5em;
   border-bottom: solid 1px #e8e8e8;
 }
@@ -13770,113 +13770,144 @@ ul.gallery-links li a span.description {
 #content div.tab-content ul.gallery-links li a span.author,
 #content ul.gallery-links li a span.author,
 ul.gallery-links li a span.author {
-  margin-bottom: 1em;
   color: #878586;
   font-style: italic;
 }
-/* line 963, sass/_forms.scss */
+/* line 962, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.review-title,
+#content ul.gallery-links li a span.review-title,
+ul.gallery-links li a span.review-title {
+  color: #2f2f2f;
+  margin-top: .5em;
+  font-weight: bold;
+}
+/* line 967, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.review,
+#content ul.gallery-links li a span.review,
+ul.gallery-links li a span.review {
+  color: #2f2f2f;
+  font-style: italic;
+}
+/* line 970, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.review::before,
+#content ul.gallery-links li a span.review::before,
+ul.gallery-links li a span.review::before {
+  font-weight: bold;
+  content: '« ';
+  font-size: 1.2em;
+}
+/* line 975, sass/_forms.scss */
+#content div.tab-content ul.gallery-links li a span.review::after,
+#content ul.gallery-links li a span.review::after,
+ul.gallery-links li a span.review::after {
+  font-weight: bold;
+  content: ' »';
+  font-size: 1.2em;
+}
+/* line 981, sass/_forms.scss */
 #content div.tab-content ul.gallery-links li a span.icon,
 #content ul.gallery-links li a span.icon,
 ul.gallery-links li a span.icon {
   color: #2497d0;
   font-size: 1.6em;
-  padding: .5em;
+  padding: .15em 0 .5em 0;
 }
-/* line 968, sass/_forms.scss */
+/* line 986, sass/_forms.scss */
 #content div.tab-content ul.gallery-links li a span.url,
 #content ul.gallery-links li a span.url,
 ul.gallery-links li a span.url {
-  margin-bottom: 1em;
+  display: block;
+  margin-bottom: .25em;
   color: #19688f;
   font-size: .8em;
   line-height: 1.4em;
 }
-/* line 977, sass/_forms.scss */
+/* line 996, sass/_forms.scss */
 #content div.tab-content ul.gallery-links li .image-preview > *,
 #content ul.gallery-links li .image-preview > *,
 ul.gallery-links li .image-preview > * {
   border: none;
 }
-/* line 980, sass/_forms.scss */
+/* line 999, sass/_forms.scss */
 #content div.tab-content ul.gallery-links li .image-preview .thumbnail,
 #content ul.gallery-links li .image-preview .thumbnail,
 ul.gallery-links li .image-preview .thumbnail {
   margin-bottom: 0;
 }
-/* line 983, sass/_forms.scss */
+/* line 1002, sass/_forms.scss */
 #content div.tab-content ul.gallery-links li .image-preview canvas,
 #content ul.gallery-links li .image-preview canvas,
 ul.gallery-links li .image-preview canvas {
   max-width: 100%;
 }
 
-/* line 992, sass/_forms.scss */
+/* line 1011, sass/_forms.scss */
 #content .nav-tabs-resource div.tab-content ul.gallery-links li,
 #content .resource-form ul.gallery-links li,
 .resource-form ul.gallery-links li {
   width: 50%;
 }
-/* line 994, sass/_forms.scss */
+/* line 1013, sass/_forms.scss */
 #content .nav-tabs-resource div.tab-content ul.gallery-links li a,
 #content .resource-form ul.gallery-links li a,
 .resource-form ul.gallery-links li a {
   border-color: #30c9ad;
 }
-/* line 996, sass/_forms.scss */
+/* line 1015, sass/_forms.scss */
 #content .nav-tabs-resource div.tab-content ul.gallery-links li a:hover,
 #content .resource-form ul.gallery-links li a:hover,
 .resource-form ul.gallery-links li a:hover {
   border-color: #218b78;
 }
-/* line 998, sass/_forms.scss */
+/* line 1017, sass/_forms.scss */
 #content .nav-tabs-resource div.tab-content ul.gallery-links li a:hover span.icon,
 #content .resource-form ul.gallery-links li a:hover span.icon,
 .resource-form ul.gallery-links li a:hover span.icon {
   color: #218b78;
 }
-/* line 1003, sass/_forms.scss */
+/* line 1022, sass/_forms.scss */
 #content .nav-tabs-resource div.tab-content ul.gallery-links li span.icon,
 #content .resource-form ul.gallery-links li span.icon,
 .resource-form ul.gallery-links li span.icon {
   color: #30c9ad;
 }
-/* line 1006, sass/_forms.scss */
+/* line 1025, sass/_forms.scss */
 #content .nav-tabs-resource div.tab-content ul.gallery-links li span.url,
 #content .resource-form ul.gallery-links li span.url,
 .resource-form ul.gallery-links li span.url {
   color: #218b78;
 }
 
-/* line 1013, sass/_forms.scss */
+/* line 1032, sass/_forms.scss */
 .admin #content form .thumbnail, .cover-image .thumbnail {
   border-color: transparent;
 }
-/* line 1016, sass/_forms.scss */
+/* line 1035, sass/_forms.scss */
 .admin #content form .thumbnail-container, .cover-image .thumbnail-container {
   border: solid 1px #e8e8e8;
   width: 355px;
   height: 196px;
   float: left;
 }
-/* line 1022, sass/_forms.scss */
+/* line 1041, sass/_forms.scss */
 .admin #content form .inputfile-container, .cover-image .inputfile-container {
   float: left;
   width: 280px;
   margin-left: 20px;
 }
-/* line 1026, sass/_forms.scss */
+/* line 1045, sass/_forms.scss */
 .admin #content form .inputfile-container .inputfile, .admin #content form .inputfile-container .inputfile + label, .cover-image .inputfile-container .inputfile, .cover-image .inputfile-container .inputfile + label {
   margin-top: 0;
 }
 
-/* line 1034, sass/_forms.scss */
+/* line 1053, sass/_forms.scss */
 .modal-content h5 {
   font-size: 1.3em;
   font-weight: bold;
   margin-top: .75em;
   color: #878586;
 }
-/* line 1040, sass/_forms.scss */
+/* line 1059, sass/_forms.scss */
 .modal-content .inputfile {
   width: 0.1px;
   height: 0.1px;
@@ -13886,7 +13917,7 @@ ul.gallery-links li .image-preview canvas {
   z-index: -1;
   margin-top: 20px;
 }
-/* line 1049, sass/_forms.scss */
+/* line 1068, sass/_forms.scss */
 .modal-content .inputfile + label {
   display: block;
   margin-right: 50px;
@@ -13897,12 +13928,12 @@ ul.gallery-links li .image-preview canvas {
   text-overflow: ellipsis;
 }
 
-/* line 1060, sass/_forms.scss */
+/* line 1079, sass/_forms.scss */
 .required {
   color: #c30;
 }
 
-/* line 1064, sass/_forms.scss */
+/* line 1083, sass/_forms.scss */
 .loader-form {
   display: flex;
   justify-content: center;
@@ -13910,7 +13941,7 @@ ul.gallery-links li .image-preview canvas {
   width: 300px;
   margin: 0 auto;
 }
-/* line 1070, sass/_forms.scss */
+/* line 1089, sass/_forms.scss */
 .loader-form > span {
   font-weight: bold;
   font-style: italic;
@@ -13918,24 +13949,24 @@ ul.gallery-links li .image-preview canvas {
   font-size: 1.2em;
   text-align: center;
 }
-/* line 1079, sass/_forms.scss */
+/* line 1098, sass/_forms.scss */
 .loader-form.loader-project > span {
   color: #2497d0;
 }
-/* line 1082, sass/_forms.scss */
+/* line 1101, sass/_forms.scss */
 .loader-form.loader-project .sk-folding-cube .sk-cube:before {
   background-color: #2497d0;
 }
-/* line 1087, sass/_forms.scss */
+/* line 1106, sass/_forms.scss */
 .loader-form.loader-resource > span {
   color: #2bb49b;
 }
-/* line 1090, sass/_forms.scss */
+/* line 1109, sass/_forms.scss */
 .loader-form.loader-resource .sk-folding-cube .sk-cube:before {
   background-color: #30c9ad;
 }
 
-/* line 1096, sass/_forms.scss */
+/* line 1115, sass/_forms.scss */
 .sk-folding-cube {
   margin: 20px auto;
   width: 40px;
@@ -13945,7 +13976,7 @@ ul.gallery-links li .image-preview canvas {
   transform: rotateZ(45deg);
 }
 
-/* line 1105, sass/_forms.scss */
+/* line 1124, sass/_forms.scss */
 .sk-folding-cube .sk-cube {
   float: left;
   width: 50%;
@@ -13956,7 +13987,7 @@ ul.gallery-links li .image-preview canvas {
   transform: scale(1.1);
 }
 
-/* line 1114, sass/_forms.scss */
+/* line 1133, sass/_forms.scss */
 .sk-folding-cube .sk-cube:before {
   content: '';
   position: absolute;
@@ -13972,37 +14003,37 @@ ul.gallery-links li .image-preview canvas {
   transform-origin: 100% 100%;
 }
 
-/* line 1128, sass/_forms.scss */
+/* line 1147, sass/_forms.scss */
 .sk-folding-cube .sk-cube2 {
   -webkit-transform: scale(1.1) rotateZ(90deg);
   transform: scale(1.1) rotateZ(90deg);
 }
 
-/* line 1132, sass/_forms.scss */
+/* line 1151, sass/_forms.scss */
 .sk-folding-cube .sk-cube3 {
   -webkit-transform: scale(1.1) rotateZ(180deg);
   transform: scale(1.1) rotateZ(180deg);
 }
 
-/* line 1136, sass/_forms.scss */
+/* line 1155, sass/_forms.scss */
 .sk-folding-cube .sk-cube4 {
   -webkit-transform: scale(1.1) rotateZ(270deg);
   transform: scale(1.1) rotateZ(270deg);
 }
 
-/* line 1140, sass/_forms.scss */
+/* line 1159, sass/_forms.scss */
 .sk-folding-cube .sk-cube2:before {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
 
-/* line 1144, sass/_forms.scss */
+/* line 1163, sass/_forms.scss */
 .sk-folding-cube .sk-cube3:before {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
 
-/* line 1148, sass/_forms.scss */
+/* line 1167, sass/_forms.scss */
 .sk-folding-cube .sk-cube4:before {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;

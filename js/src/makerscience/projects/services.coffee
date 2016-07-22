@@ -21,7 +21,6 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
                 when 'PostalAddress' then PostalAddress.one(resources.resourceId).patch(putData)
 
         uploadMedia: (media, bucketId, projectId) ->
-            console.log media
             return new Promise((resolve, reject) ->
                 formData = new FormData()
 
@@ -48,6 +47,8 @@ module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, P
                     formData.append('author', media.author)
                 if media.experience
                     formData.append('experience_detail', JSON.stringify(media.experience))
+                if media.review
+                  formData.append('review', media.review)
 
                 BucketRestangular.all(projectId)
                   .withHttpConfig({transformRequest: angular.identity})

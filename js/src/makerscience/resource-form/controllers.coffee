@@ -24,10 +24,8 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
     $scope.changeCover = () ->
         $scope.$apply(() ->
             $scope.newResourceForm.$setValidity('imageFileFormat', true)
-            console.log $scope.resourceCover.file
             if $scope.resourceCover.file
                 $scope.newResourceForm.$setValidity('imageFileFormat', GalleryService.isTypeImage($scope.resourceCover.file.type))
-                console.log $scope.newResourceForm
         )
 
     $scope.saveMakerscienceResource = (newResourceForm) ->

@@ -25,10 +25,8 @@
     $scope.changeCover = function() {
       return $scope.$apply(function() {
         $scope.newResourceForm.$setValidity('imageFileFormat', true);
-        console.log($scope.resourceCover.file);
         if ($scope.resourceCover.file) {
-          $scope.newResourceForm.$setValidity('imageFileFormat', GalleryService.isTypeImage($scope.resourceCover.file.type));
-          return console.log($scope.newResourceForm);
+          return $scope.newResourceForm.$setValidity('imageFileFormat', GalleryService.isTypeImage($scope.resourceCover.file.type));
         }
       });
     };

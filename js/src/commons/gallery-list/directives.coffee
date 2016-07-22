@@ -12,8 +12,6 @@ module.directive('galleryList', () ->
       }
       restrict: 'E'
       templateUrl: 'views/gallery/gallery-list.directive.html'
-      link: (scope) ->
-          console.log scope
     }
 )
 
