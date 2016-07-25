@@ -75,19 +75,19 @@
                                         <label><span class="glyphicon glyphicon-time"></span> Date de fin de projet</label>
                                         <input type="date" ng-model="projectsheet.project.end_date" />
 
-                                        <label>Localisation <span class="required">*</span></label>
+                                        <label>Localisation</label>
                                         <input type="text"
                                                name="localisation"
                                                ng-model="projectsheet.project.location.address.address_locality"/>
 
                                         <label>Thématiques</label>
-                                        <tag-auto-complete model="themesTags" placeholder="Mot-clé"></tag-auto-complete>
+                                        <tag-auto-complete model="themesTags" placeholder="Mots clés séparés par une virgule (par exemple : biologie, sciences de l'ingénieur, nanotechnologies)"></tag-auto-complete>
 
                                         <label>Publics visés</label>
-                                        <tag-auto-complete model="targetsTags" placeholder="Mot-clé"></tag-auto-complete>
+                                        <tag-auto-complete model="targetsTags" placeholder="Mots clés séparés par une virgule (par exemple : biologie, sciences de l'ingénieur, nanotechnologies)"></tag-auto-complete>
 
                                         <label>Formats</label>
-                                        <tag-auto-complete model="formatsTags" placeholder="Mot-clé"></tag-auto-complete>
+                                        <tag-auto-complete model="formatsTags" placeholder="Mots clés séparés par une virgule (par exemple : biologie, sciences de l'ingénieur, nanotechnologies)"></tag-auto-complete>
                                    </fieldset>
                                 </accordion-group>
 
@@ -172,7 +172,7 @@
                                             <div class="col-md-8">
                                                 <div class="need-keywords">
                                                   <label>Mots-clés</label>
-                                                  <tag-auto-complete model="questionTags" placeholder="Mot-clé"></tag-auto-complete>
+                                                  <tag-auto-complete model="questionTags" placeholder="Mots clés séparés par une virgule (par exemple : biologie, sciences de l'ingénieur, nanotechnologies)"></tag-auto-complete>
                                               </div>
                                             </div>
 
