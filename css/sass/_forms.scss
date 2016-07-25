@@ -948,25 +948,30 @@ ul.gallery-links {
 					color: $text-color;
 					font-size: 1em;
 					font-weight: bold;
+					word-wrap: break-word;
 				}
 				&.description {
 					color: $text-color;
 					padding: 0 0 1em 0;
 					margin-bottom: .5em;
 					border-bottom: solid 1px $color-light-grey;
+					word-wrap: break-word;
 				}
 				&.author {
 					color: $color-crumbs-grey;
 					font-style: italic;
+					word-wrap: break-word;
 				}
 				&.review-title {
 					color: $color-dark-grey;
 					margin-top: .5em;
 					font-weight: bold;
+					word-wrap: break-word;
 				}
 				&.review {
 					color: $color-dark-grey;
 					font-style: italic;
+					word-wrap: break-word;
 					&::before {
 						font-weight: bold;
 						content: '« ';
@@ -989,6 +994,9 @@ ul.gallery-links {
 					color: darken($color-blue, 15);
 					font-size: .8em;
 					line-height: 1.4em;
+					text-overflow: ellipsis;
+					height: 30px;
+					overflow: hidden;
 				}
 			}
 		}

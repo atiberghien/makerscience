@@ -4,6 +4,16 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
     $scope.config = config
     $scope.newMedia = GalleryService.initMediaProject('image')
 
+    $scope.$on('images-added', (event, data) ->
+      angular.forEach(data, (img, index) ->
+          $scope.medias.push({
+            type: 'image'
+            title: img.alt
+            url: img.src
+          })
+        )
+      )
+
     $scope.coverId = if $scope.projectsheet.cover then $scope.projectsheet.cover.id else null
     GalleryService.setCoverId($scope.coverId)
 

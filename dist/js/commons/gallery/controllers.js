@@ -6,6 +6,15 @@
   module.controller('GalleryCreationProjectCtrl', function($scope, GalleryService, ProjectSheet, BucketFile, ProjectService) {
     $scope.config = config;
     $scope.newMedia = GalleryService.initMediaProject('image');
+    $scope.$on('images-added', function(event, data) {
+      return angular.forEach(data, function(img, index) {
+        return $scope.medias.push({
+          type: 'image',
+          title: img.alt,
+          url: img.src
+        });
+      });
+    });
     $scope.coverId = $scope.projectsheet.cover ? $scope.projectsheet.cover.id : null;
     GalleryService.setCoverId($scope.coverId);
     $scope.getMediasToShow = function() {

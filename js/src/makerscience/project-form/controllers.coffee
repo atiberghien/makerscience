@@ -10,6 +10,7 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state
     $scope.projectsheet = { medias: [] }
     $scope.QAItems = []
     $scope.status2 = {}
+    $scope.status1 = {}
     $scope.status2.open = false;
 
     FormService.init('projet-makerscience-2016').then((response) ->
@@ -45,13 +46,16 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state
             keyboard : false
         )
         modalInstance.result.then((result)->
+            $scope.$broadcast('images-added', result.img)
+            $scope.status1.open = true;
+
             if !$scope.projectsheet.project
                 $scope.projectsheet.project = {}
-            $scope.projectsheet.project.title = result.title
-            $scope.projectsheet.project.website = result.url
+            $scope.projectsheet.project.title = result.url.title
+            $scope.projectsheet.project.website = result.url.url
             $scope.status2.open = true;
-            $scope.QAItems[0].answer = result.description
-            $window.tinymce.editors[0].setContent(result.description)
+            $scope.QAItems[0].answer = result.url.description
+            $window.tinymce.editors[0].setContent(result.url.description)
         )
 
     $scope.addNeed = (need) ->
@@ -172,15 +176,31 @@ module.controller("InfoLinkCtrl", ($scope, $modalInstance, MediaRestangular) ->
         $modalInstance.dismiss('close')
 
     $scope.ok = (link) ->
+        $scope.hideControls = true
+        console.log $scope
+
         if ($scope.infoLinkForm.$invalid)
             return false
 
+
         MediaRestangular.one('geturl').get({'url': link.$modelValue})
-          .then((res) ->
-              $modalInstance.close(res)
+          .then((resultUrl) ->
+              MediaRestangular.one('getimg').get({'url': link.$modelValue})
+                .then((resultImg) ->
+                  $scope.hideControls = false
+                  result = {
+                    url: resultUrl
+                    img: resultImg
+                  }
+                  $modalInstance.close(result)
+                )
+                .catch((err) ->
+                  console.error err
+)
           )
           .catch((err) ->
               console.error err
           )
+
 
 )

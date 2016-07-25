@@ -12,6 +12,7 @@
     };
     $scope.QAItems = [];
     $scope.status2 = {};
+    $scope.status1 = {};
     $scope.status2.open = false;
     FormService.init('projet-makerscience-2016').then(function(response) {
       $scope.QAItems = response.QAItems;
@@ -54,14 +55,16 @@
         keyboard: false
       });
       return modalInstance.result.then(function(result) {
+        $scope.$broadcast('images-added', result.img);
+        $scope.status1.open = true;
         if (!$scope.projectsheet.project) {
           $scope.projectsheet.project = {};
         }
-        $scope.projectsheet.project.title = result.title;
-        $scope.projectsheet.project.website = result.url;
+        $scope.projectsheet.project.title = result.url.title;
+        $scope.projectsheet.project.website = result.url.url;
         $scope.status2.open = true;
-        $scope.QAItems[0].answer = result.description;
-        return $window.tinymce.editors[0].setContent(result.description);
+        $scope.QAItems[0].answer = result.url.description;
+        return $window.tinymce.editors[0].setContent(result.url.description);
       });
     };
     $scope.addNeed = function(need) {
@@ -184,13 +187,27 @@
       return $modalInstance.dismiss('close');
     };
     return $scope.ok = function(link) {
+      $scope.hideControls = true;
+      console.log($scope);
       if ($scope.infoLinkForm.$invalid) {
         return false;
       }
       return MediaRestangular.one('geturl').get({
         'url': link.$modelValue
-      }).then(function(res) {
-        return $modalInstance.close(res);
+      }).then(function(resultUrl) {
+        return MediaRestangular.one('getimg').get({
+          'url': link.$modelValue
+        }).then(function(resultImg) {
+          var result;
+          $scope.hideControls = false;
+          result = {
+            url: resultUrl,
+            img: resultImg
+          };
+          return $modalInstance.close(result);
+        })["catch"](function(err) {
+          return console.error(err);
+        });
       })["catch"](function(err) {
         return console.error(err);
       });
