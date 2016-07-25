@@ -270,8 +270,11 @@
       type: 'cover'
     };
     $scope.ok = function(cover) {
+      console.log(cover);
+      $scope.hideControls = true;
       if ($scope.resourceCover.file) {
         return ProjectService.uploadMedia($scope.resourceCover, base_projectsheet.bucket.id, base_projectsheet.id).then(function(res) {
+          $scope.hideControls = false;
           ProjectSheet.one(base_projectsheet.id).patch({
             cover: res.resource_uri
           });
@@ -285,7 +288,6 @@
       return $modalInstance.dismiss('cancel');
     };
     return $scope.change = function() {
-      console.log($scope);
       return scope.$apply(function() {
         return scope.coverForm.$setValidity('imageFileFormat', GalleryService.isTypeImage(scope.newMedia.file.type));
       });

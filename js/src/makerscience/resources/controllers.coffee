@@ -226,8 +226,12 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 module.controller("CoverResourceSheetCtrl", ($scope, $modalInstance, ProjectService, ProjectSheet, base_projectsheet, GalleryService) ->
         $scope.resourceCover = {type: 'cover'}
         $scope.ok = (cover) ->
+            console.log cover
+            $scope.hideControls = true
+
             if $scope.resourceCover.file
                 ProjectService.uploadMedia($scope.resourceCover, base_projectsheet.bucket.id, base_projectsheet.id).then((res) ->
+                    $scope.hideControls = false
                     ProjectSheet.one(base_projectsheet.id).patch({cover: res.resource_uri})
                     $modalInstance.close(res)
                   )
@@ -238,7 +242,6 @@ module.controller("CoverResourceSheetCtrl", ($scope, $modalInstance, ProjectServ
             $modalInstance.dismiss('cancel')
 
         $scope.change = () ->
-            console.log $scope
             scope.$apply ->
                 scope.coverForm.$setValidity('imageFileFormat', GalleryService.isTypeImage(scope.newMedia.file.type))
 

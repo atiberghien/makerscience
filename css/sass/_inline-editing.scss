@@ -404,29 +404,26 @@ div.editable-controls {
 }
 
 #sidebar {
-
-	div.member-edit {
-		button.remove {
-			position: absolute;
-			top: 0;
-			left: -10px;
-			width: 25px;
-			height: 25px;
-			font-size: 0.85em;
-			color: #fff;
-			background-color: $color-dark-grey;
-			border: 0;
-			@include border-radius(12px);
-			&:hover {
-				background-color: $color-red;
-			}
+	button.remove {
+		position: absolute;
+		top: 0;
+		left: -10px;
+		width: 25px;
+		height: 25px;
+		font-size: 0.85em;
+		color: #fff;
+		background-color: $color-dark-grey;
+		border: 0;
+		@include border-radius(12px);
+		&:hover {
+			background-color: $color-red;
 		}
-		button.valid-button {
-			margin-top: 5px;
-    			font-size: 1em;
-    			padding: 0.4em;
-    			margin-left: 1em;
-		}
+	}
+	button.valid-button {
+		margin-top: 5px;
+				font-size: 1em;
+				padding: 0.4em;
+				margin-left: 1em;
 	}
 	div.member-details {
 		form {

@@ -1,6 +1,6 @@
 module = angular.module('commons.community.controllers', [])
 
-module.controller("CommunityCtrl", ($scope, $filter, $interval, Profile, ObjectProfileLink) ->
+module.controller("CommunityCtrl", ($scope, $rootScope, $filter, $interval, Profile, ObjectProfileLink) ->
     """
     Controller pour la manipulation des data d'une communauté liée à un objet partagé (project, fiche resource, etc.    )
     La sémantique des niveaux d'implication est à préciser en fonction de la resource.

@@ -21,6 +21,15 @@ div.forum-sidebar {
 		}
 		&.community-resource {
 			background: $color-resource url('../img/bg/shape-right-bg.png') 175px -110px no-repeat;
+
+			.btn-primary {
+				background: rgba(48, 70, 81, 0.5);
+
+				&:hover {
+					background: $color-sidebar-submenu-bg;
+					border-color: $color-sidebar-submenu-bg;
+				}
+			}
 		}
 		&.community-forum {
 			background: $color-forum url('../img/bg/shape-right-bg.png') 175px -110px no-repeat;
@@ -55,6 +64,12 @@ div.forum-sidebar {
 					span {
 						display: block;
 					}
+					.pending {
+						display: inline;
+						font-size: .8em;
+						font-weight: bold;
+						color: $color-light-grey;
+					}
 					&.selected {
 						background-color: $color-sidebar-submenu-bg;
 					}
@@ -72,7 +87,7 @@ div.forum-sidebar {
 		}
 		ul.nav-tabs {
 			padding: 0;
-			margin-bottom: 0.2em;
+			margin-bottom: 0.75em;
 		}
 		div.add-member {
 			padding: $grid-gutter-width / 3;

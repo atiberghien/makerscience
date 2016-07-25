@@ -14098,16 +14098,27 @@ div.forum-sidebar section.community.community-resource {
   background: #30c9ad url("../img/bg/shape-right-bg.png") 175px -110px no-repeat;
 }
 /* line 25, sass/_sidebar.scss */
+#sidebar section.community.community-resource .btn-primary,
+div.forum-sidebar section.community.community-resource .btn-primary {
+  background: rgba(48, 70, 81, 0.5);
+}
+/* line 28, sass/_sidebar.scss */
+#sidebar section.community.community-resource .btn-primary:hover,
+div.forum-sidebar section.community.community-resource .btn-primary:hover {
+  background: #304651;
+  border-color: #304651;
+}
+/* line 34, sass/_sidebar.scss */
 #sidebar section.community.community-forum,
 div.forum-sidebar section.community.community-forum {
   background: #5a4b84 url("../img/bg/shape-right-bg.png") 175px -110px no-repeat;
 }
-/* line 29, sass/_sidebar.scss */
+/* line 38, sass/_sidebar.scss */
 #sidebar section.community .tab-content,
 div.forum-sidebar section.community .tab-content {
   font-size: 0.9em;
 }
-/* line 33, sass/_sidebar.scss */
+/* line 42, sass/_sidebar.scss */
 #sidebar section.community ul.submenu, #sidebar section.community ul.nav-tabs,
 div.forum-sidebar section.community ul.submenu,
 div.forum-sidebar section.community ul.nav-tabs {
@@ -14117,7 +14128,7 @@ div.forum-sidebar section.community ul.nav-tabs {
   padding: 2em 0;
   border-bottom: none;
 }
-/* line 39, sass/_sidebar.scss */
+/* line 48, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li, #sidebar section.community ul.nav-tabs li,
 div.forum-sidebar section.community ul.submenu li,
 div.forum-sidebar section.community ul.nav-tabs li {
@@ -14126,13 +14137,13 @@ div.forum-sidebar section.community ul.nav-tabs li {
   border-right: 1px solid #cbdfde;
   background-color: transparent;
 }
-/* line 44, sass/_sidebar.scss */
+/* line 53, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li:last-child, #sidebar section.community ul.nav-tabs li:last-child,
 div.forum-sidebar section.community ul.submenu li:last-child,
 div.forum-sidebar section.community ul.nav-tabs li:last-child {
   border: none;
 }
-/* line 47, sass/_sidebar.scss */
+/* line 56, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li > a, #sidebar section.community ul.nav-tabs li > a,
 div.forum-sidebar section.community ul.submenu li > a,
 div.forum-sidebar section.community ul.nav-tabs li > a {
@@ -14146,57 +14157,66 @@ div.forum-sidebar section.community ul.nav-tabs li > a {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 55, sass/_sidebar.scss */
+/* line 64, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li > a span, #sidebar section.community ul.nav-tabs li > a span,
 div.forum-sidebar section.community ul.submenu li > a span,
 div.forum-sidebar section.community ul.nav-tabs li > a span {
   display: block;
 }
-/* line 58, sass/_sidebar.scss */
+/* line 67, sass/_sidebar.scss */
+#sidebar section.community ul.submenu li > a .pending, #sidebar section.community ul.nav-tabs li > a .pending,
+div.forum-sidebar section.community ul.submenu li > a .pending,
+div.forum-sidebar section.community ul.nav-tabs li > a .pending {
+  display: inline;
+  font-size: .8em;
+  font-weight: bold;
+  color: #e8e8e8;
+}
+/* line 73, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li > a.selected, #sidebar section.community ul.nav-tabs li > a.selected,
 div.forum-sidebar section.community ul.submenu li > a.selected,
 div.forum-sidebar section.community ul.nav-tabs li > a.selected {
   background-color: #304651;
 }
-/* line 61, sass/_sidebar.scss */
+/* line 76, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li > a:hover, #sidebar section.community ul.nav-tabs li > a:hover,
 div.forum-sidebar section.community ul.submenu li > a:hover,
 div.forum-sidebar section.community ul.nav-tabs li > a:hover {
   background-color: #304651;
   text-decoration: none;
 }
-/* line 69, sass/_sidebar.scss */
+/* line 84, sass/_sidebar.scss */
 #sidebar section.community ul.submenu li.active a, #sidebar section.community ul.nav-tabs li.active a,
 div.forum-sidebar section.community ul.submenu li.active a,
 div.forum-sidebar section.community ul.nav-tabs li.active a {
   background-color: #304651;
 }
-/* line 73, sass/_sidebar.scss */
+/* line 88, sass/_sidebar.scss */
 #sidebar section.community ul.nav-tabs,
 div.forum-sidebar section.community ul.nav-tabs {
   padding: 0;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.75em;
 }
-/* line 77, sass/_sidebar.scss */
+/* line 92, sass/_sidebar.scss */
 #sidebar section.community div.add-member,
 div.forum-sidebar section.community div.add-member {
   padding: 10px;
 }
-/* line 79, sass/_sidebar.scss */
+/* line 94, sass/_sidebar.scss */
 #sidebar section.community div.add-member input, #sidebar section.community div.add-member button.btn,
 div.forum-sidebar section.community div.add-member input,
 div.forum-sidebar section.community div.add-member button.btn {
   width: 100%;
   margin-bottom: 0.2em;
 }
-/* line 83, sass/_sidebar.scss */
+/* line 98, sass/_sidebar.scss */
 #sidebar section.community div.add-member input,
 div.forum-sidebar section.community div.add-member input {
   margin: 0.2em 0;
   padding: 0.2em;
   color: #333;
 }
-/* line 89, sass/_sidebar.scss */
+/* line 104, sass/_sidebar.scss */
 #sidebar section.community div.member-forum,
 div.forum-sidebar section.community div.member-forum {
   position: relative;
@@ -14204,7 +14224,7 @@ div.forum-sidebar section.community div.member-forum {
   padding: 0.5em 0.2em 0.3em 0.2em;
   min-height: 50px;
 }
-/* line 94, sass/_sidebar.scss */
+/* line 109, sass/_sidebar.scss */
 #sidebar section.community div.member-forum a.member-details,
 div.forum-sidebar section.community div.member-forum a.member-details {
   font-size: 1.25em;
@@ -14213,7 +14233,7 @@ div.forum-sidebar section.community div.member-forum a.member-details {
   display: block;
   color: #fff;
 }
-/* line 102, sass/_sidebar.scss */
+/* line 117, sass/_sidebar.scss */
 #sidebar section.community div.member,
 div.forum-sidebar section.community div.member {
   #min-height: 5em;
@@ -14222,22 +14242,22 @@ div.forum-sidebar section.community div.member {
   padding: 1em 0.2em 0.3em 0.2em;
   #border-bottom: 1px solid #7fb3c9;
 }
-/* line 108, sass/_sidebar.scss */
+/* line 123, sass/_sidebar.scss */
 #sidebar section.community div.member a,
 div.forum-sidebar section.community div.member a {
   color: white;
 }
-/* line 111, sass/_sidebar.scss */
+/* line 126, sass/_sidebar.scss */
 #sidebar section.community div.member:last-child,
 div.forum-sidebar section.community div.member:last-child {
   border: none;
 }
-/* line 114, sass/_sidebar.scss */
+/* line 129, sass/_sidebar.scss */
 #sidebar section.community div.member img,
 div.forum-sidebar section.community div.member img {
   display: inline-block;
 }
-/* line 117, sass/_sidebar.scss */
+/* line 132, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details, #sidebar section.community div.member div.member-name,
 div.forum-sidebar section.community div.member div.member-details,
 div.forum-sidebar section.community div.member div.member-name {
@@ -14245,7 +14265,7 @@ div.forum-sidebar section.community div.member div.member-name {
   width: 63%;
   vertical-align: top;
 }
-/* line 121, sass/_sidebar.scss */
+/* line 136, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details p, #sidebar section.community div.member div.member-name p,
 div.forum-sidebar section.community div.member div.member-details p,
 div.forum-sidebar section.community div.member div.member-name p {
@@ -14255,36 +14275,36 @@ div.forum-sidebar section.community div.member div.member-name p {
   vertical-align: top;
   font-weight: bold;
 }
-/* line 127, sass/_sidebar.scss */
+/* line 142, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details p a, #sidebar section.community div.member div.member-name p a,
 div.forum-sidebar section.community div.member div.member-details p a,
 div.forum-sidebar section.community div.member div.member-name p a {
   font-size: 1.25em;
   color: #fff;
 }
-/* line 134, sass/_sidebar.scss */
+/* line 149, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details div.edit-buttons,
 div.forum-sidebar section.community div.member div.member-details div.edit-buttons {
   top: -15px;
   right: -20px;
 }
-/* line 137, sass/_sidebar.scss */
+/* line 152, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details div.edit-buttons button,
 div.forum-sidebar section.community div.member div.member-details div.edit-buttons button {
   background-color: transparent;
 }
-/* line 139, sass/_sidebar.scss */
+/* line 154, sass/_sidebar.scss */
 #sidebar section.community div.member div.member-details div.edit-buttons button:hover,
 div.forum-sidebar section.community div.member div.member-details div.edit-buttons button:hover {
   color: #2f2f2f;
 }
-/* line 145, sass/_sidebar.scss */
+/* line 160, sass/_sidebar.scss */
 #sidebar section.community div.member div.contact,
 div.forum-sidebar section.community div.member div.contact {
   float: right;
   display: inline-block;
 }
-/* line 148, sass/_sidebar.scss */
+/* line 163, sass/_sidebar.scss */
 #sidebar section.community div.member div.contact button,
 div.forum-sidebar section.community div.member div.contact button {
   margin-top: 0.4em;
@@ -14292,12 +14312,12 @@ div.forum-sidebar section.community div.member div.contact button {
   border: none;
   background-color: transparent;
 }
-/* line 153, sass/_sidebar.scss */
+/* line 168, sass/_sidebar.scss */
 #sidebar section.community div.member div.contact button:hover,
 div.forum-sidebar section.community div.member div.contact button:hover {
   color: #2f2f2f;
 }
-/* line 158, sass/_sidebar.scss */
+/* line 173, sass/_sidebar.scss */
 #sidebar section.community div.member em,
 div.forum-sidebar section.community div.member em {
   display: block;
@@ -14305,13 +14325,13 @@ div.forum-sidebar section.community div.member em {
   font-weight: normal;
   font-size: 0.8em;
 }
-/* line 168, sass/_sidebar.scss */
+/* line 183, sass/_sidebar.scss */
 #sidebar section.solo,
 div.forum-sidebar section.solo {
   color: white;
   background-color: #5a4b84;
 }
-/* line 171, sass/_sidebar.scss */
+/* line 186, sass/_sidebar.scss */
 #sidebar section.solo h3,
 div.forum-sidebar section.solo h3 {
   padding: 5em 0;
@@ -14320,7 +14340,7 @@ div.forum-sidebar section.solo h3 {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 180, sass/_sidebar.scss */
+/* line 195, sass/_sidebar.scss */
 #sidebar section.comments,
 div.forum-sidebar section.comments {
   position: relative;
@@ -14329,20 +14349,20 @@ div.forum-sidebar section.comments {
   /* Top paragraph under the heading */
   /* Voir plus link at the bottom */
 }
-/* line 186, sass/_sidebar.scss */
+/* line 201, sass/_sidebar.scss */
 #sidebar section.comments.comments-container,
 div.forum-sidebar section.comments.comments-container {
   padding-bottom: 30px;
   margin-top: 30px;
   margin-bottom: 30px;
 }
-/* line 192, sass/_sidebar.scss */
+/* line 207, sass/_sidebar.scss */
 #sidebar section.comments div.comment,
 div.forum-sidebar section.comments div.comment {
   position: relative;
   margin-top: 0.5em;
 }
-/* line 195, sass/_sidebar.scss */
+/* line 210, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-gravatar,
 #sidebar section.comments div.comment div.comment-content,
 #sidebar section.comments div.comment div.comment-date,
@@ -14352,14 +14372,14 @@ div.forum-sidebar section.comments div.comment div.comment-date {
   display: inline-block;
   vertical-align: top;
 }
-/* line 201, sass/_sidebar.scss */
+/* line 216, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-gravatar,
 div.forum-sidebar section.comments div.comment div.comment-gravatar {
   width: 15%;
   margin-top: 1%;
   margin-left: 3%;
 }
-/* line 206, sass/_sidebar.scss */
+/* line 221, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-content,
 div.forum-sidebar section.comments div.comment div.comment-content {
   width: 74%;
@@ -14378,14 +14398,14 @@ div.forum-sidebar section.comments div.comment div.comment-content {
   -webkit-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-/* line 212, sass/_sidebar.scss */
+/* line 227, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-content p.comment-author,
 div.forum-sidebar section.comments div.comment div.comment-content p.comment-author {
   margin-top: 0.25em;
   margin-bottom: 0.5em;
   font-size: 1.05em;
 }
-/* line 218, sass/_sidebar.scss */
+/* line 233, sass/_sidebar.scss */
 #sidebar section.comments div.comment div.comment-date,
 div.forum-sidebar section.comments div.comment div.comment-date {
   margin-top: 1%;
@@ -14393,7 +14413,7 @@ div.forum-sidebar section.comments div.comment div.comment-date {
   font-size: 0.9em;
   color: #666;
 }
-/* line 226, sass/_sidebar.scss */
+/* line 241, sass/_sidebar.scss */
 #sidebar section.comments h3 + p,
 div.forum-sidebar section.comments h3 + p {
   margin: 0 30px;
@@ -14401,7 +14421,7 @@ div.forum-sidebar section.comments h3 + p {
   font-size: 1.25em;
   line-height: 1.5em;
 }
-/* line 234, sass/_sidebar.scss */
+/* line 249, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child a,
 div.forum-sidebar section.comments > p:last-child a {
   display: block;
@@ -14412,70 +14432,70 @@ div.forum-sidebar section.comments > p:last-child a {
   text-decoration: none;
   text-transform: uppercase;
 }
-/* line 243, sass/_sidebar.scss */
+/* line 258, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child.project a,
 div.forum-sidebar section.comments > p:last-child.project a {
   color: #2497d0;
 }
-/* line 245, sass/_sidebar.scss */
+/* line 260, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child.project a:hover,
 div.forum-sidebar section.comments > p:last-child.project a:hover {
   color: #fff;
   background-color: #2497d0;
 }
-/* line 250, sass/_sidebar.scss */
+/* line 265, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child.resource a,
 div.forum-sidebar section.comments > p:last-child.resource a {
   color: #30c9ad;
 }
-/* line 252, sass/_sidebar.scss */
+/* line 267, sass/_sidebar.scss */
 #sidebar section.comments > p:last-child.resource a:hover,
 div.forum-sidebar section.comments > p:last-child.resource a:hover {
   color: #fff;
   background-color: #30c9ad;
 }
-/* line 259, sass/_sidebar.scss */
+/* line 274, sass/_sidebar.scss */
 #sidebar section.comments.comments-add,
 div.forum-sidebar section.comments.comments-add {
   padding-top: 1.5em;
 }
-/* line 261, sass/_sidebar.scss */
+/* line 276, sass/_sidebar.scss */
 #sidebar section.comments.comments-add .comment,
 div.forum-sidebar section.comments.comments-add .comment {
   border-bottom: none;
 }
-/* line 265, sass/_sidebar.scss */
+/* line 280, sass/_sidebar.scss */
 #sidebar section.comments.comments-add .author img,
 div.forum-sidebar section.comments.comments-add .author img {
   display: inline-block;
   margin-left: 30px;
   margin-right: 15px;
 }
-/* line 270, sass/_sidebar.scss */
+/* line 285, sass/_sidebar.scss */
 #sidebar section.comments.comments-add .author p,
 div.forum-sidebar section.comments.comments-add .author p {
   display: inline-block;
   margin-top: 0.5em;
   vertical-align: top;
 }
-/* line 274, sass/_sidebar.scss */
+/* line 289, sass/_sidebar.scss */
 #sidebar section.comments.comments-add .author p strong,
 div.forum-sidebar section.comments.comments-add .author p strong {
   font-size: 1.1em;
 }
-/* line 279, sass/_sidebar.scss */
+/* line 294, sass/_sidebar.scss */
 #sidebar section.comments.comments-add fieldset,
 div.forum-sidebar section.comments.comments-add fieldset {
   padding: 0 2em;
 }
-/* line 282, sass/_sidebar.scss */
+/* line 297, sass/_sidebar.scss */
 #sidebar section.comments.comments-add textarea,
 div.forum-sidebar section.comments.comments-add textarea {
   width: 100%;
   height: 15em;
   padding: 1em;
 }
-/* line 287, sass/_sidebar.scss */
+/* line 302, sass/_sidebar.scss */
 #sidebar section.comments.comments-add button,
 div.forum-sidebar section.comments.comments-add button {
   width: 100%;
@@ -14484,12 +14504,12 @@ div.forum-sidebar section.comments.comments-add button {
   -webkit-border-radius: 1px;
   border-radius: 1px;
 }
-/* line 291, sass/_sidebar.scss */
+/* line 306, sass/_sidebar.scss */
 #sidebar section.comments.comments-add button:not(:first-child),
 div.forum-sidebar section.comments.comments-add button:not(:first-child) {
   margin: .5em 0 .25em 0;
 }
-/* line 300, sass/_sidebar.scss */
+/* line 315, sass/_sidebar.scss */
 #sidebar section.button a,
 div.forum-sidebar section.button a {
   display: block;
@@ -14502,12 +14522,12 @@ div.forum-sidebar section.button a {
   text-align: center;
   text-transform: uppercase;
 }
-/* line 310, sass/_sidebar.scss */
+/* line 325, sass/_sidebar.scss */
 #sidebar section.button a:hover,
 div.forum-sidebar section.button a:hover {
   background-color: #2497d0;
 }
-/* line 316, sass/_sidebar.scss */
+/* line 331, sass/_sidebar.scss */
 #sidebar section.popularity,
 div.forum-sidebar section.popularity {
   position: relative;
@@ -14515,39 +14535,39 @@ div.forum-sidebar section.popularity {
   color: #fff;
   /* Rating widget */
 }
-/* line 322, sass/_sidebar.scss */
+/* line 337, sass/_sidebar.scss */
 #sidebar section.popularity.popularity-project,
 div.forum-sidebar section.popularity.popularity-project {
   background: #2497d0 url("../img/bg/sidebar-blue-bg.png") 175px -110px no-repeat;
 }
-/* line 325, sass/_sidebar.scss */
+/* line 340, sass/_sidebar.scss */
 #sidebar section.popularity.popularity-resource,
 div.forum-sidebar section.popularity.popularity-resource {
   background: #30c9ad url("../img/bg/sidebar-green-bg.png") top left no-repeat;
 }
-/* line 329, sass/_sidebar.scss */
+/* line 344, sass/_sidebar.scss */
 #sidebar section.popularity table,
 div.forum-sidebar section.popularity table {
   margin: 2em 2em;
   width: 85%;
 }
-/* line 332, sass/_sidebar.scss */
+/* line 347, sass/_sidebar.scss */
 #sidebar section.popularity table td,
 div.forum-sidebar section.popularity table td {
   line-height: 2em;
   text-transform: uppercase;
 }
-/* line 335, sass/_sidebar.scss */
+/* line 350, sass/_sidebar.scss */
 #sidebar section.popularity table td small,
 div.forum-sidebar section.popularity table td small {
   font-size: 0.65em;
 }
-/* line 339, sass/_sidebar.scss */
+/* line 354, sass/_sidebar.scss */
 #sidebar section.popularity table td.percent,
 div.forum-sidebar section.popularity table td.percent {
   width: 50%;
 }
-/* line 342, sass/_sidebar.scss */
+/* line 357, sass/_sidebar.scss */
 #sidebar section.popularity table td.percent span,
 div.forum-sidebar section.popularity table td.percent span {
   display: block;
@@ -14558,12 +14578,12 @@ div.forum-sidebar section.popularity table td.percent span {
   -webkit-border-radius: 2px;
   border-radius: 2px;
 }
-/* line 348, sass/_sidebar.scss */
+/* line 363, sass/_sidebar.scss */
 #sidebar section.popularity table td.percent span span,
 div.forum-sidebar section.popularity table td.percent span span {
   background-color: #fff;
 }
-/* line 355, sass/_sidebar.scss */
+/* line 370, sass/_sidebar.scss */
 #sidebar section.popularity label,
 div.forum-sidebar section.popularity label {
   display: inline-block;
@@ -14571,13 +14591,13 @@ div.forum-sidebar section.popularity label {
   margin: 0 0 1em 2em;
   text-transform: uppercase;
 }
-/* line 361, sass/_sidebar.scss */
+/* line 376, sass/_sidebar.scss */
 #sidebar section.popularity span i,
 div.forum-sidebar section.popularity span i {
   font-size: 2em;
   vertical-align: middle;
 }
-/* line 365, sass/_sidebar.scss */
+/* line 380, sass/_sidebar.scss */
 #sidebar section.popularity button.solo,
 div.forum-sidebar section.popularity button.solo {
   padding: 0.25em 1.25em;
@@ -14585,42 +14605,42 @@ div.forum-sidebar section.popularity button.solo {
   font-weight: bold;
 }
 
-/* line 375, sass/_sidebar.scss */
+/* line 390, sass/_sidebar.scss */
 .sidebar-filters {
   margin: 30px 0;
 }
-/* line 377, sass/_sidebar.scss */
+/* line 392, sass/_sidebar.scss */
 .sidebar-filters h4 {
   margin-bottom: 0.5em;
 }
-/* line 380, sass/_sidebar.scss */
+/* line 395, sass/_sidebar.scss */
 .sidebar-filters .input-group {
   margin-bottom: 1em;
 }
-/* line 383, sass/_sidebar.scss */
+/* line 398, sass/_sidebar.scss */
 .sidebar-filters .panel-body {
   padding: 0;
 }
-/* line 385, sass/_sidebar.scss */
+/* line 400, sass/_sidebar.scss */
 .sidebar-filters .panel-body ul a {
   display: block;
   padding: 0.5em 1em;
 }
-/* line 388, sass/_sidebar.scss */
+/* line 403, sass/_sidebar.scss */
 .sidebar-filters .panel-body ul a:hover {
   color: #fff;
   text-decoration: none;
 }
-/* line 396, sass/_sidebar.scss */
+/* line 411, sass/_sidebar.scss */
 .sidebar-filters.sidebar-profiles .panel-body ul a:hover {
   background-color: #ff5353;
 }
-/* line 402, sass/_sidebar.scss */
+/* line 417, sass/_sidebar.scss */
 .sidebar-filters.sidebar-projects .panel-body ul a:hover {
   background-color: #2497d0;
 }
 
-/* line 409, sass/_sidebar.scss */
+/* line 424, sass/_sidebar.scss */
 .report-abuse {
   background: white;
   display: block;
@@ -14631,12 +14651,12 @@ div.forum-sidebar section.popularity button.solo {
   padding: 1em;
   margin-top: 30px;
 }
-/* line 418, sass/_sidebar.scss */
+/* line 433, sass/_sidebar.scss */
 .report-abuse .fa {
   font-size: 20px;
   margin-right: 5px;
 }
-/* line 422, sass/_sidebar.scss */
+/* line 437, sass/_sidebar.scss */
 .report-abuse:hover {
   background: #a13535;
   color: white;
@@ -15296,8 +15316,8 @@ div.editable-controls textarea {
   background-color: #e8e8e8;
 }
 
-/* line 409, sass/_inline-editing.scss */
-#sidebar div.member-edit button.remove {
+/* line 407, sass/_inline-editing.scss */
+#sidebar button.remove {
   position: absolute;
   top: 0;
   left: -10px;
@@ -15311,57 +15331,57 @@ div.editable-controls textarea {
   -webkit-border-radius: 12px;
   border-radius: 12px;
 }
-/* line 420, sass/_inline-editing.scss */
-#sidebar div.member-edit button.remove:hover {
+/* line 418, sass/_inline-editing.scss */
+#sidebar button.remove:hover {
   background-color: #c30;
 }
-/* line 424, sass/_inline-editing.scss */
-#sidebar div.member-edit button.valid-button {
+/* line 422, sass/_inline-editing.scss */
+#sidebar button.valid-button {
   margin-top: 5px;
   font-size: 1em;
   padding: 0.4em;
   margin-left: 1em;
 }
-/* line 432, sass/_inline-editing.scss */
+/* line 429, sass/_inline-editing.scss */
 #sidebar div.member-details form {
   margin: 0.5em 0 0.5em 0.5em;
 }
-/* line 434, sass/_inline-editing.scss */
+/* line 431, sass/_inline-editing.scss */
 #sidebar div.member-details form input {
   display: block;
   width: 100%;
 }
-/* line 438, sass/_inline-editing.scss */
+/* line 435, sass/_inline-editing.scss */
 #sidebar div.member-details form .editable-controls {
   display: block;
 }
-/* line 442, sass/_inline-editing.scss */
+/* line 439, sass/_inline-editing.scss */
 #sidebar div.member-details .editable-buttons {
   display: block;
 }
-/* line 444, sass/_inline-editing.scss */
+/* line 441, sass/_inline-editing.scss */
 #sidebar div.member-details .editable-buttons button {
   display: inline-block;
   width: auto;
   margin-top: 0.25em;
   margin-left: 0;
 }
-/* line 449, sass/_inline-editing.scss */
+/* line 446, sass/_inline-editing.scss */
 #sidebar div.member-details .editable-buttons button:last-child {
   margin-left: 4px;
 }
-/* line 457, sass/_inline-editing.scss */
+/* line 454, sass/_inline-editing.scss */
 #sidebar div.comment div.comment-content {
   position: relative;
 }
-/* line 460, sass/_inline-editing.scss */
+/* line 457, sass/_inline-editing.scss */
 #sidebar div.comment div.btn-group {
   position: absolute;
   top: 0;
   right: 0;
   /* Open dropdown menu on the left, instead of right */
 }
-/* line 464, sass/_inline-editing.scss */
+/* line 461, sass/_inline-editing.scss */
 #sidebar div.comment div.btn-group button {
   padding-right: 0.5em;
   padding-left: 0.5em;
@@ -15371,14 +15391,14 @@ div.editable-controls textarea {
   -webkit-border-radius: 0;
   border-radius: 0;
 }
-/* line 472, sass/_inline-editing.scss */
+/* line 469, sass/_inline-editing.scss */
 #sidebar div.comment div.btn-group ul.dropdown-menu {
   left: auto;
   right: 0;
 }
 
 /* Restore lists in editing */
-/* line 482, sass/_inline-editing.scss */
+/* line 479, sass/_inline-editing.scss */
 .ta-editor ul {
   list-style-type: disc;
 }

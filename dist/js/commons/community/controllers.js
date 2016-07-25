@@ -3,7 +3,7 @@
 
   module = angular.module('commons.community.controllers', []);
 
-  module.controller("CommunityCtrl", function($scope, $filter, $interval, Profile, ObjectProfileLink) {
+  module.controller("CommunityCtrl", function($scope, $rootScope, $filter, $interval, Profile, ObjectProfileLink) {
     "Controller pour la manipulation des data d'une communauté liée à un objet partagé (project, fiche resource, etc.    )\nLa sémantique des niveaux d'implication est à préciser en fonction de la resource.\nA titre d'exemple, pour les projets et fiche ressource MakerScience :\n- 0 -> Membre de l'équipe projet\n- 1 -> personne ressource\n- 2 -> fan/follower\n\nNB. les objets \"profile\" manipulé ici sont les profils génériques du dataserver (et non les MakerScienceProfile)\n    dispo à api/v0/accounts/profile (cf service \"Profile\")";
     $scope.profiles = Profile.getList().$object;
     $scope.teamCandidate = null;
