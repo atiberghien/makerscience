@@ -1,5 +1,5 @@
 <section class="community community-project" ng-init="manageCommunity=false">
-    <ul class="actions" ng-show="currentMakerScienceProfile !== null">
+    <ul class="actions" ng-show="$root.currentMakerScienceProfile !== null">
         <li><a href="" ng-click="manageCommunity=!manageCommunity"><span class="glyphicon glyphicon-user"></span>Rejoindre</a></li>
     </ul>
     <h3>Communauté</h3>
@@ -7,18 +7,18 @@
     <div class="add-member" ng-show="manageCommunity">
         <button type="button"
                 class="btn btn-primary"
-                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember(currentMakerScienceProfile.parent, 0)"
-                ng-click="teamCandidate=currentMakerScienceProfile.parent">Vous voulez rejoindre l'équipe</button>
+                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember($root.currentMakerScienceProfile.parent, 0)"
+                ng-click="teamCandidate=$root.currentMakerScienceProfile.parent">Vous voulez rejoindre l'équipe</button>
 
         <button type="button"
                 class="btn btn-primary"
-                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember(currentMakerScienceProfile.parent, 1)"
-                ng-click="resourceCandidate=currentMakerScienceProfile.parent">Vous voulez aider ce projet</button>
+                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember($root.currentMakerScienceProfile.parent, 1)"
+                ng-click="resourceCandidate=$root.currentMakerScienceProfile.parent">Vous voulez aider ce projet</button>
 
         <button type="button"
                 class="btn btn-primary"
-                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember(currentMakerScienceProfile.parent, 2)"
-                ng-click="addMember(currentMakerScienceProfile.parent, 2, '', true); manageCommunity=false">Vous voulez juste suivre ce projet</button>
+                ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember($root.currentMakerScienceProfile.parent, 2)"
+                ng-click="addMember($root.currentMakerScienceProfile.parent, 2, '', true); manageCommunity=false">Vous voulez juste suivre ce projet</button>
 
         <input type="text" ng-show="teamCandidate || resourceCandidate" name="role" ng-model="role" placeholder="Saisissez votre rôle ..." />
 
@@ -57,7 +57,7 @@
                 <div ng-show="teamCandidate">
                     <button type="button"
                             class="btn btn-primary"
-                            ng-click="addMember(teamCandidate.originalObject, 5, currentMakerScienceProfile.slug, false); addTeamMember=false; teamCandidate=null">
+                            ng-click="addMember(teamCandidate.originalObject, 5, $root.currentMakerScienceProfile.slug, false); addTeamMember=false; teamCandidate=null">
                             Inviter {{teamCandidate.originalObject.user.first_name}} {{teamCandidate.originalObject.user.last_name}} à rejoindre l'équipe du projet ?
                     </button>
                     <button type="button" class="btn btn-default" ng-click="addTeamMember=false; teamCandidate=null">Annuler</button>
@@ -76,22 +76,22 @@
                 </button>
             </div>
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coreTeamRequestingMembers=(community|filter:{level:0, isValidated:false}|orderBy:'created_on')">
-                <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
+                <div ng-show="editable && $root.currentMakerScienceProfile.parent.id != member.profile.id">
                     <ng-include src="'/views/block/community_profile_thumb.html'"></ng-include>
                     <button class="remove" ng-click="removeMember(member)"><span class="glyphicon glyphicon-remove"></span></button>
                     <button class="btn btn-primary valid-button" ng-click="validateMember(member, true)">Valider ce membre</button>
                 </div>
-                <div ng-show="currentMakerScienceProfile.parent.id == member.profile.id">
+                <div ng-show="$root.currentMakerScienceProfile.parent.id == member.profile.id">
                     Votre demande pour intégrer l'équipe est en attente de validation par un membre de l'équipe
                     <a class="remove" ng-click="removeMember(member)"><span class="fa fa-trash" tooltip="Annuler votre demande"></span></a>
                 </div>
             </div>
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in coreTeamInvitedMembers=(community|filter:{level:5, isValidated:false}|orderBy:'created_on')">
-                <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
+                <div ng-show="editable && $root.currentMakerScienceProfile.parent.id != member.profile.id">
                     Invitation envoyée à <a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a>
                     <a ng-click="removeMember(member)"><span class="fa fa-trash" tooltip="Annuler l'invitation"></span></a>
                 </div>
-                <div ng-show="currentMakerScienceProfile.parent.id == member.profile.id">
+                <div ng-show="$root.currentMakerScienceProfile.parent.id == member.profile.id">
                     <label>Vous avez été invité à rejoindre l'équipe</label>
                     <button class="btn btn-primary" ng-click="validateMember(member, true)">Accepter</button>
                     <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
@@ -125,7 +125,7 @@
                 <div ng-show="resourceCandidate">
                     <button type="button"
                             class="btn btn-primary"
-                            ng-click="addMember(resourceCandidate.originalObject, 6, currentMakerScienceProfile.slug, false); addResourceMember=false; resourceCandidate=null">
+                            ng-click="addMember(resourceCandidate.originalObject, 6, $root.currentMakerScienceProfile.slug, false); addResourceMember=false; resourceCandidate=null">
                             Inviter {{resourceCandidate.originalObject.user.first_name}} {{resourceCandidate.originalObject.user.last_name}} à aider le projet ?
                     </button>
                     <button type="button" class="btn btn-default" ng-click="addResourceMember=false; resourceCandidate=null">Annuler</button>
@@ -133,19 +133,19 @@
             </div>
             <!-- ###################################################### -->
 
-            <div class="member" ng-class="{'member-edit': editable || currentMakerScienceProfile.parent.id == member.profile.id}" ng-repeat="member in helperMembers=community|filter:{level:1, isValidated:true}|orderBy:'created_on'">
+            <div class="member" ng-class="{'member-edit': editable || $root.currentMakerScienceProfile.parent.id == member.profile.id}" ng-repeat="member in helperMembers=community|filter:{level:1, isValidated:true}|orderBy:'created_on'">
                 <ng-include src="'/views/block/community_profile_thumb.html'"></ng-include>
-                <button ng-show="editable || currentMakerScienceProfile.parent.id == member.profile.id" class="remove" ng-click="removeMember(member)">
+                <button ng-show="editable || $root.currentMakerScienceProfile.parent.id == member.profile.id" class="remove" ng-click="removeMember(member)">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
 
             <div class="member" ng-class="{'member-edit': editable}" ng-repeat="member in helperInvitedMembers=community|filter:{level:6, isValidated:false}|orderBy:'created_on'">
-                <div ng-show="editable && currentMakerScienceProfile.parent.id != member.profile.id">
+                <div ng-show="editable && $root.currentMakerScienceProfile.parent.id != member.profile.id">
                     Demande d'aide envoyée à <a ui-sref="profile.detail({slug:member.profile.id})">{{member.profile.user.first_name}} {{member.profile.user.last_name}}</a>
                     <a ng-click="removeMember(member)"><span class="fa fa-trash" tooltip="Annuler la demande"></span></a>
                 </div>
-                <div ng-show="currentMakerScienceProfile.parent.id == member.profile.id">
+                <div ng-show="$root.currentMakerScienceProfile.parent.id == member.profile.id">
                     <label>Un membre de l'équipe a solliciter votre aide</label>
                     <button class="btn btn-primary" ng-click="validateMember(member, true)">Accepter</button>
                     <button class="btn btn-default" ng-click="removeMember(member)">Refuser</button>
