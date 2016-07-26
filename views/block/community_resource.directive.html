@@ -64,8 +64,8 @@
         <!-- Auteurs  -->
         <tab ng-init="addResourceMember=false">
             <tab-heading>
-                <span>{{(community|filter:{level:10, isValidated: true}).length }} <span ng-show="isAlreadyMember($root.currentMakerScienceProfile.parent, 10)" class="pending">({{(community|filter:{level:10, isValidated: false}).length }} en attente)</span></span>
-                <ng-pluralize count="(community | filter: {level:10, isValidated: true}).length"
+                <span>{{(community|filter:{level:9, isValidated: true}).length }} <span ng-show="isAlreadyMember($root.currentMakerScienceProfile.parent, 10)" class="pending">({{(community|filter:{level:9, isValidated: false}).length }} en attente)</span></span>
+                <ng-pluralize count="(community | filter: {level:9, isValidated: true}).length"
                              when="{'0': 'Auteur',
                                  'one': 'Auteur',
                                  'other': 'Auteurs'}">
