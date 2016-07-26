@@ -28,7 +28,10 @@
       link: function(scope, el) {
         var check;
         check = function() {
-          if (scope.newMedia.url) {
+          if (!scope.newMedia.url && !scope.newMedia.file) {
+            scope.mediaForm.$setValidity('mediaDefine', false);
+          }
+          if (!!scope.newMedia.url) {
             scope.mediaForm.$setValidity('mediaDefine', true);
             if (scope.mediaForm.imageUrl) {
               scope.mediaForm.imageUrl.$setValidity('format', true);
@@ -49,7 +52,7 @@
               case 'link':
                 return scope.mediaForm.mediaUrl.$setValidity('format', GalleryService.isUrl(scope.newMedia.url));
             }
-          } else if (scope.newMedia.file) {
+          } else if (!!scope.newMedia.file) {
             scope.mediaForm.$setValidity('mediaDefine', true);
             scope.mediaForm.$setValidity('imageFileFormat', true);
             scope.mediaForm.$setValidity('documentFileFormat', true);
@@ -59,11 +62,8 @@
               case 'document':
                 return scope.mediaForm.$setValidity('documentFileFormat', GalleryService.isTypeDocument(scope.newMedia.file.type));
             }
-          } else {
-            return scope.mediaForm.$setValidity('mediaDefine', false);
           }
         };
-        scope.mediaForm.$setValidity('mediaDefine', false);
         el.bind('change', function() {
           scope.$apply(function() {
             return check();

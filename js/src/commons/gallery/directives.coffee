@@ -24,7 +24,10 @@ module.directive('checkForm', (GalleryService, MediaRestangular) ->
         restrict: 'A'
         link: (scope, el) ->
             check = () ->
-                if scope.newMedia.url
+                if !scope.newMedia.url && !scope.newMedia.file
+                    scope.mediaForm.$setValidity('mediaDefine', false)
+
+                if !!scope.newMedia.url
                     scope.mediaForm.$setValidity('mediaDefine', true);
                     if scope.mediaForm.imageUrl then scope.mediaForm.imageUrl.$setValidity('format', true)
                     if scope.mediaForm.documentUrl then scope.mediaForm.documentUrl.$setValidity('format', true)
@@ -39,7 +42,8 @@ module.directive('checkForm', (GalleryService, MediaRestangular) ->
                             scope.mediaForm.videoUrl.$setValidity('format', GalleryService.isUrlVideo(scope.newMedia.url))
                         when 'link'
                             scope.mediaForm.mediaUrl.$setValidity('format', GalleryService.isUrl(scope.newMedia.url))
-                else if scope.newMedia.file
+
+                else if !!scope.newMedia.file
                     scope.mediaForm.$setValidity('mediaDefine', true);
                     scope.mediaForm.$setValidity('imageFileFormat', true)
                     scope.mediaForm.$setValidity('documentFileFormat', true)
@@ -49,10 +53,6 @@ module.directive('checkForm', (GalleryService, MediaRestangular) ->
                       when 'document'
                           scope.mediaForm.$setValidity('documentFileFormat', GalleryService.isTypeDocument(scope.newMedia.file.type))
 
-                else
-                    scope.mediaForm.$setValidity('mediaDefine', false);
-
-            scope.mediaForm.$setValidity('mediaDefine', false);
 
             el.bind('change', () ->
                 scope.$apply ->

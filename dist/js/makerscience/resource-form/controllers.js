@@ -111,6 +111,7 @@
             promises = [];
             angular.forEach($scope.medias, function(media, index) {
               var promise;
+              console.log(media);
               promise = ProjectService.uploadMedia(media, resourcesheetResult.bucket.id, resourcesheetResult.id);
               return promises.push(promise);
             });

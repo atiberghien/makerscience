@@ -146,7 +146,6 @@
       $scope.objectId = $scope.projectsheet.id;
       $scope.hasPictures = false;
       $scope.hasVideos = false;
-      console.log($scope.projectsheet);
       angular.forEach($scope.projectsheet.news, function(news, index) {
         return news.summary = $filter('getSummary')(news.text);
       });

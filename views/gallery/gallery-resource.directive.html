@@ -17,13 +17,13 @@
                     <inputfile id="file-document" fileread="newMedia.file" label="newMedia.file.name || 'Parcourir...'" set-title="setTitle(newMedia.file.name)"></inputfile>
                 </div>
                 <div class="col-md-8 file-errors">
-                    <p ng-show="mediaForm.$pristine && submitted" class="help-block">Veuillez sélectionner un fichier</p>
+                    <p ng-show="(mediaForm.$error.mediaDefine || mediaForm.$pristine) && submitted" class="help-block">Veuillez sélectionner un fichier</p>
                     <p ng-show="mediaForm.$error.documentFileFormat" class="help-block">Format non valide, vérifiez le format du document ou changer de type de média</p>
                 </div>
             </div>
             <label for="title-document">Titre <span class="required">*</span></label>
-            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" ng-required="newMedia.type === 'document'" />
-            <p ng-show="mediaForm.mediaTitle.$pristine && submitted && newMedia.type === 'document'" class="help-block">Titre requis</p>
+            <input id="title-document" name="documentTitle" type="text" ng-model="newMedia.title" maxlength="50" ng-required="newMedia.type === 'document'" />
+            <p ng-show="mediaForm.documentTitle.$invalid && submitted" class="help-block">Titre requis</p>
 
             <label for="description-document">Description</label>
             <textarea
@@ -77,9 +77,9 @@
             <p ng-show="mediaForm.$pristine && submitted" class="help-block">Veuillez insérer un lien</p>
             <p ng-show="mediaForm.mediaUrl.$error.format" class="help-block">Url non valide, vérifier l'adresse du lien</p>
 
-            <label for="title-document">Titre <span class="required">*</span></label>
-            <input id="title-document" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" ng-required="newMedia.type === 'link'" />
-            <p ng-show="mediaForm.mediaTitle.$pristine && submitted && newMedia.type === 'link'" class="help-block">Titre requis</p>
+            <label for="title-link">Titre <span class="required">*</span></label>
+            <input id="title-link" name="linkTitle" type="text" ng-model="newMedia.title" maxlength="50" ng-required="newMedia.type === 'link'" />
+            <p ng-show="mediaForm.linkTitle.$invalid && submitted" class="help-block">Titre requis</p>
 
             <label for="description-document">Description</label>
             <textarea
@@ -128,8 +128,8 @@
                 Expérience
             </tab-heading>
             <label for="title-experience">Titre <span class="required">*</span></label>
-            <input id="title-experience" name="mediaTitle" type="text" ng-model="newMedia.title" maxlength="50" />
-            <p ng-show="mediaForm.mediaTitle.$pristine && submitted" class="help-block">Titre requis</p>
+            <input id="title-experience" name="experienceTitle" type="text" ng-model="newMedia.title" maxlength="50" />
+            <p ng-show="mediaForm.experienceTitle.$invalid && submitted" class="help-block">Titre requis</p>
 
             <label for="date-experience">Date de l'expérience <span class="required">*</span></label>
             <input id="date-experience" name="mediaDate" type="date" ng-model="newMedia.experience.date" placeholder="http://" ng-required="newMedia.type === 'experience'" />
