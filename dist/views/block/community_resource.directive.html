@@ -8,12 +8,12 @@
         <button type="button"
                 class="btn btn-primary"
                 ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember($root.currentMakerScienceProfile.parent, 9) && !isAlreadyMember($root.currentMakerScienceProfile.parent, 10)"
-                ng-click="teamCandidate=$root.currentMakerScienceProfile.parent">Je suis auteur d'une des ressources</button>
+                ng-click="teamCandidate=$root.currentMakerScienceProfile.parent">Je suis auteur</button>
 
         <button type="button"
                 class="btn btn-primary"
                 ng-show="!teamCandidate && !resourceCandidate && !isAlreadyMember($root.currentMakerScienceProfile.parent, 12)"
-                ng-click="addMember($root.currentMakerScienceProfile.parent, 12, '', true); manageCommunity=false">Je veux mettre en favoris cette expérience</button>
+                ng-click="addMember($root.currentMakerScienceProfile.parent, 12, '', true); manageCommunity=false">Je veux mettre en favoris cette ressource</button>
 
         <input type="text" ng-show="teamCandidate || resourceCandidate" name="role" ng-model="role" placeholder="De quelle(s) ressource(s) êtes-vous auteur(e) ?" />
 
