@@ -141,6 +141,8 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.hasPictures = false
         $scope.hasVideos = false
 
+        console.log $scope.projectsheet
+
         angular.forEach($scope.projectsheet.news, (news, index) ->
             news.summary = $filter('getSummary')(news.text)
           )

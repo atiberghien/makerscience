@@ -348,15 +348,50 @@ div.toolbar {
         margin-bottom: $grid-gutter-width;
         border: none;
         &> li {
-             a {
-                 font-size: 1.4em;
-                 font-weight: bold;
+            a {
+                font-size: 1.4em;
+                font-weight: bold;
                 color: $color-content-tab;
                 background-color: $color-content-tab-bg;
                 border-color: $color-light-grey;
             }
             &.active a {
                 //color: $color-content-tab-active;
+            }
+
+            span[data-tooltip] {
+                position: relative;
+            }
+            /* Tooltip styling */
+            span[data-tooltip]:before {
+                content: attr(data-tooltip);
+                display: block;
+                position: absolute;
+                background: $color-dark-grey;
+                color: #fff;
+                padding: 4px;
+                width: 100%;
+                font-size: .65em;
+                line-height: 1.4;
+                min-width: 100px;
+                text-align: center;
+                border-radius: 4px;
+                left: 100%;
+                margin-left: 30px;
+            }
+
+            /* Tooltip arrow styling/placement */
+            span[data-tooltip]:after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+                top: 8px;
+                right: -30px;
+                border-width: 6px 6px 6px 0;
+                border-right-color: $color-dark-grey;
             }
         }
     }

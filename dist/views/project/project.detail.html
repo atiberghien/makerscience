@@ -248,7 +248,18 @@
                         </section>
 
                     </tab>
-                    <tab ng-if="projectsheet.linked_makersciencepost" heading="Discussions ({{projectsheet.linked_makersciencepost.length}})">
+                    <tab ng-if="projectsheet.linked_makersciencepost">
+                        <tab-heading>
+                            <span ng-show="(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length > 1" data-tooltip="Dont {{(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length}} besoins" tooltip-trigger="manual">
+                                Discussions ({{projectsheet.linked_makersciencepost.length}})
+                            </span>
+                            <span ng-show="(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length === 1" data-tooltip="Dont {{(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length}} besoin" tooltip-trigger="manual">
+                                Discussions ({{projectsheet.linked_makersciencepost.length}})
+                            </span>
+                            <span ng-show="!(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length">
+                                Discussions ({{projectsheet.linked_makersciencepost.length}})
+                            </span>
+                        </tab-heading>
                         <section>
                             <div ng-repeat="post in projectsheet.linked_makersciencepost">
                                 <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
