@@ -128,7 +128,7 @@
                 Expérience
             </tab-heading>
             <label for="title-experience">Titre <span class="required">*</span></label>
-            <input id="title-experience" name="experienceTitle" type="text" ng-model="newMedia.title" maxlength="50" />
+            <input id="title-experience" name="experienceTitle" type="text" ng-model="newMedia.title" maxlength="50" ng-required="newMedia.type === 'experience'" />
             <p ng-show="mediaForm.experienceTitle.$invalid && submitted" class="help-block">Titre requis</p>
 
             <label for="date-experience">Date de l'expérience <span class="required">*</span></label>

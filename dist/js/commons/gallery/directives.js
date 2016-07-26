@@ -28,7 +28,7 @@
       link: function(scope, el) {
         var check;
         check = function() {
-          if (!scope.newMedia.url && !scope.newMedia.file) {
+          if (!scope.newMedia.url && !scope.newMedia.file && !scope.newMedia.experience) {
             scope.mediaForm.$setValidity('mediaDefine', false);
           }
           if (!!scope.newMedia.url) {

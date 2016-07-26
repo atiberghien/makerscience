@@ -24,11 +24,11 @@ module.directive('checkForm', (GalleryService, MediaRestangular) ->
         restrict: 'A'
         link: (scope, el) ->
             check = () ->
-                if !scope.newMedia.url && !scope.newMedia.file
+                if !scope.newMedia.url && !scope.newMedia.file && !scope.newMedia.experience
                     scope.mediaForm.$setValidity('mediaDefine', false)
 
                 if !!scope.newMedia.url
-                    scope.mediaForm.$setValidity('mediaDefine', true);
+                    scope.mediaForm.$setValidity('mediaDefine', true)
                     if scope.mediaForm.imageUrl then scope.mediaForm.imageUrl.$setValidity('format', true)
                     if scope.mediaForm.documentUrl then scope.mediaForm.documentUrl.$setValidity('format', true)
                     if scope.mediaForm.videoUrl then scope.mediaForm.videoUrl.$setValidity('format', true)

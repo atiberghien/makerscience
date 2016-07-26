@@ -22,9 +22,7 @@
     };
     $scope.getMediasToShow();
     $scope.changeTab = function(type) {
-      $scope.newMedia.type = type;
-      $scope.newMedia.file = null;
-      return $scope.newMedia.url = null;
+      return $scope.newMedia = GalleryService.initMediaProject(type);
     };
     $scope.toggleCoverCandidate = function(media) {
       $scope.coverId = GalleryService.setCoverId(media.id);
@@ -111,7 +109,10 @@
       $scope.newMedia = GalleryService.initMediaResource(type, $scope.user);
       $scope.submitted = false;
       if (type === 'experience') {
-        return $scope.newMedia.experience = {};
+        $scope.newMedia.experience = {};
+        $scope.mediaForm.$setValidity('mediaDefine', true);
+        $scope.mediaForm.$setValidity('documentFileFormat', true);
+        return $scope.mediaForm.mediaUrl.$setValidity('format', true);
       }
     };
     $scope.addMedia = function(newMedia) {

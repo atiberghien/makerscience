@@ -23,9 +23,7 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
     $scope.getMediasToShow()
 
     $scope.changeTab = (type) ->
-        $scope.newMedia.type = type
-        $scope.newMedia.file = null
-        $scope.newMedia.url = null
+        $scope.newMedia = GalleryService.initMediaProject(type)
 
     $scope.toggleCoverCandidate = (media) ->
         $scope.coverId = GalleryService.setCoverId(media.id)
@@ -95,6 +93,9 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
         $scope.submitted = false
         if type == 'experience'
             $scope.newMedia.experience = {}
+            $scope.mediaForm.$setValidity('mediaDefine', true)
+            $scope.mediaForm.$setValidity('documentFileFormat', true)
+            $scope.mediaForm.mediaUrl.$setValidity('format', true)
 
     $scope.addMedia = (newMedia) ->
         if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine
