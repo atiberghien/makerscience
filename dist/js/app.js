@@ -37,7 +37,7 @@
   }).config(function(RestangularProvider) {
     RestangularProvider.setBaseUrl(config.rest_uri);
     RestangularProvider.setRequestSuffix('?format=json');
-    RestangularProvider.setMethodOverriders(['put', 'patch', 'delete']);
+    RestangularProvider.setMethodOverriders(["put", "patch", "delete"]);
     return RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
       var newResponse;
       newResponse = null;

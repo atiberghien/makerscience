@@ -269,8 +269,7 @@
     $scope.resourceCover = {
       type: 'cover'
     };
-    $scope.ok = function(cover) {
-      console.log(cover);
+    $scope.ok = function() {
       $scope.hideControls = true;
       if ($scope.resourceCover.file) {
         return ProjectService.uploadMedia($scope.resourceCover, base_projectsheet.bucket.id, base_projectsheet.id).then(function(res) {

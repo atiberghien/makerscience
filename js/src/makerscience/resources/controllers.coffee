@@ -225,8 +225,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
 
 module.controller("CoverResourceSheetCtrl", ($scope, $modalInstance, ProjectService, ProjectSheet, base_projectsheet, GalleryService) ->
         $scope.resourceCover = {type: 'cover'}
-        $scope.ok = (cover) ->
-            console.log cover
+        $scope.ok = () ->
             $scope.hideControls = true
 
             if $scope.resourceCover.file
