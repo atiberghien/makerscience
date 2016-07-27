@@ -159,7 +159,12 @@
             promises = [];
             angular.forEach($scope.medias, function(media, index) {
               var promise;
-              promise = ProjectService.uploadMedia(media, projectsheetResult.bucket.id, projectsheetResult.id);
+              console.log(media);
+              promise = ProjectService.uploadMedia(media, projectsheetResult.bucket.id, projectsheetResult.id).then(function(res) {
+                return console.log(res);
+              })["catch"](function(err) {
+                return console.log(err);
+              });
               promises.push(promise);
               return promise.then(function(res) {
                 if ($scope.coverId === media.id) {

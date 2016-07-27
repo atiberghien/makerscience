@@ -152,7 +152,12 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state
                     promises = []
 
                     angular.forEach($scope.medias, (media, index) ->
+                        console.log media
+                        
                         promise = ProjectService.uploadMedia(media, projectsheetResult.bucket.id, projectsheetResult.id)
+                        .then((res) -> console.log res)
+                        .catch((err) -> console.log err)
+
                         promises.push(promise)
 
                         promise.then((res) ->
