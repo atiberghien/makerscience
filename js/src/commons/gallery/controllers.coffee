@@ -26,6 +26,9 @@ module.controller('GalleryCreationProjectCtrl', ($scope, GalleryService, Project
         $scope.newMedia = GalleryService.initMediaProject(type)
 
     $scope.toggleCoverCandidate = (media) ->
+        if media.id == undefined
+            media.id = $scope.medias.indexOf(media)
+
         $scope.coverId = GalleryService.setCoverId(media.id)
 
         if $scope.projectsheet.id

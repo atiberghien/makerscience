@@ -25,6 +25,9 @@
       return $scope.newMedia = GalleryService.initMediaProject(type);
     };
     $scope.toggleCoverCandidate = function(media) {
+      if (media.id === void 0) {
+        media.id = $scope.medias.indexOf(media);
+      }
       $scope.coverId = GalleryService.setCoverId(media.id);
       if ($scope.projectsheet.id) {
         $scope.projectsheet.cover = media;
