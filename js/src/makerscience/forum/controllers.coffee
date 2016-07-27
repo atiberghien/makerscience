@@ -211,7 +211,7 @@ module.controller("MakerSciencePostCtrl", ($scope, $state, $stateParams, $contro
         $scope.fetchPostLikes($scope.post.parent)
         resolveMentions($scope.post.parent)
 
-        $scope.initCommunityCtrl('post', $scope.post.parent.id).then((community)->
+        ObjectProfileLink.one().customGETLIST('post/' + $scope.post.parent.id).then((community) ->
             $scope.contributors = []
             $scope.followers = []
 

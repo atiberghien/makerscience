@@ -244,7 +244,7 @@
       $scope.getSimilars($scope.post.parent.id);
       $scope.fetchPostLikes($scope.post.parent);
       resolveMentions($scope.post.parent);
-      $scope.initCommunityCtrl('post', $scope.post.parent.id).then(function(community) {
+      ObjectProfileLink.one().customGETLIST('post/' + $scope.post.parent.id).then(function(community) {
         var alreadyHasProfileMember;
         $scope.contributors = [];
         $scope.followers = [];
