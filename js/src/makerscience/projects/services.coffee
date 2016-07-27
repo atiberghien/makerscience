@@ -3,9 +3,11 @@ module = angular.module("makerscience.projects.services", ['restangular'])
 module.factory("ProjectService", (ProjectSheetTemplate, ProjectSheet, Project, ProjectSheetQuestionAnswer, PostalAddress, BucketRestangular) ->
     return {
 
-        fetchCoverURL: (coverId) ->
-            if coverId
-                return config.media_uri + '/bucket/file/' + coverId + '/thumbnail/?dim=710x390&border=true'
+        fetchCoverURL: (cover) ->
+            if cover
+                if cover.url
+                    return cover.url
+                return config.media_uri + '/bucket/file/' + cover.id + '/thumbnail/?dim=710x390&border=true'
             return "/img/default_project.jpg"
 
         updateProjectSheet: (resources, projectsheet) ->

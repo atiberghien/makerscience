@@ -158,14 +158,16 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
             ProjectService.updateProjectSheet(resources, $scope.projectsheet)
 
         coverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
-        $scope.coverURL = ProjectService.fetchCoverURL(coverId)
+        $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover)
 
         $scope.$on('cover-updated', ()->
+            console.log $scope
             MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
                 $scope.projectsheet = makerScienceProjectResult.objects[0]
-                newCoverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
-                if newCoverId != coverId
-                  $scope.coverURL = ProjectService.fetchCoverURL(newCoverId)
+                if GalleryService.coverId != coverId
+                    coverId = GalleryService.coverId
+                    newCover = if GalleryService.coverId == null then null else $scope.projectsheet.base_projectsheet.cover
+                    $scope.coverURL = ProjectService.fetchCoverURL(newCover)
                 $scope.setMediasToShow()
                 $scope.checkFiles()
             )

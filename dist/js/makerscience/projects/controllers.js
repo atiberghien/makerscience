@@ -171,16 +171,18 @@
         return ProjectService.updateProjectSheet(resources, $scope.projectsheet);
       };
       coverId = $scope.projectsheet.base_projectsheet.cover ? $scope.projectsheet.base_projectsheet.cover.id : null;
-      $scope.coverURL = ProjectService.fetchCoverURL(coverId);
+      $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover);
       $scope.$on('cover-updated', function() {
+        console.log($scope);
         return MakerScienceProject.one().get({
           'parent__slug': $stateParams.slug
         }).then(function(makerScienceProjectResult) {
-          var newCoverId;
+          var newCover;
           $scope.projectsheet = makerScienceProjectResult.objects[0];
-          newCoverId = $scope.projectsheet.base_projectsheet.cover ? $scope.projectsheet.base_projectsheet.cover.id : null;
-          if (newCoverId !== coverId) {
-            $scope.coverURL = ProjectService.fetchCoverURL(newCoverId);
+          if (GalleryService.coverId !== coverId) {
+            coverId = GalleryService.coverId;
+            newCover = GalleryService.coverId === null ? null : $scope.projectsheet.base_projectsheet.cover;
+            $scope.coverURL = ProjectService.fetchCoverURL(newCover);
           }
           $scope.setMediasToShow();
           return $scope.checkFiles();
