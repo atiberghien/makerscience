@@ -47,7 +47,7 @@
           duration: $scope.projectsheet.duration
         };
         return MakerScienceResource.post(makerscienceResourceData).then(function(makerscienceResourceResult) {
-          var promises, x, _i;
+          var isAuthor, promises, x, _i;
           ObjectProfileLink.one().customPOST({
             profile_id: $scope.currentMakerScienceProfile.parent.id,
             level: 10,
@@ -109,12 +109,23 @@
             }, 5000);
           } else {
             promises = [];
+            isAuthor = false;
             angular.forEach($scope.medias, function(media, index) {
               var promise;
-              console.log(media);
               promise = ProjectService.uploadMedia(media, resourcesheetResult.bucket.id, resourcesheetResult.id);
-              return promises.push(promise);
+              promises.push(promise);
+              if (media.is_author) {
+                return isAuthor = true;
+              }
             });
+            if (isAuthor) {
+              ObjectProfileLink.one().customPOST({
+                profile_id: $scope.currentMakerScienceProfile.parent.id,
+                level: 9,
+                detail: "Créateur/Créatrice",
+                isValidated: true
+              }, 'makerscienceresource/' + makerscienceResourceResult.id);
+            }
             return Promise.all(promises).then(function() {
               return $state.go("resource.detail", {
                 slug: makerscienceResourceResult.parent.slug

@@ -248,23 +248,56 @@
                         </section>
 
                     </tab>
-                    <tab ng-if="projectsheet.linked_makersciencepost">
+                    <tab>
                         <tab-heading>
-                            <span ng-show="(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length > 1" data-tooltip="Dont {{(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length}} besoins" tooltip-trigger="manual">
+                            <span ng-show="need_length === 1" data-tooltip="Dont 1 besoin" tooltip-trigger="manual">
                                 Discussions ({{projectsheet.linked_makersciencepost.length}})
                             </span>
-                            <span ng-show="(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length === 1" data-tooltip="Dont {{(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length}} besoin" tooltip-trigger="manual">
+                            <span ng-show="need_length > 1" data-tooltip="Dont {{need_length}} besoins" tooltip-trigger="manual">
                                 Discussions ({{projectsheet.linked_makersciencepost.length}})
                             </span>
-                            <span ng-show="!(projectsheet.linked_makersciencepost | filter: {post_type: 'need'}).length">
+                            <span ng-show="need_length === 0">
                                 Discussions ({{projectsheet.linked_makersciencepost.length}})
                             </span>
                         </tab-heading>
-                        <section>
-                            <div ng-repeat="post in projectsheet.linked_makersciencepost">
-                                <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
-                            </div>
+                        <section  ng-show="editable" class="news-form">
+                            <h3>Nouveau besoin</h3>
+                            <form novalidate class="need-form">
+                                <label for="new-need">Titre du besoin <span class="required">*</span></label>
+                                <input type="text" id="new-need" ng-model="newNeed.title" />
+                                <p ng-show="newNeed.title.$invalid && submitted" class="help-block">Titre du besoin requis</p>
+                                <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Ce titre apparaitra comme titre de discussion sur le forum</p>
+
+                                <label for="">Précisions sur le besoin</label>
+                                <textarea ui-tinymce="tinyMceFullOptions"
+                                  ng-trim="false"
+                                  ng-model="newNeed.text"
+                                  name="project-need"
+                                  placeholder="Décrivez votre besoin le plus précisement possible."
+                                  rows="3">
+                                </textarea>
+
+                                <div class="need-keywords">
+                                    <label>Mots-clés</label>
+                                    <tag-auto-complete model="questionTags" placeholder="Mots clés séparés par une virgule (par exemple : biologie, sciences de l'ingénieur, nanotechnologies)"></tag-auto-complete>
+                                </div>
+
+                                <button ng-hide="needFormSent" type="submit" class="btn btn-primary" ng-click="addNeed(newNeed);questionTags=null">Publier</button>
+
+                                <div ng-show="needFormSent" class="loader-form loader-project">
+                                    <div class="sk-folding-cube">
+                                        <div class="sk-cube1 sk-cube"></div>
+                                        <div class="sk-cube2 sk-cube"></div>
+                                        <div class="sk-cube4 sk-cube"></div>
+                                        <div class="sk-cube3 sk-cube"></div>
+                                    </div>
+                                    <span>Envoi du formulaire en cours</span>
+                                </div>
+                            </form>
                         </section>
+                        <div ng-repeat="post in projectsheet.linked_makersciencepost">
+                            <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
+                        </div>
                     </tab>
                 </tabset>
             </div><!-- #content -->

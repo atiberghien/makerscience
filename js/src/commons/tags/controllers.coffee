@@ -16,6 +16,7 @@ module.controller("TagAutoCompleteCtrl", ($scope, Tag) ->
                         'weight' : tag.weight
                     availableTags.push(tmpTag)
             )
+
             return availableTags
         )
 )

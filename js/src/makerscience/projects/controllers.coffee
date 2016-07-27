@@ -83,39 +83,6 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
     )
 )
 
-module.controller("NewNeedPopupInstanceCtrl",  ($scope, $controller, $modalInstance, projectsheet, MakerScienceProjectLight, MakerSciencePostLight) ->
-
-    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
-    $scope.newNeed = {
-        title : '',
-        text : '',
-        type : 'need'
-    }
-
-
-    $scope.ok = () ->
-        $scope.errors = []
-        if $scope.newNeed.title == ""
-            $scope.errors.push("title")
-        if String($scope.newNeed.text).replace(/<[^>]+>/gm, '') == ""
-            $scope.errors.push("text")
-
-        if $scope.errors.length == 0
-            MakerScienceProjectLight.one(projectsheet.id).get().then((projectResult) ->
-                $scope.newNeed.linked_projects = [projectResult.resource_uri]
-                $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then((postResult)->
-                    MakerSciencePostLight.one(postResult.id).get().then((post)->
-                        post.author = $scope.currentMakerScienceProfile.parent
-                        projectsheet.linked_makersciencepost.push(post)
-                    )
-                )
-            )
-            $modalInstance.close()
-
-    $scope.cancel = () ->
-        $modalInstance.dismiss('cancel')
-)
-
 module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $stateParams, $controller, $filter, $window, $modal, ProjectService, TaggedItemService, GalleryService,
                                                     MakerScienceProject, MakerScienceProjectLight, MakerScienceResource,  MakerSciencePostLight,
                                                     MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress, ProjectNews
@@ -123,6 +90,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
     $controller('VoteCtrl', {$scope: $scope})
     $controller('PostCtrl', {$scope: $scope})
+    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
 
     $scope.openTagPopup = (preparedTags, tagType, editableTag, addTagCallback, removeTagCallback) ->
       TaggedItemService.openTagPopup(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)
@@ -218,6 +186,8 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
 
+        $scope.need_length = $filter('filter')($scope.projectsheet.linked_makersciencepost, {post_type: 'need'}).length
+
         angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostResult) ->
             $scope.getPostAuthor(makerSciencePostResult.parent_id).then((author) ->
                 makerSciencePostResult.author = author
@@ -247,14 +217,32 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 $window.tinymce.activeEditor.setContent('')
             )
 
-        $scope.openNewNeedPopup = () ->
-            modalInstance = $modal.open(
-                templateUrl: '/views/block/newNeedPopup.html'
-                controller: 'NewNeedPopupInstanceCtrl'
-                resolve:
-                    projectsheet: ->
-                        return $scope.projectsheet
-            )
+        $scope.newNeed = {
+            title : '',
+            text : '',
+            type : 'need'
+        }
+        $scope.needFormSent = false
+
+        $scope.addNeed = () ->
+            $scope.needFormSent = true
+            $scope.errors = []
+            if $scope.newNeed.title == ""
+                $scope.errors.push("title")
+            if String($scope.newNeed.text).replace(/<[^>]+>/gm, '') == ""
+                $scope.errors.push("text")
+
+            if $scope.errors.length == 0
+                MakerScienceProjectLight.one($scope.projectsheet.id).get().then((projectResult) ->
+                    $scope.newNeed.linked_projects = [projectResult.resource_uri]
+                    $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then((postResult)->
+                        MakerSciencePostLight.one(postResult.id).get().then((post)->
+                            post.author = $scope.currentMakerScienceProfile.parent
+                            $scope.projectsheet.linked_makersciencepost.push(post)
+                            $scope.needFormSent = false
+                        )
+                    )
+                )
 
         $scope.deleteNews = (news) ->
             ProjectNews.one(news.id).remove().then(->

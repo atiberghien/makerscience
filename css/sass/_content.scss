@@ -196,7 +196,7 @@ div.toolbar {
             margin-bottom: 1em;
             white-space: normal;
         }
-        ul {
+        ul:not(.tag-list) {
             margin-bottom: 1em;
             margin-left: 1em;
         }
@@ -840,6 +840,13 @@ div.toolbar {
         //.needs-financing { background-image: url('../img/needs/needs-financing.png'); }
         //.needs-hardware { background-image: url('../img/needs/needs-hardware.png'); }
         //.needs-skills { background-image: url('../img/needs/needs-skills.png'); }
+    }
+    .need-form {
+      .help {
+				margin-top: 0.25em;
+				font-style: italic;
+				color: $color-crumbs-grey;
+			}
     }
     .interested {
         display: table;

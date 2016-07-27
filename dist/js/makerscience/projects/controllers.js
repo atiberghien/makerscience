@@ -86,41 +86,6 @@
     });
   });
 
-  module.controller("NewNeedPopupInstanceCtrl", function($scope, $controller, $modalInstance, projectsheet, MakerScienceProjectLight, MakerSciencePostLight) {
-    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {
-      $scope: $scope
-    }));
-    $scope.newNeed = {
-      title: '',
-      text: '',
-      type: 'need'
-    };
-    $scope.ok = function() {
-      $scope.errors = [];
-      if ($scope.newNeed.title === "") {
-        $scope.errors.push("title");
-      }
-      if (String($scope.newNeed.text).replace(/<[^>]+>/gm, '') === "") {
-        $scope.errors.push("text");
-      }
-      if ($scope.errors.length === 0) {
-        MakerScienceProjectLight.one(projectsheet.id).get().then(function(projectResult) {
-          $scope.newNeed.linked_projects = [projectResult.resource_uri];
-          return $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then(function(postResult) {
-            return MakerSciencePostLight.one(postResult.id).get().then(function(post) {
-              post.author = $scope.currentMakerScienceProfile.parent;
-              return projectsheet.linked_makersciencepost.push(post);
-            });
-          });
-        });
-        return $modalInstance.close();
-      }
-    };
-    return $scope.cancel = function() {
-      return $modalInstance.dismiss('cancel');
-    };
-  });
-
   module.controller("MakerScienceProjectSheetCtrl", function($rootScope, $scope, $stateParams, $controller, $filter, $window, $modal, ProjectService, TaggedItemService, GalleryService, MakerScienceProject, MakerScienceProjectLight, MakerScienceResource, MakerSciencePostLight, MakerScienceProjectTaggedItem, TaggedItem, ProjectProgress, ProjectNews, Comment, ObjectProfileLink, DataSharing) {
     $controller('VoteCtrl', {
       $scope: $scope
@@ -128,6 +93,9 @@
     $controller('PostCtrl', {
       $scope: $scope
     });
+    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {
+      $scope: $scope
+    }));
     $scope.openTagPopup = function(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback) {
       return TaggedItemService.openTagPopup(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback);
     };
@@ -248,6 +216,9 @@
             });
         }
       });
+      $scope.need_length = $filter('filter')($scope.projectsheet.linked_makersciencepost, {
+        post_type: 'need'
+      }).length;
       angular.forEach($scope.projectsheet.linked_makersciencepost, function(makerSciencePostResult) {
         $scope.getPostAuthor(makerSciencePostResult.parent_id).then(function(author) {
           return makerSciencePostResult.author = author;
@@ -277,17 +248,33 @@
           return $window.tinymce.activeEditor.setContent('');
         });
       };
-      $scope.openNewNeedPopup = function() {
-        var modalInstance;
-        return modalInstance = $modal.open({
-          templateUrl: '/views/block/newNeedPopup.html',
-          controller: 'NewNeedPopupInstanceCtrl',
-          resolve: {
-            projectsheet: function() {
-              return $scope.projectsheet;
-            }
-          }
-        });
+      $scope.newNeed = {
+        title: '',
+        text: '',
+        type: 'need'
+      };
+      $scope.needFormSent = false;
+      $scope.addNeed = function() {
+        $scope.needFormSent = true;
+        $scope.errors = [];
+        if ($scope.newNeed.title === "") {
+          $scope.errors.push("title");
+        }
+        if (String($scope.newNeed.text).replace(/<[^>]+>/gm, '') === "") {
+          $scope.errors.push("text");
+        }
+        if ($scope.errors.length === 0) {
+          return MakerScienceProjectLight.one($scope.projectsheet.id).get().then(function(projectResult) {
+            $scope.newNeed.linked_projects = [projectResult.resource_uri];
+            return $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then(function(postResult) {
+              return MakerSciencePostLight.one(postResult.id).get().then(function(post) {
+                post.author = $scope.currentMakerScienceProfile.parent;
+                $scope.projectsheet.linked_makersciencepost.push(post);
+                return $scope.needFormSent = false;
+              });
+            });
+          });
+        }
       };
       $scope.deleteNews = function(news) {
         return ProjectNews.one(news.id).remove().then(function() {

@@ -102,12 +102,22 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     ,5000)
                 else
                     promises = []
+                    isAuthor = false
 
                     angular.forEach($scope.medias, (media, index) ->
-                        console.log media
                         promise = ProjectService.uploadMedia(media, resourcesheetResult.bucket.id, resourcesheetResult.id)
                         promises.push(promise)
+                        if media.is_author
+                            isAuthor = true
                     )
+
+                    if isAuthor
+                        ObjectProfileLink.one().customPOST(
+                            profile_id: $scope.currentMakerScienceProfile.parent.id,
+                            level: 9,
+                            detail : "Créateur/Créatrice",
+                            isValidated:true
+                        , 'makerscienceresource/'+makerscienceResourceResult.id)
 
                     Promise.all(promises).then(() ->
                         $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
