@@ -159,20 +159,19 @@
             promises = [];
             angular.forEach($scope.medias, function(media, index) {
               var promise;
-              console.log(media);
-              promise = ProjectService.uploadMedia(media, projectsheetResult.bucket.id, projectsheetResult.id).then(function(res) {
-                return console.log(res);
-              })["catch"](function(err) {
-                return console.log(err);
+              promise = new Promise(function(resolve, reject) {
+                return ProjectService.uploadMedia(media, projectsheetResult.bucket.id, projectsheetResult.id).then(function(res) {
+                  if ($scope.coverId === media.id) {
+                    ProjectSheet.one(projectsheetResult.id).patch({
+                      cover: res.resource_uri
+                    });
+                  }
+                  return resolve(res);
+                })["catch"](function(err) {
+                  return reject(err);
+                });
               });
-              promises.push(promise);
-              return promise.then(function(res) {
-                if ($scope.coverId === media.id) {
-                  return ProjectSheet.one(projectsheetResult.id).patch({
-                    cover: res.resource_uri
-                  });
-                }
-              });
+              return promises.push(promise);
             });
             return Promise.all(promises).then(function() {
               return $state.go("project.detail", {
