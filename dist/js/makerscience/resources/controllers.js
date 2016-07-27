@@ -102,7 +102,6 @@
     MakerScienceResource.one().get({
       'parent__slug': $stateParams.slug
     }).then(function(makerScienceResourceResult) {
-      var coverId;
       $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0];
       $scope.objectId = $scope.projectsheet.id;
       $scope.editable = $scope.projectsheet.can_edit;
@@ -161,9 +160,7 @@
           }
         });
         return modalInstance.result.then(function(result) {
-          var coverId;
           $scope.projectsheet.base_projectsheet.cover = result;
-          coverId = $scope.projectsheet.base_projectsheet.cover ? $scope.projectsheet.base_projectsheet.cover.id : null;
           return $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover);
         });
       };
@@ -177,8 +174,7 @@
         };
         return ProjectService.updateProjectSheet(resources, $scope.projectsheet);
       };
-      coverId = $scope.projectsheet.base_projectsheet.cover ? $scope.projectsheet.base_projectsheet.cover.id : null;
-      $scope.coverURL = ProjectService.fetchCoverURL(coverId);
+      $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover);
       $scope.$on('cover-updated', function() {
         return MakerScienceResource.one().get({
           'parent__slug': $stateParams.slug

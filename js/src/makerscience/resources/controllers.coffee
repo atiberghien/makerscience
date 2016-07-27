@@ -140,7 +140,6 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
             )
             modalInstance.result.then((result)->
                 $scope.projectsheet.base_projectsheet.cover = result
-                coverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
                 $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover)
             )
 
@@ -153,8 +152,7 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
             }
             ProjectService.updateProjectSheet(resources, $scope.projectsheet)
 
-        coverId = if $scope.projectsheet.base_projectsheet.cover then $scope.projectsheet.base_projectsheet.cover.id else null
-        $scope.coverURL = ProjectService.fetchCoverURL(coverId)
+        $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover)
 
         $scope.$on('cover-updated', ()->
             MakerScienceResource.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceResourceResult) ->
