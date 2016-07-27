@@ -90,11 +90,16 @@
               }, 'taggeditem/' + taggedItemResult.id);
             });
           });
-          if ($scope.resourceCover) {
+          console.log($scope.resourceCover);
+          if ($scope.resourceCover.file) {
             ProjectService.uploadMedia($scope.resourceCover, resourcesheetResult.bucket.id, resourcesheetResult.id).then(function(res) {
               return ProjectSheet.one(resourcesheetResult.id).patch({
                 cover: res.resource_uri
               });
+            });
+          } else {
+            ProjectSheet.one(resourcesheetResult.id).patch({
+              cover: null
             });
           }
           if (_.size($scope.medias) === 0) {

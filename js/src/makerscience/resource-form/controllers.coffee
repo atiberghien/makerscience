@@ -84,10 +84,15 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
                 )
 
-                if $scope.resourceCover
+                console.log $scope.resourceCover
+
+                if $scope.resourceCover.file
                     ProjectService.uploadMedia($scope.resourceCover, resourcesheetResult.bucket.id, resourcesheetResult.id).then((res) ->
                         ProjectSheet.one(resourcesheetResult.id).patch({cover: res.resource_uri})
                       )
+
+                else
+                    ProjectSheet.one(resourcesheetResult.id).patch({cover: null})
 
 
                 # if no photos to upload, directly go to new project sheet
