@@ -161,7 +161,6 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
         $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover)
 
         $scope.$on('cover-updated', ()->
-            console.log $scope
             MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
                 $scope.projectsheet = makerScienceProjectResult.objects[0]
                 if GalleryService.coverId != coverId

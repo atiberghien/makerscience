@@ -164,7 +164,7 @@
           var coverId;
           $scope.projectsheet.base_projectsheet.cover = result;
           coverId = $scope.projectsheet.base_projectsheet.cover ? $scope.projectsheet.base_projectsheet.cover.id : null;
-          return $scope.coverURL = ProjectService.fetchCoverURL(coverId);
+          return $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover);
         });
       };
       $scope.updateProjectSheet = function(resourceName, resourceId, fieldName, data) {

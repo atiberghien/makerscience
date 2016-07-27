@@ -173,7 +173,6 @@
       coverId = $scope.projectsheet.base_projectsheet.cover ? $scope.projectsheet.base_projectsheet.cover.id : null;
       $scope.coverURL = ProjectService.fetchCoverURL($scope.projectsheet.base_projectsheet.cover);
       $scope.$on('cover-updated', function() {
-        console.log($scope);
         return MakerScienceProject.one().get({
           'parent__slug': $stateParams.slug
         }).then(function(makerScienceProjectResult) {
