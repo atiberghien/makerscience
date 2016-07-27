@@ -11226,11 +11226,6 @@ div.toolbar.toolbar-profile form button {
   margin-bottom: 1em;
   white-space: normal;
 }
-/* line 199, sass/_content.scss */
-#content div.tab-content ul:not(.tag-list) {
-  margin-bottom: 1em;
-  margin-left: 1em;
-}
 /* line 205, sass/_content.scss */
 #content.content-dashboard .tab-content {
   margin-bottom: 30px;
@@ -11732,7 +11727,7 @@ div.toolbar.toolbar-profile form button {
   padding-bottom: 0;
 }
 /* line 639, sass/_content.scss */
-#content section:nth-child(even) {
+#content section:nth-child(even):not(.news-form) {
   background-color: #e8e8e8;
 }
 /* line 643, sass/_content.scss */

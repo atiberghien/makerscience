@@ -260,13 +260,20 @@
                                 Discussions ({{projectsheet.linked_makersciencepost.length}})
                             </span>
                         </tab-heading>
+                        <div ng-repeat="post in projectsheet.linked_makersciencepost">
+                            <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
+                        </div>
                         <section  ng-show="editable" class="news-form">
                             <h3>Nouveau besoin</h3>
-                            <form novalidate class="need-form">
+                            <form
+                                novalidate
+                                ng-init="submitted=true"
+                                ng-class="{ 'has-error' : newNeedErrors.length !== 0  && submitted }"
+                                class="need-form">
                                 <label for="new-need">Titre du besoin <span class="required">*</span></label>
-                                <input type="text" id="new-need" ng-model="newNeed.title" />
-                                <p ng-show="newNeed.title.$invalid && submitted" class="help-block">Titre du besoin requis</p>
+                                <input type="text" id="new-need" name="title" ng-model="newNeed.title" required />
                                 <p class="help"><span class="glyphicon glyphicon-info-sign"></span> Ce titre apparaitra comme titre de discussion sur le forum</p>
+                                <p ng-show="newNeedErrors.indexOf('title') !== -1 && submitted" class="help-block">Titre du besoin requis</p>
 
                                 <label for="">Précisions sur le besoin</label>
                                 <textarea ui-tinymce="tinyMceFullOptions"
@@ -276,6 +283,7 @@
                                   placeholder="Décrivez votre besoin le plus précisement possible."
                                   rows="3">
                                 </textarea>
+                                <p ng-show="newNeedErrors.indexOf('text') !== -1 && submitted" class="help-block">Description du besoin requis</p>
 
                                 <div class="need-keywords">
                                     <label>Mots-clés</label>
@@ -295,9 +303,6 @@
                                 </div>
                             </form>
                         </section>
-                        <div ng-repeat="post in projectsheet.linked_makersciencepost">
-                            <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
-                        </div>
                     </tab>
                 </tabset>
             </div><!-- #content -->

@@ -255,23 +255,31 @@
         type: 'need'
       };
       $scope.needFormSent = false;
+      $scope.newNeedErrors = [];
       $scope.addNeed = function() {
-        $scope.needFormSent = true;
-        $scope.errors = [];
+        $scope.submitted = true;
+        $scope.newNeedErrors = [];
         if ($scope.newNeed.title === "") {
-          $scope.errors.push("title");
+          $scope.newNeedErrors.push("title");
         }
         if (String($scope.newNeed.text).replace(/<[^>]+>/gm, '') === "") {
-          $scope.errors.push("text");
+          $scope.newNeedErrors.push("text");
         }
-        if ($scope.errors.length === 0) {
+        if ($scope.newNeedErrors.length === 0) {
+          $scope.needFormSent = true;
           return MakerScienceProjectLight.one($scope.projectsheet.id).get().then(function(projectResult) {
             $scope.newNeed.linked_projects = [projectResult.resource_uri];
             return $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then(function(postResult) {
               return MakerSciencePostLight.one(postResult.id).get().then(function(post) {
                 post.author = $scope.currentMakerScienceProfile.parent;
                 $scope.projectsheet.linked_makersciencepost.push(post);
-                return $scope.needFormSent = false;
+                $scope.needFormSent = false;
+                $scope.newNeed = {
+                  title: '',
+                  text: '',
+                  type: 'need'
+                };
+                return $window.tinymce.editors[1].setContent('');
               });
             });
           });

@@ -196,10 +196,10 @@ div.toolbar {
             margin-bottom: 1em;
             white-space: normal;
         }
-        ul:not(.tag-list) {
-            margin-bottom: 1em;
-            margin-left: 1em;
-        }
+        // ul:not(.tag-list) {
+        //     margin-bottom: 1em;
+        //     margin-left: 1em;
+        // }
     }
     &.content-dashboard {
         .tab-content {
@@ -636,7 +636,7 @@ div.toolbar {
           }
         }
     }
-    section:nth-child(even) {
+    section:nth-child(even):not(.news-form) {
         background-color: $color-content-section-bg-even;
     }
 

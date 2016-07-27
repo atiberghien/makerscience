@@ -224,16 +224,19 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
             type : 'need'
         }
         $scope.needFormSent = false
+        $scope.newNeedErrors = []
 
         $scope.addNeed = () ->
-            $scope.needFormSent = true
-            $scope.errors = []
-            if $scope.newNeed.title == ""
-                $scope.errors.push("title")
-            if String($scope.newNeed.text).replace(/<[^>]+>/gm, '') == ""
-                $scope.errors.push("text")
+            $scope.submitted = true
+            $scope.newNeedErrors = []
 
-            if $scope.errors.length == 0
+            if $scope.newNeed.title == ""
+                $scope.newNeedErrors.push("title")
+            if String($scope.newNeed.text).replace(/<[^>]+>/gm, '') == ""
+                $scope.newNeedErrors.push("text")
+
+            if $scope.newNeedErrors.length == 0
+                $scope.needFormSent = true
                 MakerScienceProjectLight.one($scope.projectsheet.id).get().then((projectResult) ->
                     $scope.newNeed.linked_projects = [projectResult.resource_uri]
                     $scope.saveMakersciencePost($scope.newNeed, null, $scope.currentMakerScienceProfile.parent).then((postResult)->
@@ -241,6 +244,13 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                             post.author = $scope.currentMakerScienceProfile.parent
                             $scope.projectsheet.linked_makersciencepost.push(post)
                             $scope.needFormSent = false
+
+                            $scope.newNeed = {
+                                title : '',
+                                text : '',
+                                type : 'need'
+                            }
+                            $window.tinymce.editors[1].setContent('')
                         )
                     )
                 )
