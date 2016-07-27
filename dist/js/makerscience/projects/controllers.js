@@ -176,12 +176,10 @@
         return MakerScienceProject.one().get({
           'parent__slug': $stateParams.slug
         }).then(function(makerScienceProjectResult) {
-          var newCover;
           $scope.projectsheet = makerScienceProjectResult.objects[0];
           if (GalleryService.coverId !== coverId) {
-            coverId = GalleryService.coverId;
-            newCover = GalleryService.coverId === null ? null : $scope.projectsheet.base_projectsheet.cover;
-            $scope.coverURL = ProjectService.fetchCoverURL(newCover);
+            coverId = GalleryService.coverId === null ? null : $scope.projectsheet.base_projectsheet.cover;
+            $scope.coverURL = ProjectService.fetchCoverURL(coverId);
           }
           $scope.setMediasToShow();
           return $scope.checkFiles();

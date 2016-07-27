@@ -158,15 +158,29 @@
         promises = [];
         angular.forEach($scope.medias, function(media, index) {
           var promise;
-          promise = ProjectService.uploadMedia(media, $scope.projectsheet.bucket.id, $scope.projectsheet.id);
-          promises.push(promise);
-          return promise.then(function(res) {
-            if ($scope.coverId === media.id) {
-              return ProjectSheet.one($scope.projectsheet.id).patch({
-                cover: res.resource_uri
-              });
-            }
+          promise = new Promise(function(resolve, reject) {
+            return ProjectService.uploadMedia(media, $scope.projectsheet.bucket.id, $scope.projectsheet.id).then(function(res) {
+              if ($scope.coverId === void 0 && parseInt(GalleryService.coverId) === index + 1) {
+                ProjectSheet.one($scope.projectsheet.id).patch({
+                  cover: res.resource_uri
+                }).then(function() {
+                  return resolve();
+                })["catch"](function() {
+                  return reject();
+                });
+              }
+              if ($scope.coverId === media.id) {
+                return ProjectSheet.one($scope.projectsheet.id).patch({
+                  cover: res.resource_uri
+                }).then(function() {
+                  return resolve();
+                })["catch"](function() {
+                  return reject();
+                });
+              }
+            });
           });
+          return promises.push(promise);
         });
         return Promise.all(promises).then(function() {
           return $modalInstance.close($scope.projectsheet);
