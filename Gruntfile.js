@@ -210,5 +210,5 @@ module.exports = function(grunt) {
     grunt.registerTask('dist', ['clean:dist', 'copy:dist']);
     grunt.registerTask('stage', ['compile', 'dist', 'rsync:staging'])
     grunt.registerTask('prod', ['shell:prod', "compile", 'dist', 'rsync:prod'])
-    grunt.registerTask('preprod', ['clean:dist', 'compass:prod', 'wiredep', 'coffee', 'dist'])
+    grunt.registerTask('preprod', ['clean:dist', 'compass:prod', 'wiredep', 'coffee', 'copy:dist'])
 };
