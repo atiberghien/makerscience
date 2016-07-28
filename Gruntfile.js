@@ -205,7 +205,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks("grunt-rsync");
 
-    grunt.registerTask('compile', ['compass:dev', 'wiredep', 'coffee']);
+    grunt.registerTask('compile', ['compass:prod', 'wiredep', 'coffee']);
     grunt.registerTask('default', ['compass:dev', 'wiredep', 'coffee', 'concurrent:run']);
     grunt.registerTask('dist', ['clean:dist', 'copy:dist']);
     grunt.registerTask('stage', ['compile', 'dist', 'rsync:staging'])
