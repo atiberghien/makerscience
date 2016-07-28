@@ -90,7 +90,6 @@
               }, 'taggeditem/' + taggedItemResult.id);
             });
           });
-          console.log($scope.resourceCover);
           if ($scope.resourceCover.file) {
             ProjectService.uploadMedia($scope.resourceCover, resourcesheetResult.bucket.id, resourcesheetResult.id).then(function(res) {
               return ProjectSheet.one(resourcesheetResult.id).patch({

@@ -100,7 +100,6 @@ module.controller("MakerScienceResourceSheetCtrl", ($rootScope, $scope, $statePa
         $scope.objectId = $scope.projectsheet.id
         $scope.editable = $scope.projectsheet.can_edit
 
-        console.log $scope.projectsheet
         $scope.getFilterMedias = () ->
             $scope.mediasToShow = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {type: '!cover'})
             $scope.filteredByAuthor = $filter('filter')($scope.mediasToShow, {is_author: true, type: '!experience'})

@@ -85,7 +85,6 @@
       User.one().get({
         email: $scope.email
       }).then(function(userResults) {
-        console.log(userResults.objects.length);
         if (userResults.objects.length > 0) {
           return $scope.emailError = true;
         }

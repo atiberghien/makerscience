@@ -78,7 +78,6 @@ module.controller('SignupPopupCtrl', ($scope, $rootScope, $modalInstance, $state
             $scope.passwordError = true
 
         User.one().get({email : $scope.email}).then((userResults)->
-            console.log(userResults.objects.length)
             if userResults.objects.length > 0
                 $scope.emailError = true
         )

@@ -84,8 +84,6 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
                 )
 
-                console.log $scope.resourceCover
-
                 if $scope.resourceCover.file
                     ProjectService.uploadMedia($scope.resourceCover, resourcesheetResult.bucket.id, resourcesheetResult.id).then((res) ->
                         ProjectSheet.one(resourcesheetResult.id).patch({cover: res.resource_uri})

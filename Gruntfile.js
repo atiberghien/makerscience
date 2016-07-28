@@ -89,6 +89,18 @@ module.exports = function(grunt) {
                     ],
                 }
             },
+            prod: {
+                options: {
+                    environment: 'production',
+                    outputStyle: 'compressed',
+                    sassDir: 'css/sass',
+                    cssDir: 'css',
+                    importPath : [
+                        "bower_components/bootstrap-sass/assets/stylesheets",
+                        "bower_components/font-awesome"
+                    ],
+                }
+            }
         },
         coffee: {
             dist: {
@@ -152,7 +164,7 @@ module.exports = function(grunt) {
           },
         },
         clean: {
-          dist: ["dist/"],
+          dist: ["css/*.css", "dist/"],
         },
         rsync: {
             options: {
@@ -198,4 +210,5 @@ module.exports = function(grunt) {
     grunt.registerTask('dist', ['clean:dist', 'copy:dist']);
     grunt.registerTask('stage', ['compile', 'dist', 'rsync:staging'])
     grunt.registerTask('prod', ['shell:prod', "compile", 'dist', 'rsync:prod'])
+    grunt.registerTask('preprod', ['clean:dist', 'compass:prod', 'wiredep', 'coffee', 'dist'])
 };

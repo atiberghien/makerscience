@@ -105,7 +105,6 @@
       $scope.projectsheet = $scope.resourcesheet = makerScienceResourceResult.objects[0];
       $scope.objectId = $scope.projectsheet.id;
       $scope.editable = $scope.projectsheet.can_edit;
-      console.log($scope.projectsheet);
       $scope.getFilterMedias = function() {
         $scope.mediasToShow = $filter('filter')($scope.projectsheet.base_projectsheet.bucket.files, {
           type: '!cover'
