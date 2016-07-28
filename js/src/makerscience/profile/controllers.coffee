@@ -1,4 +1,4 @@
-module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'makerscience.base.services',
+module = angular.module("makerscience.profile.controllers", ['makerscience.profile.services', 'makerscience.base.services', 'commons.tags.services',
                                                              'commons.accounts.services', 'makerscience.base.controllers'])
 
 module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScienceProfileLight, MakerScienceProfileTaggedItem) ->
@@ -126,15 +126,17 @@ module.controller('SocialsEditInstanceCtrl', ($scope, $modalInstance, MakerScien
         $modalInstance.dismiss('cancel')
 )
 
-module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal,
+module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $stateParams,$state, $modal, TaggedItemService,
                                             MakerScienceProfile, MakerScienceProfileLight,
                                             MakerScienceProjectLight, MakerScienceResourceLight,
                                             MakerSciencePost, MakerSciencePostLight,
                                             MakerScienceProfileTaggedItem, TaggedItem,Tag, Post, ObjectProfileLink, PostalAddress) ->
 
     angular.extend(this, $controller('MakerScienceObjectGetter', {$scope: $scope}))
-    angular.extend(this, $controller('TaggedItemCtrl', {$scope: $scope}))
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
+
+    $scope.openTagPopup = (preparedTags, tagType, editableTag, addTagCallback, removeTagCallback) ->
+      TaggedItemService.openTagPopup(preparedTags, tagType, editableTag, addTagCallback, removeTagCallback)
 
     MakerScienceProfile.one($stateParams.slug).get().then((makerscienceProfileResult) ->
 

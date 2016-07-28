@@ -1,0 +1,66 @@
+<div id="intro" class="intro-project-list">
+    <h1>Découvrez de nombreux projets</h1>
+    <h2>enthousiasmants et inspirants</h1>
+</div><!-- #intro -->
+
+<div class="row container">
+
+    <div id="content" class="listing">
+
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-9">
+                    <tabset class="nav-tabs-listing">
+                        <tab heading="Les plus récents" ng-click="fetchRecentProjects()"></tab>
+                        <tab heading="Les plus populaires" ng-click="fetchTopProjects()"></tab>
+                        <tab heading="Sélection thématique" ng-click="fetchThematicProjects()">
+                            <h1 class="thematic">
+                                <ng-pluralize count="selected_themes.length" when="{'0': 'Thème à la Une', 'one': 'Thème à la Une', 'other': 'Thèmes à la Une'}"></ng-pluralize>:
+                                <span ng-repeat="theme in selected_themes">
+                                    <a ui-sref="tag({slug:theme.slug})">{{theme.name}}</a>
+                                    <span ng-if="!$last">, </span>
+                                </span>
+                                <span ng-if="selected_themes.length == 0">Aucun</span>
+                            </h1>
+                        </tab>
+                        <tab heading="Au hasard" ng-click="fetchRandomProjects()"></tab>
+                    </tabset>
+                    <div class="boxes boxes-listing">
+                        <div class="box" ng-repeat="project in projects">
+                            <ng-include src="'/views/block/project_thumb_light.html'"></ng-include>
+                        </div>
+                    </div>
+                    <div ng-show="projects.length > 0">
+                    <pagination total-items="totalItems"
+                                items-per-page='limit'
+                                ng-model="currentPage"
+                                max-size="10"
+                                class="pagination-sm pagination-projects"
+                                rotate="false"
+                                num-pages="numPages"
+                                ng-change="pageChanged(currentPage)"
+                                previous-text="<<"
+                                next-text=">>">
+                    </pagination>
+                    </div>
+                    <div ng-show="projects.length == 0 && !waitingList">
+                        Aucun projet ne correspond à votre recherche.
+                    </div>
+                    <div ng-show="waitingList">
+                        En attente de résultat ...
+                    </div>
+                    <a ui-sref="project.form" class="large large-red">
+                        Créer un projet
+                        <i class="fa fa-lock" ng-show="!authVars.isAuthenticated"></i>
+                        <img src="/img/smiley.png" class="smiley" alt="Smiley" />
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <ng-include src="'/views/block/filters_project.html'" ng-init="objectType='makerscienceproject'" ></ng-include>
+                </div>
+            </div>
+        </div><!-- .col-md-12 -->
+
+    </div><!-- #content -->
+
+</div><!-- .row .container -->

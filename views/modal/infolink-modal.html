@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h3 class="modal-title">Ajouter des infos depuis un lien</h3>
+</div>
+<div class="modal-body modal-gallery">
+    <ng-form
+        novalidate
+        ng-init="submitted=false"
+        name="infoLinkForm"
+        class="info-link-form"
+        ng-class="{ 'has-error' : infoLinkForm.$invalid && submitted }">
+        <fieldset>
+            <label for="infolink">Lien vers le site web</label>
+            <input id="infolink" name="infolink" ng-model="infolink" type="text" required>
+            <p ng-show="infoLinkForm.infolink.$pristine && submitted" class="help-block">Lien vers le site requis</p>
+            <p ng-show="infoLinkForm.infolink.$error.format && submitted" class="help-block">Lien non valide</p>
+        </fieldset>
+    </ng-form>
+
+    <div ng-show="hideControls" class="loader-form loader-project">
+        <div class="sk-folding-cube">
+            <div class="sk-cube1 sk-cube"></div>
+            <div class="sk-cube2 sk-cube"></div>
+            <div class="sk-cube4 sk-cube"></div>
+            <div class="sk-cube3 sk-cube"></div>
+        </div>
+        <span>Récupération des données</span>
+    </div>
+</div>
+
+<div class="modal-footer" ng-hide="hideControls">
+    <button class="btn btn-warning btn-lg" ng-click="close()">Fermer</button>
+    <button class="btn btn-primary btn-lg" ng-click="submitted=true;ok(infoLinkForm.infolink)">Valider</button>
+</div>

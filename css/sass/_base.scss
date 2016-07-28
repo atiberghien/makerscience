@@ -71,9 +71,16 @@ button.button {
 	&:hover {
 		background-color: $color-dark-blue;
 	}
-	&.button-resource {
-		background-color: $color-resource;
-	}
+}
+
+.button-resource {
+	background-color: $color-resource;
+	border-color: $color-resource;
+}
+
+.btn-warning:hover {
+	border-color: transparent;
+	color: $color-red;
 }
 
 h2.boxed {
@@ -143,17 +150,17 @@ ul.actions {
 	}
 	a, button {
 		display: inline-block;
-		padding: 1.25em 1em 0.25em 1em;
-		font-size: 0.7em;
-		line-height: 3em;
+		padding: 1em 0.75em 0 0.75em;
+		font-size: 0.9em;
+		line-height: 2.5em;
 		color: $color-sidebar-action;
 		background-color: $color-sidebar-action-bg;
 		text-align: center;
-		text-transform: uppercase;
+		// text-transform: uppercase;
 		border: none;
 		span {
 			display: block;
-			font-size: 2em;
+			font-size: 1.75em;
 		}
 		.solo {
 			font-size: 2em !important;
@@ -355,15 +362,36 @@ ul.pagination {
 	}
 }
 
-#socialshare {
+.socialshare {
 	position: fixed;
 	top: 14em;
 	left: 50%;
+	margin-left: - $page-width / 2 - 50px;
 	font-size: 3em;
-	ul {
-		margin-left: - $page-width / 2 - 50px;
+	display: block;
+	overflow: hidden;
+	li {
+		background-color: white !important;
+		border-radius: 11px !important;
+		margin-bottom: 8px !important;
+		text-align: center;
+		width: 40px;
+		height: 40px;
+		font-size: 24px;
+		line-height: 40px;
+		a {
+			display: block;
+		}
+		.fa-google-plus {
+			font-size: 20px;
+			vertical-align: middle;
+			display: inline-block;
+			height: 40px;
+			line-height: 35px;
+		}
 	}
 }
+
 
 .ta-editor div {
 	ul, ol {

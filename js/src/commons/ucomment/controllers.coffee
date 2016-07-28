@@ -8,14 +8,9 @@ module.controller("CommentCtrl", ($scope, $rootScope, Comment, Profile, ObjectPr
     $scope.newcommentForm =
         text: ""
 
-    $scope.initCommentCtrl = (objectTypeName, objectID) ->
-        $scope.commentedObjectTypeName = objectTypeName
-        $scope.commentedObjectID = objectID
-        console.log($scope.commentedObjectTypeName, $scope.commentedObjectID)
-        $scope.refreshComments()
-
-    $scope.refreshComments = (objectTypeName, objectId) ->
-        $scope.comments = Comment.one().customGETLIST($scope.commentedObjectTypeName+'/'+$scope.commentedObjectID).$object
+    $scope.commentedObjectTypeName = $scope.objectTypeName
+    $scope.commentedObjectID = $scope.objectId
+    $scope.comments = Comment.one().customGETLIST($scope.commentedObjectTypeName+'/'+$scope.commentedObjectID).$object
 
     $scope.isCommentAuthor = (comment)->
         """

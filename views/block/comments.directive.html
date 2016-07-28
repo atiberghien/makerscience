@@ -1,0 +1,57 @@
+ <div>
+    <section class="comments comments-container">
+
+        <ul class="actions">
+            <li><a ng-click="commenting = !commenting"><span class="glyphicon glyphicon-comment"></span>Commenter</a></li>
+        </ul>
+        <h3>Commentaires</h3>
+        <p>Partagez vos questions, vos avis, vos pistes d'améliorations</p>
+        <!-- When adding a comment -->
+        <div>
+            <div class="comment" ng-repeat="comment in comments| orderBy:'-submit_date' | limitTo :  5" ng-class="{'flagged' : comment.flags[0]}">
+                <div class="comment-gravatar">
+                    <span class="avatar avatar40">
+                        <a ui-sref="profile.detail({slug:comment.user.profile.id})">
+                            <img ng-show="comment.user.profile.avatar" src="{{comment.user.profile.avatar}}" class="profile img-circle">
+                            <img ng-hide="comment.user.profile.avatar" src="/img/avatar.png" class="profile img-circle">
+                        </a>
+                    </span>
+                </div>
+                <div class="comment-content">
+                    <div class="btn-group" dropdown is-open="isopen" ng-if="$root.authVars.isAuthenticated">
+                        <button type="button" class="btn dropdown-toggle" dropdown-toggle>
+                            <span class="glyphicon glyphicon-option-vertical"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <!-- <li><a href="">Modifier</a></li> -->
+                            <li ng-if="isCommentAuthor(comment)"><a href="" ng-click="removeComment($index)">Supprimer</a></li>
+                            <li>
+                                <a report-abuse href="" ng-click="showReportAbusePopup(location.protocol() + '://' + location.host() + '' + location.path())">Signaler un abus</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <p class="comment-author">
+                        <a ui-sref="profile.detail({slug:comment.user.profile.id})">{{comment.user.first_name}} <strong>{{comment.user.last_name}}</strong></a>
+                    </p>
+                    <p style="word-wrap: break-word;">{{comment.comment}}</p>
+                </div>
+                <div class="comment-date">
+                    <span class="date" am-time-ago="comment.submit_date"></span>
+                </div>
+            </div><!-- .comment -->
+        </div>
+        <section class="comments comments-add" ng-show="commenting">
+            <form id="commentform">
+                <fieldset>
+                    <!-- <input type="text" ng-model="newcommentForm.text" name="comment" placeholder="Ajouter un commentaire" required/> -->
+                    <textarea name="comment" ng-model="newcommentForm.text" form="commentform" placeholder="Rédiger votre commentaire..."></textarea>
+                    <button class="btn btn-primary button-{{parentColor}}" type="submit" ng-click="postComment(commentType)" name="send">Commenter</button>
+                    <button class="btn btn-default" type="submit" ng-click="commenting = !commenting" name="cancel">Annuler</button>
+                </fieldset>
+            </form>
+        </section>
+        <p ng-show="comments.length > 5" class="{{parentColor}}"><a href="">Voir tous les commentaires</a></p>
+
+    </section><!-- .comments -->
+
+
+</div>

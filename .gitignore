@@ -1,6 +1,8 @@
 /css/*.css
 /js/*.js
+!/js/tinymce_fr_FR.js
 /js/commons/
+/js/directives/
 /js/makerscience/
 /js/vendor/
 .DS_Store

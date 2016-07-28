@@ -100,13 +100,8 @@
                 </script>
 
                 <fieldset class="forum-keywords">
-                    <div ng-controller="TagAutoCompleteCtrl">
-                        <h4>Quels sont les mots-clés associés à votre discussion ?</h4>
-                        <tags-input ng-model="questionTags"
-                                    placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)">
-                          <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
-                        </tags-input>
-                    </div>
+                      <h4>Quels sont les mots-clés associés à votre discussion ?</h4>
+                      <tag-auto-complete model="questionTags" placeholder="> Mot-clé (ne pas utiliser de #, séparer par des virgules)"></tag-auto-complete>
                 </fieldset>
 
                 <fieldset class="forum-linked">

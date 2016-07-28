@@ -28,3 +28,68 @@ module.factory('StaticContent', (Restangular) ->
 module.factory('Notification', (Restangular) ->
     return Restangular.service('notification')
 )
+
+
+# Projects / Resources
+module.factory('MakerScienceProject', (Restangular) ->
+    return Restangular.service('makerscience/project')
+)
+
+module.factory('MakerScienceResource', (Restangular) ->
+    return Restangular.service('makerscience/resource')
+)
+
+module.factory('MakerScienceProjectLight', (Restangular) ->
+    return Restangular.service('makerscience/projectlight')
+)
+
+module.factory('MakerScienceResourceLight', (Restangular) ->
+    return Restangular.service('makerscience/resourcelight')
+)
+
+module.factory('MakerScienceProjectTaggedItem', (Restangular) ->
+    return Restangular.service('makerscience/projecttaggeditem')
+)
+
+module.factory('MakerScienceResourceTaggedItem', (Restangular) ->
+    return Restangular.service('makerscience/resourcetaggeditem')
+)
+
+module.factory('Project', (Restangular) ->
+    return Restangular.service('project/project')
+)
+
+module.factory('ProjectNews', (Restangular) ->
+    return Restangular.service('project/news')
+)
+
+module.factory('ProjectSheet', (Restangular) ->
+    return Restangular.service('project/sheet/projectsheet')
+)
+
+module.factory('ProjectSheetTemplate', (Restangular) ->
+    return Restangular.service('project/sheet/template')
+)
+
+module.factory('ProjectSheetQuestionAnswer', (Restangular) ->
+    return Restangular.service('project/sheet/question_answer')
+)
+
+module.factory('ProjectProgress', (Restangular) ->
+    return Restangular.service('projectprogress')
+)
+
+module.factory('BucketFile', (Restangular) ->
+    return Restangular.service('bucket/file')
+)
+
+module.factory('Bucket', (Restangular) ->
+    return Restangular.service('bucket/bucket')
+)
+
+module.factory('BucketRestangular', (Restangular, Config) ->
+    return Restangular.withConfig((RestangularConfigurer) ->
+      RestangularConfigurer.setRequestSuffix('/');
+      RestangularConfigurer.setBaseUrl(Config.bucket_uri);
+    )
+)
