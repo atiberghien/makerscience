@@ -21,7 +21,7 @@
     };
   });
 
-  module.directive('checkForm', function(GalleryService, MediaRestangular) {
+  module.directive('checkForm', function(GalleryService, $http, Config) {
     return {
       require: "form",
       restrict: 'A',
@@ -65,17 +65,20 @@
           }
         };
         el.bind('change', function() {
-          scope.$apply(function() {
-            return check();
-          });
           if (scope.newMedia.url) {
-            return MediaRestangular.one('geturl').get({
-              'url': scope.newMedia.url
-            }).then(function(res) {
+            return $http.get(Config.oauthBaseUrl + '/geturl/?url=' + scope.newMedia.url).then(function(res) {
               scope.newMedia.title = res.title;
-              return scope.newMedia.description = res.description;
-            })["catch"](function(err) {
-              return console.error(err);
+              scope.newMedia.description = res.description;
+              return scope.$apply(function() {
+                return check();
+              });
+            }, function(err) {
+              scope.mediaForm.mediaUrl.$setValidity('format', false);
+              return false;
+            });
+          } else {
+            return scope.$apply(function() {
+              return check();
             });
           }
         });

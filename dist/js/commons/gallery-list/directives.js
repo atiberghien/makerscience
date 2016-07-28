@@ -3,7 +3,7 @@
 
   module = angular.module('commons.gallery.directives');
 
-  module.directive('galleryList', function() {
+  module.directive('galleryList', function(GalleryService) {
     return {
       scope: {
         medias: '=',
@@ -14,7 +14,12 @@
         uri: '='
       },
       restrict: 'E',
-      templateUrl: 'views/gallery/gallery-list.directive.html'
+      templateUrl: 'views/gallery/gallery-list.directive.html',
+      link: function(scope) {
+        return scope.isUrl = function(src) {
+          return GalleryService.isUrlImage(src);
+        };
+      }
     };
   });
 

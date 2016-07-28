@@ -96,13 +96,6 @@
     return Restangular.service('bucket/bucket');
   });
 
-  module.factory('MediaRestangular', function(Restangular, Config) {
-    return Restangular.withConfig(function(RestangularConfigurer) {
-      RestangularConfigurer.setRequestSuffix('/');
-      return RestangularConfigurer.setBaseUrl(Config.media_uri);
-    });
-  });
-
   module.factory('BucketRestangular', function(Restangular, Config) {
     return Restangular.withConfig(function(RestangularConfigurer) {
       RestangularConfigurer.setRequestSuffix('/');

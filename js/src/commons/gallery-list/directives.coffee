@@ -1,6 +1,6 @@
 module = angular.module('commons.gallery.directives')
 
-module.directive('galleryList', () ->
+module.directive('galleryList', (GalleryService) ->
     return {
       scope: {
         medias: '='
@@ -12,6 +12,9 @@ module.directive('galleryList', () ->
       }
       restrict: 'E'
       templateUrl: 'views/gallery/gallery-list.directive.html'
+      link: (scope) ->
+          scope.isUrl = (src) ->
+              return GalleryService.isUrlImage(src)
     }
 )
 

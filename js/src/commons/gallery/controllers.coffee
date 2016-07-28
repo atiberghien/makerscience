@@ -139,6 +139,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, project
             angular.forEach($scope.medias, (media, index) ->
                 promise = new Promise((resolve, reject) ->
                     ProjectService.uploadMedia(media, $scope.projectsheet.bucket.id, $scope.projectsheet.id).then((res) ->
+
                         if $scope.coverId == undefined && parseInt(GalleryService.coverId) == index + 1
                             ProjectSheet.one($scope.projectsheet.id).patch({cover: res.resource_uri})
                             .then(() -> resolve())
@@ -148,6 +149,7 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, project
                             ProjectSheet.one($scope.projectsheet.id).patch({cover: res.resource_uri})
                             .then(() -> resolve())
                             .catch(() -> reject())
+
                       )
                   )
                 promises.push(promise)

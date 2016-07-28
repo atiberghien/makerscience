@@ -174,37 +174,32 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state
         )
 )
 
-module.controller("InfoLinkCtrl", ($scope, $modalInstance, MediaRestangular) ->
+module.controller("InfoLinkCtrl", ($scope, $modalInstance, $http, Config, GalleryService) ->
 
     $scope.close = ->
         $modalInstance.dismiss('close')
 
     $scope.ok = (link) ->
-        $scope.hideControls = true
-        console.log $scope
-
-        if ($scope.infoLinkForm.$invalid)
+        if $scope.infoLinkForm.$invalid
             return false
 
-
-        MediaRestangular.one('geturl').get({'url': link.$modelValue})
+        $scope.hideControls = true
+        $http.get(Config.oauthBaseUrl + '/geturl/?url=' + link.$modelValue)
           .then((resultUrl) ->
-              MediaRestangular.one('getimg').get({'url': link.$modelValue})
+              $http.get(Config.oauthBaseUrl + '/getimg/?url=' + link.$modelValue)
                 .then((resultImg) ->
-                  $scope.hideControls = false
-                  result = {
-                    url: resultUrl
-                    img: resultImg
-                  }
-                  $modalInstance.close(result)
+                    $scope.hideControls = false
+                    result = {
+                      url: resultUrl.data
+                      img: resultImg.data
+                    }
+                    $modalInstance.close(result)
+                , (err)->
+                    $scope.infoLinkForm.infolink.$setValidity('format', false)
+                    $scope.hideControls = false
                 )
-                .catch((err) ->
-                  console.error err
-)
+          , (err) ->
+              $scope.infoLinkForm.infolink.$setValidity('format', false)
+              $scope.hideControls = false
           )
-          .catch((err) ->
-              console.error err
-          )
-
-
 )

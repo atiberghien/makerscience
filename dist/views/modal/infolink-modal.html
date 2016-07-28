@@ -11,7 +11,8 @@
         <fieldset>
             <label for="infolink">Lien vers le site web</label>
             <input id="infolink" name="infolink" ng-model="infolink" type="text" required>
-            <p ng-show="infoLinkForm.infolink.$invalid && submitted" class="help-block">Lien vers le site requis</p>
+            <p ng-show="infoLinkForm.infolink.$pristine && submitted" class="help-block">Lien vers le site requis</p>
+            <p ng-show="infoLinkForm.infolink.$error.format && submitted" class="help-block">Lien non valide</p>
         </fieldset>
     </ng-form>
 

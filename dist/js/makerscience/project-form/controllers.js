@@ -186,34 +186,31 @@
     };
   });
 
-  module.controller("InfoLinkCtrl", function($scope, $modalInstance, MediaRestangular) {
+  module.controller("InfoLinkCtrl", function($scope, $modalInstance, $http, Config, GalleryService) {
     $scope.close = function() {
       return $modalInstance.dismiss('close');
     };
     return $scope.ok = function(link) {
-      $scope.hideControls = true;
-      console.log($scope);
       if ($scope.infoLinkForm.$invalid) {
         return false;
       }
-      return MediaRestangular.one('geturl').get({
-        'url': link.$modelValue
-      }).then(function(resultUrl) {
-        return MediaRestangular.one('getimg').get({
-          'url': link.$modelValue
-        }).then(function(resultImg) {
+      $scope.hideControls = true;
+      return $http.get(Config.oauthBaseUrl + '/geturl/?url=' + link.$modelValue).then(function(resultUrl) {
+        return $http.get(Config.oauthBaseUrl + '/getimg/?url=' + link.$modelValue).then(function(resultImg) {
           var result;
           $scope.hideControls = false;
           result = {
-            url: resultUrl,
-            img: resultImg
+            url: resultUrl.data,
+            img: resultImg.data
           };
           return $modalInstance.close(result);
-        })["catch"](function(err) {
-          return console.error(err);
+        }, function(err) {
+          $scope.infoLinkForm.infolink.$setValidity('format', false);
+          return $scope.hideControls = false;
         });
-      })["catch"](function(err) {
-        return console.error(err);
+      }, function(err) {
+        $scope.infoLinkForm.infolink.$setValidity('format', false);
+        return $scope.hideControls = false;
       });
     };
   });

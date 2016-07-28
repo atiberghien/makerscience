@@ -18,7 +18,7 @@ module.directive('galleryResource', () ->
     }
 )
 
-module.directive('checkForm', (GalleryService, MediaRestangular) ->
+module.directive('checkForm', (GalleryService, $http, Config) ->
     return {
         require: "form"
         restrict: 'A'
@@ -55,18 +55,20 @@ module.directive('checkForm', (GalleryService, MediaRestangular) ->
 
 
             el.bind('change', () ->
-                scope.$apply ->
-                    check()
-
                 if scope.newMedia.url
-                    MediaRestangular.one('geturl').get({'url': scope.newMedia.url})
+                    $http.get(Config.oauthBaseUrl + '/geturl/?url=' + scope.newMedia.url)
                       .then((res) ->
                           scope.newMedia.title = res.title
                           scope.newMedia.description = res.description
+                          scope.$apply ->
+                              check()
+                      ,(err) ->
+                          scope.mediaForm.mediaUrl.$setValidity('format', false)
+                          return false;
                       )
-                      .catch((err) ->
-                          console.error err
-                      )
+                else
+                    scope.$apply ->
+                        check()
             )
 
 

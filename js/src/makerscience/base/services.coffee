@@ -87,13 +87,6 @@ module.factory('Bucket', (Restangular) ->
     return Restangular.service('bucket/bucket')
 )
 
-module.factory('MediaRestangular', (Restangular, Config) ->
-    return Restangular.withConfig((RestangularConfigurer) ->
-      RestangularConfigurer.setRequestSuffix('/');
-      RestangularConfigurer.setBaseUrl(Config.media_uri);
-    )
-)
-
 module.factory('BucketRestangular', (Restangular, Config) ->
     return Restangular.withConfig((RestangularConfigurer) ->
       RestangularConfigurer.setRequestSuffix('/');
