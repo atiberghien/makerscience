@@ -25,10 +25,3 @@ Then :
 * Gaëtan Priour (web integrator)
 * Freddy Limpens (dev front/back)
 * Violaine Alvarez (web design)
-
-## Deploy
-
-In prod, to set the appropriate backend and oauth server, use:
-```
-    $ grunt prod --prod
-```    
