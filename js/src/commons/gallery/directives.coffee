@@ -35,7 +35,7 @@ module.directive('checkForm', (GalleryService, $http, Config) ->
 
                     switch scope.newMedia.type
                         when 'image'
-                            scope.mediaForm.imageUrl.$setValidity('format', GalleryService.isUrlImage(scope.newMedia.url))
+                            scope.mediaForm.imageUrl.$setValidity('format', GalleryService.isUrlImage(scope.newMedia))
                         when 'document'
                             scope.mediaForm.documentUrl.$setValidity('format', GalleryService.isUrlDocument(scope.newMedia.url))
                         when 'video'
