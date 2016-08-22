@@ -44,8 +44,9 @@ module.factory("GalleryService", () ->
         else
             return null
 
-    isUrlImage = (url) ->
-        extensions = ['png', 'jpg', 'gif']
+    isUrlImage = (media) ->
+        url = if media.url then media.url else  media.file.name
+        extensions = ['png', 'jpg', 'gif', 'jpeg']
         return extensionIsValid(url, extensions)
 
     isUrlDocument = (url) ->

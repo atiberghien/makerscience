@@ -13,8 +13,8 @@ module.directive('galleryList', (GalleryService) ->
       restrict: 'E'
       templateUrl: 'views/gallery/gallery-list.directive.html'
       link: (scope) ->
-          scope.isUrl = (src) ->
-              return GalleryService.isUrlImage(src)
+          scope.isUrlImage = (media) ->
+              return GalleryService.isUrlImage(media)
     }
 )
 

@@ -3,8 +3,8 @@
     <button ng-show="edit" type="button" class="remove-button" ng-click="remove()(media)">
         <span class="glyphicon glyphicon-remove"></span>
     </button>
-    <cover-button class="cover-button" ng-if="media.type === 'image' && isUrl(media.url)" toggle="cover()(media)" cover-id="coverId" media="media"></cover-button>
-    <a class="filename" ng-class="{ 'invalid': !isUrl(media.url) }" ng-href="{{media.url ? media.url : uri + media.file}}" target="_blank">
+    <cover-button class="cover-button" ng-if="media.type === 'image' && isUrlImage(media)" toggle="cover()(media)" cover-id="coverId" media="media"></cover-button>
+    <a class="filename" ng-class="{ 'invalid': !isUrlImage(media) }" ng-href="{{media.url ? media.url : uri + media.file}}" target="_blank">
       <span class="icon" ng-switch on="media.type">
         <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
         <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
@@ -21,7 +21,7 @@
           <div class="thumbnail" ng-if="media.video_provider === 'dailymotion'"><img ng-src="http://www.dailymotion.com/thumbnail/video/{{media.video_id}}" /></div>
       </div>
       <span class="title">{{media.title}}</span>
-      <span ng-if="!isUrl(media.url)" class="validation">Format d'image non valide</span>
+      <span ng-if="!isUrlImage(media)" class="validation">Format d'image non valide</span>
       <span ng-if="media.description" class="description">{{media.description}}</span>
       <span ng-if="media.url" title="{{media.url}}" class="url">{{media.url}}</span>
       <span ng-if="media.author" class="author">{{media.author}}</span>
