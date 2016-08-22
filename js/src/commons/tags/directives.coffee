@@ -9,7 +9,7 @@ module.directive('tagAutoComplete', (Tag) ->
       restrict: 'E'
       template: '''
         <tags-input max-length="50" ng-model="model" placeholder="{{placeholder}}">
-            <auto-complete source="loadTags($query)" template="{{data.text}} ({{data.weight}})"></auto-complete>
+            <auto-complete source="loadTags($query)" template="views/base/tag_autocomplete.html"></auto-complete>
         </tags-input>
       ''',
       controller: 'TagAutoCompleteCtrl'
