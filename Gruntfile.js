@@ -18,7 +18,7 @@ module.exports = function(grunt) {
                         "bower_components/rangy/rangy-cssclassapplier.min.js",
                         "bower_components/rangy/rangy-selectionsaverestore.min.js",
                         "bower_components/rangy/rangy-serializer.min.js",
-                        "bower_components/leaflet/dist/leaflet-src.js",
+                        //"bower_components/leaflet/dist/leaflet-src.js",
                         "bower_components/geocoder-service/geocoder-service.min.js",
                     ],
                     overrides: {
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
                             'main' : ['angular-socialshare.min.js']
                         },
                         "angular-ui-tinymce" : {
-                            'main' : ["tinymce.js"],
+                            'main' : ["src/tinymce.js"],
                         },
                         "tinymce-placeholder" : {
                             'main' : ["placeholder/plugin.js"],
@@ -74,6 +74,18 @@ module.exports = function(grunt) {
                     ],
                 }
             },
+            prod: {
+                options: {
+                    environment: 'production',
+                    outputStyle: 'compressed',
+                    sassDir: 'css/sass',
+                    cssDir: 'css',
+                    importPath : [
+                        "bower_components/bootstrap-sass/assets/stylesheets",
+                        "bower_components/font-awesome"
+                    ],
+                }
+            }
         },
         coffee: {
             dist: {
@@ -98,7 +110,7 @@ module.exports = function(grunt) {
         connect: {
             server: {
                 options: {
-                    hostname: '127.0.0.1',
+                    hostname: '0.0.0.0',
                     port: 8001,
                     keepalive: true,
                     debug:true,
@@ -137,7 +149,7 @@ module.exports = function(grunt) {
           },
         },
         clean: {
-          dist: ["dist/"],
+          dist: ["css/*.css", "dist/"],
         },
         rsync: {
             options: {
@@ -178,7 +190,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks("grunt-rsync");
 
-    grunt.registerTask('compile', ['compass:dev', 'wiredep', 'coffee']);
+    grunt.registerTask('compile', ['compass:prod', 'wiredep', 'coffee']);
     grunt.registerTask('default', ['compass:dev', 'wiredep', 'coffee', 'concurrent:run']);
     grunt.registerTask('dist', ['clean:dist', 'copy:dist']);
     grunt.registerTask('stage', ['compile', 'dist', 'rsync:staging'])

@@ -21,7 +21,6 @@ else
     @config =
         templateBaseUrl: '/views/',
         useHtml5Mode: true,
-
         bucket_uri: 'http://127.0.0.1:8002/bucket/upload/',
         loginBaseUrl: 'http://127.0.0.1:8002/api/v0',
         oauthBaseUrl: 'http://127.0.0.1:8001',

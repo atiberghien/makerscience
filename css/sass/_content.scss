@@ -181,10 +181,10 @@ div.toolbar {
             font-size: 1.25em;
         }
         h3 {
-            font-size: 1em;
+            font-size: 1.2em;
         }
         h4 {
-            font-size: .75em;
+            font-size: 1em;
         }
         h5 {
             font-size: .5em;
@@ -196,10 +196,10 @@ div.toolbar {
             margin-bottom: 1em;
             white-space: normal;
         }
-        ul {
-            margin-bottom: 1em;
-            margin-left: 1em;
-        }
+        // ul:not(.tag-list) {
+        //     margin-bottom: 1em;
+        //     margin-left: 1em;
+        // }
     }
     &.content-dashboard {
         .tab-content {
@@ -316,19 +316,82 @@ div.toolbar {
         margin-top: $grid-gutter-width;
         padding: 0;
     }
+    ul.experiences {
+      li {
+        overflow: hidden;
+        margin-bottom: 0;
+      }
+      h4 {
+        font-size: 1.2em;
+        margin-top: 1em;
+        margin-bottom: 0;
+        font-weight: normal;
+        i {
+          color: $color-green;
+          margin-right: 4px;
+        }
+      }
+      h5 {
+        font-size: 1em;
+        margin-bottom: .5em;
+        color: $color-dark-grey;
+      }
+      .date {
+        padding-left: 25px;
+        padding-bottom: 0;
+        font-size: .9em;
+        font-style: italic;
+        color: $color-crumbs-grey;
+      }
+    }
     ul.nav-tabs {
         margin-bottom: $grid-gutter-width;
         border: none;
         &> li {
-             a {
-                 font-size: 1.4em;
-                 font-weight: bold;
+            a {
+                font-size: 1.4em;
+                font-weight: bold;
                 color: $color-content-tab;
                 background-color: $color-content-tab-bg;
                 border-color: $color-light-grey;
             }
             &.active a {
                 //color: $color-content-tab-active;
+            }
+
+            span[data-tooltip] {
+                position: relative;
+            }
+            /* Tooltip styling */
+            span[data-tooltip]:before {
+                content: attr(data-tooltip);
+                display: block;
+                position: absolute;
+                background: $color-dark-grey;
+                color: #fff;
+                padding: 4px;
+                width: 100%;
+                font-size: .65em;
+                line-height: 1.4;
+                min-width: 100px;
+                text-align: center;
+                border-radius: 4px;
+                left: 100%;
+                margin-left: 30px;
+            }
+
+            /* Tooltip arrow styling/placement */
+            span[data-tooltip]:after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-color: transparent;
+                border-style: solid;
+                top: 8px;
+                right: -30px;
+                border-width: 6px 6px 6px 0;
+                border-right-color: $color-dark-grey;
             }
         }
     }
@@ -393,34 +456,74 @@ div.toolbar {
         }
     }
     .nav-tabs-slide {
-        ul.nav-tabs {
-            font-size: 1.3em;
-            &>li a {
-                color: $color-content-tab-slide;
-                background-color: $color-content-tab-slide-bg;
-                @include border-radius(0);
-            }
-            &>li.active a {
-                border: 2px solid $color-content-tab-active;
-            }
-        }
         &.nav-tabs-slide-project {
             ul.nav-tabs {
-                &>li.active a {
-                    background-color: $color-blue;
+                & > li.active a, & > li.active a:active, & > li.active a:focus {
+                    background: $color-blue;
+                    color: $color-light-cream;
+                    span {
+                      color: white;
+                    }
+                }
+                & > li:not(.active) a:hover {
+                  border: none;
+                  color: $color-blue;
+                  background-color: $color-bg;
+                  span {
+                    color: $color-blue;
+                  }
+                }
+
+                & > li a:active, & > li a:focus {
+                  span {
+                    color: white;
+                  }
                 }
             }
         }
         &.nav-tabs-slide-resource {
-            ul.nav-tabs {
-                &>li.active a {
-                    background-color: $color-green;
-                }
+            ul.nav-tabs > li.active a {
+              background: $color-light-cream;
+              color: $color-green;
+              span {
+                color: white;
+              }
+            }
+            ul.nav-tabs > li a:hover {
+              border: none;
+              color: $color-green;
+              background-color: $color-bg;
+              span {
+                color: white;
+              }
             }
         }
         .carousel-inner .item img {
             width: 100%;
         }
+
+        ul.nav-tabs > li a {
+  				padding-right: 1.5em;
+  				color: $color-text;
+  				font-size: 1.1em;
+  				font-weight: bold;
+  				border: none;
+  				border-radius: 0;
+          background: $color-light-grey;
+  				@include transition(color .2s ease-in-out);
+  				span {
+  						@include transition(background-color .2s ease-in-out);
+  						margin-right: 0.25em;
+  						margin-bottom: 0.25em;
+  						font-size: 1.5em;
+              line-height: 25px;
+              vertical-align: middle;
+  						color: $color-text;
+  				}
+  				&:focus {
+  					border: none;
+  				}
+  			}
     }
     .nav-tabs-seance ul.nav-tabs {
         font-size: 0.8em;
@@ -499,7 +602,7 @@ div.toolbar {
     }
     section {
         position: relative;
-        margin-bottom: $grid-gutter-width;
+        margin-bottom: 20px;
         padding: 1em 1em 0;
         color: $color-content-section;
         background-color: $color-content-section-bg;
@@ -509,11 +612,76 @@ div.toolbar {
             text-transform: uppercase;
         }
         p:last-child {
-            padding-bottom: 2em;
+            padding-bottom: 1em;
+        }
+
+        &.actu-item {
+          padding-bottom: 1em;
+          p.infos, p.infos a {
+            color: $color-crumbs-grey;
+          }
+        }
+
+        &.actu-item, .actu-item {
+          h4 {
+            margin-bottom: 0;
+          }
+          p.infos {
+            font-style: italic;
+            margin-bottom: .5em;
+            font-size: .95em;
+          }
+          p:last-child {
+            padding-bottom: 0;
+          }
         }
     }
-    section:nth-child(even) {
+    section:nth-child(even):not(.news-form) {
         background-color: $color-content-section-bg-even;
+    }
+
+    section.medias {
+      background-color: white;
+      padding-bottom: 10px;
+    }
+
+    section.bloc-actus {
+      background: $color-blue;
+      color: white;
+      padding-bottom: 1em;
+
+      h3 {
+        text-align: center;
+        padding: .25em;
+      }
+
+      .btn {
+        display: block;
+        margin: .5em auto;
+      }
+
+      a {
+        color: $color-light-grey;
+        font-weight: bold;
+      }
+
+      .actu-item {
+        .content {
+          margin-bottom: 1em;
+        }
+        p.infos {
+          color: $color-light-grey;
+        }
+      }
+    }
+
+    section.bloc-presentation {
+      overflow: hidden;
+      .btn {
+        display: block;
+        margin: 0 auto 1.5em auto;
+        width: 170px;
+      }
     }
 
     section.linked {
@@ -672,6 +840,13 @@ div.toolbar {
         //.needs-financing { background-image: url('../img/needs/needs-financing.png'); }
         //.needs-hardware { background-image: url('../img/needs/needs-hardware.png'); }
         //.needs-skills { background-image: url('../img/needs/needs-skills.png'); }
+    }
+    .need-form {
+      .help {
+				margin-top: 0.25em;
+				font-style: italic;
+				color: $color-crumbs-grey;
+			}
     }
     .interested {
         display: table;
