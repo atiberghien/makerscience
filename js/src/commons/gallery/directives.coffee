@@ -58,10 +58,10 @@ module.directive('checkForm', (GalleryService, $http, Config) ->
                 if scope.newMedia.url
                     $http.get(Config.oauthBaseUrl + '/geturl/?url=' + scope.newMedia.url)
                       .then((res) ->
-                          scope.newMedia.title = res.title
+                          if scope.newMedia.title == ''
+                              scope.newMedia.title = res.title
                           scope.newMedia.description = res.description
-                          scope.$apply ->
-                              check()
+                          check()
                       ,(err) ->
                           scope.mediaForm.mediaUrl.$setValidity('format', false)
                           return false;
