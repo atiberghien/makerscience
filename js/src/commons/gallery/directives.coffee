@@ -56,7 +56,7 @@ module.directive('checkForm', (GalleryService, $http, Config) ->
 
             el.bind('change', () ->
                 if scope.newMedia.url
-                    $http.get(Config.oauthBaseUrl + '/geturl/?url=' + scope.newMedia.url)
+                    $http.get(Config.media_uri + '/geturl/?url=' + scope.newMedia.url)
                       .then((res) ->
                           if scope.newMedia.title == ''
                               scope.newMedia.title = res.title

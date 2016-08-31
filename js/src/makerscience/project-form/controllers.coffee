@@ -184,9 +184,9 @@ module.controller("InfoLinkCtrl", ($scope, $modalInstance, $http, Config, Galler
             return false
 
         $scope.hideControls = true
-        $http.get(Config.oauthBaseUrl + '/geturl/?url=' + link.$modelValue)
+        $http.get(Config.media_uri + '/geturl/?url=' + link.$modelValue)
           .then((resultUrl) ->
-              $http.get(Config.oauthBaseUrl + '/getimg/?url=' + link.$modelValue)
+              $http.get(Config.media_uri + '/getimg/?url=' + link.$modelValue)
                 .then((resultImg) ->
                     $scope.hideControls = false
                     result = {
