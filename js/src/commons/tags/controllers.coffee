@@ -7,16 +7,14 @@ module.controller("TagListCtrl", ($scope, Tag) ->
 module.controller("TagAutoCompleteCtrl", ($scope, Tag) ->
 
     $scope.loadTags = (query) ->
-        return Tag.getList().then((tagResults) ->
+        Tag.getList({'slug__icontains': query}).then((tagResults) ->
             availableTags = []
             angular.forEach(tagResults, (tag) ->
-                if tag.name.indexOf(query) > -1
-                    tmpTag =
-                        'text' : tag.name
-                        'weight' : tag.weight
-                    availableTags.push(tmpTag)
+                tmpTag =
+                    'text' : tag.name
+                    'weight' : tag.weight
+                availableTags.push(tmpTag)
             )
-
             return availableTags
         )
 )
