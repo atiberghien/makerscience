@@ -40,8 +40,6 @@ module.directive('checkForm', (GalleryService, $http, Config) ->
                             scope.mediaForm.documentUrl.$setValidity('format', GalleryService.isUrlDocument(scope.newMedia.url))
                         when 'video'
                             scope.mediaForm.videoUrl.$setValidity('format', GalleryService.isUrlVideo(scope.newMedia.url))
-                        when 'link'
-                            scope.mediaForm.mediaUrl.$setValidity('format', GalleryService.isUrl(scope.newMedia.url))
 
                 else if !!scope.newMedia.file
                     scope.mediaForm.$setValidity('mediaDefine', true);
