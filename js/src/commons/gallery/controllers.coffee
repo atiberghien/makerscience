@@ -150,6 +150,9 @@ module.controller('GalleryEditionInstanceCtrl', ($scope, $modalInstance, project
                             .then(() -> resolve())
                             .catch(() -> reject())
 
+                        else
+                            resolve()
+
                       )
                   )
                 promises.push(promise)
