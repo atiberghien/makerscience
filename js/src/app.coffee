@@ -34,7 +34,7 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
         RestangularProvider.setBaseUrl(config.rest_uri)
         RestangularProvider.setRequestSuffix('?format=json')
         # Tastypie patch
-        RestangularProvider.setMethodOverriders(["put", "patch", "delete"])
+        # RestangularProvider.setMethodOverriders(["put", "patch", "delete"])
         RestangularProvider.setResponseExtractor((response, operation, what, url) ->
                 newResponse = null;
 
