@@ -45,7 +45,14 @@ module.factory("GalleryService", () ->
             return null
 
     isUrlImage = (media) ->
-        url = if media.url then media.url.toLowerCase() else  media.file.name.toLowerCase()
+        url = ''
+        if media.url
+            url = media.url
+
+        else
+          url = if typeof(media.file) == 'string' then media.file else media.file.name
+
+        url = url.toLowerCase()
         extensions = ['png', 'jpg', 'gif', 'jpeg']
         return extensionIsValid(url, extensions)
 
