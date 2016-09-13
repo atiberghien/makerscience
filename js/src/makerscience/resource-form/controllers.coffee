@@ -84,13 +84,17 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                     )
                 )
 
-                if $scope.resourceCover.file
-                    ProjectService.uploadMedia($scope.resourceCover, resourcesheetResult.bucket.id, resourcesheetResult.id).then((res) ->
-                        ProjectSheet.one(resourcesheetResult.id).patch({cover: res.resource_uri})
-                      )
+                isCoverUpdated = new Promise((resolve, reject) ->
+                    if $scope.resourceCover.file
+                        ProjectService.uploadMedia($scope.resourceCover, resourcesheetResult.bucket.id, resourcesheetResult.id).then((res) ->
+                          ProjectSheet.one(resourcesheetResult.id).patch({cover: res.resource_uri})
+                          resolve(res.resource_uri)
+                        )
 
-                else
-                    ProjectSheet.one(resourcesheetResult.id).patch({cover: null})
+                    else
+                        ProjectSheet.one(resourcesheetResult.id).patch({cover: null})
+                        resolve();
+                )
 
 
                 # if no photos to upload, directly go to new project sheet
@@ -101,8 +105,10 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                         $scope.fake_progress += 100/5
 
                     $timeout(() ->
-                        $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
-                    ,5000)
+                        isCoverUpdated.then((res) ->
+                            $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
+                        )
+                    , 5000)
                 else
                     promises = []
                     isAuthor = false
@@ -123,7 +129,10 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                         , 'makerscienceresource/'+makerscienceResourceResult.id)
 
                     Promise.all(promises).then(() ->
-                        $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
+                        isCoverUpdated.then(() ->
+                            console.log 4
+                            $state.go("resource.detail", {slug : makerscienceResourceResult.parent.slug})
+                        )
                     ).catch((err) ->
                         console.error err
                     )
