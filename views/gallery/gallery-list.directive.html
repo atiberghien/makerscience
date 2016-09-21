@@ -4,7 +4,7 @@
         <span class="glyphicon glyphicon-remove"></span>
     </button>
     <cover-button class="cover-button" ng-if="media.type === 'image' && isUrlImage(media)" toggle="cover()(media)" cover-id="coverId" media="media"></cover-button>
-    <a class="filename" ng-class="{ 'invalid': media.type === 'image' && !isUrlImage(media) }" ng-href="{{media.url ? media.url : uri + media.file}}" target="_blank">
+    <a class="filename" ng-class="{ 'invalid': media.type === 'image' && !isUrlImage(media) }" ng-href="{{media.url ? media.url : media.file}}" target="_blank">
       <span class="icon" ng-switch on="media.type">
         <i class="glyphicon glyphicon-file" ng-switch-when="document"></i>
         <i class="glyphicon glyphicon-link" ng-switch-when="link"></i>
