@@ -49,7 +49,7 @@
     "ng-videosharing-embed": "~0.3.3",
     "ngInfiniteScroll": "1.0.0",
     "ngSticky": "~1.7.9",
-    "satellizer": "master",
+    "satellizer": "~1.13.4",
     "restangular": "~1.5.1",
     "slug": "~0.8.0",
     "tinymce-placeholder": "https://github.com/mohan999/tinymce-placeholder.git",
