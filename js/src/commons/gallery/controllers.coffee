@@ -98,7 +98,7 @@ module.controller('GalleryCreationResourceCtrl', (@$rootScope, $scope, $filter, 
             $scope.newMedia.experience = {}
             $scope.mediaForm.$setValidity('mediaDefine', true)
             $scope.mediaForm.$setValidity('documentFileFormat', true)
-            $scope.mediaForm.mediaUrl.$setValidity('format', true)
+            $scope.mediaForm.$setValidity('format', true)
 
     $scope.addMedia = (newMedia) ->
         if $scope.mediaForm.$invalid || $scope.mediaForm.$pristine

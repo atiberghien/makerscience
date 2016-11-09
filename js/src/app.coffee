@@ -113,7 +113,7 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
         )
         .state('project.detail',
                 url: ':slug',
-                templateUrl: '/views/project/project.detail.html',
+                templateUrl: '/views/project/project.detail.base.html',
                 controller : 'MakerScienceProjectSheetCtrl'
                 ncyBreadcrumb:
                     label: '{{projectsheet.parent.title}}'
@@ -144,7 +144,7 @@ angular.module('makerscience', ['commons.accounts', 'commons.community', 'common
         )
         .state('resource.detail',
                 url: ':slug',
-                templateUrl: '/views/resource/resource.detail.html'
+                templateUrl: '/views/resource/resource.detail.base.html'
                 controller: 'MakerScienceResourceSheetCtrl'
                 ncyBreadcrumb:
                     label: '{{projectsheet.parent.title}}'

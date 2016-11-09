@@ -1,0 +1,28 @@
+<section ng-if="projectsheet.parent.description">
+    <div class="edit-buttons" ng-click="DescBtnForm.$show()" ng-hide="DescBtnForm.$visible || !editable" ng-show="editable">
+        <button> <span class="glyphicon glyphicon-pencil"></span></button>
+    </div>
+    <h4>A propos du projet</h4>
+
+    <p editable-tiny-angular="projectsheet.parent.description"
+        blur="ignore"
+         e-form="DescBtnForm"
+         e-rows="4"
+         onbeforesave="updateProjectSheet('Project', projectsheet.parent.id , 'description', $data)"
+         ng-bind-html="trustAsHtml(projectsheet.parent.description)">
+    </p>
+
+</section>
+<section id="item{{item.id}}" ng-if="item.answer" ng-repeat="item in projectsheet.base_projectsheet.question_answers">
+    <h4>{{item.question.text}}</h4>
+    <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
+        <button><span class="glyphicon glyphicon-pencil"></span></button>
+    </div>
+    <p editable-tiny-angular="item.answer"
+        blur="ignore"
+         e-form="AnswerBtnForm"
+         e-rows="4"
+         onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
+         ng-bind-html="trustAsHtml(item.answer)">
+    </p>
+</section>

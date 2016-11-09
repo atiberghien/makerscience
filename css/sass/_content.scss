@@ -483,20 +483,19 @@ div.toolbar {
         }
         &.nav-tabs-slide-resource {
             ul.nav-tabs > li.active a {
-              background: $color-light-cream;
-              color: $color-green;
+              background: $color-green;
+              color: $color-light-cream;
               span {
                 color: white;
               }
             }
             ul.nav-tabs > li a:hover {
-              border: none;
-              color: $color-green;
-              background-color: $color-bg;
-              span {
-                color: white;
-              }
-            }
+                background: $color-green;
+                color: $color-light-cream;
+                span {
+                  color: white;
+                }
+            }     
         }
         .carousel-inner .item img {
             width: 100%;
@@ -509,7 +508,7 @@ div.toolbar {
   				font-weight: bold;
   				border: none;
   				border-radius: 0;
-          background: $color-light-grey;
+                background: $color-light-grey;
   				@include transition(color .2s ease-in-out);
   				span {
   						@include transition(background-color .2s ease-in-out);

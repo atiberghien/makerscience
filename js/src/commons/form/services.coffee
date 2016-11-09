@@ -14,14 +14,16 @@ module.factory("FormService", (ProjectSheetTemplate, ProjectSheet) ->
       return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4()
 
 
-    FormService.init = (templateSlug) ->
+    # templateType is related to back-end configuration
+    FormService.init = (templateType) ->
         projectsheet = {
             medias : {}
         }
         # $scope.QAItems = []
         QAItems = []
 
-        ProjectSheetTemplate.one().get({'slug' : templateSlug}).then((templateResult) ->
+        ProjectSheetTemplate.one().get({'type' : templateType, 'active' : true}).then((templateResult) ->
+        # ProjectSheetTemplate.one().get({'slug' : templateSlug}).then((templateResult) ->
             template = templateResult.objects[0]
             angular.forEach(template.questions, (question)->
                 QAItems.push(

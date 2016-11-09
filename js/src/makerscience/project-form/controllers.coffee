@@ -6,14 +6,14 @@ module.controller("MakerScienceProjectSheetCreateCtrl", ($window, $scope, $state
                                                         ObjectProfileLink) ->
 
 
-    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
+    # angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     $scope.projectsheet = { medias: [] }
     $scope.QAItems = []
     $scope.status2 = {}
     $scope.status1 = {}
     $scope.status2.open = false;
 
-    FormService.init('projet-makerscience-2016').then((response) ->
+    FormService.init('P').then((response) ->
         $scope.QAItems = response.QAItems
         $scope.projectsheet = response.projectsheet
     )

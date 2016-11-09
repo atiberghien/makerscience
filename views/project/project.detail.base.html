@@ -128,37 +128,9 @@
 
                             <button class="btn btn-info" ng-click="tabs[1].active = true">Voir toutes les actus du projet</button>
                         </section>
-
-                        <section class="bloc-presentation" ng-repeat="item in projectsheet.base_projectsheet.question_answers track by $index" ng-if="$index === 0">
-                            <h4>{{item.question.text}}</h4>
-                            <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
-                                <button><span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
-                            <p editable-tiny-angular="item.answer"
-                                blur="ignore"
-                                 e-form="AnswerBtnForm"
-                                 e-rows="4"
-                                 onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
-                                 ng-bind-html="trustAsHtml(item.answer)">
-                            </p>
-                            <a ng-if="projectsheet.parent.website.length" href="{{projectsheet.parent.website}}" target="_blank" class="btn btn-primary">Visitez notre site web</a>
-                        </section>
-
-                        <h3>Contacts</h3>
-                        <section ng-repeat="item in projectsheet.base_projectsheet.question_answers track by $index" ng-if="$index !== 0">
-                            <h4>{{item.question.text}}</h4>
-                            <div class="edit-buttons" ng-click="AnswerBtnForm.$show()" ng-hide="AnswerBtnForm.$visible || !editable" ng-show="editable">
-                                <button><span class="glyphicon glyphicon-pencil"></span></button>
-                            </div>
-                            <p editable-tiny-angular="item.answer"
-                                blur="ignore"
-                                 e-form="AnswerBtnForm"
-                                 e-rows="4"
-                                 onbeforesave="updateProjectSheet('ProjectSheetQuestionAnswer', item.id , 'answer', $data)"
-                                 ng-bind-html="trustAsHtml(item.answer)">
-                            </p>
-                        </section>
-
+                        <!-- -->
+                        <ng-include src="projectsheet.base_projectsheet.template_file"></ng-include>
+                        <!-- -->
                         <!-- Angular UI Tabs -->
 
                         <h3>Médias</h3>
@@ -246,7 +218,6 @@
                               <span am-time-ago="news.timestamp"></span>
                             </p>
                         </section>
-
                     </tab>
                     <tab>
                         <tab-heading>
@@ -329,7 +300,7 @@
 
             <ul class="boxes boxes-medium boxes-spaced">
                 <!-- #WARNING No space between a closing </li> and the following opening one or the browser will add extra space -->
-                <li class="box" ng-repeat="project in similars">
+                <li class="box" ng-repeat="project in similars | limitTo:7">
                     <ng-include src="'/views/block/project_thumb_light.html'"></ng-include>
                 </li
                 ><li class="box box-solo box-blue">

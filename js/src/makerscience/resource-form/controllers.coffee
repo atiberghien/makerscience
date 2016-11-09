@@ -4,11 +4,11 @@ module.controller("MakerScienceResourceSheetCreateCtrl", ($scope, $state, $contr
                              MakerScienceResource,  MakerScienceResourceTaggedItem, ObjectProfileLink) ->
 
 
-    angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
+    # angular.extend(this, $controller('MakerSciencePostCreateCtrl', {$scope: $scope}))
     $scope.projectsheet = {}
     $scope.QAItems = []
 
-    FormService.init('experience-makerscience').then((response) ->
+    FormService.init('R').then((response) ->
         $scope.QAItems = response.QAItems
         $scope.projectsheet = response.projectsheet
     )
