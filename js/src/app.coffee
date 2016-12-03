@@ -7,14 +7,15 @@ angular.module('commons.form', ['commons.form.services'])
 angular.module('commons.community', ['commons.community.controllers', 'commons.community.directives'])
 angular.module('commons.gallery', ['commons.gallery.services', 'commons.gallery.controllers', 'commons.gallery.directives'])
 angular.module('commons.tags', ['commons.tags.directives', 'commons.tags.controllers', 'commons.tags.services'])
-angular.module('commons.directives', ['commons.directives.reportabuse' ,'commons.directives.inputfile', 'commons.directives.thumb', 'commons.directives.socialshare', 'commons.directives.cover'])
+angular.module('commons.directives', ['commons.directives.reportabuse' ,'commons.directives.inputfile', 'commons.directives.thumb',
+                                      'commons.directives.socialshare', 'commons.directives.cover', 'commons.directives.avatar'])
 angular.module('makerscience.projects', ['makerscience.projects.controllers', 'makerscience.projects.services'])
 angular.module('makerscience.resources', ['makerscience.resources.controllers'])
-angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services'])
+angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services', 'makerscience.profile.directives'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services', 'makerscience.base.filters'])
 angular.module('makerscience.map', ['makerscience.map.controllers'])
-angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services'])
-angular.module('makerscience', ['commons.accounts', 'commons.community', 'commons.gallery', 'commons.tags', 'commons.scout', 'commons.ucomment', 'commons.directives', 'commons.form',
+angular.module('makerscience.forum', ['makerscience.forum.controllers', 'makerscience.forum.services', 'makerscience.forum.directives'])
+app = angular.module('makerscience', ['commons.accounts', 'commons.community', 'commons.gallery', 'commons.tags', 'commons.scout', 'commons.ucomment', 'commons.directives', 'commons.form',
                                 'makerscience.projects', 'makerscience.resources', 'makerscience.profile', "makerscience.forum",
                                 'makerscience.base','makerscience.map', 'commons.megafon', 'commons.starlet',
                                 'restangular', 'ui.bootstrap', 'ui.router', 'ui.unique', 'xeditable', 'angularFileUpload',

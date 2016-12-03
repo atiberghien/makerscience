@@ -1,6 +1,9 @@
 .avatar {
     float : left;
 
+    &.no-float {
+        float: none;
+    }
     &.avatar40 {
         img {
             width : 40px;

@@ -116,14 +116,6 @@ module.controller("MakerScienceForumCtrl", ($scope,  $state, $controller, $filte
     }
     $scope.params["limit"] = $scope.limit =  6
 
-    $scope.bestContributors = []
-    ObjectProfileLink.one().customGET('post/best', {level:[30,31,32]}).then((profileResults) ->
-        angular.forEach(profileResults.objects, (profile) ->
-            MakerScienceProfile.one().get({parent__id : profile.id}).then((makerScienceProfileResults) ->
-                $scope.bestContributors.push(makerScienceProfileResults.objects[0])
-            )
-        )
-    )
     $scope.refreshList = () ->
         MakerSciencePostLight.one().customGETLIST('search', $scope.params).then((makerSciencePostResults) ->
             meta = makerSciencePostResults.metadata

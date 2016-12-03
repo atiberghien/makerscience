@@ -175,17 +175,7 @@
         <div class="col-md-4">
             <div class="forum-sidebar">
                 <div class="forum-sidebar-dark">
-                    <h3>Les membres les plus actifs</h3>
-                    <ul class="forum-top-users" >
-                        <li ng-repeat="profile in bestContributors| orderBy: '-score' | limitTo : 5">
-                            <div>
-                                <a ui-sref="profile.detail({slug:profile.slug})">
-                                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar52"></ng-include>
-                                    {{profile.parent.user.first_name}} <strong>{{profile.parent.user.last_name}}</strong>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
+                    <best-contributors></best-contributors>
                 </div>
 
                 <!-- <div class="forum-sidebar-light" >
