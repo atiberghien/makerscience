@@ -5,10 +5,13 @@ module.directive('mksProfileCard', [ ->
         restrict: 'E',
         scope: {
             profile : "=" #baseProfile
+            avatarSize : "@"
+            avatarExtraClass : "@"
+            textColor : "@"
         },
         template: '''
-            <a ui-sref="profile.detail({slug:slug})">
-                <avatar profile="profile" size="52"></avatar>
+            <a class="avatar-link" ui-sref="profile.detail({slug:slug})" style="color:{{textColor}}">
+                <avatar profile="profile" size="{{avatarSize}}" extra-class="{{avatarExtraClass}}"></avatar>
                 {{profile.user.first_name}} <strong>{{profile.user.last_name}}</strong>
             </a>
         ''',

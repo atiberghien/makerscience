@@ -128,7 +128,7 @@
                     <tab ng-show="{{resourcesheet.linked_makersciencepost.length}}" heading="Discussions ({{resourcesheet.linked_makersciencepost.length}})">
                         <section>
                             <div ng-repeat="post in resourcesheet.linked_makersciencepost">
-                                <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
+                                <thread-light post="post"></thread-light>
                             </div>
                         </section>
                     </tab>

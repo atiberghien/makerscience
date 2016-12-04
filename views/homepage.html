@@ -174,7 +174,7 @@
                 <!-- <div class="preview"></div> -->
                 <h2 class="forum">Discussions <a ui-sref="forum">Voir toutes les discussions</a></h2>
                 <div ng-repeat="post in threads| orderBy : '-posted_on' | limitTo:3">
-                    <ng-include src="'/views/forum/block/thread_light.html'"></ng-include>
+                    <thread-light post="post"></thread-light>
                 </div>
             </div><!-- .home-forum -->
 

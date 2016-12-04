@@ -49,7 +49,7 @@
             <h2 class="forum clear"><span class="glyphicon glyphicon-user"></span> Les discussions comportant ce tag</h2>
             <div class="boxes boxes-medium">
                 <div class="box" ng-repeat="post in threads">
-                    <ng-include src="'/views/forum/block/thread_light.html'"></ng-include>
+                    <thread-light post="post" thread-style='box'></thread-light>
                 </div>
                 <div class="box box-solo box-purple">
                     <div>

@@ -495,7 +495,7 @@ div.toolbar {
                 span {
                   color: white;
                 }
-            }     
+            }
         }
         .carousel-inner .item img {
             width: 100%;
@@ -962,7 +962,7 @@ div.toolbar {
         position: relative;
         height: $boxes-height;
         width: $boxes-width;
-        margin-right: $grid-gutter-width;
+        margin-right: $grid-gutter-width - 5;
         margin-bottom: $grid-gutter-width;
         color: $color-boxes;
         vertical-align: top;

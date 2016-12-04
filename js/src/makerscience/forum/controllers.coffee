@@ -122,14 +122,6 @@ module.controller("MakerScienceForumCtrl", ($scope,  $state, $controller, $filte
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
             $scope.threads =  makerSciencePostResults
-            angular.forEach($scope.threads, (thread) ->
-                $scope.getPostAuthor(thread.parent_id).then((author) ->
-                    thread.author = author
-                )
-                $scope.getContributors(thread.parent_id).then((contributors) ->
-                    thread.contributors = contributors
-                )
-            )
         )
 
     # Must be called AFTER refreshList definition due to inheriance

@@ -226,12 +226,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
                     MakerSciencePostLight.one().get({parent_id : objectProfileLink.object_id}).then((makersciencePostResults) ->
                         if makersciencePostResults.objects.length == 1
                             post = makersciencePostResults.objects[0]
-                            $scope.getPostAuthor(post.parent_id).then((author) ->
-                                post.author = author
-                            )
-                            $scope.getContributors(post.parent_id).then((contributors) ->
-                                post.contributors = contributors
-                            )
                             if objectProfileLink.level == 30 && $scope.authored_post.indexOf(post) == -1
                                 $scope.authored_post.push(post)
                             else if objectProfileLink.level == 33 && $scope.liked_post.indexOf(post) == -1

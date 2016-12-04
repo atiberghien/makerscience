@@ -162,7 +162,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.$on('cover-updated', ()->
             MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
-                $scope.projectsheet = makerScienceProjectResult.objects[0]                
+                $scope.projectsheet = makerScienceProjectResult.objects[0]
                 if GalleryService.coverId != coverId
                     coverId = if GalleryService.coverId == null then null else $scope.projectsheet.base_projectsheet.cover
                     $scope.coverURL = ProjectService.fetchCoverURL(coverId)
@@ -186,14 +186,11 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
                 when "fm" then $scope.preparedFormatsTags.push({text : taggedItem.tag.name, slug : taggedItem.tag.slug,  taggedItemId : taggedItem.id})
         )
 
-        $scope.need_length = $filter('filter')($scope.projectsheet.linked_makersciencepost, {post_type: 'need'}).length
-
-        angular.forEach($scope.projectsheet.linked_makersciencepost, (makerSciencePostResult) ->
-            $scope.getPostAuthor(makerSciencePostResult.parent_id).then((author) ->
-                makerSciencePostResult.author = author
-            )
-            $scope.getContributors(makerSciencePostResult.parent_id).then((contributors) ->
-                makerSciencePostResult.contributors = contributors
+        console.log $scope.projectsheet.needs_length
+        $scope.projectsheet.linked_makersciencepost = []
+        angular.forEach($.parseJSON($scope.projectsheet.linked_makersciencepost_ids), (linked_makersciencepost_id) ->
+            MakerSciencePostLight.one(linked_makersciencepost_id).get().then((makerSciencePostResult)->
+                $scope.projectsheet.linked_makersciencepost.push(makerSciencePostResult)
             )
         )
 

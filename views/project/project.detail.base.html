@@ -221,18 +221,18 @@
                     </tab>
                     <tab>
                         <tab-heading>
-                            <span ng-show="need_length === 1" data-tooltip="Dont 1 besoin" tooltip-trigger="manual">
+                            <span ng-show="projectsheet.needs_length == 1" data-tooltip="Dont 1 besoin" tooltip-trigger="manual">
                                 Discussions ({{projectsheet.linked_makersciencepost.length}})
                             </span>
-                            <span ng-show="need_length > 1" data-tooltip="Dont {{need_length}} besoins" tooltip-trigger="manual">
+                            <span ng-show="projectsheet.needs_length > 1" data-tooltip="Dont {{needs_length}} besoins" tooltip-trigger="manual">
                                 Discussions ({{projectsheet.linked_makersciencepost.length}})
                             </span>
-                            <span ng-show="need_length === 0">
+                            <span ng-show="projectsheet.needs_length == 0">
                                 Discussions ({{projectsheet.linked_makersciencepost.length}})
                             </span>
                         </tab-heading>
                         <div ng-repeat="post in projectsheet.linked_makersciencepost">
-                            <ng-include ng-if="post.id" src="'/views/forum/block/thread_light.html'"></ng-include>
+                            <thread-light post="post"></thread-light>
                         </div>
                         <section  ng-show="editable" class="news-form">
                             <h3>Nouveau besoin</h3>

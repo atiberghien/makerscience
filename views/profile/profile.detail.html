@@ -247,15 +247,15 @@
                 <tab heading="Discussions ({{authored_post.length + contributed_post.length + liked_post.length + followed_post.length}})">
                     <h2 class="members">Mes discussions</h2>
                     <div ng-repeat="post in authored_post">
-                        <ng-include src="'/views/forum/block/thread_light.html'"></ng-include>
+                        <thread-light post="post"></thread-light>
                     </div>
                     <h2 class="members">Les discussions auxquelles j'ai contribué</h2>
                     <div ng-repeat="post in contributed_post">
-                        <ng-include src="'/views/forum/block/thread_light.html'"></ng-include>
+                        <thread-light post="post"></thread-light>
                     </div>
                     <h2 class="members">Ces discussions m’intéressent</h2>
                     <div ng-repeat="post in followed_post">
-                        <ng-include src="'/views/forum/block/thread_light.html'"></ng-include>
+                        <thread-light post="post"></thread-light>
                     </div>
                 </tab>
                 <tab heading="Membres suivis ({{friends.length}})">

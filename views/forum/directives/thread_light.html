@@ -1,20 +1,17 @@
 <section class="forum-topic">
     <header>
-        <ul class="members">
-            <li ng-repeat="profile in post.contributors|limitTo : 4">
-                <div>
-                    <ng-include src="'/views/profile/block/avatar.html'" class="avatar avatar40"></ng-include>
-                </div>
+        <ul  ng-if="threadStyle != 'box'" class="members">
+            <li ng-repeat="profile in post.parent.contributors|limitTo : 4">
+                <avatar profile="profile" size="40"></avatar>
             </li>
-            <li class="count" ng-if="post.contributors.length > 0"><a href="">+{{post.contributors.length}}</a></li>
+            <li class="count" ng-if="post.parent.contributors.length > 0">
+                <a ui-sref="question({slug : post.slug})">+{{post.parent.contributors.length}}</a>
+            </li>
         </ul><!-- .members -->
-        <div>
-            <span class="avatar avatar40">
-                <img ng-show="post.author.avatar" src="{{post.author.avatar}}" class="profile img-circle">
-                <img ng-hide="post.author.avatar" src="/img/avatar.png" class="profile img-circle">
-            </span>
-            <h3><a ui-sref="profile.detail({slug:post.author.id})" style="color: inherit;">{{post.author.user.first_name}} <strong>{{post.author.user.last_name}}</strong></a></h3>
-        </div>
+        <mks-profile-card profile="post.parent.author"
+                          avatar-size="40"
+                          text-color="inherit" >
+        </mks-profile-card>
         <h4>Mise à jour: <strong><span am-time-ago="post.updated_on"></span></strong></h4>
     </header>
     <p class="question">
@@ -26,6 +23,12 @@
         <span ng-if="post.post_type == 'event'" class="glyphicon glyphicon-calendar"></span>
 
         <a ui-sref="question({slug : post.slug})">{{post.title}}</a>
+    </p>
+    <p class="related-to" ng-if="post.linked_projects.length > 0">
+        Question relative au projet <a ui-sref="project.detail({slug : post.linked_projects[0].slug})">{{post.linked_projects[0].title}}</a>
+    </p>
+    <p class="related-to" ng-if="post.linked_resources.length > 0">
+        Question relative à la resource <a ui-sref="resource.detail({slug : post.linked_resources[0].slug})">{{post.linked_resources[0].title}}</a>
     </p>
     <p class="comments-count" ng-class="{'no-tag': post.tags.length == 0}"><span class="glyphicon glyphicon-comment"></span> {{post.answers_count}}</p>
     <ul class="tags" >

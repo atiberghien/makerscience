@@ -147,7 +147,7 @@ form.forum-answer {
         background-color: $color-bg;
 	ul.nav-tabs {
 		margin-top: 15px;
-		li.active { 
+		li.active {
 			a, a:focus, a:hover {
 				background-color: $color-bg;
 			}
@@ -155,7 +155,7 @@ form.forum-answer {
 	}
 	margin-bottom: 1em;
     }
-    
+
     fieldset.forum-keywords {
         padding: $grid-gutter-width / 2;
         background-color: $color-bg;
@@ -275,10 +275,12 @@ section.forum-topic,
             top: $grid-gutter-width / 2;
             left: $grid-gutter-width / 2;
         }
-        h3, h4 {
-            margin-left: 65px;
+        .avatar {
+            img {
+                margin-right: 0.5em;
+            }
         }
-        h3 {
+        .avatar-link {
             margin-top: 0.25em;
             margin-bottom: 0.25em;
             font-size: 1.15em;
@@ -291,7 +293,7 @@ section.forum-topic,
     }
     p.question {
         position: relative;
-        margin: $grid-gutter-width / 2 0;
+        margin: $grid-gutter-width / 2 0 0 0;
         padding-left: 2.25em;
         font-size: 1.2em;
         font-weight: bold;
@@ -311,6 +313,14 @@ section.forum-topic,
             color: $color-text;
         }
     }
+    p.related-to {
+        position: relative;
+        margin: 0;
+        padding-left: 2.25em;
+        font-size: 1em;
+        font-style: italic;
+        line-height: 1.25em;
+    }
     p.comments-count {
         float: right;
         margin: 0.25em 0 0.75em;
@@ -327,7 +337,7 @@ section.forum-topic,
         }
     }
     ul.tags {
-        margin-bottom: 0.5em;
+        margin-top: 1em;
         li.more a {
             color: #fff;
             background-color: $color-blue;
@@ -424,6 +434,7 @@ div.forum-sidebar {
                 background-color: rgba(0, 0, 0, 0.25);
                 text-decoration: none;
             }
+            text-transform: capitalize;
         }
         li:last-child a {
             border-bottom: none;
@@ -664,13 +675,17 @@ div.forum-answer + button {
 #content .boxes .box section.forum-topic {
     height: 100%;
     color: #fff;
+    padding: .2em 1em 0;
     background-color: $color-forum;
     @include transition(background 0.2s ease-in-out);
     &:hover {
         @include opacity(0.9);
     }
     header {
-        h3 {
+        .avatar-link {
+            img {
+                width: 1em;
+            }
             margin: 0.5em 0 0 0;
             padding: 0;
         }
@@ -679,7 +694,7 @@ div.forum-answer + button {
             padding: 0.25em 0 0 0;
             font-size: 0.75em;
         }
-        h3, h4 {
+        h4 {
             display: block;
             position: relative;
             line-height: 1.5em;
@@ -698,6 +713,12 @@ div.forum-answer + button {
         }
         span {
             display: none;
+        }
+    }
+    p.related-to {
+        padding: 1em 0;
+        a {
+            text-decoration: underline;
         }
     }
     p.comments-count {
