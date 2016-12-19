@@ -425,8 +425,8 @@ div.forum-sidebar {
     ul.forum-top-users {
         a {
             display: block;
-            padding-left: $grid-gutter-width;
-            line-height: 4.75em;
+            padding-left: $grid-gutter-width/2;
+            line-height: 3.5em;
             font-size: 1.25em;
             color: #fff;
             #border-bottom: 1px solid $color-medium-grey;
@@ -435,6 +435,9 @@ div.forum-sidebar {
                 text-decoration: none;
             }
             text-transform: capitalize;
+        }
+        a:last-child {
+            padding-bottom: 0.5em;
         }
         li:last-child a {
             border-bottom: none;

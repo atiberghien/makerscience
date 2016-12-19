@@ -259,11 +259,26 @@
                     </div>
                 </tab>
                 <tab heading="Membres suivis ({{friends.length}})">
-                    <h2 class="members">Suivis</h2>
+                    <h2 class="members">Suivis
+                        <pagination total-items="bigTotalItems"
+                            items-per-page='itemsPerPage'
+                            ng-model="bigCurrentPage"
+                            max-size="5"
+                            class="pagination-sm"
+                            rotate="false"
+                            boundary-link="true"
+                            num-pages="numPages"
+                            ng-change="pageChanged(bigCurrentPage)"
+                            previous-text="<<"
+                            next-text=">>">
+                        </pagination>
+                    </h2>
                     <div class="boxes boxes-profiles">
-                        <div class="box" ng-repeat="profile in friends">
+                        <div class="clearfix"></div>
+                        <div class="box" ng-repeat="profile in paginationFriends">
                             <ng-include src="'/views/profile/block/profile_thumb_light.html'"></ng-include>
                         </div>
+
                     </div>
                     <h2 class="members">Contacts similaires</h2>
                     <div class="boxes boxes-profiles">

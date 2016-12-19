@@ -150,9 +150,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         $scope.preparedInterestTags = []
         $scope.preparedSkillTags = []
 
-        $scope.member_projects = []
-        $scope.member_resources = []
-
         $scope.fan_projects = []
         $scope.fan_resources = []
 
@@ -199,69 +196,64 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
         $scope.addMoreActivities()
 
         #Current profile is a member of a project team
-        ObjectProfileLink.getList({profile__id : $scope.profile.parent.id, isValidated: true}).then((objectProfileLinkResults)->
-            angular.forEach(objectProfileLinkResults, (objectProfileLink) ->
-                if  objectProfileLink.content_type == 'makerscienceproject'
-                    MakerScienceProjectLight.one().get({id : objectProfileLink.object_id}).then((makerscienceProjectResults) ->
-                        if makerscienceProjectResults.objects.length == 1
-                            if objectProfileLink.level == 0
-                                $scope.member_projects.push(makerscienceProjectResults.objects[0])
-                            else if objectProfileLink.level == 2
-                                $scope.fan_projects.push(makerscienceProjectResults.objects[0])
-                    )
-                else if  objectProfileLink.content_type == 'makerscienceresource'
-                    MakerScienceResourceLight.one().get({id : objectProfileLink.object_id}).then((makerscienceResourceResults) ->
-                        if makerscienceResourceResults.objects.length == 1
-                            if objectProfileLink.level == 10
-                                $scope.member_resources.push(makerscienceResourceResults.objects[0])
-                            else if objectProfileLink.level == 12
-                                $scope.fan_resources.push(makerscienceResourceResults.objects[0])
-                    )
-                else if objectProfileLink.content_type == 'makerscienceprofile' && objectProfileLink.level == 40
-                    MakerScienceProfileLight.one().get({id : objectProfileLink.object_id}).then((profileResults) ->
-                        if profileResults.objects.length == 1
-                            $scope.friends.push(profileResults.objects[0])
-                    )
-                else if objectProfileLink.content_type == 'post'
-                    MakerSciencePostLight.one().get({parent_id : objectProfileLink.object_id}).then((makersciencePostResults) ->
-                        if makersciencePostResults.objects.length == 1
-                            post = makersciencePostResults.objects[0]
-                            if objectProfileLink.level == 30 && $scope.authored_post.indexOf(post) == -1
-                                $scope.authored_post.push(post)
-                            else if objectProfileLink.level == 33 && $scope.liked_post.indexOf(post) == -1
-                                $scope.liked_post.push(post)
-                            else if objectProfileLink.level == 32 && $scope.followed_post.indexOf(post) == -1
-                                $scope.followed_post.push(post)
-                        else
-                            #anwers and subanswers have no related MakerSciencePost object
-                            if objectProfileLink.level == 31
-                                Post.one(objectProfileLink.object_id).customGET("root").then((root) ->
-                                    MakerSciencePostLight.one().get({parent_id : root.id}).then((makersciencePostResults) ->
-                                        post = makersciencePostResults.objects[0]
-                                        $scope.getPostAuthor(post.parent_id).then((author) ->
-                                            post.author = author
-                                            if $scope.contributed_post.indexOf(post) == -1 && post.author.id != $scope.profile.parent.id
-                                                $scope.getContributors(post.parent_id).then((contributors) ->
-                                                    post.contributors = contributors
-                                                    $scope.contributed_post.push(post)
-                                                )
-                                        )
-                                    )
-                                )
-                    )
-                else if objectProfileLink.content_type == 'taggeditem' && objectProfileLink.level == 50 #object tagging
-                    TaggedItem.one(objectProfileLink.object_id).get().then((taggedItemResult)->
-                        slug = taggedItemResult.tag.slug
-                        if $scope.favoriteTags.hasOwnProperty(slug)
-                            $scope.favoriteTags[slug]++
-                        else
-                            $scope.favoriteTags[slug] = 1
-                    )
-                else if objectProfileLink.content_type == 'tag' && objectProfileLink.level == 51 #tag following
-                    Tag.one(objectProfileLink.object_id).get().then((tagResult)->
-                        $scope.followedTags.push(tagResult)
-                    )
+
+        MakerScienceProfile.one($stateParams.slug).customGET("makerscienceproject/0").then((results) ->
+            $scope.member_projects = results
+        )
+        MakerScienceProfile.one($stateParams.slug).customGET("makerscienceproject/2").then((results) ->
+            $scope.fan_projects = results
+        )
+        MakerScienceProfile.one($stateParams.slug).customGET("makerscienceresource/10").then((results) ->
+            $scope.member_resources = results
+        )
+        MakerScienceProfile.one($stateParams.slug).customGET("makerscienceresource/12").then((results) ->
+            $scope.fan_resources  = results
+        )
+
+        MakerScienceProfile.one($stateParams.slug).customGET("makerscienceprofile/40").then((results) ->
+            $scope.friends  = results
+
+            $scope.bigTotalItems = $scope.friends.length;
+            $scope.bigCurrentPage = 1;
+            $scope.itemsPerPage = 8
+            $scope.numPages = Math.ceil($scope.bigTotalItems / $scope.itemsPerPage)
+
+            $scope.paginationFriends = results.slice(($scope.bigCurrentPage-1) * $scope.itemsPerPage,
+                                                     $scope.bigCurrentPage * $scope.itemsPerPage)
+
+            $scope.pageChanged = (pageNum) ->
+                $scope.bigCurrentPage = pageNum
+                $scope.paginationFriends = results.slice(($scope.bigCurrentPage-1) * $scope.itemsPerPage,
+                                                         $scope.bigCurrentPage * $scope.itemsPerPage)
+
+            $scope.maxSize = 5;
+        )
+
+
+
+        MakerScienceProfile.one($stateParams.slug).customGET("post/30", {lookup_field : 'parent__id'}).then((results) ->
+            $scope.authored_post  = results
+        )
+        MakerScienceProfile.one($stateParams.slug).customGET("post/31", {lookup_field : 'parent__id'}).then((results) ->
+            $scope.contributed_post  = results
+        )
+        MakerScienceProfile.one($stateParams.slug).customGET("post/32", {lookup_field : 'parent__id'}).then((results) ->
+            $scope.followed_post  = results
+        )
+        MakerScienceProfile.one($stateParams.slug).customGET("post/33", {lookup_field : 'parent__id'}).then((results) ->
+            $scope.liked_post  = results
+        )
+        MakerScienceProfile.one($stateParams.slug).customGET("taggeditem/50").then((results) ->
+            angular.forEach(results, (taggedItemResult) ->
+                slug = taggedItemResult.tag.slug
+                if $scope.favoriteTags.hasOwnProperty(slug)
+                    $scope.favoriteTags[slug]++
+                else
+                    $scope.favoriteTags[slug] = 1
             )
+        )
+        MakerScienceProfile.one($stateParams.slug).customGET("tag/51").then((results) ->
+            $scope.followedTags = results
         )
 
         TaggedItem.one().customGET("makerscienceprofile/"+$scope.profile.id+"/similars").then((similarResults) ->
@@ -338,7 +330,6 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             # in case of MakerScienceProfile, resourceId must be the profile slug
             putData = {}
             putData[fieldName] = data
-            console.log(resourceName, resourceId, fieldName, data)
             switch resourceName
                 when 'MakerScienceProfile' then MakerScienceProfile.one(resourceId).patch(putData)
                 when 'PostalAddress' then PostalAddress.one(resourceId).patch(putData)

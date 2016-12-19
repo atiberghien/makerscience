@@ -9,7 +9,7 @@ angular.module('commons.gallery', ['commons.gallery.services', 'commons.gallery.
 angular.module('commons.tags', ['commons.tags.directives', 'commons.tags.controllers', 'commons.tags.services'])
 angular.module('commons.directives', ['commons.directives.reportabuse' ,'commons.directives.inputfile', 'commons.directives.thumb',
                                       'commons.directives.socialshare', 'commons.directives.cover', 'commons.directives.avatar'])
-angular.module('makerscience.projects', ['makerscience.projects.controllers', 'makerscience.projects.services'])
+angular.module('makerscience.projects', ['makerscience.projects.controllers', 'makerscience.projects.services','makerscience.projects.directives'])
 angular.module('makerscience.resources', ['makerscience.resources.controllers'])
 angular.module('makerscience.profile', ['makerscience.profile.controllers', 'makerscience.profile.services', 'makerscience.profile.directives'])
 angular.module('makerscience.base', ['makerscience.base.controllers', 'makerscience.base.services', 'makerscience.base.filters'])
