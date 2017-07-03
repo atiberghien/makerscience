@@ -28,11 +28,11 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
         $scope.waitingList = true
 
     $scope.refreshList = ()->
-        return MakerScienceProjectLight.one().customGETLIST('search', $scope.params).then((makerScienceProjectResults) ->
-            meta = makerScienceProjectResults.metadata
+        return MakerScienceProjectLight.one().get($scope.params).then((makerScienceProjectResults) ->
+            meta = makerScienceProjectResults.meta
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
-            $scope.projects =  makerScienceProjectResults
+            $scope.projects =  makerScienceProjectResults.objects
             $scope.waitingList = false
         )
 
@@ -41,29 +41,30 @@ module.controller("MakerScienceProjectListCtrl", ($scope, $controller, MakerScie
 
     $scope.fetchRecentProjects = () ->
         $scope.clearList()
-        $scope.params['ordering'] = '-created_on'
+        $scope.params['order_by'] = '-created_on'
         $scope.refreshList()
 
     $scope.fetchTopProjects = () ->
         $scope.clearList()
-        $scope.params['ordering'] = '-total_score'
+        $scope.params['order_by'] = '-total_score'
         $scope.refreshList()
 
     $scope.fetchRandomProjects = () ->
         $scope.clearList()
-        delete $scope.params['ordering']
-        $scope.refreshList().then(->
-            nbElmt = $scope.projects.length
-            while nbElmt
-                rand = Math.floor(Math.random() * nbElmt--)
-                tmp = $scope.projects[nbElmt]
-                $scope.projects[nbElmt] = $scope.projects[rand]
-                $scope.projects[rand] = tmp
-        )
+        delete $scope.params['order_by']
+        $scope.refreshList()
+        # $scope.refreshList().then(->
+        #     nbElmt = $scope.projects.length
+        #     while nbElmt
+        #         rand = Math.floor(Math.random() * nbElmt--)
+        #         tmp = $scope.projects[nbElmt]
+        #         $scope.projects[nbElmt] = $scope.projects[rand]
+        #         $scope.projects[rand] = tmp
+        # )
 
     $scope.fetchThematicProjects = () ->
         $scope.clearList()
-        $scope.params['ordering'] = '-created_on'
+        $scope.params['order_by'] = '-created_on'
         FilterService.filterParams.tags = $scope.selected_themes_facets
         # $scope.refreshList()
 
@@ -162,7 +163,7 @@ module.controller("MakerScienceProjectSheetCtrl", ($rootScope, $scope, $statePar
 
         $scope.$on('cover-updated', ()->
             MakerScienceProject.one().get({'parent__slug' : $stateParams.slug}).then((makerScienceProjectResult) ->
-                $scope.projectsheet = makerScienceProjectResult.objects[0]                
+                $scope.projectsheet = makerScienceProjectResult.objects[0]
                 if GalleryService.coverId != coverId
                     coverId = if GalleryService.coverId == null then null else $scope.projectsheet.base_projectsheet.cover
                     $scope.coverURL = ProjectService.fetchCoverURL(coverId)

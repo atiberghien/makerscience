@@ -23,11 +23,11 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
         $scope.waitingList = true
 
     $scope.refreshList = ()->
-        return MakerScienceResourceLight.one().customGETLIST('search', $scope.params).then((makerScienceResourceResults) ->
-            meta = makerScienceResourceResults.metadata
+        return MakerScienceResourceLight.one().get($scope.params).then((makerScienceResourceResults) ->
+            meta = makerScienceResourceResults.meta
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
-            $scope.resources =  makerScienceResourceResults
+            $scope.resources =  makerScienceResourceResults.objects
             $scope.waitingList = false
         )
 
@@ -36,29 +36,30 @@ module.controller("MakerScienceResourceListCtrl", ($scope, $controller, StaticCo
 
     $scope.fetchRecentResources = () ->
         $scope.clearList()
-        $scope.params['ordering'] = '-created_on'
+        $scope.params['order_by'] = '-created_on'
         $scope.refreshList()
 
     $scope.fetchTopResources = () ->
         $scope.clearList()
-        $scope.params['ordering'] = '-total_score'
+        $scope.params['order_by'] = '-total_score'
         $scope.refreshList()
 
     $scope.fetchRandomResources = () ->
         $scope.$broadcast('clearFacetFilter')
-        delete $scope.params['ordering']
-        $scope.refreshList().then(->
-            nbElmt = $scope.resources.length
-            while nbElmt
-                rand = Math.floor(Math.random() * nbElmt--)
-                tmp = $scope.resources[nbElmt]
-                $scope.resources[nbElmt] = $scope.resources[rand]
-                $scope.resources[rand] = tmp
-        )
+        delete $scope.params['order_by']
+        $scope.refreshList()
+        # $scope.refreshList().then(->
+        #     nbElmt = $scope.resources.length
+        #     while nbElmt
+        #         rand = Math.floor(Math.random() * nbElmt--)
+        #         tmp = $scope.resources[nbElmt]
+        #         $scope.resources[nbElmt] = $scope.resources[rand]
+        #         $scope.resources[rand] = tmp
+        # )
 
     $scope.fetchThematicResources = () ->
         $scope.clearList()
-        $scope.params['ordering'] = '-created_on'
+        $scope.params['order_by'] = '-created_on'
         FilterService.filterParams.tags = $scope.selected_themes_facets
         # $scope.refreshList()
 

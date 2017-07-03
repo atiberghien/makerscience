@@ -33,8 +33,8 @@ module.controller("MakerScienceMapCtrl", ($scope, $anchorScroll, $location, $con
         markers : {}
     )
 
-    MakerScienceProfileLight.one().customGETLIST('search', {limit : 0}).then((profileResults) ->
-        angular.forEach(profileResults, (profile) ->
+    MakerScienceProfileLight.one().get({limit : 0}).then((profileResults) ->
+        angular.forEach(profileResults.objects, (profile) ->
             if profile.lng and profile.lat
                 icon =
                     shadowUrl: '/img/users/user-shadow.png'

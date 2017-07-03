@@ -7,11 +7,12 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
     $scope.params["limit"] = $scope.limit =  6
 
     $scope.refreshList = ()->
-        MakerScienceProfileLight.one().customGETLIST('search', $scope.params).then((makerScienceProfileResults) ->
-            meta = makerScienceProfileResults.metadata
+        MakerScienceProfileLight.one().get($scope.params).then((makerScienceProfileResults) ->
+            console.log makerScienceProfileResults
+            meta = makerScienceProfileResults.meta
             $scope.totalItems = meta.total_count
             $scope.limit = meta.limit
-            $scope.profiles =  makerScienceProfileResults
+            $scope.profiles =  makerScienceProfileResults.objects
         )
 
     # Must be called AFTER refreshList definition due to inheriance
@@ -19,25 +20,26 @@ module.controller("MakerScienceProfileListCtrl", ($scope, $controller, MakerScie
 
     $scope.fetchRecentProfiles = () ->
         $scope.$broadcast('clearFacetFilter')
-        $scope.params['ordering'] = '-date_joined'
+        $scope.params['order_by'] = '-date_joined'
         $scope.refreshList()
 
     $scope.fetchTopProfiles = () ->
         $scope.$broadcast('clearFacetFilter')
-        $scope.params['ordering'] = '-activity_score'
+        $scope.params['order_by'] = '-activity_score'
         $scope.refreshList()
 
     $scope.fetchRandomProfiles = () ->
         $scope.$broadcast('clearFacetFilter')
-        $scope.params['ordering'] = ''
-        $scope.refreshList().then(->
-            nbElmt = $scope.profiles.length
-            while nbElmt
-                rand = Math.floor(Math.random() * nbElmt--)
-                tmp = $scope.profiles[nbElmt]
-                $scope.profiles[nbElmt] = $scope.profiles[rand]
-                $scope.profiles[rand] = tmp
-        )
+        delete $scope.params['order_by']
+        $scope.refreshList()
+        # $scope.refreshList().then(->
+        #     nbElmt = $scope.profiles.length
+        #     while nbElmt
+        #         rand = Math.floor(Math.random() * nbElmt--)
+        #         tmp = $scope.profiles[nbElmt]
+        #         $scope.profiles[nbElmt] = $scope.profiles[rand]
+        #         $scope.profiles[rand] = tmp
+        # )
 
 
     $scope.availableInterestTags = []

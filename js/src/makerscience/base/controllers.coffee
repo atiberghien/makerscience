@@ -48,24 +48,24 @@ module.controller("MakerScienceAbstractListCtrl", ($scope, FilterService) ->
 module.controller('HomepageCtrl', ($scope, $filter, $controller, MakerScienceProjectLight, MakerScienceResourceLight, MakerScienceProfileLight, MakerSciencePostLight) ->
     angular.extend(this, $controller('PostCtrl', {$scope: $scope}))
 
-    MakerScienceProjectLight.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceProjectResults) ->
-        $scope.projects =  makerScienceProjectResults
+    MakerScienceProjectLight.one().get({order_by: '-modified', limit : 3}).then((makerScienceProjectResults) ->
+        $scope.projects =  makerScienceProjectResults.objects
     )
-    MakerScienceResourceLight.one().customGETLIST('search', {ordering: '-updated_on', limit : 3}).then((makerScienceResourceResults) ->
-        $scope.resources =  makerScienceResourceResults
+    MakerScienceResourceLight.one().get({order_by: '-modified', limit : 3}).then((makerScienceResourceResults) ->
+        $scope.resources =  makerScienceResourceResults.objects
     )
-    MakerScienceProjectLight.one().customGETLIST('search', {featured: true, ordering: '-updated_on', limit : 2}).then((makerScienceProjectResults) ->
-        $scope.featuredProjects =  makerScienceProjectResults
+    MakerScienceProjectLight.one().get({featured: true, order_by: '-modified', limit : 2}).then((makerScienceProjectResults) ->
+        $scope.featuredProjects =  makerScienceProjectResults.objects
     )
-    MakerScienceResourceLight.one().customGETLIST('search', {featured: true, ordering: '-updated_on', limit : 2}).then((makerScienceResourceResults) ->
-        $scope.featuredResources =  makerScienceResourceResults
+    MakerScienceResourceLight.one().get({featured: true, order_by: '-modified', limit : 2}).then((makerScienceResourceResults) ->
+        $scope.featuredResources =  makerScienceResourceResults.objects
     )
-
-    MakerScienceProfileLight.one().customGETLIST('search', {ordering: '-date_joined', limit : 3}).then((makerScienceProfileResults) ->
-        $scope.profiles =  makerScienceProfileResults
+    MakerScienceProfileLight.one().get({order_by: '-modified', limit : 3}).then((makerScienceProfileResults) ->
+        $scope.profiles =  makerScienceProfileResults.objects
     )
-    MakerSciencePostLight.one().customGETLIST('search', {ordering: '-created_on', limit : 5}).then((makerSciencePostResults) ->
-        $scope.threads =  makerSciencePostResults
+    MakerSciencePostLight.one().get({order_by: '-updated_on', limit : 4}).then((makerSciencePostResults) ->
+        $scope.threads =  makerSciencePostResults.objects
+        console.log $scope.threads
         angular.forEach($scope.threads, (thread) ->
             $scope.getPostAuthor(thread.parent_id).then((author) ->
                 thread.author = author
