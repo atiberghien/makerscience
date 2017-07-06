@@ -350,6 +350,7 @@ module.controller("MakerScienceProfileCtrl", ($scope, $rootScope, $controller, $
             switch resourceName
                 when 'MakerScienceProfile' then MakerScienceProfile.one(resourceId).patch(putData)
                 when 'PostalAddress' then PostalAddress.one(resourceId).patch(putData)
+            return true
 
     , (response) ->
         if response.status == 404
